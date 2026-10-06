@@ -20,7 +20,8 @@ SRC_nettle-aes    := nettle-aes/nettle-aes.c
 SRC_nettle-sha256 := nettle-sha256/nettle-sha256.c
 SRC_wikisort      := wikisort/libwikisort.c
 
-.PHONY: all run
+.PHONY: all run trace
+.DELETE_ON_ERROR:
 
 all: $(PROGRAMS:%=generated/programs/%.elf)
 
@@ -30,3 +31,9 @@ generated/programs/%.elf: $(SETUP) src/spike-setup/memory-layout.ld
 
 run: all
 	for p in $(PROGRAMS); do $(SPIKE) $(SPIKE_FLAGS) generated/programs/$$p.elf; echo "$$p: exit $$?"; done
+
+generated/traces/%.jsonl: generated/programs/%.elf src/tracing.py
+	mkdir -p generated/traces
+	$(SPIKE) $(SPIKE_FLAGS) --log-commits --log=/dev/stdout $< | python3 src/tracing.py $@
+
+trace: $(PROGRAMS:%=generated/traces/%.jsonl)
