@@ -79,7 +79,7 @@ def main():
     # opens the trace file named on the command line
     out = open(sys.argv[1], "w")
     readings = []
-    lines_between = 0
+    linesBetween = 0
     unknown = 0
 
     # reads the Spike log one line at a time
@@ -96,7 +96,7 @@ def main():
             record = {"pc": parts[3], "raw": f"0x{word:08x}", "op": op,
                       "rd": rd, "rs1": rs1, "rs2": rs2, "imm": imm, "seq": seq}
             out.write(json.dumps(record) + "\n")
-            lines_between += 1
+            linesBetween += 1
             # counts instructions the decoder did not recognize
             unknown += op == "unknown"
 
@@ -104,14 +104,10 @@ def main():
 
     # compares the counter with the log
     counter = readings[1] - readings[0]
-    print(f"counter says:   {counter} instructions")
-    print(f"log has:        {lines_between + 1} instructions")
-    print(f"unknown:        {unknown} instructions")
 
     # stops with an error when the checks fail
-    if counter != lines_between + 1 or unknown != 0:
+    if counter != linesBetween + 1 or unknown != 0:
         sys.exit("MISMATCH")
-    print("OK")
 
 
 # runs main only when this file is run directly
