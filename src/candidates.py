@@ -170,6 +170,30 @@ def followsRules(candidate, block, records, sources, lastWrites):
     return True
 
 
+def describe(candidate, block, records, sources):
+    # writes what the candidate computes with in0 and in1 for inputs so identical work gets identical text
+    names = {}
+
+    def build(member):
+        record = records[block[member]]
+        writers = dict(sources[member])
+        parts = []
+        for reg in (record["rs1"], record["rs2"]):
+            if reg is None:
+                continue
+            if reg == 0:
+                parts.append("0")
+            elif writers[reg] in candidate:
+                parts.append(build(writers[reg]))
+            else:
+                parts.append(names.setdefault((reg, writers[reg]), f"in{len(names)}"))
+        if record["imm"] is not None:
+            parts.append(str(record["imm"]))
+        return f"{record['op']}({','.join(parts)})"
+
+    return build(max(candidate))
+
+
 def main():
     # counts how many times each address ran
     runs = Counter()
@@ -192,8 +216,8 @@ def main():
     if mixed:
         sys.exit("MIXED BLOCK COUNTS")
 
-    # keeps the potential candidates that follow the rules in every block that ran
-    candidates = []
+    # keeps the potential candidates that follow the rules and merges the ones that do identical work
+    patterns = {}
     for block in blocks:
         if runs[block[0]] == 0:
             continue
@@ -201,7 +225,10 @@ def main():
         lastWrites = findLastWrites(block, program)
         for candidate in findPotentialCandidates(block, program, findArrows(block, program)):
             if followsRules(candidate, block, program, sources, lastWrites):
-                candidates.append((block, candidate))
+                formula = describe(candidate, block, program, sources)
+                entry = patterns.setdefault(formula, {"size": len(candidate), "runs": 0, "places": 0})
+                entry["runs"] += runs[block[0]]
+                entry["places"] += 1
 
 
 if __name__ == "__main__":
