@@ -1,6 +1,9 @@
 import json
+import subprocess
 import sys
 from collections import Counter
+
+from tracing import decode
 
 # instructions that can change which instruction runs next
 JUMPS = {"beq", "bne", "blt", "bge", "bltu", "bgeu", "jal", "jalr"}
@@ -11,16 +14,38 @@ ELIGIBLE = {"add", "sub", "and", "or", "xor", "sll", "srl", "sra", "slt", "sltu"
             "lui", "mul", "mulh", "mulhu", "mulhsu"}
 
 
-def findBlocks(records, starts):
-    # cuts the addresses into straight runs with one way in and one way out
+def readProgram(elfPath):
+    # reads every instruction in the compiled program including ones the trace never saw
+    text = subprocess.run(["riscv64-unknown-elf-objdump", "-d", elfPath],
+                          capture_output=True, text=True).stdout
+    program = {}
+    for line in text.splitlines():
+        parts = line.split()
+        # instruction lines start with an address and the raw bits like 80000280: 00a447b3
+        if len(parts) >= 2 and parts[0].endswith(":") and len(parts[1]) == 8:
+            pc = int(parts[0][:-1], 16)
+            op, rd, rs1, rs2, imm = decode(int(parts[1], 16))
+            program[pc] = {"op": op, "rd": rd, "rs1": rs1, "rs2": rs2, "imm": imm}
+    return program
+
+
+def findBlocks(program, starts):
+    # cuts the program into straight runs with one way in and one way out
+    starts = set(starts)
+    for pc, record in program.items():
+        # a block also starts wherever a branch or jump in the code can land
+        # jalr jumps to an address held in a register so its target is unknown here
+        if record["op"] in JUMPS and record["op"] != "jalr":
+            starts.add(pc + record["imm"])
+
     blocks = []
     current = []
-    for pc in sorted(records):
+    for pc in sorted(program):
         if current and (pc in starts or pc != current[-1] + 4):
             blocks.append(current)
             current = []
         current.append(pc)
-        if records[pc]["op"] in JUMPS:
+        if program[pc]["op"] in JUMPS:
             blocks.append(current)
             current = []
     if current:
@@ -81,28 +106,102 @@ def findPotentialCandidates(block, records, arrows, maxSize=5):
     return potentialCandidates
 
 
+def findSources(block, records):
+    # lists the registers each instruction reads and which instruction in the block wrote them
+    lastWriter = {}
+    sources = []
+    for i, pc in enumerate(block):
+        record = records[pc]
+        reads = []
+        for reg in (record["rs1"], record["rs2"]):
+            # register zero always reads as 0 so it is never an input
+            if reg:
+                reads.append((reg, lastWriter.get(reg)))
+        sources.append(reads)
+        if record["rd"]:
+            lastWriter[record["rd"]] = i
+    return sources
+
+
+def findLastWrites(block, records):
+    # lists the instructions whose result is still in its register when the block ends
+    lastWriter = {}
+    for i, pc in enumerate(block):
+        if records[pc]["rd"]:
+            lastWriter[records[pc]["rd"]] = i
+    return set(lastWriter.values())
+
+
+def findInputsAndOutputs(candidate, sources, lastWrites):
+    # finds the values that cross into and out of the candidate
+    inputs = set()
+    # a result still in its register when the block ends might be needed later
+    outputs = {member for member in candidate if member in lastWrites}
+    for reader, reads in enumerate(sources):
+        for reg, writer in reads:
+            # value made outside and used inside
+            if reader in candidate and writer not in candidate:
+                inputs.add((reg, writer))
+            # value made inside and used outside
+            if reader not in candidate and writer in candidate:
+                outputs.add(writer)
+    return inputs, outputs
+
+
+def followsRules(candidate, block, records, sources, lastWrites):
+    # checks that the candidate could really become one instruction
+    inputs, outputs = findInputsAndOutputs(candidate, sources, lastWrites)
+
+    # one instruction reads at most two registers and writes one
+    if len(inputs) > 2 or len(outputs) != 1:
+        return False
+
+    # the new instruction sits where the last member was so that member must give the result
+    last = max(candidate)
+    if outputs != {last}:
+        return False
+
+    # every input must still be in its register when the new instruction runs
+    for reg, writer in inputs:
+        first = 0 if writer is None else writer + 1
+        for k in range(first, last):
+            if k not in candidate and records[block[k]]["rd"] == reg:
+                return False
+    return True
+
+
 def main():
     # counts how many times each address ran
     runs = Counter()
-    records = {}
     starts = set()
     previous = None
     for line in open(sys.argv[1]):
         record = json.loads(line)
         pc = int(record["pc"], 16)
         runs[pc] += 1
-        records[pc] = record
         # an address reached by a jump starts a block
         if previous is None or pc != previous + 4:
             starts.add(pc)
         previous = pc
 
-    blocks = findBlocks(records, starts)
+    program = readProgram(sys.argv[2])
+    blocks = findBlocks(program, starts)
 
     # stops with an error when a block has addresses that ran a different number of times
     mixed = [b for b in blocks if len({runs[pc] for pc in b}) != 1]
     if mixed:
         sys.exit("MIXED BLOCK COUNTS")
+
+    # keeps the potential candidates that follow the rules in every block that ran
+    candidates = []
+    for block in blocks:
+        if runs[block[0]] == 0:
+            continue
+        sources = findSources(block, program)
+        lastWrites = findLastWrites(block, program)
+        for candidate in findPotentialCandidates(block, program, findArrows(block, program)):
+            if followsRules(candidate, block, program, sources, lastWrites):
+                candidates.append((block, candidate))
 
 
 if __name__ == "__main__":
