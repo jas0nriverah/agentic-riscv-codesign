@@ -230,6 +230,20 @@ def main():
                 entry["runs"] += runs[block[0]]
                 entry["places"] += 1
 
+    # ranks the patterns by how many instructions each would save
+    total = sum(runs.values())
+    ranked = []
+    for formula, entry in patterns.items():
+        saved = (entry["size"] - 1) * entry["runs"]
+        ranked.append({"formula": formula, "size": entry["size"], "runs": entry["runs"],
+                       "places": entry["places"], "saved": saved,
+                       "savedPercent": round(100 * saved / total, 3)})
+    ranked.sort(key=lambda p: -p["saved"])
+
+    # writes the ranked list to the file named on the command line
+    with open(sys.argv[3], "w") as out:
+        json.dump(ranked, out, indent=1)
+
 
 if __name__ == "__main__":
     main()
