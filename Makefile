@@ -20,7 +20,7 @@ SRC_nettle-aes    := nettle-aes/nettle-aes.c
 SRC_nettle-sha256 := nettle-sha256/nettle-sha256.c
 SRC_wikisort      := wikisort/libwikisort.c
 
-.PHONY: all run trace
+.PHONY: all run trace candidates
 .DELETE_ON_ERROR:
 
 all: $(PROGRAMS:%=generated/programs/%.elf)
@@ -37,3 +37,9 @@ generated/traces/%.jsonl: generated/programs/%.elf src/tracing.py
 	$(SPIKE) $(SPIKE_FLAGS) --log-commits --log=/dev/stdout $< | python3 src/tracing.py $@
 
 trace: $(PROGRAMS:%=generated/traces/%.jsonl)
+
+generated/candidates/%.json: generated/traces/%.jsonl generated/programs/%.elf src/candidates.py
+	mkdir -p generated/candidates
+	python3 src/candidates.py $< generated/programs/$*.elf $@
+
+candidates: $(PROGRAMS:%=generated/candidates/%.json)
