@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "isaforge"
+version = "0.1.0"
+description = "Measured-data learning and selection for RISC-V custom instruction candidates"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26,<3", "scipy>=1.11,<2", "scikit-learn>=1.4,<2", "xgboost>=2.1,<4"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+isaforge = "isaforge.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["isaforge*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
