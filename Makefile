@@ -1,5 +1,10 @@
-CC          := riscv64-unknown-elf-gcc
-SPIKE       := spike
+# Command-line overrides support toolchains such as xPack's riscv-none-elf.
+CC          = riscv64-unknown-elf-gcc
+OBJDUMP     = riscv64-unknown-elf-objdump
+SPIKE       = spike
+PYTHON      = python3
+SHELL       := /bin/bash
+.SHELLFLAGS := -eu -o pipefail -c
 
 CFLAGS      := -march=rv32im -mabi=ilp32 -O2 -std=gnu17 -DCPU_MHZ=1 -DWARMUP_HEAT=1
 LDFLAGS     := -nostartfiles -T src/spike-setup/memory-layout.ld
@@ -25,21 +30,21 @@ SRC_wikisort      := wikisort/libwikisort.c
 
 all: $(PROGRAMS:%=generated/programs/%.elf)
 
-generated/programs/%.elf: $(SETUP) src/spike-setup/memory-layout.ld
+generated/programs/%.elf: $(SETUP) src/spike-setup/memory-layout.ld $(wildcard $(EMBENCH)/src/*/*.c)
 	mkdir -p generated/programs
 	$(CC) $(CFLAGS) -I $(EMBENCH)/support $(LDFLAGS) $(SETUP) $(EMBENCH)/src/$(SRC_$*) -lm -o $@
 
 run: all
-	for p in $(PROGRAMS); do $(SPIKE) $(SPIKE_FLAGS) generated/programs/$$p.elf; echo "$$p: exit $$?"; done
+	for p in $(PROGRAMS); do $(SPIKE) $(SPIKE_FLAGS) generated/programs/$$p.elf; echo "$$p: exit 0 (self-check passed)"; done
 
 generated/traces/%.jsonl: generated/programs/%.elf src/tracing.py
 	mkdir -p generated/traces
-	$(SPIKE) $(SPIKE_FLAGS) --log-commits --log=/dev/stdout $< | python3 src/tracing.py $@
+	$(SPIKE) $(SPIKE_FLAGS) --log-commits --log=/dev/stdout $< | $(PYTHON) src/tracing.py $@
 
 trace: $(PROGRAMS:%=generated/traces/%.jsonl)
 
 generated/candidates/%.json: generated/traces/%.jsonl generated/programs/%.elf src/candidates.py
 	mkdir -p generated/candidates
-	python3 src/candidates.py $< generated/programs/$*.elf $@
+	$(PYTHON) src/candidates.py $< generated/programs/$*.elf $@ --objdump $(OBJDUMP)
 
 candidates: $(PROGRAMS:%=generated/candidates/%.json)

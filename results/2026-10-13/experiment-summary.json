@@ -1,0 +1,82 @@
+{
+  "benchmarks": [
+    {
+      "benchmark": "aha-mont64",
+      "candidate_count": 20,
+      "selected_count": 20,
+      "trace_total_instructions": 4475850,
+      "candidates_sha256": "61276652dd7d2f60ac9d715b062ac9adb5773aa8e27e1dd8e5e2297a39b17adf"
+    },
+    {
+      "benchmark": "crc32",
+      "candidate_count": 16,
+      "selected_count": 16,
+      "trace_total_instructions": 3831151,
+      "candidates_sha256": "cd400959026c08dc2eb49e0ed9975f006ef50dd69b53881cf437e9e5987e22c0"
+    },
+    {
+      "benchmark": "edn",
+      "candidate_count": 24,
+      "selected_count": 24,
+      "trace_total_instructions": 3466138,
+      "candidates_sha256": "48c49e62f65880548b82b0d5af941919d7fb5256605ec7ea571336648d8ccd5c"
+    },
+    {
+      "benchmark": "huffbench",
+      "candidate_count": 20,
+      "selected_count": 20,
+      "trace_total_instructions": 2131015,
+      "candidates_sha256": "27da7e6a18780bd64a62a01241693ca1a9e5cdd3a6ea2e460da7c98bedc0e216"
+    },
+    {
+      "benchmark": "matmult-int",
+      "candidate_count": 1,
+      "selected_count": 1,
+      "trace_total_instructions": 3179289,
+      "candidates_sha256": "3f7a6a5eab1f57238378fc13b56692b4f130dfb469ee8ebc42149f42e483f563"
+    },
+    {
+      "benchmark": "nettle-aes",
+      "candidate_count": 51,
+      "selected_count": 51,
+      "trace_total_instructions": 4083359,
+      "candidates_sha256": "c285b9d17696498b16605e0b1aacc596cdd87fccb75ffa05a4881f5d736cfcb0"
+    },
+    {
+      "benchmark": "nettle-sha256",
+      "candidate_count": 67,
+      "selected_count": 67,
+      "trace_total_instructions": 3854208,
+      "candidates_sha256": "f39356b2536f8b559ace75778ec2e9fe33ac1107de0f878153b072383bf0ee48"
+    },
+    {
+      "benchmark": "wikisort",
+      "candidate_count": 140,
+      "selected_count": 140,
+      "trace_total_instructions": 1182159,
+      "candidates_sha256": "491b2893a3fd4d98ac1fb7c053adcd409546782cc534a8e247a104d02fcffc4f"
+    }
+  ],
+  "candidate_rows": 339,
+  "unique_circuits": 301,
+  "failures": [],
+  "verification": {
+    "verified": true,
+    "formula_count": 301,
+    "vectors_per_formula": 1124,
+    "total_comparisons": 338324,
+    "random_seed": 20261013,
+    "oracle": "Python integer RV32 semantics",
+    "tool": "Verilator 5.050 2026-07-01 rev vUNKNOWN-built20260701",
+    "rtl_sha256": "c874d2250626bbdeb28e366a9feb9a030487cb6015470bce595e009cb34a4b41",
+    "vectors_sha256": "2c428667890065fbd867de056a7dde951b7c250d5c80237ee46524dd4c6013ac"
+  },
+  "synthesis_wall_seconds": 36.703196041009505,
+  "target": "isolated combinational iCE40 LUT4 resources; no placement or routing",
+  "limitations": [
+    "No measured architectural cycles, clock period, or processor speedup.",
+    "Stratified sample includes top merit and randomly sampled candidates.",
+    "RTL checked against integer oracle using sampled inputs, not a formal proof.",
+    "Overlap-safe savings are instruction counts, not cycles."
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "maxSize": 4,
+  "limit": null,
+  "overlapSelectionMethod": "deterministic-greedy-pc-disjoint",
+  "benchmarks": [
+    {
+      "benchmark": "aha-mont64",
+      "candidateCount": 20,
+      "staticOccurrences": 58,
+      "traceTotalInstructions": 4475850,
+      "candidateSizeCounts": {
+        "2": 15,
+        "3": 5,
+        "4": 0
+      },
+      "overlappingFormulaCount": 0,
+      "sizeVariantFormulaCount": 0,
+      "legacyMeritTop": {
+        "formula": "add(srli(in0,31),slli(in1,1))",
+        "savedPercent": 9.678,
+        "overlapSafeSavedPercent": 9.678
+      },
+      "legacyMeritTopSymbols": [
+        "benchmark_body"
+      ]
+    },
+    {
+      "benchmark": "crc32",
+      "candidateCount": 16,
+      "staticOccurrences": 16,
+      "traceTotalInstructions": 3831151,
+      "candidateSizeCounts": {
+        "2": 11,
+        "3": 4,
+        "4": 1
+      },
+      "overlappingFormulaCount": 0,
+      "sizeVariantFormulaCount": 0,
+      "legacyMeritTop": {
+        "formula": "add(mul(in0,addi(lui(1103515648),-403)),in1)",
+        "savedPercent": 13.631,
+        "overlapSafeSavedPercent": 13.631
+      },
+      "legacyMeritTopSymbols": [
+        "rand_beebs"
+      ]
+    },
+    {
+      "benchmark": "edn",
+      "candidateCount": 24,
+      "staticOccurrences": 54,
+      "traceTotalInstructions": 3466138,
+      "candidateSizeCounts": {
+        "2": 17,
+        "3": 6,
+        "4": 1
+      },
+      "overlappingFormulaCount": 0,
+      "sizeVariantFormulaCount": 0,
+      "legacyMeritTop": {
+        "formula": "add(srai(add(slli(in0,1),in0),15),in1)",
+        "savedPercent": 1.129,
+        "overlapSafeSavedPercent": 1.129
+      },
+      "legacyMeritTopSymbols": [
+        "benchmark_body.isra.0"
+      ]
+    },
+    {
+      "benchmark": "huffbench",
+      "candidateCount": 20,
+      "staticOccurrences": 32,
+      "traceTotalInstructions": 2131015,
+      "candidateSizeCounts": {
+        "2": 19,
+        "3": 1,
+        "4": 0
+      },
+      "overlappingFormulaCount": 0,
+      "sizeVariantFormulaCount": 0,
+      "legacyMeritTop": {
+        "formula": "add(in0,slli(in1,2))",
+        "savedPercent": 2.191,
+        "overlapSafeSavedPercent": 2.191
+      },
+      "legacyMeritTopSymbols": [
+        "compdecomp",
+        "heap_adjust"
+      ]
+    },
+    {
+      "benchmark": "matmult-int",
+      "candidateCount": 1,
+      "staticOccurrences": 1,
+      "traceTotalInstructions": 3179289,
+      "candidateSizeCounts": {
+        "2": 1,
+        "3": 0,
+        "4": 0
+      },
+      "overlappingFormulaCount": 0,
+      "sizeVariantFormulaCount": 0,
+      "legacyMeritTop": {
+        "formula": "addi(lui(-2147475456),32)",
+        "savedPercent": 0.0,
+        "overlapSafeSavedPercent": 0.0
+      },
+      "legacyMeritTopSymbols": [
+        "benchmark_body.isra.0"
+      ]
+    },
+    {
+      "benchmark": "nettle-aes",
+      "candidateCount": 51,
+      "staticOccurrences": 267,
+      "traceTotalInstructions": 4083359,
+      "candidateSizeCounts": {
+        "2": 32,
+        "3": 15,
+        "4": 4
+      },
+      "overlappingFormulaCount": 0,
+      "sizeVariantFormulaCount": 0,
+      "legacyMeritTop": {
+        "formula": "add(in0,slli(in1,2))",
+        "savedPercent": 12.917,
+        "overlapSafeSavedPercent": 12.917
+      },
+      "legacyMeritTopSymbols": [
+        "_aes_set_key",
+        "_nettle_aes_decrypt.part.0",
+        "_nettle_aes_encrypt.part.0",
+        "_nettle_aes_invert"
+      ]
+    },
+    {
+      "benchmark": "nettle-sha256",
+      "candidateCount": 67,
+      "staticOccurrences": 862,
+      "traceTotalInstructions": 3854208,
+      "candidateSizeCounts": {
+        "2": 38,
+        "3": 18,
+        "4": 11
+      },
+      "overlappingFormulaCount": 0,
+      "sizeVariantFormulaCount": 0,
+      "legacyMeritTop": {
+        "formula": "xor(add(srli(in0,2),slli(in0,30)),in1)",
+        "savedPercent": 4.732,
+        "overlapSafeSavedPercent": 4.732
+      },
+      "legacyMeritTopSymbols": [
+        "_nettle_sha256_compress"
+      ]
+    },
+    {
+      "benchmark": "wikisort",
+      "candidateCount": 140,
+      "staticOccurrences": 249,
+      "traceTotalInstructions": 1182159,
+      "candidateSizeCounts": {
+        "2": 95,
+        "3": 32,
+        "4": 13
+      },
+      "overlappingFormulaCount": 0,
+      "sizeVariantFormulaCount": 0,
+      "legacyMeritTop": {
+        "formula": "addi(addi(in0,-16),16)",
+        "savedPercent": 1.674,
+        "overlapSafeSavedPercent": 1.674
+      },
+      "legacyMeritTopSymbols": [
+        "TestCompare"
+      ]
+    }
+  ]
+}

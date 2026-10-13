@@ -5,9 +5,32 @@ custom instructions with fewer expensive measurements than frequency or merit
 ranking. The repository contains Spike tracing and candidate extraction, plus a
 Python dataset, prediction, and offline selection pipeline.
 
-The ML pipeline is runnable now. **No measured benchmark dataset or demonstrated
-hardware speedup is included.** The demo is synthetic and only verifies that the
-software works together.
+The repository now includes a [real measured dataset and results](results/2026-10-13/README.md):
+eight passing Embench workloads, 339 candidate examples, 301 synthesized circuits,
+and a trained FPGA-resource predictor. Nested benchmark-held-out evaluation gives
+33.1 LUT4 mean absolute error versus 77.3 for the mean baseline, with pooled
+Spearman correlation 0.801. The final model selected by grouped validation is
+XGBoost. **These results predict isolated circuit resources, not processor
+speedup.** The original `isaforge demo` remains explicitly synthetic.
+
+## Train on the real measurements
+
+```sh
+python -m isaforge.area_model train \
+  --rows results/2026-10-13/dataset.json \
+  --output-dir generated/real/model --seed 20261013
+python -m isaforge.area_model predict \
+  --model generated/real/model/area-model.joblib \
+  --candidates results/2026-10-13/dataset.json \
+  --output generated/real/model/predictions.json
+```
+
+Prediction only needs formula text; synthesis labels are not model inputs.
+See [the area model](docs/area-model.md), [actual benchmark setup](docs/toolchain.md),
+[candidate correctness](docs/candidates.md), [RTL and synthesis](docs/synthesis.md),
+and [budgeted selection results](docs/area-selection.md). Selection's target-budget
+comparison assumes previously measured training circuits from other benchmarks;
+it does not count those historical labels as free end-to-end research cost.
 
 ## Quick start
 
@@ -40,10 +63,10 @@ make candidates
 
 The eight benchmark targets are `aha-mont64`, `crc32`, `edn`, `huffbench`,
 `matmult-int`, `nettle-aes`, `nettle-sha256`, and `wikisort`. Results live under
-`generated/`. The current extractor enumerates up to five connected operations;
-the proposal's two-to-four-operation study needs an explicit size filter or a
-later extractor change. Its occurrence-based savings are a heuristic, not a
-measurement of cycles or overlap-safe combined savings.
+`generated/`. The extractor supports `--max-size 4` for the proposal's
+two-to-four-operation study, as used in the measured pilot. Its overlap-safe
+instruction-saving estimates are not measured CPU cycles; combining different
+candidates requires checking conflicts between their occurrences.
 
 ## Build a dataset and run an experiment
 
@@ -95,13 +118,13 @@ the unmodified processor as an option. See [selection](docs/selection.md).
 
 ## Remaining research milestones
 
-1. Collect real candidate measurements and run the premise check: does merit
-   disagree with timing-aware speedup? Preserve simulator/build configuration
-   and measurement artifacts alongside labels.
+1. Extend the measured LUT4 dataset to integrated timing and cycles, then run
+   the premise check: does merit disagree with timing-aware speedup? Preserve
+   simulator/build configuration and measurement artifacts alongside labels.
 2. Connect real gem5 and/or synthesis measurement adapters. Keep simulator
    measurements separate from synthesis-based performance estimates.
-3. Evaluate generalization and uncertainty on the measured data. Compare
-   repeated random seeds and learning curves at several measurement budgets.
+3. Improve resource predictions on expensive multipliers, calibrate uncertainty,
+   and extend the completed held-out/budgeted evaluations to measured runtime.
 4. Connect an LLM selector to the budgeted tools and compare it with active
    learning under the same initial data and measurement budget.
 5. Add occurrence/overlap metadata and jointly measured instruction sets before
