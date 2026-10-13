@@ -20,11 +20,17 @@ POLICIES = ("frequency", "merit", "random", "active_learning")
 
 
 def _number(value: Any, name: str, *, positive: bool = False) -> float:
-    if isinstance(value, bool) or not isinstance(value, Real) or not math.isfinite(value):
+    if isinstance(value, bool) or not isinstance(value, Real):
         raise ValueError(f"{name} must be a finite number")
-    if positive and value <= 0:
+    try:
+        result = float(value)
+    except (OverflowError, ValueError) as error:
+        raise ValueError(f"{name} must be a finite number") from error
+    if not math.isfinite(result):
+        raise ValueError(f"{name} must be a finite number")
+    if positive and result <= 0:
         raise ValueError(f"{name} must be positive")
-    return float(value)
+    return result
 
 
 def _measurement(row: Mapping[str, Any]) -> dict[str, Any]:
@@ -33,7 +39,8 @@ def _measurement(row: Mapping[str, Any]) -> dict[str, Any]:
     result["area"] = _number(row.get("area"), "area")
     if result["area"] < 0:
         raise ValueError("area must be nonnegative")
-    if result.get("measurement_source") not in MEASUREMENT_SOURCES:
+    if (not isinstance(result.get("measurement_source"), str)
+            or result["measurement_source"] not in MEASUREMENT_SOURCES):
         raise ValueError("unsupported measurement_source")
     if any(key in row for key in TIMING_COLUMNS):
         timing = {key: _number(row.get(key), key, positive=True) for key in TIMING_COLUMNS}
@@ -67,6 +74,8 @@ class SelectionTools:
     ) -> None:
         if isinstance(budget, bool) or not isinstance(budget, int) or budget < 0:
             raise ValueError("budget must be a nonnegative integer")
+        if isinstance(seed, bool) or not isinstance(seed, int) or seed < 0:
+            raise ValueError("seed must be a nonnegative integer")
         if area_cap is not None:
             area_cap = _number(area_cap, "area_cap")
             if area_cap < 0:
@@ -89,7 +98,8 @@ class SelectionTools:
                     raise ValueError(f"{key} must be a nonempty string")
             public = {key: row[key] for key in ("candidate_id", "benchmark", "formula")}
             public.update({key: _number(row.get(key), key) for key in FEATURE_COLUMNS})
-            if row.get("measurement_source") not in MEASUREMENT_SOURCES:
+            if (not isinstance(row.get("measurement_source"), str)
+                    or row["measurement_source"] not in MEASUREMENT_SOURCES):
                 raise ValueError("unsupported measurement_source")
             self.__records[candidate_id] = row
             self.__public[candidate_id] = public

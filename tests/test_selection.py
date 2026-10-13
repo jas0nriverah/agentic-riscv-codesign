@@ -188,6 +188,17 @@ def test_invalid_budget_rejected(budget):
         SelectionTools([row("a")], budget)
 
 
+@pytest.mark.parametrize("seed", [-1, 1.5, True])
+def test_invalid_seed_rejected(seed):
+    with pytest.raises(ValueError, match="seed"):
+        SelectionTools([row("a")], 1, seed=seed)
+
+
+def test_overflowing_numeric_feature_has_a_clear_validation_error():
+    with pytest.raises(ValueError, match="finite"):
+        SelectionTools([dict(row("a"), runs=10**400)], 1)
+
+
 def test_duplicate_ids_and_mixed_benchmarks_rejected():
     with pytest.raises(ValueError, match="duplicate"):
         SelectionTools([row("a"), row("a")], 1)
