@@ -532,4 +532,7 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    # Train through the canonical module so saved classes are importable by
+    # other processes, rather than recorded as __main__.AreaPredictor.
+    from isaforge.area_model import main as module_main
+    raise SystemExit(module_main())

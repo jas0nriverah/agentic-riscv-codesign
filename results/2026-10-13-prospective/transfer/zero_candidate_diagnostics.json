@@ -1,0 +1,107 @@
+[
+  {
+    "benchmark": "statemate",
+    "trace_instructions": 1064517,
+    "executed_static_basic_blocks": 63,
+    "maximum_executed_block_length": 75,
+    "weighted_operation_mix": {
+      "sb": 384944,
+      "lbu": 243536,
+      "sw": 121775,
+      "addi": 88389,
+      "lw": 74637,
+      "beq": 60884,
+      "bne": 35352,
+      "jal": 17679,
+      "jalr": 15715,
+      "bltu": 7856,
+      "andi": 5892,
+      "sh": 3928,
+      "bgeu": 1964,
+      "add": 1964,
+      "lui": 1,
+      "bge": 1
+    },
+    "eligible_dynamic_instructions": 96246,
+    "eligible_fraction": 0.09041283511677127,
+    "connected_eligible_dependency_edges": 1,
+    "potential_connected_groups": 1,
+    "legal_candidate_groups": 0,
+    "rejection_counts": {
+      "input_register_overwritten_before_final_member": 1
+    },
+    "rejected_examples": [
+      {
+        "block_start": "0x800013fc",
+        "symbol": "memset",
+        "operations": [
+          "andi",
+          "add"
+        ],
+        "inputs": 2,
+        "output_member_indexes": [
+          2
+        ],
+        "reason": "input_register_overwritten_before_final_member",
+        "block": [
+          {
+            "pc": "0x800013fc",
+            "op": "andi",
+            "rd": 13,
+            "rs1": 12,
+            "rs2": null,
+            "imm": -16,
+            "symbol": "memset"
+          },
+          {
+            "pc": "0x80001400",
+            "op": "andi",
+            "rd": 12,
+            "rs1": 12,
+            "rs2": null,
+            "imm": 15,
+            "symbol": "memset"
+          },
+          {
+            "pc": "0x80001404",
+            "op": "add",
+            "rd": 13,
+            "rs1": 13,
+            "rs2": 14,
+            "imm": null,
+            "symbol": "memset"
+          }
+        ],
+        "clobbered_input_register": 12,
+        "clobbering_pc": "0x80001400"
+      }
+    ],
+    "explanation": "The only eligible dependency pair is in libc memset. Original x12 feeds andi x13,x12,-16 but is overwritten by andi x12,x12,15 before add x13,x13,x14. Replacing the pair at its last member would read the wrong x12; the input-lifetime rule rejects it."
+  },
+  {
+    "benchmark": "nsichneu",
+    "trace_instructions": 2236750,
+    "executed_static_basic_blocks": 825,
+    "maximum_executed_block_length": 8,
+    "weighted_operation_mix": {
+      "lw": 1226077,
+      "blt": 273282,
+      "jal": 236355,
+      "bge": 192037,
+      "bne": 156337,
+      "beq": 147720,
+      "sw": 3696,
+      "addi": 1241,
+      "jalr": 3,
+      "lui": 2
+    },
+    "eligible_dynamic_instructions": 1243,
+    "eligible_fraction": 0.0005557170001117693,
+    "connected_eligible_dependency_edges": 0,
+    "potential_connected_groups": 0,
+    "legal_candidate_groups": 0,
+    "rejection_counts": {},
+    "rejected_examples": [],
+    "explanation": "No connected eligible dependency group of at least two operations exists in any executed basic block. Load/branch/control operations dominate; memory and control are ineligible, and individual addi/lui operations do not connect to another eligible operation."
+  }
+]

@@ -1,0 +1,1060 @@
+[
+  {
+    "argv": [
+      "git",
+      "-C",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/picorv32",
+      "rev-parse",
+      "HEAD"
+    ],
+    "exit_code": 0,
+    "log": "revision.log",
+    "elapsed_seconds": 0.009802375003346242
+  },
+  {
+    "argv": [
+      "git",
+      "-C",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/picorv32",
+      "status",
+      "--porcelain"
+    ],
+    "exit_code": 0,
+    "log": "core-status.log",
+    "elapsed_seconds": 0.010375708996434696
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "--version"
+    ],
+    "exit_code": 0,
+    "log": "gcc-version.log",
+    "elapsed_seconds": 0.012520125004812144
+  },
+  {
+    "argv": [
+      "verilator",
+      "--version"
+    ],
+    "exit_code": 0,
+    "log": "verilator-version.log",
+    "elapsed_seconds": 0.054831625006045215
+  },
+  {
+    "argv": [
+      "yosys",
+      "-V"
+    ],
+    "exit_code": 0,
+    "log": "yosys-version.log",
+    "elapsed_seconds": 0.02937779200146906
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-O2",
+      "-nostdlib",
+      "-nostartfiles",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-msmall-data-limit=0",
+      "-mno-relax",
+      "-DCUSTOM=0",
+      "-I",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources",
+      "-Wl,--no-relax",
+      "-Wl,-T,/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_link.ld",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_start.S",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_firmware.c",
+      "-o",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline.elf"
+    ],
+    "exit_code": 0,
+    "log": "baseline-compile.log",
+    "elapsed_seconds": 0.1889363329974003
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy",
+      "-O",
+      "binary",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline.elf",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline.bin"
+    ],
+    "exit_code": 0,
+    "log": "baseline-objcopy.log",
+    "elapsed_seconds": 0.004366832989035174
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objdump",
+      "-d",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline.elf"
+    ],
+    "exit_code": 0,
+    "log": "baseline-disassembly.txt",
+    "elapsed_seconds": 0.005461374996230006
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-O2",
+      "-nostdlib",
+      "-nostartfiles",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-msmall-data-limit=0",
+      "-mno-relax",
+      "-DCUSTOM=1",
+      "-I",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources",
+      "-Wl,--no-relax",
+      "-Wl,-T,/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_link.ld",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_start.S",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_firmware.c",
+      "-o",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom.elf"
+    ],
+    "exit_code": 0,
+    "log": "custom-compile.log",
+    "elapsed_seconds": 0.05911070900037885
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy",
+      "-O",
+      "binary",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom.elf",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom.bin"
+    ],
+    "exit_code": 0,
+    "log": "custom-objcopy.log",
+    "elapsed_seconds": 0.0026192079967586324
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objdump",
+      "-d",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom.elf"
+    ],
+    "exit_code": 0,
+    "log": "custom-disassembly.txt",
+    "elapsed_seconds": 0.002714959002332762
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "-march=rv32i",
+      "-mabi=ilp32",
+      "-nostdlib",
+      "-nostartfiles",
+      "-DINVALID_INSN=0x0400000b",
+      "-Wl,-T,/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_link.ld",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_illegal.S",
+      "-o",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct7.elf"
+    ],
+    "exit_code": 0,
+    "log": "illegal-wrong-funct7-compile.log",
+    "elapsed_seconds": 0.02641612500883639
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy",
+      "-O",
+      "binary",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct7.elf",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct7.bin"
+    ],
+    "exit_code": 0,
+    "log": "illegal-wrong-funct7-objcopy.log",
+    "elapsed_seconds": 0.0026161250134464353
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "-march=rv32i",
+      "-mabi=ilp32",
+      "-nostdlib",
+      "-nostartfiles",
+      "-DINVALID_INSN=0x0200700b",
+      "-Wl,-T,/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_link.ld",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_illegal.S",
+      "-o",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct3.elf"
+    ],
+    "exit_code": 0,
+    "log": "illegal-wrong-funct3-compile.log",
+    "elapsed_seconds": 0.02679220800928306
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy",
+      "-O",
+      "binary",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct3.elf",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct3.bin"
+    ],
+    "exit_code": 0,
+    "log": "illegal-wrong-funct3-objcopy.log",
+    "elapsed_seconds": 0.002638999998453073
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "-march=rv32i",
+      "-mabi=ilp32",
+      "-nostdlib",
+      "-nostartfiles",
+      "-DINVALID_INSN=0x0200002b",
+      "-Wl,-T,/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_link.ld",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_illegal.S",
+      "-o",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-opcode.elf"
+    ],
+    "exit_code": 0,
+    "log": "illegal-wrong-opcode-compile.log",
+    "elapsed_seconds": 0.027528790989890695
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy",
+      "-O",
+      "binary",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-opcode.elf",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-opcode.bin"
+    ],
+    "exit_code": 0,
+    "log": "illegal-wrong-opcode-objcopy.log",
+    "elapsed_seconds": 0.002573999998276122
+  },
+  {
+    "argv": [
+      "verilator",
+      "--cc",
+      "--exe",
+      "--build",
+      "-j",
+      "2",
+      "-Wno-fatal",
+      "--top-module",
+      "core_top",
+      "--Mdir",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline-core/obj_dir",
+      "-GEXTENSION_MASK=0",
+      "-GPCPI_LATENCY=1",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/picorv32.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/pcpi_candidates.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_top.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_sim.cpp"
+    ],
+    "exit_code": 0,
+    "log": "baseline-core/build.log",
+    "elapsed_seconds": 0.0478398749983171
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline-core/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline.bin"
+    ],
+    "exit_code": 0,
+    "log": "baseline-sim.json",
+    "elapsed_seconds": 0.03151587500178721
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline-core/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom.bin"
+    ],
+    "exit_code": 6,
+    "log": "baseline-custom-illegal.log",
+    "elapsed_seconds": 0.002533459002734162
+  },
+  {
+    "argv": [
+      "verilator",
+      "--cc",
+      "--exe",
+      "--build",
+      "-j",
+      "2",
+      "-Wno-fatal",
+      "--top-module",
+      "core_top",
+      "--Mdir",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-0/obj_dir",
+      "-GEXTENSION_MASK=3",
+      "-GPCPI_LATENCY=0",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/picorv32.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/pcpi_candidates.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_top.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_sim.cpp"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-0/build.log",
+    "elapsed_seconds": 0.0461290000093868
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-0/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom.bin"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-0/sim.json",
+    "elapsed_seconds": 0.028708292011287995
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-0/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline.bin"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-0/baseline-control.json",
+    "elapsed_seconds": 0.03056533400376793
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-0/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct7.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-0/illegal-wrong-funct7.log",
+    "elapsed_seconds": 0.002525459000025876
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-0/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct3.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-0/illegal-wrong-funct3.log",
+    "elapsed_seconds": 0.0024402919952990487
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-0/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-opcode.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-0/illegal-wrong-opcode.log",
+    "elapsed_seconds": 0.002241458001662977
+  },
+  {
+    "argv": [
+      "verilator",
+      "--cc",
+      "--exe",
+      "--build",
+      "-j",
+      "2",
+      "-Wno-fatal",
+      "--top-module",
+      "core_top",
+      "--Mdir",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-1/obj_dir",
+      "-GEXTENSION_MASK=3",
+      "-GPCPI_LATENCY=1",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/picorv32.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/pcpi_candidates.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_top.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_sim.cpp"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-1/build.log",
+    "elapsed_seconds": 0.04673016699962318
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-1/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom.bin"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-1/sim.json",
+    "elapsed_seconds": 0.02789029199630022
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-1/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline.bin"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-1/baseline-control.json",
+    "elapsed_seconds": 0.03193391699460335
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-1/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct7.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-1/illegal-wrong-funct7.log",
+    "elapsed_seconds": 0.0024071249936241657
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-1/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct3.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-1/illegal-wrong-funct3.log",
+    "elapsed_seconds": 0.0023542920098407194
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-1/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-opcode.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-1/illegal-wrong-opcode.log",
+    "elapsed_seconds": 0.004464958008611575
+  },
+  {
+    "argv": [
+      "verilator",
+      "--cc",
+      "--exe",
+      "--build",
+      "-j",
+      "2",
+      "-Wno-fatal",
+      "--top-module",
+      "core_top",
+      "--Mdir",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-4/obj_dir",
+      "-GEXTENSION_MASK=3",
+      "-GPCPI_LATENCY=4",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/picorv32.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/pcpi_candidates.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_top.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_sim.cpp"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-4/build.log",
+    "elapsed_seconds": 0.046952415999840014
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-4/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom.bin"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-4/sim.json",
+    "elapsed_seconds": 0.031203499995172024
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-4/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline.bin"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-4/baseline-control.json",
+    "elapsed_seconds": 0.032328499990398996
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-4/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct7.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-4/illegal-wrong-funct7.log",
+    "elapsed_seconds": 0.0024208339891629294
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-4/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct3.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-4/illegal-wrong-funct3.log",
+    "elapsed_seconds": 0.00234508300491143
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-4/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-opcode.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-4/illegal-wrong-opcode.log",
+    "elapsed_seconds": 0.002513499988708645
+  },
+  {
+    "argv": [
+      "verilator",
+      "--cc",
+      "--exe",
+      "--build",
+      "-j",
+      "2",
+      "-Wno-fatal",
+      "--top-module",
+      "core_top",
+      "--Mdir",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-16/obj_dir",
+      "-GEXTENSION_MASK=3",
+      "-GPCPI_LATENCY=16",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/picorv32.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/pcpi_candidates.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_top.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_sim.cpp"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-16/build.log",
+    "elapsed_seconds": 0.04725883400533348
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-16/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom.bin"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-16/sim.json",
+    "elapsed_seconds": 0.0383306250005262
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-16/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline.bin"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-16/baseline-control.json",
+    "elapsed_seconds": 0.033081250003306195
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-16/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct7.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-16/illegal-wrong-funct7.log",
+    "elapsed_seconds": 0.0026470000011613593
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-16/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct3.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-16/illegal-wrong-funct3.log",
+    "elapsed_seconds": 0.0023933749907882884
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-16/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-opcode.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-16/illegal-wrong-opcode.log",
+    "elapsed_seconds": 0.002323917011381127
+  },
+  {
+    "argv": [
+      "verilator",
+      "--cc",
+      "--exe",
+      "--build",
+      "-j",
+      "2",
+      "-Wno-fatal",
+      "--top-module",
+      "core_top",
+      "--Mdir",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-24/obj_dir",
+      "-GEXTENSION_MASK=3",
+      "-GPCPI_LATENCY=24",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/picorv32.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/pcpi_candidates.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_top.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_sim.cpp"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-24/build.log",
+    "elapsed_seconds": 0.046718333003809676
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-24/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom.bin"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-24/sim.json",
+    "elapsed_seconds": 0.043778833001852036
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-24/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline.bin"
+    ],
+    "exit_code": 0,
+    "log": "custom-latency-24/baseline-control.json",
+    "elapsed_seconds": 0.03386983400559984
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-24/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct7.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-24/illegal-wrong-funct7.log",
+    "elapsed_seconds": 0.002876415994251147
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-24/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-funct3.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-24/illegal-wrong-funct3.log",
+    "elapsed_seconds": 0.002566000010119751
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-24/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/illegal-wrong-opcode.bin"
+    ],
+    "exit_code": 6,
+    "log": "custom-latency-24/illegal-wrong-opcode.log",
+    "elapsed_seconds": 0.0024434999941149727
+  },
+  {
+    "argv": [
+      "yosys",
+      "-s",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/synthesis/baseline/ice40.ys"
+    ],
+    "exit_code": 0,
+    "log": "synthesis/baseline/ice40.log",
+    "elapsed_seconds": 1.6833841249899706
+  },
+  {
+    "argv": [
+      "yosys",
+      "-s",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/synthesis/formula0/ice40.ys"
+    ],
+    "exit_code": 0,
+    "log": "synthesis/formula0/ice40.log",
+    "elapsed_seconds": 1.7439800419961102
+  },
+  {
+    "argv": [
+      "yosys",
+      "-s",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/synthesis/formula1/ice40.ys"
+    ],
+    "exit_code": 0,
+    "log": "synthesis/formula1/ice40.log",
+    "elapsed_seconds": 1.7565433749987278
+  },
+  {
+    "argv": [
+      "yosys",
+      "-s",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/synthesis/both/ice40.ys"
+    ],
+    "exit_code": 0,
+    "log": "synthesis/both/ice40.log",
+    "elapsed_seconds": 1.7407252500124741
+  },
+  {
+    "argv": [
+      "yosys",
+      "-s",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/synthesis/both-combinational/ice40.ys"
+    ],
+    "exit_code": 0,
+    "log": "synthesis/both-combinational/ice40.log",
+    "elapsed_seconds": 1.7185901249904418
+  },
+  {
+    "argv": [
+      "git",
+      "-C",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/embench",
+      "rev-parse",
+      "HEAD"
+    ],
+    "exit_code": 0,
+    "log": "embench-revision.log",
+    "elapsed_seconds": 0.009342500008642673
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-O2",
+      "-std=gnu17",
+      "-nostdlib",
+      "-nostartfiles",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-msmall-data-limit=0",
+      "-mno-relax",
+      "-DCPU_MHZ=1",
+      "-DCUSTOM=0",
+      "-DFUSION_MASK=0",
+      "-I",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench",
+      "-Wl,--no-relax",
+      "-Wl,--gc-sections",
+      "-Wl,-T,/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_link.ld",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_start.S",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_crc_firmware.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench/crc32-upstream.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench/beebsc.c",
+      "-lgcc",
+      "-o",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-stock.elf"
+    ],
+    "exit_code": 0,
+    "log": "crc32-stock-compile.log",
+    "elapsed_seconds": 0.12423950000084005
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy",
+      "-O",
+      "binary",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-stock.elf",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-stock.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-stock-objcopy.log",
+    "elapsed_seconds": 0.0028222909895703197
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objdump",
+      "-d",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-stock.elf"
+    ],
+    "exit_code": 0,
+    "log": "crc32-stock-disassembly.txt",
+    "elapsed_seconds": 0.0028301249985815957
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-O2",
+      "-std=gnu17",
+      "-nostdlib",
+      "-nostartfiles",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-msmall-data-limit=0",
+      "-mno-relax",
+      "-DCPU_MHZ=1",
+      "-DCUSTOM=0",
+      "-DFUSION_MASK=0",
+      "-I",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench",
+      "-Wl,--no-relax",
+      "-Wl,--gc-sections",
+      "-Wl,-T,/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_link.ld",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_start.S",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_crc_firmware.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench/crc32-fused.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench/beebsc.c",
+      "-lgcc",
+      "-o",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-source-control.elf"
+    ],
+    "exit_code": 0,
+    "log": "crc32-source-control-compile.log",
+    "elapsed_seconds": 0.1142894590011565
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy",
+      "-O",
+      "binary",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-source-control.elf",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-source-control.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-source-control-objcopy.log",
+    "elapsed_seconds": 0.002772459003608674
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objdump",
+      "-d",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-source-control.elf"
+    ],
+    "exit_code": 0,
+    "log": "crc32-source-control-disassembly.txt",
+    "elapsed_seconds": 0.0027983339969068766
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-O2",
+      "-std=gnu17",
+      "-nostdlib",
+      "-nostartfiles",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-msmall-data-limit=0",
+      "-mno-relax",
+      "-DCPU_MHZ=1",
+      "-DCUSTOM=0",
+      "-DFUSION_MASK=1",
+      "-I",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench",
+      "-Wl,--no-relax",
+      "-Wl,--gc-sections",
+      "-Wl,-T,/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_link.ld",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_start.S",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_crc_firmware.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench/crc32-fused.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench/beebsc.c",
+      "-lgcc",
+      "-o",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-formula0.elf"
+    ],
+    "exit_code": 0,
+    "log": "crc32-formula0-compile.log",
+    "elapsed_seconds": 0.1186950420087669
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy",
+      "-O",
+      "binary",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-formula0.elf",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-formula0.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-formula0-objcopy.log",
+    "elapsed_seconds": 0.0028152090089861304
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objdump",
+      "-d",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-formula0.elf"
+    ],
+    "exit_code": 0,
+    "log": "crc32-formula0-disassembly.txt",
+    "elapsed_seconds": 0.002883458000724204
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-O2",
+      "-std=gnu17",
+      "-nostdlib",
+      "-nostartfiles",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-msmall-data-limit=0",
+      "-mno-relax",
+      "-DCPU_MHZ=1",
+      "-DCUSTOM=0",
+      "-DFUSION_MASK=2",
+      "-I",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench",
+      "-Wl,--no-relax",
+      "-Wl,--gc-sections",
+      "-Wl,-T,/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_link.ld",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_start.S",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_crc_firmware.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench/crc32-fused.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench/beebsc.c",
+      "-lgcc",
+      "-o",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-formula1.elf"
+    ],
+    "exit_code": 0,
+    "log": "crc32-formula1-compile.log",
+    "elapsed_seconds": 0.1125815420091385
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy",
+      "-O",
+      "binary",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-formula1.elf",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-formula1.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-formula1-objcopy.log",
+    "elapsed_seconds": 0.0029999590042280033
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objdump",
+      "-d",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-formula1.elf"
+    ],
+    "exit_code": 0,
+    "log": "crc32-formula1-disassembly.txt",
+    "elapsed_seconds": 0.0031416669953614473
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-O2",
+      "-std=gnu17",
+      "-nostdlib",
+      "-nostartfiles",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-msmall-data-limit=0",
+      "-mno-relax",
+      "-DCPU_MHZ=1",
+      "-DCUSTOM=0",
+      "-DFUSION_MASK=3",
+      "-I",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench",
+      "-Wl,--no-relax",
+      "-Wl,--gc-sections",
+      "-Wl,-T,/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_link.ld",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_start.S",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/core_crc_firmware.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench/crc32-fused.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/sources/embench/beebsc.c",
+      "-lgcc",
+      "-o",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-both.elf"
+    ],
+    "exit_code": 0,
+    "log": "crc32-both-compile.log",
+    "elapsed_seconds": 0.11823449999792501
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy",
+      "-O",
+      "binary",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-both.elf",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-both.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-both-objcopy.log",
+    "elapsed_seconds": 0.0032555000070715323
+  },
+  {
+    "argv": [
+      "../toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objdump",
+      "-d",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-both.elf"
+    ],
+    "exit_code": 0,
+    "log": "crc32-both-disassembly.txt",
+    "elapsed_seconds": 0.0031240829994203523
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline-core/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-stock.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-stock-sim.json",
+    "elapsed_seconds": 2.0862254579988075
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/baseline-core/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-source-control.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-source-control-sim.json",
+    "elapsed_seconds": 2.1052850840060273
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-0/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-stock.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-stock-extended-latency-0.json",
+    "elapsed_seconds": 2.1019724590005353
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-0/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-formula0.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-formula0-latency-0.json",
+    "elapsed_seconds": 2.0121557090024
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-0/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-formula1.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-formula1-latency-0.json",
+    "elapsed_seconds": 2.04075370899227
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-0/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-both.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-both-latency-0.json",
+    "elapsed_seconds": 1.909460124996258
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-1/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-stock.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-stock-extended-latency-1.json",
+    "elapsed_seconds": 2.1342702910042135
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-1/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-formula0.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-formula0-latency-1.json",
+    "elapsed_seconds": 2.026369250001153
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-1/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-formula1.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-formula1-latency-1.json",
+    "elapsed_seconds": 2.0876722920074826
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/custom-latency-1/obj_dir/Vcore_top",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/core/crc32-both.bin"
+    ],
+    "exit_code": 0,
+    "log": "crc32-both-latency-1.json",
+    "elapsed_seconds": 1.9672379590047058
+  }
+]

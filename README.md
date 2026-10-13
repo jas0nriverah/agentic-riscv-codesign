@@ -5,15 +5,38 @@ custom instructions with fewer expensive measurements than frequency or merit
 ranking. The repository contains Spike tracing and candidate extraction, plus a
 Python dataset, prediction, and offline selection pipeline.
 
-The repository now includes a [real measured dataset and results](results/2026-10-13/README.md):
-eight passing Embench workloads, 339 candidate examples, 301 synthesized circuits,
-and a trained FPGA-resource predictor. Nested benchmark-held-out evaluation gives
-33.1 LUT4 mean absolute error versus 77.3 for the mean baseline, with pooled
-Spearman correlation 0.801. The final model selected by grouped validation is
-XGBoost. **These results predict isolated circuit resources, not processor
-speedup.** The original `isaforge demo` remains explicitly synthetic.
+The [prospective research results](results/2026-10-13-prospective/README.md) now
+cover all 19 Embench programs, 1,098 candidate rows, 713 distinct synthesized
+formulas, frozen-model inference, and a complete CRC32 FPGA SoC experiment.
+On the final 331 new formulas, a structural linear model achieves 23.15 LUT4
+MAE versus 87.59 for the original XGBoost model and 33.17 for the residual model.
+At the primary selection budget, models tie simple merit; superiority over
+merit or published tools is not established.
 
-## Train on the real measurements
+The closed-memory PicoRV32 CRC32 system reduces cycles from 32,387,382 to
+29,602,102 with two custom instructions and passes checksum, memory, and control
+tests. Matched place-and-route runs include the on-chip memory and yield
+1.022–1.140× estimated runtime ratios across three seeds. These are RTL/timing
+model results, not physical-board measurements. **The ML models predict isolated
+LUT4 resources, not CPU speedup.** The original `isaforge demo` remains synthetic.
+
+## Run the trained model
+
+```sh
+python -m isaforge.area_model_v2 predict \
+  --model results/2026-10-13-prospective/deployment/resource-deployment.joblib \
+  --candidates results/2026-10-13-prospective/final/dataset.json \
+  --output generated/inference.json
+```
+
+This deployment model refits all 713 available formulas after model comparison;
+it has no new independent evaluation. Reproduce the reported held-out scores
+using the separate frozen models under `results/2026-10-13-prospective/models/`.
+Read the [research manuscript](docs/research-manuscript.md),
+[reproduction guide](docs/reproduce-research.md), [model methodology](docs/area-model-v2.md),
+[processor experiment](hardware/README.md), and [SoC routing](docs/soc-routing.md).
+
+## Reproduce the original measured pilot
 
 ```sh
 python -m isaforge.area_model train \

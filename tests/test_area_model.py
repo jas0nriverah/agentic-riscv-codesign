@@ -1,5 +1,7 @@
 """Leakage barriers, model persistence, and formula-only LUT4 prediction."""
 import json
+import subprocess
+import sys
 
 import numpy as np
 import pytest
@@ -87,6 +89,18 @@ def test_persisted_model_roundtrip_and_tamper_detection(tmp_path):
     schema.write_text(json.dumps(data))
     with pytest.raises(ValueError, match='schema'):
         load_area_model(paths['model_path'])
+
+
+def test_cli_trained_artifact_loads_from_another_module(tmp_path):
+    rows = fixture_rows()
+    data = tmp_path / 'rows.json'
+    data.write_text(json.dumps(rows))
+    subprocess.run([sys.executable, '-m', 'isaforge.area_model', 'train',
+                    '--rows', str(data), '--output-dir', str(tmp_path / 'model')],
+                   check=True, capture_output=True, text=True)
+    loaded = load_area_model(tmp_path / 'model/area-model.joblib')
+    assert loaded.__class__.__module__ == 'isaforge.area_model'
+    assert len(loaded.predict(rows)) == len(rows)
 
 
 def test_nested_evaluation_and_final_fit_have_distinct_scopes(tmp_path, monkeypatch):

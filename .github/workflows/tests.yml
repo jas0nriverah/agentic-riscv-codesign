@@ -14,6 +14,7 @@ jobs:
       - run: python -m pip install -e '.[dev]'
       - run: python -m pytest -q
       - run: isaforge demo --output generated/demo
+      - run: python -m isaforge.frozen_inference --model results/2026-10-13-prospective/models/resource-ridge.joblib --kind v2 --candidates results/2026-10-13-prospective/final/dataset.json --output generated/inference-smoke.json
   hardware-test:
     runs-on: ubuntu-latest
     steps:
