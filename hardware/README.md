@@ -1,5 +1,7 @@
 # Measured PicoRV32 custom instructions
 
+This page documents the core with an external memory model. The later [closed-memory SoC experiment](../docs/soc-integration.md) and [matched SoC routing](../docs/soc-routing.md) include on-chip RAM; [current results](../docs/results.md) keeps their cycle and resource counts separate.
+
 ISAForge now executes two extracted formulas as real instructions on the
 official PicoRV32 processor. The experiment measures both a controlled formula
 recurrence and a source-modified complete Embench CRC32 benchmark. These are

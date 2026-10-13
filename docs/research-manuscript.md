@@ -1,5 +1,7 @@
 # ISAForge: resource prediction and measured RISC-V instruction fusion
 
+> Historical manuscript for the earlier prospective-workload and processor experiments. For the subsequent six-model matched comparison and current conclusions, read [current methodology](methodology.md) and [current results](results.md). Statements about an unevaluated deployment model or a needed matched comparison describe this earlier stage.
+
 Working research manuscript, 13 October 2026. SoC simulation and paired FPGA routing are complete.
 
 ## Abstract

@@ -48,3 +48,20 @@ generated/candidates/%.json: generated/traces/%.jsonl generated/programs/%.elf s
 	$(PYTHON) src/candidates.py $< generated/programs/$*.elf $@ --objdump $(OBJDUMP)
 
 candidates: $(PROGRAMS:%=generated/candidates/%.json)
+
+# Research entry points. Activate .venv first, or set PYTHON=.venv/bin/python.
+.PHONY: help test reproduce diagram
+help:
+	@echo 'Research: make test | make reproduce | make diagram'
+	@echo 'make reproduce replays frozen scores/audit/figures; no training or synthesis.'
+	@echo 'Hardware collection: make all | make run | make trace | make candidates'
+	@echo 'See docs/README.md for methodology, results, and pinned toolchains.'
+
+test:
+	$(PYTHON) -m pytest -q
+
+reproduce:
+	$(PYTHON) scripts/reproduce_matched.py
+
+diagram:
+	$(PYTHON) scripts/render_architecture.py

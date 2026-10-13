@@ -178,7 +178,7 @@ Figure replay reads the tracked evaluation reports, predictions, timing records 
   --timing masterrtl_sog=results/2026-10-13-v3/probe-inference/masterrtl_sog.timing.json \
   --masterrtl-cold-timing results/2026-10-13-v3/masterrtl/cold-probe-timing.json \
   --independent-audit results/2026-10-13-v3/independent-audit.json \
-  --output /Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/outputs/research-figures
+  --output generated/research-figures
 ```
 
 The nine figures are exported as editable SVG, vector PDF and 300 dpi PNG. `figure-data.json` retains complete plotted observations, intervals, runtime versions and SHA-256 provenance; `README.txt` gives figure captions, and `invocation.json` records the exact command. The renderer checks matched development data/splits and hashes of the probe labels, predictions and independent audit.

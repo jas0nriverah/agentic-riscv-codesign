@@ -16,6 +16,7 @@ jobs:
       - run: isaforge demo --output generated/demo
       - run: python -m isaforge.frozen_inference --model results/2026-10-13-prospective/models/resource-ridge.joblib --kind v2 --candidates results/2026-10-13-prospective/final/dataset.json --output generated/inference-smoke.json
       - run: python -m isaforge.frozen_inference --model results/2026-10-13-v3/models/area-model-v3.joblib --kind v3 --candidates results/2026-10-13-v3/probe/candidates.json --output generated/v3-inference-smoke.json
+      - run: python scripts/reproduce_matched.py --skip-figures --output generated/ci-replay
   hardware-test:
     runs-on: ubuntu-latest
     steps:
