@@ -20,7 +20,26 @@ tests. Matched place-and-route runs include the on-chip memory and yield
 model results, not physical-board measurements. **The ML models predict isolated
 LUT4 resources, not CPU speedup.** The original `isaforge demo` remains synthetic.
 
-## Run the trained model
+## Matched research-method comparison
+
+A [new frozen comparison](results/2026-10-13-v3/README.md) trains six predictors on
+identical 713-formula data and tests all of them on 192 unseen synthesized
+circuits. The **MasterRTL recipe adapted to LUT4 wins this probe: 35.07 LUT4 MAE**,
+versus 41.59 for our previous residual model, 56.40 for the new structural
+challenger, and 80.86 for the original architecture refitted on the same data.
+The structural revision did not improve the primary endpoint. These are
+synthetic compositions, not an additional executed workload. This adaptation
+of the published method does not reproduce its ASIC benchmark or establish
+superiority over the original system.
+
+All 192 circuits pass 412,416 sampled/boundary RTL comparisons. Predictions and
+model hashes were frozen before the test labels were opened. The
+[matched reproduction guide](docs/reproduce-matched-comparison.md) covers all
+six frozen inference commands, strict scoring, and the cached MasterRTL model.
+MasterRTL needs label-free Yosys preprocessing for new formulas; its measured
+192-formula cold inference takes 7.431 seconds, versus 0.205 seconds warm.
+
+## Run the formula-only structural model
 
 ```sh
 python -m isaforge.area_model_v2 predict \
@@ -29,7 +48,8 @@ python -m isaforge.area_model_v2 predict \
   --output generated/inference.json
 ```
 
-This deployment model refits all 713 available formulas after model comparison;
+This earlier deployment artifact refits all 713 available formulas after the
+prospective-workload comparison;
 it has no new independent evaluation. Reproduce the reported held-out scores
 using the separate frozen models under `results/2026-10-13-prospective/models/`.
 Read the [research manuscript](docs/research-manuscript.md),
