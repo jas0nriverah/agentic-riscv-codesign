@@ -34,19 +34,25 @@ def infer(model, rows, repeats=20):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--model', required=True, type=Path)
-    parser.add_argument('--kind', choices=['v1', 'v2'], default='v1')
+    parser.add_argument('--kind', choices=['v1', 'v2', 'v3', 'masterrtl'], default='v1')
     parser.add_argument('--candidates', required=True, type=Path)
     parser.add_argument('--output', required=True, type=Path)
     args = parser.parse_args(argv)
     if args.kind == 'v1':
         from .area_model import load_area_model as load
-    else:
+    elif args.kind == 'v2':
         from .area_model_v2 import load_area_model_v2 as load
+    elif args.kind == 'v3':
+        from .area_model_v3 import load_model as load
+    else:
+        from .masterrtl_baseline import load_model as load
     started = time.perf_counter()
     model = load(args.model)
     load_seconds = time.perf_counter() - started
     rows = json.loads(args.candidates.read_text())
     predictions, metadata = infer(model, rows)
+    if args.kind == 'masterrtl':
+        metadata['timing_scope'] = 'Feature-plus-ML inference includes cache file IO, integrity checks, graph traversal, and cold Yosys extraction on misses; excludes input/output JSON serialization, process startup, and model loading.'
     metadata.update(model_path=str(args.model), model_sha256=hashlib.sha256(args.model.read_bytes()).hexdigest(),
                     model_load_seconds=load_seconds,
                     candidates_sha256=hashlib.sha256(args.candidates.read_bytes()).hexdigest())
