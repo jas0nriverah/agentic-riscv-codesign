@@ -1,0 +1,35 @@
+V6 consumed post-test diagnostic — separate from the frozen primary
+
+This analysis was requested after test completion. No model, label, comparator, acquisition rule or scoring code changes follow it. All192 errors for every one of8 models, and all192 paired primary cases, remain in v6-posttest-diagnostics.json. Per-stratum differences for every model versus DG are retained there, including unfavorable strata. Additional contrasts are descriptive, not new multiplicity-adjusted tests.
+
+Where the mapping gain occurs
+Stratum                 MappingMAE  Mapping−DG  Contribution to8-stratum difference
+arithmetic_chain        76.429306   −10.730833  −1.341354
+comparators             10.802917    +0.337083   +0.042135
+constant_shifts          4.350417    −1.042361   −0.130295
+mask_logic               5.655972    −1.750000   −0.218750
+multiplication         123.200486    −1.574514   −0.196814
+parallel_branches        8.231458    +0.479236   +0.059905
+shared_diamond          10.662917    −1.585556   −0.198194
+variable_shifts         17.954097    −1.502847   −0.187856
+TOTAL                   32.160946                −2.171224
+Six strata improve; comparator and parallel branches regress. Arithmetic contributes61.7787% of the NET aggregate gain. The seven nonmultiply strata supply90.9353%; their mean MAE difference is−2.256468 LUT4. This is a broader nonmultiply direction than V5's synthetic improvement dominated by one multiplier stratum, but does not establish uniform or application improvement. The router's higher aggregate error arises entirely on multiplication, because other points equal mapping by construction.
+
+Error concentration and signed structure
+Mapping's largest error1181.8467 LUT4 accounts for19.1395% of all absolute error; largest2=26.9513%,largest10=50.4546%,largest20=67.0241%. DG concentration is17.9235%,25.4099%,50.3869%,66.7649% at the same counts. Mapping still overpredicts on average by19.5400 LUT4. The two worst mapping rows are constant variants in ONE family:
+ add(add(mulhsu(sub(ori(in1,255),in1),slli(in0,16)),in1),in1)
+ actual357,point1538.8467,error+1181.8467
+ add(add(mulhsu(sub(ori(in1,1431655765),in1),slli(in0,23)),in1),in1)
+ actual423,point905.3717,error+482.3717
+The worstcase is essentially unchanged from DG, despite a lower total MAE. Full-semantic routing worsens its overprediction to1231.5833 LUT4. Another restricted/correlated high-half product has actual374,point611.8967. Arithmetic chains also overpredict substantially: one11-op chain actual156,point358.0133; another7-op chain actual112,point293.4433. These are representation/distribution errors below the training-target maximum.
+
+Extrapolation is real but does not explain the bulk error
+The exact1665 fitting targets range0..3050 LUT4. OnlyONE test target exceeds that maximum:3076, a multiplication formula; all other191 remain within it. Mapping underpredicts that row66.8433 LUT4, DG66.0933,router69.47. This accounts for1.0825% of mapping's total absolute error. A predictor bounded by the fitting maximum necessarily incurs at least26 on that row, only0.135417 MAE across192; the observed total is32.160946. ExtraTrees' leaf-target averaging cannot extrapolate above3050, but simply collecting larger targets would not resolve the dominant1182-LUT overprediction at target357. The3050 threshold is the shared originalfit reference, not every historical baseline's individual training maximum.
+
+Priorities for a later lineage — hypotheses from consumed evidence
+1. Keep the mapping block as the tested point-estimation direction, with DG and original graph retained as controls. Do not promote the worse router or rewrite V6's selected primary. Require another frozen independent cohort after any further change.
+2. Add proof-backed bitmask/range and operand-correlation descriptors. The exact32-bit identity(x|C)−x=(~x)&C follows because x and(~x&C) have disjoint set bits; it exposes an8-bit restricted operand in the worstcase. Generic topology/cut summaries and current normalization miss this functional restriction. Build a feature-only semantic channel using verified identities and known-bit/demanded-bit transfer while retaining original implementation graphs and original mapped targets; equivalent normalized RTL is not a substitute target.
+3. Address repeated-input arithmetic cancellation and carry/borrow behavior with controlled paired development cases, affine/modular summaries and bounded functional cut descriptors. Deep add/sub chains and dynamic shift amount/data correlation need new independent development families rather than more constants on old skeletons. Isolate each added representation block under the same budget.
+4. Evaluate actual decision losses. Mapping's lower MAE increases point false acceptance at16/32/64, and even its fresh upper retains2 false accepts at256. A future policy needs declared screening/acquisition costs, boundary cases and independent calibration/evaluation; no policy is trained or validated here.
+5. Improve uncertainty using fresh groups at the intended unit and report whole-component coverage, not only candidate coverage. Mapping/router cover85/96 groups;4 mapping misses remain in-range. Range flags/tree spread are insufficient risk certificates. Existing experts' old margins and new V6 margins have different calibration histories, so do not call their coverage contrast an isolated feature gain.
+6. Broaden future evaluation to independently sourced complete application families and multiple structural families per stratum. These192 test and192 calibration labels are now consumed. Twelve synthetic components per stratum improve this experiment's uncertainty unit but do not establish exchangeability or application transfer. Preserve every failure/outlier and the serialization correction history.
