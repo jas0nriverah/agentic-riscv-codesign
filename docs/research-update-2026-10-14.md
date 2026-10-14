@@ -22,3 +22,19 @@ This update records additional primary literature reviewed during the V6 experim
 4. Evaluate cost-aware selection and source-only prediction as separate hypotheses, each with a frozen budget, comparator and held-out evaluation.
 
 These papers motivate specific tests. Their reported scores are not targets that can be matched by changing ISAForge's denominator, hardware technology, data split or output scale.
+
+## V7 mechanism study: compiler analysis with proof obligations
+
+LLVM's `KnownBits` representation tracks bits known to be zero or one, distinguishes signed significant width from unsigned width, and provides separate low-product and signed/unsigned high-product analysis. This is a useful reference for the multiplier failures exposed by V6. Sparse support and signed width are different properties: a mask with a small population can still include the sign bit. [LLVM KnownBits reference](https://llvm.org/doxygen/structllvm_1_1KnownBits.html).
+
+The V7 development study adds small, fixed known-bit and modular-affine feature blocks while retaining the original implementation's measured LUT4 target. Every accepted rewrite has a bit-vector proof. LLVM's value-tracking code also uses no-wrap flags and undefined-value assumptions in some transformations; those assumptions cannot be copied into total RV32 arithmetic, where overflow wraps and shift distances are masked. [LLVM value-tracking implementation](https://www.llvm.org/doxygen/ValueTracking_8cpp_source.html).
+
+This is a hypothesis about useful model inputs, not a new compiler-analysis algorithm or an established accuracy gain. Neither proposed correlated-bit identity occurs in the original fitting corpus. The fixed six-view study therefore distinguishes descriptor benefits from stronger normalization and retains an explicit mechanism-coverage limitation. See the [V7 development protocol](v7-development-protocol.md).
+
+## Newer preprints: optimization requires a different endpoint
+
+**AutoPPA (April 2026)** learns rewrite rules from contrasting RTL implementations and applies them through bounded search. Its main flow uses SiliconCompiler and FreePDK 45 nm. Table 3 reports 20.45% average area improvement over original designs across 11 circuits, while average delay improvement is −4.85%: area gains can accompany slower hardware. Its described equivalence filter uses generated simulation testbenches. These are implementation optimization results, not prediction error. [Primary preprint, sections 3.2 and 5, Table 3](https://arxiv.org/html/2604.18445v1).
+
+**Alpha-RTL / TTT-RTL (June 2026)** reports a 0.349 geometric-mean area×delay×power ratio over the 44-design common-success subset of RTLLM v2.0, with 48/49 overall coverage. The paper explicitly identifies different model backbones, mainly single-seed results, and simulation-only correctness as limits. Its Nangate 45 nm benchmark and Sky130 case study are separate from ISAForge's FPGA target. [Primary preprint, Table 1 and limitations](https://arxiv.org/html/2606.05253v1).
+
+**Action for ISAForge:** retain independent functional proofs where our bounded combinational language permits them, and assess any future optimization or instruction-selection policy under equal synthesis budgets. Record every failed candidate and report area and timing separately before combining them. A lowered LUT4 prediction error cannot be presented as either paper's hardware optimization ratio. More LLM sampling without a defined hardware objective and cost-matched baseline would not resolve the current transfer problem.

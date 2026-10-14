@@ -2,6 +2,14 @@
 
 Checked 13 October 2026 against the papers themselves. Different prediction targets and workloads prevent treating this table as a shared leaderboard.
 
+The model-development discussion below records the earlier 713-formula stage.
+For the current completed experiment, see [V6 results](v6-results.md): mapping
+features improve its fixed synthetic primary by 6.32%, while application
+transfer and useful selection gains remain unestablished. The
+[14 October literature update](research-update-2026-10-14.md) adds VeriDistill
+and concrete follow-up experiments; the [normalization diagnosis](../results/2026-10-14-v6/audit/normalization-research.md)
+connects current failures to proved compiler-style transformations.
+
 | Published system | Reported result | Evaluation boundary |
 | --- | --- | --- |
 | MasterRTL, extended TCAD study, Table III | ASIC total-area MAPE 16%, Pearson R 0.98 | 90 RTL designs; bit-level Simple Operator Graph features and a lightweight area model; ASIC cell area, not iCE40 LUT count |

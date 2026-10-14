@@ -73,6 +73,11 @@ complete functional nonequivalence.
 | Variable shifts | 19.457 | 17.954 | −1.503 |
 
 Six strata improve, with most of the aggregate gain in arithmetic chains.
+The paired measured-versus-predicted plots retain all zero targets and the
+large overpredictions on the same axes:
+
+![Original-circuit measurements against both primary predictors](figures/v6/v6-predictions.png)
+
 Multiplication remains the largest error source. One retained formula,
 `add(add(mulhsu(sub(ori(in1,255),in1),slli(in0,16)),in1),in1)`, measures
 **357 LUT4** but is predicted at **1,538.847**, an error of **1,181.847**.

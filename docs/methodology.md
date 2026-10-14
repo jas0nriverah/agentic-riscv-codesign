@@ -53,6 +53,37 @@ The primary probe endpoint is macro-stratum MAE, numerically equal to pooled MAE
 
 The subsequent [V4 protocol](v4-protocol.md) adds 384 development circuits, reuses the earlier 192-circuit probe as development, and reserves 256 new synthetic circuits. V4 introduces semantics-normalized structural and pre-ABC topology features; six fixed estimator configurations are compared through five normalized-operator-skeleton group folds. A same-data MasterRTL retrain distinguishes expanded-data gains from method gains. All models and predictions freeze before test RTL validation and target synthesis; input-only normalization equivalence checks are allowed and explicitly recorded. [V4 results](v4-results.md) retain all 256 outcomes and secondary-metric regressions. No new workload acquisition or CPU integration is inferred from this circuit experiment.
 
+## V5 and V6: feature controls, structural groups and calibration
+
+V5 compares SOG, original graph, dual graph and dual graph plus semantics on
+the same 1,665 fitting formulas, five component folds and six estimator
+configurations. Another 392 formulas calibrate upper bounds. Original RTL
+defines every LUT4 target, including when a second graph represents an
+equivalent normalized expression. The original graph remains visible because
+functional equivalence does not imply identical mapped implementation cost.
+The [V5 protocol](v5-protocol.md) defines its known-family and unseen-composition
+tests; the [external study](external-v5-evaluation.md) separately evaluates
+three application sources with all overlap reported.
+
+V6 appends 23 mapping descriptors to the dual-graph view and fixes the same
+1,665 fitting rows, estimator parameters and seed. Its primary is mapping
+minus unchanged dual graph on equal-eight-stratum MAE. Each fresh calibration
+and test cohort contains 192 formulas in 96 two-variant components, with
+12 components in every stratum. Input-only identities, ordered skeletons and
+exact feature vectors exclude consumed or cross-cohort overlaps. These are
+sufficient grouping rules, not a complete proof of semantic independence.
+
+All point predictions freeze before calibration measurements. The fixed
+one-sided 90% rule takes rank 88 among 96 calibration component-maximum
+residuals. Calibrated artifacts and test bounds then freeze in a second Git
+commit before test measurements. No calibration labels choose features,
+estimators, gates or thresholds outside this rule. Test uncertainty resamples
+whole paired components within each stratum, retaining every stratum in all
+10,000 draws. Coverage is reported both per candidate and per complete
+component, alongside finite-bound fraction, slack and cap errors. These
+procedures and the limits of exchangeability are recorded in the
+[V6 protocol](v6-protocol.md) and [results](v6-results.md).
+
 ## Budgeted decisions and processor validation
 
 The prospective acquisition experiment orders candidates using frequency, merit, seeded random policies, and predicted feasibility plus merit. All policies share pools, caps, and attempted-measurement budgets; only measured candidates can be selected, with the unmodified processor available. Historical training/calibration labels are additional costs outside the target budget. Exhaustively measured pools provide a retrospective oracle, whose full label cost is not counted as ordinary acquisition. The primary decision endpoint is per-program oracle-savings retention at a 64-LUT cap and one new measurement, with the complete sensitivity grid retained. See [selection.md](selection.md).
@@ -63,4 +94,4 @@ Two CRC32 formulas are separately implemented through PicoRV32 PCPI and source-l
 
 Canonical loaders verify frozen schemas and artifact/source hashes. The five formula models need no synthesis at inference. MasterRTL requires retained graph features or compatible Yosys extraction for uncached formulas; cold and cached timings are reported separately. [Matched replay](reproduce-matched-comparison.md) reproduces all six scores from tracked inputs without regenerating labels, while [hardware reproduction](reproduce-research.md) describes the workload and processor experiments.
 
-Small correlated program samples, synthetic compositions, sparse multiplier coverage, sampled semantic checks, one integrated application/processor, and absent energy or physical-board measurements constrain generalization. Prediction intervals are not calibrated; older program-bootstrap intervals are descriptive, and observed selection ties do not prove population equivalence. The study reports these limitations and unsuccessful comparisons in [results.md](results.md).
+Small correlated program samples, synthetic compositions, sparse multiplier coverage, sampled semantic checks, one integrated application/processor, and absent energy or physical-board measurements constrain generalization. V5/V6 upper bounds have explicit calibration stages but do not achieve nominal whole-group coverage on every test, and they do not guarantee application coverage. Older program-bootstrap intervals are descriptive; observed selection ties do not prove population equivalence. The study reports these limitations and unsuccessful comparisons in [results.md](results.md).

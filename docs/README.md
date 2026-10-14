@@ -20,6 +20,7 @@ RTL synthesis of synthetic expressions.
 | Extract legal two-input, one-output instruction groups and verify substitutions | [Candidate contract](candidates.md) |
 | Generate RV32 RTL, check its outputs, and measure isolated LUT4 resources | [RTL verification and synthesis](synthesis.md) |
 | Understand formula predictors and grouped model evaluation | [Methodology](methodology.md), [v1 model](area-model.md), [v2 resource and residual models](area-model-v2.md) |
+| Inspect the latest fitting-only semantic ablation and its limitations | [V7 development results](v7-development-results.md), [pre-score protocol](v7-development-protocol.md) |
 | Evaluate a fixed measurement budget over a measured candidate pool | [Area selection](area-selection.md) |
 | Reproduce the six-model comparison and independent error audit | [Matched comparison reproduction](reproduce-matched-comparison.md) |
 | Reproduce historical V4, inspect its remaining failures, or run frozen inference | [V4 results and replay](v4-results.md), [frozen protocol](v4-protocol.md) |

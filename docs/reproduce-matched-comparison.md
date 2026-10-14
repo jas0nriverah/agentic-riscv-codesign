@@ -44,7 +44,7 @@ The reference is [MasterRTL commit 5bccf38](https://github.com/hkust-zhiyao/Mast
 Run commands from the repository root. The artifact schemas record these package versions: NumPy 2.5.4, SciPy 1.18.1, scikit-learn 1.9.1, XGBoost 3.4.1, and joblib 1.6.0. Use Python 3.13 for this exact environment; general package support for Python 3.11 does not imply compatibility with every pinned artifact dependency. A fresh environment can be prepared with:
 
 ```sh
-python3 -m venv .venv
+python3.13 -m venv .venv
 .venv/bin/python -m pip install -e . numpy==2.5.4 scipy==1.18.1 scikit-learn==1.9.1 xgboost==3.4.1 joblib==1.6.0
 ```
 

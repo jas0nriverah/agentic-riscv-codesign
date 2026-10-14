@@ -2,7 +2,11 @@
 
 The evidence supports resource-prediction and processor-integration results. V6 mapping features improve a frozen synthetic comparison by 6.32%, but error tails, feasibility mistakes and incomplete family coverage remain. Earlier V5 gains transfer weakly to three application families. Historical V4’s small advantage over a same-data MasterRTL retrain was inconclusive. Learned acquisition has not beaten simple merit on the prospective primary endpoint. The ML target is isolated LUT4 cost; the CRC32 cycle result comes from a separate matched processor experiment. [Methodology](methodology.md) defines those quantities and their boundaries.
 
-## Latest: V6 mapping features and fresh family calibration
+## New development evidence: V7 semantic ablation
+
+The [fixed six-view study](v7-development-results.md) completes 90 fits on the original 1,665 fitting rows. New bit and affine blocks lower development macro MAE **4.9351 → 4.8601 LUT4 (1.52%)**, while MAPE, zero error and p95 error worsen slightly. Existing semantic descriptors on proved rewrites reach **4.7384**. The primary gain concentrates in multiplication; the nonmultiplication average worsens. All scores remain development evidence on consumed folds with a newly detected cross-fold equivalence. No revised deployment model or independent accuracy claim follows this study.
+
+## Latest independent measurement: V6 mapping features and fresh family calibration
 
 The [V6 study](v6-results.md) adds 23 mapping descriptors while preserving the dual-graph control's 1,665 fitting rows and estimator settings/seed. On 192 new test circuits in 96 structural components, MAE falls from **34.332 to 32.161 LUT4** (6.32%), primary difference **−2.171**, descriptive stratified component interval **[−3.473, −0.938]**. All eight predictors and strata remain; the secondary multiply router reaches 33.191. Separate calibration and test cohorts total 384 original circuits and 824,832 passing RTL comparisons. Positive MAPE is 43.63% on 186 test targets; six zeros remain in MAE. This is a new cohort, not a direct comparison with older headline scores.
 

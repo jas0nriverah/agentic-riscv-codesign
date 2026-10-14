@@ -1,0 +1,11 @@
+(set-logic QF_BV)
+(set-option :timeout 500)
+; benchmark generated from python API
+(set-info :status unknown)
+(declare-fun independent_opaque_1 () (_ BitVec 32))
+(declare-fun independent_opaque_0 () (_ BitVec 32))
+(assert
+ (let ((?x35 (bvadd independent_opaque_0 (bvadd independent_opaque_1 (_ bv512 32)))))
+(let ((?x40 (bvadd (bvadd independent_opaque_0 (_ bv512 32)) independent_opaque_1)))
+(and (distinct ?x40 ?x35) true))))
+(check-sat)

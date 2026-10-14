@@ -64,6 +64,27 @@ def main():
         ax.set_title(s.replace('_',' ').capitalize(),loc='left',fontsize=11);ax.set_ylabel('MAE (LUT4)')
         ax.grid(axis='y',alpha=.15);ax.set_axisbelow(True)
     save(fig,'v6-strata','Every declared stratum is retained. Vertical scales differ between panels. Each stratum contains 24 formulas in 12 separate structural components. These synthetic grammar families are not independently sourced applications.')
+    fig,axes=plt.subplots(1,2,figsize=(11,5.8),layout='constrained',sharex=True,sharey=True)
+    palette=plt.get_cmap('tab10')
+    for ax,name,title in zip(axes,('dual_graph','mapping_v6'),('Unchanged dual-graph control','V6 mapping')):
+        errors=models[name]['candidate_errors']
+        for i,stratum in enumerate(strata):
+            selected=[r for r in errors if r['stratum']==stratum]
+            ax.scatter([r['lut4_count'] for r in selected],[r['predicted_lut4'] for r in selected],
+                       s=22,alpha=.72,color=palette(i),label=stratum.replace('_',' '),edgecolors='none')
+        ax.plot([0,3500],[0,3500],ls='--',color='#555',lw=1,zorder=0)
+        ax.set_xscale('symlog',linthresh=1);ax.set_yscale('symlog',linthresh=1)
+        ax.set_xlim(-.1,3500);ax.set_ylim(-.1,3500);ax.set_aspect('equal')
+        ticks=[0,1,10,100,1000];ax.set_xticks(ticks,[str(v) for v in ticks]);ax.set_yticks(ticks,[str(v) for v in ticks])
+        ax.set_xlabel('Measured isolated LUT4');ax.set_title(title,loc='left');ax.grid(alpha=.13)
+    axes[0].set_ylabel('Predicted isolated LUT4')
+    worst=max(models['mapping_v6']['candidate_errors'],key=lambda r:r['absolute_error_lut4'])
+    axes[1].annotate(f"{worst['lut4_count']:,.0f} measured\n{worst['predicted_lut4']:,.0f} predicted",xy=(worst['lut4_count'],worst['predicted_lut4']),xytext=(12,1700),
+                     fontsize=8,arrowprops={'arrowstyle':'-','color':'#555'},bbox={'facecolor':'white','edgecolor':'none','alpha':.9})
+    handles,labels=axes[0].get_legend_handles_labels()
+    fig.legend(handles,labels,loc='outside lower center',ncol=4,fontsize=8,frameon=False)
+    fig.suptitle('All 192 V6 test circuits · equal axes · dashed line: exact prediction\nLinear scale from 0 to 1, logarithmic above 1; all six zero targets retained',fontsize=11)
+    save(fig,'v6-predictions','Measured versus predicted original-circuit LUT4 on identical axes, retaining every zero and outlier. The annotated mapping overprediction remains in all metrics. Colors identify the eight fixed strata; this is a descriptive error view, not a new endpoint.')
     bound_names=[n for n in ORDER if 'upper_bound' in models[n]]
     fig,axes=plt.subplots(1,2,figsize=(12,4.6),layout='constrained',sharey=True)
     fig.suptitle('V6 test: 192 circuits / 96 components · dashed line: nominal 90%\nV6 uses fresh calibration; controls retain their earlier margins',fontsize=11)

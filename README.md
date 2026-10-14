@@ -26,6 +26,10 @@ The [methodology](docs/methodology.md) defines the data splits, feature boundary
 
 ## Results at a glance
 
+### New development study: proved semantic rewrites
+
+A fixed **90-fit** ablation on the original 1,665 fitting circuits tests six feature views across three paired seeds. New bit and affine descriptors lower development macro MAE **4.9351 → 4.8601 LUT4 (1.52%)**, but worsen MAPE and error tails slightly. The best observed view applies the proved rewrite before the existing semantic descriptors: **4.7384 LUT4 (3.99% below baseline)**. These are development scores on consumed folds, with a newly detected cross-fold equivalence; they do not replace the independent V6 test below. Neither new correlated-bit pattern occurs in training. [All controls, correctness evidence and limitations](docs/v7-development-results.md).
+
 ### Latest: V6 mapping features on fresh structural families
 
 V6 adds 23 generic-graph mapping descriptors to the previous dual-graph model, keeping the same **1,665 fitting circuits, 300-tree estimator settings and seed**. Models and predictions were frozen before measuring a separate 192-case calibration cohort and **192 test circuits in 96 structural families**. All 384 circuits passed verification and synthesis: **824,832 sampled/boundary RTL comparisons**, with no failed or replaced cases.
