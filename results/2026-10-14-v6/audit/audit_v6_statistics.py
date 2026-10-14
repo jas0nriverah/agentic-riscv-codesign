@@ -263,12 +263,27 @@ def audit(root,repo,scope,calibrated=False):
     if calibrated or scope=='test':
         import joblib
         freeze=read(root/'calibration-freeze.json');assert freeze['point_freeze']['sha256']==sha(root/'point-freeze.json') and freeze['new_fits']==0 and freeze['test_labels_read'] is False
+        assert freeze['schema']=='isaforge-v6-calibration-freeze-v1' and set(freeze['models'])==set(NEW) and freeze['alpha']==.1
+        assert checked(freeze['point_freeze'],root)==root/'point-freeze.json'
+        calfolder=root/'corpus/calibration';caldone=read(calfolder/'completion.json');calattempt=calfolder/caldone['attempt']
+        assert freeze['calibration_dataset_sha256']==caldone['dataset_sha256']
+        assert utc(read(calfolder/'label-release.json')['released_at_utc'])<=utc(freeze['started_at_utc'])<=utc(freeze['frozen_at_utc'])
+        frozen_paths={checked(entry,root) for entry in freeze['files']}
+        required={root/'point-freeze.json',*(calfolder/n for n in ('label-release.json','label-approval.json','completion.json','raw-evidence.json','raw-evidence.zip')),
+                  *(calattempt/n for n in ('completion.json','dataset.json','unique-measurements.json','verification.json')),repo/'scripts/evaluate_v6.py',repo/'scripts/measure_v6.py'}
+        assert required<=frozen_paths
+        result['calibration_frozen_evidence_records_checked']=len(freeze['files'])
         if scope=='test':
             calrows,caly,calraw=raw_stage(repo,root,'calibration',parse_formula,generate_rtl)
             calgroups=read(root/'corpus/calibration/components.json')['component_by_formula'];ids=np.array([calgroups[r['formula']] for r in calrows])
         else:calrows,caly,ids=rows,y,component_ids
         for name in NEW:
-            original=joblib.load(checked(point['models'][name]['artifact'],root));updated=joblib.load(checked(freeze['models'][name]['artifact'],root))
+            entry=freeze['models'][name];schema=read(checked(entry['schema'],root));oldschema=read(checked(point['models'][name]['schema'],root))
+            assert schema['artifact_sha256']==entry['artifact']['sha256'] and schema['calibration']==entry['calibration']
+            for key in set(oldschema)-{'artifact_sha256','calibration'}:assert schema[key]==oldschema[key],('calibration changed schema',name,key)
+            assert utc(freeze['started_at_utc'])<=utc(entry['frozen_at_utc'])<=utc(freeze['frozen_at_utc'])
+            original=joblib.load(checked(point['models'][name]['artifact'],root));updated=joblib.load(checked(entry['artifact'],root))
+            assert type(original) is type(updated)
             assert estimator_digest(original.estimator)==estimator_digest(updated.estimator)
             if original.semantic_expert is None:assert updated.semantic_expert is None
             else:
@@ -279,6 +294,7 @@ def audit(root,repo,scope,calibrated=False):
                     else:assert value==other
             for field in ('feature_columns','feature_minimum','feature_maximum','training_formula_count','training_provenance','kind','semantic_source','frozen_tool','runtime_source_sha256'):assert getattr(original,field)==getattr(updated,field)
             expected=group_calibration(caly,aligned(calrows,predictions[name]['calibration'],'predicted_lut4'),ids);result['calibration'][name]=expected
+            assert updated.calibration==schema['calibration'] and updated.calibration['status']=='calibrated' and updated.calibration['alpha']==.1
             for key in ('group_count','rank','upper_margin_lut4'):assert updated.calibration[key]==freeze['models'][name]['calibration'][key]==expected[key]
             for s in ('calibration','test'):
                 current=read(checked(freeze['models'][name][s+'_predictions'],root));old=predictions[name][s];assert len(current)==len(old)
