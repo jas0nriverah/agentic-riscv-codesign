@@ -23,6 +23,7 @@ RTL synthesis of synthetic expressions.
 | Evaluate a fixed measurement budget over a measured candidate pool | [Area selection](area-selection.md) |
 | Reproduce the six-model comparison and independent error audit | [Matched comparison reproduction](reproduce-matched-comparison.md) |
 | Reproduce historical V4, inspect its remaining failures, or run frozen inference | [V4 results and replay](v4-results.md), [frozen protocol](v4-protocol.md) |
+| Audit external program transfer and restore raw synthesis evidence | [External results](external-v5-results.md), [evaluation protocol](external-v5-evaluation.md), [collection protocol](external-v5-protocol.md) |
 | Replay V5, inspect matched feature ablations and calibration failures | [V5 results](v5-results.md), [reproduction](v5-reproduction.md), [protocol](v5-protocol.md), [research direction](research-direction-v5.md) |
 | Integrate custom instructions and distinguish cycles from clock estimates | [Processor experiment](../hardware/README.md), [closed-memory SoC](soc-integration.md) |
 
@@ -70,3 +71,5 @@ Later experiments do not replace the earlier protocols or historical outcomes.
 Historical reports and refits have stage-specific meanings. A dataset that was
 held out in an earlier experiment can be development data for a later model;
 the result archive index makes those transitions explicit.
+
+Development hypotheses and literature: [V6 conditional routing and mapping descriptors](v6-development-direction.md). These fitting-only diagnostics do not replace frozen test results.

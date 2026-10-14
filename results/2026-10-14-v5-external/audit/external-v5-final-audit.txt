@@ -1,0 +1,43 @@
+Independent completed external V5 audit — 2026-10-14
+
+PASS: independently reconstructed all six models' primary/secondary metrics, 480 row errors, positive-only percentage errors, zero-label handling, cap decisions, frozen bounds/slack and selected-feature OOD flags. Independently replayed all four matched estimators from frozen features, including point/upper/tree-SD/OOD identity. All 155 frozen files match reviewed commit 0db749ab0a4b0ba769d9b0bbd42bbfdef00343e9; freeze SHA256 9504e132d5e7469b7a53d0a3d965fd0fc8896d17854d7445176ebac8ddaeeb48. Acquisition completed 79 unique formulas / 80 program-formula rows, zero failures, after explicit release. Raw mapped-cell recount is assigned to the separate reproducibility audit and is not claimed here. Machine evidence: external-v5-final-audit.json; reproducible source: audit_external_v5_statistics.py plus audit_v5_statistics.py.
+
+Primary equal-three-family MAE (LUT4)
+  fixed MasterRTL 25-tree control   5.8080755431
+  dual graph                       6.1109802432
+  full dual+semantics               6.2556847349
+  equally tuned SOG                 6.5373423956
+  original graph                   7.0054766126
+  frozen V4                        8.3163036136
+Full semantics minus tuned SOG = -0.2816576607 LUT4, a 4.3084% improvement. This is much smaller than the synthetic novel-cohort improvement and does not establish a universal winner: dual graph and the fixed public-method control have lower external primary MAE. Full semantics' pooled MAE is 7.131125, RMSLE 0.0493694, positive-only MAPE 3.13086%; these measure different losses. There are 19 zero and 61 positive targets. Matched models and V4 predict all zero targets exactly; the fixed baseline zero-target MAE is 0.0800598.
+
+Family MAE, ordered Dijkstra / ADPCM decoder / anagram
+  tuned SOG       0 / 3.2111938534 / 16.4008333333
+  original graph  0 / 2.5398226950 / 18.4766071429
+  dual graph      0 / 2.3982978723 / 15.9346428571
+  full semantics  0 / 2.3690780142 / 16.3979761905
+  fixed MasterRTL .3847397327 / 4.3356372575 / 12.7038496392
+  frozen V4       0 / 3.1191489362 / 21.8297619048
+ADPCM supplies 0.28070528 of the 0.28165766 primary gain; anagram contributes only 0.00095238 and Dijkstra contributes zero. Anagram dominates severe errors. Full semantics' two largest absolute residuals are 125.5933 and 116.87 LUT4 on shifted/unshifted high-half products with an input offset -1365. They account for 42.50% of pooled absolute error; the six largest account for 76.57%. A lower headline average does not resolve this concentration.
+
+Novelty and scope
+The primary retains all familiar inputs and gives each family weight 1/3, hence each Dijkstra row 1/15, ADPCM row 1/141 and anagram row 1/84. The shared formula is measured once but retains each program's declared weight. Of 80 rows, 13 exact formulas, 14 normalized formulas and 26 full feature vectors match development; original/normalized skeleton matches are 55/56. Consumed V5 test contributes two skeleton matches, no exact/normalized/vector matches. Strict novelty has only 20 rows (0 Dijkstra, 14 ADPCM, 6 anagram); formula novelty has 54 (0/40/14). Correctly, neither has a complete three-family macro. Their pooled MAEs are secondary, not replacement primary endpoints: strict full 20.8208333 vs SOG 23.1966667, formula-novel full 10.5633333 vs SOG 11.2990638.
+Only three curated application families are observed. Dijkstra covers one (0,50) path invocation and all five extracted formulas are familiar under the formula-novel rule. This is a partial workload/formula transfer test, not a full-program hardware or CPU-performance evaluation, not a random application sample, and not a significance claim across application populations.
+
+Bounds, domain flags and cap decisions
+All 80 upper bounds are finite for each matched model. Candidate coverage / whole-family coverage: SOG 76/80 and 2/3; original graph 75/80 and 1/3; dual graph 76/80 and 2/3; full semantics 76/80 and 1/3. Full semantics covers 5/5 Dijkstra,45/47 ADPCM,26/28 anagram; its minimum slack is -61.94 LUT4. Strict-novel full coverage is 17/20. The nominal 90% calibration was based on structural components, not exchangeable whole application families, so these observations provide no 90% application guarantee.
+Full semantics' four bound misses are:
+  sra(in0,sub(addi(0,9),srai(in1,11))) : target175, point161.37, upper174.95
+  add(srai(sub(slli(in0,7),in0),7),in1) : target88, point73.3, upper86.88
+  mul(addi(in0,1),in1) : target1444, point1368.48, upper1382.06
+  mul(srli(in0,2),in1) : target1314, point1299.903333, upper1313.483333
+All four are inside the selected-feature min/max domain. The only two full-model OOD flags are overpredicted constant high-half products in anagram; the other matched views flag none. Thus domain flags did not identify these failures, and neither an in-range flag nor tree spread is a calibrated risk guarantee.
+Exactly the THREE graph-enhanced views (original graph, dual graph, full semantics) have zero false accepts and false rejects at every declared cap 16/32/64/128/256. Tuned SOG has TWO false accepts at cap32 and ONE false reject at cap64; it has no errors at the other caps. Fixed MasterRTL has2 false accepts+1 false reject at32 and3 false rejects at64; V4 has3 false rejects at32. Observed zero cap errors are cohort-specific and do not establish a deployment bound.
+
+Prioritized next improvements — consumed-data analysis, not a new test
+1. Preserve dual graph as the simpler candidate and original graph as an essential control; retain fixed MasterRTL as a credible baseline. Do not silently replace V5's selected primary model or its test score. A multiply-only semantic router is a justified development hypothesis, requiring new calibration and independent evaluation after its design is fixed.
+2. Add controlled development coverage for multiplication input offsets, low products of incremented operands, operand shifts/width reduction, high-half shifts, and LUI-plus-immediate constants. The V4/V5 multiplier generator's left-constant set omits +1, while mul(addi(in0,1),in1) is an actual bound failure. Include 0,+/-1,powers-of-two neighbors,signed/high-half regimes,and independent-vs-shared operands. Preserve original implementation mapping targets even for functionally equivalent expressions.
+3. Investigate dynamic shift amount logic and carry/reconvergence structure: ADPCM's 9-srai(input,11) shift amount and shift/subtract/add chain fail despite in-range features. Fixed-budget feasible-cut/reuse/output-cone/carry descriptors are a more direct representation hypothesis than simply adding more trees or generic descriptors. Isolate added columns in matched fitting-only ablations.
+4. Design the acquisition objective around actual decisions. All three graph models already classify this cohort perfectly at the declared caps; improving very large multiplier MAE need not improve those decisions. Preregister cap-boundary coverage, tail underprediction, runtime and acquisition cost alongside equal-family MAE.
+5. Calibrate the final predictor on untouched groups at the unit of the intended claim. For whole-family90% conformal maxima, at least9 exchangeable calibration families are needed even to obtain a finite quantile, and substantially more are needed for precision. Keep separate unseen application families for evaluation. Range flags and seed stability do not replace this.
+6. Treat all external inputs as consumed after this analysis. There are67 new canonical unique formulas beyond2313 prior canonical references, giving2380 canonical unique consumed formulas for future exclusions, with stronger equivalence/skeleton grouping additionally required. Add multiple independent families per stratum and complete programs. Preserve failures and familiar rows; do not tune a new margin or novelty filter against this test and report it as fresh performance.

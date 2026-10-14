@@ -43,13 +43,13 @@ def arrow(points, color=LINE, dash=False):
 
 panel(24,414,'CANDIDATE DISCOVERY + MEASUREMENT',
       'Pinned software inputs · RV32 semantics · traceable hardware labels', BLUE,'#f0f6ff','#c8daff')
-box(50,112,'Workload execution',['Embench C programs → GCC → Spike', 'Self-checks · instruction traces · pinned tools'],'#c8daff')
-box(630,112,'Candidate extraction',['≤2 inputs · one output · 2–4 operations', 'Trace candidates + separate synthetic probe'],'#c8daff')
+box(50,112,'Workload execution',['Embench + TACLeBench → GCC → Spike', 'Self-checks · instruction traces · pinned tools'],'#c8daff')
+box(630,112,'Candidate extraction',['≤2 inputs · one output · bounded operations', 'Program candidates + deeper synthetic probes'],'#c8daff')
 arrow([(480,173),(618,173)])
 text(549,144,'Trace',11,MUTED,ha='center')
 box(630,290,'RTL verification + synthesis',['Verilator vs RV32 integer oracle', 'Yosys → actual isolated iCE40 LUT4 count'],'#c8daff')
 arrow([(840,244),(840,280)])
-box(50,290,'Versioned circuit evidence',['1,289 development + 256 test formulas', 'Measured labels · logs · hashes · provenance'],'#c8daff')
+box(50,290,'Versioned circuit evidence',['Separate fitting, calibration and test cohorts', 'Measured labels · logs · hashes · provenance'],'#c8daff')
 arrow([(619,352),(481,352)])
 text(550,319,'Verified labels',10.5,MUTED,ha='center')
 arrow([(260,450),(260,527)],BLUE)
@@ -58,7 +58,7 @@ text(286,493,'Probe labels stay hidden until every model is frozen',11.5,MUTED)
 
 panel(539,297,'LEARNING + CONTROLLED COMPARISON',
       'Predict isolated LUT4 resources · assess generalization and inference cost',GREEN,'#effbf6','#b1e6d0')
-box(50,628,'Feature extraction + training',['Normalized semantics + pre-ABC topology', 'Same-data baseline + frozen prior models'],'#b1e6d0')
+box(50,628,'Feature extraction + training',['Original/normalized graphs + RV32 features', 'Matched tuning · reserved calibration groups'],'#b1e6d0')
 box(630,628,'Frozen evaluation + reporting',['Program holdouts + unseen synthetic probe', 'MAE · RMSLE · MAPE · timing · figures'],'#b1e6d0')
 arrow([(480,689),(618,689)],GREEN)
 text(549,651,'Freeze',11,GREEN,ha='center',weight='bold')

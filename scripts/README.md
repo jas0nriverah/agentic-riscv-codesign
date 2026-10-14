@@ -13,3 +13,5 @@ Run these scripts from the repository root with the Python environment activated
 For new inference, training, or measurement, use the [matched comparison guide](../docs/reproduce-matched-comparison.md) and [hardware reproduction guide](../docs/reproduce-research.md). Benchmark collection programs remain under [`src/`](../src/) so existing run manifests and commands remain valid.
 
 The replay comparison permits only floating-point roundoff (absolute tolerance `1e-10`, relative tolerance `1e-12`); cohort counts and metric structure must match exactly.
+
+External transfer: `archive_external_v5.py restore` restores the hash-checked native evidence; `evaluate_external_v5.py score` checks the committed freeze and measurements; `report_external_v5.py` exports figures. Use `make reproduce-external-v5` with full Git history. Collection/freezing/measurement are separate explicit commands described in [the protocol](../docs/external-v5-evaluation.md).

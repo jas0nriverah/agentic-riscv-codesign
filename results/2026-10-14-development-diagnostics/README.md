@@ -4,6 +4,10 @@ This archive contains development diagnostics, not a new independent model
 evaluation. The study was designed after V5 outcomes were inspected. The V5
 model, sources, calibration and reported predictions remain unchanged.
 
+![Development stability and exact inference runtime](../../docs/figures/development/stability-runtime.png)
+
+Regenerate PDF/SVG/PNG with `python scripts/report_development_diagnostics.py --output generated/development-report`.
+
 ## Repeated-seed fitting-only study
 
 Three views × five seeds × five frozen fitting folds produce 75 fits, all using

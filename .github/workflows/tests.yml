@@ -8,6 +8,8 @@ jobs:
         python-version: ["3.11", "3.13"]
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
@@ -19,10 +21,14 @@ jobs:
       - run: python scripts/reproduce_matched.py --skip-figures --output generated/ci-replay
       - run: python scripts/evaluate_v4.py --manifest results/2026-10-13-v4/freeze.json --release results/2026-10-13-v4/label-release.json --output generated/ci-v4/evaluation.json
       - run: python scripts/evaluate_v5.py --root results/2026-10-14-v5 --output generated/ci-v5/evaluation.json
+      - run: python scripts/archive_external_v5.py restore
+      - run: python scripts/evaluate_external_v5.py score --output generated/ci-external-v5/evaluation.json
   hardware-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"

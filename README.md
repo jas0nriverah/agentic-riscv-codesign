@@ -6,7 +6,7 @@ ISAForge explores whether machine learning can help choose useful RISC-V instruc
 
 The current learned target is **isolated iCE40 LUT4 count**. Processor speedup is evaluated separately through RTL simulation and routing. This is a research prototype with reproducible measured evidence; an LLM-driven selector remains future work.
 
-[Methodology](docs/methodology.md) · [Latest V5 results](docs/v5-results.md) · [All results](docs/results.md) · [Documentation](docs/README.md) · [Evidence index](results/README.md)
+[Methodology](docs/methodology.md) · [External transfer](docs/external-v5-results.md) · [V5 synthetic results](docs/v5-results.md) · [All results](docs/results.md) · [Documentation](docs/README.md) · [Evidence index](results/README.md)
 
 ## System architecture
 
@@ -26,7 +26,26 @@ The [methodology](docs/methodology.md) defines the data splits, feature boundary
 
 ## Results at a glance
 
-### Latest: V5 matched feature comparison
+### Latest: external application transfer
+
+The six frozen models now predict **79 unique circuits from three TACLeBench programs**, retaining all **80 program/formula occurrences** and equal family weights. Predictions were committed before measurements; all circuits pass **169,692 RTL comparisons**, with no synthesis failures.
+
+| Frozen predictor | External family-macro MAE, LUT4 |
+| :--- | ---: |
+| Fixed MasterRTL recipe | **5.808** |
+| SOG + dual graphs | 6.111 |
+| Full V5: dual graphs + semantics | 6.256 |
+| Equally tuned SOG | 6.537 |
+| SOG + original graph | 7.005 |
+| V4, unchanged | 8.316 |
+
+Full V5 improves its preregistered comparator by **4.31%**, but the fixed MasterRTL adaptation wins this primary metric. The much larger synthetic gain does not transfer at the same scale. Full V5's positive MAPE is **3.13%** over 61 positive targets; 19 zero targets remain in MAE. These are different distributions from published ASIC and FPGA studies.
+
+![External application-derived comparison](docs/figures/external-v5/external-primary.png)
+
+All five Dijkstra formulas are familiar under our novelty rule. Strict novelty leaves 20 rows from only ADPCM and anagram, so a three-family novel score is unavailable. Full V5's upper bounds cover 95% of candidates but only one of three complete families. [Results, failure analysis and reproduction](docs/external-v5-results.md) include all predictors, overlap, bounds and the portable raw-evidence archive. Run `make reproduce-external-v5` to replay scores and vector figures.
+
+### V5 matched synthetic feature comparison
 
 V5 adds original and normalized graph channels, stronger range/output-demand features, structural group splits, and held-out calibration. All four V5 views use **1,665 fitting circuits**, identical folds and six estimator configurations; **392 separate circuits** calibrate upper bounds. Models and all predictions were committed before measuring **256 fresh circuits**, split equally between familiar families and unseen compositions.
 
@@ -46,6 +65,9 @@ There are only **19 unseen structural clusters**, and five strata have one clust
 ![V5 matched feature comparison on both fresh test scopes.](docs/figures/v5/scope-comparison.png)
 
 All 256 original circuits passed RTL checks and synthesis; no failures or outliers were removed. See [V5 results](docs/v5-results.md), the [frozen protocol](docs/v5-protocol.md), [reproduction guide](docs/v5-reproduction.md), and [literature-informed next steps](docs/research-direction-v5.md). Run `make reproduce-v5` to regenerate scores and vector figures.
+
+<details>
+<summary>Historical model comparisons: V4 and the original six-model study</summary>
 
 ### Historical V4: separate 256-circuit holdout
 
@@ -87,6 +109,8 @@ MAPE uses all 181 positive targets; the 11 zero targets remain in MAE and RMSLE.
 
 MasterRTL processes all 192 formulas in **7.431 s with a fresh graph cache** and **0.205 s median with cached graphs**; structural v3 takes **0.047 s warm**. The graph method has an additional preprocessing cost. This is a matched adaptation of a published recipe to our FPGA target, not replication of its ASIC benchmark.
 
+</details>
+
 ### Processor and earlier workload experiments
 
 | Experiment | Recorded result | Interpretation |
@@ -114,9 +138,10 @@ python -m pip install -e '.[dev,reports]'
 make reproduce
 make reproduce-v4
 make reproduce-v5
+make reproduce-external-v5
 ```
 
-This validates both model freezes, reproduces all six scores within floating-point roundoff, reruns the independent audit, and exports nine figures to `generated/reproduction/figures/` as vector PDF/SVG and 300 dpi PNG. It neither retrains models nor synthesizes new circuits.
+These commands validate their respective frozen experiments and regenerate scores and vector PDF/SVG plus PNG figures under `generated/reproduction/`. External replay also restores and hashes every retained raw synthesis artifact, and checks the reviewed freeze against Git history. They do not retrain models or synthesize new circuits.
 
 ```sh
 make test                         # Python suite; hardware checks run when tools exist
@@ -138,7 +163,7 @@ python -m isaforge.frozen_inference \
   --output generated/inference/residual-v2.json
 ```
 
-For V5, use the [frozen inference command](docs/v5-reproduction.md#feature-extraction-and-portable-cache-replay); the [V4 command](docs/v4-results.md#run-frozen-v4-inference) remains available. V4 and MasterRTL require retained graph caches or their compatible frozen Yosys tool; the older formula-only models remain available when that dependency is unsuitable. The [six-model inference guide](docs/reproduce-matched-comparison.md#run-all-six-frozen-predictors-then-score) covers earlier artifacts. Large raw logs, netlists, and graph caches are outside Git; committed predictions suffice for score and figure replay.
+For V5, use the [frozen inference command](docs/v5-reproduction.md#feature-extraction-and-portable-cache-replay); the [V4 command](docs/v4-results.md#run-frozen-v4-inference) remains available. V4 and MasterRTL require retained graph caches or their compatible frozen Yosys tool; the older formula-only models remain available when that dependency is unsuitable. The [six-model inference guide](docs/reproduce-matched-comparison.md#run-all-six-frozen-predictors-then-score) covers earlier artifacts. Large graph caches remain outside Git. The external snapshot includes a compressed raw-evidence archive; its scorer checks those artifacts as well as committed predictions and Git history.
 
 ## Repository map
 
@@ -158,6 +183,6 @@ Frozen model modules and experiment paths remain stable because saved artifacts 
 
 ## Scope and next steps
 
-The next research targets are the remaining multiplier/zero-cost failures, another untouched real-workload evaluation, calibrated selection under a total measurement budget, and jointly measured multi-instruction sets. V5 improves the matched synthetic comparison; the simpler original-graph view has the lowest observed unseen-composition error. New application-family transfer and useful acquisition gains remain unestablished. LLM-guided selection and power/energy prediction remain unimplemented. Current evidence does not establish published-system superiority or a general CPU speedup model.
+The next research targets are the remaining multiplier/zero-cost failures, another untouched real-workload evaluation, calibrated selection under a total measurement budget, and jointly measured multi-instruction sets. V5 improves the matched synthetic comparison; the simpler original-graph view has the lowest observed unseen-composition error. The first external program-transfer study shows a small gain over tuned SOG and a loss to the fixed MasterRTL recipe; genuinely novel application-family transfer and useful acquisition gains remain unestablished. LLM-guided selection and power/energy prediction remain unimplemented. Current evidence does not establish published-system superiority or a general CPU speedup model.
 
 The [related-work comparison](docs/research-model-comparison.md) and [MasterRTL adaptation protocol](docs/masterrtl-matched-protocol.md) identify the primary research sources and the differences from their settings. The code and measurements are a research checkpoint, not a peer-reviewed result. Third-party components retain their upstream licenses; see [reuse and attribution](docs/reuse.md).

@@ -14,7 +14,10 @@ was known at that stage; later development can reuse its labels.
 | `2026-10-13-prospective/` | Six-program transfer collection followed by a five-program final test using models frozen on the original 301 circuits; transfer labels subsequently calibrate the final acquisition policy | [Prospective and hardware summary](2026-10-13-prospective/README.md) |
 | `2026-10-13-v3/` | Six matched-target predictors trained on the combined 713-formula development corpus; frozen evaluation on 192 novel synthetic circuits, including the MasterRTL recipe adaptation | [Six-model comparison](2026-10-13-v3/README.md) |
 | `2026-10-13-v4/` | Semantics-aware V4 and same-data MasterRTL train on 1,289 circuits; new 256-circuit frozen holdout includes three unchanged historical comparators | [V4 results and replay](../docs/v4-results.md) |
+| `2026-10-14-v5-external/` | Six frozen models on 80 application-derived rows / 79 measured original circuits; input overlap and all failures retained | [External results](../docs/external-v5-results.md) |
 | `2026-10-14-v5/` | Four equally tuned feature views fit 1,665 circuits, reserve 392 for calibration, and compare six frozen predictors on 256 new circuits | [V5 results](../docs/v5-results.md) |
+
+The [post-V5 development diagnostics](2026-10-14-development-diagnostics/README.md) retain 75 fitting-only seed runs and an exact-output inference optimization. These are development/runtime results, not a replacement independent test.
 
 The three workload collections together cover all 19 pinned Embench programs,
 with 1,098 program/formula occurrences and 713 unique circuits. Two transfer
@@ -65,3 +68,7 @@ outside tracked Git files. The evidence archive supplies selected retained
 hardware artifacts and the complete SOG cache; the guides explain where to put
 them and which external tools are needed. Preserve frozen files when replaying:
 write new outputs under `generated/` or `work/`.
+
+[Fixed-router development study](2026-10-14-development-router/README.md): two predeclared input-only gates on existing fitting-only OOF predictions; all controls and seeds retained.
+
+[Mapping-feature development study](2026-10-14-development-mapping/README.md): fixed 23-descriptor ablation, 30 matched fits, all three seeds and nine strata. Development only; fresh V6 validation is a separate lineage.

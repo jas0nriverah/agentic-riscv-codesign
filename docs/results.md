@@ -2,7 +2,11 @@
 
 The evidence supports resource-prediction and processor-integration results. Latest V5 improves the matched synthetic comparison, concentrated in multiplication; added semantic features and nominal uncertainty coverage do not generalize reliably. Historical V4’s small advantage over a same-data MasterRTL retrain was inconclusive. Learned acquisition has not beaten simple merit on the prospective primary endpoint. The ML target is isolated LUT4 cost; the CRC32 cycle result comes from a separate matched processor experiment. [Methodology](methodology.md) defines those quantities and their boundaries.
 
-## Latest V5: matched feature ablations on two fresh scopes
+## Latest: external application-derived transfer
+
+The [external V5 study](external-v5-results.md) retains 80 rows/79 unique circuits from Dijkstra, ADPCM decoding and anagram search. Full V5 achieves **6.256 LUT4 family-macro MAE** versus tuned SOG's **6.537** (4.31% reduction), but loses to the fixed MasterRTL adaptation (**5.808**). Dual graph reaches 6.111. All measurements pass, with 169,692 sampled/boundary RTL comparisons. All five Dijkstra formulas are familiar; neither novelty subset has all three families. Full bounds cover 76/80 candidates but only 1/3 whole families. This does not establish broad novel-family transfer or published-system superiority.
+
+## V5: matched feature ablations on two fresh synthetic scopes
 
 The [V5 report](v5-results.md) compares four equally tuned nested feature views and two references after freezing all predictions before 256 original-RTL measurements. Full V5 reaches **21.69 LUT4 MAE** on unseen compositions versus **52.91** for tuned SOG (59.01% reduction); the simpler original-graph view reaches **18.77**. Full V5’s aggregate gain is entirely in multiplication. Its nominal 90% bound covers only **63.16% of whole unseen components**. Nineteen unseen structural clusters and five singly represented strata limit the conditional uncertainty analysis.
 
