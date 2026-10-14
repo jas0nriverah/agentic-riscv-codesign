@@ -1,0 +1,43 @@
+{
+  "verified": true,
+  "formula_count": 384,
+  "vectors_per_formula": 2148,
+  "total_comparisons": 824832,
+  "random_seed": 2026101401,
+  "oracle": "Python RV32 integer semantics; Verilator with defined signed overflow; Yosys boundary cross-check",
+  "tool": "Verilator 5.050 2026-07-01 rev vUNKNOWN-built20260701",
+  "rtl_sha256": "f11be8931efd06436c9e005770c563715afae738e082189e646b26e3b486def1",
+  "vectors_sha256": "ba32453052d9673d1bbabfd76b39da487a97fadb1ecfb91427757a026b7cdae5",
+  "v4_validation_override_sha256": "193dd1b6780b1187e251db2dee08545b0391afead95a8f6d825dd51b58a694ff",
+  "compiler_path": "/usr/bin/c++",
+  "compiler_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+  "signed_overflow_workaround_applied": true,
+  "build_command": [
+    "/opt/homebrew/bin/verilator",
+    "--cc",
+    "--exe",
+    "--build",
+    "-j",
+    "2",
+    "-Wno-fatal",
+    "-CFLAGS",
+    "-fwrapv",
+    "--top-module",
+    "verification_top",
+    "--Mdir",
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v4-corpus/development/verification/obj_dir_wrapv",
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v4-corpus/development/verification/verification.v",
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v4-corpus/development/verification/verification.cpp"
+  ],
+  "incident": {
+    "original_error": "RTL correctness failed: Mismatch formula 366 vector 7 got 0 expected ffffffff\n",
+    "formula_index": 366,
+    "formula": "srai(mulhu(xori(in0,-1),srai(in1,8)),31)",
+    "vector_index": 7,
+    "got_hex": "0",
+    "expected_hex": "ffffffff",
+    "resolution": "identical RTL rebuilt with defined signed wrapping; boundary cross-check in Yosys"
+  },
+  "independent_yosys_boundary_comparisons": 100,
+  "independent_yosys_log_sha256": "e8063fcd2ce56bd4dbac5176c0615dad98187d71de87d9a2bada14ebf38f6af4"
+}
