@@ -1,0 +1,23 @@
+Independent V5 inference / raw provenance audit: PASSED
+Frozen commit: fc338e8bf8704d6c771230ba903b03ae09da2f59
+All 52 unique frozen records match the pre-label commit.
+All six artifacts reproduce 256 frozen predictions exactly; three populated-cache batches plus outcome-poisoning check per model.
+Replayed from isolated copied caches with both Yosys identity lookups disabled. Shared cache contents were not modified.
+Fit/CV grouping, input seal, nested views, configuration selection, estimator parameters, fit-only feature ranges and calibration rank 132/145 verified.
+768 original mapped netlists recounted: 512 development, 256 test; LUT4/carry counts, complete top-module cell counts and all RTL/script/netlist/log hashes verified.
+Retained sampled verification: 1,649,664 comparisons with RTL/vector/source hashes checked. No new simulation or formal proof.
+Independent scores/intervals are handled by the statistical audit; this audit did not refit or measure anything.
+
+Runtime: all graphs populated before timing; these are not cold-extraction measurements. Startup/copying/JSON IO excluded.
+dual_graph: load 0.1863s; first cached 4.4697s; median next two cached 3.1371s
+dual_semantics: load 0.0515s; first cached 3.0850s; median next two cached 3.0861s
+masterrtl_fixed: load 0.0303s; first cached 0.6594s; median next two cached 0.5112s
+original_graph: load 0.0556s; first cached 3.2324s; median next two cached 3.0150s
+sog_tuned: load 0.0580s; first cached 3.0745s; median next two cached 2.9549s
+v4_frozen: load 0.0372s; first cached 2.1447s; median next two cached 1.7523s
+
+Separate actual cold-cache benchmark, dual_semantics only:
+Model load 0.1382s; cold full feature+prediction 34.3339s; median three warm repeats 2.9142s.
+671 native Yosys extractions plus one version query; 415 generic and 256 SOG cache entries. Every batch exactly matches freeze.
+Separate warm CLI wall time 4.2039s includes process startup, imports, model loading and JSON IO.
+Cold feature+prediction is 40.79% of the recorded 84.1670s full test-measurement wall time. This is an overhead comparison with different work and concurrency, not a speedup or savings result.

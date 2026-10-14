@@ -1,0 +1,98 @@
+{
+  "status": "passed",
+  "audited_at_utc": "2026-10-14T19:58:20.784572+00:00",
+  "frozen_commit": "fc338e8bf8704d6c771230ba903b03ae09da2f59",
+  "freeze_sha256": "53baf4c412f54db6e27d6688c9f8fcf0435869998ca8b5df639ef204ffb88a6a",
+  "all_52_unique_frozen_records_match_commit": true,
+  "all_six_models_reproduce_256_predictions_exactly": true,
+  "cached_replay_without_yosys_lookup": true,
+  "outcome_poisoning_invariant": true,
+  "calibration_groups": 145,
+  "calibration_rank": 132,
+  "fit_only_ranges_verified": true,
+  "raw_candidate_count": 768,
+  "sampled_verification_comparisons_retained_and_hash_checked": 1649664,
+  "raw": {
+    "development": {
+      "circuits": 512,
+      "raw_lut4_sum": 52784,
+      "raw_carry_sum": 9907,
+      "verification_comparisons": 1099776,
+      "all_target_resource_counts_and_hashes_verified": true
+    },
+    "test": {
+      "circuits": 256,
+      "raw_lut4_sum": 41589,
+      "raw_carry_sum": 8405,
+      "verification_comparisons": 549888,
+      "all_target_resource_counts_and_hashes_verified": true
+    }
+  },
+  "runtime": {
+    "dual_graph": {
+      "first_populated_cache_seconds": 4.469696707994444,
+      "warm_median_seconds": 3.1370710835035425,
+      "load_seconds": 0.186270541002159
+    },
+    "dual_semantics": {
+      "first_populated_cache_seconds": 3.084979250008473,
+      "warm_median_seconds": 3.0860761249932693,
+      "load_seconds": 0.05148462500073947
+    },
+    "masterrtl_fixed": {
+      "first_populated_cache_seconds": 0.6593894999969052,
+      "warm_median_seconds": 0.5111876664959709,
+      "load_seconds": 0.030349542008480057
+    },
+    "original_graph": {
+      "first_populated_cache_seconds": 3.2323915000015404,
+      "warm_median_seconds": 3.015038250494399,
+      "load_seconds": 0.05558083299547434
+    },
+    "sog_tuned": {
+      "first_populated_cache_seconds": 3.074514416002785,
+      "warm_median_seconds": 2.954895333001332,
+      "load_seconds": 0.058026833008625545
+    },
+    "v4_frozen": {
+      "first_populated_cache_seconds": 2.1446757499943487,
+      "warm_median_seconds": 1.7522725419912604,
+      "load_seconds": 0.03721429100551177
+    }
+  },
+  "cold_feature_extraction_measured": true,
+  "measurement_cost_savings_established": false,
+  "shared_feature_cache_content_modified": false,
+  "score_and_bootstrap_recomputation": "Owned by the separate independent statistical audit; not duplicated here.",
+  "limits": [
+    "The inference/calibration phase did not read fresh V5 test labels or audit area scores. The subsequent raw/provenance phase independently recounted all released mapped targets.",
+    "Six-model replay timings use copied populated caches. A separate dual-semantics-only benchmark measures one verified absent-cache extraction and three warm repeats; neither establishes cost savings.",
+    "Calibration coverage still assumes exchangeable complete groups and is not guaranteed on new compositions or applications.",
+    "Hashes and commits establish retained consistency, not unrecorded historical access.",
+    "Resource labels independently recounted; semantic verification is retained sampled evidence, not a new formal proof.",
+    "No score/CI recomputation in this raw-only pass; a separate statistical audit owns those checks."
+  ],
+  "cold_feature_extraction_measured_for": [
+    "dual_semantics"
+  ],
+  "dual_semantics_cold_cache_benchmark": {
+    "cache_absent_before": true,
+    "worker_count": 1,
+    "model_load_seconds": 0.13818908399844076,
+    "cold_feature_and_prediction_seconds": 34.33392087499669,
+    "median_three_warm_feature_and_prediction_seconds": 2.91417016700143,
+    "cache_entry_counts_after_runs": {
+      "generic": 415,
+      "sog": 256
+    },
+    "warm_cli_elapsed_seconds": 4.203885458002333,
+    "completed_test_measurement_wall_seconds": 84.1669863749994,
+    "cold_inference_divided_by_completed_test_measurement_wall": 0.4079262232584235,
+    "comparison_limits": [
+      "Test measurement wall time includes sampled RTL verification/compiler builds and target synthesis with four mapping workers; inference uses one feature worker and performs different work.",
+      "This is one same-machine descriptive cold run and three immediate warm repeats for dual_semantics only. No latency result is asserted for other V5 views.",
+      "Feature overhead ratio is not an end-to-end speedup or measurement savings result; training, development/calibration measurements and historical costs are excluded.",
+      "Recorded timing varies with machine load, filesystem cache and native tool behavior; no runtime confidence interval is estimated."
+    ]
+  }
+}

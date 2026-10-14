@@ -14,6 +14,7 @@ was known at that stage; later development can reuse its labels.
 | `2026-10-13-prospective/` | Six-program transfer collection followed by a five-program final test using models frozen on the original 301 circuits; transfer labels subsequently calibrate the final acquisition policy | [Prospective and hardware summary](2026-10-13-prospective/README.md) |
 | `2026-10-13-v3/` | Six matched-target predictors trained on the combined 713-formula development corpus; frozen evaluation on 192 novel synthetic circuits, including the MasterRTL recipe adaptation | [Six-model comparison](2026-10-13-v3/README.md) |
 | `2026-10-13-v4/` | Semantics-aware V4 and same-data MasterRTL train on 1,289 circuits; new 256-circuit frozen holdout includes three unchanged historical comparators | [V4 results and replay](../docs/v4-results.md) |
+| `2026-10-14-v5/` | Four equally tuned feature views fit 1,665 circuits, reserve 392 for calibration, and compare six frozen predictors on 256 new circuits | [V5 results](../docs/v5-results.md) |
 
 The three workload collections together cover all 19 pinned Embench programs,
 with 1,098 program/formula occurrences and 713 unique circuits. Two transfer

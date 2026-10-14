@@ -92,6 +92,21 @@ def main():
             ax.annotate(f'{y[i]:.0f}→{p[i]:.1f}', (np.log1p(y[i]), np.log1p(p[i])), xytext=(5, 7), textcoords='offset points', fontsize=8)
     save(fig, 'all-predictions', 'All 256 dual+semantics predictions; no difficult case is removed. The two largest errors per scope are annotated. Coordinates use log1p to retain true zero targets.')
 
+    fig, ax = plt.subplots(figsize=(10, 4.3), layout='constrained')
+    bounded = ('sog_tuned', 'original_graph', 'dual_graph', 'dual_semantics')
+    positions = np.arange(len(bounded))
+    for offset, scope, color in ((-.18, 'known_families', '#3E8D83'), (.18, 'unseen_compositions', '#17699C')):
+        values = [100*data['models'][n]['by_scope'][scope]['upper_bound']['whole_component_coverage'] for n in bounded]
+        ax.bar(positions+offset, values, width=.34, color=color, label=scope.replace('_', ' ').capitalize())
+        for x, value in zip(positions+offset, values):
+            ax.text(x, value+1, f'{value:.1f}%', ha='center', fontsize=9)
+    ax.axhline(90, ls='--', color='#A64A38', label='Nominal 90% under exchangeability')
+    ax.set_xticks(positions, [LABELS[n].replace(' + ', '\n+ ') for n in bounded])
+    ax.set_ylim(0, 112); ax.set_ylabel('Whole-component upper-bound coverage (%)')
+    ax.set_title('Calibrated bounds lose coverage on unseen structures', loc='left')
+    ax.legend(loc='lower left', fontsize=9); ax.grid(axis='y', alpha=.15); ax.set_axisbelow(True)
+    save(fig, 'bound-coverage', 'A component is covered only if every circuit in it is below its upper estimate. Denominators are 94 known-family components and 19 unseen-composition components. Nominal coverage requires exchangeability; the shifted-cohort results do not support that assumption.')
+
     tables = []
     for scope in SCOPES:
         scores = []
@@ -100,6 +115,8 @@ def main():
             fmt = lambda v: 'n/a' if v is None else f'{v:.2f}'
             scores.append([LABELS[n], fmt(m['mae_lut4']), fmt(m['positive_mape_percent']), fmt(m['positive_median_ape_percent']), f"{m['rmsle']:.3f}", fmt(m['zero_target_mae_lut4'])])
         tables += ['<h2>'+scope.replace('_', ' ').capitalize()+'</h2>', table(['Predictor', 'MAE LUT4', 'MAPE %', 'Median APE %', 'RMSLE', 'Zero MAE'], scores)]
+    strata = data['models']['dual_semantics']['by_scope']['unseen_compositions']['by_stratum']
+    tables += ['<h2>Unseen compositions by stratum</h2><p>The full model’s aggregate gain comes from multiplication. Across the other seven strata together, its MAE is 10.87 versus 10.72 LUT4 for tuned SOG. These are post-test diagnostics; all eight strata remain in the primary endpoint.</p>', table(['Stratum', 'Tuned SOG', 'Original graph', 'Dual graphs', 'Dual + semantics'], [[s]+[f"{data['models'][n]['by_scope']['unseen_compositions']['by_stratum'][s]['mae_lut4']:.2f}" for n in ('sog_tuned', 'original_graph', 'dual_graph', 'dual_semantics')] for s in strata])]
     worst = sorted(rows, key=lambda r: r['absolute_error_lut4'], reverse=True)[:12]
     coverage = []
     for name in ORDER:
@@ -109,6 +126,10 @@ def main():
             c = data['models'][name]['by_scope'][scope]['upper_bound']
             coverage.append([LABELS[name], scope, f"{100*c['candidate_coverage']:.1f}%", f"{100*c['whole_component_coverage']:.1f}%", str(c['mean_upper_minus_target_lut4'])])
     body = '<p class="eyebrow">ISAForge • V5 frozen research experiment</p><h1>Original and normalized circuit representations</h1><p>Matched small-model comparison on original iCE40 LUT4 cost. The primary endpoint is unseen-composition macro-stratum MAE; the primary comparison is dual graphs plus semantics versus equally tuned original SOG. All V4 evidence remains separate and frozen.</p>'
+    full = data['models']['dual_semantics']['by_scope']['unseen_compositions']['mae_lut4']
+    reference = data['models']['sog_tuned']['by_scope']['unseen_compositions']['mae_lut4']
+    original = data['models']['original_graph']['by_scope']['unseen_compositions']['mae_lut4']
+    body += f'<p><strong>Primary result: {full:.2f} versus {reference:.2f} LUT4 MAE, a {100*(1-full/reference):.2f}% reduction.</strong> The simpler original-graph view has lower observed MAE ({original:.2f}); extra semantic features do not improve this test. Bounds under-cover unseen structural groups. These findings guide a new evaluation rather than changing this frozen endpoint.</p>'
     body += ''.join(tables)+''.join(figures)
     body += '<h2>Remaining largest failures</h2>'+table(['Scope', 'Formula', 'Measured', 'Predicted', 'Absolute error'], [[r['evaluation_scope'], r['formula'], r['lut4_count'], round(r['predicted_lut4'], 3), round(r['absolute_error_lut4'], 3)] for r in worst])
     body += '<h2>Upper-bound calibration</h2><p>Bounds use maxima of residuals within held-out calibration components. 90% nominal coverage requires exchangeable whole groups, which is not established for novel compositions. Observed coverage and slack are diagnostics; tree disagreement is not calibrated confidence.</p>'+table(['Model', 'Scope', 'Candidate coverage', 'Whole-component coverage', 'Mean upper − actual LUT4'], coverage)

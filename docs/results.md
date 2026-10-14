@@ -1,8 +1,14 @@
 # Results
 
-The evidence supports resource-prediction and processor-integration results. Latest V4 reduces MAE substantially versus the older custom models, but its small advantage over a same-data MasterRTL retrain is inconclusive and some secondary metrics regress. Learned acquisition has not beaten simple merit on the prospective primary endpoint. The ML target is isolated LUT4 cost; the CRC32 cycle result comes from a separate matched processor experiment. [Methodology](methodology.md) defines those quantities and their boundaries.
+The evidence supports resource-prediction and processor-integration results. Latest V5 improves the matched synthetic comparison, concentrated in multiplication; added semantic features and nominal uncertainty coverage do not generalize reliably. Historical V4’s small advantage over a same-data MasterRTL retrain was inconclusive. Learned acquisition has not beaten simple merit on the prospective primary endpoint. The ML target is isolated LUT4 cost; the CRC32 cycle result comes from a separate matched processor experiment. [Methodology](methodology.md) defines those quantities and their boundaries.
 
-## Latest V4: new 256-circuit holdout
+## Latest V5: matched feature ablations on two fresh scopes
+
+The [V5 report](v5-results.md) compares four equally tuned nested feature views and two references after freezing all predictions before 256 original-RTL measurements. Full V5 reaches **21.69 LUT4 MAE** on unseen compositions versus **52.91** for tuned SOG (59.01% reduction); the simpler original-graph view reaches **18.77**. Full V5’s aggregate gain is entirely in multiplication. Its nominal 90% bound covers only **63.16% of whole unseen components**. Nineteen unseen structural clusters and five singly represented strata limit the conditional uncertainty analysis.
+
+Known-family MAE is **3.58** for full V5 versus **13.56** for tuned SOG. Four V5 models share 1,665 fitting formulas, grouped folds and six configuration choices; 392 separate formulas calibrate bounds. All earlier evidence is development data for V5. These findings do not establish CPU or budgeted selection gains. See [reproduction](v5-reproduction.md) and [literature-informed next steps](research-direction-v5.md).
+
+## Historical V4: separate 256-circuit holdout
 
 See [V4 results and replay](v4-results.md) for the complete new experiment. V4 and the matched MasterRTL retrain fit 1,289 development formulas; three frozen historical comparators retain their 713-formula fits. All five sets of predictions precede target measurement. The 256 new synthetic circuits pass 549,888 RTL oracle comparisons and actual iCE40 synthesis.
 
