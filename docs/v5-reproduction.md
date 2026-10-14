@@ -65,6 +65,12 @@ diagnostics; neither proves coverage or automatically makes a circuit safe.
 The upper bound assumes exchangeable complete groups, an assumption not
 established for novel compositions or new applications.
 
+A later, separately versioned [original-only inference wrapper](../results/2026-10-14-development-diagnostics/README.md)
+skips channels unused by the `original_graph` artifact while preserving every
+prediction and diagnostic field exactly. It does not change the frozen V5
+implementation or the external comparison. The linked benchmark reports actual
+cold/warm costs and their limitations.
+
 ## Prepare and freeze a new experiment
 
 The preparation workflow generates input-only cohorts, collects development

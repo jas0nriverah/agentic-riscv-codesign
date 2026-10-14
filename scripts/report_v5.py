@@ -7,6 +7,7 @@ import hashlib
 import html
 import json
 from pathlib import Path
+import shutil
 
 import matplotlib
 matplotlib.use('Agg')
@@ -29,6 +30,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--evaluation', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--audit-dir', type=Path)
     args = parser.parse_args()
     data = json.loads(args.evaluation.read_text())
     out = args.output
@@ -134,6 +136,9 @@ def main():
     body += '<h2>Remaining largest failures</h2>'+table(['Scope', 'Formula', 'Measured', 'Predicted', 'Absolute error'], [[r['evaluation_scope'], r['formula'], r['lut4_count'], round(r['predicted_lut4'], 3), round(r['absolute_error_lut4'], 3)] for r in worst])
     body += '<h2>Upper-bound calibration</h2><p>Bounds use maxima of residuals within held-out calibration components. 90% nominal coverage requires exchangeable whole groups, which is not established for novel compositions. Observed coverage and slack are diagnostics; tree disagreement is not calibrated confidence.</p>'+table(['Model', 'Scope', 'Candidate coverage', 'Whole-component coverage', 'Mean upper − actual LUT4'], coverage)
     body += '<h2>Research context and next validation</h2><p><a href="https://arxiv.org/html/2311.08441v1">MasterRTL</a> motivates bit-level representations and low-cost tree models; its ASIC designs and published area percentage are not this FPGA benchmark. <a href="https://doi.org/10.1145/2560014">Lam et al.</a> motivate carry/width-aware custom-instruction estimates, while excluding several complex operations from their evaluated class. <a href="https://arxiv.org/abs/1403.5607">Constrained Bayesian optimization</a> motivates calibrated feasibility and explicit measurement cost. These ideas require matched evaluation here.</p><p>This experiment does not establish CPU speedup or useful acquisition savings. The next application study needs untouched source families, correct compilation/execution, equally budgeted merit/random/model comparisons and whole-processor resource/timing measurements. A changed model requires another untouched test.</p>'
+    if args.audit_dir:
+        shutil.copytree(args.audit_dir, out/'audit', dirs_exist_ok=True)
+        body += '<h2>Independent verification and inference cost</h2><p>All six saved artifacts exactly reproduce their frozen predictions. The raw audit recounts 768 netlists and checks retained RTL, mapping and verification hashes; a separate statistical implementation reconstructs all metrics and calibration quantiles. Full V5 inference takes 34.33 seconds from an absent cache and 2.91 seconds median warm for 256 circuits. Preprocessing cost is substantial and useful measurement savings remain unestablished.</p><p><a href="audit/summary.json">Inference and raw audit</a> · <a href="audit/statistics.txt">Statistical audit</a> · <a href="audit/runtime-cost.json">Actual cold/warm timing</a></p>'
     body += '<p><a href="report-data.json">Complete scores and all error rows</a> · <a href="provenance.json">Source provenance</a></p>'
     css = 'body{font:16px/1.6 system-ui;color:#20394b;background:#f5f7f9}main{max-width:1100px;margin:auto;padding:38px;background:white}h1{font-size:36px;line-height:1.2}h2{margin-top:38px;color:#185372}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:1px}.table{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:10px;border-bottom:1px solid #dce4ea;text-align:left;overflow-wrap:anywhere}th{background:#edf4f8}figure{margin:28px 0}figure svg{width:100%;height:auto}figcaption{font-size:13px;color:#536d7e}a{color:#096b9c}'
     (out/'report.html').write_text('<!DOCTYPE html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ISAForge V5</title><style>'+css+'</style><main>'+body+'</main></html>')

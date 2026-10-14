@@ -1,0 +1,43 @@
+Exact original-graph inference optimization
+
+New module: isaforge/fast_graph_inference.py
+Tests: tests/test_fast_graph_inference.py, 12 passed
+Frozen model: results/2026-10-14-v5/models/original_graph.joblib
+Machine benchmark: work/fast-graph-runtime.json
+
+The wrapper loads the unchanged V5 artifact through its strict source/artifact/
+environment loader. It extracts original generic graph and SOG14 only, bypassing
+normalization and semantic feature computation. Unused schema columns are zero
+adapters; all selected values and the original generic-graph zero rule remain
+unchanged. Other feature views are rejected.
+
+All 256 frozen point predictions, upper bounds, tree standard deviations and
+feature-range domain flags are exactly equal for standard and optimized cold
+inference and every warm repeat. No fitting, calibration or test-label changes
+occurred. This is a runtime optimization with no prediction-accuracy gain.
+
+Sequential runs on this machine, one worker, separate initially absent caches:
+
+                      Cold features + prediction    Median of 3 warm repeats
+  standard V5                 36.7518 seconds              2.9499 seconds
+  original-only               27.2489 seconds              1.6887 seconds
+
+Observed cold time falls about 25.9% (1.349× speedup); median warm time falls
+about 42.8%. Model loading is recorded separately. Process startup and JSON
+serialization are excluded. There is one cold run per implementation and the
+standard run executes first; scheduling and OS cache conditions are uncontrolled.
+These observations do not establish runtime confidence, acquisition savings or
+CPU speedup. The original audited V5 runtime and transfer freeze are unchanged.
+
+Reproduce exact inference with a compatible trusted artifact/toolchain:
+
+  .venv/bin/python -m isaforge.fast_graph_inference \
+    --model results/2026-10-14-v5/models/original_graph.joblib \
+    --candidates results/2026-10-14-v5/corpus/test/candidates.json \
+    --cache-root generated/new-original-only-cache \
+    --output generated/original-only-predictions.json
+
+For timing, add --benchmark and --expected-predictions with the frozen
+original_graph prediction list; use a previously absent cache root and a separate
+output path. The optimized wrapper is separately versioned and does not rewrite
+the V5 model artifact or its original inference implementation.

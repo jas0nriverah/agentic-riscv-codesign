@@ -69,7 +69,7 @@ reproduce-v4:
 
 reproduce-v5:
 	$(PYTHON) scripts/evaluate_v5.py --root results/2026-10-14-v5 --output generated/reproduction/v5/evaluation.json
-	$(PYTHON) scripts/report_v5.py --evaluation generated/reproduction/v5/evaluation.json --output generated/reproduction/v5/report
+	$(PYTHON) scripts/report_v5.py --evaluation generated/reproduction/v5/evaluation.json --output generated/reproduction/v5/report --audit-dir results/2026-10-14-v5/audit
 
 diagram:
 	$(PYTHON) scripts/render_architecture.py

@@ -1,0 +1,88 @@
+V6 fitting-only seed and concentration diagnostic
+
+Scope: 1,665 frozen V5 fitting rows, the same five frozen component folds,
+ExtraTrees with 300 trees/minimum leaf 1/max_features 1.0, and seeds
+2026101421–2026101425. Three views × five seeds × five folds = 75 fits.
+No calibration or test rows enter any fit, metric or seed-based comparison.
+This study was designed after V5 outcomes were inspected and remains development
+evidence. It does not revise V5 or produce a new independent test result.
+
+Mean macro-stratum fitting OOF MAE across seeds (LUT4), sample standard deviation:
+  original_graph, 74 features:    5.420463 ± 0.053502; range [5.362089, 5.474512]
+  dual_graph, 194 features:      5.305404 ± 0.039051; range [5.263464, 5.348280]
+  dual_semantics, 313 features:  5.246948 ± 0.034276; range [5.197610, 5.282846]
+
+Dual graph beats original graph in all five paired seeds by a mean 0.115058
+LUT4 (2.12%). Full semantics beats original graph in all five seeds by 0.173514
+(3.20%) and beats dual graph in all five seeds by only 0.058456 (1.10%). These
+observed differences are stable in direction across the five seeds; they are
+not explained by an isolated lucky seed. Five seeds do not establish a
+population confidence interval, and OOF selection remains development evidence.
+
+The small semantic gain is concentrated in multiplication. Relative to dual
+graph, its multiplier MAE improves by 0.919370, contributing -0.102152 to the
+nine-stratum macro difference. The other eight strata together contribute
++0.043696, opposing that gain. Full semantics increases arithmetic MAE by
+0.132509, mask-logic MAE by 0.186084 and variable-shift MAE by 0.406900 versus
+dual graph. Its mean multiplier accuracy improvement therefore does not imply
+broadly improved composition prediction.
+
+Average fitting OOF MAE and signed bias across seeds:
+                         Arithmetic MAE/bias     Multiplication MAE/bias
+  original_graph             7.60237 / -0.35148      22.43479 / +0.91427
+  dual_graph                 7.18881 / -0.21163      22.15140 / -0.24320
+  dual_semantics             7.32132 / -0.39503      21.23203 / -1.15511
+
+Arithmetic MAE is lower for dual graph than original graph in all five seeds.
+The multiplier comparison between those two changes direction with the seed.
+Multiplier worst underprediction across seeds remains substantial:
+173.71–196.39 LUT4 for original graph, 177.31–203.33 for dual graph, and
+175.66–210.57 for full semantics. Small average signed bias masks large
+individual residuals; it is not a calibrated safety margin.
+
+The error distribution remains concentrated in every view/seed. The worst 17
+of 1,665 fitting OOF rows (~1%) produce 25.1–27.0% of pooled absolute error;
+the worst 84 (~5%) produce 54.8–57.1%. Multiplication accounts for approximately
+39.1–41.4% of pooled error. All cases remain in the reported metrics.
+
+Repeated seeds cannot repair structural failures. For example, full semantics
+predicts add(in0,mulhu(in1,in1)) at a five-seed mean 2603.49 against the recorded
+2253 target, while the between-seed prediction standard deviation is only 12.84.
+For srli(mulhu(addi(in0,-1023),xori(in1,3)),16), the mean is 2783.90 against
+2926, with standard deviation 1.80. Stable predictions can remain substantially
+wrong. The saved worst-development-cases.json retains ten such diagnostics.
+
+Practical direction for the next lineage
+
+Dual graph is a reasonable simpler candidate: its 194-feature view retains a
+small but consistent fitting improvement over the 74-feature original graph
+and has the strongest arithmetic OOF result among the three. Keep original
+graph as the essential simpler control. Keep semantic features as an explicit
+multiplier-focused ablation; this study does not justify treating their narrow
+MAE gain as a robust improvement across families. Their removal or revised
+estimator still needs separately reserved families and an external test.
+
+Prioritize more independent, deeper arithmetic/shared/shift families and
+multiplier demand/reuse regimes before another hyperparameter expansion.
+Evaluate worst underprediction and family calibration as well as macro MAE.
+Seed ensembles slightly reduce OOF MAE but do not address domain coverage or
+turn seed dispersion into a confidence interval. Use the previous V5 failure
+analysis to design a new study rather than replacing its reported result.
+
+Fewer selected columns do not automatically reduce inference work: the frozen
+V5 extractor computes every channel and semantic feature for every view.
+Actual extraction savings require a separate view-specific extractor change
+and an explicit cold/warm runtime benchmark in the new lineage.
+
+Artifacts retained outside the repository:
+  run-start.json: exact input/source hashes, versions, fitting indices and folds
+  source-manifest.json and sources/: 18 exact source files and their hashes
+  predictions/: 15 complete fitting OOF prediction lists
+  metrics/: 15 metric sets and complete fitted estimator parameters
+  summary.json: all metrics, paired seed differences and ensemble diagnostics
+  error-concentration.json: concentration by view/seed
+  worst-development-cases.json: ten persistent fitting OOF failures
+
+The new script and eight passing contract tests verify fitting-only fold
+coverage, component isolation, macro weighting and safe output placement.
+Frozen V5 sources and results were not changed.
