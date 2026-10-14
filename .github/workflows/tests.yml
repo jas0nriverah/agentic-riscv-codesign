@@ -36,7 +36,7 @@ jobs:
       - if: matrix.python-version == '3.13'
         run: python results/2026-10-14-development-semantics-v7/evidence/package_v7_evidence.py restore --manifest results/2026-10-14-development-semantics-v7/evidence/evidence-manifest.json --repo-root "$PWD" --destination ../v7-ci-evidence
       - if: matrix.python-version == '3.13'
-        run: python results/2026-10-14-development-semantics-v7/evidence/package_v7_evidence.py score --restored ../v7-ci-evidence --repo-root "$PWD" --output ../v7-ci-score-replay
+        run: python results/2026-10-14-development-semantics-v7/evidence/package_v7_evidence.py score --restored ../v7-ci-evidence --repo-root "$PWD" --output ../v7-ci-score-replay --python "$(command -v python)"
   hardware-test:
     runs-on: ubuntu-latest
     steps:

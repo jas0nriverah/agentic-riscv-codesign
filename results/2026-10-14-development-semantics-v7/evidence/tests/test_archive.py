@@ -2,6 +2,7 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
 import tarfile,io,json,hashlib
 
 MODULE=Path(__file__).resolve().parents[1]/'package_v7_evidence.py'
@@ -55,6 +56,19 @@ class PackageContracts(unittest.TestCase):
     def test_escaping_dependency_alias_is_rejected(self):
         path,manifest=self.evidence();manifest['repository_dependencies'][0]['repository_path']='../input';m.write(path,manifest)
         with self.assertRaises(ValueError):m.verify(path,self.repo)
+    def test_score_preserves_explicit_virtualenv_interpreter_symlink(self):
+        path,_=self.evidence();restored=m.restore(path,self.repo,self.root/'restored')
+        link=self.root/'virtualenv/bin/python';link.parent.mkdir(parents=True);link.symlink_to(Path(m.sys.executable))
+        with mock.patch.object(m.subprocess,'run') as run:
+            m.score(restored,self.repo,self.root/'scores',python=link)
+        self.assertEqual(run.call_args.args[0][0],str(link.absolute()))
+        self.assertNotEqual(run.call_args.args[0][0],str(link.resolve()))
+    def test_score_defaults_to_current_interpreter_without_checkout_venv(self):
+        path,_=self.evidence();restored=m.restore(path,self.repo,self.root/'restored')
+        self.assertFalse((self.repo/'.venv').exists())
+        with mock.patch.object(m.subprocess,'run') as run:
+            m.score(restored,self.repo,self.root/'scores')
+        self.assertEqual(run.call_args.args[0][0],str(Path(m.sys.executable).absolute()))
     def test_repository_aliases_preserve_original_plan_and_require_hash(self):
         plan={'input_sha256':{str(self.repo/'input'):m.sha(self.repo/'input')}};before=json.dumps(plan)
         result=m.portable_dependencies(plan,self.repo);self.assertEqual(result[0]['repository_path'],'input');self.assertEqual(json.dumps(plan),before)

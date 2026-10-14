@@ -9,7 +9,7 @@
     "elapsed_seconds": 23.22,
     "log_sha256": "954adee0df20afbdf7b92afd604e49740c38003b612aca6fff38f33e1d1ee11a"
   },
-  "archive_tests_passed": 9,
+  "archive_tests_passed": 11,
   "independent_prediction_metrics_replayed": 29970,
   "new_fits_during_replay": 0,
   "figure_formats": [
@@ -17,5 +17,11 @@
     "SVG",
     "PDF"
   ],
-  "figures_visually_reviewed": 2
+  "figures_visually_reviewed": 2,
+  "replay_portability_repair": {
+    "failure": "Explicit interpreter path dereferenced a virtualenv symlink and lost NumPy; no-checkout-venv default also failed.",
+    "fix": "Default to current interpreter; preserve lexical absolute executable path, including venv symlink.",
+    "model_fit_or_score_changes": false,
+    "failed_log_retained": "work/v7-evidence-attempt-0001/clone-score-failure.log"
+  }
 }

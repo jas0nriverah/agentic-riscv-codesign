@@ -188,7 +188,7 @@ def check_restored(restored,repo_root):
 def score(restored,repo_root,output,python=None):
     restored,repo_root,output=map(lambda p:Path(p).resolve(),(restored,repo_root,output));check_restored(restored,repo_root)
     if output.exists():raise ValueError('Score replay output must be a fresh path')
-    interpreter=Path(python).resolve() if python else repo_root/'.venv/bin/python'
+    interpreter=Path(python if python is not None else sys.executable).absolute()
     if not interpreter.is_file():raise ValueError('Pass --python with the pinned study environment interpreter')
     script=restored/'audits/preparation/replay_metrics.py'
     command=[str(interpreter),str(script),'--prepared',str(restored/'prepared'),'--review',str(restored/'reviews/parent-fit-review.json'),
