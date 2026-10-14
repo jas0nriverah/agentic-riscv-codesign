@@ -49,6 +49,10 @@ The probe generator predeclares eight structural strata with 24 formulas each, e
 
 The primary probe endpoint is macro-stratum MAE, numerically equal to pooled MAE because all strata are equally sized. Secondary metrics include RMSLE, positive-label MAPE, correlations, zero-target error, and every stratum. MAPE excludes true zeros and is never converted into an accuracy percentage. Canonical exclusion prevents exact-formula leakage; it does not establish semantic independence, independent real workloads, or a calibrated confidence interval. No refit, feature change, or model substitution follows probe scoring.
 
+## V4 continuation
+
+The subsequent [V4 protocol](v4-protocol.md) adds 384 development circuits, reuses the earlier 192-circuit probe as development, and reserves 256 new synthetic circuits. V4 introduces semantics-normalized structural and pre-ABC topology features; six fixed estimator configurations are compared through five normalized-operator-skeleton group folds. A same-data MasterRTL retrain distinguishes expanded-data gains from method gains. All models and predictions freeze before test RTL validation and target synthesis; input-only normalization equivalence checks are allowed and explicitly recorded. [V4 results](v4-results.md) retain all 256 outcomes and secondary-metric regressions. No new workload acquisition or CPU integration is inferred from this circuit experiment.
+
 ## Budgeted decisions and processor validation
 
 The prospective acquisition experiment orders candidates using frequency, merit, seeded random policies, and predicted feasibility plus merit. All policies share pools, caps, and attempted-measurement budgets; only measured candidates can be selected, with the unmodified processor available. Historical training/calibration labels are additional costs outside the target budget. Exhaustively measured pools provide a retrospective oracle, whose full label cost is not counted as ordinary acquisition. The primary decision endpoint is per-program oracle-savings retention at a 64-LUT cap and one new measurement, with the complete sensitivity grid retained. See [selection.md](selection.md).

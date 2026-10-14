@@ -6,7 +6,7 @@ ISAForge explores whether machine learning can help choose useful RISC-V instruc
 
 The current learned target is **isolated iCE40 LUT4 count**. Processor speedup is evaluated separately through RTL simulation and routing. This is a research prototype with reproducible measured evidence; an LLM-driven selector remains future work.
 
-[Methodology](docs/methodology.md) · [Results](docs/results.md) · [Reproduce](docs/reproduce-matched-comparison.md) · [Documentation](docs/README.md) · [Evidence index](results/README.md)
+[Methodology](docs/methodology.md) · [Latest V4 results and replay](docs/v4-results.md) · [All results](docs/results.md) · [Documentation](docs/README.md) · [Evidence index](results/README.md)
 
 ## System architecture
 
@@ -26,7 +26,25 @@ The [methodology](docs/methodology.md) defines the data splits, feature boundary
 
 ## Results at a glance
 
-### Matched hardware-cost prediction
+### Latest: semantics-aware V4 on a new 256-circuit holdout
+
+V4 combines RV32 algebraic normalization, sparse multiplier features, and pre-ABC graph topology with a 300-tree ExtraTrees regressor selected using development-only grouped validation. It trains on **1,289 circuits**: the earlier 713 workload circuits, the now-development 192-circuit probe, and 384 newly verified/synthesized development circuits. Models and all predictions were committed before measuring the new **256-circuit test**.
+
+| Predictor | Training circuits | MAE, LUT4 | RMSLE | Positive MAPE | Median percentage error |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| **V4** | 1,289 | **14.89** | 0.572 | 77.93% | **1.36%** |
+| MasterRTL adaptation, same-data retrain | 1,289 | 15.32 | **0.460** | **76.02%** | 5.55% |
+| MasterRTL adaptation, frozen earlier fit | 713 | 22.15 | 0.536 | 104.10% | 11.51% |
+| Residual XGBoost v2, frozen | 713 | 60.68 | 0.901 | 610.95% | 24.82% |
+| Structural v3, frozen | 713 | 66.75 | 0.902 | 672.91% | 21.62% |
+
+V4 reduces MAE **75.46% versus the previous residual model** on this same test. The additional training data contributes to that improvement. Against the same-data MasterRTL retrain, the MAE difference is only −0.43 LUT4, with a descriptive paired 95% interval **[−5.52, 5.59]**: broad superiority is not established. V4 improves seven of eight stratum MAEs and makes 11 rather than 19 feasibility mistakes at a 64-LUT cap, but loses on multiplication, RMSLE, and zero-target error. One zero-LUT circuit is predicted at 556.21 LUTs; all failures remain in the scores. MAPE uses 235 positive targets; all 21 zero targets remain in MAE/RMSLE.
+
+![V4 and its frozen and same-data comparators on the new 256-circuit test.](docs/figures/v4-comparison.png)
+
+The [V4 results and reproduction guide](docs/v4-results.md) includes the fixed protocol, semantic checks, independent audit, inference commands, and remaining failures. These are synthetic isolated-circuit results, not a new CPU-speedup or instruction-selection result.
+
+### Historical six-model comparison: 192 circuits
 
 All six models below train on **713 unique formulas** and predict the same **192 unseen synthetic circuits**, balanced across eight predeclared groups. Every circuit is synthesized and passes sampled/boundary RTL checks: **412,416 comparisons** in total. Lower error is better.
 
@@ -72,6 +90,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[dev,reports]'
 make reproduce
+make reproduce-v4
 ```
 
 This validates both model freezes, reproduces all six scores within floating-point roundoff, reruns the independent audit, and exports nine figures to `generated/reproduction/figures/` as vector PDF/SVG and 300 dpi PNG. It neither retrains models nor synthesizes new circuits.
@@ -96,7 +115,7 @@ python -m isaforge.frozen_inference \
   --output generated/inference/residual-v2.json
 ```
 
-The [six-model inference guide](docs/reproduce-matched-comparison.md#run-all-six-frozen-predictors-then-score) covers every artifact. MasterRTL needs the retained graph cache for portable cached replay, or its frozen compatible Yosys tool for new formulas. Large raw logs, netlists, and the full graph cache are kept in the accompanying evidence archive, outside Git; committed predictions are sufficient for score and figure replay.
+For the latest model, use the [V4 inference command](docs/v4-results.md#run-frozen-v4-inference). V4 and MasterRTL require retained graph caches or their compatible frozen Yosys tool; the older formula-only models remain available when that dependency is unsuitable. The [six-model inference guide](docs/reproduce-matched-comparison.md#run-all-six-frozen-predictors-then-score) covers earlier artifacts. Large raw logs, netlists, and graph caches are outside Git; committed predictions suffice for score and figure replay.
 
 ## Repository map
 
@@ -116,6 +135,6 @@ Frozen model modules and experiment paths remain stable because saved artifacts 
 
 ## Scope and next steps
 
-The next research targets are arithmetic simplification and variable-shift prediction, another untouched real-workload evaluation, calibrated selection under a total measurement budget, and jointly measured multi-instruction sets. LLM-guided selection and power/energy prediction remain unimplemented. Current evidence does not establish published-system superiority or a general CPU speedup model.
+The next research targets are the remaining multiplier/zero-cost failures, another untouched real-workload evaluation, calibrated selection under a total measurement budget, and jointly measured multi-instruction sets. V4 improves isolated prediction substantially over the previous custom models but does not establish useful acquisition gains over merit. LLM-guided selection and power/energy prediction remain unimplemented. Current evidence does not establish published-system superiority or a general CPU speedup model.
 
 The [related-work comparison](docs/research-model-comparison.md) and [MasterRTL adaptation protocol](docs/masterrtl-matched-protocol.md) identify the primary research sources and the differences from their settings. The code and measurements are a research checkpoint, not a peer-reviewed result. Third-party components retain their upstream licenses; see [reuse and attribution](docs/reuse.md).

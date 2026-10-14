@@ -22,6 +22,7 @@ RTL synthesis of synthetic expressions.
 | Understand formula predictors and grouped model evaluation | [Methodology](methodology.md), [v1 model](area-model.md), [v2 resource and residual models](area-model-v2.md) |
 | Evaluate a fixed measurement budget over a measured candidate pool | [Area selection](area-selection.md) |
 | Reproduce the six-model comparison and independent error audit | [Matched comparison reproduction](reproduce-matched-comparison.md) |
+| Reproduce latest V4, inspect its remaining failures, or run frozen inference | [V4 results and replay](v4-results.md), [frozen protocol](v4-protocol.md) |
 | Integrate custom instructions and distinguish cycles from clock estimates | [Processor experiment](../hardware/README.md), [closed-memory SoC](soc-integration.md) |
 
 The [general data contract](data-contract.md), [performance-model interface](model.md),

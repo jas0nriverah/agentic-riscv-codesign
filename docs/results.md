@@ -1,6 +1,14 @@
 # Results
 
-The evidence supports resource-prediction and processor-integration results, with two central negative findings: learned acquisition has not beaten simple merit on the prospective primary endpoint, and the new structural v3 model has not beaten the matched MasterRTL adaptation on the fresh synthetic probe. The ML target is isolated LUT4 cost; the CRC32 cycle result comes from a separate matched processor experiment. [Methodology](methodology.md) defines those quantities and their boundaries.
+The evidence supports resource-prediction and processor-integration results. Latest V4 reduces MAE substantially versus the older custom models, but its small advantage over a same-data MasterRTL retrain is inconclusive and some secondary metrics regress. Learned acquisition has not beaten simple merit on the prospective primary endpoint. The ML target is isolated LUT4 cost; the CRC32 cycle result comes from a separate matched processor experiment. [Methodology](methodology.md) defines those quantities and their boundaries.
+
+## Latest V4: new 256-circuit holdout
+
+See [V4 results and replay](v4-results.md) for the complete new experiment. V4 and the matched MasterRTL retrain fit 1,289 development formulas; three frozen historical comparators retain their 713-formula fits. All five sets of predictions precede target measurement. The 256 new synthetic circuits pass 549,888 RTL oracle comparisons and actual iCE40 synthesis.
+
+V4 MAE is **14.8921 LUT4**, versus **15.3243** for same-data MasterRTL, **22.1496** for frozen MasterRTL, **60.6815** for residual v2, and **66.7478** for structural v3. V4 versus same-data MasterRTL's paired difference is −0.4322 LUT4, descriptive 95% interval [−5.5241, 5.5906]. V4's median percentage error is 1.3627% versus 5.5506%; its MAPE and RMSLE are worse (77.9278%/0.5717 versus 76.0172%/0.4600). A zero-target multiplier predicted at 556.2133 LUT4 remains in the score, producing zero-target MAE 26.4863 versus 0.0780. These tradeoffs prevent a blanket superiority claim.
+
+The old 192-formula probe below is development data for V4; its original frozen results remain valid for those earlier artifacts. Cross-stage score differences are not matched comparisons.
 
 ## Frozen matched comparison: 713 training, 192 probe formulas
 

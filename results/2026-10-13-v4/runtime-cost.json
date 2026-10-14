@@ -1,0 +1,41 @@
+{
+  "recorded_at_utc": "2026-10-14T15:09:06.254171+00:00",
+  "formula_count": 256,
+  "candidates_sha256": "720446d7f047a47738f7228b8940257d568854bbafafae12c87e470e208c68bd",
+  "worker_count": 1,
+  "models": {
+    "v4": {
+      "artifact_sha256": "22561aa76adeaf16af06944769c673c3e999b37ea0648fbf4964f866f20220be",
+      "load_seconds": 0.13515870900300797,
+      "cold_feature_and_prediction_seconds": 10.89786974999879,
+      "warm_feature_and_prediction_seconds": [
+        1.094505000000936,
+        1.0786044160049642,
+        1.0675440420018276,
+        1.0787930829974357,
+        1.1054894580011023
+      ],
+      "warm_median_seconds": 1.0787930829974357,
+      "identical_to_frozen_predictions": true
+    },
+    "masterrtl_retrained": {
+      "artifact_sha256": "ccc7495a75c536ef7f7086cca7e88ec2b94329441f353f944e15587c4998bda1",
+      "load_seconds": 0.04682720800337847,
+      "cold_feature_and_prediction_seconds": 11.720273666986031,
+      "warm_feature_and_prediction_seconds": [
+        0.38822466699639335,
+        0.34544658300001174,
+        0.3458462090056855,
+        0.326413542003138,
+        0.36919287500495557
+      ],
+      "warm_median_seconds": 0.3458462090056855,
+      "identical_to_frozen_predictions": true
+    }
+  },
+  "scope": "Sequential same-machine runs; cold feature extraction plus prediction, then five immediate warm repeats. Model load separately timed. Startup and JSON serialization excluded. No training or target synthesis.",
+  "limitations": [
+    "No uncertainty interval over runtime conditions; cold/warm timings cannot establish acquisition savings.",
+    "V4 uses semantic normalization plus pre-ABC topology and structural features; both models use Yosys on cold inputs."
+  ]
+}
