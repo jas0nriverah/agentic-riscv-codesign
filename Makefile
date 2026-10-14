@@ -50,9 +50,9 @@ generated/candidates/%.json: generated/traces/%.jsonl generated/programs/%.elf s
 candidates: $(PROGRAMS:%=generated/candidates/%.json)
 
 # Research entry points. Activate .venv first, or set PYTHON=.venv/bin/python.
-.PHONY: help test reproduce reproduce-v4 reproduce-v5 reproduce-external-v5 diagram
+.PHONY: help test reproduce reproduce-v4 reproduce-v5 reproduce-external-v5 reproduce-v6 diagram
 help:
-	@echo 'Research: make test | make reproduce | make reproduce-v4 | make reproduce-v5 | make reproduce-external-v5 | make diagram'
+	@echo 'Research: make test | make reproduce | make reproduce-v4 | make reproduce-v5 | make reproduce-external-v5 | make reproduce-v6 | make diagram'
 	@echo 'make reproduce replays frozen scores/audit/figures; no training or synthesis.'
 	@echo 'Hardware collection: make all | make run | make trace | make candidates'
 	@echo 'See docs/README.md for methodology, results, and pinned toolchains.'
@@ -75,6 +75,12 @@ reproduce-external-v5:
 	$(PYTHON) scripts/archive_external_v5.py restore
 	$(PYTHON) scripts/evaluate_external_v5.py score --output generated/reproduction/external-v5/evaluation.json
 	$(PYTHON) scripts/report_external_v5.py --evaluation generated/reproduction/external-v5/evaluation.json --output generated/reproduction/external-v5/report
+
+reproduce-v6:
+	$(PYTHON) scripts/measure_v6.py restore --scope calibration
+	$(PYTHON) scripts/measure_v6.py restore --scope test
+	$(PYTHON) scripts/evaluate_v6.py score --output generated/reproduction/v6/evaluation.json
+	$(PYTHON) scripts/report_v6.py --evaluation generated/reproduction/v6/evaluation.json --output generated/reproduction/v6/report
 
 diagram:
 	$(PYTHON) scripts/render_architecture.py

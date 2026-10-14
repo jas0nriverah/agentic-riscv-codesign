@@ -6,7 +6,7 @@ ISAForge explores whether machine learning can help choose useful RISC-V instruc
 
 The current learned target is **isolated iCE40 LUT4 count**. Processor speedup is evaluated separately through RTL simulation and routing. This is a research prototype with reproducible measured evidence; an LLM-driven selector remains future work.
 
-[Methodology](docs/methodology.md) · [External transfer](docs/external-v5-results.md) · [V5 synthetic results](docs/v5-results.md) · [All results](docs/results.md) · [Documentation](docs/README.md) · [Evidence index](results/README.md)
+[Methodology](docs/methodology.md) · [V6 results](docs/v6-results.md) · [External transfer](docs/external-v5-results.md) · [All results](docs/results.md) · [Documentation](docs/README.md) · [Evidence index](results/README.md)
 
 ## System architecture
 
@@ -26,7 +26,28 @@ The [methodology](docs/methodology.md) defines the data splits, feature boundary
 
 ## Results at a glance
 
-### Latest: external application transfer
+### Latest: V6 mapping features on fresh structural families
+
+V6 adds 23 generic-graph mapping descriptors to the previous dual-graph model, keeping the same **1,665 fitting circuits, 300-tree estimator settings and seed**. Models and predictions were frozen before measuring a separate 192-case calibration cohort and **192 test circuits in 96 structural families**. All 384 circuits passed verification and synthesis: **824,832 sampled/boundary RTL comparisons**, with no failed or replaced cases.
+
+| Frozen predictor | Test MAE, LUT4 |
+| :--- | ---: |
+| **V6 mapping** | **32.161** |
+| V6 fixed multiply router, secondary | 33.191 |
+| SOG + original graph | 33.844 |
+| SOG + dual graphs, primary control | 34.332 |
+| Dual graphs + semantics | 34.903 |
+| Equally tuned SOG | 46.339 |
+| Fixed MasterRTL recipe | 61.469 |
+| V4, unchanged | 101.580 |
+
+The preregistered comparison improves equal-stratum MAE **6.32%**, with paired difference **−2.171 LUT4** and a descriptive 95% component interval **[−3.473, −0.938]**. Six of eight strata improve. Multiplication still has large failures: the two worst cases contribute 26.95% of total absolute error. Mapping's positive MAPE is **43.63%** over 186 targets; all six zero targets remain in MAE. Scores across different experiment cohorts are not directly comparable.
+
+![V6 frozen test and preregistered paired contrast](docs/figures/v6/v6-primary.png)
+
+Fresh bounds cover **92.71% of candidates but 88.54% of complete families**, below the nominal 90% at the family unit. At a 64-LUT cap, mapping's point predictor falsely accepts six infeasible cases versus the control's three. Lower MAE has not established a better selection policy. [Complete results and failure analysis](docs/v6-results.md) retain all eight predictors, strata, caps and outliers. [Run inference or replay](docs/v6-reproduction.md) with `make reproduce-v6`.
+
+### External application transfer
 
 The six frozen models now predict **79 unique circuits from three TACLeBench programs**, retaining all **80 program/formula occurrences** and equal family weights. Predictions were committed before measurements; all circuits pass **169,692 RTL comparisons**, with no synthesis failures.
 
@@ -44,6 +65,9 @@ Full V5 improves its preregistered comparator by **4.31%**, but the fixed Master
 ![External application-derived comparison](docs/figures/external-v5/external-primary.png)
 
 All five Dijkstra formulas are familiar under our novelty rule. Strict novelty leaves 20 rows from only ADPCM and anagram, so a three-family novel score is unavailable. Full V5's upper bounds cover 95% of candidates but only one of three complete families. [Results, failure analysis and reproduction](docs/external-v5-results.md) include all predictors, overlap, bounds and the portable raw-evidence archive. Run `make reproduce-external-v5` to replay scores and vector figures.
+
+<details>
+<summary>Previous V5 matched synthetic feature comparison</summary>
 
 ### V5 matched synthetic feature comparison
 
@@ -65,6 +89,8 @@ There are only **19 unseen structural clusters**, and five strata have one clust
 ![V5 matched feature comparison on both fresh test scopes.](docs/figures/v5/scope-comparison.png)
 
 All 256 original circuits passed RTL checks and synthesis; no failures or outliers were removed. See [V5 results](docs/v5-results.md), the [frozen protocol](docs/v5-protocol.md), [reproduction guide](docs/v5-reproduction.md), and [literature-informed next steps](docs/research-direction-v5.md). Run `make reproduce-v5` to regenerate scores and vector figures.
+
+</details>
 
 <details>
 <summary>Historical model comparisons: V4 and the original six-model study</summary>
@@ -139,9 +165,10 @@ make reproduce
 make reproduce-v4
 make reproduce-v5
 make reproduce-external-v5
+make reproduce-v6
 ```
 
-These commands validate their respective frozen experiments and regenerate scores and vector PDF/SVG plus PNG figures under `generated/reproduction/`. External replay also restores and hashes every retained raw synthesis artifact, and checks the reviewed freeze against Git history. They do not retrain models or synthesize new circuits.
+These commands validate their respective frozen experiments and regenerate scores and vector PDF/SVG plus PNG figures under `generated/reproduction/`. External and V6 replay also restore and hash retained raw synthesis artifacts, and check the reviewed freezes against Git history. They do not retrain models or synthesize new circuits.
 
 ```sh
 make test                         # Python suite; hardware checks run when tools exist
@@ -163,7 +190,7 @@ python -m isaforge.frozen_inference \
   --output generated/inference/residual-v2.json
 ```
 
-For V5, use the [frozen inference command](docs/v5-reproduction.md#feature-extraction-and-portable-cache-replay); the [V4 command](docs/v4-results.md#run-frozen-v4-inference) remains available. V4 and MasterRTL require retained graph caches or their compatible frozen Yosys tool; the older formula-only models remain available when that dependency is unsuitable. The [six-model inference guide](docs/reproduce-matched-comparison.md#run-all-six-frozen-predictors-then-score) covers earlier artifacts. Large graph caches remain outside Git. The external snapshot includes a compressed raw-evidence archive; its scorer checks those artifacts as well as committed predictions and Git history.
+For the latest models, use the [V6 inference guide](docs/v6-reproduction.md) and optional [descriptor cache](docs/v6-cached-inference.md). The [V5 command](docs/v5-reproduction.md#feature-extraction-and-portable-cache-replay) and [V4 command](docs/v4-results.md#run-frozen-v4-inference) remain available. Graph models require retained feature caches or their compatible frozen Yosys tool; the older formula-only models remain available when that dependency is unsuitable. The [six-model inference guide](docs/reproduce-matched-comparison.md#run-all-six-frozen-predictors-then-score) covers earlier artifacts. Large graph caches remain outside Git. Raw target-measurement archives are included in the external and V6 snapshots and serve a different purpose from feature caches.
 
 ## Repository map
 
@@ -183,6 +210,6 @@ Frozen model modules and experiment paths remain stable because saved artifacts 
 
 ## Scope and next steps
 
-The next research targets are the remaining multiplier/zero-cost failures, another untouched real-workload evaluation, calibrated selection under a total measurement budget, and jointly measured multi-instruction sets. V5 improves the matched synthetic comparison; the simpler original-graph view has the lowest observed unseen-composition error. The first external program-transfer study shows a small gain over tuned SOG and a loss to the fixed MasterRTL recipe; genuinely novel application-family transfer and useful acquisition gains remain unestablished. LLM-guided selection and power/energy prediction remain unimplemented. Current evidence does not establish published-system superiority or a general CPU speedup model.
+The next research targets are missed arithmetic/operand correlations, untouched application-family transfer, calibrated selection under a total measurement budget, and jointly measured multi-instruction sets. V6 improves its fixed synthetic primary comparison, but error tails and feasibility mistakes remain. The first external program-transfer study shows a small V5 gain over tuned SOG and a loss to the fixed MasterRTL recipe; V6 has no fresh application result. Novel application-family transfer and useful acquisition gains remain unestablished. [Recent literature](docs/research-update-2026-10-14.md) motivates separate source-only distillation and processor-aware selection experiments. LLM-guided selection and power/energy prediction remain unimplemented. Current evidence does not establish published-system superiority or a general CPU speedup model.
 
 The [related-work comparison](docs/research-model-comparison.md) and [MasterRTL adaptation protocol](docs/masterrtl-matched-protocol.md) identify the primary research sources and the differences from their settings. The code and measurements are a research checkpoint, not a peer-reviewed result. Third-party components retain their upstream licenses; see [reuse and attribution](docs/reuse.md).

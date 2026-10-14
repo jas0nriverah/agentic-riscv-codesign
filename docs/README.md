@@ -23,9 +23,11 @@ RTL synthesis of synthetic expressions.
 | Evaluate a fixed measurement budget over a measured candidate pool | [Area selection](area-selection.md) |
 | Reproduce the six-model comparison and independent error audit | [Matched comparison reproduction](reproduce-matched-comparison.md) |
 | Reproduce historical V4, inspect its remaining failures, or run frozen inference | [V4 results and replay](v4-results.md), [frozen protocol](v4-protocol.md) |
+| Replay the latest mapping-feature experiment and inspect its failures | [V6 results](v6-results.md), [reproduction and inference](v6-reproduction.md), [frozen protocol](v6-protocol.md), [optional descriptor cache](v6-cached-inference.md) |
 | Audit external program transfer and restore raw synthesis evidence | [External results](external-v5-results.md), [evaluation protocol](external-v5-evaluation.md), [collection protocol](external-v5-protocol.md) |
 | Replay V5, inspect matched feature ablations and calibration failures | [V5 results](v5-results.md), [reproduction](v5-reproduction.md), [protocol](v5-protocol.md), [research direction](research-direction-v5.md) |
 | Integrate custom instructions and distinguish cycles from clock estimates | [Processor experiment](../hardware/README.md), [closed-memory SoC](soc-integration.md) |
+| Connect newer research to concrete next experiments | [Representation cost and processor-aware selection](research-update-2026-10-14.md), [mapping-feature development](v6-development-direction.md) |
 
 The [general data contract](data-contract.md), [performance-model interface](model.md),
 and [general selection interface](selection.md) also support future measured

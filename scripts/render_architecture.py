@@ -58,7 +58,7 @@ text(286,493,'Probe labels stay hidden until every model is frozen',11.5,MUTED)
 
 panel(539,297,'LEARNING + CONTROLLED COMPARISON',
       'Predict isolated LUT4 resources · assess generalization and inference cost',GREEN,'#effbf6','#b1e6d0')
-box(50,628,'Feature extraction + training',['Original/normalized graphs + RV32 features', 'Matched tuning · reserved calibration groups'],'#b1e6d0')
+box(50,628,'Feature extraction + training',['Graphs · RV32 semantics · cut/reuse features', 'Matched fits · reserved calibration groups'],'#b1e6d0')
 box(630,628,'Frozen evaluation + reporting',['Program holdouts + unseen synthetic probe', 'MAE · RMSLE · MAPE · timing · figures'],'#b1e6d0')
 arrow([(480,689),(618,689)],GREEN)
 text(549,651,'Freeze',11,GREEN,ha='center',weight='bold')

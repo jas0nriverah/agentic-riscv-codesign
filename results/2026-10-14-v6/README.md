@@ -54,6 +54,7 @@ running hardware tools.
 | Test raw/oracle evidence, independent implementation | [Raw audit](audit/test-raw-oracle.json) |
 | All test metrics, caps, coverage and primary bootstrap | [Independent test audit](audit/v6-test-independent-audit.json), [readable report](audit/v6-test-independent-audit.txt) |
 | Consumed post-test mechanism/tail analysis | [Diagnostics](audit/v6-posttest-diagnostics.json), [readable report](audit/v6-posttest-diagnostics.txt) |
+| Fresh relocated clone, both archives restored, every score field reproduced | [Clone replay](audit/clone-replay.json) |
 
 Executed audit source files are retained alongside results. The first
 training attempt failed a padding-sensitive serialization fingerprint check

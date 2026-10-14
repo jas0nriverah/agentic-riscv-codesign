@@ -1,8 +1,14 @@
 # Results
 
-The evidence supports resource-prediction and processor-integration results. Latest V5 improves the matched synthetic comparison, concentrated in multiplication; added semantic features and nominal uncertainty coverage do not generalize reliably. Historical V4’s small advantage over a same-data MasterRTL retrain was inconclusive. Learned acquisition has not beaten simple merit on the prospective primary endpoint. The ML target is isolated LUT4 cost; the CRC32 cycle result comes from a separate matched processor experiment. [Methodology](methodology.md) defines those quantities and their boundaries.
+The evidence supports resource-prediction and processor-integration results. V6 mapping features improve a frozen synthetic comparison by 6.32%, but error tails, feasibility mistakes and incomplete family coverage remain. Earlier V5 gains transfer weakly to three application families. Historical V4’s small advantage over a same-data MasterRTL retrain was inconclusive. Learned acquisition has not beaten simple merit on the prospective primary endpoint. The ML target is isolated LUT4 cost; the CRC32 cycle result comes from a separate matched processor experiment. [Methodology](methodology.md) defines those quantities and their boundaries.
 
-## Latest: external application-derived transfer
+## Latest: V6 mapping features and fresh family calibration
+
+The [V6 study](v6-results.md) adds 23 mapping descriptors while preserving the dual-graph control's 1,665 fitting rows and estimator settings/seed. On 192 new test circuits in 96 structural components, MAE falls from **34.332 to 32.161 LUT4** (6.32%), primary difference **−2.171**, descriptive stratified component interval **[−3.473, −0.938]**. All eight predictors and strata remain; the secondary multiply router reaches 33.191. Separate calibration and test cohorts total 384 original circuits and 824,832 passing RTL comparisons. Positive MAPE is 43.63% on 186 test targets; six zeros remain in MAE. This is a new cohort, not a direct comparison with older headline scores.
+
+Six strata improve, but two large multiplication overpredictions account for 26.95% of mapping's absolute error. Nominal 90% bounds cover 178/192 candidates and only **85/96 complete components (88.54%)**. Mapping makes more point false acceptances than dual graph at 16/32/64-LUT caps. These results support the representation change in this grammar, not improved instruction selection or application transfer. [Reproduce and run inference](v6-reproduction.md).
+
+## External application-derived transfer
 
 The [external V5 study](external-v5-results.md) retains 80 rows/79 unique circuits from Dijkstra, ADPCM decoding and anagram search. Full V5 achieves **6.256 LUT4 family-macro MAE** versus tuned SOG's **6.537** (4.31% reduction), but loses to the fixed MasterRTL adaptation (**5.808**). Dual graph reaches 6.111. All measurements pass, with 169,692 sampled/boundary RTL comparisons. All five Dijkstra formulas are familiar; neither novelty subset has all three families. Full bounds cover 76/80 candidates but only 1/3 whole families. This does not establish broad novel-family transfer or published-system superiority.
 
