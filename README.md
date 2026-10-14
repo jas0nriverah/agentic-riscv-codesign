@@ -152,15 +152,15 @@ See [results and interpretation](docs/results.md) for sources, per-group behavio
 
 ## Reproduce the comparison
 
-Python 3.11+ is required. Replay uses committed predictions and needs no RISC-V or FPGA tools. Install the [recorded numerical-library versions](docs/reproduce-matched-comparison.md#runtime-requirements-and-cache) for exact artifact compatibility.
+Use **Python 3.13** for the exact research replay environment. The general package also supports Python 3.11, but some frozen numerical versions require a newer interpreter. Replay uses committed predictions and needs no RISC-V or FPGA tools. Install the [recorded numerical-library versions](docs/reproduce-matched-comparison.md#runtime-requirements-and-cache) for exact artifact compatibility.
 
 ```sh
 git clone https://github.com/jas0nriverah/agentic-riscv-codesign.git
 cd agentic-riscv-codesign
 git checkout codex/isaforge-ml-foundation
-python3 -m venv .venv
+python3.13 -m venv .venv
 source .venv/bin/activate
-python -m pip install -e '.[dev,reports]'
+python -m pip install -e '.[dev,reports]' -r requirements-research.txt
 make reproduce
 make reproduce-v4
 make reproduce-v5

@@ -12,11 +12,11 @@ feature hypothesis and its limits.
 
 ## Replay a completed snapshot
 
-Use a full Git clone on `codex/isaforge-ml-foundation`, install the project,
-and activate its environment:
+Use a full Git clone on `codex/isaforge-ml-foundation`, create and activate a
+**Python 3.13** environment, then install the project:
 
 ```sh
-python -m pip install -e '.[dev,reports]'
+python -m pip install -e '.[dev,reports]' -r requirements-research.txt
 make reproduce-v6
 ```
 
@@ -26,6 +26,12 @@ recomputes every score and the fixed paired bootstrap, then exports PNG,
 editable SVG and vector PDF figures under `generated/reproduction/v6/`.
 Score replay does not execute Yosys, train an estimator or load model pickles.
 Full Git history is required to validate the exact premeasurement commits.
+The pinned numerical versions are required even for V6 score replay: its
+frozen provenance check compares the installed environment with the fitting
+manifest. Generic package installation ranges alone do not satisfy that check.
+Python 3.11 remains covered by general compatibility tests, but cannot install
+all of these exact recorded numerical versions. CI runs the frozen V6 replay
+in its pinned Python 3.13 job.
 A partial or failed snapshot is rejected; it is not silently scored on a
 smaller successful subset.
 
