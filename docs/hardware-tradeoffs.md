@@ -11,9 +11,11 @@ ISAForge separates prediction quality, isolated circuit resources and integrated
 | V9 application budget decisions | At cap64, 0 false accepts and 3 false rejects for both models; one repaired rejection and one new rejection | Average error reduction does not automatically reduce decision errors |
 | V9 historical regression budget decisions | Cap64 stays 6 false accepts / 5 false rejects; cap128 changes 1/4 → 1/6 | Some feasibility tradeoffs worsen despite lower MAE |
 | Learned instruction selection | V8's best learned policies tie merit-only selection on the primary endpoint | No demonstrated learned-selection advantage |
-| Constant-multiply implementation | V10d: 32 parsed-RTL proofs and 64 fresh arms; LUT4 lower/equal/higher: 31/1/0; carry: 13/7/12 | Mean LUT4 saving 88.5625; 12 carry increases; no new timing or CPU claim |
+| Constant-multiply implementation | V10d: 32 parsed-RTL proofs and 64 fresh arms; LUT4 lower/equal/higher: 31/1/0; carry: 13/7/12 | Mean bare LUT4 saving 88.5625; 12 carry increases; CPU effects not measured |
 
-Sources: [processor and routing results](results.md), [SoC routing assumptions](soc-routing.md), [V9 complete metrics](v9-coverage-results.md), [V8 selection study](v8-application-results.md), and [complete CSD results](v10-csd-hardware-results.md).
+| Matched CSD harness timing | All 192 routes pass; all 32 three-seed formula means have lower period (mean −1.710802 ns); 95/96 seed pairs improve | Measured routing-model tradeoff; 72 path attributions unknown; no CPU or board claim |
+
+Sources: [processor and routing results](results.md), [SoC routing assumptions](soc-routing.md), [V9 complete metrics](v9-coverage-results.md), [V8 selection study](v8-application-results.md), [complete CSD area results](v10-csd-hardware-results.md), and [matched timing](v10d-timing-results.md).
 
 ## The existing CPU result has a measurable tradeoff
 
@@ -59,6 +61,12 @@ alone as the optimization objective.
 - **Measurement cost:** new target labels, synthesis and inference work, and any fitting or acquisition budget. Existing cached feature inference has a different cost from preprocessing a new formula.
 - **Failures:** proof timeouts, unsuccessful measurements, infeasible budgets, tails and worst underpredictions. Missing measurements remain unavailable rather than zero.
 
-The completed V10d CSD stage measures isolated original/CSD LUT4 and carry resources on all 32 fixed inputs, after complete parsed-RTL equivalence. LUT4 falls in 31 pairs and ties once, while carry increases in 12 pairs. The direct 511 multiplier illustrates the tradeoff: 299 → 62 LUT4 and 27 → 30 carry cells. It does not measure delay, frequency, energy, power or processor effects. [All paired figures and evidence](v10-csd-hardware-results.md). The [prospective timing study](v10-timing-direction.md) fixes a common registered wrapper, device, constraints and three paired routing seeds before looking at its results. Its 192 routes remain unrun; the completed area study now supplies the first prerequisite, while a separately frozen V10d adapter and timing collector are still required. Every pair and failure must remain visible. A common registered wrapper provides a clocked timing endpoint; its Fmax can be limited by the wrapper and is still not a CPU benchmark.
+The completed V10d area stage measures isolated original/CSD resources on all 32 fixed inputs after parsed-RTL equivalence. LUT4 falls in 31 pairs and ties once; carry increases in 12. The direct 511 multiplier illustrates the tradeoff: 299 → 62 LUT4 and 27 → 30 carry cells. [All bare paired resources](v10-csd-hardware-results.md).
+
+The [completed matched timing study](v10d-timing-results.md) adds a common registered wrapper and 192 routes across three seeds. All 32 formula means improve in period; one of the 96 individual seed pairs is slightly slower. Wrapped LUT4 falls in 31 pairs and ties once, but `44*x+y` uses two more packed logic cells in every seed. All arms retain 132 FFs. Carry, mapped LUT4, packed logic cells and timing remain separate endpoints. Critical-path attribution is unresolved for 72 routes, which are retained in the full-harness results. This study measures no CPU, board, energy or power effect.
+
+![All matched hardware resource and timing tradeoffs.](figures/v10d-timing/v10d-resource-timing-tradeoffs.png)
+
+[Vector PDF](figures/v10d-timing/v10d-resource-timing-tradeoffs.pdf) · [Full-precision data](figures/v10d-timing/figure-data.json)
 
 V6's earlier calibrated upper bounds do not automatically transfer to the newly fitted V9 model. V9 currently reports point-estimate feasibility errors; new uncertainty or safe-selection claims require a separate calibration design and held-out validation. Power and energy remain unmeasured. FPGA LUT4 counts are also not an ASIC area measurement.

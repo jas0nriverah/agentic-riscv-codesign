@@ -205,6 +205,8 @@ make reproduce-external-v5
 make reproduce-v6
 make reproduce-v8
 make reproduce-v9-coverage
+make reproduce-v10d-hardware
+make reproduce-v10d-timing
 ```
 
 These commands validate their respective frozen experiments and regenerate scores and vector PDF/SVG plus PNG figures under `generated/reproduction/`. External and V6 replay also restore and hash retained raw synthesis artifacts, and check the reviewed freezes against Git history. They do not retrain models or synthesize new circuits.
@@ -251,10 +253,14 @@ Frozen model modules and experiment paths remain stable because saved artifacts 
 
 ## Scope and next steps
 
-The [completed constant-multiply hardware study](docs/v10-csd-hardware-results.md) now compares all 32 fixed original/CSD pairs with fresh synthesis: **31 LUT4 reductions, one tie, no increases**, averaging 88.5625 fewer LUT4. Carry usage increases in 12 cases. All 32 parsed-RTL proofs and 64 mapped measurements passed, with every original count matching its earlier control. This is an isolated hardware implementation result; no new predictor fit, timing result or CPU speedup is claimed.
+The [completed constant-multiply hardware study](docs/v10-csd-hardware-results.md) now compares all 32 fixed original/CSD pairs with fresh synthesis: **31 LUT4 reductions, one tie, no increases**, averaging 88.5625 fewer LUT4. Carry usage increases in 12 cases. All 32 parsed-RTL proofs and 64 mapped measurements passed, with every original count matching its earlier control. This is an isolated hardware implementation result; no new predictor fit or CPU speedup is claimed.
 
 ![All 32 fixed original/CSD hardware pairs.](docs/figures/v10d-csd-hardware/v10-csd-paired-hardware.png)
 
-The next targets are [reserved application transfer](docs/v9-reserved-transfer-direction.md), matched timing for the verified constant-multiply implementations, and selection under a total measurement budget. V9 coverage improves consumed-application prediction, while the independently measured V8 rewritten-feature comparison remains negative and merit-only selection ties the best learned policies. Error tails and feasibility mistakes still matter. [Recent literature](docs/research-update-2026-10-15.md) motivates better training coverage and explicit label-budget controls. LLM-guided selection and power/energy prediction remain unimplemented. Current evidence does not establish published-system superiority or a general CPU speedup model.
+The [matched timing study](docs/v10d-timing-results.md) also completed **192 routes**: all 32 formula means improve in registered-harness period (average −1.710802 ns), while one of 96 seed pairs regresses slightly. All carry tradeoffs remain visible, and 72 paths have unresolved attribution.
+
+![Every matched resource and timing tradeoff.](docs/figures/v10d-timing/v10d-resource-timing-tradeoffs.png)
+
+The next targets are [reserved application transfer](docs/v9-reserved-transfer-direction.md), measured CPU integration of the rewrites, and selection under a total measurement budget. V9 coverage improves consumed-application prediction, while the independently measured V8 rewritten-feature comparison remains negative and merit-only selection ties the best learned policies. Error tails and feasibility mistakes still matter. [Recent literature](docs/research-update-2026-10-15.md) motivates better training coverage and explicit label-budget controls. LLM-guided selection and power/energy prediction remain unimplemented. Current evidence does not establish published-system superiority or a general CPU speedup model.
 
 The [related-work comparison](docs/research-model-comparison.md) and [MasterRTL adaptation protocol](docs/masterrtl-matched-protocol.md) identify the primary research sources and the differences from their settings. The code and measurements are a research checkpoint, not a peer-reviewed result. Third-party components retain their upstream licenses; see [reuse and attribution](docs/reuse.md).

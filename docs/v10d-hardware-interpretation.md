@@ -62,12 +62,11 @@ original-RTL predictor.
 
 ## Focused next priorities
 
-1. **Measure implementation timing before adopting CSD universally.** The
-   existing [registered timing protocol](v10-timing-direction.md) is the next
-   bounded hardware comparison: retain all 32 pairs, including the 12 carry
-   tradeoffs and the LUT tie, with common boundaries and paired routing seeds.
-   Report harness-limited paths and failures. Fewer LUTs, more/fewer carry cells
-   and fewer source operators do not establish clock speed, CPU latency or power.
+1. **Use the completed timing evidence before CPU integration.** The subsequent
+   [matched registered-harness study](v10d-timing-results.md) retains all 32 pairs
+   and 192 routes. All formula means improve in period; one individual seed
+   regresses and 72 path attributions remain unknown. Carry tradeoffs persist.
+   Processor latency, workload behavior and power still need separate evidence.
 2. **Keep the original-area model work focused on its actual errors.** The
    [V9 coverage result](v9-coverage-results.md) improved mean error but retained
    cap mistakes: its six consumed-V6 cap64 false accepts are comparator,

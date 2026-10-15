@@ -25,6 +25,7 @@ RTL synthesis of synthetic expressions.
 
 | Task | Read |
 | --- | --- |
+| Compare all 192 routed arms and resource/timing tradeoffs | [V10d timing results](v10d-timing-results.md), [timing protocol](v10d-timing-protocol.md) |
 | Inspect all 32 verified original/CSD hardware pairs and carry tradeoffs | [V10 hardware results](v10-csd-hardware-results.md), [V10d protocol](v10d-csd-hardware-protocol.md) |
 | Execute pinned Embench programs and reconcile Spike traces | [Toolchain and workload collection](toolchain.md) |
 | Extract legal two-input, one-output instruction groups and verify substitutions | [Candidate contract](candidates.md) |

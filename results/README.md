@@ -89,3 +89,5 @@ write new outputs under `generated/` or `work/`.
 ## Verified constant-multiply hardware
 
 [V10d](2026-10-15-v10d-csd-hardware/README.md) retains all 32 fixed original/CSD pairs, 64 fresh measurements and the complete raw-evidence audit. LUT4 decreases in 31 pairs and ties once; carry increases in 12. The prior V10c SAT failure remains unchanged. No timing or CPU gain is inferred.
+
+[V10d matched timing](2026-10-15-v10d-timing/README.md) subsequently retains 64 wrapped mappings, 64 sequential checks and 192 routes: all 32 formula means improve in period, with one individual seed regression and 72 unresolved path attributions. These are registered-harness timing estimates; CPU effects remain unmeasured.
