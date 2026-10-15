@@ -1,0 +1,73 @@
+{
+  "schema": "isaforge-v13-coverage-input-recipe-v1",
+  "candidates": 48,
+  "allocation": {
+    "correlated_high_products": 16,
+    "affine_masked_chains": 16,
+    "comparator_shift_compositions": 16
+  },
+  "masks": [
+    255,
+    341,
+    1365,
+    2047
+  ],
+  "high_product_shifts": [
+    8,
+    16
+  ],
+  "composition_shifts": [
+    1,
+    8,
+    16,
+    31
+  ],
+  "target": "Original emitted CPU-encodable RV32 RTL LUT4; semantic simplification never changes target.",
+  "selection": "Fixed templates informed by consumed V9 errors. No outcomes, scores, overlap-driven replacement or claim of independent novelty.",
+  "future_collection_policy": {
+    "seed": 2026101529,
+    "random_vectors": 2048,
+    "boundary_vectors": 100,
+    "total_vectors": 2148,
+    "workers": 2,
+    "timeout_seconds": 360,
+    "arms": "All48 original RTL only; no retries/replacements",
+    "release": "Separate exact tool/source/verification contract before native calls"
+  },
+  "preparation_calls": {
+    "native_jobs": 0,
+    "feature_extractions": 0,
+    "solver_queries": 0,
+    "fits": 0,
+    "new_target_reads": 0
+  },
+  "future_comparison": {
+    "status": "Requires separate input/feature/measurement/fitting release",
+    "features": "Unchanged mapping217 selected from original336; original generic-zero override",
+    "target_scale": "raw LUT4 only; V12 log candidate not promoted",
+    "trees": 300,
+    "criterion": "squared_error",
+    "min_samples_leaf": 1,
+    "max_features": 1.0,
+    "n_jobs": 1,
+    "seeds": [
+      2026101421,
+      2026101422,
+      2026101423
+    ],
+    "folds": 5,
+    "maximum_fits": 30,
+    "control": "Original1713 training rows only in each training partition",
+    "candidate": "Same original training partition plus new coverage rows belonging to that partition",
+    "assessment": "Identical held-out original rows and held-out new rows for both predictors",
+    "primary": "Three-seed mean nine-stratum macro OOF MAE difference augmented minus control on original1713; equal strata",
+    "secondary": [
+      "New48 OOF challenge errors with family/stratum denominators",
+      "P99,worstAE,maximum-underprediction",
+      "cap64 false accept/reject separately; caps32/128 sensitivity"
+    ],
+    "grouping": "Rebuild common transitive original V5 components + saved accepted identities/commutative keys + exact selected217float32 collisions + entire new template contexts; deterministic V12 greedy rule; freeze before fitting.",
+    "gate": "Require five nonempty validation folds and all nine strata in every training partition. Preserve overlaps/failures; stop rather than weaken groups. No final refit or consumed V6/V8 target replay in30-fit budget."
+  },
+  "scope": "Targeted consumed-development data augmentation, not residual correction, independent transfer, calibration or CPU benefit."
+}
