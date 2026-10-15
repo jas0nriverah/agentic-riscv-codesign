@@ -1,0 +1,1945 @@
+{
+  "status": "unsealed-input-only",
+  "scope": "Complete declared benchmark computation region; initialization, upstream status and snapshot probes excluded. Every called helper retained. Kernel attribution is secondary.",
+  "source_runtime_feasibility_sha256": "2a97c387714eb420fe4da21322b1c7b5b56e3b51185459c671397017932a0323",
+  "script_sha256": "135ee4747894bbfaf774a93b9ab4191bce7b8d4f991122db61f0a5178df8403d",
+  "consumed_input_sha256": {
+    "results/2026-10-14-v6/corpus/consumed-features.json": "70de2daa0f9abf644ae6058bae6aa110677f98a1834e8b5ef495caf1b7d5f229",
+    "results/2026-10-14-v6/corpus/calibration/features.json": "a4f327a8ba2bcd5ebdbd5b25d521fd80cd434ceca51e4935af8e0e04635292b1",
+    "results/2026-10-14-v6/corpus/test/features.json": "7436f8a1603e84a0d32e0911d84c75fb26419c47c652e7248f870c5dc455ddf3"
+  },
+  "consumed_formula_count": 2764,
+  "records": {
+    "bitcount": {
+      "candidate_count": 47,
+      "kernel_candidate_count": 33,
+      "helper_only_count": 14,
+      "retired_instructions": 5498,
+      "trace_sha256": "147d151ff30b576a9d90427c24fbeeac4ab5c4d1b89106f9a3a3df4450295617",
+      "candidate_sha256": "1311a80094ba81043f2f06ee030a82e9c80f41955d7f309e1092fd48fb2cccdc",
+      "fusion_verification": {
+        "seed": 2026101507,
+        "benchmarks": [
+          {
+            "benchmark": "bitcount",
+            "checked_occurrences": 66,
+            "skipped_opaque_block_occurrences": 0,
+            "vectors_per_occurrence": 16,
+            "individual_comparisons": 1056,
+            "joint_formula_block_comparisons": 896
+          }
+        ],
+        "passed": true,
+        "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+      },
+      "input_only_overlap": [
+        {
+          "formula": "add(in0,andi(in1,15))",
+          "normalized_v5_formula": "add(in0,andi(in1,15))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_ntbl_bitcount"
+            ],
+            [
+              "bitcount_ntbl_bitcount"
+            ],
+            [
+              "bitcount_ntbl_bitcount"
+            ],
+            [
+              "bitcount_ntbl_bitcount"
+            ],
+            [
+              "bitcount_ntbl_bitcount"
+            ],
+            [
+              "bitcount_ntbl_bitcount"
+            ],
+            [
+              "bitcount_ntbl_bitcount"
+            ],
+            [
+              "bitcount_ntbl_bitcnt"
+            ],
+            [
+              "bitcount_ntbl_bitcnt"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,andi(in1,255))",
+          "normalized_v5_formula": "add(in0,andi(in1,255))",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_BW_btbl_bitcount"
+            ],
+            [
+              "bitcount_BW_btbl_bitcount"
+            ],
+            [
+              "bitcount_BW_btbl_bitcount"
+            ],
+            [
+              "bitcount_AR_btbl_bitcount"
+            ],
+            [
+              "bitcount_AR_btbl_bitcount"
+            ],
+            [
+              "bitcount_AR_btbl_bitcount"
+            ],
+            [
+              "bitcount_btbl_bitcnt"
+            ],
+            [
+              "bitcount_btbl_bitcnt"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,16),255))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,16),255))",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_BW_btbl_bitcount"
+            ],
+            [
+              "bitcount_AR_btbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,8),255))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,8),255))",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_BW_btbl_bitcount"
+            ],
+            [
+              "bitcount_AR_btbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "add(and(srli(in0,1),in1),and(in0,in1))",
+          "normalized_v5_formula": "add(and(srli(in0,1),in1),and(in0,in1))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            4
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "add(and(srli(in0,2),in1),and(in0,in1))",
+          "normalized_v5_formula": "add(and(srli(in0,2),in1),and(in0,in1))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            4
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "add(and(srli(in0,4),in1),and(in0,in1))",
+          "normalized_v5_formula": "add(and(srli(in0,4),in1),and(in0,in1))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            4
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "sub(srai(add(in0,in1),16),srai(in1,31))",
+          "normalized_v5_formula": "sub(srai(add(in0,in1),16),srai(in1,31))",
+          "kernel_present": false,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            4
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_main"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,12),15))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,12),15))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_ntbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,16),15))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,16),15))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_ntbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,20),15))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,20),15))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_ntbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,24),15))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,24),15))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_ntbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,4),15))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,4),15))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_ntbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,8),15))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,8),15))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_ntbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,16),255)",
+          "normalized_v5_formula": "andi(srli(in0,16),255)",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_BW_btbl_bitcount"
+            ],
+            [
+              "bitcount_AR_btbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,8),255)",
+          "normalized_v5_formula": "andi(srli(in0,8),255)",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_BW_btbl_bitcount"
+            ],
+            [
+              "bitcount_AR_btbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "srai(add(mulh(in0,in1),in0),16)",
+          "normalized_v5_formula": "srai(add(mulh(in0,in1),in0),16)",
+          "kernel_present": false,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_main"
+            ]
+          ]
+        },
+        {
+          "formula": "sub(srai(in0,16),srai(in1,31))",
+          "normalized_v5_formula": "sub(srai(in0,16),srai(in1,31))",
+          "kernel_present": false,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_main"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,srli(in1,16))",
+          "normalized_v5_formula": "add(in0,srli(in1,16))",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,srli(in1,24))",
+          "normalized_v5_formula": "add(in0,srli(in1,24))",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_AR_btbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,srli(in1,28))",
+          "normalized_v5_formula": "add(in0,srli(in1,28))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_ntbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(1431654400),1365)",
+          "normalized_v5_formula": "lui(1431655765)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(16711680),255)",
+          "normalized_v5_formula": "lui(16711935)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(252645376),-241)",
+          "normalized_v5_formula": "lui(252645135)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(858992640),819)",
+          "normalized_v5_formula": "lui(858993459)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "and(srli(in0,1),in1)",
+          "normalized_v5_formula": "and(srli(in0,1),in1)",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "and(srli(in0,2),in1)",
+          "normalized_v5_formula": "and(srli(in0,2),in1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "and(srli(in0,4),in1)",
+          "normalized_v5_formula": "and(srli(in0,4),in1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "and(srli(in0,8),in1)",
+          "normalized_v5_formula": "and(srli(in0,8),in1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,12),15)",
+          "normalized_v5_formula": "andi(srli(in0,12),15)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_ntbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,16),15)",
+          "normalized_v5_formula": "andi(srli(in0,16),15)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_ntbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,20),15)",
+          "normalized_v5_formula": "andi(srli(in0,20),15)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_ntbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,24),15)",
+          "normalized_v5_formula": "andi(srli(in0,24),15)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_ntbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,4),15)",
+          "normalized_v5_formula": "andi(srli(in0,4),15)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_ntbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,8),15)",
+          "normalized_v5_formula": "andi(srli(in0,8),15)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_ntbl_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "srli(slli(in0,16),16)",
+          "normalized_v5_formula": "srli(slli(in0,16),16)",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_bitcount"
+            ]
+          ]
+        },
+        {
+          "formula": "add(mulh(in0,in1),in0)",
+          "normalized_v5_formula": "add(mulh(in0,in1),in0)",
+          "kernel_present": false,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_main"
+            ]
+          ]
+        },
+        {
+          "formula": "add(slli(in0,2),in1)",
+          "normalized_v5_formula": "add(slli(in0,2),in1)",
+          "kernel_present": false,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_main"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(-4096),1260)",
+          "normalized_v5_formula": "lui(4294964460)",
+          "kernel_present": false,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_main"
+            ]
+          ]
+        },
+        {
+          "formula": "srai(add(in0,in1),16)",
+          "normalized_v5_formula": "srai(add(in0,in1),16)",
+          "kernel_present": false,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_main"
+            ]
+          ]
+        },
+        {
+          "formula": "sub(in0,srai(in1,31))",
+          "normalized_v5_formula": "sub(in0,srai(in1,31))",
+          "kernel_present": false,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_main"
+            ]
+          ]
+        },
+        {
+          "formula": "sub(srai(in0,16),in1)",
+          "normalized_v5_formula": "sub(srai(in0,16),in1)",
+          "kernel_present": false,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_main"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(-2092036096),-1185)",
+          "normalized_v5_formula": "lui(2202930015)",
+          "kernel_present": false,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_main"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(-2147479552),264)",
+          "normalized_v5_formula": "lui(2147488008)",
+          "kernel_present": false,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_main"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(-2147483648),-1)",
+          "normalized_v5_formula": "lui(2147483647)",
+          "kernel_present": false,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_main"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(126976),797)",
+          "normalized_v5_formula": "lui(127773)",
+          "kernel_present": false,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_main"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(16384),423)",
+          "normalized_v5_formula": "lui(16807)",
+          "kernel_present": false,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "bitcount_main"
+            ]
+          ]
+        }
+      ]
+    },
+    "isqrt": {
+      "candidate_count": 2,
+      "kernel_candidate_count": 2,
+      "helper_only_count": 0,
+      "retired_instructions": 389066,
+      "trace_sha256": "e458d50347ec236ba79b9bbe70ffeeff735939dcf6f2635b917c327250aa3abe",
+      "candidate_sha256": "09777c60b872c5058625d7cbab5de4966a101a1c162d1e1d93e3c7d0ab294b7f",
+      "fusion_verification": {
+        "seed": 2026101507,
+        "benchmarks": [
+          {
+            "benchmark": "isqrt",
+            "checked_occurrences": 2,
+            "skipped_opaque_block_occurrences": 0,
+            "vectors_per_occurrence": 16,
+            "individual_comparisons": 32,
+            "joint_formula_block_comparisons": 32
+          }
+        ],
+        "passed": true,
+        "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+      },
+      "input_only_overlap": [
+        {
+          "formula": "add(in0,slli(in1,2))",
+          "normalized_v5_formula": "add(in0,slli(in1,2))",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "isqrt_usqrt"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(slli(in0,2),1)",
+          "normalized_v5_formula": "addi(slli(in0,2),1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "isqrt_usqrt"
+            ]
+          ]
+        }
+      ]
+    },
+    "fft": {
+      "candidate_count": 6,
+      "kernel_candidate_count": 5,
+      "helper_only_count": 1,
+      "retired_instructions": 264154,
+      "trace_sha256": "d89f57987f4492ca08188cf78c0be1d8a381a8ec68e9cc3d794a90a5fcd7ca0d",
+      "candidate_sha256": "0145661178d1ee10f71a8faa6104bdc566356067d7e72c08a452395effc0fa85",
+      "fusion_verification": {
+        "seed": 2026101507,
+        "benchmarks": [
+          {
+            "benchmark": "fft",
+            "checked_occurrences": 6,
+            "skipped_opaque_block_occurrences": 0,
+            "vectors_per_occurrence": 16,
+            "individual_comparisons": 96,
+            "joint_formula_block_comparisons": 96
+          }
+        ],
+        "passed": true,
+        "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+      },
+      "input_only_overlap": [
+        {
+          "formula": "srai(sub(in0,in1),13)",
+          "normalized_v5_formula": "srai(sub(in0,in1),13)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "fft_bit_reduct"
+            ]
+          ]
+        },
+        {
+          "formula": "add(slli(in0,2),in1)",
+          "normalized_v5_formula": "add(slli(in0,2),in1)",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "fft_bit_reduct"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,lui(8192))",
+          "normalized_v5_formula": "addi(in0,8192)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "fft_bit_reduct"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(-2147459072),1692)",
+          "normalized_v5_formula": "lui(2147509916)",
+          "kernel_present": false,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "fft_main"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(-2147471360),648)",
+          "normalized_v5_formula": "lui(2147496584)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "fft_bit_reduct"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(4096),-2048)",
+          "normalized_v5_formula": "lui(2048)",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "fft_bit_reduct"
+            ]
+          ]
+        }
+      ]
+    },
+    "ndes": {
+      "candidate_count": 47,
+      "kernel_candidate_count": 47,
+      "helper_only_count": 0,
+      "retired_instructions": 35735,
+      "trace_sha256": "57a7ab3145dc8c19f31c859358d5b96ccc62e06d874fa998331ab684145f2184",
+      "candidate_sha256": "3c2c90823b01cad61e066577fa34c8b9603be088db7c32429c5ebef0d9346003",
+      "fusion_verification": {
+        "seed": 2026101507,
+        "benchmarks": [
+          {
+            "benchmark": "ndes",
+            "checked_occurrences": 128,
+            "skipped_opaque_block_occurrences": 0,
+            "vectors_per_occurrence": 16,
+            "individual_comparisons": 2048,
+            "joint_formula_block_comparisons": 1472
+          }
+        ],
+        "passed": true,
+        "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+      },
+      "input_only_overlap": [
+        {
+          "formula": "add(in0,slli(in1,2))",
+          "normalized_v5_formula": "add(in0,slli(in1,2))",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ]
+          ]
+        },
+        {
+          "formula": "sltu(0,and(in0,in1))",
+          "normalized_v5_formula": "sltu(0,and(in0,in1))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,slli(addi(in1,-28),2))",
+          "normalized_v5_formula": "add(in0,slli(addi(in1,4294967268),2))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ]
+          ]
+        },
+        {
+          "formula": "or(in0,slli(in1,1))",
+          "normalized_v5_formula": "or(in0,slli(in1,1))",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "slli(addi(in0,-28),2)",
+          "normalized_v5_formula": "slli(addi(in0,4294967268),2)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,slli(addi(in1,16),2))",
+          "normalized_v5_formula": "add(in0,slli(addi(in1,16),2))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "or(andi(in0,2),andi(srai(in1,5),1))",
+          "normalized_v5_formula": "or(andi(in0,2),andi(srai(in1,5),1))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            4
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "or(andi(slli(in0,1),2),andi(in1,1))",
+          "normalized_v5_formula": "or(andi(slli(in0,1),2),andi(in1,1))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            4
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "add(add(slli(in0,3),in0),in1)",
+          "normalized_v5_formula": "add(add(slli(in0,3),in0),in1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srai(in1,4),1))",
+          "normalized_v5_formula": "add(in0,andi(srai(in1,4),1))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "add(slli(in0,3),in0)",
+          "normalized_v5_formula": "add(slli(in0,3),in0)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "or(andi(in0,2),andi(in1,1))",
+          "normalized_v5_formula": "or(andi(in0,2),andi(in1,1))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "or(andi(slli(in0,1),2),in1)",
+          "normalized_v5_formula": "or(andi(slli(in0,1),2),in1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "or(andi(slli(in0,2),8),in1)",
+          "normalized_v5_formula": "or(andi(slli(in0,2),8),in1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "or(in0,andi(srai(in1,5),1))",
+          "normalized_v5_formula": "or(in0,andi(srai(in1,5),1))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "slli(addi(in0,16),2)",
+          "normalized_v5_formula": "slli(addi(in0,16),2)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "slli(addi(in0,-32),2)",
+          "normalized_v5_formula": "slli(addi(in0,4294967264),2)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ]
+          ]
+        },
+        {
+          "formula": "srli(or(and(slli(in0,28),in1),in0),1)",
+          "normalized_v5_formula": "srli(or(and(slli(in0,28),in1),in0),1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            4
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ]
+          ]
+        },
+        {
+          "formula": "slli(add(in0,in1),2)",
+          "normalized_v5_formula": "slli(add(in0,in1),2)",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_des"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,andi(in1,1))",
+          "normalized_v5_formula": "add(in0,andi(in1,1))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(slli(in0,1),2)",
+          "normalized_v5_formula": "andi(slli(in0,1),2)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(slli(in0,2),8)",
+          "normalized_v5_formula": "andi(slli(in0,2),8)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(srai(in0,2),2)",
+          "normalized_v5_formula": "andi(srai(in0,2),2)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(srai(in0,4),1)",
+          "normalized_v5_formula": "andi(srai(in0,4),1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(srai(in0,5),1)",
+          "normalized_v5_formula": "andi(srai(in0,5),1)",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "or(andi(in0,2),in1)",
+          "normalized_v5_formula": "or(andi(in0,2),in1)",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "or(andi(in0,8),in1)",
+          "normalized_v5_formula": "or(andi(in0,8),in1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "or(in0,andi(in1,1))",
+          "normalized_v5_formula": "or(in0,andi(in1,1))",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "or(in0,slli(in1,4))",
+          "normalized_v5_formula": "or(in0,slli(in1,4))",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,slli(addi(in1,-32),2))",
+          "normalized_v5_formula": "add(in0,slli(addi(in1,4294967264),2))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_des"
+            ],
+            [
+              "ndes_des"
+            ]
+          ]
+        },
+        {
+          "formula": "or(and(slli(in0,28),in1),in0)",
+          "normalized_v5_formula": "or(and(slli(in0,28),in1),in0)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ]
+          ]
+        },
+        {
+          "formula": "and(slli(in0,28),in1)",
+          "normalized_v5_formula": "and(slli(in0,28),in1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ]
+          ]
+        },
+        {
+          "formula": "srli(or(in0,in1),1)",
+          "normalized_v5_formula": "srli(or(in0,in1),1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ],
+            [
+              "ndes_ks"
+            ]
+          ]
+        },
+        {
+          "formula": "add(in0,slli(add(slli(in1,1),in1),2))",
+          "normalized_v5_formula": "add(in0,slli(add(slli(in1,1),in1),2))",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            4
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_des"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(srl(addi(lui(65536),518),in0),1)",
+          "normalized_v5_formula": "andi(srl(66054,in0),1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            4
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_ks"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(srl(addi(in0,518),in1),1)",
+          "normalized_v5_formula": "andi(srl(addi(in0,518),in1),1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_ks"
+            ]
+          ]
+        },
+        {
+          "formula": "slli(add(slli(in0,1),in0),2)",
+          "normalized_v5_formula": "slli(add(slli(in0,1),in0),2)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_des"
+            ]
+          ]
+        },
+        {
+          "formula": "srl(addi(lui(65536),518),in0)",
+          "normalized_v5_formula": "srl(66054,in0)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            3
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_ks"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(-2147479552),-312)",
+          "normalized_v5_formula": "lui(2147487432)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ],
+            [
+              "ndes_des"
+            ]
+          ]
+        },
+        {
+          "formula": "add(slli(in0,1),in0)",
+          "normalized_v5_formula": "add(slli(in0,1),in0)",
+          "kernel_present": true,
+          "exact_consumed": true,
+          "normalized_consumed": true,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_des"
+            ]
+          ]
+        },
+        {
+          "formula": "add(slli(in0,8),in1)",
+          "normalized_v5_formula": "add(slli(in0,8),in1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(-2147479552),-440)",
+          "normalized_v5_formula": "lui(2147487304)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(-2147479552),264)",
+          "normalized_v5_formula": "lui(2147488008)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "addi(lui(65536),518)",
+          "normalized_v5_formula": "lui(66054)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_ks"
+            ]
+          ]
+        },
+        {
+          "formula": "andi(srl(in0,in1),1)",
+          "normalized_v5_formula": "andi(srl(in0,in1),1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_ks"
+            ]
+          ]
+        },
+        {
+          "formula": "slli(xor(in0,in1),8)",
+          "normalized_v5_formula": "slli(xor(in0,in1),8)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_cyfun"
+            ]
+          ]
+        },
+        {
+          "formula": "srl(addi(in0,518),in1)",
+          "normalized_v5_formula": "srl(addi(in0,518),in1)",
+          "kernel_present": true,
+          "exact_consumed": false,
+          "normalized_consumed": false,
+          "sizeVariants": [
+            2
+          ],
+          "occurrence_symbols": [
+            [
+              "ndes_ks"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "no_new_target_labels_models_predictions_fits_protocol_seal": true
+}

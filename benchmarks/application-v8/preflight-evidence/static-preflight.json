@@ -1,0 +1,2557 @@
+{
+  "status": "exploratory-input-feasibility-not-sealed",
+  "reference_commit": "c6a0d73e47bbd2bc86e34637156fb26dd4d5cf08",
+  "compiler_sha256": "d21f58713e7f2f9a9ef9de8762b2c2d1995cd4cdeda724d5fe4834f3af4737b2",
+  "objdump_sha256": "87a57cf5bdabdf2ca91ebca54fe568bd6c3524f2558782520547b1b8f29b925b",
+  "compiler_version": "riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC arm64) 15.2.0",
+  "extractor_sha256": "44f83fb2f0c421fd1bae5d89c90787a4dd997f4df1a2c433680c696f6b9486eb",
+  "decoder_sha256": "b3010ece9ef1bbc261a9efa801981a55a640468c8c6a87ed29386ccf89f49724",
+  "script_sha256": "98a7a60fd384f350e8dc3a991ecd663b141293e9145007216d9536606c5388d4",
+  "records": {
+    "bitcount": {
+      "source_sha256": {
+        "bench/kernel/bitcount/bitcount.c": "7b0a5eccbf18e81cae1bcc948f0f0f47143cd177cf46de10b2d676e5b0d8d2fa",
+        "bench/kernel/bitcount/bitops.h": "8877c5de289c0e1f4fe17836db60fe0468b999f0ddefbfbf7f0e610d6d927f6c",
+        "bench/kernel/bitcount/bitcnt_4.c": "11b07b004c24843b44d203c7be2dc5e6cae930909f5b49752c5e592ec18582c4",
+        "bench/kernel/bitcount/LICENSE": "d5433a2f12b96fb7dd1ec0e09f8268ce220a93859fa2c6441ac11724169dad95",
+        "bench/kernel/bitcount/bitcnt_3.c": "9f9735c11c5f0f88a6a8206359a4d771bf5cd0f53e52229dfb44b74b3ac02a9f",
+        "bench/kernel/bitcount/bitcnt_2.c": "853c233e8d51db3f26b4e7e12491b4c4ef8633b49beda32f542c97dd2e240f33",
+        "bench/kernel/bitcount/ChangeLog.txt": "350b8e0b014bf5768693527e4aa003315d043113e634763b4fe4ba4fa1b57ee6",
+        "bench/kernel/bitcount/bitcnt_1.c": "8e22f9e70f40539484151d17b18fd31002fcb0106ef4fb0b70ed239b2ff9228c"
+      },
+      "source_files": [
+        "bench/kernel/bitcount/bitcount.c",
+        "bench/kernel/bitcount/bitcnt_1.c",
+        "bench/kernel/bitcount/bitcnt_2.c",
+        "bench/kernel/bitcount/bitcnt_3.c",
+        "bench/kernel/bitcount/bitcnt_4.c"
+      ],
+      "kernel_symbol_filter": [
+        "bitcount_bit_count",
+        "bitcount_bitcount",
+        "bitcount_bit_shifter",
+        "bitcount_ntbl_bitcnt",
+        "bitcount_btbl_bitcnt",
+        "bitcount_ntbl_bitcount",
+        "bitcount_BW_btbl_bitcount",
+        "bitcount_AR_btbl_bitcount"
+      ],
+      "source_binary_executed": false,
+      "dynamic_trace_collected": false,
+      "compile_command": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+        "-march=rv32im",
+        "-mabi=ilp32",
+        "-O2",
+        "-std=gnu17",
+        "-Wno-unknown-pragmas",
+        "-nostartfiles",
+        "-Wl,-e,main",
+        "-I",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcount.c",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcnt_1.c",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcnt_2.c",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcnt_3.c",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcnt_4.c",
+        "-o",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/application-generalization-proposal/static-bitcount/bitcount.elf"
+      ],
+      "elf_sha256": "2f5b16d0d46695c1d498cdfac12a2168e808d306463e584e525ba5ea83bd6ffc",
+      "status": "compiled-static-legality-only",
+      "all_program_static_unique_formulas": 57,
+      "kernel_static_unique_formulas": 33,
+      "kernel_instruction_opcodes": {
+        "addi": 21,
+        "beq": 5,
+        "andi": 18,
+        "srai": 1,
+        "add": 43,
+        "bne": 4,
+        "jalr": 9,
+        "and": 9,
+        "lui": 4,
+        "srli": 23,
+        "slli": 1,
+        "lbu": 20
+      },
+      "kernel_eligible_static_instructions": 120,
+      "mechanism_formula_counts": {},
+      "kernel_static_formulas": [
+        {
+          "formula": "add(in0,andi(in1,15))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 9,
+          "kernel_symbols": [
+            "bitcount_ntbl_bitcnt",
+            "bitcount_ntbl_bitcount"
+          ]
+        },
+        {
+          "formula": "add(in0,andi(in1,255))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 8,
+          "kernel_symbols": [
+            "bitcount_AR_btbl_bitcount",
+            "bitcount_BW_btbl_bitcount",
+            "bitcount_btbl_bitcnt"
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,16),255))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "bitcount_AR_btbl_bitcount",
+            "bitcount_BW_btbl_bitcount"
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,8),255))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "bitcount_AR_btbl_bitcount",
+            "bitcount_BW_btbl_bitcount"
+          ]
+        },
+        {
+          "formula": "add(and(srli(in0,1),in1),and(in0,in1))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_bitcount"
+          ]
+        },
+        {
+          "formula": "add(and(srli(in0,2),in1),and(in0,in1))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_bitcount"
+          ]
+        },
+        {
+          "formula": "add(and(srli(in0,4),in1),and(in0,in1))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_bitcount"
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,12),15))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_ntbl_bitcount"
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,16),15))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_ntbl_bitcount"
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,20),15))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_ntbl_bitcount"
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,24),15))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_ntbl_bitcount"
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,4),15))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_ntbl_bitcount"
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,8),15))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_ntbl_bitcount"
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,16),255)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "bitcount_AR_btbl_bitcount",
+            "bitcount_BW_btbl_bitcount"
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,8),255)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "bitcount_AR_btbl_bitcount",
+            "bitcount_BW_btbl_bitcount"
+          ]
+        },
+        {
+          "formula": "add(in0,srli(in1,16))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_bitcount"
+          ]
+        },
+        {
+          "formula": "add(in0,srli(in1,24))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_AR_btbl_bitcount"
+          ]
+        },
+        {
+          "formula": "add(in0,srli(in1,28))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_ntbl_bitcount"
+          ]
+        },
+        {
+          "formula": "addi(lui(1431654400),1365)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_bitcount"
+          ]
+        },
+        {
+          "formula": "addi(lui(16711680),255)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_bitcount"
+          ]
+        },
+        {
+          "formula": "addi(lui(252645376),-241)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_bitcount"
+          ]
+        },
+        {
+          "formula": "addi(lui(858992640),819)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_bitcount"
+          ]
+        },
+        {
+          "formula": "and(srli(in0,1),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_bitcount"
+          ]
+        },
+        {
+          "formula": "and(srli(in0,2),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_bitcount"
+          ]
+        },
+        {
+          "formula": "and(srli(in0,4),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_bitcount"
+          ]
+        },
+        {
+          "formula": "and(srli(in0,8),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_bitcount"
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,12),15)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_ntbl_bitcount"
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,16),15)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_ntbl_bitcount"
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,20),15)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_ntbl_bitcount"
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,24),15)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_ntbl_bitcount"
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,4),15)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_ntbl_bitcount"
+          ]
+        },
+        {
+          "formula": "andi(srli(in0,8),15)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_ntbl_bitcount"
+          ]
+        },
+        {
+          "formula": "srli(slli(in0,16),16)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "bitcount_bitcount"
+          ]
+        }
+      ],
+      "size_output": "   text\t   data\t    bss\t    dec\t    hex\tfilename\n   2852\t      0\t    532\t   3384\t    d38\t/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/application-generalization-proposal/static-bitcount/bitcount.elf\n"
+    },
+    "isqrt": {
+      "source_sha256": {
+        "bench/kernel/isqrt/pi.h": "e96904dfd4c1c1fd2c7c89833c660680955fda779924a7bf9340fb7030e38e4e",
+        "bench/kernel/isqrt/wcclibm.h": "74424f837202e6bdbafe0907c0c6f8a6386a66d34cd8b2d66ecd0ebd19957902",
+        "bench/kernel/isqrt/basicmath_libc.c": "96ffe0f0c2629a08ebd0fcd7cb9850a359331c2d650747ee87219a52e821f476",
+        "bench/kernel/isqrt/math_private.h": "815b830cf333f1061574b933532382b16f1ee3e1759c600fd6640fce747b4638",
+        "bench/kernel/isqrt/wcclibm.c": "ffffe179f8715e269eecb00f7b23c0a4b6c94104177fba604d3ed0df1fd1534c",
+        "bench/kernel/isqrt/ChangeLog.txt": "f134b5a54af2bcae3ffd6406966e100c635588f1ff903a1f706a607de77a0fd5",
+        "bench/kernel/isqrt/snipmath.h": "b4972f2a7be15eef013947aeee7f646f80b1fac51db04b6734e3b2734f2b4b56",
+        "bench/kernel/isqrt/isqrt.c": "8a685fc29ec16db1abd1821a34c52f23cd51946843188000ca122c3a5e651a1b",
+        "bench/kernel/isqrt/basicmath_libc.h": "d3aeb042f1c60c406e4b8d7523ad272efebac8bddc00692cd38d68bcd6b2b108"
+      },
+      "source_files": [
+        "bench/kernel/isqrt/isqrt.c",
+        "bench/kernel/isqrt/basicmath_libc.c"
+      ],
+      "kernel_symbol_filter": [
+        "isqrt_usqrt",
+        "isqrt_main"
+      ],
+      "source_binary_executed": false,
+      "dynamic_trace_collected": false,
+      "compile_command": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+        "-march=rv32im",
+        "-mabi=ilp32",
+        "-O2",
+        "-std=gnu17",
+        "-Wno-unknown-pragmas",
+        "-nostartfiles",
+        "-Wl,-e,main",
+        "-I",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/isqrt",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/isqrt/isqrt.c",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/isqrt/basicmath_libc.c",
+        "-o",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/application-generalization-proposal/static-isqrt/isqrt.elf"
+      ],
+      "elf_sha256": "2d44a8009b381ed03002d5ba2fea6ea07b21318a293d56d0de4edb59044fce80",
+      "status": "compiled-static-legality-only",
+      "all_program_static_unique_formulas": 7,
+      "kernel_static_unique_formulas": 2,
+      "kernel_instruction_opcodes": {
+        "addi": 12,
+        "sw": 2,
+        "srli": 1,
+        "slli": 4,
+        "add": 1,
+        "bltu": 1,
+        "sub": 1,
+        "bne": 1,
+        "jal": 1,
+        "lw": 1,
+        "jalr": 1
+      },
+      "kernel_eligible_static_instructions": 19,
+      "mechanism_formula_counts": {},
+      "kernel_static_formulas": [
+        {
+          "formula": "add(in0,slli(in1,2))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "isqrt_usqrt"
+          ]
+        },
+        {
+          "formula": "addi(slli(in0,2),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "isqrt_usqrt"
+          ]
+        }
+      ],
+      "size_output": "   text\t   data\t    bss\t    dec\t    hex\tfilename\n    420\t      0\t     16\t    436\t    1b4\t/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/application-generalization-proposal/static-isqrt/isqrt.elf\n"
+    },
+    "fft": {
+      "source_sha256": {
+        "bench/kernel/fft/fft.c": "5ec513b40c9eca10c15e634e4462bc453ed68b97d110fc81027f428dcf0ab3ea",
+        "bench/kernel/fft/ChangeLog.txt": "b2fc01afa7c015057c7fc424e2de6022111f83c5194c204593d7448020b61a8c",
+        "bench/kernel/fft/fft_input.c": "0958354e2cf1b1df928b75a8b669c1d479a64ecf6d80b60688c4058e2c322630"
+      },
+      "source_files": [
+        "bench/kernel/fft/fft.c",
+        "bench/kernel/fft/fft_input.c"
+      ],
+      "kernel_symbol_filter": [
+        "fft_bit_reduct"
+      ],
+      "source_binary_executed": false,
+      "dynamic_trace_collected": false,
+      "compile_command": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+        "-march=rv32im",
+        "-mabi=ilp32",
+        "-O2",
+        "-std=gnu17",
+        "-Wno-unknown-pragmas",
+        "-nostartfiles",
+        "-Wl,-e,main",
+        "-I",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/fft",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/fft/fft.c",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/fft/fft_input.c",
+        "-o",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/application-generalization-proposal/static-fft/fft.elf"
+      ],
+      "elf_sha256": "a354529d4b95386653411aa82c0007846f6cc818a5579b41a5ee1d17ac81f231",
+      "status": "compiled-static-legality-only",
+      "all_program_static_unique_formulas": 101,
+      "kernel_static_unique_formulas": 5,
+      "kernel_instruction_opcodes": {
+        "addi": 28,
+        "sw": 18,
+        "bge": 5,
+        "sub": 4,
+        "srai": 4,
+        "beq": 2,
+        "add": 13,
+        "slli": 5,
+        "lw": 22,
+        "jal": 1,
+        "lui": 3,
+        "mul": 4,
+        "blt": 1,
+        "bne": 2,
+        "jalr": 1
+      },
+      "kernel_eligible_static_instructions": 61,
+      "mechanism_formula_counts": {},
+      "kernel_static_formulas": [
+        {
+          "formula": "add(in0,lui(8192))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "fft_bit_reduct"
+          ]
+        },
+        {
+          "formula": "addi(lui(81920),-492)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "fft_bit_reduct"
+          ]
+        },
+        {
+          "formula": "add(slli(in0,2),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "fft_bit_reduct"
+          ]
+        },
+        {
+          "formula": "addi(lui(4096),-2048)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "fft_bit_reduct"
+          ]
+        },
+        {
+          "formula": "srai(sub(in0,in1),13)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "fft_bit_reduct"
+          ]
+        }
+      ],
+      "size_output": "   text\t   data\t    bss\t    dec\t    hex\tfilename\n   7536\t  12280\t  12288\t  32104\t   7d68\t/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/application-generalization-proposal/static-fft/fft.elf\n"
+    },
+    "ndes": {
+      "source_sha256": {
+        "bench/sequential/ndes/ndes.c": "096933b0835dd7c8f4b9ceccd57419c74669218ad1c351d78f96138edab6cb34",
+        "bench/sequential/ndes/ChangeLog.txt": "a42173178d735351b7ff1bae08944b45e28ff65b95d300b77f2aafe9e302a282"
+      },
+      "source_files": [
+        "bench/sequential/ndes/ndes.c"
+      ],
+      "kernel_symbol_filter": [
+        "ndes_des",
+        "ndes_cyfun",
+        "ndes_getbit",
+        "ndes_ks"
+      ],
+      "source_binary_executed": false,
+      "dynamic_trace_collected": false,
+      "compile_command": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+        "-march=rv32im",
+        "-mabi=ilp32",
+        "-O2",
+        "-std=gnu17",
+        "-Wno-unknown-pragmas",
+        "-nostartfiles",
+        "-Wl,-e,main",
+        "-I",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/ndes",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/ndes/ndes.c",
+        "-o",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/application-generalization-proposal/static-ndes/ndes.elf"
+      ],
+      "elf_sha256": "54a85f0abf7ac92ee37ae34bb24d9980f9b1aca0dc472b84e9c37a2d7c5651da",
+      "status": "compiled-static-legality-only",
+      "all_program_static_unique_formulas": 51,
+      "kernel_static_unique_formulas": 49,
+      "kernel_instruction_opcodes": {
+        "lui": 7,
+        "addi": 100,
+        "lw": 87,
+        "sw": 63,
+        "bge": 8,
+        "slli": 58,
+        "add": 46,
+        "and": 30,
+        "sltu": 24,
+        "or": 25,
+        "blt": 10,
+        "xor": 4,
+        "srli": 9,
+        "andi": 13,
+        "sb": 2,
+        "lbu": 11,
+        "srai": 3,
+        "jalr": 5,
+        "sub": 2,
+        "bltu": 1,
+        "srl": 1,
+        "beq": 6,
+        "jal": 14,
+        "bne": 9
+      },
+      "kernel_eligible_static_instructions": 322,
+      "mechanism_formula_counts": {},
+      "kernel_static_formulas": [
+        {
+          "formula": "add(in0,slli(in1,2))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 28,
+          "kernel_symbols": [
+            "ndes_cyfun",
+            "ndes_des",
+            "ndes_ks"
+          ]
+        },
+        {
+          "formula": "sltu(0,and(in0,in1))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 24,
+          "kernel_symbols": [
+            "ndes_cyfun",
+            "ndes_des",
+            "ndes_getbit",
+            "ndes_ks"
+          ]
+        },
+        {
+          "formula": "srli(or(and(slli(in0,28),in1),in0),1)",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "ndes_ks"
+          ]
+        },
+        {
+          "formula": "or(and(slli(in0,28),in1),in0)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "ndes_ks"
+          ]
+        },
+        {
+          "formula": "add(in0,slli(addi(in1,-28),2))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 3,
+          "kernel_symbols": [
+            "ndes_ks"
+          ]
+        },
+        {
+          "formula": "and(slli(in0,28),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "ndes_ks"
+          ]
+        },
+        {
+          "formula": "slli(addi(in0,-32),2)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "ndes_des"
+          ]
+        },
+        {
+          "formula": "srli(or(in0,in1),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "ndes_ks"
+          ]
+        },
+        {
+          "formula": "add(in0,slli(addi(in1,-32),2))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "ndes_des"
+          ]
+        },
+        {
+          "formula": "add(in0,slli(add(slli(in1,1),in1),2))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_des"
+          ]
+        },
+        {
+          "formula": "addi(lui(69632),0)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "ndes_cyfun",
+            "ndes_des"
+          ]
+        },
+        {
+          "formula": "andi(srl(addi(lui(65536),518),in0),1)",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_ks"
+          ]
+        },
+        {
+          "formula": "or(andi(in0,2),andi(srai(in1,5),1))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "or(andi(slli(in0,1),2),andi(in1,1))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "or(in0,slli(in1,1))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 3,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "slli(addi(in0,-28),2)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 3,
+          "kernel_symbols": [
+            "ndes_ks"
+          ]
+        },
+        {
+          "formula": "add(add(slli(in0,3),in0),in1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "add(addi(in0,880),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "ndes_getbit"
+          ]
+        },
+        {
+          "formula": "add(in0,andi(srai(in1,4),1))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "add(in0,slli(addi(in1,16),2))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "add(slli(in0,3),in0)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "andi(srl(addi(in0,518),in1),1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_ks"
+          ]
+        },
+        {
+          "formula": "or(andi(in0,2),andi(in1,1))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "or(andi(slli(in0,1),2),in1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "or(andi(slli(in0,2),8),in1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "or(in0,andi(srai(in1,5),1))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "slli(add(in0,in1),2)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "ndes_cyfun",
+            "ndes_des"
+          ]
+        },
+        {
+          "formula": "slli(add(slli(in0,1),in0),2)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_des"
+          ]
+        },
+        {
+          "formula": "srl(addi(lui(65536),518),in0)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_ks"
+          ]
+        },
+        {
+          "formula": "add(in0,andi(in1,1))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "add(slli(in0,1),in0)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_des"
+          ]
+        },
+        {
+          "formula": "add(slli(in0,8),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "addi(lui(65536),518)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_ks"
+          ]
+        },
+        {
+          "formula": "addi(lui(69632),-1488)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "addi(lui(69632),576)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "andi(slli(in0,1),2)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "andi(slli(in0,2),8)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "andi(srai(in0,2),2)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "andi(srai(in0,4),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "andi(srai(in0,5),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "andi(srl(in0,in1),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_ks"
+          ]
+        },
+        {
+          "formula": "or(andi(in0,2),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "or(andi(in0,8),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "or(in0,andi(in1,1))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "or(in0,slli(in1,4))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "slli(addi(in0,16),2)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "slli(sub(in0,in1),2)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_getbit"
+          ]
+        },
+        {
+          "formula": "slli(xor(in0,in1),8)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_cyfun"
+          ]
+        },
+        {
+          "formula": "srl(addi(in0,518),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "ndes_ks"
+          ]
+        }
+      ],
+      "size_output": "   text\t   data\t    bss\t    dec\t    hex\tfilename\n   2444\t   2888\t    488\t   5820\t   16bc\t/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/application-generalization-proposal/static-ndes/ndes.elf\n"
+    },
+    "mpeg2": {
+      "source_sha256": {
+        "bench/sequential/mpeg2/mpeg2.c": "6aa276ff896fe35c9e73bcb125009856a6f81e3ab0f2015bafa9fd668847c6ff",
+        "bench/sequential/mpeg2/ChangeLog.txt": "810fe4cc7eaf377c21d8b1e4c8dacd6da38f66d74400c54d702cb570a40c7c2c"
+      },
+      "source_files": [
+        "bench/sequential/mpeg2/mpeg2.c"
+      ],
+      "kernel_symbol_filter": [
+        "mpeg2_"
+      ],
+      "source_binary_executed": false,
+      "dynamic_trace_collected": false,
+      "compile_command": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+        "-march=rv32im",
+        "-mabi=ilp32",
+        "-O2",
+        "-std=gnu17",
+        "-Wno-unknown-pragmas",
+        "-nostartfiles",
+        "-Wl,-e,main",
+        "-I",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/mpeg2",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/mpeg2/mpeg2.c",
+        "-o",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/application-generalization-proposal/static-mpeg2/mpeg2.elf"
+      ],
+      "elf_sha256": "ae783de32218833977a4a426ea38dc3a2c0b6a14f1e9b493c882017c59cbdb88",
+      "status": "compiled-static-legality-only",
+      "all_program_static_unique_formulas": 74,
+      "kernel_static_unique_formulas": 69,
+      "kernel_instruction_opcodes": {
+        "or": 2,
+        "bne": 60,
+        "bge": 85,
+        "addi": 871,
+        "sw": 678,
+        "jal": 132,
+        "add": 364,
+        "beq": 69,
+        "lbu": 77,
+        "sub": 104,
+        "srai": 114,
+        "xor": 16,
+        "blt": 38,
+        "lw": 875,
+        "jalr": 20,
+        "srli": 19,
+        "xori": 4,
+        "and": 4,
+        "mul": 68,
+        "lui": 34,
+        "slli": 105,
+        "slt": 10,
+        "andi": 66,
+        "mulhu": 2,
+        "mulh": 2,
+        "sltiu": 1
+      },
+      "kernel_eligible_static_instructions": 1786,
+      "mechanism_formula_counts": {
+        "mulh": 2,
+        "mulhu": 3
+      },
+      "kernel_static_formulas": [
+        {
+          "formula": "add(sub(xor(srai(in0,31),in0),srai(in0,31)),in1)",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 8,
+          "kernel_symbols": [
+            "mpeg2_dist1"
+          ]
+        },
+        {
+          "formula": "mul(slli(in0,1),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 22,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate",
+            "mpeg2_frame_ME"
+          ]
+        },
+        {
+          "formula": "mul(srai(in0,1),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 16,
+          "kernel_symbols": [
+            "mpeg2_field_ME",
+            "mpeg2_frame_ME",
+            "mpeg2_fullsearch"
+          ]
+        },
+        {
+          "formula": "sub(xor(srai(in0,31),in0),srai(in0,31))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 8,
+          "kernel_symbols": [
+            "mpeg2_dist1"
+          ]
+        },
+        {
+          "formula": "sub(xor(in0,in1),in0)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 14,
+          "kernel_symbols": [
+            "mpeg2_dist1"
+          ]
+        },
+        {
+          "formula": "sub(srli(addi(in0,1),1),in1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "mpeg2_bdist1",
+            "mpeg2_bdist2",
+            "mpeg2_dist1",
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "addi(lui(4096),-1793)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 10,
+          "kernel_symbols": [
+            "mpeg2_field_ME",
+            "mpeg2_frame_ME"
+          ]
+        },
+        {
+          "formula": "mul(slli(in0,1),srai(in1,1))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 5,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate",
+            "mpeg2_frame_ME"
+          ]
+        },
+        {
+          "formula": "srli(addi(add(in0,in1),1),1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 5,
+          "kernel_symbols": [
+            "mpeg2_bdist1",
+            "mpeg2_dist1",
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "srli(addi(add(in0,in1),2),2)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 5,
+          "kernel_symbols": [
+            "mpeg2_bdist1",
+            "mpeg2_bdist2",
+            "mpeg2_dist1",
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "mul(sub(srli(addi(in0,1),1),in1),sub(srli(addi(in0,1),1),in1))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 3,
+          "kernel_symbols": [
+            "mpeg2_bdist2",
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "addi(add(in0,in1),2)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "mpeg2_bdist1",
+            "mpeg2_bdist2",
+            "mpeg2_dist1",
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "mul(sub(srli(in0,1),in1),sub(srli(in0,1),in1))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 3,
+          "kernel_symbols": [
+            "mpeg2_bdist2",
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "srai(add(slt(0,sub(in0,in1)),sub(in0,in1)),1)",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpfield_estimate"
+          ]
+        },
+        {
+          "formula": "srli(addi(in0,1),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "mpeg2_bdist1",
+            "mpeg2_bdist2",
+            "mpeg2_dist1",
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "srli(addi(in0,2),2)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "mpeg2_bdist1",
+            "mpeg2_bdist2",
+            "mpeg2_dist1",
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "sub(srli(in0,1),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "mpeg2_bdist1",
+            "mpeg2_bdist2",
+            "mpeg2_dist1",
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "addi(add(in0,in1),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 5,
+          "kernel_symbols": [
+            "mpeg2_bdist1",
+            "mpeg2_dist1",
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "mul(in0,srai(in1,1))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 5,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate",
+            "mpeg2_frame_ME"
+          ]
+        },
+        {
+          "formula": "mul(sub(in0,in1),sub(in0,in1))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 5,
+          "kernel_symbols": [
+            "mpeg2_bdist2",
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "slli(addi(in0,-16),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 5,
+          "kernel_symbols": [
+            "mpeg2_dpfield_estimate",
+            "mpeg2_dpframe_estimate"
+          ]
+        },
+        {
+          "formula": "add(add(slli(in0,1),in0),in1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate"
+          ]
+        },
+        {
+          "formula": "add(in0,srai(in1,1))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 4,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate",
+            "mpeg2_field_ME",
+            "mpeg2_frame_ME"
+          ]
+        },
+        {
+          "formula": "add(in0,srli(addi(in1,2),2))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_bdist1",
+            "mpeg2_bdist2"
+          ]
+        },
+        {
+          "formula": "add(slt(0,sub(in0,in1)),sub(in0,in1))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpfield_estimate"
+          ]
+        },
+        {
+          "formula": "mulh(in0,addi(lui(1431654400),1366))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate"
+          ]
+        },
+        {
+          "formula": "srli(mulhu(addi(in0,1),in1),1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate"
+          ]
+        },
+        {
+          "formula": "sub(slli(in0,1),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 4,
+          "kernel_symbols": [
+            "mpeg2_frame_ME"
+          ]
+        },
+        {
+          "formula": "sub(srli(addi(in0,2),2),in1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dist1",
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "add(srli(addi(in0,2),2),srli(in1,2))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_bdist2"
+          ]
+        },
+        {
+          "formula": "add(srli(in0,2),srli(addi(in1,2),2))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_bdist2"
+          ]
+        },
+        {
+          "formula": "addi(add(in0,srli(addi(in1,2),2)),1)",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_bdist1"
+          ]
+        },
+        {
+          "formula": "and(sub(in0,in1),srai(xori(sub(in0,in1),-1),31))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_fullsearch"
+          ]
+        },
+        {
+          "formula": "mul(sub(srli(addi(in0,2),2),in1),sub(srli(addi(in0,2),2),in1))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "slt(in0,slli(in1,1))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 3,
+          "kernel_symbols": [
+            "mpeg2_fullsearch"
+          ]
+        },
+        {
+          "formula": "srli(addi(add(in0,srli(in1,2)),1),1)",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_bdist1"
+          ]
+        },
+        {
+          "formula": "add(in0,slli(in1,3))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_field_ME"
+          ]
+        },
+        {
+          "formula": "add(in0,slli(in1,4))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_field_estimate"
+          ]
+        },
+        {
+          "formula": "add(in0,srli(in1,2))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_bdist1",
+            "mpeg2_bdist2"
+          ]
+        },
+        {
+          "formula": "add(slli(in0,1),in0)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate"
+          ]
+        },
+        {
+          "formula": "add(slli(in0,2),in0)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_field_ME",
+            "mpeg2_frame_ME"
+          ]
+        },
+        {
+          "formula": "add(slt(0,in0),in0)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpfield_estimate"
+          ]
+        },
+        {
+          "formula": "add(slt(in0,slli(in1,1)),in0)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_fullsearch"
+          ]
+        },
+        {
+          "formula": "add(srai(in0,1),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate",
+            "mpeg2_fullsearch"
+          ]
+        },
+        {
+          "formula": "add(srli(addi(in0,2),2),in1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_bdist2"
+          ]
+        },
+        {
+          "formula": "add(srli(in0,2),srli(in1,2))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_bdist2"
+          ]
+        },
+        {
+          "formula": "addi(add(in0,srli(in1,2)),1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_bdist1"
+          ]
+        },
+        {
+          "formula": "addi(lui(-1431654400),-1365)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate"
+          ]
+        },
+        {
+          "formula": "addi(lui(1431654400),1366)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate"
+          ]
+        },
+        {
+          "formula": "and(in0,srai(xori(in0,-1),31))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_fullsearch"
+          ]
+        },
+        {
+          "formula": "mul(sub(srli(in0,2),in1),sub(srli(in0,2),in1))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "mulh(in0,addi(in1,1366))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate"
+          ]
+        },
+        {
+          "formula": "mulhu(addi(in0,1),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate"
+          ]
+        },
+        {
+          "formula": "slli(addi(in0,8),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_field_ME"
+          ]
+        },
+        {
+          "formula": "srai(xori(in0,-1),31)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_fullsearch"
+          ]
+        },
+        {
+          "formula": "srli(mulhu(in0,in1),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate"
+          ]
+        },
+        {
+          "formula": "srli(xori(in0,-1),31)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpfield_estimate",
+            "mpeg2_dpframe_estimate"
+          ]
+        },
+        {
+          "formula": "sub(addi(0,1),in0)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate"
+          ]
+        },
+        {
+          "formula": "sub(srli(in0,2),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "mpeg2_dist1",
+            "mpeg2_dist2"
+          ]
+        },
+        {
+          "formula": "add(slt(in0,in1),in0)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_fullsearch"
+          ]
+        },
+        {
+          "formula": "add(srli(in0,2),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_bdist2"
+          ]
+        },
+        {
+          "formula": "addi(add(in0,in1),-1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate"
+          ]
+        },
+        {
+          "formula": "and(in0,srai(in1,31))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_fullsearch"
+          ]
+        },
+        {
+          "formula": "slli(add(in0,in1),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_fullsearch"
+          ]
+        },
+        {
+          "formula": "slli(addi(in0,-1),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_dpframe_estimate"
+          ]
+        },
+        {
+          "formula": "slli(addi(in0,0),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_fullsearch"
+          ]
+        },
+        {
+          "formula": "sltiu(addi(in0,-2),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_field_ME"
+          ]
+        },
+        {
+          "formula": "srli(mul(in0,in0),8)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_variance"
+          ]
+        },
+        {
+          "formula": "sub(in0,slt(0,in0))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "mpeg2_fullsearch"
+          ]
+        }
+      ],
+      "size_output": "   text\t   data\t    bss\t    dec\t    hex\tfilename\n  15572\t  90144\t  33796\t 139512\t  220f8\t/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/application-generalization-proposal/static-mpeg2/mpeg2.elf\n"
+    },
+    "h264_dec": {
+      "source_sha256": {
+        "bench/sequential/h264_dec/h264_dec.c": "ea8b87fe930bea1088a1d29eb8a6603d0af23b14676ace0577100e0153bf9d21",
+        "bench/sequential/h264_dec/copyright.txt": "0c1a2d8d08247b183d80bb16d4db45a3b74c3421acacd68ff4e1c3163e6cf761",
+        "bench/sequential/h264_dec/changeLog.txt": "93190d9a539acbef32cfc36f6dbae2c52dca3e2f1dc8162105269e2b31e4c688",
+        "bench/sequential/h264_dec/h264_dec.h": "2467c48b9e14dda3d4aeb858056fa4cdde45b3834313cc77755daf0359f1e91a",
+        "bench/sequential/h264_dec/h264_decinput.c": "a69db1024ec77b1d05b325189adb5506edcf3e71247a7c4ca660a71d544e2d90"
+      },
+      "source_files": [
+        "bench/sequential/h264_dec/h264_dec.c",
+        "bench/sequential/h264_dec/h264_decinput.c"
+      ],
+      "kernel_symbol_filter": [
+        "h264_dec_decode_one_macroblock"
+      ],
+      "source_binary_executed": false,
+      "dynamic_trace_collected": false,
+      "compile_command": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+        "-march=rv32im",
+        "-mabi=ilp32",
+        "-O2",
+        "-std=gnu17",
+        "-Wno-unknown-pragmas",
+        "-nostartfiles",
+        "-Wl,-e,main",
+        "-I",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/h264_dec",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/h264_dec/h264_dec.c",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/h264_dec/h264_decinput.c",
+        "-o",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/application-generalization-proposal/static-h264_dec/h264_dec.elf"
+      ],
+      "elf_sha256": "a75b808d8fa5e9443c30cb35f9b1f38ee74f9f911feead520b894294a6772980",
+      "status": "compiled-static-legality-only",
+      "all_program_static_unique_formulas": 58,
+      "kernel_static_unique_formulas": 51,
+      "kernel_instruction_opcodes": {
+        "addi": 75,
+        "lw": 49,
+        "sw": 33,
+        "bge": 9,
+        "div": 9,
+        "lui": 9,
+        "mul": 16,
+        "srai": 25,
+        "andi": 5,
+        "add": 49,
+        "sub": 28,
+        "srli": 4,
+        "slli": 23,
+        "lb": 2,
+        "blt": 3,
+        "bne": 6,
+        "mulh": 7,
+        "and": 4,
+        "lh": 4,
+        "sb": 2,
+        "beq": 1,
+        "jal": 7,
+        "xori": 2,
+        "jalr": 1
+      },
+      "kernel_eligible_static_instructions": 247,
+      "mechanism_formula_counts": {
+        "mulh": 3
+      },
+      "kernel_static_formulas": [
+        {
+          "formula": "add(slli(sub(in0,srai(in1,31)),1),sub(in0,srai(in1,31)))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "add(slli(sub(srai(in0,5),in1),1),sub(srai(in0,5),in1))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "sub(srai(add(in0,in1),5),srai(in1,31))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "add(slli(sub(in0,in1),1),sub(in0,in1))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 7,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "srai(add(mulh(in0,in1),in0),5)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "sub(in0,sub(slli(in1,4),in1))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "sub(srai(in0,5),srai(in1,31))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "add(slli(in0,1),in0)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 8,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "sub(in0,srai(in1,31))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 7,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "sub(slli(in0,4),in0)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 7,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "add(in0,slli(in1,1))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "add(mulh(in0,in1),in0)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "srai(add(in0,in1),5)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "sub(andi(add(in0,in1),63),in1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 3,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "sub(andi(add(in0,srli(in1,26)),63),srli(in1,26))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "sub(slli(add(slli(in0,1),in0),4),add(slli(in0,1),in0))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "sub(srai(in0,5),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 6,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "addi(lui(77824),1900)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "slli(add(in0,in1),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 4,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "andi(add(in0,in1),63)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 3,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "mul(sub(andi(in0,63),in1),addi(0,54))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "srai(add(andi(srai(in0,31),3),in0),2)",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "srli(srai(in0,31),26)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 3,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "sub(andi(in0,63),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 3,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "sub(srai(mulh(in0,in1),4),srai(in0,31))",
+          "sizes": [
+            4
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "add(andi(srai(in0,31),3),in0)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "add(mul(in0,addi(0,54)),in1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "add(sub(slli(in0,4),in0),in1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "andi(srai(in0,31),3)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "mul(in0,addi(lui(4096),-640))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "mul(sub(in0,in1),addi(0,54))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "srai(add(andi(in0,3),in1),2)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "srai(add(in0,in1),2)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "srai(add(srli(in0,31),in0),1)",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "srai(xori(in0,-1),31)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 2,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "sub(slli(add(in0,in1),4),add(in0,in1))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "sub(srai(in0,4),srai(in1,31))",
+          "sizes": [
+            3
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "add(andi(in0,3),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "add(slli(in0,6),in0)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "add(srli(in0,31),in0)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "addi(lui(-1240768512),183)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "addi(lui(1272582144),759)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "addi(lui(4096),-640)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "addi(lui(81920),-1588)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "addi(lui(86016),1484)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "mul(in0,addi(0,2025))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "mul(in0,addi(0,54))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "mul(in0,addi(in1,-640))",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "srai(add(in0,in1),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "srai(mul(in0,in1),1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        },
+        {
+          "formula": "sub(srai(in0,4),in1)",
+          "sizes": [
+            2
+          ],
+          "static_occurrences": 1,
+          "kernel_symbols": [
+            "h264_dec_decode_one_macroblock"
+          ]
+        }
+      ],
+      "size_output": "   text\t   data\t    bss\t    dec\t    hex\tfilename\n   1812\t   8100\t  16996\t  26908\t   691c\t/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/application-generalization-proposal/static-h264_dec/h264_dec.elf\n"
+    }
+  },
+  "limits": "No program execution, trace, occurrence frequency, input correctness, targetmapping/labels or model prediction. Unit-weight staticblocks only test existing legality; no savings from syntheticweights retained. Helper/init exclusions are declared above; unusedcode mayremain. No family assignment issealed."
+}

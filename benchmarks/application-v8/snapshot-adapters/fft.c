@@ -1,0 +1,2 @@
+#include <stdint.h>
+extern int fft_input_data[2048];unsigned external_snapshot(int32_t*v){uint32_t h=2166136261u;for(unsigned i=0;i<2048;i++)h=(h^(uint32_t)fft_input_data[i])*16777619u;v[0]=(int32_t)h;for(unsigned i=0;i<8;i++){v[1+i]=fft_input_data[i];v[9+i]=fft_input_data[2040+i];}return 17;}

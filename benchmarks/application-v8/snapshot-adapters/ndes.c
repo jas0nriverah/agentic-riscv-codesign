@@ -1,0 +1,2 @@
+#include <stdint.h>
+struct NDES_IMMENSE{unsigned long l,r;};extern struct NDES_IMMENSE ndes_out,ndes_inp,ndes_key;unsigned external_snapshot(int32_t*v){v[0]=ndes_out.l;v[1]=ndes_out.r;v[2]=ndes_inp.l;v[3]=ndes_inp.r;v[4]=ndes_key.l;v[5]=ndes_key.r;return 6;}

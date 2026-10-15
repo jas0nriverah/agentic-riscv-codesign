@@ -1,0 +1,2 @@
+#include <stdint.h>
+extern signed char h264_dec_img_mpr[7][7],h264_dec_dec_picture_imgUV[2][64][54];unsigned external_snapshot(int32_t*v){uint32_t a=2166136261u,b=a;for(unsigned i=0;i<49;i++)a=(a^(uint8_t)((signed char*)h264_dec_img_mpr)[i])*16777619u;for(unsigned i=0;i<6912;i++)b=(b^(uint8_t)((signed char*)h264_dec_dec_picture_imgUV)[i])*16777619u;v[0]=(int32_t)a;v[1]=(int32_t)b;v[2]=h264_dec_img_mpr[0][0];v[3]=h264_dec_dec_picture_imgUV[0][0][0];return 4;}
