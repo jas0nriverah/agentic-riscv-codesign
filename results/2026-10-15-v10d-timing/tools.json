@@ -1,0 +1,2155 @@
+{
+  "schema": "isaforge-v10-timing-tools-v1",
+  "area_tools": {
+    "schema": "isaforge-v10-csd-tools-v1",
+    "executables": {
+      "yosys": {
+        "path": "/opt/homebrew/Cellar/yosys/0.69_1/bin/yosys",
+        "sha256": "1222a95c90c84f66238b0a5ecb8b228bf787318cf1c412b41363e26ace5544cf",
+        "version": "Yosys 0.69+post (git sha1 143eb14f9cc55d6f8927e68523b0c9d2166ed02c, Release, AppleClang clang++ 21.0.0.21000334)"
+      },
+      "abc": {
+        "path": "/opt/homebrew/Cellar/yosys/0.69_1/bin/yosys-abc",
+        "sha256": "3e54f452dd7d92ac3ca6b596d82c1b6fd6e5a4d63d50e9a59ee2c08d94cff1b5",
+        "version": "UC Berkeley, ABC 1.01 (compiled Sep  9 2026 05:28:12)"
+      },
+      "yosys_config": {
+        "path": "/opt/homebrew/Cellar/yosys/0.69_1/bin/yosys-config",
+        "sha256": "8823565fe7660a6fc4a6b459e81d7db21d17d47196de78d3246d3a5910254a8f",
+        "version": "/opt/homebrew/Cellar/yosys/0.69_1/share/yosys"
+      }
+    },
+    "yosys_data": {
+      "path": "/opt/homebrew/Cellar/yosys/0.69_1/share/yosys",
+      "files": [
+        {
+          "path": "abc9_map.v",
+          "sha256": "b960ea3290504de79a747d41947570902cb64ad285f3ddb16e006030a2cae7ec",
+          "bytes": 923
+        },
+        {
+          "path": "abc9_model.v",
+          "sha256": "21f332106384501759ca256e95ed30321ad5615610a66488731ca06e0b4722d2",
+          "bytes": 653
+        },
+        {
+          "path": "abc9_unmap.v",
+          "sha256": "c35d3b6378898cc53a0ffebf6982dfd8dce25d39c08696b9fc2140c1a60ed625",
+          "bytes": 638
+        },
+        {
+          "path": "achronix/speedster22i/cells_map.v",
+          "sha256": "52971a024ec20137f5b7c7be264882dc93a8a2fe2030fc87cf791c9d6720eb74",
+          "bytes": 2628
+        },
+        {
+          "path": "achronix/speedster22i/cells_sim.v",
+          "sha256": "8ab0be5a3e73772c81f039d0db9883a1dacf21ac6ff9cd0bd083b3344291ef55",
+          "bytes": 2340
+        },
+        {
+          "path": "adff2dff.v",
+          "sha256": "beb053280dc959be7be1e88592b2be5cc68f0d6ea5c577691e4fd17eea7ceaf2",
+          "bytes": 575
+        },
+        {
+          "path": "analogdevices/abc9_model.v",
+          "sha256": "7e85aae733b730b17beaa156987dbbcef29a197a6480b5ef3fc1e20cadfaf0fe",
+          "bytes": 1504
+        },
+        {
+          "path": "analogdevices/arith_map.v",
+          "sha256": "cf72be1d42b0004c2e53c26593250cf260d024d0ce04fd443bffc8ea1991e8d2",
+          "bytes": 4049
+        },
+        {
+          "path": "analogdevices/brams.txt",
+          "sha256": "9ed8c528538c59266a9360b4f75b59b890a1f56c06e0676a1e64d82bbf4ff113",
+          "bytes": 5225
+        },
+        {
+          "path": "analogdevices/brams_defs.vh",
+          "sha256": "6060e135ee7cc4a391d06547f0c6f37bf6da55878cc58be89165078526b04a55",
+          "bytes": 15515
+        },
+        {
+          "path": "analogdevices/brams_map.v",
+          "sha256": "f29fa05d94ed49b4b4674a9d037ef2851ad1bfee7507fd681215d7ea807c6f6f",
+          "bytes": 5688
+        },
+        {
+          "path": "analogdevices/cells_map.v",
+          "sha256": "09faeb381544774a0418b158c48e7602b5ee2c17f3617de83fc6a0fa9ae457f8",
+          "bytes": 16248
+        },
+        {
+          "path": "analogdevices/cells_sim.v",
+          "sha256": "6ceabe6eacd8035c2a495e4409b217beda1554f1cd3a494635e9b00b961517f6",
+          "bytes": 28805
+        },
+        {
+          "path": "analogdevices/dsp_map.v",
+          "sha256": "cde860b6075d510a4b636a35f62e74ffcd32cdb63e512ed518eedcece106a7be",
+          "bytes": 1110
+        },
+        {
+          "path": "analogdevices/ff_map.v",
+          "sha256": "ff6562dbf6cf2c0702441eec79f2090723a60d3f84317dd77e794be9d7cbadca",
+          "bytes": 2364
+        },
+        {
+          "path": "analogdevices/lut_map.v",
+          "sha256": "d5e7dad17a1b68b152ea38535238cfd030f8e4d13017684bd67d2890f7ef6bba",
+          "bytes": 2546
+        },
+        {
+          "path": "analogdevices/lutrams.txt",
+          "sha256": "fbb5f61ad9f410670f6933997f34fa791a2b9ba5ca10bf4000ce7d66f79974e6",
+          "bytes": 353
+        },
+        {
+          "path": "analogdevices/lutrams_map.v",
+          "sha256": "6541f7c8821aac687c51229de4a933acbc6862af059ca61a9f74c4bd462f7165",
+          "bytes": 2510
+        },
+        {
+          "path": "analogdevices/mux_map.v",
+          "sha256": "d198266c4ae6b3dc8ad61db7075f82286d591abf5ffea6c1c7e29c40ee3d990f",
+          "bytes": 2505
+        },
+        {
+          "path": "anlogic/arith_map.v",
+          "sha256": "6d56ab855bd52e25448a9d0017a7ff59241e6341e1bc487a8153b95001b2a4ce",
+          "bytes": 2467
+        },
+        {
+          "path": "anlogic/brams.txt",
+          "sha256": "5560988d9b4d3f9faa3f620af0e94e5b59dd1e800227bab0e839292350f8aff7",
+          "bytes": 1137
+        },
+        {
+          "path": "anlogic/brams_map.v",
+          "sha256": "86c834ff3d737f5c9b5836e258d3b389a486d0d278fa077077598ca8245e8b18",
+          "bytes": 12152
+        },
+        {
+          "path": "anlogic/cells_map.v",
+          "sha256": "867f06c7ae2404216b92e697924224fa5dd723f59ed386f0bb3971f8941434a0",
+          "bytes": 3928
+        },
+        {
+          "path": "anlogic/cells_sim.v",
+          "sha256": "0eb89d600f1ba99a8c765d2d58a8267185369a19f6847250d6afa26d6a8db432",
+          "bytes": 3204
+        },
+        {
+          "path": "anlogic/eagle_bb.v",
+          "sha256": "06b877c1df061244a5f5ce10ed545b7ef7e87b2f943011c714f0681a5e5edd67",
+          "bytes": 33554
+        },
+        {
+          "path": "anlogic/lutrams.txt",
+          "sha256": "f7aa5d713fcda56593717d6fe471219e22c7d814e00fc7582642ba059a7370dd",
+          "bytes": 151
+        },
+        {
+          "path": "anlogic/lutrams_map.v",
+          "sha256": "584bea29742f7744dd84fc92d43b8fc0e03795bc5c76a059d911d3d0b1d6d7a6",
+          "bytes": 661
+        },
+        {
+          "path": "choices/han-carlson.v",
+          "sha256": "3e1ed57559ba9e0dbae55ba949e7074d22c11f1db05bfc03df34d3d9d5ac11ec",
+          "bytes": 1188
+        },
+        {
+          "path": "choices/kogge-stone.v",
+          "sha256": "d1768604cf263a5937323b66f7d29b88ee7fea51d2e36b13131b9e6f9289e8da",
+          "bytes": 1583
+        },
+        {
+          "path": "choices/sklansky.v",
+          "sha256": "699bac38d6cecca9c63e9136f3a6ec1625ce44819a2d653e2867d6728d398c25",
+          "bytes": 781
+        },
+        {
+          "path": "cmp2lcu.v",
+          "sha256": "dd41396c59636a27af5634276f826242644e0466c06ef91b309d33b956b3fdf2",
+          "bytes": 5260
+        },
+        {
+          "path": "cmp2lut.v",
+          "sha256": "f1abb22f2a305b98c6a1cd63f3ac53361d2307bd19c8f318275eb4e6d140fb4e",
+          "bytes": 2644
+        },
+        {
+          "path": "cmp2softlogic.v",
+          "sha256": "2230f0f7ef11b7c76ace1a68171da61d15fc13929b15ec09612048813b5a256b",
+          "bytes": 2716
+        },
+        {
+          "path": "dff2ff.v",
+          "sha256": "cda7e5ad24b83525310e822d5dbc6dffe792a4b211a0fed9931cbb93460aa63c",
+          "bytes": 299
+        },
+        {
+          "path": "ecp5/ccu2c_sim.vh",
+          "sha256": "178b1310b2e70768114e1c795118529055799df1ad650a09d0613b3856a81ccc",
+          "bytes": 1624
+        },
+        {
+          "path": "ecp5/cells_bb.v",
+          "sha256": "7631d36505f84d9a353ba7042e98999abcf4fe1f4f4041f0404255d4606e0680",
+          "bytes": 62137
+        },
+        {
+          "path": "ecp5/cells_ff.vh",
+          "sha256": "9d3c49d7a470d87a8888ffef5312334f5a4b9567d71bffb33782f88a59c296f4",
+          "bytes": 6129
+        },
+        {
+          "path": "ecp5/cells_io.vh",
+          "sha256": "bbc7bb1406ed0d249ac588f1216c3c3964eb98a802816a4a21b14703d8dae62b",
+          "bytes": 2055
+        },
+        {
+          "path": "ecp5/cells_sim.v",
+          "sha256": "c1ddb9de055c6c2a2225215ffd6ded48c884d12d5c7321eaf1a2f417d4f23ce0",
+          "bytes": 11944
+        },
+        {
+          "path": "ecp5/common_sim.vh",
+          "sha256": "3d55fcb1b659f9a99e081d0e8cd3e0a74fb8d659644103db9ad10b04a64ce75d",
+          "bytes": 9490
+        },
+        {
+          "path": "efinix/arith_map.v",
+          "sha256": "4a3b18e077be48cd8d1deeb3f90f2304f3efa6722a42f306a856675e8af5a17b",
+          "bytes": 2427
+        },
+        {
+          "path": "efinix/brams.txt",
+          "sha256": "0254219cb7244006ff3a665e5abaf97443c58b474a740d258688ddb53bbc6983",
+          "bytes": 296
+        },
+        {
+          "path": "efinix/brams_map.v",
+          "sha256": "6fc645d31bc5b4d9c2f5753420959fb23b3c5ae5e313ddc254203ac84af8a9b2",
+          "bytes": 3601
+        },
+        {
+          "path": "efinix/cells_map.v",
+          "sha256": "062b5bab163f62ff498325f5040a2b4e31c0dafd71079d13c40b59bfa69e260b",
+          "bytes": 2693
+        },
+        {
+          "path": "efinix/cells_sim.v",
+          "sha256": "3b9d2da2f0a3d4e4b91f0643088f71be2e726102b17de7d087c90cb0dd4305d9",
+          "bytes": 5361
+        },
+        {
+          "path": "efinix/gbuf_map.v",
+          "sha256": "1130400f5fed673226f5d936894d8b6d1146447d6a3b76041a2e89f8058c8fd1",
+          "bytes": 131
+        },
+        {
+          "path": "gate2lut.v",
+          "sha256": "8f910902e06758dc35e63d2c8caf927aad814e095e79b0c5dda00dd2973ef0bd",
+          "bytes": 1447
+        },
+        {
+          "path": "gatemate/arith_map.v",
+          "sha256": "c1246323e3da4527e134f377243147f8fcc68e1e3f059c64e6da52b8687895e1",
+          "bytes": 1947
+        },
+        {
+          "path": "gatemate/brams.txt",
+          "sha256": "9adcac1ab30696d952c3df1e387492acddfcc7342693155b7e04e2bd0ad9e6a9",
+          "bytes": 1210
+        },
+        {
+          "path": "gatemate/brams_init_20.vh",
+          "sha256": "3ca61245938bfe2e859a3cb5741fa5174792955f0114b8c6bc3aabc3ace12e9c",
+          "bytes": 4480
+        },
+        {
+          "path": "gatemate/brams_init_40.vh",
+          "sha256": "c8ae748102b529ce7d4716db57dc63796a218489e4c99de0e8de569ada6a32e8",
+          "bytes": 17970
+        },
+        {
+          "path": "gatemate/brams_map.v",
+          "sha256": "c2db7cf165a1227e60f9c1de70b15d1bb01aa3d69eaa2cf870e453d5506d0787",
+          "bytes": 29096
+        },
+        {
+          "path": "gatemate/cells_bb.v",
+          "sha256": "5735cc399c4efd33abb67fab484fd78932fc13258584b7b4728edb0dc5b4bc23",
+          "bytes": 11626
+        },
+        {
+          "path": "gatemate/cells_sim.v",
+          "sha256": "ba13335af26780efa41365c657cb0d125a6465ed226e5f5a5be01f3b9a47c94e",
+          "bytes": 64094
+        },
+        {
+          "path": "gatemate/inv_map.v",
+          "sha256": "5299997ed6eb646bfb2bca1dd6b8c8774f7d753baa43268fef3e33f95de14202",
+          "bytes": 180
+        },
+        {
+          "path": "gatemate/lut_map.v",
+          "sha256": "0fa22b5ba1fd7dbb87cf49922914a897169d124b7e72db45a46d8c6c3eefb6c4",
+          "bytes": 1513
+        },
+        {
+          "path": "gatemate/lut_tree_cells.genlib",
+          "sha256": "f040996864e7375591817ccbf23381f397b7694c1045e5dc62ee600bb11be7ab",
+          "bytes": 6422
+        },
+        {
+          "path": "gatemate/lut_tree_map.v",
+          "sha256": "21e954d2111ce929ff32c69a1eb322ca2b65e7deb13fecee2b972d80d1263d95",
+          "bytes": 19119
+        },
+        {
+          "path": "gatemate/mul_map.v",
+          "sha256": "2b5f05cfa902f6662105c9f4c30186f8aee2f38b1ffde084f43f2758841f307a",
+          "bytes": 2029
+        },
+        {
+          "path": "gatemate/mux_map.v",
+          "sha256": "d8de78240bff495978b004c3629d8c604eeb006fcd23c85ad709b021b05206ea",
+          "bytes": 1437
+        },
+        {
+          "path": "gatemate/reg_map.v",
+          "sha256": "e32e9bb6173111e38af7cef51ee91d07d41cb0a5db3f5abd0b742be52b6f8321",
+          "bytes": 1820
+        },
+        {
+          "path": "gowin/arith_map.v",
+          "sha256": "135bae8ea9c9c9c649b896f2d14c1abc9caac36c71e890d85ae0b70f8e504bc8",
+          "bytes": 2103
+        },
+        {
+          "path": "gowin/brams.txt",
+          "sha256": "d913d2aa28c09a021d9a2a8f362e85d4c83771f8f578ee3df2b8ba60d10b8a75",
+          "bytes": 1201
+        },
+        {
+          "path": "gowin/brams_map.v",
+          "sha256": "f552ae82f94112fbcb77d8c32f0a9b98b362111b601d06c3b73fc1b2e4ea6fb9",
+          "bytes": 8961
+        },
+        {
+          "path": "gowin/brams_map_gw5a.v",
+          "sha256": "05b1f8ecda944e7bcc2c172c33540830fef6b44ebd723116cdea4892ddc95237",
+          "bytes": 8925
+        },
+        {
+          "path": "gowin/cells_latch.v",
+          "sha256": "2cffcd333af1ede6fb804a60771c77b0a8c9afe5da686e7e627e898b4777a0e4",
+          "bytes": 1228
+        },
+        {
+          "path": "gowin/cells_map.v",
+          "sha256": "666ab656564e1411e150deb98f70ce59d80aa4a04ca124e2aa0601a71f7e8ff9",
+          "bytes": 6100
+        },
+        {
+          "path": "gowin/cells_sim.v",
+          "sha256": "0af82c7c45d64bbdfca798b951c3cd5ba4b6a6f85336f8aaa518725a5a5f7222",
+          "bytes": 49381
+        },
+        {
+          "path": "gowin/cells_xtra_gw1n.v",
+          "sha256": "90cade9595b3a12dd127d664c54ee2600c65a691d9e3b98072c54a2ac501bc22",
+          "bytes": 65241
+        },
+        {
+          "path": "gowin/cells_xtra_gw2a.v",
+          "sha256": "7a240f119d027accd329969a3577d2421dc2c5447610c83e3aff5de79e5438c2",
+          "bytes": 65334
+        },
+        {
+          "path": "gowin/cells_xtra_gw5a.v",
+          "sha256": "d4e6a2e6b45e489fd9d9cb687bcdced29ec39e5f18d0239d423a1193006a1ca3",
+          "bytes": 147670
+        },
+        {
+          "path": "gowin/dsp_map.v",
+          "sha256": "f01c8a7ce4b27e783a468a6b80f26d2db0a923dce4ce24f0f73eb377254675e4",
+          "bytes": 1357
+        },
+        {
+          "path": "gowin/lutrams.txt",
+          "sha256": "89bed0fe92e829e0f73c374ab6a677563552ac7a58a527051ec64f13d942a622",
+          "bytes": 160
+        },
+        {
+          "path": "gowin/lutrams_map.v",
+          "sha256": "51f6cbb7ebb5eeb4e7a565befcb3da74f37bd3678be9b4400e3694289816f5e6",
+          "bytes": 1122
+        },
+        {
+          "path": "ice40/abc9_model.v",
+          "sha256": "c9becd1ccb295ccb8a79f70812739bf4bcd0bf846f77f22c2627ea802a3123ba",
+          "bytes": 3612
+        },
+        {
+          "path": "ice40/arith_map.v",
+          "sha256": "65cb378d8fa70648fce6e5429fe57ac292394a03689395b3a483e0f8101a67a3",
+          "bytes": 2171
+        },
+        {
+          "path": "ice40/brams.txt",
+          "sha256": "5b909e796ee26e7d18aca1637a4e396675d93b39300936dd31860490a6d3c13d",
+          "bytes": 300
+        },
+        {
+          "path": "ice40/brams_map.v",
+          "sha256": "b9f606a53b9fe24b1810601e4d74b057df287b8924989c0f1516ddc77b570d50",
+          "bytes": 3958
+        },
+        {
+          "path": "ice40/cells_map.v",
+          "sha256": "4f3f2d0d036d3a494c5b433b0a2a1f1ea4fb5f170906a4b611d9e407c7c8ce92",
+          "bytes": 1087
+        },
+        {
+          "path": "ice40/cells_sim.v",
+          "sha256": "b5b2bcd86c0d6eea269015aaebff1d5fb66e7ec3f7eded0bde07406e5ac99527",
+          "bytes": 153943
+        },
+        {
+          "path": "ice40/dsp_map.v",
+          "sha256": "6297d8ea9049a47f2bfddd8a98f2e91c5a86bb7f1b76c6ad4da90572855abdc8",
+          "bytes": 789
+        },
+        {
+          "path": "ice40/ff_map.v",
+          "sha256": "d2292afa2d7f5154fac6e14b323d997e2970bbac33f2889b31db4f7a06654eb3",
+          "bytes": 3043
+        },
+        {
+          "path": "ice40/latches_map.v",
+          "sha256": "57937005a20c2faf1e3a5843694254b3c5be82045e3e33ec0ed527de69d2a5aa",
+          "bytes": 258
+        },
+        {
+          "path": "ice40/spram.txt",
+          "sha256": "742455d1f95f26e9ef9ef295d10e4aab9341ae187f3e46465ef52debbe5a8889",
+          "bytes": 153
+        },
+        {
+          "path": "ice40/spram_map.v",
+          "sha256": "3bc7d1915b87d5d8005c402d609821f304c79d910aef97cf00c048f8f81856ab",
+          "bytes": 475
+        },
+        {
+          "path": "include/backends/cxxrtl/runtime/README.txt",
+          "sha256": "9fa21b73508f760a15309546c8cfc1da7130cc92939c7c8d06f3b88c9b7b95c5",
+          "bytes": 1195
+        },
+        {
+          "path": "include/backends/cxxrtl/runtime/cxxrtl/capi/cxxrtl_capi.cc",
+          "sha256": "e161fc07407b63b198e37057657d3ee8f1853d871b39c6af26c788d3033f5494",
+          "bytes": 4559
+        },
+        {
+          "path": "include/backends/cxxrtl/runtime/cxxrtl/capi/cxxrtl_capi.h",
+          "sha256": "2e53569e39b12aa50725e68939a5d3f4e30062af86d062e057342fb189026ff5",
+          "bytes": 16719
+        },
+        {
+          "path": "include/backends/cxxrtl/runtime/cxxrtl/capi/cxxrtl_capi_vcd.cc",
+          "sha256": "e40e882b8ead83c05682cfefcd2d7cde9f473197d63fb1597c9cc28e7077bd6f",
+          "bytes": 2815
+        },
+        {
+          "path": "include/backends/cxxrtl/runtime/cxxrtl/capi/cxxrtl_capi_vcd.h",
+          "sha256": "3fa28112cfbbe882b82f02818576e3bbd9f0907deb9a6a949b8b92ba2692f3c3",
+          "bytes": 4286
+        },
+        {
+          "path": "include/backends/cxxrtl/runtime/cxxrtl/cxxrtl.h",
+          "sha256": "f0b10970e58343d4992b0838c6729357e8c6c299ef26eaa36a344f1a741e0dcf",
+          "bytes": 73300
+        },
+        {
+          "path": "include/backends/cxxrtl/runtime/cxxrtl/cxxrtl_replay.h",
+          "sha256": "ddb140cb79d8b5a1f832c2c8f4abdff3c2ba0583a430bf2994333198fb4f76cb",
+          "bytes": 30008
+        },
+        {
+          "path": "include/backends/cxxrtl/runtime/cxxrtl/cxxrtl_time.h",
+          "sha256": "eb3231b971bb6d7cb95167bb5ae03f2901e2c15ed55af72c35e73038f00bfdb5",
+          "bytes": 6174
+        },
+        {
+          "path": "include/backends/cxxrtl/runtime/cxxrtl/cxxrtl_vcd.h",
+          "sha256": "2f854e3b1edcf6b1a4c53162f158e184d1846eecf17ff8fa3f90f4ff49f45a30",
+          "bytes": 8637
+        },
+        {
+          "path": "include/backends/rtlil/rtlil_backend.h",
+          "sha256": "321b8cf5c015565fb0c652a39f0990e503bdaf64bcbed728ea7ad18753b377e7",
+          "bytes": 2497
+        },
+        {
+          "path": "include/frontends/blif/blifparse.h",
+          "sha256": "18671e3849be7e53cad1074f2150d9e991a9913a614f5e284f126101821bd916",
+          "bytes": 1139
+        },
+        {
+          "path": "include/kernel/binding.h",
+          "sha256": "04a7cc84d7ff1df96287009712ac99b81d73a7dc73562d0d44a7bee4cbc889d3",
+          "bytes": 1947
+        },
+        {
+          "path": "include/kernel/bitpattern.h",
+          "sha256": "dfa1051ea018a40b8516afc611c9205e3e31f15d81d1477aa2b1a9b0a26f0307",
+          "bytes": 5949
+        },
+        {
+          "path": "include/kernel/cellaigs.h",
+          "sha256": "09d628b3aec8a660202ef05b27c102de15a0e96841201cbd8e685da19dfa1d51",
+          "bytes": 1391
+        },
+        {
+          "path": "include/kernel/celledges.h",
+          "sha256": "7c5fec1c93a937fa90d4fd31f0a2a8244f6e94332eb1f8e4174741a5332cd7d1",
+          "bytes": 2216
+        },
+        {
+          "path": "include/kernel/celltypes.h",
+          "sha256": "4498a655d3ac281dca7b0fbaae9eb63ec5482a81515a708f88390e3e8075e742",
+          "bytes": 19183
+        },
+        {
+          "path": "include/kernel/consteval.h",
+          "sha256": "aa050129a5e5467984b737efe0a77b19cfe53500a96f73dd0e42d7c2ca35e8cc",
+          "bytes": 11201
+        },
+        {
+          "path": "include/kernel/constids.inc",
+          "sha256": "3e64074ad8ef518a44befdc31ce3af11973f791d28c9d791ac3dffeffc637de3",
+          "bytes": 13264
+        },
+        {
+          "path": "include/kernel/cost.h",
+          "sha256": "4d15b72863d52efe4cc4098d6d28759a7cf04dcf901ef6574a1f567dcea6c375",
+          "bytes": 2921
+        },
+        {
+          "path": "include/kernel/drivertools.h",
+          "sha256": "8ada435c40ae44b1fd85106a3dc71d35bb85f9e984205ebd0ddd1510ebc4e684",
+          "bytes": 33535
+        },
+        {
+          "path": "include/kernel/ff.h",
+          "sha256": "0d94daa4ea6701aeb29070b73413fa271c120e7bf420232b598c18490412adc3",
+          "bytes": 7805
+        },
+        {
+          "path": "include/kernel/ffinit.h",
+          "sha256": "024653416b5b58276d9d45fe8ea698f40ed9a062823f20900228655bb78763c9",
+          "bytes": 4314
+        },
+        {
+          "path": "include/kernel/ffmerge.h",
+          "sha256": "c65d7f87cf1998b231a658bbbe98a2537e51fd8e1c66aef6f3e03bd9a6eeccc8",
+          "bytes": 6309
+        },
+        {
+          "path": "include/kernel/fmt.h",
+          "sha256": "d144fe683557eff2a7ce568dc8ade232c4b3a0809ae10d0786ab0522bc0704cc",
+          "bytes": 2790
+        },
+        {
+          "path": "include/kernel/fstdata.h",
+          "sha256": "cba9cb3dccadaa1494cc2a0360531fa3f6dea6c7e945094ff9ccbd8c2ab51797",
+          "bytes": 2564
+        },
+        {
+          "path": "include/kernel/gzip.h",
+          "sha256": "c29019f61035dc71295a0667b61e3a247bd52d203fa9d4be259079821f37f900",
+          "bytes": 1847
+        },
+        {
+          "path": "include/kernel/hashlib.h",
+          "sha256": "eb5bb822ae14652ca94d780eb7189e9e8643c1fd6d49cb5107a83d39cd5725c7",
+          "bytes": 40283
+        },
+        {
+          "path": "include/kernel/io.h",
+          "sha256": "781d2df92f4ae196d631301b8a2daa89ef8b749a7a7d054ea3ba06eeeee8369c",
+          "bytes": 17641
+        },
+        {
+          "path": "include/kernel/json.h",
+          "sha256": "8b6c2620c676482139cdce8820854bc785d9dbe1d08991052746a8fdc3089cad",
+          "bytes": 2849
+        },
+        {
+          "path": "include/kernel/log.h",
+          "sha256": "ad8f3f9fbb99460cb4f209f80ab40a7679bb6b98b343473ad1eff8d00d2d31f1",
+          "bytes": 22859
+        },
+        {
+          "path": "include/kernel/macc.h",
+          "sha256": "a41752a3db678e9382efb514a850f38103336428e2c5d8663ab2e74a2f5051e2",
+          "bytes": 8918
+        },
+        {
+          "path": "include/kernel/mem.h",
+          "sha256": "da608f63c432815a03235342f9c1b46b4c5a3304a28697237da184c840cdeefb",
+          "bytes": 15498
+        },
+        {
+          "path": "include/kernel/modtools.h",
+          "sha256": "2523905d04a0da8b8a6b904597b433ebf7a6bad7769a5ae3d2e37a4b323859e6",
+          "bytes": 15062
+        },
+        {
+          "path": "include/kernel/newcelltypes.h",
+          "sha256": "a46192dd35cb12d4621fbd4d1199f895c264a8ba8d122676771c6c665e2b7526",
+          "bytes": 30098
+        },
+        {
+          "path": "include/kernel/qcsat.h",
+          "sha256": "4e4c2ae6e311971a4567cff7c0ec85a2a46ba8f8a34b6f76fdee1b6a36735d15",
+          "bytes": 4398
+        },
+        {
+          "path": "include/kernel/register.h",
+          "sha256": "8b7ec879324d2772cea7f24a4b7f347204f07f18d3546f5eabe5c3e38fbeb374",
+          "bytes": 7583
+        },
+        {
+          "path": "include/kernel/rtlil.h",
+          "sha256": "048e86a509ec6a41ee338649d49b48649b8a915efef6d93522bdff2551eb74f5",
+          "bytes": 117702
+        },
+        {
+          "path": "include/kernel/satgen.h",
+          "sha256": "a3cc919b23f8a5fe6794cc20699a29ae8c6070b6ed782b204eb44efe9583d86a",
+          "bytes": 10698
+        },
+        {
+          "path": "include/kernel/scopeinfo.h",
+          "sha256": "aa983fe1cc6e45c36ddc6af402f5d5b5849c69e91ae13b29b9d02b0c0c8b410d",
+          "bytes": 11786
+        },
+        {
+          "path": "include/kernel/sexpr.h",
+          "sha256": "0940ca15e855a0699a9180582e910a52d94cd03777a08e93356fdc2b3faa7b48",
+          "bytes": 4720
+        },
+        {
+          "path": "include/kernel/sigtools.h",
+          "sha256": "e6cd6a91e1a3576a5bc2b59135a3606b2f2a1df2b393b4e02b58d033e0b60dca",
+          "bytes": 10652
+        },
+        {
+          "path": "include/kernel/threading.h",
+          "sha256": "a96e6675e16d28d6b42dd7ce8561b4c9936908d4d59b6d9e5fea112b548b7f86",
+          "bytes": 25795
+        },
+        {
+          "path": "include/kernel/timinginfo.h",
+          "sha256": "ddaead125f4e809f56b2e3710e6da2838e267375609f1dba89cf89e114d65a28",
+          "bytes": 7207
+        },
+        {
+          "path": "include/kernel/unused_bits.h",
+          "sha256": "958131762610537e1ebcdbb354d43493b413f595ebf04c6171dfa974fc4e173d",
+          "bytes": 1064
+        },
+        {
+          "path": "include/kernel/utils.h",
+          "sha256": "effe4f12fe418267470870da3a89fa67f565df46ac38f189c3e213a9256dc4a0",
+          "bytes": 8815
+        },
+        {
+          "path": "include/kernel/yosys.h",
+          "sha256": "4ece42df8843f2592f2b969a8a0f68f823173be14080a05165ff4a6db12f4fc7",
+          "bytes": 3538
+        },
+        {
+          "path": "include/kernel/yosys_common.h",
+          "sha256": "516e44a426ac30edd92438eb3166423ee1ae093bd9b19d0de09673627c9adc69",
+          "bytes": 8776
+        },
+        {
+          "path": "include/kernel/yosys_config.h",
+          "sha256": "4739d589104ce1e4e156883a6e75e6f703c6311fa7a73348d4b92dfc02cfab4c",
+          "bytes": 524
+        },
+        {
+          "path": "include/kernel/yw.h",
+          "sha256": "1abe73a8135448a5ce2a1770eed97df8a702899837c4570af4cb23ecb31ac1d2",
+          "bytes": 5470
+        },
+        {
+          "path": "include/libs/ezsat/ezcmdline.h",
+          "sha256": "17b7cc8ea513d75613a01a970388a480f5996d8b09dbfd1fd65922bb80d01bbd",
+          "bytes": 1240
+        },
+        {
+          "path": "include/libs/ezsat/ezminisat.h",
+          "sha256": "6d2ac32fa5518a7a577542e847c3fd950693d43cb89001197d370a8d128e7638",
+          "bytes": 2098
+        },
+        {
+          "path": "include/libs/ezsat/ezsat.h",
+          "sha256": "f75718aa34461e178089a26bfeb1e342eea7a07b631f0e64408149c31721c193",
+          "bytes": 14955
+        },
+        {
+          "path": "include/libs/fst/fstapi.h",
+          "sha256": "0cff58c3eb80ecc79cd3b0d29f08357f47334673ae8a02c3bb9b343d79ed8546",
+          "bytes": 19493
+        },
+        {
+          "path": "include/libs/json11/json11.hpp",
+          "sha256": "d3483048e71d6889b6e5b849bc1dd8dff18955ba667bb1254ee32d857603b4e8",
+          "bytes": 9268
+        },
+        {
+          "path": "include/libs/sha1/sha1.h",
+          "sha256": "fc18584559e2293010622f0a6414e883a3e9930c0931258a5418299f2921c82b",
+          "bytes": 1382
+        },
+        {
+          "path": "include/passes/fsm/fsmdata.h",
+          "sha256": "13d825e5d9c87b20667d5e083ca9a7f51c276d5357002a8f520b87c9c546d295",
+          "bytes": 5855
+        },
+        {
+          "path": "include/passes/techmap/libparse.h",
+          "sha256": "07ea03f50ba01454300230d35dcb9ce7b0ba85ba09c9062bf2773aed878dad1b",
+          "bytes": 5927
+        },
+        {
+          "path": "intel/common/altpll_bb.v",
+          "sha256": "16a26a5eff0bd07ba8496086ea7347d3105182c9d04a8ba53093932d9b7162b8",
+          "bytes": 14302
+        },
+        {
+          "path": "intel/common/brams_m9k.txt",
+          "sha256": "b5d34e3dcf93104e6dfbdbe6e60ffe889925552626a36bbab6e804859d7a12fb",
+          "bytes": 518
+        },
+        {
+          "path": "intel/common/brams_map_m9k.v",
+          "sha256": "1bc752130c74deb007bcbceab89e3ad037243c5b7d1d0503afdbb2d7e2d8dd9f",
+          "bytes": 4318
+        },
+        {
+          "path": "intel/common/ff_map.v",
+          "sha256": "6de068e4123712bae46a0cc1f7b88c728bfb2f0e0be52440930eec5c714d9491",
+          "bytes": 630
+        },
+        {
+          "path": "intel/common/m9k_bb.v",
+          "sha256": "51eb1b2b6dd5c970722cd4d7d1a83f89fe023db5ad579535584abdbacd4e6ad3",
+          "bytes": 3076
+        },
+        {
+          "path": "intel/cyclone10lp/cells_map.v",
+          "sha256": "98ce4b53c837eb0c56eaf9b95d38ca890970c5bbcf55b17040b3097ce6d5e891",
+          "bytes": 3440
+        },
+        {
+          "path": "intel/cyclone10lp/cells_sim.v",
+          "sha256": "142ce722a9b82e46f4ef353eb179c119a91e874539f0f52fd89a4e2746ba6eb1",
+          "bytes": 4373
+        },
+        {
+          "path": "intel/cycloneiv/cells_map.v",
+          "sha256": "3cfe28ba08eb4f10e8307c284df75f3d6485c22b1a3bb9b32c8056c538a99ea7",
+          "bytes": 2300
+        },
+        {
+          "path": "intel/cycloneiv/cells_sim.v",
+          "sha256": "e57a7edd4b8b0b482ce58475b10b33f71b9e996cc7dcc1a94f20c42fa27d0e20",
+          "bytes": 9688
+        },
+        {
+          "path": "intel/cycloneive/cells_map.v",
+          "sha256": "14bf842cf0d4e5de734f701e6be76dd2112a9c3a65e13c359400bae9fbb89a99",
+          "bytes": 3435
+        },
+        {
+          "path": "intel/cycloneive/cells_sim.v",
+          "sha256": "d1f563a41bf1bb018646f073116a8e2d90850991bde15911a306df8cf0f73934",
+          "bytes": 9839
+        },
+        {
+          "path": "intel/max10/cells_map.v",
+          "sha256": "808add89ca062fbeeb12ae6ce7b806155c0d7348a7cfc4f266a5135bdbe7001d",
+          "bytes": 2316
+        },
+        {
+          "path": "intel/max10/cells_sim.v",
+          "sha256": "4697649342a6ce74f98ba0b3da4c1fcc78e9bdfb79337f578d50ba03c00ff2cc",
+          "bytes": 10812
+        },
+        {
+          "path": "intel/max10/dsp_map.v",
+          "sha256": "e0de76572eae1d131caf01254396e25b61a633b4d0218d1eabfdf1f5e5876bc2",
+          "bytes": 2070
+        },
+        {
+          "path": "intel_alm/common/abc9_map.v",
+          "sha256": "16ab6df1c1cec13576706e8f14b23a3e4192d439c21c8345dacf3cea26d4c217",
+          "bytes": 630
+        },
+        {
+          "path": "intel_alm/common/abc9_model.v",
+          "sha256": "96479f981e035a1f985615dbb9e4e96ece6a55caa927ecbf02e82000f1cccf08",
+          "bytes": 342
+        },
+        {
+          "path": "intel_alm/common/abc9_unmap.v",
+          "sha256": "07c96ef54a061bd4b34e07e080145e80a0fd56141baaa730b7d55dd7fbc73481",
+          "bytes": 352
+        },
+        {
+          "path": "intel_alm/common/alm_map.v",
+          "sha256": "c3f6cb34359cf7e687780a1d8d853be16da291b482b9a467164243eb310f9f33",
+          "bytes": 1504
+        },
+        {
+          "path": "intel_alm/common/alm_sim.v",
+          "sha256": "c812ff26762b308fb4cfd51305e21467e02971f6e189ff57fbc758d5f58b0bf4",
+          "bytes": 6106
+        },
+        {
+          "path": "intel_alm/common/arith_alm_map.v",
+          "sha256": "b2b3dcdce789ad09be53dd9066e0eecde7cdc3ebc9bdf58ed00e649a5bde21d9",
+          "bytes": 2096
+        },
+        {
+          "path": "intel_alm/common/bram_m10k.txt",
+          "sha256": "aa9846e636bcc43f04640840626847e7663fcb455a659aa0541607744897c4b8",
+          "bytes": 578
+        },
+        {
+          "path": "intel_alm/common/bram_m10k_map.v",
+          "sha256": "b715c7e24f0fdcb363f681025c24d9d11aa2da8471e93cc854894fad0932a2d2",
+          "bytes": 746
+        },
+        {
+          "path": "intel_alm/common/dff_map.v",
+          "sha256": "8281b81ba0f0699bce381083ea5d03c4884ff755858de4fe12111ee5aa678661",
+          "bytes": 579
+        },
+        {
+          "path": "intel_alm/common/dff_sim.v",
+          "sha256": "9939cd1c1edfbdde75fe6d4c2ae018fdc3ba59762caec3cba06c0853f064daa4",
+          "bytes": 3656
+        },
+        {
+          "path": "intel_alm/common/dsp_map.v",
+          "sha256": "bf4aadd88ef82cd617d49aaa2881de80e09a46fd9aae6bb35d6f6039e02e5671",
+          "bytes": 891
+        },
+        {
+          "path": "intel_alm/common/dsp_sim.v",
+          "sha256": "0e39b87aeebd14582aae668dc8a2d2cac35e4670a47fc3e9b1d1d53353c2ff77",
+          "bytes": 2238
+        },
+        {
+          "path": "intel_alm/common/lutram_mlab.txt",
+          "sha256": "5ca16ab11a28687293c065228737fc5522fce7206f099d595c7f3758cd0f85d9",
+          "bytes": 317
+        },
+        {
+          "path": "intel_alm/common/megafunction_bb.v",
+          "sha256": "46f8954863ffe3895bc6d2e4863249aa48c1ee66a22ca8f93628c51ebab96396",
+          "bytes": 23485
+        },
+        {
+          "path": "intel_alm/common/mem_sim.v",
+          "sha256": "ef5c6cad81427c7b94d6aa5351d32ecf2e25da94629977ee8502112efe1f88e1",
+          "bytes": 3709
+        },
+        {
+          "path": "intel_alm/common/misc_sim.v",
+          "sha256": "61c61824ffc029aef50950b3dd419ae368706cbe568aa6987cbe1d5f696feb17",
+          "bytes": 563
+        },
+        {
+          "path": "intel_alm/cyclonev/cells_sim.v",
+          "sha256": "880c9d6d6fc24e1722bff7c70fbb34f65cd07ac023c8ca08703da3a833dfb8e6",
+          "bytes": 5522
+        },
+        {
+          "path": "lattice/arith_map_ccu2c.v",
+          "sha256": "46f63e58251d21088783e817c609aed5ecdf075b938d038de1b310c4ee89bbe6",
+          "bytes": 2592
+        },
+        {
+          "path": "lattice/arith_map_ccu2d.v",
+          "sha256": "6dbbd5ab8c697e01da9b80414e1cc96c5245ebc9962a82559bcc010cdc1c40aa",
+          "bytes": 2596
+        },
+        {
+          "path": "lattice/arith_map_nexus.v",
+          "sha256": "e66415ae11bb05782dd64fbef0049191d9667dc09cfe4fc470438812824cb1f7",
+          "bytes": 2804
+        },
+        {
+          "path": "lattice/brams_16kd.txt",
+          "sha256": "faf42a66c03a939808f09e1ef580d647133d8c81863eb625c3cb65268f98ecb5",
+          "bytes": 812
+        },
+        {
+          "path": "lattice/brams_8kc.txt",
+          "sha256": "ad7f09be3b17ff98c5323ce41c20652ae43f8de3756c3c1577228876d6cb448d",
+          "bytes": 917
+        },
+        {
+          "path": "lattice/brams_map_16kd.v",
+          "sha256": "a18f1fba714c81c8e469a20fc0fae0dcd93cfb56cf27037e3d0a11573f3595b4",
+          "bytes": 11907
+        },
+        {
+          "path": "lattice/brams_map_8kc.v",
+          "sha256": "649ecf8d2df743b75bcaecdc249cb328f54686cef32696490cf9ee4c3048e181",
+          "bytes": 8100
+        },
+        {
+          "path": "lattice/brams_map_nexus.v",
+          "sha256": "69f622b0c4d916e97be0935af8165b242ae190acdec3ca3a0abf71bfd4829ee7",
+          "bytes": 15615
+        },
+        {
+          "path": "lattice/brams_nexus.txt",
+          "sha256": "8987103eb718169bdcd8889850773634aef00cac4128599c6a03a8dc184d036a",
+          "bytes": 882
+        },
+        {
+          "path": "lattice/ccu2c_sim.vh",
+          "sha256": "178b1310b2e70768114e1c795118529055799df1ad650a09d0613b3856a81ccc",
+          "bytes": 1624
+        },
+        {
+          "path": "lattice/ccu2d_sim.vh",
+          "sha256": "6619e625751624895a993360e721e8ce2c857fed62c880cac9aba3e3cd2fc6fa",
+          "bytes": 1083
+        },
+        {
+          "path": "lattice/cells_bb_ecp5.v",
+          "sha256": "7631d36505f84d9a353ba7042e98999abcf4fe1f4f4041f0404255d4606e0680",
+          "bytes": 62137
+        },
+        {
+          "path": "lattice/cells_bb_nexus.v",
+          "sha256": "d80e4ced5983ed883a00235fa131ef4024d2a79d0ce347a9425160b010629ffc",
+          "bytes": 1205953
+        },
+        {
+          "path": "lattice/cells_bb_xo2.v",
+          "sha256": "527d92a82dcbb1fc6643a085968324ae4367735b362a294ca421a7c30e19a7d2",
+          "bytes": 22342
+        },
+        {
+          "path": "lattice/cells_bb_xo3.v",
+          "sha256": "527d92a82dcbb1fc6643a085968324ae4367735b362a294ca421a7c30e19a7d2",
+          "bytes": 22342
+        },
+        {
+          "path": "lattice/cells_bb_xo3d.v",
+          "sha256": "da872d6bb9d0ca29ee0d6c4e7fc71d1150ddc0f0bdf60ceb2270afc7b25c6bdc",
+          "bytes": 22369
+        },
+        {
+          "path": "lattice/cells_ff.vh",
+          "sha256": "9d3c49d7a470d87a8888ffef5312334f5a4b9567d71bffb33782f88a59c296f4",
+          "bytes": 6129
+        },
+        {
+          "path": "lattice/cells_io.vh",
+          "sha256": "bbc7bb1406ed0d249ac588f1216c3c3964eb98a802816a4a21b14703d8dae62b",
+          "bytes": 2055
+        },
+        {
+          "path": "lattice/cells_map_nexus.v",
+          "sha256": "9ca37ddc46e3e31ce3530c613a170124ff13f8234cda057b546fb23e6ac32e46",
+          "bytes": 3947
+        },
+        {
+          "path": "lattice/cells_map_trellis.v",
+          "sha256": "ea608cada6e640bf555afb9a5328dfddf23e03137bf1e67ba80d195c113d2126",
+          "bytes": 15010
+        },
+        {
+          "path": "lattice/cells_sim_ecp5.v",
+          "sha256": "c1ddb9de055c6c2a2225215ffd6ded48c884d12d5c7321eaf1a2f417d4f23ce0",
+          "bytes": 11944
+        },
+        {
+          "path": "lattice/cells_sim_nexus.v",
+          "sha256": "58b323bf9f731f3181d419f309248ece090dcf937810d4b73a0af77fae7df11e",
+          "bytes": 25103
+        },
+        {
+          "path": "lattice/cells_sim_xo2.v",
+          "sha256": "794cb8c0ac411ef892cc6c09b8062fd2440c3adcef7f2a8e9f7405fc306eac27",
+          "bytes": 125
+        },
+        {
+          "path": "lattice/cells_sim_xo3.v",
+          "sha256": "794cb8c0ac411ef892cc6c09b8062fd2440c3adcef7f2a8e9f7405fc306eac27",
+          "bytes": 125
+        },
+        {
+          "path": "lattice/cells_sim_xo3d.v",
+          "sha256": "794cb8c0ac411ef892cc6c09b8062fd2440c3adcef7f2a8e9f7405fc306eac27",
+          "bytes": 125
+        },
+        {
+          "path": "lattice/common_sim.vh",
+          "sha256": "3d55fcb1b659f9a99e081d0e8cd3e0a74fb8d659644103db9ad10b04a64ce75d",
+          "bytes": 9490
+        },
+        {
+          "path": "lattice/dsp_map_18x18.v",
+          "sha256": "aa05c8ea6efc57dd51cdf6a94d2af6fc7675f3a93325ec5cae8abc5ed97f2b44",
+          "bytes": 1436
+        },
+        {
+          "path": "lattice/dsp_map_nexus.v",
+          "sha256": "9b168fc06608d570a0806c6f1569dce470d7c7719d539ec7c851eda2d472f418",
+          "bytes": 4310
+        },
+        {
+          "path": "lattice/latches_map.v",
+          "sha256": "57937005a20c2faf1e3a5843694254b3c5be82045e3e33ec0ed527de69d2a5aa",
+          "bytes": 258
+        },
+        {
+          "path": "lattice/lrams_map_nexus.v",
+          "sha256": "e33acb1964f8e92b74d2247eeded1fd00ef15a9088a7023972b0b5e47d2058e4",
+          "bytes": 8557
+        },
+        {
+          "path": "lattice/lrams_nexus.txt",
+          "sha256": "7a48ad31266fcad1a1d640ee64a48151e7b033a76f396c2e532b5de675532c2e",
+          "bytes": 324
+        },
+        {
+          "path": "lattice/lutrams_map_nexus.v",
+          "sha256": "86db55a28502b3a00d124d057e32bbd0c4c852e9625eb4ec31ec777f5638c2bb",
+          "bytes": 429
+        },
+        {
+          "path": "lattice/lutrams_map_trellis.v",
+          "sha256": "0e36e11b61bbca96d424c83d991745bee2422453645431c3f72a370517984b3c",
+          "bytes": 519
+        },
+        {
+          "path": "lattice/lutrams_nexus.txt",
+          "sha256": "d67678115d2b08b3353475a276d6e92af0e6d94d7c509eaba6303d8a32ba2790",
+          "bytes": 148
+        },
+        {
+          "path": "lattice/lutrams_trellis.txt",
+          "sha256": "60bc6b886d5323b7ba3e54508287b129d55afbd34a5b84ff15a65222b927730b",
+          "bytes": 145
+        },
+        {
+          "path": "lattice/parse_init.vh",
+          "sha256": "59e7aff484d693c244a1aa2f21ddfa318c3fbd72e6b19be967d539f63142ee7e",
+          "bytes": 855
+        },
+        {
+          "path": "microchip/LSRAM.txt",
+          "sha256": "b135adc9d6bcaef53bde6dad1f7b9d4688195befefa1f6f8249d9ee389a37be8",
+          "bytes": 4763
+        },
+        {
+          "path": "microchip/LSRAM_map.v",
+          "sha256": "f0a4b5b4043b458f8ac226441fed057ede3c91fc90986b65e931b74f0d16529d",
+          "bytes": 9348
+        },
+        {
+          "path": "microchip/arith_map.v",
+          "sha256": "8a240faf12ef7884e7261467c6596fa0b22236b293309c2c038031b403e6b310",
+          "bytes": 2823
+        },
+        {
+          "path": "microchip/brams_defs.vh",
+          "sha256": "616bb837c951edb02945e08dc77913bf0ee47c647b9cea5875d1302b236c04fa",
+          "bytes": 2341
+        },
+        {
+          "path": "microchip/cells_map.v",
+          "sha256": "d8f0b5b2173297ec590838ea88cd21db93f23d396dbfdbcc0ce395687df59b36",
+          "bytes": 3260
+        },
+        {
+          "path": "microchip/cells_sim.v",
+          "sha256": "30727e8cbe6bdf205187074108a153174a6bd769d24549000cde04ac7706ab36",
+          "bytes": 11825
+        },
+        {
+          "path": "microchip/polarfire_dsp_map.v",
+          "sha256": "5926b0e89fd1a0da262fe655df37e63e0e44f19b5baae5d4617451d91ad67002",
+          "bytes": 2207
+        },
+        {
+          "path": "microchip/uSRAM.txt",
+          "sha256": "7bacd47897c78ec0b25165b5726bd36b13224c04ff2233155e93ef28100c411d",
+          "bytes": 1596
+        },
+        {
+          "path": "microchip/uSRAM_map.v",
+          "sha256": "4182a0cada1012c2793830400cbbd1c0d63bf5743c8238461dddb2e7d70250b3",
+          "bytes": 2886
+        },
+        {
+          "path": "mul2dsp.v",
+          "sha256": "81a976a44f2141267dc91b95837d8bd753f4274bef7a456328d39568a24c99bd",
+          "bytes": 9201
+        },
+        {
+          "path": "nanoxplore/arith_map.v",
+          "sha256": "b69e9fb3ed030393d0059045b068864e739869bd83534796b82e103e371e1da0",
+          "bytes": 2095
+        },
+        {
+          "path": "nanoxplore/brams.txt",
+          "sha256": "287ebbda2521032c3b2198d4869672622e268ebd655daea945893a5b63729982",
+          "bytes": 832
+        },
+        {
+          "path": "nanoxplore/brams_init.vh",
+          "sha256": "d7452f21414b172d2c10c937187d57bcd4fbdf7167b1e09adbf319408be13b16",
+          "bytes": 647
+        },
+        {
+          "path": "nanoxplore/brams_map.v",
+          "sha256": "4851b02e44d97259f0a357029ed845d709ff894229173797984fef9b1a24ff47",
+          "bytes": 2514
+        },
+        {
+          "path": "nanoxplore/cells_bb.v",
+          "sha256": "7dda14e44252b4b12e77a73f1ad3dd1cbecdf97c9ed2b3618ad920f41992b764",
+          "bytes": 2925
+        },
+        {
+          "path": "nanoxplore/cells_bb_l.v",
+          "sha256": "6481cdf4736040e6fbb888af9f1a1a08f633a61d14b9c01fb3aa200c47f4740c",
+          "bytes": 53764
+        },
+        {
+          "path": "nanoxplore/cells_bb_m.v",
+          "sha256": "8678f7bd10fdb1c11a4283b66976eb2d739101eaab52e15564d01a5543bb7558",
+          "bytes": 35018
+        },
+        {
+          "path": "nanoxplore/cells_bb_u.v",
+          "sha256": "ecc6dd3ff64c880bf6bfe2a6fa9337c29e6b1db7338736cfc9e56aa304eba553",
+          "bytes": 70764
+        },
+        {
+          "path": "nanoxplore/cells_map.v",
+          "sha256": "30fd692098d56b7982cdfeee41f2cfdf610a7f7cd94400970b5f748100d4b994",
+          "bytes": 4402
+        },
+        {
+          "path": "nanoxplore/cells_sim.v",
+          "sha256": "db85f928abcceb05167ab0141f80f33f29217693cb1ff1d5b2483f3a824ac48a",
+          "bytes": 10418
+        },
+        {
+          "path": "nanoxplore/cells_sim_l.v",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "nanoxplore/cells_sim_m.v",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "nanoxplore/cells_sim_u.v",
+          "sha256": "bd81c4fa1895ea8e11931b5ce9c2268ba952ede7b7ff658c676729dd359a017b",
+          "bytes": 7926
+        },
+        {
+          "path": "nanoxplore/cells_wrap.v",
+          "sha256": "f562cd82e3a5b167498f27007f8075062a87ce6343e8ea2c64df5d422f96a9de",
+          "bytes": 3853
+        },
+        {
+          "path": "nanoxplore/cells_wrap_l.v",
+          "sha256": "79103bedb087081e40945264fabbcaecfd9664133f2420696d191cf80f310e2d",
+          "bytes": 45791
+        },
+        {
+          "path": "nanoxplore/cells_wrap_m.v",
+          "sha256": "3b92bde4bb4ed3b4fbd97a6cbcdb9a8923c04432d36df6a5e935cd218c99875b",
+          "bytes": 30155
+        },
+        {
+          "path": "nanoxplore/cells_wrap_u.v",
+          "sha256": "cf337d51221a5ca2784f83c615a23dd1c300de88a6e74000904a27cce7913657",
+          "bytes": 87726
+        },
+        {
+          "path": "nanoxplore/io_map.v",
+          "sha256": "081384d958eefbd709cabf5b90270520a6187777758ca1987107e2356ee59a64",
+          "bytes": 483
+        },
+        {
+          "path": "nanoxplore/latches_map.v",
+          "sha256": "57937005a20c2faf1e3a5843694254b3c5be82045e3e33ec0ed527de69d2a5aa",
+          "bytes": 258
+        },
+        {
+          "path": "nanoxplore/rf_init.vh",
+          "sha256": "e2fb6ba3da9d434bbcd77848330554d61c7ea1c32fb34f1ac8c7c35608b4c41b",
+          "bytes": 422
+        },
+        {
+          "path": "nanoxplore/rf_rams_l.txt",
+          "sha256": "71ec6f09c69475f7c576eb6188e9905754de51f528809d7ee54df18c2410a8de",
+          "bytes": 216
+        },
+        {
+          "path": "nanoxplore/rf_rams_m.txt",
+          "sha256": "0daa4e5280921ca397830639f2483323ae8c052954825a848e09d16169ca581a",
+          "bytes": 216
+        },
+        {
+          "path": "nanoxplore/rf_rams_map_l.v",
+          "sha256": "842d9b9686b8fffd9e29f6856f34ccc133c52b9da08f47d4636cc0b69b806cdf",
+          "bytes": 662
+        },
+        {
+          "path": "nanoxplore/rf_rams_map_m.v",
+          "sha256": "4522297186149812a9e1dd9b3e1539a5d9dc5f90559c3f69c9546150cd270c5e",
+          "bytes": 662
+        },
+        {
+          "path": "nanoxplore/rf_rams_map_u.v",
+          "sha256": "e2cf43e7cdf22cb8fd920a1700dbe11e46089094d6e03d96a3818b2c12bb1ee0",
+          "bytes": 8390
+        },
+        {
+          "path": "nanoxplore/rf_rams_u.txt",
+          "sha256": "3de76da8becc2517439f9c7e516bb66a6d049388fa0772771a5a94b5bf5d188d",
+          "bytes": 1050
+        },
+        {
+          "path": "nexus/cells_sim.v",
+          "sha256": "58b323bf9f731f3181d419f309248ece090dcf937810d4b73a0af77fae7df11e",
+          "bytes": 25103
+        },
+        {
+          "path": "nexus/cells_xtra.v",
+          "sha256": "d80e4ced5983ed883a00235fa131ef4024d2a79d0ce347a9425160b010629ffc",
+          "bytes": 1205953
+        },
+        {
+          "path": "nexus/parse_init.vh",
+          "sha256": "59e7aff484d693c244a1aa2f21ddfa318c3fbd72e6b19be967d539f63142ee7e",
+          "bytes": 855
+        },
+        {
+          "path": "pmux2mux.v",
+          "sha256": "3fb31c0ed479d45648b97e674a57a35e4b76133ec8d67398d8907179a4f92fbf",
+          "bytes": 342
+        },
+        {
+          "path": "python3/smtio.py",
+          "sha256": "3ab59d7fa9808e8f529870868dca27477b5d61f727508c94310e4c19cb59f75e",
+          "bytes": 49883
+        },
+        {
+          "path": "python3/ywio.py",
+          "sha256": "537d38a17af01d67c4ff4c5e6fb88f01b4dad7d0f9f6cb5cd13e2429036d5cfb",
+          "bytes": 12434
+        },
+        {
+          "path": "quicklogic/common/cells_sim.v",
+          "sha256": "5e355446bcff9207f69f7d8cabd28a51701b98a26c6b3a92f3b3e2ce70bbe44c",
+          "bytes": 366
+        },
+        {
+          "path": "quicklogic/pp3/abc9_map.v",
+          "sha256": "7ddde7e90d8c21fbea476ff8687e58dcf5325a31f4aadb4a1a4cc863c296cbaa",
+          "bytes": 769
+        },
+        {
+          "path": "quicklogic/pp3/abc9_model.v",
+          "sha256": "17413894e3fd5a4385f5d64f5a3cb960d186aa8145828339c756375962dd920b",
+          "bytes": 197
+        },
+        {
+          "path": "quicklogic/pp3/abc9_unmap.v",
+          "sha256": "c0d4c545f41920a6e9a2d443868fd71bfabe5171a2654514b10cd4a7fe21b46d",
+          "bytes": 384
+        },
+        {
+          "path": "quicklogic/pp3/cells_map.v",
+          "sha256": "21c27662dbe19e969bb00a83c484feb6819270ffae7998daacceaca1e401fc8c",
+          "bytes": 499
+        },
+        {
+          "path": "quicklogic/pp3/cells_sim.v",
+          "sha256": "056186976c9dacc0749ec7bdbdfe3ef2ae237118fd3fd6d742706f5e107acdd3",
+          "bytes": 7927
+        },
+        {
+          "path": "quicklogic/pp3/ffs_map.v",
+          "sha256": "b338b851f6b3571c80ba50d74db2a9a189ac6f9b5bc8273975498edcf3dbb0a6",
+          "bytes": 194
+        },
+        {
+          "path": "quicklogic/pp3/latches_map.v",
+          "sha256": "52b1b3465c30213c00ee63255e11e50c53e2c17a293ba29d775e02e1f92a8189",
+          "bytes": 258
+        },
+        {
+          "path": "quicklogic/pp3/lut_map.v",
+          "sha256": "0668a3312e04a9540f3f604fa36ce0292b4a3cf8512d37f991b700b46299115b",
+          "bytes": 928
+        },
+        {
+          "path": "quicklogic/qlf_k6n10f/TDP18K_FIFO.v",
+          "sha256": "935015af0a4e437be9c685806dc851a6635b9dc60262d55f0c4c73e95726b418",
+          "bytes": 10404
+        },
+        {
+          "path": "quicklogic/qlf_k6n10f/arith_map.v",
+          "sha256": "26f18caf5fede2174bcb9f9e6dc72db43fcd4f6f4b332c427e394f2f76fb83a0",
+          "bytes": 2559
+        },
+        {
+          "path": "quicklogic/qlf_k6n10f/bram_types_sim.v",
+          "sha256": "6466fb9e4cca86dc81dd72a31eefcaeb40823f51b59ad5b122a12867702050ff",
+          "bytes": 2551705
+        },
+        {
+          "path": "quicklogic/qlf_k6n10f/brams_map.v",
+          "sha256": "0a23c5f5507a3bb7fcd0167be0401e3b0830052f0cea8388b7fabdd9b63a4266",
+          "bytes": 103559
+        },
+        {
+          "path": "quicklogic/qlf_k6n10f/brams_sim.v",
+          "sha256": "492000ca58b7264bfb2cf1a98c6cca5da36d9e5516dff9b75aff3fd15317e9b3",
+          "bytes": 339635
+        },
+        {
+          "path": "quicklogic/qlf_k6n10f/cells_sim.v",
+          "sha256": "a1fb2c63af97e0f814691c66191db38c427b76a64ee79c27b89ec539531fb4d4",
+          "bytes": 7346
+        },
+        {
+          "path": "quicklogic/qlf_k6n10f/dsp_final_map.v",
+          "sha256": "65ea71d9e499965c7f2dc6b2d591069152bada226f7fd1c84baada48391b1d76",
+          "bytes": 7383
+        },
+        {
+          "path": "quicklogic/qlf_k6n10f/dsp_map.v",
+          "sha256": "4d3816b794881f5b90e0399dcf5eda8c937030331f4d4418c05b67c56842b5fb",
+          "bytes": 3086
+        },
+        {
+          "path": "quicklogic/qlf_k6n10f/dsp_sim.v",
+          "sha256": "89750a1f0947e4aedc4f7152c1821d7d2aab3eb5b9dfeb36b88cdf4e7729954b",
+          "bytes": 107262
+        },
+        {
+          "path": "quicklogic/qlf_k6n10f/ffs_map.v",
+          "sha256": "f4911b7c921144c5db5cf51cd15d4824183075f8e4a5d5a0e02d2cb8ecff6273",
+          "bytes": 3132
+        },
+        {
+          "path": "quicklogic/qlf_k6n10f/libmap_brams.txt",
+          "sha256": "18a3881f56566fb8c52d8d1403b592e3757ef90597603ef0e4b7cdfa928a2132",
+          "bytes": 352
+        },
+        {
+          "path": "quicklogic/qlf_k6n10f/libmap_brams_map.v",
+          "sha256": "cfb24d1b2b128e9f98f8ceeb1f2c419d0dd524979834192d374816b8624814ff",
+          "bytes": 14120
+        },
+        {
+          "path": "quicklogic/qlf_k6n10f/sram1024x18_mem.v",
+          "sha256": "54e5ec54158820a7237b77dc226d5bad3444f09d24df583d13f8502552dbe6d7",
+          "bytes": 1127
+        },
+        {
+          "path": "quicklogic/qlf_k6n10f/ufifo_ctl.v",
+          "sha256": "47649a972c877c6497c81eb384cf3c9234a21e1b75eacd8724c4998e81b95cab",
+          "bytes": 19068
+        },
+        {
+          "path": "sdc/graph-stubs.sdc",
+          "sha256": "8dc2207d3fc342dc206982209152d1b8199334926ef690b10484e2847003781c",
+          "bytes": 1398
+        },
+        {
+          "path": "sf2/arith_map.v",
+          "sha256": "eaa635b37fe8151f010a366057e4ec0e01cdb7b714e71188d14d27d285c8b99d",
+          "bytes": 1941
+        },
+        {
+          "path": "sf2/cells_map.v",
+          "sha256": "7abdef63be659627e9c8a36f27b9596affff97909ba001a9f4ef225713a0a685",
+          "bytes": 1745
+        },
+        {
+          "path": "sf2/cells_sim.v",
+          "sha256": "244b67dacb1a726905d63f8b3b6c3f24dc72513a02983cf42256541586ae7b75",
+          "bytes": 8449
+        },
+        {
+          "path": "simcells.v",
+          "sha256": "63918d5fd356ffcda0780eccfa4304a9888603a5266bbc1c812bf5a9bdd65b3c",
+          "bytes": 91313
+        },
+        {
+          "path": "simlib.v",
+          "sha256": "e79c08085225bdc6f52ce99f128328158009a33b8ea0c8c273011dfde370561d",
+          "bytes": 78616
+        },
+        {
+          "path": "smtmap.v",
+          "sha256": "0eaab0c3a5324dcc30d0503cc3a571f5d4fb13fea6fbc18151efb294ff799cac",
+          "bytes": 654
+        },
+        {
+          "path": "techmap.v",
+          "sha256": "9cae09999a99182452bd7a2b384bdf7508e0e8a745df7044a95dd0174665d847",
+          "bytes": 16627
+        },
+        {
+          "path": "xilinx/abc9_model.v",
+          "sha256": "dc0e139669a32c2436cec6c7e49b716415bd0cdcb0d8d29f3ac4293a991cfa6c",
+          "bytes": 1497
+        },
+        {
+          "path": "xilinx/arith_map.v",
+          "sha256": "2dbe81c47b4f53ccc7a4411e9253e33500efa358a4d68cbdc29d8ef10d76145e",
+          "bytes": 4592
+        },
+        {
+          "path": "xilinx/brams_defs.vh",
+          "sha256": "6060e135ee7cc4a391d06547f0c6f37bf6da55878cc58be89165078526b04a55",
+          "bytes": 15515
+        },
+        {
+          "path": "xilinx/brams_xc2v.txt",
+          "sha256": "abf9e8aea3c3c5935e16114574e77c3d2d0b63a9d709b2d400f031bb5eb1b67d",
+          "bytes": 665
+        },
+        {
+          "path": "xilinx/brams_xc2v_map.v",
+          "sha256": "21b9df7ef7e879d803ef5aa15a63dca8d2c6c9a4fc6a0120940050ba54d709f1",
+          "bytes": 11752
+        },
+        {
+          "path": "xilinx/brams_xc3sda.txt",
+          "sha256": "28b303dade5811f5394ebd320e18650f1d5da6d77dc97c0895f8d3b36d8bd426",
+          "bytes": 2357
+        },
+        {
+          "path": "xilinx/brams_xc3sda_map.v",
+          "sha256": "c9780d27aac8d2b749b6d06de8583b2b0bd276f109c1a3dfad0b87349445399a",
+          "bytes": 5591
+        },
+        {
+          "path": "xilinx/brams_xc4v.txt",
+          "sha256": "13e895e452af7e34161aa7572f4e11ab81d787fc1b9b85d10c713f03554b85f2",
+          "bytes": 3268
+        },
+        {
+          "path": "xilinx/brams_xc4v_map.v",
+          "sha256": "ca785c3de3c76b7b1f4e8b9cc8a28ad27e001836ca2d67dd0479e8e8c2eb34a0",
+          "bytes": 3501
+        },
+        {
+          "path": "xilinx/brams_xc5v_map.v",
+          "sha256": "c99f911c73df5a7115fb4298f6a8094f622845cf5238186dce42827a9db88c49",
+          "bytes": 5590
+        },
+        {
+          "path": "xilinx/brams_xc6v_map.v",
+          "sha256": "a1afcda1610f3f3dcbc0b9bbe99c30ce2125788b7e69cbaa456f314fbfca6431",
+          "bytes": 7211
+        },
+        {
+          "path": "xilinx/brams_xcu_map.v",
+          "sha256": "5a6583e7039d6fd7b0bb8df5ec2c3cca3b9ffe6b4c77fa2920ba9e1926e2370e",
+          "bytes": 5948
+        },
+        {
+          "path": "xilinx/brams_xcv.txt",
+          "sha256": "3b9ef4d87cd29044d0f6de58a3f2f820fa8472a0618f49cba1d1531644e4af3a",
+          "bytes": 302
+        },
+        {
+          "path": "xilinx/brams_xcv_map.v",
+          "sha256": "f7a79f9452fe34079dbe7b79228e905e0e71aba81699e06b09442ae28a2e5363",
+          "bytes": 5210
+        },
+        {
+          "path": "xilinx/cells_map.v",
+          "sha256": "8771009e87d1a535ea1d776fb2dd7af72cb2d036d4b152c5ee8b51b093979ccf",
+          "bytes": 16083
+        },
+        {
+          "path": "xilinx/cells_sim.v",
+          "sha256": "10f8afc61bf708949ebf238294327dce95eaa68919bb0ab5938d40f24e39d15e",
+          "bytes": 161270
+        },
+        {
+          "path": "xilinx/cells_xtra.v",
+          "sha256": "39078cf0cbd191bbcf347e6f0e7877325baed81fff64129fcecc6ec30b9749c5",
+          "bytes": 1632201
+        },
+        {
+          "path": "xilinx/ff_map.v",
+          "sha256": "390b6f9b114a0767932caf769324478b4b5f4f2c76d5597cd35a367cb5240062",
+          "bytes": 4942
+        },
+        {
+          "path": "xilinx/lut_map.v",
+          "sha256": "90bbd35682d17f64b21e3dc2b107f9dad974ae5e08c9813bcd5bc65747d31d00",
+          "bytes": 3502
+        },
+        {
+          "path": "xilinx/lutrams_xc5v.txt",
+          "sha256": "88b460c2a164059c4fb7cf89f71f7a657a993905c275e6acd8685a316d3a8ce9",
+          "bytes": 1364
+        },
+        {
+          "path": "xilinx/lutrams_xc5v_map.v",
+          "sha256": "a88ef19a3318a4b45655d826bfcb80f17bd241fa4f573fca8dcd6b12c5640cff",
+          "bytes": 19522
+        },
+        {
+          "path": "xilinx/lutrams_xcu.txt",
+          "sha256": "80aa75e6797d1f167ccde4f43322b09f528ac766133bb8a856114efc15bb6d94",
+          "bytes": 2167
+        },
+        {
+          "path": "xilinx/lutrams_xcv.txt",
+          "sha256": "b1f1b6ab0ad11e215430003725e0121343bf3bc490a71c4fef906e405117b387",
+          "bytes": 797
+        },
+        {
+          "path": "xilinx/lutrams_xcv_map.v",
+          "sha256": "d25d077d95ae9563b44b07a15ff3653a1f16539ce4962db243cc9c47cb9dfaa8",
+          "bytes": 3209
+        },
+        {
+          "path": "xilinx/mux_map.v",
+          "sha256": "1f19d8e13e7ca893151339322090e6995c6e077c0ef6aa4c9bebd081f681fda6",
+          "bytes": 2498
+        },
+        {
+          "path": "xilinx/urams.txt",
+          "sha256": "9a1c3e21b030e1a86a51b183618f7b0f5b9d98d7431fd87c567330e33be0582e",
+          "bytes": 972
+        },
+        {
+          "path": "xilinx/urams_map.v",
+          "sha256": "2890b5e37b3476f2e0c8c610d56836c8afb5d51f59cf75852334992a9d07505a",
+          "bytes": 6890
+        },
+        {
+          "path": "xilinx/xc3s_mult_map.v",
+          "sha256": "3997176fc3549f010955081e82e4ef1342aee1f0c566748a0d0241890498cfc6",
+          "bytes": 265
+        },
+        {
+          "path": "xilinx/xc3sda_dsp_map.v",
+          "sha256": "51bd2d03595785f0240040dc1205e6631936a92bf0a640de2900f9994985b30b",
+          "bytes": 559
+        },
+        {
+          "path": "xilinx/xc4v_dsp_map.v",
+          "sha256": "ed688a24c26663848684a8db7ff51feaed6563f76f8e6b6d415542e6a3fe1f54",
+          "bytes": 661
+        },
+        {
+          "path": "xilinx/xc5v_dsp_map.v",
+          "sha256": "f58260fba6c7b541d2caaae241726faf2e70e49bdc91a34012974562cafcf669",
+          "bytes": 784
+        },
+        {
+          "path": "xilinx/xc6s_dsp_map.v",
+          "sha256": "e2ac8f2e1f37e22eeeadd3a0e14d242f6599a766a80efdefe92cebdcbcbb739a",
+          "bytes": 560
+        },
+        {
+          "path": "xilinx/xc7_dsp_map.v",
+          "sha256": "cebceb7908bb98496b00cb6b6b2c6d88efc1c34d12eb3b234a34957239893c7d",
+          "bytes": 884
+        },
+        {
+          "path": "xilinx/xcu_dsp_map.v",
+          "sha256": "13b2916d655a8256b9e2abb192ec1e661ed60f56e19f5e603db6ae43b201b046",
+          "bytes": 881
+        }
+      ],
+      "tree_sha256": "228cecb5cec997db7fbd2c4841f48d7ccacf14d9b89ec00564dafa226dc631da"
+    },
+    "solver": {
+      "version": "4.15.4",
+      "files": [
+        {
+          "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/lib/python3.14/site-packages/z3/__init__.py",
+          "sha256": "53c4529a01f38e7c0d593b7548c79e0d7398aa09f7d7cbd1773470859ee2febd"
+        },
+        {
+          "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/lib/python3.14/site-packages/z3/lib/libz3.4.15.dylib",
+          "sha256": "80b90ad4090016b67ada7d64039ea0b76b8f5a6f2747ea0ca96f9a6709841b58"
+        },
+        {
+          "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/lib/python3.14/site-packages/z3/lib/libz3.dll",
+          "sha256": "88b20513993816cf71e29969c5232a8eb03dda05deefce71879ecc1e3519b2aa"
+        },
+        {
+          "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/lib/python3.14/site-packages/z3/lib/libz3.dylib",
+          "sha256": "80b90ad4090016b67ada7d64039ea0b76b8f5a6f2747ea0ca96f9a6709841b58"
+        },
+        {
+          "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/lib/python3.14/site-packages/z3/z3.py",
+          "sha256": "928428b680721433616cd2ca6662c1ada979f4f322ccdd3825b09b5237dc7f26"
+        },
+        {
+          "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/lib/python3.14/site-packages/z3/z3consts.py",
+          "sha256": "59737a55612e9bddb33f7ec4a27db9fbc880a92053fa8a88919fcc934e1f7573"
+        },
+        {
+          "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/lib/python3.14/site-packages/z3/z3core.py",
+          "sha256": "801867d32d0eb6525c00a3dfeff2a877590c74fc0cb776d6cde1d4e7b8aa6d7f"
+        },
+        {
+          "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/lib/python3.14/site-packages/z3/z3num.py",
+          "sha256": "d7ad7cceb560867f55dcbd87c5866e1c365fddec92faa22321bf91b60c431dee"
+        },
+        {
+          "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/lib/python3.14/site-packages/z3/z3poly.py",
+          "sha256": "fd06029418e5899b300fe3b3a300d110c8e174e633cba8b751314f22a583394e"
+        },
+        {
+          "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/lib/python3.14/site-packages/z3/z3printer.py",
+          "sha256": "714f9fa34a1da9281bdc1a98d8e89d650daca6e99cd1839d325c4d3605a99730"
+        },
+        {
+          "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/lib/python3.14/site-packages/z3/z3rcf.py",
+          "sha256": "504e0339b1bb06075c19ca52e51457716671218a2f2191d0c9754e0b75bede87"
+        },
+        {
+          "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/lib/python3.14/site-packages/z3/z3types.py",
+          "sha256": "ba728354b4a9ee40bcfbd899f405d904bc4bb023e41807044c06c318548c3080"
+        },
+        {
+          "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/lib/python3.14/site-packages/z3/z3util.py",
+          "sha256": "7087f1bbb0119e0e8f545d70cba9a21446ff267cda1289e55b3c2e4e644effd9"
+        }
+      ]
+    },
+    "python": {
+      "path": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+      "sha256": "87d4df53fd91304be5bac391fb204643c36b7df2023c04a0953bcbc7d4fdf634",
+      "version": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.1.1.101)]"
+    },
+    "platform": {
+      "system": "Darwin",
+      "release": "25.5.0",
+      "machine": "arm64",
+      "mac_version": "26.5.1"
+    },
+    "limitations": "OS shared-library/cache dependencies are identified by platform, not a portable hermetic container. No compiler/Verilator: collector uses Yosys eval and strict mapped-netlist interpretation."
+  },
+  "nextpnr": {
+    "path": "/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/bin/nextpnr-ice40",
+    "sha256": "c3df2ed2fb9be697db09e3bb5332ce2474b5437bde79e8edf9397c213048722e",
+    "version_output": "\"nextpnr-ice40\" -- Next Generation Place and Route (Version )"
+  },
+  "chipdb": {
+    "path": "/opt/homebrew/Cellar/icestorm/1.1/share/icestorm/chipdb/chipdb-8k.txt",
+    "sha256": "07a93c71edab68363db302a01cafde9bf9412397a63242c4a9d0de3a9b952087"
+  },
+  "nextpnr_install_receipt": {
+    "path": "/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/INSTALL_RECEIPT.json",
+    "sha256": "adc55bc37fdde5d6bcb5e07dfd6fae06312430213337ffa676b6accceb1578f4",
+    "content": {
+      "homebrew_version": "6.0.17-32-geb0d884",
+      "used_options": [],
+      "unused_options": [],
+      "built_as_bottle": true,
+      "poured_from_bottle": true,
+      "loaded_from_api": true,
+      "loaded_from_internal_api": true,
+      "installed_on_request": true,
+      "changed_files": [],
+      "time": 1791868673,
+      "source_modified_time": 1786320599,
+      "compiler": "clang",
+      "aliases": [],
+      "runtime_dependencies": [
+        {
+          "full_name": "icu4c@78",
+          "version": "78.3",
+          "revision": 0,
+          "bottle_rebuild": 0,
+          "pkg_version": "78.3",
+          "declared_directly": false
+        },
+        {
+          "full_name": "xz",
+          "version": "5.8.4",
+          "revision": 0,
+          "bottle_rebuild": 0,
+          "pkg_version": "5.8.4",
+          "declared_directly": false
+        },
+        {
+          "full_name": "lz4",
+          "version": "1.10.0",
+          "revision": 0,
+          "bottle_rebuild": 3,
+          "pkg_version": "1.10.0",
+          "declared_directly": false
+        },
+        {
+          "full_name": "zstd",
+          "version": "1.5.7",
+          "revision": 1,
+          "bottle_rebuild": 0,
+          "pkg_version": "1.5.7_1",
+          "declared_directly": false
+        },
+        {
+          "full_name": "boost",
+          "version": "1.92.0",
+          "revision": 0,
+          "bottle_rebuild": 0,
+          "pkg_version": "1.92.0",
+          "declared_directly": true
+        },
+        {
+          "full_name": "eigen",
+          "version": "5.0.1",
+          "revision": 0,
+          "bottle_rebuild": 0,
+          "pkg_version": "5.0.1",
+          "declared_directly": true
+        },
+        {
+          "full_name": "confuse",
+          "version": "3.4",
+          "revision": 0,
+          "bottle_rebuild": 0,
+          "pkg_version": "3.4",
+          "declared_directly": false
+        },
+        {
+          "full_name": "libusb",
+          "version": "1.0.30",
+          "revision": 0,
+          "bottle_rebuild": 0,
+          "pkg_version": "1.0.30",
+          "declared_directly": false
+        },
+        {
+          "full_name": "libftdi",
+          "version": "1.5",
+          "revision": 2,
+          "bottle_rebuild": 0,
+          "pkg_version": "1.5_2",
+          "declared_directly": false
+        },
+        {
+          "full_name": "ca-certificates",
+          "version": "2026-09-25",
+          "revision": 0,
+          "bottle_rebuild": 0,
+          "pkg_version": "2026-09-25",
+          "declared_directly": false
+        },
+        {
+          "full_name": "mpdecimal",
+          "version": "4.0.1",
+          "revision": 0,
+          "bottle_rebuild": 1,
+          "pkg_version": "4.0.1",
+          "declared_directly": false
+        },
+        {
+          "full_name": "openssl@4",
+          "version": "4.0.3",
+          "revision": 0,
+          "bottle_rebuild": 0,
+          "pkg_version": "4.0.3",
+          "declared_directly": false
+        },
+        {
+          "full_name": "readline",
+          "version": "8.3.6",
+          "revision": 0,
+          "bottle_rebuild": 0,
+          "pkg_version": "8.3.6",
+          "declared_directly": false
+        },
+        {
+          "full_name": "sqlite",
+          "version": "3.54.0",
+          "revision": 0,
+          "bottle_rebuild": 0,
+          "pkg_version": "3.54.0",
+          "declared_directly": false
+        },
+        {
+          "full_name": "python@3.14",
+          "version": "3.14.8",
+          "revision": 2,
+          "bottle_rebuild": 0,
+          "pkg_version": "3.14.8_2",
+          "declared_directly": true
+        },
+        {
+          "full_name": "icestorm",
+          "version": "1.1",
+          "revision": 0,
+          "bottle_rebuild": 0,
+          "pkg_version": "1.1",
+          "declared_directly": true
+        }
+      ],
+      "source": {
+        "spec": "stable",
+        "versions": {
+          "stable": "0.11.1",
+          "head": null,
+          "version_scheme": 0,
+          "compatibility_version": null
+        },
+        "path": "/Users/jasonrivera/Library/Caches/Homebrew/api/internal/packages.arm64_tahoe.jws.json",
+        "tap_git_head": null,
+        "tap": "homebrew/core"
+      },
+      "arch": "arm64",
+      "built_on": {
+        "os": "Macintosh",
+        "os_version": "macOS 26",
+        "cpu_family": "dunno",
+        "xcode": "26.6",
+        "clt": "26.6.0.0.1781586589",
+        "preferred_perl": "5.34"
+      }
+    }
+  },
+  "pins": {
+    "clk": {
+      "pin": "J3",
+      "location": [
+        0,
+        16,
+        1
+      ]
+    },
+    "serial_in": {
+      "pin": "L5",
+      "location": [
+        0,
+        6,
+        1
+      ]
+    },
+    "capture": {
+      "pin": "T6",
+      "location": [
+        12,
+        0,
+        1
+      ]
+    },
+    "serial_out": {
+      "pin": "D8",
+      "location": [
+        14,
+        33,
+        1
+      ]
+    }
+  },
+  "historical_protocol": {
+    "path": "results/2026-10-13-prospective/soc/routing-protocol.json",
+    "sha256": "db4d3d69b3c69f5e78140076e650ff98751e5fd8c2e134772cb4213ffa2cc5c1"
+  },
+  "limitations": "Same-host native inventory, including complete prior Yosys/ABC data. Not a hermetic OS image.",
+  "nextpnr_dynamic_dependencies": {
+    "method": "otool -L/-l transitive non-system Mach-O dependency closure",
+    "files": [
+      {
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_atomic.dylib",
+        "sha256": "cbb0ca3f0906999bfef951f408149bf581d1e3b0e184caf2f4f45696e5b2b6b0"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_chrono.dylib",
+        "sha256": "4c802654455de23abbcb0310d874b6ba7f738a8b19f9794ab77131760040d534"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_container.dylib",
+        "sha256": "8c83fa51d3d1cf9a173c021afe70910b9023cecdb5a8a5ead06a129a81e0ceab"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_date_time.dylib",
+        "sha256": "757b90310013555eae7452a4999435f889246f03eda86f4847f0cfb924179ee1"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_iostreams.dylib",
+        "sha256": "94d9323133d6e621377d7ea1599ecfc66af2e017134459fd9b513f97b5554940"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_program_options.dylib",
+        "sha256": "05431f6d7c770f2811fb859815b2227702b47fdb980999290842c54345ca3db0"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_random.dylib",
+        "sha256": "174c989e7156c84ef6647020f1494932c51fdeac2280368df4c03a902c551e0d"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_thread.dylib",
+        "sha256": "30588b0187d7e889a83b84c621024767d43b43b988c35dbc13160d9f86ea3af8"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/bin/nextpnr-ice40",
+        "sha256": "c3df2ed2fb9be697db09e3bb5332ce2474b5437bde79e8edf9397c213048722e"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/Python",
+        "sha256": "b112695af23f5e46d84a7c4ef6057603b70b94aacc32e9d548808c2875759d47"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/xz/5.8.3/lib/liblzma.5.dylib",
+        "sha256": "606a5184911c876c7446f932685183d8b348f5c9a95f764b01607be0e40b64ea"
+      },
+      {
+        "path": "/opt/homebrew/Cellar/zstd/1.5.7_1/lib/libzstd.1.5.7.dylib",
+        "sha256": "602d50cbe6fad0f0da6d1b73284ae3f75316015aea482ebd55614b6df2406b43"
+      }
+    ],
+    "edges": [
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_atomic.dylib",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_atomic.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_atomic.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_atomic.dylib",
+        "sha256": "cbb0ca3f0906999bfef951f408149bf581d1e3b0e184caf2f4f45696e5b2b6b0"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_chrono.dylib",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_chrono.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_chrono.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_chrono.dylib",
+        "sha256": "4c802654455de23abbcb0310d874b6ba7f738a8b19f9794ab77131760040d534"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_container.dylib",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_container.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_container.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_container.dylib",
+        "sha256": "8c83fa51d3d1cf9a173c021afe70910b9023cecdb5a8a5ead06a129a81e0ceab"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_date_time.dylib",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_date_time.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_date_time.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_date_time.dylib",
+        "sha256": "757b90310013555eae7452a4999435f889246f03eda86f4847f0cfb924179ee1"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_date_time.dylib",
+        "install_name": "@loader_path/libboost_container.dylib",
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_container.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_container.dylib",
+        "sha256": "8c83fa51d3d1cf9a173c021afe70910b9023cecdb5a8a5ead06a129a81e0ceab"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_iostreams.dylib",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_iostreams.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_iostreams.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_iostreams.dylib",
+        "sha256": "94d9323133d6e621377d7ea1599ecfc66af2e017134459fd9b513f97b5554940"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_iostreams.dylib",
+        "install_name": "/opt/homebrew/opt/xz/lib/liblzma.5.dylib",
+        "path": "/opt/homebrew/opt/xz/lib/liblzma.5.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/xz/5.8.3/lib/liblzma.5.dylib",
+        "sha256": "606a5184911c876c7446f932685183d8b348f5c9a95f764b01607be0e40b64ea"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_iostreams.dylib",
+        "install_name": "/opt/homebrew/opt/zstd/lib/libzstd.1.dylib",
+        "path": "/opt/homebrew/opt/zstd/lib/libzstd.1.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/zstd/1.5.7_1/lib/libzstd.1.5.7.dylib",
+        "sha256": "602d50cbe6fad0f0da6d1b73284ae3f75316015aea482ebd55614b6df2406b43"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_iostreams.dylib",
+        "install_name": "@loader_path/libboost_random.dylib",
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_random.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_random.dylib",
+        "sha256": "174c989e7156c84ef6647020f1494932c51fdeac2280368df4c03a902c551e0d"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_program_options.dylib",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_program_options.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_program_options.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_program_options.dylib",
+        "sha256": "05431f6d7c770f2811fb859815b2227702b47fdb980999290842c54345ca3db0"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_program_options.dylib",
+        "install_name": "@loader_path/libboost_container.dylib",
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_container.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_container.dylib",
+        "sha256": "8c83fa51d3d1cf9a173c021afe70910b9023cecdb5a8a5ead06a129a81e0ceab"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_random.dylib",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_random.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_random.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_random.dylib",
+        "sha256": "174c989e7156c84ef6647020f1494932c51fdeac2280368df4c03a902c551e0d"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_thread.dylib",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_thread.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_thread.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_thread.dylib",
+        "sha256": "30588b0187d7e889a83b84c621024767d43b43b988c35dbc13160d9f86ea3af8"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_thread.dylib",
+        "install_name": "@loader_path/libboost_atomic.dylib",
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_atomic.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_atomic.dylib",
+        "sha256": "cbb0ca3f0906999bfef951f408149bf581d1e3b0e184caf2f4f45696e5b2b6b0"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_thread.dylib",
+        "install_name": "@loader_path/libboost_chrono.dylib",
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_chrono.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_chrono.dylib",
+        "sha256": "4c802654455de23abbcb0310d874b6ba7f738a8b19f9794ab77131760040d534"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_thread.dylib",
+        "install_name": "@loader_path/libboost_container.dylib",
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_container.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_container.dylib",
+        "sha256": "8c83fa51d3d1cf9a173c021afe70910b9023cecdb5a8a5ead06a129a81e0ceab"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_thread.dylib",
+        "install_name": "@loader_path/libboost_date_time.dylib",
+        "path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_date_time.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_date_time.dylib",
+        "sha256": "757b90310013555eae7452a4999435f889246f03eda86f4847f0cfb924179ee1"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/bin/nextpnr-ice40",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_atomic.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_atomic.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_atomic.dylib",
+        "sha256": "cbb0ca3f0906999bfef951f408149bf581d1e3b0e184caf2f4f45696e5b2b6b0"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/bin/nextpnr-ice40",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_chrono.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_chrono.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_chrono.dylib",
+        "sha256": "4c802654455de23abbcb0310d874b6ba7f738a8b19f9794ab77131760040d534"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/bin/nextpnr-ice40",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_container.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_container.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_container.dylib",
+        "sha256": "8c83fa51d3d1cf9a173c021afe70910b9023cecdb5a8a5ead06a129a81e0ceab"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/bin/nextpnr-ice40",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_date_time.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_date_time.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_date_time.dylib",
+        "sha256": "757b90310013555eae7452a4999435f889246f03eda86f4847f0cfb924179ee1"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/bin/nextpnr-ice40",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_iostreams.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_iostreams.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_iostreams.dylib",
+        "sha256": "94d9323133d6e621377d7ea1599ecfc66af2e017134459fd9b513f97b5554940"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/bin/nextpnr-ice40",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_program_options.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_program_options.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_program_options.dylib",
+        "sha256": "05431f6d7c770f2811fb859815b2227702b47fdb980999290842c54345ca3db0"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/bin/nextpnr-ice40",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_random.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_random.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_random.dylib",
+        "sha256": "174c989e7156c84ef6647020f1494932c51fdeac2280368df4c03a902c551e0d"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/bin/nextpnr-ice40",
+        "install_name": "/opt/homebrew/opt/boost/lib/libboost_thread.dylib",
+        "path": "/opt/homebrew/opt/boost/lib/libboost_thread.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/boost/1.92.0/lib/libboost_thread.dylib",
+        "sha256": "30588b0187d7e889a83b84c621024767d43b43b988c35dbc13160d9f86ea3af8"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/bin/nextpnr-ice40",
+        "install_name": "/opt/homebrew/opt/python@3.14/Frameworks/Python.framework/Versions/3.14/Python",
+        "path": "/opt/homebrew/opt/python@3.14/Frameworks/Python.framework/Versions/3.14/Python",
+        "resolved_path": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/Python",
+        "sha256": "b112695af23f5e46d84a7c4ef6057603b70b94aacc32e9d548808c2875759d47"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/Python",
+        "install_name": "/opt/homebrew/opt/python@3.14/Frameworks/Python.framework/Versions/3.14/Python",
+        "path": "/opt/homebrew/opt/python@3.14/Frameworks/Python.framework/Versions/3.14/Python",
+        "resolved_path": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/Python",
+        "sha256": "b112695af23f5e46d84a7c4ef6057603b70b94aacc32e9d548808c2875759d47"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/xz/5.8.3/lib/liblzma.5.dylib",
+        "install_name": "/opt/homebrew/opt/xz/lib/liblzma.5.dylib",
+        "path": "/opt/homebrew/opt/xz/lib/liblzma.5.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/xz/5.8.3/lib/liblzma.5.dylib",
+        "sha256": "606a5184911c876c7446f932685183d8b348f5c9a95f764b01607be0e40b64ea"
+      },
+      {
+        "loader": "/opt/homebrew/Cellar/zstd/1.5.7_1/lib/libzstd.1.5.7.dylib",
+        "install_name": "/opt/homebrew/opt/zstd/lib/libzstd.1.dylib",
+        "path": "/opt/homebrew/opt/zstd/lib/libzstd.1.dylib",
+        "resolved_path": "/opt/homebrew/Cellar/zstd/1.5.7_1/lib/libzstd.1.5.7.dylib",
+        "sha256": "602d50cbe6fad0f0da6d1b73284ae3f75316015aea482ebd55614b6df2406b43"
+      }
+    ],
+    "boundary": "System /usr/lib and /System/Library, macOS loader and kernel are not frozen."
+  }
+}
