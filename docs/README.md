@@ -25,6 +25,7 @@ RTL synthesis of synthetic expressions.
 
 | Task | Read |
 | --- | --- |
+| Inspect all 32 verified original/CSD hardware pairs and carry tradeoffs | [V10 hardware results](v10-csd-hardware-results.md), [V10d protocol](v10d-csd-hardware-protocol.md) |
 | Execute pinned Embench programs and reconcile Spike traces | [Toolchain and workload collection](toolchain.md) |
 | Extract legal two-input, one-output instruction groups and verify substitutions | [Candidate contract](candidates.md) |
 | Generate RV32 RTL, check its outputs, and measure isolated LUT4 resources | [RTL verification and synthesis](synthesis.md) |

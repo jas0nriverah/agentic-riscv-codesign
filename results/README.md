@@ -85,3 +85,7 @@ write new outputs under `generated/` or `work/`.
 [Fixed-router development study](2026-10-14-development-router/README.md): two predeclared input-only gates on existing fitting-only OOF predictions; all controls and seeds retained.
 
 [Mapping-feature development study](2026-10-14-development-mapping/README.md): fixed 23-descriptor ablation, 30 matched fits, all three seeds and nine strata. Development only; fresh V6 validation is a separate lineage.
+
+## Verified constant-multiply hardware
+
+[V10d](2026-10-15-v10d-csd-hardware/README.md) retains all 32 fixed original/CSD pairs, 64 fresh measurements and the complete raw-evidence audit. LUT4 decreases in 31 pairs and ties once; carry increases in 12. The prior V10c SAT failure remains unchanged. No timing or CPU gain is inferred.
