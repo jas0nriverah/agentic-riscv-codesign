@@ -1,0 +1,33 @@
+{
+  "schema": "isaforge-v10-csd-source-proof-v2",
+  "original_formula": "mul(sub(andi(in0,63),in1),addi(0,1364))",
+  "rewritten_formula": "add(add(add(add(slli(sub(andi(in0,63),in1),10),slli(sub(andi(in0,63),in1),8)),slli(sub(andi(in0,63),in1),6)),slli(sub(andi(in0,63),in1),4)),slli(sub(andi(in0,63),in1),2))",
+  "method": "universal QF_BV32 operand lemma plus exact whole-expression AST congruence",
+  "inputs": [
+    "in0:32",
+    "in1:32"
+  ],
+  "assumptions": [],
+  "timeout_ms": 60000,
+  "result": "unsat",
+  "elapsed_seconds": 6.4808250830101315,
+  "query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun word () (_ BitVec 32))\n(assert\n (let ((?x18 (bvadd (bvadd (bvshl word (_ bv10 32)) (bvshl word (_ bv8 32))) (bvshl word (_ bv6 32)))))\n(and (distinct (bvmul word (bvadd (_ bv0 32) (_ bv1364 32))) (bvadd (bvadd ?x18 (bvshl word (_ bv4 32))) (bvshl word (_ bv2 32)))) true)))\n(check-sat)\n",
+  "query_sha256": "f60fe9d294c8fc431ad9c3add351fb01cec97d268a376518ee2200d553c3219c",
+  "solver_version": "4.15.4",
+  "query_scope": "universal unconstrained word:32; no range or reachability assumptions",
+  "congruence": {
+    "schema": "isaforge-v10-csd-congruence-v1",
+    "replacement_path": [],
+    "operand_formula": "sub(andi(in0,63),in1)",
+    "constant_u32": 1364,
+    "original_product": "mul(sub(andi(in0,63),in1),addi(0,1364))",
+    "rewritten_product": "add(add(add(add(slli(sub(andi(in0,63),in1),10),slli(sub(andi(in0,63),in1),8)),slli(sub(andi(in0,63),in1),6)),slli(sub(andi(in0,63),in1),4)),slli(sub(andi(in0,63),in1),2))",
+    "lemma_original_formula": "mul(in0,addi(0,1364))",
+    "lemma_rewritten_formula": "add(add(add(add(slli(in0,10),slli(in0,8)),slli(in0,6)),slli(in0,4)),slli(in0,2))",
+    "checked": "All enclosing/unmodified AST nodes identical; each term uses the exact original operand AST",
+    "logical_rule": "Universal word identity instantiated with operand, then equality congruence through identical whole context"
+  },
+  "whole_expression_query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun in1 () (_ BitVec 32))\n(declare-fun in0 () (_ BitVec 32))\n(assert\n (let ((?x18 (bvadd (bvshl (bvsub (bvand in0 (_ bv63 32)) in1) (_ bv10 32)) (bvshl (bvsub (bvand in0 (_ bv63 32)) in1) (_ bv8 32)))))\n(let ((?x24 (bvadd (bvadd ?x18 (bvshl (bvsub (bvand in0 (_ bv63 32)) in1) (_ bv6 32))) (bvshl (bvsub (bvand in0 (_ bv63 32)) in1) (_ bv4 32)))))\n(and (distinct (bvmul (bvsub (bvand in0 (_ bv63 32)) in1) (bvadd (_ bv0 32) (_ bv1364 32))) (bvadd ?x24 (bvshl (bvsub (bvand in0 (_ bv63 32)) in1) (_ bv2 32)))) true))))\n(check-sat)\n",
+  "whole_expression_query_sha256": "b5c2f7b96f004244987a4b19b1988c764046b0a70a7f8b16e94ef75603634343",
+  "whole_expression_query_status": "diagnostic-only; not solved in amended preparation"
+}

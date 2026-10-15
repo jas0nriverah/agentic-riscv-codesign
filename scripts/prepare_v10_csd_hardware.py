@@ -24,13 +24,15 @@ CONSTANTS = (11, 44, 85, 340, 341, 511, 1364, 2044)
 CONTEXTS = ('direct_product', 'add_after_product', 'sub_before_product', 'masked_sub_before_product')
 V9 = 'results/2026-10-15-v9-coverage-development'
 V9_CANDIDATES_SHA256 = '74b1ef78b3d97ab34c940f464345bef21fd8f2441a3e09d6cb21daaa686a5354'
-PROOF_TIMEOUT_MS = 5000
+PROOF_TIMEOUT_MS = 60000
 RTL_TIMEOUT_SECONDS = 60
 VERIFY_SEED = 2026101522
 FAILED_PREPARATION_COMMIT = '05b19728803d96a5754ed695f543a97fc49ba1b1'
 FAILED_PREPARATION = 'results/2026-10-15-v10-csd-hardware'
 IMPLEMENTATION_FAILURE_COMMIT = '978025afd18c49226f6b04414b885c90daca5483'
 IMPLEMENTATION_FAILURE = 'results/2026-10-15-v10a-csd-hardware'
+LEMMA_TIMEOUT_COMMIT = '7204c571c6274d0bd0bdb2ccdfe1200ef96c105e'
+LEMMA_TIMEOUT_PREPARATION = 'results/2026-10-15-v10b-csd-hardware'
 
 
 def require(condition, message):
@@ -392,6 +394,22 @@ def amendment_record(repository=ROOT):
     for entry in implementation_review['sources']:
         historical = subprocess.check_output(['git', 'show', IMPLEMENTATION_FAILURE_COMMIT + ':' + entry['path']], cwd=repository)
         require(digest(historical) == entry['sha256'], 'Failed implementation source lineage differs')
+    timeout_root = repository / LEMMA_TIMEOUT_PREPARATION
+    timeout_paths = [timeout_root / name for name in ('failure-review.json', 'preparation-failure.json', 'preparation-first.log')]
+    timeout_paths.extend(sorted((timeout_root / 'proofs').glob('*.json')))
+    require(len(timeout_paths) == 28, 'Exact source-lemma timeout attempt requires25 proof records')
+    timeout_evidence = []
+    for path in timeout_paths:
+        relative = path.relative_to(repository).as_posix()
+        historical = subprocess.check_output(['git', 'show', LEMMA_TIMEOUT_COMMIT + ':' + relative], cwd=repository)
+        require(digest(historical) == sha(path), 'Preserved source-lemma timeout differs from committed evidence')
+        timeout_evidence.append({'path': relative, 'sha256': digest(historical)})
+    timeout_review = read(timeout_root / 'failure-review.json')
+    require(timeout_review.get('new_area_measurements') == timeout_review.get('native_rtl_proof_jobs')
+        == timeout_review.get('new_model_fits') == 0, 'Uniform budget amendment must precede hardware outcomes')
+    for entry in timeout_review['sources']:
+        historical = subprocess.check_output(['git', 'show', LEMMA_TIMEOUT_COMMIT + ':' + entry['path']], cwd=repository)
+        require(digest(historical) == entry['sha256'], 'Source-lemma timeout source lineage differs')
     return {'schema': 'isaforge-v10a-premeasurement-amendment-v1',
         'status': 'parent-approved-premeasurement-proof-composition-amendment',
         'previous_commit': FAILED_PREPARATION_COMMIT, 'previous_root': FAILED_PREPARATION,
@@ -400,9 +418,14 @@ def amendment_record(repository=ROOT):
             'evidence': implementation_evidence, 'source_files': implementation_review['sources'],
             'change': 'Dedicated Z3 Context perquery for exact stable serialization; no relaxed identity check',
             'proof_method_budget_cohort_rtl_gate_changed': False},
+        'uniform_lemma_budget_amendment': {'commit': LEMMA_TIMEOUT_COMMIT, 'root': LEMMA_TIMEOUT_PREPARATION,
+            'evidence': timeout_evidence, 'source_files': timeout_review['sources'],
+            'reason': 'First24 lemmas UNSAT; direct1364 returnedunknown/timeout at5000ms, beforeanyhardwareoutcomes',
+            'old_timeout_ms': 5000, 'new_timeout_ms': PROOF_TIMEOUT_MS, 'scope': 'all32 pairs uniformly, not selective',
+            'maximum_further_timeout_increments': 0, 'method_encoding_inputs_rewrites_rtl_gate_changed': False},
         'reason': 'Third full-expression query timed out at fixed5000ms; retained with no area/nativeRTL/fits and no silent retry',
         'change': 'Universal unconstrained-word product lemma plus exact AST substitution/congruence; full expression queries retained diagnostic-only',
-        'unchanged': ['same32 original formulas and CSD rewrites', '5000ms lemma timeout', '60s actual RTL pair miter',
+        'unchanged': ['same32 original formulas and CSD rewrites', '60s actual RTL pair miter',
             '64 fresh paired synthesis jobs', '2148 physical verification samples perarm', 'all32 complete primary endpoint'],
         'new_area_outcomes_read': False, 'native_rtl_jobs': 0, 'model_fits': 0}
 

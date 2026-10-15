@@ -63,7 +63,8 @@ change to the 32 inputs, rewrites, budgets, physical proof gate or endpoints.
 
 Amended preparation proves the product lemma `word*K == CSD(word)` for a fresh
 **unconstrained** 32-bit word, with one QF_BV32 check per pair. Only UNSAT is
-accepted, at the same fixed 5,000 ms timeout. The checker then compares the two
+accepted. The final uniformly amended timeout is 60,000 ms for every pair
+(the retained earlier attempts used 5,000 ms). The checker then compares the two
 whole expression ASTs recursively: every node outside the one multiplication
 must be identical, including constants and input names. Every CSD term must use
 the exact original operand AST; foreign operands are rejected. The certificate
@@ -89,7 +90,19 @@ The approved implementation fix gives every query a dedicated Z3 context and
 tests exact query-byte stability after unrelated AST allocation, garbage
 collection and a completed proof. It does not relax hash checks or change the
 theorem, inputs, rewrite, proof budget or physical gates. Both amendments are
-bound in the new V10b preparation; neither failed attempt ran native RTL/area.
+bound in the preparation; neither failed attempt ran native RTL/area.
+
+V10b then proved the first 24 lemmas, but direct constant 1364 timed out at
+5,000 ms. Its complete evidence and source are preserved at commit
+`7204c571c6274d0bd0bdb2ccdfe1200ef96c105e`,
+[lemma timeout record](../results/2026-10-15-v10b-csd-hardware/failure-review.json).
+Before any hardware outcome, the parent approved a **uniform 60-second budget
+for all 32 source lemmas** in V10c. This changes no candidate, rewrite, encoding,
+congruence rule or actual-RTL proof budget. No further timeout increase is
+authorized: another unknown/timeout must remain retained and would require a
+separate verified algebraic/factorization proof design. It cannot trigger a
+longer brute-force retry. All three preserved attempts are authenticated by the
+bound premeasurement amendment record.
 
 Source proofs do not validate the emitter. Preparation therefore also seals a
 miter made from the actual two emitted modules; only their module names change.
@@ -158,9 +171,9 @@ needs its own emitter version and target/training lineage.
 ```sh
 .venv/bin/python -m unittest discover -s tests -p 'test_prepare_v10_csd_hardware.py' -v
 .venv/bin/python scripts/prepare_v10_csd_hardware.py \
-  --root results/2026-10-15-v10b-csd-hardware
+  --root results/2026-10-15-v10c-csd-hardware
 .venv/bin/python scripts/prepare_v10_csd_hardware.py \
-  --root results/2026-10-15-v10b-csd-hardware --validate-only
+  --root results/2026-10-15-v10c-csd-hardware --validate-only
 ```
 
 Preparation creates its output directory exclusively; preserve failed first

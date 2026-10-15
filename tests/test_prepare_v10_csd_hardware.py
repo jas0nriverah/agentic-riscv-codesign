@@ -28,7 +28,7 @@ def proof_fixture(pair):
     import z3
     return {'schema': 'isaforge-v10-csd-source-proof-v2', 'original_formula': pair['formula'],
         'rewritten_formula': pair['rewritten_formula'], 'method': 'universal QF_BV32 operand lemma plus exact whole-expression AST congruence',
-        'inputs': ['in0:32', 'in1:32'], 'assumptions': [], 'timeout_ms': 5000, 'result': 'unsat',
+        'inputs': ['in0:32', 'in1:32'], 'assumptions': [], 'timeout_ms': p.PROOF_TIMEOUT_MS, 'result': 'unsat',
         'query_smt2': query, 'query_sha256': p.digest(query.encode()), 'solver_version': z3.get_version_string(),
         'congruence': certificate, 'query_scope': 'universal unconstrained word:32; no range or reachability assumptions',
         'whole_expression_query_smt2': whole, 'whole_expression_query_sha256': p.digest(whole.encode()),
@@ -139,7 +139,7 @@ class FixedStudyTests(unittest.TestCase):
     def test_fixed_recipe_complete_physical_and_reporting_scope(self):
         recipe = p.fixed_recipe()
         self.assertEqual(recipe['fresh_synthesis_jobs'], 64)
-        self.assertEqual(recipe['source_equivalence']['timeout_ms'], 5000)
+        self.assertEqual(recipe['source_equivalence']['timeout_ms'], 60000)
         self.assertEqual(recipe['rtl_equivalence']['timeout_seconds'], 60)
         self.assertIn('sat -timeout 60 -verify -prove trigger 0 -show-inputs -show-outputs', recipe['rtl_equivalence']['script_commands'])
         self.assertEqual(recipe['measurement']['vectors_per_arm'], 2148)
