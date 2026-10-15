@@ -1,5 +1,8 @@
 # Documentation
 
+- [V9 adaptation development](v9-adaptation-results.md): fixed paid-label correction, independent arithmetic audit and publication figure.
+- [Training coverage diagnosis](v9-training-coverage-direction.md): tree-level evidence and fixed augmentation direction.
+
 Start with [methodology](methodology.md) for the experimental design and
 [results](results.md) for the conclusions and limitations. The
 [result archive index](../results/README.md) identifies the evidence belonging

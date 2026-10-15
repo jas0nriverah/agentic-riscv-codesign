@@ -1,5 +1,8 @@
 # Research result archives
 
+- [V9 adaptation development](2026-10-15-v9-adaptation-development/README.md): 1.94% remaining-case MAE reduction after three charged reveals per family; consumed development only.
+- [Training support diagnosis](2026-10-15-development-diagnosis/README.md): archived leaf-level analysis with no new fits or labels.
+
 These directories preserve completed experimental stages, including negative
 results, model freezes, predictions, and measurement provenance. Read
 [current conclusions](../docs/results.md) and [methodology](../docs/methodology.md)

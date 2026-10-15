@@ -19,3 +19,12 @@ Our inference from these results: data coverage and explicitly budgeted adaptati
 5. Report the practical objective: quality of the chosen verified instruction per measurement cost, with processor integration as a separate endpoint. A lower area-prediction error does not establish lower CPU latency.
 
 The next research claim should be tied to a matched target, dataset boundary and information budget. This avoids chasing a published percentage obtained with a different amount of synthesis information.
+
+
+## Further evidence for targeted data coverage
+
+The expanded **MasterRTL journal paper (2025)** evaluates generated training RTL as well as its original prediction framework. Its augmentation study adds 45 designs (30 graph-generated and 15 LLM-generated) and examines TNS transfer and path-level slack, not our small-circuit LUT4 task. The authors report stronger gains from graph generation than LLM generation and improved results from combining sources, particularly with fewer real training designs. They emphasize synthesizability, diversity and resemblance to real design structure. This supports testing representative training compositions; it does not establish that arbitrary synthetic circuits improve area prediction. [Author-hosted paper, Sections II-F and III-F, Figure 14](https://zhiyaoxie.com/files/TCAD25_MasterRTL.pdf).
+
+A **2025 TinyML resource estimator** builds constant-specific multiplication resource tables and models dense-layer composition. On PYNQ-Z2, it reports 0.82% average LUT RRMSE for randomized dense-layer experiments with generic multiplication implemented in LUTs, but 27% for the smallest evaluated full MLP; omitted activation costs become proportionally important there. RRMSE is not MAPE, and this is a specialized hls4ml/Xilinx task. Our inference is that primitive coverage and composition costs deserve explicit tests, especially for small circuits where one missing operation matters. [Paper, Sections 3–4](https://mdpi-res.com/d_attachment/electronics/electronics-14-00247/article_deploy/electronics-14-00247.pdf?version=1736402512).
+
+Accordingly, V9 separates two questions: a fixed paid-label residual correction, and a 48-circuit coverage augmentation with the existing mapping217 features and ET300 learner. Both use consumed applications for development; a later untouched source-family evaluation is required.

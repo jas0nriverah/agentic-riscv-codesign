@@ -6,7 +6,7 @@ ISAForge explores whether machine learning can help choose useful RISC-V instruc
 
 The current learned target is **isolated iCE40 LUT4 count**. Processor speedup is evaluated separately through RTL simulation and routing. This is a research prototype with reproducible measured evidence; an LLM-driven selector remains future work.
 
-[Methodology](docs/methodology.md) · [V8 application results](docs/v8-application-results.md) · [V6 results](docs/v6-results.md) · [External transfer](docs/external-v5-results.md) · [All results](docs/results.md) · [Documentation](docs/README.md) · [Evidence index](results/README.md)
+[Methodology](docs/methodology.md) · [V9 development](docs/v9-adaptation-results.md) · [V8 application results](docs/v8-application-results.md) · [V6 results](docs/v6-results.md) · [External transfer](docs/external-v5-results.md) · [All results](docs/results.md) · [Documentation](docs/README.md) · [Evidence index](results/README.md)
 
 ## System architecture
 
@@ -26,7 +26,13 @@ The [methodology](docs/methodology.md) defines the data splits, feature boundary
 
 ## Results at a glance
 
-### Latest: complete application-pool transfer
+### Latest development: measured-example correction
+
+A fixed local residual correction uses three previously measured examples per family and improves MAE on the remaining circuits **3.3450 → 3.2800 LUT4 (1.94%)**. A global offset worsens error. This is development on consumed V8 data; the changing unqueried pools and tiny FFT denominator are explicit. The hardest constant-multiply misses remain unchanged because the queried examples provide no local forest support. [Results, publication figure and independent replay](docs/v9-adaptation-results.md).
+
+A [tree-level coverage audit](docs/v9-training-coverage-direction.md) identifies missing constant-product compositions in the original training data. A fixed 48-circuit augmentation is being prepared to test that bottleneck with the existing learner and features.
+
+### Complete application-pool transfer
 
 Six frozen models predicted **146 original circuits across 152 application rows** before fresh synthesis. The primary panel covers four families and 150 rows; related-source isqrt is secondary. All circuits passed **313,608 RTL comparisons**, with zero synthesis failures.
 
