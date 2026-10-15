@@ -16,3 +16,7 @@ python scripts/audit_v10d_hardware.py --root results/2026-10-15-v10d-csd-hardwar
 ```
 
 All 32 source proofs remain bound. Universal parsed-RTL equivalence is distinct from the 2,148 sampled mapped-netlist checks per arm. Original/CSD counts remain separate; no fitted model or existing label was changed.
+
+## Portable evidence replay
+
+A [fresh tracked-blob replay](portable-checkout-review.json) at commit `24007ee1ac209cd6a7f5af2ab7da5337a8bb0dad` reproduced the audit byte-for-byte. Its 523-file temporary tree had an empty `PATH`; runtime guards blocked native subprocesses and reads from the original repository. No hardware tool, model, Git history or untracked working file was needed. [File inventory](portability-review/tracked-blob-inventory.json).
