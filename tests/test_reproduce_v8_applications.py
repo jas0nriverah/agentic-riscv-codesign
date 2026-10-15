@@ -2,6 +2,7 @@
 import copy
 import importlib.util
 import json
+import math
 from pathlib import Path
 import sys
 import types
@@ -50,7 +51,7 @@ def test_authenticated_replay_allows_only_evaluation_time_to_change(replay):
 
 
 @pytest.mark.parametrize('key,value', [('primary', 9.0), ('complete', 1), ('nested_timestamp', 'changed')])
-def test_reference_arithmetic_type_or_nested_timestamp_changes_fail(replay, key, value):
+def test_reference_arithmetic_type_or_nested_timestamp_changes_fail(replay, key, value, capsys):
     root, output, reference, actual, _ = replay
     reference['scores'][key] = value
     (root / 'evaluation.json').write_text(json.dumps(reference))
@@ -58,6 +59,10 @@ def test_reference_arithmetic_type_or_nested_timestamp_changes_fail(replay, key,
         m.reproduce(root, output, skip_figures=True)
     assert (output / 'evaluation.json').is_file()
     assert not (output / 'reproduction.json').exists()
+    mismatch = json.loads((output / 'mismatch.json').read_text())
+    assert mismatch['difference_count'] == 1
+    assert mismatch['differences'][0]['path'] == '/scores/' + key
+    assert json.loads(capsys.readouterr().err) == mismatch
 
 
 def test_replay_preserves_existing_output_without_scoring(replay):
@@ -108,3 +113,46 @@ def test_unpublished_evaluation_does_not_create_output(replay):
     with pytest.raises(ValueError, match='Published V8'):
         m.reproduce(root, output, skip_figures=True)
     assert not output.exists() and not calls
+
+
+def test_one_ulp_diagnostic_reports_the_exact_field_without_accepting_it(replay):
+    root, output, _, actual, _ = replay
+    actual['scores']['primary'] = math.nextafter(1.5, math.inf)
+    with pytest.raises(ValueError, match='differs from published'):
+        m.reproduce(root, output, skip_figures=True)
+    report = json.loads((output / 'mismatch.json').read_text())
+    difference = report['differences'][0]
+    assert difference['expected'] == 1.5
+    assert difference['actual'] == actual['scores']['primary']
+    assert difference['numeric_difference']['absolute'] == math.ulp(1.5)
+    assert difference['numeric_difference']['ulps'] == 1.0
+    assert not (output / 'reproduction.json').exists()
+
+
+def test_diagnostics_bound_output_but_count_every_mismatch():
+    report = m.difference_report({'values': list(range(1000))}, {'values': list(range(1, 1001))}, limit=2)
+    assert report['difference_count'] == 1000
+    assert report['reported_difference_count'] == 2 and report['truncated']
+    assert [d['path'] for d in report['differences']] == ['/values/0', '/values/1']
+    assert len(json.dumps(report)) < 2000
+
+
+def test_diagnostic_paths_preserve_types_structure_and_nested_timestamps():
+    expected = {'x/y~z': [True], 'missing': {'large': list(range(1000))},
+                'evaluated_at_utc': 'ignored', 'nested': {'evaluated_at_utc': 'before'}}
+    actual = {'x/y~z': [1, 2], 'extra': False,
+              'evaluated_at_utc': 'different', 'nested': {'evaluated_at_utc': 'after'}}
+    report = m.difference_report(expected, actual)
+    by_path = {d['path']: d for d in report['differences']}
+    assert report['difference_count'] == 5
+    assert by_path['/x~1y~0z']['reason'] == 'list_length'
+    assert by_path['/x~1y~0z/0']['reason'] == 'type'
+    assert by_path['/missing']['expected']['length'] == 1
+    assert by_path['/nested/evaluated_at_utc']['actual'] == 'after'
+    assert '/evaluated_at_utc' not in by_path
+
+
+@pytest.mark.parametrize('limit', [0, 1001, True])
+def test_diagnostic_limit_is_bounded(limit):
+    with pytest.raises(ValueError, match='Diagnostic limit'):
+        m.difference_report({}, {}, limit=limit)
