@@ -50,9 +50,9 @@ generated/candidates/%.json: generated/traces/%.jsonl generated/programs/%.elf s
 candidates: $(PROGRAMS:%=generated/candidates/%.json)
 
 # Research entry points. Activate .venv first, or set PYTHON=.venv/bin/python.
-.PHONY: help test reproduce reproduce-v4 reproduce-v5 reproduce-external-v5 reproduce-v6 reproduce-v8 reproduce-v9-coverage diagram
+.PHONY: help test reproduce reproduce-v4 reproduce-v5 reproduce-external-v5 reproduce-v6 reproduce-v8 reproduce-v9-coverage reproduce-v10d-hardware diagram
 help:
-	@echo 'Research: make test | make reproduce | make reproduce-v4 | make reproduce-v5 | make reproduce-external-v5 | make reproduce-v6 | make reproduce-v8 | make reproduce-v9-coverage | make diagram'
+	@echo 'Research: make test | make reproduce | make reproduce-v4 | make reproduce-v5 | make reproduce-external-v5 | make reproduce-v6 | make reproduce-v8 | make reproduce-v9-coverage | make reproduce-v10d-hardware | make diagram'
 	@echo 'make reproduce replays frozen scores/audit/figures; no training or synthesis.'
 	@echo 'Hardware collection: make all | make run | make trace | make candidates'
 	@echo 'See docs/README.md for methodology, results, and pinned toolchains.'
@@ -87,6 +87,9 @@ reproduce-v8:
 
 reproduce-v9-coverage:
 	$(PYTHON) scripts/reproduce_v9_coverage.py
+
+reproduce-v10d-hardware:
+	$(PYTHON) scripts/audit_v10d_hardware.py --root results/2026-10-15-v10d-csd-hardware --output generated/reproduction/v10d/independent-audit.json
 
 diagram:
 	$(PYTHON) scripts/render_architecture.py

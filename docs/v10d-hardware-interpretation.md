@@ -85,3 +85,5 @@ The universal proof concerns accepted parsed original/CSD RTL. Mapped
 verification remains sampled at 2,148 vectors per arm. No CPU integration,
 timing, power, ASIC-area or independent-generalization result follows from
 this area study. This interpretation introduces no new native run or label.
+
+[Research rationale for the timing and model follow-ups](v10d-research-direction.md) connects these choices to the primary constant-multiplication literature.
