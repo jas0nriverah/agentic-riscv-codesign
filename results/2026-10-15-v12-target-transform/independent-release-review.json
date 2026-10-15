@@ -1,0 +1,71 @@
+{
+  "schema": "isaforge-v12-independent-release-review-v1",
+  "status": "go",
+  "reviewed_at_utc": "2026-10-15T22:43:57.747793+00:00",
+  "freeze_commit": "e1f0edcaa13c24be87adb835e86f30c3acb83a5e",
+  "preparation_sha256": "3934bf7dd0ef2c6c5dbc47e3ddd3a627f32523a9861c41697baa45e6d4e35377",
+  "independent_input_audit_sha256": "6fe78bac2a80b5fbaffe5fd0c3f0d7c97447ac3f82d5ea39c3ae068aa62c52f0",
+  "source_hashes": {
+    "scripts/develop_v12_target_transform.py": "953ce5f40f33b580ac22ae5f1128ee115ded6cb8ed93d2b176908698d1f2ff55",
+    "tests/test_develop_v12_target_transform.py": "3a4978da5bc0d955e0919398a86e5d7ff94f3fbc74c551711050336b0191f54b",
+    "scripts/audit_v12_target_transform.py": "20876508dd51db408ae3a70110c4dd9135f00178e3bfbd6761cc31f59f3804cf",
+    "tests/test_audit_v12_target_transform.py": "67a96434a95a3a42d4d098aa6fb477813fc5662f2476a9544ff6dd7657be579d",
+    "docs/v12-model-direction.md": "b0a7f5c730f450b1ccda5bfe04a5581d8e44a9bb37a5fb25467b75392f28ed5e"
+  },
+  "blocking_findings": [],
+  "tests": {
+    "passed": 34,
+    "elapsed_seconds": 7.71,
+    "real_fits": 0,
+    "native_processes": 0,
+    "method": "Synthetic spies prevent real ExtraTrees fitting and native execution; exact30slot,failedslot,noretry,save/loadpoints,loss/metrics,groupingpoison,andrelease/runtimeguards.",
+    "log": "v12-independent-final-source-tests.log",
+    "log_sha256": "89d1b09ab7eb2a370c27a3fc03cf11fcfd7faf1d9640a461f459251710c37b92"
+  },
+  "actual_input_review": {
+    "independent_audit_replayed_exact": true,
+    "manifest_only_repository_read_guard_passed": true,
+    "undeclared_reads": [],
+    "bound_files": 74,
+    "rows": 1713,
+    "selected_float32_columns": 217,
+    "matrix_bytes": 1486884,
+    "components": 528,
+    "float32_collision_classes": 140,
+    "fold_validation_counts": [
+      366,
+      373,
+      339,
+      317,
+      318
+    ],
+    "all9strata_in_every_training_partition": true,
+    "heldout_rows_exactly_once": true,
+    "training_validation_disjoint": true,
+    "target_poison_groups_and_folds_unchanged": true
+  },
+  "model_contract": [
+    "Exactly2targetviews x5newclosedfolds x3pairedseeds=30maximumfits; nofinalrefit,retry,featureextraction,newphysicaltarget,normalizationquery,oroutsideevaluationtarget.",
+    "Rawtarget vslog1p(target),same217float32features/300ExtraTrees/squaredloss/equalformulaweights; expm1 AFTERforestmean,notmeanofinverses orsmearing.",
+    "Same original_generic_gate_count==0 override afterdecode forbothviews; semanticzero/wire doesnotrelabelfrozenoriginalarea.",
+    "Nine-stratum macroOOFMAE(log-minus-raw) perseed thenmeanover3seeds; cap64FA/FR,tails,underpredictionanddenominators remainseparate.",
+    "TransitiveV5components,savedacceptedcanonical/commutativealiases,float32collisions,andwholecoveragecontexts; no newglobal skeletonunions; deterministiclabelfreefoldassignment.",
+    "Git-boundinput/sourcefreeze,exactparentapproval,independentauditschema/source/prepidentity,UTCprep<=review<=claim<=fitstart,andperfit/finalruntimefilehashguards."
+  ],
+  "resolved_review_items": [
+    "Requiredinput-auditorfilenamescorrected.",
+    "Runtimefiles nowcheckedateveryfitandafterfinalfit.",
+    "UTCapproval/claim/fitstartchronology enforced.",
+    "Restricted-high-productcounts clarifiedasinputdiagnostics,notunannouncedsubsetscore."
+  ],
+  "stale_read_correction": "An earlier review concern referenced pre-final auditor code. Current20876508 already removed the unboundfit-attempt.json read; final fullmanifest-only readguard passed. No amendment/sourcechange was needed.",
+  "review_independence": "Read-only independent source/design review; input reconstruction replays the separate auditor with its disclosed shared recipe/parser/V4 normalization. This review ran no actual model fit.",
+  "new_real_fits": 0,
+  "new_physical_labels": 0,
+  "new_native_jobs": 0,
+  "frozen_source_or_data_edits": false,
+  "limits": [
+    "Consumed-development comparison only,nofreshtransfer/applicationselection/calibration/CPUclaim.",
+    "Noautomaticpromotion,best-seedselection,or31stdeploymentfit; mixedmean/cap/tailresultsneedreview."
+  ]
+}
