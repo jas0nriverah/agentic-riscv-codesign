@@ -1,5 +1,8 @@
 # Research result archives
 
+- [V10 paired hardware attempt](../docs/v10-csd-hardware-results.md): all 32 source proofs pass; 16 actual-RTL proofs pass and 16 time out, blocking all 64 area jobs. Raw evidence and independent audit retained.
+- [Synthetic proof and timing preparation](2026-10-15-v10-hardware-preparation/README.md): standalone proof checker and fixed-register wrapper validation; no study result or timing route.
+
 - [V11 reserved transfer input feasibility](2026-10-15-v11-reserved-transfer/README.md): 318 complete-pool rows from three programs, two incomplete traces and one empty pool. The reserved five-family primary remains incomplete; no new model features, predictions, targets or fits.
 
 - [V9 training coverage](2026-10-15-v9-coverage-development/README.md): 48 new measured training circuits, one fixed fit, 25.40% consumed-application MAE reduction; independent raw and inference audits.
