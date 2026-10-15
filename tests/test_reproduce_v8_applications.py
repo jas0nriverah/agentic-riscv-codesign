@@ -156,3 +156,55 @@ def test_diagnostic_paths_preserve_types_structure_and_nested_timestamps():
 def test_diagnostic_limit_is_bounded(limit):
     with pytest.raises(ValueError, match='Diagnostic limit'):
         m.difference_report({}, {}, limit=limit)
+
+
+def test_declared_rmsle_roundoff_is_recorded_while_preserving_published_bytes(replay):
+    root, output, reference, actual, _ = replay
+    reference['scores']['mapping_v6'] = {'by_program': {'fft': {'rmsle': 0.030547051812597762}}}
+    actual['scores']['mapping_v6'] = {'by_program': {'fft': {'rmsle': 0.030547051812597856}}}
+    reference_path = root / 'evaluation.json'
+    reference_path.write_text(json.dumps(reference))
+    before = reference_path.read_bytes()
+    report = m.reproduce(root, output, skip_figures=True)
+    assert report['status'] == 'pass' and report['accepted_rmsle_roundoff_count'] == 1
+    roundoff = json.loads((output / 'roundoff.json').read_text())
+    assert roundoff['status'] == 'pass' and roundoff['incompatible_difference_count'] == 0
+    assert roundoff['differences'][0]['numeric_difference']['ulps'] == 27
+    assert reference_path.read_bytes() == before
+    assert not (output / 'mismatch.json').exists()
+
+
+@pytest.mark.parametrize('metric,expected,actual', [
+    ('rmsle', 0.1, 0.1 + 2e-14),
+    ('rmsle', 0, 0.0),
+    ('rmsle', -1e-16, 0.0),
+    ('mae_lut4', 0.1, math.nextafter(0.1, math.inf)),
+])
+def test_rmsle_tolerance_cannot_hide_larger_drift_types_invalid_values_or_mae(metric, expected, actual):
+    def value(x):
+        return {'scores': {'mapping_v6': {'by_program': {'fft': {metric: x}}}}}
+    report = m.difference_report(value(expected), value(actual), rmsle_roundoff=True)
+    assert report['status'] == 'fail'
+    assert report['accepted_rmsle_roundoff_count'] == 0
+    assert report['incompatible_difference_count'] == 1
+
+
+def test_unknown_rmsle_paths_and_provenance_remain_exact():
+    for expected, actual in [
+        ({'scores': {'unknown_model': {'by_program': {'fft': {'rmsle': .1}}}}},
+         {'scores': {'unknown_model': {'by_program': {'fft': {'rmsle': math.nextafter(.1, math.inf)}}}}}),
+        ({'provenance': {'rmsle': .1}}, {'provenance': {'rmsle': math.nextafter(.1, math.inf)}}),
+    ]:
+        report = m.difference_report(expected, actual, rmsle_roundoff=True)
+        assert report['status'] == 'fail' and report['incompatible_difference_count'] == 1
+
+
+def test_unreported_incompatible_fields_still_block_acceptance():
+    expected = {'scores': {'mapping_v6': {'by_program': {'fft': {'rmsle': .1}}}}, 'z': 1}
+    actual = copy.deepcopy(expected)
+    actual['scores']['mapping_v6']['by_program']['fft']['rmsle'] = math.nextafter(.1, math.inf)
+    actual['z'] = 2
+    report = m.difference_report(expected, actual, limit=1, rmsle_roundoff=True)
+    assert report['truncated'] and report['differences'][0]['accepted_rmsle_roundoff']
+    assert report['accepted_rmsle_roundoff_count'] == 1 and report['incompatible_difference_count'] == 1
+    assert report['status'] == 'fail'

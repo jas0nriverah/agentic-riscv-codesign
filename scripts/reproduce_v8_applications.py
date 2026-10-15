@@ -20,6 +20,7 @@ import score_v8_applications as scorer
 
 DEFAULT_ROOT = ROOT / 'results/2026-10-15-v8-application-transfer'
 DEFAULT_OUTPUT = ROOT / 'generated/reproduction/v8'
+RMSLE_ABSOLUTE_TOLERANCE = 1e-14
 
 
 def sha(path):
@@ -36,12 +37,35 @@ def comparable(value):
     return json.dumps(result, sort_keys=True, separators=(',', ':'), allow_nan=False)
 
 
-def difference_report(reference, reproduced, limit=100):
-    """Diagnose exact mismatches; this does not introduce numerical tolerance."""
+def rmsle_metric_path(path):
+    """Only the frozen evaluator's declared log/sqrt summaries permit roundoff."""
+    parts = path.split('/')[1:]
+    if len(parts) == 5 and parts[0] == 'scores' and parts[1] in scorer.MODELS:
+        return parts[2] == 'by_program' and parts[4] == 'rmsle'
+    if len(parts) == 4 and parts[0] == 'scores' and parts[1] in scorer.MODELS:
+        return parts[2] in ('pooled_all_application_rows', 'pooled_primary_application_rows') and parts[3] == 'rmsle'
+    if len(parts) == 8 and parts[:2] == ['secondary_diagnostics', 'novelty']:
+        return (parts[2] in ('canonical_seen', 'no_declared_identity_match', 'strict_no_declared_match', 'familiar_under_any_declared_test')
+                and parts[3] == 'scores' and parts[4] in scorer.MODELS and parts[5] == 'by_program' and parts[7] == 'rmsle')
+    if len(parts) == 6 and parts[:2] == ['secondary_diagnostics', 'ood']:
+        return (parts[2] in scorer.MODELS and parts[3] in ('outside_any_selected_feature_range', 'inside_selected_feature_ranges')
+                and parts[4:] == ['metrics', 'rmsle'])
+    return False
+
+
+def difference_report(reference, reproduced, limit=100, *, rmsle_roundoff=False):
+    """Count all differences and report a bounded list, with optional RMSLE rule.
+
+    Linux/Python 3.13 and macOS/Python 3.14 differed only in 23 RMSLE fields
+    (largest absolute difference 2.43e-16). The log1p subtraction can magnify
+    relative/ULP differences near zero. Permit 1e-14 absolute, zero relative,
+    only for finite nonnegative floats at these declared metric paths.
+    """
     if type(limit) is not int or not 1 <= limit <= 1000:
         raise ValueError('Diagnostic limit must be an integer from 1 to 1000')
     differences = []
     count = 0
+    accepted = 0
     maxima = {'absolute': 0.0, 'relative': 0.0, 'ulps': 0.0}
 
     def preview(value):
@@ -52,7 +76,7 @@ def difference_report(reference, reproduced, limit=100):
         return value
 
     def record(path, reason, expected, actual):
-        nonlocal count
+        nonlocal count, accepted
         count += 1
         item = {'path': path, 'reason': reason,
                 'expected': preview(expected), 'actual': preview(actual)}
@@ -64,6 +88,10 @@ def difference_report(reference, reproduced, limit=100):
             item['numeric_difference'] = numeric
             for key, value in numeric.items():
                 maxima[key] = max(maxima[key], value)
+            if (rmsle_roundoff and reason == 'value' and expected >= 0 and actual >= 0
+                    and rmsle_metric_path(path) and absolute <= RMSLE_ABSOLUTE_TOLERANCE):
+                accepted += 1
+                item['accepted_rmsle_roundoff'] = True
         if len(differences) < limit:
             differences.append(item)
 
@@ -90,9 +118,11 @@ def difference_report(reference, reproduced, limit=100):
             record(path, 'value', expected, actual)
 
     walk(reference, reproduced)
-    return {'schema': 'isaforge-v8-reproduction-mismatch-v1', 'status': 'fail',
-            'comparison': 'Exact JSON fields and types except top-level evaluated_at_utc; no numerical tolerance.',
+    return {'schema': 'isaforge-v8-reproduction-mismatch-v1', 'status': 'pass' if count == accepted else 'fail',
+            'comparison': 'Exact JSON fields and types except top-level evaluated_at_utc' +
+                (' and finite nonnegative RMSLE floats at declared metric paths within 1e-14 absolute (zero relative) tolerance.' if rmsle_roundoff else '; no numerical tolerance.'),
             'path_format': 'JSON Pointer (RFC 6901)', 'difference_count': count,
+            'accepted_rmsle_roundoff_count': accepted, 'incompatible_difference_count': count - accepted,
             'reported_difference_count': len(differences), 'truncated': count > len(differences),
             'maximum_float_difference': maxima, 'differences': differences}
 
@@ -111,14 +141,17 @@ def reproduce(root=DEFAULT_ROOT, output=DEFAULT_OUTPUT, *, skip_figures=False):
     scorer.score(root, evaluation_path)
     reproduced = json.loads(evaluation_path.read_text())
     reference = json.loads(reference_path.read_text())
+    roundoff_count = 0
     if comparable(reproduced) != comparable(reference):
-        mismatch = difference_report(reference, reproduced)
+        mismatch = difference_report(reference, reproduced, rmsle_roundoff=True)
         mismatch.update(published_evaluation_sha256=sha(reference_path),
                         reproduced_evaluation_sha256=sha(evaluation_path))
-        mismatch_path = output / 'mismatch.json'
+        roundoff_count = mismatch['accepted_rmsle_roundoff_count']
+        mismatch_path = output / ('roundoff.json' if mismatch['status'] == 'pass' else 'mismatch.json')
         mismatch_path.write_text(json.dumps(mismatch, indent=2, allow_nan=False) + '\n')
-        print(json.dumps(mismatch, indent=2, allow_nan=False), file=sys.stderr)
-        raise ValueError('Reproduced V8 evaluation differs from published reference; output retained for inspection')
+        if mismatch['status'] != 'pass':
+            print(json.dumps(mismatch, indent=2, allow_nan=False), file=sys.stderr)
+            raise ValueError('Reproduced V8 evaluation differs from published reference; output retained for inspection')
     report = {
         'schema': 'isaforge-v8-application-reproduction-v1',
         'status': 'pass',
@@ -127,7 +160,8 @@ def reproduce(root=DEFAULT_ROOT, output=DEFAULT_OUTPUT, *, skip_figures=False):
         'point_freeze_sha256': reproduced['provenance']['point_freeze_sha256'],
         'scorer_sha256': sha(scorer.__file__),
         'reproduction_source_sha256': sha(__file__),
-        'comparison': 'All JSON fields and types match except top-level evaluated_at_utc.',
+        'comparison': 'All JSON fields and types match except top-level evaluated_at_utc and declared RMSLE floats within 1e-14 absolute (zero relative) tolerance.',
+        'accepted_rmsle_roundoff_count': roundoff_count,
         'new_estimator_fits': 0,
         'fresh_target_generation': False,
         'raw_evidence_restored': False,
