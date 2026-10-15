@@ -1,0 +1,433 @@
+{
+  "schema": "isaforge-v9-consumed-risk-diagnosis-v1",
+  "scope": "Post-outcome diagnosis of consumed V6 regression labels with frozen V9 predictions; no inference, fitting, new targets or fresh validation.",
+  "sources": [
+    {
+      "path": "results/2026-10-15-v9-coverage-development/fit-attempt-0000/point-predictions.json",
+      "sha256": "0636128f908c2f2ff598c3e2009c5533a4b044e58936f08624915e09c3ee36f5"
+    },
+    {
+      "path": "results/2026-10-14-v6/corpus/test/candidates.json",
+      "sha256": "a6a6893884cb3677fc7a42efbb8ede9d2ca5240fe18623d284592c4fad49a0ee"
+    },
+    {
+      "path": "results/2026-10-14-v6/corpus/test/attempt-0000/dataset.json",
+      "sha256": "138e03733d057a3154f581997f5fa9504e9503c73a5043d0aef6c264bafa496f"
+    }
+  ],
+  "count": 192,
+  "sum_absolute_error_lut4": 5578.321666666667,
+  "mae_lut4": 29.053758680555557,
+  "strata": {
+    "arithmetic_chain": {
+      "count": 24,
+      "absolute_error_share_percent": 25.342269912127097,
+      "mae_lut4": 58.90305555555556
+    },
+    "shared_diamond": {
+      "count": 24,
+      "absolute_error_share_percent": 4.454207104705627,
+      "mae_lut4": 10.352916666666667
+    },
+    "parallel_branches": {
+      "count": 24,
+      "absolute_error_share_percent": 3.555519835267059,
+      "mae_lut4": 8.264097222222222
+    },
+    "mask_logic": {
+      "count": 24,
+      "absolute_error_share_percent": 2.4877255494708237,
+      "mae_lut4": 5.782222222222223
+    },
+    "constant_shifts": {
+      "count": 24,
+      "absolute_error_share_percent": 1.5189753907462613,
+      "mae_lut4": 3.5305555555555563
+    },
+    "variable_shifts": {
+      "count": 24,
+      "absolute_error_share_percent": 7.8267866111461855,
+      "mae_lut4": 18.191805555555558
+    },
+    "comparators": {
+      "count": 24,
+      "absolute_error_share_percent": 4.518025582963573,
+      "mae_lut4": 10.50125
+    },
+    "multiplication": {
+      "count": 24,
+      "absolute_error_share_percent": 50.296490013573376,
+      "mae_lut4": 116.90416666666668
+    }
+  },
+  "top_absolute_error": [
+    {
+      "formula": "add(add(mulhsu(sub(ori(in1,255),in1),slli(in0,16)),in1),in1)",
+      "stratum": "multiplication",
+      "actual_lut4": 357,
+      "predicted_lut4": 1535.1166666666666,
+      "signed_error_lut4": 1178.1166666666666,
+      "absolute_error_lut4": 1178.1166666666666
+    },
+    {
+      "formula": "add(add(mulhsu(sub(ori(in1,1431655765),in1),slli(in0,23)),in1),in1)",
+      "stratum": "multiplication",
+      "actual_lut4": 423,
+      "predicted_lut4": 908.7683333333333,
+      "signed_error_lut4": 485.7683333333333,
+      "absolute_error_lut4": 485.7683333333333
+    },
+    {
+      "formula": "mulhu(andi(add(xor(in0,in0),in1),2863311530),xori(addi(slli(in1,31),3),-2047))",
+      "stratum": "multiplication",
+      "actual_lut4": 374,
+      "predicted_lut4": 616.5033333333333,
+      "signed_error_lut4": 242.50333333333333,
+      "absolute_error_lut4": 242.50333333333333
+    },
+    {
+      "formula": "addi(sub(addi(sub(add(sub(sub(sub(in1,in0),in1),addi(in1,-1365)),in0),andi(in1,65535)),2047),andi(in0,65535)),17)",
+      "stratum": "arithmetic_chain",
+      "actual_lut4": 156,
+      "predicted_lut4": 306.58666666666664,
+      "signed_error_lut4": 150.58666666666664,
+      "absolute_error_lut4": 150.58666666666664
+    },
+    {
+      "formula": "sub(add(sub(add(sub(in0,in1),in0),add(in0,in1)),in0),ori(in0,252645135))",
+      "stratum": "arithmetic_chain",
+      "actual_lut4": 112,
+      "predicted_lut4": 256.29333333333335,
+      "signed_error_lut4": 144.29333333333335,
+      "absolute_error_lut4": 144.29333333333335
+    },
+    {
+      "formula": "add(sub(sub(sub(in1,in0),add(in0,in0)),ori(in1,2863311530)),add(in1,in0))",
+      "stratum": "arithmetic_chain",
+      "actual_lut4": 108,
+      "predicted_lut4": 246.91333333333333,
+      "signed_error_lut4": 138.91333333333333,
+      "absolute_error_lut4": 138.91333333333333
+    },
+    {
+      "formula": "sub(add(sub(add(sub(in0,in1),in0),add(in0,in1)),in0),ori(in0,65535))",
+      "stratum": "arithmetic_chain",
+      "actual_lut4": 118,
+      "predicted_lut4": 256.29333333333335,
+      "signed_error_lut4": 138.29333333333335,
+      "absolute_error_lut4": 138.29333333333335
+    },
+    {
+      "formula": "add(sub(sub(sub(in1,in0),add(in0,in0)),ori(in1,16777215)),add(in1,in0))",
+      "stratum": "arithmetic_chain",
+      "actual_lut4": 121,
+      "predicted_lut4": 238.85666666666665,
+      "signed_error_lut4": 117.85666666666665,
+      "absolute_error_lut4": 117.85666666666665
+    }
+  ],
+  "false_accepts_by_cap": {
+    "32": [
+      {
+        "formula": "srli(addi(or(srli(srai(in0,1),2),srai(in1,13)),-2047),23)",
+        "stratum": "constant_shifts",
+        "actual_lut4": 37,
+        "predicted_lut4": 27.10333333333333,
+        "signed_error_lut4": -9.896666666666668,
+        "absolute_error_lut4": 9.896666666666668
+      },
+      {
+        "formula": "slt(andi(in1,255),xor(in0,in1))",
+        "stratum": "comparators",
+        "actual_lut4": 33,
+        "predicted_lut4": 29.11,
+        "signed_error_lut4": -3.8900000000000006,
+        "absolute_error_lut4": 3.8900000000000006
+      },
+      {
+        "formula": "xor(slt(add(xori(xori(in0,1),1023),in0),ori(andi(in1,16777215),65535)),sltiu(xori(in0,17),63))",
+        "stratum": "comparators",
+        "actual_lut4": 34,
+        "predicted_lut4": 28.496666666666666,
+        "signed_error_lut4": -5.503333333333334,
+        "absolute_error_lut4": 5.503333333333334
+      },
+      {
+        "formula": "xor(add(sltu(ori(in0,65535),andi(ori(in1,65535),65535)),sltiu(addi(in0,1365),-257)),in1)",
+        "stratum": "comparators",
+        "actual_lut4": 33,
+        "predicted_lut4": 26.88,
+        "signed_error_lut4": -6.120000000000001,
+        "absolute_error_lut4": 6.120000000000001
+      }
+    ],
+    "64": [
+      {
+        "formula": "sub(addi(add(andi(srli(slli(in1,31),5),1),ori(addi(ori(ori(in0,1),7),16777215),1431655765)),-1365),in1)",
+        "stratum": "parallel_branches",
+        "actual_lut4": 66,
+        "predicted_lut4": 51.99666666666667,
+        "signed_error_lut4": -14.00333333333333,
+        "absolute_error_lut4": 14.00333333333333
+      },
+      {
+        "formula": "srai(srai(add(srli(addi(xori(in0,-257),1),11),srai(in1,2)),1),16)",
+        "stratum": "constant_shifts",
+        "actual_lut4": 65,
+        "predicted_lut4": 56.63666666666666,
+        "signed_error_lut4": -8.363333333333337,
+        "absolute_error_lut4": 8.363333333333337
+      },
+      {
+        "formula": "slli(slli(sra(xor(sub(in1,in0),in0),andi(ori(in0,2863311530),31)),19),7)",
+        "stratum": "variable_shifts",
+        "actual_lut4": 81,
+        "predicted_lut4": 63.415,
+        "signed_error_lut4": -17.585,
+        "absolute_error_lut4": 17.585
+      },
+      {
+        "formula": "sub(xori(sltu(addi(add(in0,in0),63),slli(add(in1,in0),23)),17),in0)",
+        "stratum": "comparators",
+        "actual_lut4": 81,
+        "predicted_lut4": 60.946666666666665,
+        "signed_error_lut4": -20.053333333333335,
+        "absolute_error_lut4": 20.053333333333335
+      },
+      {
+        "formula": "sub(addi(slt(slli(addi(in0,3),23),xori(slli(in1,3),-1365)),1),in1)",
+        "stratum": "comparators",
+        "actual_lut4": 73,
+        "predicted_lut4": 59.10666666666667,
+        "signed_error_lut4": -13.89333333333333,
+        "absolute_error_lut4": 13.89333333333333
+      },
+      {
+        "formula": "sub(addi(slt(slli(addi(in0,-2047),29),xori(slli(in1,16),17)),-33),in1)",
+        "stratum": "comparators",
+        "actual_lut4": 69,
+        "predicted_lut4": 38.54,
+        "signed_error_lut4": -30.46,
+        "absolute_error_lut4": 30.46
+      }
+    ],
+    "128": [
+      {
+        "formula": "addi(add(ori(sub(or(in0,in1),in0),15),sub(sub(or(in0,in1),in0),in0)),-1)",
+        "stratum": "shared_diamond",
+        "actual_lut4": 169,
+        "predicted_lut4": 126.53666666666666,
+        "signed_error_lut4": -42.46333333333334,
+        "absolute_error_lut4": 42.46333333333334
+      }
+    ]
+  },
+  "false_rejects_by_cap": {
+    "32": [
+      {
+        "formula": "sub(add(add(in1,in0),in1),srai(andi(add(in1,in0),255),19))",
+        "stratum": "shared_diamond",
+        "actual_lut4": 31,
+        "predicted_lut4": 32.89666666666667,
+        "signed_error_lut4": 1.8966666666666683,
+        "absolute_error_lut4": 1.8966666666666683
+      },
+      {
+        "formula": "sub(add(add(in1,in0),in1),srai(andi(add(in1,in0),3),11))",
+        "stratum": "shared_diamond",
+        "actual_lut4": 31,
+        "predicted_lut4": 32.89666666666667,
+        "signed_error_lut4": 1.8966666666666683,
+        "absolute_error_lut4": 1.8966666666666683
+      },
+      {
+        "formula": "andi(sub(addi(ori(sub(in1,in0),16777215),63),ori(sub(in1,in0),65535)),4042322160)",
+        "stratum": "shared_diamond",
+        "actual_lut4": 27,
+        "predicted_lut4": 49.45666666666666,
+        "signed_error_lut4": 22.456666666666663,
+        "absolute_error_lut4": 22.456666666666663
+      },
+      {
+        "formula": "xor(and(xor(xori(in0,4042322160),in1),in1),ori(xori(xori(xori(in1,1431655765),1431655765),2863311530),2863311530))",
+        "stratum": "mask_logic",
+        "actual_lut4": 32,
+        "predicted_lut4": 36.48,
+        "signed_error_lut4": 4.479999999999997,
+        "absolute_error_lut4": 4.479999999999997
+      },
+      {
+        "formula": "xor(and(xor(xori(in0,1431655765),in1),in1),ori(xori(xori(xori(in1,4042322160),2863311530),4042322160),2863311530))",
+        "stratum": "mask_logic",
+        "actual_lut4": 32,
+        "predicted_lut4": 36.48,
+        "signed_error_lut4": 4.479999999999997,
+        "absolute_error_lut4": 4.479999999999997
+      },
+      {
+        "formula": "and(xor(and(xori(in0,252645135),in1),in1),and(xor(ori(andi(in1,3),255),in0),in1))",
+        "stratum": "mask_logic",
+        "actual_lut4": 16,
+        "predicted_lut4": 39.663333333333334,
+        "signed_error_lut4": 23.663333333333334,
+        "absolute_error_lut4": 23.663333333333334
+      },
+      {
+        "formula": "and(xor(and(xori(in0,3),in1),in1),and(xor(ori(andi(in1,252645135),2863311530),in0),in1))",
+        "stratum": "mask_logic",
+        "actual_lut4": 22,
+        "predicted_lut4": 39.93,
+        "signed_error_lut4": 17.93,
+        "absolute_error_lut4": 17.93
+      },
+      {
+        "formula": "xor(xor(ori(andi(in0,3),252645135),in0),and(xor(andi(in1,255),in0),in1))",
+        "stratum": "mask_logic",
+        "actual_lut4": 32,
+        "predicted_lut4": 35.7,
+        "signed_error_lut4": 3.700000000000003,
+        "absolute_error_lut4": 3.700000000000003
+      },
+      {
+        "formula": "xor(xor(ori(andi(in0,65535),1431655765),in0),and(xor(andi(in1,16777215),in0),in1))",
+        "stratum": "mask_logic",
+        "actual_lut4": 32,
+        "predicted_lut4": 34.86333333333334,
+        "signed_error_lut4": 2.863333333333337,
+        "absolute_error_lut4": 2.863333333333337
+      },
+      {
+        "formula": "xor(xor(andi(in0,252645135),in1),or(xori(or(ori(in1,4042322160),in0),65535),in0))",
+        "stratum": "mask_logic",
+        "actual_lut4": 32,
+        "predicted_lut4": 34.196666666666665,
+        "signed_error_lut4": 2.1966666666666654,
+        "absolute_error_lut4": 2.1966666666666654
+      },
+      {
+        "formula": "xor(xor(andi(in0,4042322160),in1),or(xori(or(ori(in1,16777215),in0),1431655765),in0))",
+        "stratum": "mask_logic",
+        "actual_lut4": 26,
+        "predicted_lut4": 34.49,
+        "signed_error_lut4": 8.490000000000002,
+        "absolute_error_lut4": 8.490000000000002
+      },
+      {
+        "formula": "xor(slt(add(xori(xori(in0,3),-2047),in0),ori(andi(in1,4042322160),16777215)),sltiu(xori(in0,17),17))",
+        "stratum": "comparators",
+        "actual_lut4": 3,
+        "predicted_lut4": 39.64666666666667,
+        "signed_error_lut4": 36.64666666666667,
+        "absolute_error_lut4": 36.64666666666667
+      },
+      {
+        "formula": "sltu(ori(in1,1431655765),addi(in0,-1))",
+        "stratum": "comparators",
+        "actual_lut4": 32,
+        "predicted_lut4": 50.193333333333335,
+        "signed_error_lut4": 18.193333333333335,
+        "absolute_error_lut4": 18.193333333333335
+      },
+      {
+        "formula": "sltu(ori(in1,3),addi(in0,129))",
+        "stratum": "comparators",
+        "actual_lut4": 31,
+        "predicted_lut4": 45.833333333333336,
+        "signed_error_lut4": 14.833333333333336,
+        "absolute_error_lut4": 14.833333333333336
+      }
+    ],
+    "64": [
+      {
+        "formula": "or(andi(add(add(sub(in0,in1),in0),in1),16777215),xor(add(sub(in0,in1),in0),in1))",
+        "stratum": "shared_diamond",
+        "actual_lut4": 62,
+        "predicted_lut4": 77.35333333333334,
+        "signed_error_lut4": 15.353333333333339,
+        "absolute_error_lut4": 15.353333333333339
+      },
+      {
+        "formula": "or(andi(add(add(sub(in0,in1),in0),in1),65535),xor(add(sub(in0,in1),in0),in1))",
+        "stratum": "shared_diamond",
+        "actual_lut4": 62,
+        "predicted_lut4": 76.49,
+        "signed_error_lut4": 14.489999999999995,
+        "absolute_error_lut4": 14.489999999999995
+      },
+      {
+        "formula": "sll(xori(ori(sub(in1,in1),252645135),511),andi(add(slli(addi(in0,-2047),19),in1),31))",
+        "stratum": "variable_shifts",
+        "actual_lut4": 44,
+        "predicted_lut4": 103.32833333333333,
+        "signed_error_lut4": 59.32833333333333,
+        "absolute_error_lut4": 59.32833333333333
+      },
+      {
+        "formula": "xori(slli(add(slt(srli(in0,11),srai(in1,31)),slti(sub(in0,in1),-1365)),19),1023)",
+        "stratum": "comparators",
+        "actual_lut4": 64,
+        "predicted_lut4": 65.95,
+        "signed_error_lut4": 1.9500000000000028,
+        "absolute_error_lut4": 1.9500000000000028
+      },
+      {
+        "formula": "xor(slt(andi(xor(xori(in0,-1),in1),4042322160),andi(srai(sub(in1,in0),7),1431655765)),slti(in0,-257))",
+        "stratum": "comparators",
+        "actual_lut4": 62,
+        "predicted_lut4": 68.87666666666667,
+        "signed_error_lut4": 6.876666666666665,
+        "absolute_error_lut4": 6.876666666666665
+      }
+    ],
+    "128": [
+      {
+        "formula": "sub(add(sub(add(sub(in0,in1),in0),add(in0,in1)),in0),ori(in0,252645135))",
+        "stratum": "arithmetic_chain",
+        "actual_lut4": 112,
+        "predicted_lut4": 256.29333333333335,
+        "signed_error_lut4": 144.29333333333335,
+        "absolute_error_lut4": 144.29333333333335
+      },
+      {
+        "formula": "sub(add(sub(add(sub(in0,in1),in0),add(in0,in1)),in0),ori(in0,65535))",
+        "stratum": "arithmetic_chain",
+        "actual_lut4": 118,
+        "predicted_lut4": 256.29333333333335,
+        "signed_error_lut4": 138.29333333333335,
+        "absolute_error_lut4": 138.29333333333335
+      },
+      {
+        "formula": "sub(add(addi(add(addi(addi(addi(add(in0,in1),-1),-1),-257),ori(in0,2863311530)),63),in1),in0)",
+        "stratum": "arithmetic_chain",
+        "actual_lut4": 86,
+        "predicted_lut4": 128.26333333333332,
+        "signed_error_lut4": 42.26333333333332,
+        "absolute_error_lut4": 42.26333333333332
+      },
+      {
+        "formula": "sub(addi(addi(add(add(sub(in0,in1),slli(in0,3)),in0),-33),-1),in1)",
+        "stratum": "arithmetic_chain",
+        "actual_lut4": 118,
+        "predicted_lut4": 141.23666666666668,
+        "signed_error_lut4": 23.23666666666668,
+        "absolute_error_lut4": 23.23666666666668
+      },
+      {
+        "formula": "add(sub(sub(sub(in1,in0),add(in0,in0)),ori(in1,16777215)),add(in1,in0))",
+        "stratum": "arithmetic_chain",
+        "actual_lut4": 121,
+        "predicted_lut4": 238.85666666666665,
+        "signed_error_lut4": 117.85666666666665,
+        "absolute_error_lut4": 117.85666666666665
+      },
+      {
+        "formula": "add(sub(sub(sub(in1,in0),add(in0,in0)),ori(in1,2863311530)),add(in1,in0))",
+        "stratum": "arithmetic_chain",
+        "actual_lut4": 108,
+        "predicted_lut4": 246.91333333333333,
+        "signed_error_lut4": 138.91333333333333,
+        "absolute_error_lut4": 138.91333333333333
+      }
+    ]
+  }
+}

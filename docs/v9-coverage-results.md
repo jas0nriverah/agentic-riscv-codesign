@@ -64,6 +64,8 @@ All 192 original V6 test circuits are retained. MAE changes **32.160946 → 29.0
 
 The regression tail remains large, and the worsened P99, maximum underprediction and cap128 false rejections must accompany the mean improvement. The new batch's zero training MAE is an **in-sample diagnostic**. Original1665 in-sample MAE stays 0.002402 LUT4 for both models; neither training score is generalization evidence.
 
+A [post-outcome risk diagnosis](../results/2026-10-15-v9-coverage-development/risk-diagnosis.json) separates average error from budget mistakes. Multiplication contributes 50.30% of total absolute error and arithmetic chains contribute 25.34%, but none of the six cap64 false accepts are multiplication cases. Those accepts comprise three comparator cases, one parallel branch, one constant shift and one variable shift. All six cap128 false rejects are arithmetic chains. Reducing the largest multiplication errors alone would leave the cap64 mistakes unresolved; the next predictor comparison must track both objectives. This diagnosis reuses the same consumed labels and frozen predictions, with no new fit or inference.
+
 The experiment supports training coverage as a development direction under this fixed budget. It does not isolate targeted coverage from the effect of adding 48 more training examples, and it does not establish superiority on unseen source families, lower ASIC area, processor timing, energy or CPU speedup. A subsequent method claim requires a separately frozen experiment on newly reserved sources.
 
 ## Evidence and figures
