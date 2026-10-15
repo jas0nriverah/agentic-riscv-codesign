@@ -11,8 +11,9 @@ Completed: 32 fixed original/CSD pairs, 64 mappings and sequential checks, 192 r
 | Sequential checks and route gate | [checks](measurements/attempt-0000/sequential-checks.json), [gate](measurements/attempt-0000/route-gate.json) |
 | All 192 native routes | [routes](measurements/attempt-0000/routes.json) |
 | Raw logs, commands, mapped/packed JSON, ASC and reports | [archive](measurements/attempt-0000/raw-evidence.zip), [hash manifest](measurements/attempt-0000/raw-evidence.json) |
+| Fresh committed-file portability | [review](portable-checkout-review.json), [inventory](portability-review/tracked-blob-inventory.json), [log](portability-review/portable-audit.log) |
 | Independent replay | [separate-agent report](independent-second-review.json), [figure replay](../../docs/figures/v10d-timing/independent-audit.json) |
 
-Run `make reproduce-v10d-timing` from the repository root, writing to a new output file. This verifies retained raw evidence without native hardware tools. The full local suite before collection passed 1,475 tests and 111 subtests; its [log](full-suite.log) is retained. No files in the frozen measurement closure were changed after collection.
+Run `make reproduce-v10d-timing` from the repository root, writing to a new output file. This verifies retained raw evidence using the Python standard library without native hardware tools. A fresh 784-file tree populated only from committed Git blobs reproduces the audit byte-for-byte with no site packages, native processes or access to the original checkout. The full local suite before collection passed 1,475 tests and 111 subtests; its [log](full-suite.log) is retained. No files in the frozen measurement closure were changed after collection.
 
 Reported Fmax concerns the complete fixed 132-FF harness. 120 paths have a datapath-boundary certificate and 72 remain unknown; no unknown is filtered. It is not a CPU, board, power, energy, ASIC or independent-program result. The historical area proofs and failed V10c SAT attempt retain their original meaning.

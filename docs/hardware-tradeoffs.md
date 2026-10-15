@@ -69,4 +69,6 @@ The [completed matched timing study](v10d-timing-results.md) adds a common regis
 
 [Vector PDF](figures/v10d-timing/v10d-resource-timing-tradeoffs.pdf) · [Full-precision data](figures/v10d-timing/figure-data.json)
 
+These measurements are tracked and compared, but the trained predictor is still an area model. A learned selector that jointly optimizes processor performance, resources and timing has not been demonstrated. The next implementation decision must use explicit budgets and retain the feasible tradeoff frontier, followed by full-workload CPU validation.
+
 V6's earlier calibrated upper bounds do not automatically transfer to the newly fitted V9 model. V9 currently reports point-estimate feasibility errors; new uncertainty or safe-selection claims require a separate calibration design and held-out validation. Power and energy remain unmeasured. FPGA LUT4 counts are also not an ASIC area measurement.
