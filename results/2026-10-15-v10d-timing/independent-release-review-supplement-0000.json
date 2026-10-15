@@ -1,0 +1,26 @@
+{
+  "schema": "isaforge-v10d-timing-release-review-supplement-v1",
+  "status": "go",
+  "reviewed_at_utc": "2026-10-15T21:43:27.561038+00:00",
+  "prior_review": {
+    "path": "v10d-timing-independent-release-review.json",
+    "sha256": "1b610b9f6ff04d3990e65be7554f46fe02e86228e19db6823c8111bd14d90a2b",
+    "preserved_unchanged": true
+  },
+  "auditor_sha256": "6205a16316933dcf5024102f3a7270d927759903f3e8fbe7741c1b2a7c03fd30",
+  "auditor_tests_sha256": "c15ed20d6ac5d546a650e4edd6633fbe5d544e0b30a99d797c02f2b1f6d0a0e6",
+  "reviewed_delta": "Current preparation() explicitly resolves tools.historical_protocol within ROOT and requires its SHA256 in the already authenticated flat bindings; then checks inherited HX8K,CT256,12MHz,seeds1/2/3 and nextpnr binary SHA/version and chipdb SHA against frozen timing tool ledger.",
+  "finding": "No blocker. Portable provenance strengthened; no native installation reads or changed measurement/arithmetic/eligibility/clock rules.",
+  "tests": {
+    "command": ".venv/bin/python -m pytest -q tests/test_audit_v10d_timing.py",
+    "passed": 68,
+    "elapsed_seconds": 1.1,
+    "log": "v10d-timing-review-supplement-tests.log",
+    "log_sha256": "f1feb692985298dc5f534e8003054a3b4c484e321a458246ac2dc111515a7efa"
+  },
+  "native_jobs": 0,
+  "source_edits": 0,
+  "prior_191_test_review_still_applies_to_other_sources": true,
+  "current_preparation_sha256": "e0c2baa1a51e68e3f904e4b0ce7e321c4a6875d66b19e723445e2da21f716321",
+  "preparation_binds_current_auditor": true
+}
