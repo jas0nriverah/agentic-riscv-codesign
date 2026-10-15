@@ -1,7 +1,9 @@
 # Documentation
 
+- [V12 target-scale results](v12-target-transform-results.md): 30 matched fits; log targets lower MAPE but worsen MAE and over-budget acceptance, so raw-target fitting is retained.
+
 - [Hardware tradeoff ledger](hardware-tradeoffs.md): resource costs, feasibility mistakes, processor timing evidence and unmeasured quantities.
-- [Prospective CSD timing study](v10-timing-direction.md): common registered wrapper, paired routing seeds and explicit timing-attribution limits; no timing result yet.
+- [Completed CSD timing study](v10d-timing-results.md): common registered wrapper, 192 routes and explicit timing-attribution limits.
 - [Reserved transfer input feasibility](../results/2026-10-15-v11-reserved-transfer/README.md): all six first attempts, two incomplete traces and an empty pool; no new model evaluation.
 
 - [V9 training coverage](v9-coverage-results.md): one fixed 48-circuit augmentation, 25.40% consumed-application MAE reduction, all tradeoffs and independent replay.
@@ -33,7 +35,7 @@ RTL synthesis of synthetic expressions.
 | Generate RV32 RTL, check its outputs, and measure isolated LUT4 resources | [RTL verification and synthesis](synthesis.md) |
 | Understand formula predictors and grouped model evaluation | [Methodology](methodology.md), [v1 model](area-model.md), [v2 resource and residual models](area-model-v2.md) |
 | Replay complete application-pool transfer and selection outcomes | [V8 application results](v8-application-results.md), [frozen protocol](v8-application-pilot-protocol.md) |
-| Inspect the latest fitting-only semantic ablation and its limitations | [V7 development results](v7-development-results.md), [pre-score protocol](v7-development-protocol.md) |
+| Inspect the earlier fitting-only semantic ablation and its limitations | [V7 development results](v7-development-results.md), [pre-score protocol](v7-development-protocol.md) |
 | Evaluate a fixed measurement budget over a measured candidate pool | [Area selection](area-selection.md) |
 | Reproduce the six-model comparison and independent error audit | [Matched comparison reproduction](reproduce-matched-comparison.md) |
 | Reproduce historical V4, inspect its remaining failures, or run frozen inference | [V4 results and replay](v4-results.md), [frozen protocol](v4-protocol.md) |

@@ -12,7 +12,6 @@ ISAForge separates prediction quality, isolated circuit resources and integrated
 | V9 historical regression budget decisions | Cap64 stays 6 false accepts / 5 false rejects; cap128 changes 1/4 → 1/6 | Some feasibility tradeoffs worsen despite lower MAE |
 | Learned instruction selection | V8's best learned policies tie merit-only selection on the primary endpoint | No demonstrated learned-selection advantage |
 | Constant-multiply implementation | V10d: 32 parsed-RTL proofs and 64 fresh arms; LUT4 lower/equal/higher: 31/1/0; carry: 13/7/12 | Mean bare LUT4 saving 88.5625; 12 carry increases; CPU effects not measured |
-
 | Matched CSD harness timing | All 192 routes pass; all 32 three-seed formula means have lower period (mean −1.710802 ns); 95/96 seed pairs improve | Measured routing-model tradeoff; 72 path attributions unknown; no CPU or board claim |
 
 Sources: [processor and routing results](results.md), [SoC routing assumptions](soc-routing.md), [V9 complete metrics](v9-coverage-results.md), [V8 selection study](v8-application-results.md), [complete CSD area results](v10-csd-hardware-results.md), and [matched timing](v10d-timing-results.md).
@@ -72,3 +71,5 @@ The [completed matched timing study](v10d-timing-results.md) adds a common regis
 The [implemented measured selector](v10d-selection-policy.md) now applies independent resource and clock caps across every routing seed, preserves the feasible Pareto frontier and explicitly rejects infeasible choices. With no resource cap it chooses CSD for all 32 formulas; under the original per-formula worst-case resource/clock limits, it chooses CSD for 19 and retains the original for 13. [Complete decisions and graph](../results/2026-10-15-v10d-selection/README.md). This uses already measured alternatives. The trained predictor is still an area model, and a learned selector that jointly optimizes processor performance, resources and timing has not been demonstrated. Full-workload CPU validation remains necessary.
 
 V6's earlier calibrated upper bounds do not automatically transfer to the newly fitted V9 model. V9 currently reports point-estimate feasibility errors; new uncertainty or safe-selection claims require a separate calibration design and held-out validation. Power and energy remain unmeasured. FPGA LUT4 counts are also not an ASIC area measurement.
+
+The [V12 target-scale comparison](v12-target-transform-results.md) reinforces this distinction: log-target fitting lowers MAPE but raises cap64 false accepts from 16/14/18 to 23/22/24 across the three paired seeds, while reducing false rejects from 37/39/37 to 24/17/22. Raw-target fitting is retained. These are out-of-fold area-budget decisions, not measured processor choices.

@@ -2,6 +2,12 @@
 
 The evidence supports resource-prediction and processor-integration results. V6 mapping features improve a frozen synthetic comparison by 6.32%, but error tails, feasibility mistakes and incomplete family coverage remain. Earlier V5 gains transfer weakly to three application families. Historical V4’s small advantage over a same-data MasterRTL retrain was inconclusive. Learned acquisition has not beaten simple merit on the prospective primary endpoint. The ML target is isolated LUT4 cost; the CRC32 cycle result comes from a separate matched processor experiment. [Methodology](methodology.md) defines those quantities and their boundaries.
 
+## Latest fitting-only result: V12 target scale
+
+The [V12 matched target-scale experiment](v12-target-transform-results.md) completes 30 fits on identical leakage-closed folds. Log-target fitting reduces MAPE but worsens the primary macro MAE **5.0777 → 5.3200 LUT4 (+4.77%)** and increases cap64 false accepts in every seed. We retain raw-target fitting; this negative development result prevents adopting a model that looks better only on percentage error.
+
+All 10,278 out-of-fold points, three seeds, nine strata, threshold mistakes and error tails remain available. This is a matched comparison within the new grouped development split; it is not a replacement independent transfer result or a new deployment model.
+
 ## Latest development: V9 training coverage
 
 A [fixed coverage augmentation](v9-coverage-results.md) adds 48 measured circuits to the original 1,665 while retaining the mapping features, 300-tree configuration and seed. All 48 circuits pass 103,104 RTL output checks. On consumed V8 applications, equal-family MAE falls **3.4092 → 2.5434 LUT4 (25.40%)**, with all four families improving. The six diagnosed constant-product cases improve 49.72% in aggregate, but two worsen. Independent arithmetic replay and actual CLI inference agree with the saved results.

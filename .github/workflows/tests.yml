@@ -40,6 +40,13 @@ jobs:
           name: v10d-selection-replay-python-${{ matrix.python-version }}
           path: generated/ci-v10d-selection/
           if-no-files-found: ignore
+      - run: python -I -S scripts/audit_v12_results.py --root results/2026-10-15-v12-target-transform --output generated/ci-v12/independent-results-audit.json
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v12-point-replay-python-${{ matrix.python-version }}
+          path: generated/ci-v12/
+          if-no-files-found: ignore
       - run: python -m unittest discover -s results/2026-10-14-development-semantics-v7/evidence/tests -p 'test_*.py'
       - run: isaforge demo --output generated/demo
       - run: python -m isaforge.frozen_inference --model results/2026-10-13-prospective/models/resource-ridge.joblib --kind v2 --candidates results/2026-10-13-prospective/final/dataset.json --output generated/inference-smoke.json

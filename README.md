@@ -26,6 +26,10 @@ The [methodology](docs/methodology.md) defines the data splits, feature boundary
 
 ## Results at a glance
 
+### Latest controlled model experiment
+
+The [V12 matched target-scale experiment](docs/v12-target-transform-results.md) completes 30 fits on identical leakage-closed folds. Log-target fitting reduces MAPE but worsens the primary macro MAE **5.0777 → 5.3200 LUT4 (+4.77%)** and increases cap64 false accepts in every seed. We retain raw-target fitting; this negative development result prevents adopting a model that looks better only on percentage error.
+
 ### Latest development: targeted training coverage
 
 One fixed augmentation adds **48 verified and synthesized circuits** to the original 1,665 training examples, retaining the same 217 mapping features and 300-tree learner. On the consumed V8 application set, equal-family MAE improves **3.4092 → 2.5434 LUT4 (25.40%)**, with all four families improving. The six diagnosed constant-product cases improve **49.72%** in aggregate; two individual cases worsen. All 48 new circuits passed **103,104 RTL output checks**, and actual CLI inference reproduced their frozen predictions exactly.
