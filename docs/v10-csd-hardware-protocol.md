@@ -53,12 +53,32 @@ Cache identical operand subexpressions through the same emitter in both arms.
 
 ## Proof and physical verification gates
 
-Preparation performs one whole-expression universal QF_BV32 disequality check
-per pair, over both unconstrained 32-bit inputs. Only UNSAT is accepted. Its
-5,000 ms solver timeout is fixed; preserve query text/hash, solver identity,
-result, elapsed time and SAT counterexample/unknown reason. Failed proofs leave
+The first whole-expression QF_BV32 attempt is preserved in
+[the failed preparation](../results/2026-10-15-v10-csd-hardware/failure-review.json),
+commit `05b19728803d96a5754ed695f543a97fc49ba1b1`. The first two 11-product
+contexts proved UNSAT; the third, subtraction before multiplication, returned
+unknown/timeout at 5,000 ms. No RTL proof or area measurement ran. The parent
+approved this explicit **premeasurement** proof-composition amendment, with no
+change to the 32 inputs, rewrites, budgets, physical proof gate or endpoints.
+
+Amended preparation proves the product lemma `word*K == CSD(word)` for a fresh
+**unconstrained** 32-bit word, with one QF_BV32 check per pair. Only UNSAT is
+accepted, at the same fixed 5,000 ms timeout. The checker then compares the two
+whole expression ASTs recursively: every node outside the one multiplication
+must be identical, including constants and input names. Every CSD term must use
+the exact original operand AST; foreign operands are rejected. The certificate
+records the replacement path, operand, original/replacement subtrees, constant
+and abstract lemma. For any two program inputs, instantiate the universally
+proved word with that operand value; equality congruence through the identical
+surrounding operations proves the complete expression. This uses no operand
+range, reachability or input assumption and is not a shape/hash-only check.
+
+Preserve lemma query text/hash, certificate, solver identity, result, elapsed
+time and SAT counterexample/unknown reason. Retain the original full-expression
+query text/hash as a diagnostic, without solving it again. Failed proofs leave
 an immutable failure record and prevent a completed preparation. No silent
-retries or timeout increases after seeing results.
+retries or timeout increases. A bound amendment record authenticates the failed
+attempt and its original source hashes against the preserved commit.
 
 Source proofs do not validate the emitter. Preparation therefore also seals a
 miter made from the actual two emitted modules; only their module names change.
@@ -127,22 +147,24 @@ needs its own emitter version and target/training lineage.
 ```sh
 .venv/bin/python -m unittest discover -s tests -p 'test_prepare_v10_csd_hardware.py' -v
 .venv/bin/python scripts/prepare_v10_csd_hardware.py \
-  --root results/2026-10-15-v10-csd-hardware
+  --root results/2026-10-15-v10a-csd-hardware
 .venv/bin/python scripts/prepare_v10_csd_hardware.py \
-  --root results/2026-10-15-v10-csd-hardware --validate-only
+  --root results/2026-10-15-v10a-csd-hardware --validate-only
 ```
 
 Preparation creates its output directory exclusively; preserve failed first
 attempts. Replays use a new directory. It opens no new measurement outcome,
 fits no model and performs no synthesis/RTL execution. `validate_preparation`
 returns `(manifest, recipe, pairs)` without executing a solver; it reconstructs
-the exact proof queries and RTL to check their identities. `validate_tools`
+the exact lemma/diagnostic queries, AST congruence and RTL to check their
+identities. `validate_tools`
 separately checks runtime/data digests. The collector consumes `pairs.json`,
 `recipe.json`, `tools.json`, `proofs/`, `rtl/` and flat bindings in
 `preparation.json`; it must require a parent release binding the exact input
 manifest and collector before native jobs begin.
 
-Unit tests include a real universal source proof for the masked-subtraction
-511 case and a deliberately wrong rewrite with a SAT counterexample. These
+Unit tests include a real universal source lemma with exact whole-context
+congruence for the masked-subtraction 511 case, wrong-context/constant/operand
+poisons, and a deliberately wrong rewrite with a SAT counterexample. These
 proof preflights precede the first complete 32-case preparation; there is no
 claim that preparation is the first-ever solver invocation on these formulas.

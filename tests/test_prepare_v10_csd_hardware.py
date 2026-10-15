@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location('prepare_v10_csd_hardware', ROOT / 'scripts/prepare_v10_csd_hardware.py')
 p = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(p)
+SYNTHETIC_AMENDMENT = {'schema': 'synthetic-premeasurement-amendment', 'new_area_outcomes_read': False}
 
 
 def put(path, value):
@@ -20,12 +21,17 @@ def put(path, value):
 
 
 def proof_fixture(pair):
-    query = p.formula_query(pair['formula'], pair['rewritten_formula']).to_smt2()
+    certificate = p.congruence_certificate(pair['formula'], pair['rewritten_formula'])
+    query = p.formula_query(certificate['lemma_original_formula'], certificate['lemma_rewritten_formula'], operand_lemma=True).to_smt2()
+    whole = p.formula_query(pair['formula'], pair['rewritten_formula']).to_smt2()
     import z3
-    return {'schema': 'isaforge-v10-csd-source-proof-v1', 'original_formula': pair['formula'],
-        'rewritten_formula': pair['rewritten_formula'], 'method': 'whole-expression universal QF_BV32 disequality',
+    return {'schema': 'isaforge-v10-csd-source-proof-v2', 'original_formula': pair['formula'],
+        'rewritten_formula': pair['rewritten_formula'], 'method': 'universal QF_BV32 operand lemma plus exact whole-expression AST congruence',
         'inputs': ['in0:32', 'in1:32'], 'assumptions': [], 'timeout_ms': 5000, 'result': 'unsat',
-        'query_smt2': query, 'query_sha256': p.digest(query.encode()), 'solver_version': z3.get_version_string()}
+        'query_smt2': query, 'query_sha256': p.digest(query.encode()), 'solver_version': z3.get_version_string(),
+        'congruence': certificate, 'query_scope': 'universal unconstrained word:32; no range or reachability assumptions',
+        'whole_expression_query_smt2': whole, 'whole_expression_query_sha256': p.digest(whole.encode()),
+        'whole_expression_query_status': 'diagnostic-only; not solved in amended preparation'}
 
 
 def fixture(root):
@@ -35,6 +41,7 @@ def fixture(root):
     pairs = p.fixed_pairs()
     (root / 'source-candidates.json').write_bytes((ROOT / p.V9 / 'candidates.json').read_bytes())
     put(root / 'tools.json', {'solver': {'version': z3.get_version_string()}})
+    put(root / 'premeasurement-amendment.json', SYNTHETIC_AMENDMENT)
     for pair in pairs:
         suffix = pair['pair_id'].split(':')[1]
         directory = root / 'rtl' / suffix
@@ -60,6 +67,7 @@ def fixture(root):
         'new_measurements': 0, 'model_fits': 0, 'new_measurement_outcomes_read': False, 'universal_source_proofs': 32,
         'recipe': p.record(root / 'recipe.json', root),
         'tools': p.record(root / 'tools.json', root), 'pairs': p.record(root / 'pairs.json', root),
+        'amendment': p.record(root / 'premeasurement-amendment.json', root),
         'source_candidates': p.record(root / 'source-candidates.json', root),
         'source_files': [os.path.relpath(x, root) for x in sources], 'files': [p.record(x, root) for x in files]}
     put(root / 'preparation.json', manifest)
@@ -148,9 +156,35 @@ class FixedStudyTests(unittest.TestCase):
         pair = next(x for x in p.fixed_pairs() if x['constant_u32'] == 511 and x['context'] == 'masked_sub_before_product')
         proof = p.prove_equivalence(pair['formula'], pair['rewritten_formula'])
         p.validate_proof(proof, pair)
-        wrong = p.prove_equivalence(pair['formula'], 'sub(slli(sub(andi(in0,63),in1),9),in0)')
+        wrong = p.prove_equivalence(pair['formula'], pair['rewritten_formula'].replace(',9)', ',8)'))
         self.assertEqual(wrong['result'], 'sat')
         self.assertIn('counterexample', wrong)
+
+    def test_exact_congruence_rejects_wrong_context_constant_operand_and_rewrite(self):
+        rows = p.fixed_pairs()
+        after = next(x for x in rows if x['context'] == 'add_after_product' and x['constant_u32'] == 11)
+        before = next(x for x in rows if x['context'] == 'sub_before_product' and x['constant_u32'] == 11)
+        wrong_context = after['rewritten_formula'][:-4] + 'in0)'
+        with self.assertRaisesRegex(ValueError, 'context AST'): p.congruence_certificate(after['formula'], wrong_context)
+        wrong_operand = before['rewritten_formula'].replace('sub(in0,in1)', 'sub(in1,in0)')
+        with self.assertRaisesRegex(ValueError, 'foreign operand'): p.congruence_certificate(before['formula'], wrong_operand)
+        wrong_constant = p.rewrite('mul(in0,addi(0,44))', 44)
+        self.assertEqual(p.prove_equivalence('mul(in0,addi(0,11))', wrong_constant)['result'], 'sat')
+        for pair in rows:
+            certificate = p.congruence_certificate(pair['formula'], pair['rewritten_formula'])
+            self.assertEqual(certificate['constant_u32'], pair['constant_u32'])
+            self.assertEqual(certificate['replacement_path'], [0] if pair['context'] == 'add_after_product' else [])
+
+    def test_poisoned_congruence_or_diagnostic_query_cannot_certify(self):
+        pair = p.fixed_pairs()[0]
+        for kind in ('operand', 'constant', 'context-path', 'diagnostic', 'assumed-range'):
+            proof = proof_fixture(pair)
+            if kind == 'operand': proof['congruence']['operand_formula'] = 'in1'
+            elif kind == 'constant': proof['congruence']['constant_u32'] = 44
+            elif kind == 'context-path': proof['congruence']['replacement_path'] = [1]
+            elif kind == 'diagnostic': proof['whole_expression_query_smt2'] = '(check-sat)'
+            else: proof['query_scope'] = 'assume word<64'
+            with self.assertRaises(ValueError): p.validate_proof(proof, pair)
 
     def test_unknown_or_missing_proof_fails_closed(self):
         pair = p.fixed_pairs()[0]
@@ -213,7 +247,8 @@ class IntegrityTests(unittest.TestCase):
                     put(root / 'recipe.json', recipe); rebind(root, manifest, root / 'recipe.json')
                 elif kind == 'failure': put(root / 'preparation-failure.json', {'status': 'failed-closed'})
                 put(root / 'pairs.json', pairs); rebind(root, manifest, root / 'pairs.json')
-                with mock.patch.object(p, 'required_sources', return_value=sources):
+                with mock.patch.object(p, 'required_sources', return_value=sources), \
+                     mock.patch.object(p, 'amendment_record', return_value=SYNTHETIC_AMENDMENT):
                     if kind == 'valid': self.assertEqual(len(p.validate_preparation(root)[2]), 32)
                     else:
                         with self.assertRaises(ValueError): p.validate_preparation(root)
@@ -230,7 +265,8 @@ class IntegrityTests(unittest.TestCase):
                     rows = p.read(path); rows[0]['operation_count'] = 99; put(path, rows)
                     rebind(root, manifest, path)
                 put(root / 'preparation.json', manifest)
-                with mock.patch.object(p, 'required_sources', return_value=sources):
+                with mock.patch.object(p, 'required_sources', return_value=sources), \
+                     mock.patch.object(p, 'amendment_record', return_value=SYNTHETIC_AMENDMENT):
                     with self.assertRaises(ValueError): p.validate_preparation(root)
 
     def test_data_inventory_detects_new_changed_or_missing_files(self):
@@ -251,6 +287,7 @@ class IntegrityTests(unittest.TestCase):
             proof = dict(proof_fixture(pair), result='unknown', reason_unknown='synthetic timeout')
             with mock.patch.object(p, 'required_sources', return_value=[ROOT / 'scripts/prepare_v10_csd_hardware.py']), \
                  mock.patch.object(p, 'tool_inventory', return_value={}), \
+                 mock.patch.object(p, 'amendment_record', return_value=SYNTHETIC_AMENDMENT), \
                  mock.patch.object(p, 'prove_equivalence', return_value=proof):
                 with self.assertRaises(ValueError): p.run(root)
                 self.assertTrue((root / 'preparation-failure.json').is_file())

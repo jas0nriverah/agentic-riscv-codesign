@@ -27,6 +27,8 @@ V9_CANDIDATES_SHA256 = '74b1ef78b3d97ab34c940f464345bef21fd8f2441a3e09d6cb21daaa
 PROOF_TIMEOUT_MS = 5000
 RTL_TIMEOUT_SECONDS = 60
 VERIFY_SEED = 2026101522
+FAILED_PREPARATION_COMMIT = '05b19728803d96a5754ed695f543a97fc49ba1b1'
+FAILED_PREPARATION = 'results/2026-10-15-v10-csd-hardware'
 
 
 def require(condition, message):
@@ -162,10 +164,11 @@ def fixed_pairs(source_rows=None):
     return output
 
 
-def formula_query(original, rewritten):
+def formula_query(original, rewritten, *, operand_lemma=False):
     import z3
     left, right = validate_formula(original), validate_formula(rewritten, rewritten=True)
-    inputs = {name: z3.BitVec(name, 32) for name in ('in0', 'in1')}
+    inputs = {name: z3.BitVec('word' if operand_lemma and name == 'in0' else name, 32)
+              for name in ('in0', 'in1')}
     def encode(node):
         if not node.children:
             return z3.BitVecVal(node.value, 32) if type(node.value) is int else inputs[node.value]
@@ -182,36 +185,92 @@ def formula_query(original, rewritten):
     return solver
 
 
+def congruence_certificate(original, rewritten):
+    """Check one exact subtree substitution; abstract only identical operand ASTs.
+
+    A universal identity for the unconstrained word remains true when that word
+    is instantiated by ANY32-bit operand expression. Equality is preserved by
+    every identical enclosing operation. No reachability/range premise is used.
+    """
+    before, after = validate_formula(original), validate_formula(rewritten, rewritten=True)
+    replacements = []
+    def compare(left, right, path):
+        if left.value != 'mul':
+            require(left.value == right.value and len(left.children) == len(right.children),
+                'Whole-context AST node changed outside the product')
+            for index, (a, b) in enumerate(zip(left.children, right.children)):
+                compare(a, b, [*path, index])
+            return
+        operand, constant_node = left.children
+        require(constant_node.value == 'addi' and constant_node.children[0] == Expression(0)
+            and type(constant_node.children[1].value) is int, 'Exact decoded constant product required')
+        constant = constant_node.children[1].value
+        require(constant in CONSTANTS, 'Lemma constant outside fixed grid')
+        require(not any(n.value == 'mul' for n in walk(operand)), 'Nested product forbidden')
+        word = Expression('in0')
+        def abstract(node):
+            if node == operand:
+                return word
+            if node.value in ('add', 'sub') and len(node.children) == 2:
+                return op(node.value, *(abstract(c) for c in node.children))
+            if node.value == 'slli' and node.children[0] == operand:
+                require(0 <= node.children[1].value <= 31, 'Invalid lemma shift')
+                return op('slli', word, node.children[1])
+            raise ValueError('Rewritten product contains a changed or foreign operand')
+        lemma_after = abstract(right).canonical()
+        replacements.append({'replacement_path': path, 'operand_formula': operand.canonical(),
+            'constant_u32': constant, 'original_product': left.canonical(), 'rewritten_product': right.canonical(),
+            'lemma_original_formula': f'mul(in0,addi(0,{constant}))', 'lemma_rewritten_formula': lemma_after})
+    compare(before, after, [])
+    require(len(replacements) == 1, 'Exactly one context-preserving replacement required')
+    return {'schema': 'isaforge-v10-csd-congruence-v1', **replacements[0],
+        'checked': 'All enclosing/unmodified AST nodes identical; each term uses the exact original operand AST',
+        'logical_rule': 'Universal word identity instantiated with operand, then equality congruence through identical whole context'}
+
+
 def prove_equivalence(original, rewritten):
     import z3
-    solver = formula_query(original, rewritten)
+    certificate = congruence_certificate(original, rewritten)
+    solver = formula_query(certificate['lemma_original_formula'], certificate['lemma_rewritten_formula'], operand_lemma=True)
     query = solver.to_smt2()
+    whole_query = formula_query(original, rewritten).to_smt2()  # retained, not solved again
     started = time.monotonic()
     result = solver.check()
-    proof = {'schema': 'isaforge-v10-csd-source-proof-v1', 'original_formula': original,
-        'rewritten_formula': rewritten, 'method': 'whole-expression universal QF_BV32 disequality',
+    proof = {'schema': 'isaforge-v10-csd-source-proof-v2', 'original_formula': original,
+        'rewritten_formula': rewritten, 'method': 'universal QF_BV32 operand lemma plus exact whole-expression AST congruence',
         'inputs': ['in0:32', 'in1:32'], 'assumptions': [], 'timeout_ms': PROOF_TIMEOUT_MS,
         'result': str(result), 'elapsed_seconds': time.monotonic() - started,
-        'query_smt2': query, 'query_sha256': digest(query.encode()), 'solver_version': z3.get_version_string()}
+        'query_smt2': query, 'query_sha256': digest(query.encode()), 'solver_version': z3.get_version_string(),
+        'query_scope': 'universal unconstrained word:32; no range or reachability assumptions',
+        'congruence': certificate, 'whole_expression_query_smt2': whole_query,
+        'whole_expression_query_sha256': digest(whole_query.encode()),
+        'whole_expression_query_status': 'diagnostic-only; not solved in amended preparation'}
     if result == z3.sat:
-        proof['counterexample'] = {n: solver.model().eval(z3.BitVec(n, 32), model_completion=True).as_long()
-                                  for n in ('in0', 'in1')}
+        proof['counterexample'] = {'word': solver.model().eval(z3.BitVec('word', 32), model_completion=True).as_long()}
     elif result == z3.unknown:
         proof['reason_unknown'] = solver.reason_unknown()
     return proof
 
 
 def validate_proof(proof, pair):
-    require(proof.get('schema') == 'isaforge-v10-csd-source-proof-v1'
+    require(proof.get('schema') == 'isaforge-v10-csd-source-proof-v2'
         and proof.get('original_formula') == pair['formula']
         and proof.get('rewritten_formula') == pair['rewritten_formula']
-        and proof.get('method') == 'whole-expression universal QF_BV32 disequality'
+        and proof.get('method') == 'universal QF_BV32 operand lemma plus exact whole-expression AST congruence'
         and proof.get('inputs') == ['in0:32', 'in1:32'] and proof.get('assumptions') == []
         and proof.get('timeout_ms') == PROOF_TIMEOUT_MS and proof.get('result') == 'unsat',
         'Universal source proof absent or failed')
     require(digest(proof['query_smt2'].encode()) == proof['query_sha256'], 'Proof query hash differs')
-    require(formula_query(pair['formula'], pair['rewritten_formula']).to_smt2() == proof['query_smt2'],
-        'Proof query does not encode the exact pair')
+    certificate = congruence_certificate(pair['formula'], pair['rewritten_formula'])
+    require(proof.get('congruence') == certificate, 'Whole-context congruence certificate differs')
+    require(formula_query(certificate['lemma_original_formula'], certificate['lemma_rewritten_formula'], operand_lemma=True).to_smt2()
+        == proof['query_smt2'] and proof.get('query_scope') == 'universal unconstrained word:32; no range or reachability assumptions',
+        'Proof query does not encode the exact unconstrained operand lemma')
+    whole = formula_query(pair['formula'], pair['rewritten_formula']).to_smt2()
+    require(proof.get('whole_expression_query_smt2') == whole
+        and proof.get('whole_expression_query_sha256') == digest(whole.encode())
+        and proof.get('whole_expression_query_status') == 'diagnostic-only; not solved in amended preparation',
+        'Original whole-expression diagnostic query differs')
 
 
 def miter_rtl(pair):
@@ -292,13 +351,45 @@ def required_sources(repository=ROOT):
         repository / 'docs/v10-csd-hardware-protocol.md', *sorted((repository / 'isaforge').glob('*.py'))]
 
 
+def amendment_record(repository=ROOT):
+    """Authenticate the preserved failed attempt/source before any new labels."""
+    repository = Path(repository).resolve()
+    previous = repository / FAILED_PREPARATION
+    paths = [previous / name for name in ('failure-review.json', 'preparation-failure.json', 'preparation-first.log')]
+    paths.extend(sorted((previous / 'proofs').glob('*.json')))
+    require(len(paths) == 6, 'Exact preserved first attempt requires three proof records')
+    evidence = []
+    for path in paths:
+        relative = path.relative_to(repository).as_posix()
+        historical = subprocess.check_output(['git', 'show', FAILED_PREPARATION_COMMIT + ':' + relative], cwd=repository)
+        require(digest(historical) == sha(path), 'Preserved failure differs from committed evidence')
+        evidence.append({'path': relative, 'sha256': digest(historical)})
+    review = read(previous / 'failure-review.json')
+    require(review.get('new_area_measurements') == review.get('native_rtl_proof_jobs') == review.get('new_model_fits') == 0,
+        'Amendment must precede all new hardware outcomes')
+    for entry in review['sources']:
+        historical = subprocess.check_output(['git', 'show', FAILED_PREPARATION_COMMIT + ':' + entry['path']], cwd=repository)
+        require(digest(historical) == entry['sha256'], 'Original failed source lineage differs')
+    return {'schema': 'isaforge-v10a-premeasurement-amendment-v1',
+        'status': 'parent-approved-premeasurement-proof-composition-amendment',
+        'previous_commit': FAILED_PREPARATION_COMMIT, 'previous_root': FAILED_PREPARATION,
+        'previous_evidence': evidence, 'previous_source_files': review['sources'],
+        'reason': 'Third full-expression query timed out at fixed5000ms; retained with no area/nativeRTL/fits and no silent retry',
+        'change': 'Universal unconstrained-word product lemma plus exact AST substitution/congruence; full expression queries retained diagnostic-only',
+        'unchanged': ['same32 original formulas and CSD rewrites', '5000ms lemma timeout', '60s actual RTL pair miter',
+            '64 fresh paired synthesis jobs', '2148 physical verification samples perarm', 'all32 complete primary endpoint'],
+        'new_area_outcomes_read': False, 'native_rtl_jobs': 0, 'model_fits': 0}
+
+
 def fixed_recipe():
     return {'schema': 'isaforge-v10-csd-hardware-recipe-v1', 'scope': 'Consumed32-case hardware development study; no area predictor fit',
         'pairs': 32, 'arms': ['original', 'csd'], 'fresh_synthesis_jobs': 64, 'model_fits': 0,
         'constants': list(CONSTANTS), 'contexts': list(CONTEXTS),
         'rewrite': {'method': 'nonadjacent signed digits; highest positive term then descending add/subtract',
             'max_nonzero_digits': 5, 'max_shift': 11, 'max_output_operations': 32, 'alternatives_per_original': 1},
-        'source_equivalence': {'logic': 'QF_BV32', 'timeout_ms': PROOF_TIMEOUT_MS, 'required_result': 'unsat', 'input_assumptions': []},
+        'source_equivalence': {'logic': 'QF_BV32 unconstrained-word lemma + exact whole-context AST congruence',
+            'timeout_ms': PROOF_TIMEOUT_MS, 'required_result': 'unsat', 'input_assumptions': [],
+            'whole_expression_queries': 'retained diagnostic-only, not solved again', 'amendment_commit': FAILED_PREPARATION_COMMIT},
         'rtl_equivalence': {'pairs': 32, 'timeout_seconds': RTL_TIMEOUT_SECONDS,
             'script_commands': ['prep -top pair_miter -flatten', 'check -assert',
                 'sat -timeout 60 -verify -prove trigger 0 -show-inputs -show-outputs'],
@@ -337,6 +428,7 @@ def validate_preparation(root):
     expected_recipe['tools'] = manifest['tools']
     require(recipe == expected_recipe, 'Fixed recipe differs')
     pairs = read(bound(manifest['pairs']))
+    require(read(bound(manifest['amendment'])) == amendment_record(ROOT), 'Premeasurement amendment lineage differs')
     expected = fixed_pairs(read(bound(manifest['source_candidates'])))
     require(sha(bound(manifest['source_candidates'])) == V9_CANDIDATES_SHA256, 'Historical V9 candidate file differs')
     require(len(pairs) == len(expected) == 32, 'Complete32 pairs required')
@@ -370,9 +462,11 @@ def run(root, *, repository=ROOT):
     pairs = fixed_pairs(read(source))
     initial_source_hashes = {p: sha(p) for p in sources}
     tools = tool_inventory()
+    amendment = amendment_record(repository)
     root.mkdir(parents=True)
     try:
         write(root / 'tools.json', tools)
+        write(root / 'premeasurement-amendment.json', amendment)
         with (root / 'source-candidates.json').open('xb') as stream:
             stream.write(source.read_bytes())
         for pair in pairs:
@@ -407,6 +501,7 @@ def run(root, *, repository=ROOT):
             'universal_actual_rtl_proofs': 'pending collection stage',
             'recipe': record(root / 'recipe.json', root), 'tools': record(root / 'tools.json', root),
             'pairs': record(root / 'pairs.json', root), 'source_candidates': record(root / 'source-candidates.json', root),
+            'amendment': record(root / 'premeasurement-amendment.json', root),
             'source_files': [os.path.relpath(p.resolve(), root) for p in sources],
             'files': [record(p, root) for p in [*files, *sources]]}
         write(root / 'preparation.json', manifest)
