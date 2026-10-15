@@ -1,5 +1,7 @@
 # Research result archives
 
+- [V9 training coverage](2026-10-15-v9-coverage-development/README.md): 48 new measured training circuits, one fixed fit, 25.40% consumed-application MAE reduction; independent raw and inference audits.
+
 - [V9 adaptation development](2026-10-15-v9-adaptation-development/README.md): 1.94% remaining-case MAE reduction after three charged reveals per family; consumed development only.
 - [Training support diagnosis](2026-10-15-development-diagnosis/README.md): archived leaf-level analysis with no new fits or labels.
 

@@ -2,6 +2,12 @@
 
 The evidence supports resource-prediction and processor-integration results. V6 mapping features improve a frozen synthetic comparison by 6.32%, but error tails, feasibility mistakes and incomplete family coverage remain. Earlier V5 gains transfer weakly to three application families. Historical V4’s small advantage over a same-data MasterRTL retrain was inconclusive. Learned acquisition has not beaten simple merit on the prospective primary endpoint. The ML target is isolated LUT4 cost; the CRC32 cycle result comes from a separate matched processor experiment. [Methodology](methodology.md) defines those quantities and their boundaries.
 
+## Latest development: V9 training coverage
+
+A [fixed coverage augmentation](v9-coverage-results.md) adds 48 measured circuits to the original 1,665 while retaining the mapping features, 300-tree configuration and seed. All 48 circuits pass 103,104 RTL output checks. On consumed V8 applications, equal-family MAE falls **3.4092 → 2.5434 LUT4 (25.40%)**, with all four families improving. The six diagnosed constant-product cases improve 49.72% in aggregate, but two worsen. Independent arithmetic replay and actual CLI inference agree with the saved results.
+
+The consumed V6 regression set improves 9.66% in MAE while P99 error, maximum underprediction and cap128 false rejections worsen. Application cap64 false rejections stay at three. These are development results motivated by known failures; new source families remain necessary to assess transfer. The earlier [local residual correction](v9-adaptation-results.md) achieves 1.94% on its different remaining-case pool and leaves the largest constant-product error unchanged. Neither study establishes a learned-selection or processor-speedup advantage.
+
 ## Latest application measurement: V8
 
 The [complete application-pool study](v8-application-results.md) freezes six predictors before measuring all146 original circuits across152 rows. Its four-family primary contains150 rows; all circuits pass313,608 RTL comparisons and synthesis. The V7-selected rewritten model **does not improve** the primary family-macro MAE:3.4319 versus3.4092 for V6 (+0.67%). The original-descriptor control is lowest at3.3509; frozen tuned SOG and MasterRTL adaptation score5.3395 and7.3124 on the same targets. Four curated source families and an incomplete strict-novel subset limit the generalization claim.

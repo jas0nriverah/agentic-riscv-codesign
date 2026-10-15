@@ -6,7 +6,7 @@ ISAForge explores whether machine learning can help choose useful RISC-V instruc
 
 The current learned target is **isolated iCE40 LUT4 count**. Processor speedup is evaluated separately through RTL simulation and routing. This is a research prototype with reproducible measured evidence; an LLM-driven selector remains future work.
 
-[Methodology](docs/methodology.md) · [V9 development](docs/v9-adaptation-results.md) · [V8 application results](docs/v8-application-results.md) · [V6 results](docs/v6-results.md) · [External transfer](docs/external-v5-results.md) · [All results](docs/results.md) · [Documentation](docs/README.md) · [Evidence index](results/README.md)
+[Methodology](docs/methodology.md) · [V9 development](docs/v9-coverage-results.md) · [V8 application results](docs/v8-application-results.md) · [V6 results](docs/v6-results.md) · [External transfer](docs/external-v5-results.md) · [All results](docs/results.md) · [Documentation](docs/README.md) · [Evidence index](results/README.md)
 
 ## System architecture
 
@@ -26,11 +26,15 @@ The [methodology](docs/methodology.md) defines the data splits, feature boundary
 
 ## Results at a glance
 
-### Latest development: measured-example correction
+### Latest development: targeted training coverage
 
-A fixed local residual correction uses three previously measured examples per family and improves MAE on the remaining circuits **3.3450 → 3.2800 LUT4 (1.94%)**. A global offset worsens error. This is development on consumed V8 data; the changing unqueried pools and tiny FFT denominator are explicit. The hardest constant-multiply misses remain unchanged because the queried examples provide no local forest support. [Results, publication figure and independent replay](docs/v9-adaptation-results.md).
+One fixed augmentation adds **48 verified and synthesized circuits** to the original 1,665 training examples, retaining the same 217 mapping features and 300-tree learner. On the consumed V8 application set, equal-family MAE improves **3.4092 → 2.5434 LUT4 (25.40%)**, with all four families improving. The six diagnosed constant-product cases improve **49.72%** in aggregate; two individual cases worsen. All 48 new circuits passed **103,104 RTL output checks**, and actual CLI inference reproduced their frozen predictions exactly.
 
-A [tree-level coverage audit](docs/v9-training-coverage-direction.md) identifies missing constant-product compositions in the original training data. A fixed 48-circuit augmentation is being prepared to test that bottleneck with the existing learner and features.
+This is **development on previously examined applications**, not a new independent transfer result. The consumed 192-circuit V6 regression set improves **32.1609 → 29.0538 LUT4 (9.66%)**, but P99 error, maximum underprediction and cap128 false rejections worsen. Application cap64 false rejections remain three: one repaired mistake is offset by a new mistake. No instruction-selection or CPU speedup gain follows from these prediction results.
+
+![Fixed training-coverage augmentation: all families, constant-product cases and regression tradeoffs.](docs/figures/v9-coverage/v9-fixed-training-coverage.png)
+
+[Complete results, inference and reproduction](docs/v9-coverage-results.md) preserve all cases, raw evidence and independent audits. The earlier [three-example local correction](docs/v9-adaptation-results.md) improved its different remaining-case pool by 1.94%; its lack of support for the hardest cases motivated the [tree-level coverage diagnosis](docs/v9-training-coverage-direction.md). Those percentages are not a matched method comparison.
 
 ### Complete application-pool transfer
 
@@ -196,6 +200,7 @@ make reproduce-v5
 make reproduce-external-v5
 make reproduce-v6
 make reproduce-v8
+make reproduce-v9-coverage
 ```
 
 These commands validate their respective frozen experiments and regenerate scores and vector PDF/SVG plus PNG figures under `generated/reproduction/`. External and V6 replay also restore and hash retained raw synthesis artifacts, and check the reviewed freezes against Git history. They do not retrain models or synthesize new circuits.

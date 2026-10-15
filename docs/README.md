@@ -1,5 +1,7 @@
 # Documentation
 
+- [V9 training coverage](v9-coverage-results.md): one fixed 48-circuit augmentation, 25.40% consumed-application MAE reduction, all tradeoffs and independent replay.
+
 - [V9 adaptation development](v9-adaptation-results.md): fixed paid-label correction, independent arithmetic audit and publication figure.
 - [Training coverage diagnosis](v9-training-coverage-direction.md): tree-level evidence and fixed augmentation direction.
 

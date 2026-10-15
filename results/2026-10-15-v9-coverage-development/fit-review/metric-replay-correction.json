@@ -1,0 +1,26 @@
+{
+  "schema": "isaforge-v9-independent-metric-audit-correction-v1",
+  "reason": "The initial independent checker treated integer0 and engine float-0.0 as distinct types for maximum_underprediction_lut4. All three are mathematical zero; numeric outcomes were identical. Accept only this zero representation at that real-valued metric, preserving strict count/boolean types. No frozen experiment files changed.",
+  "initial_report_sha256": "a3826ce138391ae53b00c22dfbf29160b6dda45eb274e62d9803a4e68e5fa2f4",
+  "initial_findings": [
+    {
+      "path": "/primary/by_program/isqrt/frozen/maximum_underprediction_lut4",
+      "expected": 0,
+      "actual": -0.0
+    },
+    {
+      "path": "/primary/by_program/isqrt/augmented/maximum_underprediction_lut4",
+      "expected": 0,
+      "actual": -0.0
+    },
+    {
+      "path": "/coverage_training_in_sample/augmented/maximum_underprediction_lut4",
+      "expected": 0,
+      "actual": -0.0
+    }
+  ],
+  "final_report_sha256": "26ca6ed838f63fec3f75dcd3ce767e26d4e690f651b39210c0e8e01dbd1455bc",
+  "final_source_sha256": "534a0d999ad526d9f4e96cf2b7e08b41e42aa96a1e9a99c5f302cbfcae1114f5",
+  "synthetic_tests": "4 standard-library tests passed, including strict integer counts, zero underprediction representations and boolean rejection.",
+  "all_numeric_fields_match_exactly": true
+}
