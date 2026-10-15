@@ -85,6 +85,7 @@ class MaterializationGuards(unittest.TestCase):
         for name in ['scripts/seal_v8_application_inputs.py','scripts/measure_v6.py','scripts/evaluate_v6.py','docs/v8-application-pilot-protocol.md']:
             p=root/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_text('synthetic fixture source')
         for folder in ['isaforge','tests']:(root/folder).mkdir()
+        (root/'tests/test_semantic_features_v7_independent.py').write_text('synthetic independent proof helper')
         return root,app,training,consumed,runtime,rm,audit,review,sources
     def test_materialization_retains_first_fallback_and_checked_training_file(self):
         root,app,training,consumed,runtime,rm,audit,review,sources=self.fixture();out=root/'results/sealed'
