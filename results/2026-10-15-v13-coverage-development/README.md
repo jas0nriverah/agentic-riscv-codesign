@@ -1,6 +1,6 @@
 # V13 targeted coverage: sealed inputs
 
-**Status: input preparation complete; no new hardware measurements or model fits.** The next experiment tests whether measured training coverage helps the unchanged raw-target mapping model after the V12 log-target candidate failed its primary comparison.
+**Status: the first verification build failed; zero completed RTL comparisons, zero synthesis labels and zero model fits.** The next experiment tests whether measured training coverage helps the unchanged raw-target mapping model after the V12 log-target candidate failed its primary comparison.
 
 | Proposed originals | Count |
 | --- | ---: |
@@ -24,3 +24,9 @@ Recheck the sealed inputs:
 ```
 
 Fourteen focused tests pass, covering exact grids and immediates, source/identity lineage, label-poison invariance, fixed output validation, and constructive pairwise differences.
+
+## Retained first measurement attempt
+
+The single approved attempt stopped in Verilator’s C++ compilation because the controlled environment could not locate `<cstdint>`. This occurred before the correctness gate, so no synthesis job ran. [Authoritative failure record](measurements/completion.json), [raw archive manifest](measurements/attempt-0000/raw-evidence.json), and [native attempt log](native-attempt.log) preserve the failure. Archive byte verification passes even though the study itself is incomplete.
+
+The next engineering step is a separate V13b environment amendment with identical candidate/input bytes and no outcome-based replacements. The V13 attempt and its original no-retry contract remain unchanged.
