@@ -215,17 +215,19 @@ On macOS, XGBoost may require `brew install libomp`. Hardware regeneration addit
 
 ### Run actual frozen-model inference
 
-This example predicts from formula inputs with the previous residual model; it does not need Yosys:
+The latest development artifact is the **V9 coverage-augmented mapping model**. Its CLI predicts isolated original-RTL LUT4 count from formulas; new formulas require compatible Yosys preprocessing, while a complete verified cache avoids rebuilding those features:
 
 ```sh
-python -m isaforge.frozen_inference \
-  --kind v2 \
-  --model results/2026-10-13-v3/models/area-model-v2-full.joblib \
-  --candidates results/2026-10-13-v3/probe/candidates.json \
-  --output generated/inference/residual-v2.json
+python -m isaforge.area_model_v6 \
+  --model results/2026-10-15-v9-coverage-development/fit-attempt-0000/models/mapping-coverage.joblib \
+  --candidates results/2026-10-15-v9-coverage-development/candidates.json \
+  --cache-root generated/v9-coverage-features/fit-attempt-0000 \
+  --output generated/v9-coverage-inference.json
 ```
 
-For the latest models, use the [V6 inference guide](docs/v6-reproduction.md) and optional [descriptor cache](docs/v6-cached-inference.md). The [V5 command](docs/v5-reproduction.md#feature-extraction-and-portable-cache-replay) and [V4 command](docs/v4-results.md#run-frozen-v4-inference) remain available. Graph models require retained feature caches or their compatible frozen Yosys tool; the older formula-only models remain available when that dependency is unsuitable. The [six-model inference guide](docs/reproduce-matched-comparison.md#run-all-six-frozen-predictors-then-score) covers earlier artifacts. Large graph caches remain outside Git. Raw target-measurement archives are included in the external and V6 snapshots and serve a different purpose from feature caches.
+For inference without hardware tools, `make reproduce-v9-coverage` loads both fitted forests and predicts from authenticated saved features across all four recorded cohorts. The [V9 artifact guide](results/2026-10-15-v9-coverage-development/README.md) distinguishes this portable replay from native formula extraction. The artifact remains a development model awaiting fresh transfer evaluation.
+
+Earlier [V6](docs/v6-reproduction.md), [V5](docs/v5-reproduction.md#feature-extraction-and-portable-cache-replay), [V4](docs/v4-results.md#run-frozen-v4-inference) and [six-model inference](docs/reproduce-matched-comparison.md#run-all-six-frozen-predictors-then-score) entry points remain available. Formula-only historical models need no Yosys. Feature caches and raw target-measurement archives have different roles; do not substitute one for the other.
 
 ## Repository map
 
@@ -245,6 +247,6 @@ Frozen model modules and experiment paths remain stable because saved artifacts 
 
 ## Scope and next steps
 
-The next research targets are missed arithmetic/operand correlations, untouched application-family transfer, calibrated selection under a total measurement budget, and jointly measured multi-instruction sets. V6 improves its fixed synthetic primary comparison, but error tails and feasibility mistakes remain. The first external program-transfer study shows a small V5 gain over tuned SOG and a loss to the fixed MasterRTL recipe; V6 has no fresh application result. Novel application-family transfer and useful acquisition gains remain unestablished. [Recent literature](docs/research-update-2026-10-14.md) motivates separate source-only distillation and processor-aware selection experiments. LLM-guided selection and power/energy prediction remain unimplemented. Current evidence does not establish published-system superiority or a general CPU speedup model.
+The next targets are [reserved application transfer](docs/v9-reserved-transfer-direction.md), exact hardware implementations for constant multiplication, and selection under a total measurement budget. V9 coverage improves consumed-application prediction, while the independently measured V8 rewritten-feature comparison remains negative and merit-only selection ties the best learned policies. Error tails and feasibility mistakes still matter. [Recent literature](docs/research-update-2026-10-15.md) motivates better training coverage and explicit label-budget controls. LLM-guided selection and power/energy prediction remain unimplemented. Current evidence does not establish published-system superiority or a general CPU speedup model.
 
 The [related-work comparison](docs/research-model-comparison.md) and [MasterRTL adaptation protocol](docs/masterrtl-matched-protocol.md) identify the primary research sources and the differences from their settings. The code and measurements are a research checkpoint, not a peer-reviewed result. Third-party components retain their upstream licenses; see [reuse and attribution](docs/reuse.md).
