@@ -1,0 +1,25 @@
+{
+  "schema": "isaforge-v11-input-provenance-amendment-v1",
+  "original_input_plan_sha256": "533fb31680e29cf3173c2bc93821a3a8d27063e96100ffd670a804be9a71d74c",
+  "reservation_commit": "b6f1549ae2ef3f20f8a54511a6c3d13d865646e4",
+  "added_runtime_sources": [
+    {
+      "path": "src/run_holdout_benchmarks.py",
+      "sha256": "01d4d79f43845b8a705a805864f7c8f280c0286158a13c91498ae5f07c6b6674",
+      "reservation_commit_exact_bytes": true
+    },
+    {
+      "path": "isaforge/dataset.py",
+      "sha256": "bb568ef7ca5f6ad79fd6a9ffef9ff18c510b29ffb9f4b6a7e3bfd5cb4cae3cbc",
+      "reservation_commit_exact_bytes": true
+    },
+    {
+      "path": "isaforge/__init__.py",
+      "sha256": "788b89398980996e41116e972bf0b790b077eda914cd1e630200d1911713109a",
+      "reservation_commit_exact_bytes": true
+    }
+  ],
+  "reason": "Inherited V8 base runtime list omitted its separate CountedTrace provenance amendment and the imported-but-unused dataset/package modules. Original plan and collector remain unchanged. All added bytes match the existing pre-trace reservation commit.",
+  "timing": "During input-only first attempt, before any ML features, predictions or target labels; first AMMUNITION complete-window trace in progress.",
+  "scope": "Provenance completeness only; no source, algorithm, inputs, window, candidate policy, oracle or tool change."
+}

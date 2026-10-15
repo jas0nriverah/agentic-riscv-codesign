@@ -1,5 +1,7 @@
 # Research result archives
 
+- [V11 reserved transfer input feasibility](2026-10-15-v11-reserved-transfer/README.md): 318 complete-pool rows from three programs, two incomplete traces and one empty pool. The reserved five-family primary remains incomplete; no new model features, predictions, targets or fits.
+
 - [V9 training coverage](2026-10-15-v9-coverage-development/README.md): 48 new measured training circuits, one fixed fit, 25.40% consumed-application MAE reduction; independent raw and inference audits.
 
 - [V9 adaptation development](2026-10-15-v9-adaptation-development/README.md): 1.94% remaining-case MAE reduction after three charged reveals per family; consumed development only.
