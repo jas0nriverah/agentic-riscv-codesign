@@ -1,6 +1,8 @@
 # Documentation
 
 - [Hardware tradeoff ledger](hardware-tradeoffs.md): resource costs, feasibility mistakes, processor timing evidence and unmeasured quantities.
+- [Prospective CSD timing study](v10-timing-direction.md): common registered wrapper, paired routing seeds and explicit timing-attribution limits; no timing result yet.
+- [Reserved transfer input feasibility](../results/2026-10-15-v11-reserved-transfer/README.md): all six first attempts, two incomplete traces and an empty pool; no new model evaluation.
 
 - [V9 training coverage](v9-coverage-results.md): one fixed 48-circuit augmentation, 25.40% consumed-application MAE reduction, all tradeoffs and independent replay.
 

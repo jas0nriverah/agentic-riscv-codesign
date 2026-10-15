@@ -183,6 +183,10 @@ MasterRTL processes all 192 formulas in **7.431 s with a fresh graph cache** and
 
 See [results and interpretation](docs/results.md) for sources, per-group behavior, uncertainty, and remaining research questions.
 
+![CRC32 integrated hardware tradeoffs: resources, routed timing and runtime across every matched seed.](docs/figures/cpu-hardware-tradeoffs/crc32-hardware-tradeoffs.png)
+
+The [hardware tradeoff ledger](docs/hardware-tradeoffs.md) combines these measurements. The custom CPU is faster and larger under the stated timing assumptions; its LUT4 × runtime proxy worsens slightly in two of three modeled-Fmax cases. The model still predicts area only, and power/energy are unmeasured. [Vector PDF](docs/figures/cpu-hardware-tradeoffs/crc32-hardware-tradeoffs.pdf).
+
 ## Reproduce the comparison
 
 Use **Python 3.13** for the exact research replay environment. The general package also supports Python 3.11, but some frozen numerical versions require a newer interpreter. Replay uses committed predictions and needs no RISC-V or FPGA tools. Install the [recorded numerical-library versions](docs/reproduce-matched-comparison.md#runtime-requirements-and-cache) for exact artifact compatibility.

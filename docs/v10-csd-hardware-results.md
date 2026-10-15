@@ -1,7 +1,16 @@
 # V10: paired CSD hardware study — pending
 
-**No hardware result is available yet.** This page is a presentation skeleton,
-not evidence of a rewrite gain. Actual figures require a completed, audited
+**The first actual-RTL proof attempt is complete but the hardware comparison remains unavailable.**
+All 32 source-level proofs passed. Native Yosys SAT proved 16 of 32 emitted-RTL
+pairs; the other 16 reached the fixed 60-second wall limit without a reported
+counterexample. Constants 11, 44, 85 and 340 passed in all four contexts;
+341, 511, 1364 and 2044 timed out in all four. Every outcome is retained.
+The correctness gate blocked all 64 fresh synthesis jobs, so no area values
+or rewrite gains are reported. An independent portable audit verified all
+167 raw archive members and the incomplete outcome. Its passing status means
+the evidence is internally consistent, not that the experiment succeeded.
+
+Actual figures require a completed, audited
 32-pair experiment: all 32 universal actual-RTL pair proofs and all 64 fresh
 original/CSD synthesis arms must succeed. A failed or unresolved pair leaves
 the complete primary comparison pending; no cases may be filtered or replaced.
@@ -49,7 +58,14 @@ retained; later presentation must not select a favorable attempt.
 
 ## Evidence — pending completion
 
-The final page will link the completed preparation, release, all proof verdicts,
-all 64 arm records, raw archive, independent auditor report, full table and
-figure data/hash manifest. Until those obligations are complete, numeric
-outcomes and optimization claims remain pending.
+- [Frozen source preparation](../results/2026-10-15-v10c-csd-hardware/preparation.json)
+- [Parent measurement approval](../results/2026-10-15-v10c-csd-hardware/measurement-approval.json)
+- [Complete first-attempt status](../results/2026-10-15-v10c-csd-hardware/measurements/completion.json)
+- [All 32 actual-RTL proof outcomes](../results/2026-10-15-v10c-csd-hardware/measurements/attempt-0000/rtl-equivalence.json)
+- [Independent portable audit](../results/2026-10-15-v10c-csd-hardware/independent-audit.json)
+
+The original protocol and failed attempt remain unchanged. A more suitable
+word-level algebraic RTL checker is under development; it has not yet supplied
+native proofs for this cohort or authorized synthesis. The separate
+[timing plan](v10-timing-direction.md) remains gated on complete verified area
+measurements and validated wrapper inputs. No timing result is available.
