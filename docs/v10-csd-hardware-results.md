@@ -1,6 +1,6 @@
 # V10: verified constant-multiply hardware comparison
 
-**The completed V10d comparison saves LUT4 resources in 31 of 32 fixed cases, ties once, and loses none.** It compares one predetermined canonical signed-digit (CSD) implementation against fresh original RTL under identical default iCE40 synthesis settings. The average paired saving is 88.5625 LUT4. Carry usage increases in 12 cases, so LUT reduction alone does not establish dominance on every hardware resource.
+**The completed V10d comparison saves LUT4 resources in 31 of 32 fixed cases, ties once, and loses none.** It compares one predetermined canonical signed-digit (CSD) implementation against fresh original RTL under identical default iCE40 synthesis settings. The average paired saving is 88.5625 LUT4. Carry usage increases in 12 cases, so LUT reduction alone does not establish dominance on every hardware resource. CSD improves at least one resource without worsening the other in 20 pairs; the remaining 12 trade LUT savings for more carry cells. [Detailed interpretation and next experiments](v10d-hardware-interpretation.md).
 
 This is an implementation experiment on consumed development cases, with no predictor fit. It does not establish a timing improvement, CPU speedup, power reduction, unseen-program generalization or superiority over published ASIC results.
 
