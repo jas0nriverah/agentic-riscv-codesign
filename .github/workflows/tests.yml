@@ -35,10 +35,10 @@ jobs:
         run: python scripts/evaluate_v6.py score --output generated/ci-v6/evaluation.json
       - if: matrix.python-version == '3.13'
         run: python scripts/reproduce_v8_applications.py --skip-figures --output generated/ci-v8
-      - if: failure() && matrix.python-version == '3.13'
+      - if: always() && matrix.python-version == '3.13'
         uses: actions/upload-artifact@v4
         with:
-          name: v8-replay-failure-python-3.13
+          name: v8-replay-python-3.13
           path: generated/ci-v8/
           if-no-files-found: ignore
       - if: matrix.python-version == '3.13'
