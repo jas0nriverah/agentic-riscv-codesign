@@ -29,6 +29,8 @@ RTL_TIMEOUT_SECONDS = 60
 VERIFY_SEED = 2026101522
 FAILED_PREPARATION_COMMIT = '05b19728803d96a5754ed695f543a97fc49ba1b1'
 FAILED_PREPARATION = 'results/2026-10-15-v10-csd-hardware'
+IMPLEMENTATION_FAILURE_COMMIT = '978025afd18c49226f6b04414b885c90daca5483'
+IMPLEMENTATION_FAILURE = 'results/2026-10-15-v10a-csd-hardware'
 
 
 def require(condition, message):
@@ -167,11 +169,14 @@ def fixed_pairs(source_rows=None):
 def formula_query(original, rewritten, *, operand_lemma=False):
     import z3
     left, right = validate_formula(original), validate_formula(rewritten, rewritten=True)
-    inputs = {name: z3.BitVec('word' if operand_lemma and name == 'in0' else name, 32)
+    # SMT let aliases contain context-local allocation IDs. Isolate each query
+    # so unrelated earlier proofs/GC cannot change its exact serialization.
+    context = z3.Context()
+    inputs = {name: z3.BitVec('word' if operand_lemma and name == 'in0' else name, 32, ctx=context)
               for name in ('in0', 'in1')}
     def encode(node):
         if not node.children:
-            return z3.BitVecVal(node.value, 32) if type(node.value) is int else inputs[node.value]
+            return z3.BitVecVal(node.value, 32, ctx=context) if type(node.value) is int else inputs[node.value]
         a, b = (encode(child) for child in node.children)
         if node.value in ('add', 'addi'): return a + b
         if node.value == 'sub': return a - b
@@ -179,7 +184,7 @@ def formula_query(original, rewritten, *, operand_lemma=False):
         if node.value == 'mul': return a * b
         if node.value == 'slli': return a << b
         raise ValueError('Unsupported proof operation')
-    solver = z3.SolverFor('QF_BV')
+    solver = z3.SolverFor('QF_BV', ctx=context)
     solver.set(timeout=PROOF_TIMEOUT_MS)
     solver.add(encode(left) != encode(right))
     return solver
@@ -246,7 +251,7 @@ def prove_equivalence(original, rewritten):
         'whole_expression_query_sha256': digest(whole_query.encode()),
         'whole_expression_query_status': 'diagnostic-only; not solved in amended preparation'}
     if result == z3.sat:
-        proof['counterexample'] = {'word': solver.model().eval(z3.BitVec('word', 32), model_completion=True).as_long()}
+        proof['counterexample'] = {'word': solver.model().eval(z3.BitVec('word', 32, ctx=solver.ctx), model_completion=True).as_long()}
     elif result == z3.unknown:
         proof['reason_unknown'] = solver.reason_unknown()
     return proof
@@ -370,10 +375,31 @@ def amendment_record(repository=ROOT):
     for entry in review['sources']:
         historical = subprocess.check_output(['git', 'show', FAILED_PREPARATION_COMMIT + ':' + entry['path']], cwd=repository)
         require(digest(historical) == entry['sha256'], 'Original failed source lineage differs')
+    implementation_root = repository / IMPLEMENTATION_FAILURE
+    implementation_paths = [implementation_root / name for name in
+        ('implementation-failure-review.json', 'preparation-failure.json', 'preparation-first.log')]
+    implementation_paths.extend(sorted((implementation_root / 'proofs').glob('*.json')))
+    require(len(implementation_paths) == 8, 'Exact implementation failure requires five successful lemma records')
+    implementation_evidence = []
+    for path in implementation_paths:
+        relative = path.relative_to(repository).as_posix()
+        historical = subprocess.check_output(['git', 'show', IMPLEMENTATION_FAILURE_COMMIT + ':' + relative], cwd=repository)
+        require(digest(historical) == sha(path), 'Preserved implementation failure differs from committed evidence')
+        implementation_evidence.append({'path': relative, 'sha256': digest(historical)})
+    implementation_review = read(implementation_root / 'implementation-failure-review.json')
+    require(implementation_review.get('new_area_measurements') == implementation_review.get('native_rtl_proof_jobs')
+        == implementation_review.get('new_model_fits') == 0, 'Implementation fix must precede new hardware outcomes')
+    for entry in implementation_review['sources']:
+        historical = subprocess.check_output(['git', 'show', IMPLEMENTATION_FAILURE_COMMIT + ':' + entry['path']], cwd=repository)
+        require(digest(historical) == entry['sha256'], 'Failed implementation source lineage differs')
     return {'schema': 'isaforge-v10a-premeasurement-amendment-v1',
         'status': 'parent-approved-premeasurement-proof-composition-amendment',
         'previous_commit': FAILED_PREPARATION_COMMIT, 'previous_root': FAILED_PREPARATION,
         'previous_evidence': evidence, 'previous_source_files': review['sources'],
+        'implementation_fix': {'commit': IMPLEMENTATION_FAILURE_COMMIT, 'root': IMPLEMENTATION_FAILURE,
+            'evidence': implementation_evidence, 'source_files': implementation_review['sources'],
+            'change': 'Dedicated Z3 Context perquery for exact stable serialization; no relaxed identity check',
+            'proof_method_budget_cohort_rtl_gate_changed': False},
         'reason': 'Third full-expression query timed out at fixed5000ms; retained with no area/nativeRTL/fits and no silent retry',
         'change': 'Universal unconstrained-word product lemma plus exact AST substitution/congruence; full expression queries retained diagnostic-only',
         'unchanged': ['same32 original formulas and CSD rewrites', '5000ms lemma timeout', '60s actual RTL pair miter',

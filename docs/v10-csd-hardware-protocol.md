@@ -80,6 +80,17 @@ an immutable failure record and prevent a completed preparation. No silent
 retries or timeout increases. A bound amendment record authenticates the failed
 attempt and its original source hashes against the preserved commit.
 
+The first amended attempt then passed five lemmas but failed its exact query
+identity check: shared Z3-context allocation changed SMT let-alias numbers.
+That attempt and source are preserved at commit
+`978025afd18c49226f6b04414b885c90daca5483`,
+[implementation failure record](../results/2026-10-15-v10a-csd-hardware/implementation-failure-review.json).
+The approved implementation fix gives every query a dedicated Z3 context and
+tests exact query-byte stability after unrelated AST allocation, garbage
+collection and a completed proof. It does not relax hash checks or change the
+theorem, inputs, rewrite, proof budget or physical gates. Both amendments are
+bound in the new V10b preparation; neither failed attempt ran native RTL/area.
+
 Source proofs do not validate the emitter. Preparation therefore also seals a
 miter made from the actual two emitted modules; only their module names change.
 Before area claims, the collector must prove all 32 actual RTL miters with:
@@ -147,9 +158,9 @@ needs its own emitter version and target/training lineage.
 ```sh
 .venv/bin/python -m unittest discover -s tests -p 'test_prepare_v10_csd_hardware.py' -v
 .venv/bin/python scripts/prepare_v10_csd_hardware.py \
-  --root results/2026-10-15-v10a-csd-hardware
+  --root results/2026-10-15-v10b-csd-hardware
 .venv/bin/python scripts/prepare_v10_csd_hardware.py \
-  --root results/2026-10-15-v10a-csd-hardware --validate-only
+  --root results/2026-10-15-v10b-csd-hardware --validate-only
 ```
 
 Preparation creates its output directory exclusively; preserve failed first
@@ -164,7 +175,7 @@ separately checks runtime/data digests. The collector consumes `pairs.json`,
 manifest and collector before native jobs begin.
 
 Unit tests include a real universal source lemma with exact whole-context
-congruence for the masked-subtraction 511 case, wrong-context/constant/operand
+congruence for the masked-subtraction 511 and direct 44 cases, wrong-context/constant/operand
 poisons, and a deliberately wrong rewrite with a SAT counterexample. These
 proof preflights precede the first complete 32-case preparation; there is no
 claim that preparation is the first-ever solver invocation on these formulas.

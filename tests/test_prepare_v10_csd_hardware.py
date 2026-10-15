@@ -1,5 +1,6 @@
 """Synthetic integrity/proof tests; no measurements, fits or feature extraction."""
 import hashlib
+import gc
 import importlib.util
 import json
 import os
@@ -159,6 +160,25 @@ class FixedStudyTests(unittest.TestCase):
         wrong = p.prove_equivalence(pair['formula'], pair['rewritten_formula'].replace(',9)', ',8)'))
         self.assertEqual(wrong['result'], 'sat')
         self.assertIn('counterexample', wrong)
+
+    def test_query_bytes_stable_under_other_contexts_gc_and_completed_proofs(self):
+        import z3
+        pairs = p.fixed_pairs()
+        def queries(pair):
+            certificate = p.congruence_certificate(pair['formula'], pair['rewritten_formula'])
+            return (p.formula_query(certificate['lemma_original_formula'], certificate['lemma_rewritten_formula'], operand_lemma=True).to_smt2(),
+                    p.formula_query(pair['formula'], pair['rewritten_formula']).to_smt2())
+        expected = {pair['pair_id']: queries(pair) for pair in pairs}
+        # Unrelated default-context AST allocation used to alter ?xNN SMT aliases.
+        noise = [z3.BitVec('noise_' + str(i), 32) + i for i in range(100)]
+        del noise
+        gc.collect()
+        direct44 = next(x for x in pairs if x['constant_u32'] == 44 and x['context'] == 'direct_product')
+        proof = p.prove_equivalence(direct44['formula'], direct44['rewritten_formula'])
+        for pair in reversed(pairs):
+            self.assertEqual(queries(pair), expected[pair['pair_id']])
+        gc.collect()
+        p.validate_proof(proof, direct44)
 
     def test_exact_congruence_rejects_wrong_context_constant_operand_and_rewrite(self):
         rows = p.fixed_pairs()

@@ -6,7 +6,7 @@ ISAForge separates prediction quality, isolated circuit resources and integrated
 | --- | --- | --- |
 | Whole CRC32 workload cycles | 32,387,382 → 29,602,102 (8.60% lower) with two custom instructions | RTL-simulated workload behavior including the implemented PCPI integration |
 | Whole-SoC area | 1,633 → 1,704 LUT4 (4.35% higher); 20 BRAMs in both | Area cost of that integrated processor configuration |
-| Routed processor timing | Six paired-seed runs pass 12 MHz; cycle/Fmax ratios 1.022×–1.140× | Conditional timing-model runtime estimates, not physical-board speedups |
+| Routed processor timing | Six runs (three baseline/extended pairs) pass 12 MHz; cycle/Fmax ratios 1.022×–1.140× | Conditional timing-model runtime estimates, not physical-board speedups |
 | V9 prediction quality | Consumed-application family-macro MAE 3.4092 → 2.5434 LUT4 | A development improvement in predicting original-RTL isolated area |
 | V9 application budget decisions | At cap64, 0 false accepts and 3 false rejects for both models; one repaired rejection and one new rejection | Average error reduction does not automatically reduce decision errors |
 | V9 historical regression budget decisions | Cap64 stays 6 false accepts / 5 false rejects; cap128 changes 1/4 → 1/6 | Some feasibility tradeoffs worsen despite lower MAE |

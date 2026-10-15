@@ -1,0 +1,33 @@
+{
+  "schema": "isaforge-v10-csd-source-proof-v2",
+  "original_formula": "mul(sub(andi(in0,63),in1),addi(0,85))",
+  "rewritten_formula": "add(add(add(slli(sub(andi(in0,63),in1),6),slli(sub(andi(in0,63),in1),4)),slli(sub(andi(in0,63),in1),2)),sub(andi(in0,63),in1))",
+  "method": "universal QF_BV32 operand lemma plus exact whole-expression AST congruence",
+  "inputs": [
+    "in0:32",
+    "in1:32"
+  ],
+  "assumptions": [],
+  "timeout_ms": 5000,
+  "result": "unsat",
+  "elapsed_seconds": 0.02198170800693333,
+  "query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun word () (_ BitVec 32))\n(assert\n (let ((?x18 (bvadd (bvadd (bvshl word (_ bv6 32)) (bvshl word (_ bv4 32))) (bvshl word (_ bv2 32)))))\n(and (distinct (bvmul word (bvadd (_ bv0 32) (_ bv85 32))) (bvadd ?x18 word)) true)))\n(check-sat)\n",
+  "query_sha256": "57264119c72d41bff27a8b803c7f72e358adff919c6cfed6983237df43d9db8f",
+  "solver_version": "4.15.4",
+  "query_scope": "universal unconstrained word:32; no range or reachability assumptions",
+  "congruence": {
+    "schema": "isaforge-v10-csd-congruence-v1",
+    "replacement_path": [],
+    "operand_formula": "sub(andi(in0,63),in1)",
+    "constant_u32": 85,
+    "original_product": "mul(sub(andi(in0,63),in1),addi(0,85))",
+    "rewritten_product": "add(add(add(slli(sub(andi(in0,63),in1),6),slli(sub(andi(in0,63),in1),4)),slli(sub(andi(in0,63),in1),2)),sub(andi(in0,63),in1))",
+    "lemma_original_formula": "mul(in0,addi(0,85))",
+    "lemma_rewritten_formula": "add(add(add(slli(in0,6),slli(in0,4)),slli(in0,2)),in0)",
+    "checked": "All enclosing/unmodified AST nodes identical; each term uses the exact original operand AST",
+    "logical_rule": "Universal word identity instantiated with operand, then equality congruence through identical whole context"
+  },
+  "whole_expression_query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun in1 () (_ BitVec 32))\n(declare-fun in0 () (_ BitVec 32))\n(assert\n (let ((?x9 (bvsub (bvand in0 (_ bv63 32)) in1)))\n(let ((?x22 (bvadd (bvadd (bvadd (bvshl ?x9 (_ bv6 32)) (bvshl ?x9 (_ bv4 32))) (bvshl ?x9 (_ bv2 32))) ?x9)))\n(and (distinct (bvmul ?x9 (bvadd (_ bv0 32) (_ bv85 32))) ?x22) true))))\n(check-sat)\n",
+  "whole_expression_query_sha256": "1ff0481d36b03518fd97e75aeceb4936bcc185d7b4880c206b4f46e54083de78",
+  "whole_expression_query_status": "diagnostic-only; not solved in amended preparation"
+}

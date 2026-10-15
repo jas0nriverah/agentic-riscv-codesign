@@ -1,0 +1,35 @@
+{
+  "schema": "isaforge-v10-csd-source-proof-v2",
+  "original_formula": "add(mul(in0,addi(0,340)),in1)",
+  "rewritten_formula": "add(add(add(add(slli(in0,8),slli(in0,6)),slli(in0,4)),slli(in0,2)),in1)",
+  "method": "universal QF_BV32 operand lemma plus exact whole-expression AST congruence",
+  "inputs": [
+    "in0:32",
+    "in1:32"
+  ],
+  "assumptions": [],
+  "timeout_ms": 5000,
+  "result": "unsat",
+  "elapsed_seconds": 1.0919526250072522,
+  "query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun word () (_ BitVec 32))\n(assert\n (let ((?x18 (bvadd (bvadd (bvshl word (_ bv8 32)) (bvshl word (_ bv6 32))) (bvshl word (_ bv4 32)))))\n(and (distinct (bvmul word (bvadd (_ bv0 32) (_ bv340 32))) (bvadd ?x18 (bvshl word (_ bv2 32)))) true)))\n(check-sat)\n",
+  "query_sha256": "331bde9fb6a58134e7339804dd3e451e811769cd672932f86079d0855118ecc6",
+  "solver_version": "4.15.4",
+  "query_scope": "universal unconstrained word:32; no range or reachability assumptions",
+  "congruence": {
+    "schema": "isaforge-v10-csd-congruence-v1",
+    "replacement_path": [
+      0
+    ],
+    "operand_formula": "in0",
+    "constant_u32": 340,
+    "original_product": "mul(in0,addi(0,340))",
+    "rewritten_product": "add(add(add(slli(in0,8),slli(in0,6)),slli(in0,4)),slli(in0,2))",
+    "lemma_original_formula": "mul(in0,addi(0,340))",
+    "lemma_rewritten_formula": "add(add(add(slli(in0,8),slli(in0,6)),slli(in0,4)),slli(in0,2))",
+    "checked": "All enclosing/unmodified AST nodes identical; each term uses the exact original operand AST",
+    "logical_rule": "Universal word identity instantiated with operand, then equality congruence through identical whole context"
+  },
+  "whole_expression_query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun in1 () (_ BitVec 32))\n(declare-fun in0 () (_ BitVec 32))\n(assert\n (let ((?x19 (bvadd (bvadd (bvshl in0 (_ bv8 32)) (bvshl in0 (_ bv6 32))) (bvshl in0 (_ bv4 32)))))\n(and (distinct (bvadd (bvmul in0 (bvadd (_ bv0 32) (_ bv340 32))) in1) (bvadd (bvadd ?x19 (bvshl in0 (_ bv2 32))) in1)) true)))\n(check-sat)\n",
+  "whole_expression_query_sha256": "97d817c90507aa805243bf7114bbfedf73bcf26210984d0c7e61586e931df2f0",
+  "whole_expression_query_status": "diagnostic-only; not solved in amended preparation"
+}
