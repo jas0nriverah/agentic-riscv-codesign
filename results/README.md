@@ -10,6 +10,7 @@ was known at that stage; later development can reuse its labels.
 
 | Archive | Evidence and evaluation status | Entry point |
 | --- | --- | --- |
+| `2026-10-15-v8-application-transfer/` | Six point predictors frozen before146 original circuit measurements; four primary application families plus related-source secondary; complete errors and budgeted decisions | [V8 results and replay](../docs/v8-application-results.md) |
 | `2026-10-14-development-semantics-v7/` | Six fixed feature views, 90 fits and 29,970 OOF predictions; proved transformations, independent metric replay and explicit cross-fold limitations; development only | [V7 results](../docs/v7-development-results.md), [portable evidence](2026-10-14-development-semantics-v7/evidence/REPRODUCE.md) |
 | `2026-10-14-v6/` | Eight frozen predictors on 192 test circuits / 96 structural components after separate 192-circuit calibration; all original RTL and failures retained | [V6 evidence](2026-10-14-v6/README.md), [results](../docs/v6-results.md) |
 | `2026-10-13/` | Original eight-program pilot: 339 program/formula rows, 301 distinct synthesized circuits; grouped model development and offline selection replay | [Pilot summary](2026-10-13/README.md) |

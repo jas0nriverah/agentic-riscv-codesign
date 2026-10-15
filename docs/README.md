@@ -20,6 +20,7 @@ RTL synthesis of synthetic expressions.
 | Extract legal two-input, one-output instruction groups and verify substitutions | [Candidate contract](candidates.md) |
 | Generate RV32 RTL, check its outputs, and measure isolated LUT4 resources | [RTL verification and synthesis](synthesis.md) |
 | Understand formula predictors and grouped model evaluation | [Methodology](methodology.md), [v1 model](area-model.md), [v2 resource and residual models](area-model-v2.md) |
+| Replay complete application-pool transfer and selection outcomes | [V8 application results](v8-application-results.md), [frozen protocol](v8-application-pilot-protocol.md) |
 | Inspect the latest fitting-only semantic ablation and its limitations | [V7 development results](v7-development-results.md), [pre-score protocol](v7-development-protocol.md) |
 | Evaluate a fixed measurement budget over a measured candidate pool | [Area selection](area-selection.md) |
 | Reproduce the six-model comparison and independent error audit | [Matched comparison reproduction](reproduce-matched-comparison.md) |
@@ -28,7 +29,7 @@ RTL synthesis of synthetic expressions.
 | Audit external program transfer and restore raw synthesis evidence | [External results](external-v5-results.md), [evaluation protocol](external-v5-evaluation.md), [collection protocol](external-v5-protocol.md) |
 | Replay V5, inspect matched feature ablations and calibration failures | [V5 results](v5-results.md), [reproduction](v5-reproduction.md), [protocol](v5-protocol.md), [research direction](research-direction-v5.md) |
 | Integrate custom instructions and distinguish cycles from clock estimates | [Processor experiment](../hardware/README.md), [closed-memory SoC](soc-integration.md) |
-| Connect newer research to concrete next experiments | [Representation cost and processor-aware selection](research-update-2026-10-14.md), [mapping-feature development](v6-development-direction.md) |
+| Connect newer research to concrete next experiments | [Transfer and labeling budgets](research-update-2026-10-15.md), [representation cost and processor-aware selection](research-update-2026-10-14.md), [mapping-feature development](v6-development-direction.md) |
 
 The [general data contract](data-contract.md), [performance-model interface](model.md),
 and [general selection interface](selection.md) also support future measured

@@ -34,6 +34,8 @@ jobs:
       - if: matrix.python-version == '3.13'
         run: python scripts/evaluate_v6.py score --output generated/ci-v6/evaluation.json
       - if: matrix.python-version == '3.13'
+        run: python scripts/reproduce_v8_applications.py --skip-figures --output generated/ci-v8
+      - if: matrix.python-version == '3.13'
         run: python results/2026-10-14-development-semantics-v7/evidence/package_v7_evidence.py restore --manifest results/2026-10-14-development-semantics-v7/evidence/evidence-manifest.json --repo-root "$PWD" --destination ../v7-ci-evidence
       - if: matrix.python-version == '3.13'
         run: python results/2026-10-14-development-semantics-v7/evidence/package_v7_evidence.py score --restored ../v7-ci-evidence --repo-root "$PWD" --output ../v7-ci-score-replay --python "$(command -v python)"

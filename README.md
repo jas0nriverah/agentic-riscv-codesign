@@ -6,7 +6,7 @@ ISAForge explores whether machine learning can help choose useful RISC-V instruc
 
 The current learned target is **isolated iCE40 LUT4 count**. Processor speedup is evaluated separately through RTL simulation and routing. This is a research prototype with reproducible measured evidence; an LLM-driven selector remains future work.
 
-[Methodology](docs/methodology.md) · [V6 results](docs/v6-results.md) · [External transfer](docs/external-v5-results.md) · [All results](docs/results.md) · [Documentation](docs/README.md) · [Evidence index](results/README.md)
+[Methodology](docs/methodology.md) · [V8 application results](docs/v8-application-results.md) · [V6 results](docs/v6-results.md) · [External transfer](docs/external-v5-results.md) · [All results](docs/results.md) · [Documentation](docs/README.md) · [Evidence index](results/README.md)
 
 ## System architecture
 
@@ -26,11 +26,30 @@ The [methodology](docs/methodology.md) defines the data splits, feature boundary
 
 ## Results at a glance
 
+### Latest: complete application-pool transfer
+
+Six frozen models predicted **146 original circuits across 152 application rows** before fresh synthesis. The primary panel covers four families and 150 rows; related-source isqrt is secondary. All circuits passed **313,608 RTL comparisons**, with zero synthesis failures.
+
+| Frozen predictor | Primary family-macro MAE, LUT4 |
+| :--- | ---: |
+| Legacy original336, secondary control | **3.3509** |
+| V6 mapping, primary incumbent | 3.4092 |
+| Legacy rewritten336, primary challenger | 3.4319 |
+| Frozen dual graph | 3.6382 |
+| Frozen tuned SOG | 5.3395 |
+| Frozen MasterRTL recipe adaptation | 7.3124 |
+
+**The rewritten model did not improve the primary prediction metric:** its difference is +0.0227 LUT4 (+0.67%). Development gains did not transfer across all four families. At the 64-LUT cap with one measurement per program, both new models find an oracle-best instruction—but **merit alone does too**, so a learned-selection advantage is not established. These are instruction-count proxies, not new CPU speedups.
+
+![V8 errors and paired family sensitivity](docs/figures/v8/v8-error-and-family-sensitivity.png)
+
+[Complete results, failure analysis and reproduction](docs/v8-application-results.md) retain all models, original zeros, novelty limits and policy outcomes. Run `make reproduce-v8` to authenticate raw evidence and regenerate scores and publication figures without training or synthesis. [Next research direction](docs/research-update-2026-10-15.md).
+
 ### New development study: proved semantic rewrites
 
 A fixed **90-fit** ablation on the original 1,665 fitting circuits tests six feature views across three paired seeds. New bit and affine descriptors lower development macro MAE **4.9351 → 4.8601 LUT4 (1.52%)**, but worsen MAPE and error tails slightly. The best observed view applies the proved rewrite before the existing semantic descriptors: **4.7384 LUT4 (3.99% below baseline)**. These are development scores on consumed folds, with a newly detected cross-fold equivalence; they do not replace the independent V6 test below. Neither new correlated-bit pattern occurs in training. [All controls, correctness evidence and limitations](docs/v7-development-results.md).
 
-### Latest: V6 mapping features on fresh structural families
+### V6 mapping features on fresh structural families
 
 V6 adds 23 generic-graph mapping descriptors to the previous dual-graph model, keeping the same **1,665 fitting circuits, 300-tree estimator settings and seed**. Models and predictions were frozen before measuring a separate 192-case calibration cohort and **192 test circuits in 96 structural families**. All 384 circuits passed verification and synthesis: **824,832 sampled/boundary RTL comparisons**, with no failed or replaced cases.
 
@@ -170,6 +189,7 @@ make reproduce-v4
 make reproduce-v5
 make reproduce-external-v5
 make reproduce-v6
+make reproduce-v8
 ```
 
 These commands validate their respective frozen experiments and regenerate scores and vector PDF/SVG plus PNG figures under `generated/reproduction/`. External and V6 replay also restore and hash retained raw synthesis artifacts, and check the reviewed freezes against Git history. They do not retrain models or synthesize new circuits.
