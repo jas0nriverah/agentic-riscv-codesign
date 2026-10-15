@@ -1,0 +1,94 @@
+{
+  "schema": "isaforge-v9-adaptation-preparation-v1",
+  "prepared_at_utc": "2026-10-15T19:38:24.583509+00:00",
+  "protocol": {
+    "status": "consumed-V8-development-not-independent-confirmation",
+    "budgets": [
+      1,
+      3,
+      5
+    ],
+    "primary_budget": 3,
+    "cap_lut4": 64,
+    "query_policy": "frozen-mapping-predicted-feasible-merit",
+    "query_ties": "saved-descending/formula/candidate-id; infeasible-first-key=point-minus-cap",
+    "family_schedule": "lexicographic-program-round-robin; unique-original-formula attempts",
+    "adapter_names": [
+      "frozen",
+      "global_residual",
+      "local_residual"
+    ],
+    "pseudo_observation_weight": 1,
+    "local_correction": "sum(K*(y-p0))/(1+sum(K)); same-tree leaf proximity",
+    "global_correction": "sum(y-p0)/(1+successful-original-query-count)",
+    "identity_groups": "transitive canonical + stored accepted V7 bit/affine/combined normalized identities",
+    "identity_scope": "within-cohort; group exclusion does not copy labels between RTL representations",
+    "exclusion": "all memberships of every queried identity group within its family episode",
+    "weighting": "equal original-formula rows within program; equal programs within family; equal primary families",
+    "primary": "local_residual minus frozen unqueried MAE at budget3 on identical cases",
+    "missing_policy": "null complete-family macro if any declared primary program is exhausted",
+    "zero_rule": "public original generic gate count zero forces all adapter outputs zero",
+    "bounds": "nonnegative points only; no calibrated upper bounds or population CI",
+    "new_fits": 0,
+    "new_labels": 0,
+    "dynamic_acquisition": false
+  },
+  "files": [
+    {
+      "path": "../../2026-10-15-v8-application-transfer/input-seal.json",
+      "sha256": "bcb0ca3212d6baa32587e56dbd5ad2858e3942cc421bd8fe577c0cae9c40d968"
+    },
+    {
+      "path": "../../2026-10-15-v8-application-transfer/point-freeze.json",
+      "sha256": "d89dde2c2f04b0c53f2f75e8eccba8410e4399feed5934dc3a92e7f3483a27ea"
+    },
+    {
+      "path": "../../../scripts/develop_v9_adaptation.py",
+      "sha256": "70cdea9a7ed324d0c8b045cc08dd768db7ccf20282f994b7790c8ceb1e618645"
+    },
+    {
+      "path": "../../../isaforge/area_adaptation_v9.py",
+      "sha256": "a046dc654190f4edbf6b2cfa4c01382f9218bb1281a44c0dfb1ec7109b4bc56b"
+    },
+    {
+      "path": "../../../docs/v9-budgeted-adaptation-protocol.md",
+      "sha256": "f7d005aa2028c1af3208e8331eef6d94a14001b0fb31f890055c4d2c558ab149"
+    },
+    {
+      "path": "../../2026-10-15-v8-application-transfer/rows.json",
+      "sha256": "c901a7115125ab6ca3a1321ce7d68734cddf2b9660120960d5baad9ef696dec6"
+    },
+    {
+      "path": "../../2026-10-15-v8-application-transfer/features.json",
+      "sha256": "abd5586aa897937ce2596ba677289b835a3d8ffa08d09e9401324c8460768eac"
+    },
+    {
+      "path": "../../2026-10-15-v8-application-transfer/programs.json",
+      "sha256": "a345395425d0ecc198e2cf545bd532e51871090e53d565b485de883dbb13f215"
+    },
+    {
+      "path": "../../2026-10-14-v6/models/mapping_v6.joblib",
+      "sha256": "1a1828d7089554fed050769aff5007c383fbd5158e063d6da89f366104f47f56"
+    },
+    {
+      "path": "../../2026-10-14-v6/models/mapping_v6.json",
+      "sha256": "42d21cd093ed9b863668fcc01d12ed4d09ebb1590e0bdffb408fdf66d5f74676"
+    },
+    {
+      "path": "../../2026-10-15-v8-application-transfer/point-predictions/mapping_v6.json",
+      "sha256": "e203e94e361e2132e7a3604ebb7dae72bcd704554f4ad027f35635bf4fa5a81c"
+    }
+  ],
+  "public_payload": {
+    "path": "public-prepared.json",
+    "sha256": "a1f708f19a3556a79fb926a1a12faf0aa3cf7cb5e848ff82651f48adf6141a1e"
+  },
+  "v8_root_relative": "../../2026-10-15-v8-application-transfer",
+  "application_labels_read": false,
+  "application_evaluation_read": false,
+  "new_fits": 0,
+  "new_labels": 0,
+  "new_feature_extractions": 0,
+  "proof_or_normalization_retries": 0,
+  "python": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/bin/python"
+}
