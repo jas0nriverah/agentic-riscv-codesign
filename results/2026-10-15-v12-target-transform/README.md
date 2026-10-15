@@ -20,3 +20,5 @@ Run `make reproduce-v12 PYTHON=.venv/bin/python` for saved-point score replay an
 Independent validation passed in two separate ways: [saved-point/receipt replay](independent-results-audit.json) reconstructs every metric and threshold decision with the standard library; [actual model inference](independent-model-inference.json) reloads all 30 local forests and reproduces all 10,278 encoded, decoded, and final points exactly, with no fitting. The numerical score replay retains 218 floating-point rounding differences within its declared 1e-12/8-ULP tolerance; all counts and JSON types match exactly.
 
 Validation: **1,592 tests and 111 subtests pass** ([full-suite log](publication-full-suite.log)). The documented score/figure reproduction also completes ([log](reproduction.log)).
+
+[Tracked-only portability check](tracked-only-replay.json) passes from a separate copy of committed files with site packages disabled, an empty PATH, and no local forests. It replays all 10,278 saved points. This verifies score replay on this host; Linux CI exercises both supported Python versions separately.
