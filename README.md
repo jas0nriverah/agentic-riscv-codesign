@@ -207,6 +207,7 @@ make reproduce-v8
 make reproduce-v9-coverage
 make reproduce-v10d-hardware
 make reproduce-v10d-timing
+make reproduce-v10d-selection
 ```
 
 These commands validate their respective frozen experiments and regenerate scores and vector PDF/SVG plus PNG figures under `generated/reproduction/`. External and V6 replay also restore and hash retained raw synthesis artifacts, and check the reviewed freezes against Git history. They do not retrain models or synthesize new circuits.
@@ -260,6 +261,8 @@ The [completed constant-multiply hardware study](docs/v10-csd-hardware-results.m
 The [matched timing study](docs/v10d-timing-results.md) also completed **192 routes**: all 32 formula means improve in registered-harness period (average −1.710802 ns), while one of 96 seed pairs regresses slightly. All carry tradeoffs remain visible, and 72 paths have unresolved attribution.
 
 ![Every matched resource and timing tradeoff.](docs/figures/v10d-timing/v10d-resource-timing-tradeoffs.png)
+
+The [measured implementation selector](docs/v10d-selection-policy.md) enforces explicit resource/clock budgets across all three seeds and retains Pareto alternatives. Under each original implementation's worst-case limits, it chooses **19 rewrites and retains 13 originals** because of carry or packed-cell growth. [All decisions and figures](results/2026-10-15-v10d-selection/README.md). This is an audited measured lookup; a learned multi-objective selector remains future work.
 
 The next targets are [reserved application transfer](docs/v9-reserved-transfer-direction.md), measured CPU integration of the rewrites, and selection under a total measurement budget. V9 coverage improves consumed-application prediction, while the independently measured V8 rewritten-feature comparison remains negative and merit-only selection ties the best learned policies. Error tails and feasibility mistakes still matter. [Recent literature](docs/research-update-2026-10-15.md) motivates better training coverage and explicit label-budget controls. LLM-guided selection and power/energy prediction remain unimplemented. Current evidence does not establish published-system superiority or a general CPU speedup model.
 

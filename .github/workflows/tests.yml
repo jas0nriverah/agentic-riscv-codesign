@@ -32,6 +32,14 @@ jobs:
           name: v10d-timing-replay-python-${{ matrix.python-version }}
           path: generated/ci-v10d-timing/
           if-no-files-found: ignore
+      - run: python scripts/reproduce_v10d_selection.py --root results/2026-10-15-v10d-timing --output generated/ci-v10d-selection --skip-figures
+      - run: cmp generated/ci-v10d-selection/policy-results.json results/2026-10-15-v10d-selection/policy-results.json
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v10d-selection-replay-python-${{ matrix.python-version }}
+          path: generated/ci-v10d-selection/
+          if-no-files-found: ignore
       - run: python -m unittest discover -s results/2026-10-14-development-semantics-v7/evidence/tests -p 'test_*.py'
       - run: isaforge demo --output generated/demo
       - run: python -m isaforge.frozen_inference --model results/2026-10-13-prospective/models/resource-ridge.joblib --kind v2 --candidates results/2026-10-13-prospective/final/dataset.json --output generated/inference-smoke.json

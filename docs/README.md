@@ -25,6 +25,7 @@ RTL synthesis of synthetic expressions.
 
 | Task | Read |
 | --- | --- |
+| Choose measured implementations under explicit resource and clock caps | [Selection policy and CLI](v10d-selection-policy.md), [all decisions](../results/2026-10-15-v10d-selection/README.md) |
 | Compare all 192 routed arms and resource/timing tradeoffs | [V10d timing results](v10d-timing-results.md), [timing protocol](v10d-timing-protocol.md) |
 | Inspect all 32 verified original/CSD hardware pairs and carry tradeoffs | [V10 hardware results](v10-csd-hardware-results.md), [V10d protocol](v10d-csd-hardware-protocol.md) |
 | Execute pinned Embench programs and reconcile Spike traces | [Toolchain and workload collection](toolchain.md) |
