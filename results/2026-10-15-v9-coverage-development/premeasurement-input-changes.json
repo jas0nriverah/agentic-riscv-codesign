@@ -1,0 +1,54 @@
+{
+  "schema": "isaforge-v9-premeasurement-proposal-changes-v1",
+  "new_labels_read": false,
+  "model_fits": 0,
+  "initial_draft": {
+    "constant_bases": [
+      11,
+      37,
+      341,
+      21845
+    ],
+    "constant_scales": [
+      1,
+      32
+    ],
+    "shifts": [
+      1,
+      2,
+      4,
+      8,
+      12,
+      16,
+      24,
+      30
+    ]
+  },
+  "final": {
+    "constant_bases": [
+      11,
+      85,
+      341,
+      511
+    ],
+    "constant_scales": [
+      1,
+      4
+    ],
+    "shifts": [
+      1,
+      2,
+      3,
+      4,
+      8,
+      12,
+      24,
+      30
+    ]
+  },
+  "reasons": [
+    "Replace shift16 with3 because the shift16 add/sign-sub original is already in consumed V8.",
+    "Replace constant grid before measurement to keep every addi(0,K) within signed12-bit immediates, max2044, while varying positive-constant density and trailing zeros."
+  ],
+  "no_outcome_dependent_candidate_change": true
+}
