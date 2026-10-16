@@ -1,5 +1,7 @@
 # Research result archives
 
+- [V11c complete input collection](2026-10-16-v11c-dtc-recovery/README.md): all six outcomes, 521 memberships and 327 originals; independent raw replay pending, no new model score.
+
 - [V11b input recovery](2026-10-16-v11b-transfer-recovery/STATUS.md): controlled-environment startup failure retained for both missing programs; no new labels or model results.
 
 - [V14 exploratory routing](2026-10-16-v14-specialist-development/README.md): one input-only gate, 5,283 audited selections, original control preserved exactly; consumed-development evidence only.
