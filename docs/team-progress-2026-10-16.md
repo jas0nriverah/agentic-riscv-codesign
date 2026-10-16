@@ -1,6 +1,6 @@
 # ISAForge team progress — 2026-10-16
 
-Evidence snapshot: **05:13 UTC, 2026-10-16**. V9 remains the current development model. Targeted training and routing have produced useful development findings, but no new model is promoted and reserved-program input collection is complete, with independent replay passed and model evaluation not yet started. The current V11c run is input recovery only; it releases no new features, predictions, area labels or fits.
+Evidence snapshot: **05:22 UTC, 2026-10-16**. V9 remains the current development model. Targeted training and routing have produced useful development findings, but no new model is promoted and reserved-program input collection is complete, with independent replay passed and model evaluation not yet started. The subsequent feature launch was rejected before any native job by an incomplete local-metadata allowlist. Its evidence is preserved; a narrow amendment is in review. No new features, predictions, area labels or fits have been produced.
 
 ## Model and improvement evidence
 
@@ -38,3 +38,5 @@ Raw-stream replay and full-pool input staging are complete. The next evidence ga
 ## Frozen comparison inputs
 
 The new `scripts/prepare_v11_model_comparison.py` prepares the complete audited input pool without extracting features, loading models, predicting or reading target labels. It preserves every program/formula membership, seals the pre-reservation 2,929-original reference and separately reports overlap with V6/V9 training. Direct matches and transitive accepted-identity components remain separate diagnostics; skeleton similarity does not establish identity. The complete-pool measurement budget is a proposal until separately released. Independent code review and all 36 synthetic tests pass. The adapter has now sealed all 327 originals and 521 memberships, with zero extraction, inference, target-label reads or fits. The feature/prediction runner and prospective reporting plan are committed before new target measurements. [Input preparation](../results/2026-10-16-v11-model-inputs/preparation.json) · [Reporting plan](v11-comparison-reporting-plan.md).
+
+The first feature release stopped before its claim because the Git/provenance check omitted 36 compact recovery metadata files already bound by the archive. This is an implementation failure, not model performance evidence. The original runner and root are preserved; a new runner will admit only exact authenticated archive members. [Failure record](../results/2026-10-16-v11-frozen-predictions/README.md).
