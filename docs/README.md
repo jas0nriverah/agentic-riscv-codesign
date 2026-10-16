@@ -1,6 +1,10 @@
 # Documentation
 
 - [ML model overview](ml-model.md): an editable diagram of the 217-feature, 300-tree predictor and its measured improvement process.
+- [V14 exploratory structural route](v14-specialist-results.md): retains all original control predictions while improving new coverage; no fresh-transfer or deployment claim.
+- [V13 regression diagnosis](v13-regression-diagnosis.md): where global augmentation changed predictions and why the structural route was investigated.
+- [Specialization research](research-specialization-2026-10-16.md): five primary sources, the fixed gate hypothesis and its evaluation limits.
+- [V11 transfer recovery design](v11-transfer-recovery-plan.md): bounded compressed tracing prototype and explicit endpoint limitations; no new cohort run yet.
 - [V13 targeted coverage results](v13-coverage-results.md): 48 new measurements and 30 matched fits; new coverage improves but original-cohort primary error worsens 5.16%, so V9 is retained.
 - [V12 target-scale results](v12-target-transform-results.md): 30 matched fits; log targets lower MAPE but worsen MAE and over-budget acceptance, so raw-target fitting is retained.
 

@@ -38,6 +38,8 @@ The [methodology](docs/methodology.md) defines the data splits, feature boundary
 
 The [V13 matched coverage experiment](docs/v13-coverage-results.md) completes 48 new synthesis measurements and 30 fits. Added training coverage sharply lowers new-cohort pooled MAE **480.7060 → 25.7168 LUT4**, but worsens the original-cohort primary macro MAE **5.5040 → 5.7882 (+5.16%)** and increases cap64 false rejections. All **10,566 held-out predictions** reproduce exactly from the 30 saved forests. The augmented model is **not promoted**; V9 remains the current development predictor. These results concern consumed development cohorts, not new independent transfer or processor speedups.
 
+The [V14 exploratory follow-up](docs/v14-specialist-results.md) uses one formula-only structural gate over those same held-out predictions. It preserves every original-cohort control prediction while reducing new-cohort pooled MAE **480.7060 → 27.4819 LUT4**. The gate matches 0 original and 16 new circuits; preservation outside it is mechanical, and new-cohort worst underprediction still worsens. This is post-hoc routing analysis, with no new fits, independent transfer claim or promotion.
+
 The [V12 matched target-scale experiment](docs/v12-target-transform-results.md) completes 30 fits on identical leakage-closed folds. Log-target fitting reduces MAPE but worsens the primary macro MAE **5.0777 → 5.3200 LUT4 (+4.77%)** and increases cap64 false accepts in every seed. We retain raw-target fitting; this negative development result prevents adopting a model that looks better only on percentage error.
 
 ### Latest development: targeted training coverage

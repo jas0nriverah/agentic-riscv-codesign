@@ -1,5 +1,6 @@
 # Research result archives
 
+- [V14 exploratory routing](2026-10-16-v14-specialist-development/README.md): one input-only gate, 5,283 audited selections, original control preserved exactly; consumed-development evidence only.
 - [V13 targeted coverage comparison](2026-10-15-v13b-coverage-recovery/README.md): 48 new verified measurements, 30 matched fits and 10,566 reproduced points; coverage gain with original-cohort regression, no promotion.
 - [V12 target-scale comparison](2026-10-15-v12-target-transform/README.md): all 30 grouped fits and 10,278 OOF points; raw-target fitting retained after log targets worsen primary MAE and false accepts.
 
