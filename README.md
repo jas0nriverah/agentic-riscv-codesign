@@ -34,6 +34,8 @@ The [methodology](docs/methodology.md) defines the data splits, feature boundary
 
 ## Results at a glance
 
+[Team progress brief — October 16](docs/team-progress-2026-10-16.md) collects the current model, measured gains, hardware tradeoffs and remaining research gaps.
+
 ### Latest controlled model experiment
 
 The [V13 matched coverage experiment](docs/v13-coverage-results.md) completes 48 new synthesis measurements and 30 fits. Added training coverage sharply lowers new-cohort pooled MAE **480.7060 → 25.7168 LUT4**, but worsens the original-cohort primary macro MAE **5.5040 → 5.7882 (+5.16%)** and increases cap64 false rejections. All **10,566 held-out predictions** reproduce exactly from the 30 saved forests. The augmented model is **not promoted**; V9 remains the current development predictor. These results concern consumed development cohorts, not new independent transfer or processor speedups.
