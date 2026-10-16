@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/scripts/audit_v11c_recovery.py", line 344, in <module>
+    if __name__ == '__main__': main()
+                               ~~~~^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/scripts/audit_v11c_recovery.py", line 245, in main
+    with args.output.open('x') as f: json.dump(report, f, indent=2, allow_nan=False); f.write('\n')
+         ~~~~~~~~~~~~~~~~^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'results/2026-10-16-v11c-dtc-recovery/input-review/independent-input-audit.json'
