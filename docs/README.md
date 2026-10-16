@@ -1,5 +1,7 @@
 # Documentation
 
+- [V11b recovery outcome](../results/2026-10-16-v11b-transfer-recovery/STATUS.md): both captures failed at Spike startup; no new ML evidence, with the failure independently audited.
+
 - [ML model overview](ml-model.md): an editable diagram of the 217-feature, 300-tree predictor and its measured improvement process.
 - [V14 exploratory structural route](v14-specialist-results.md): retains all original control predictions while improving new coverage; no fresh-transfer or deployment claim.
 - [V13 regression diagnosis](v13-regression-diagnosis.md): where global augmentation changed predictions and why the structural route was investigated.
