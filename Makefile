@@ -104,3 +104,12 @@ reproduce-v10d-selection:
 reproduce-v12:
 	$(PYTHON) scripts/audit_v12_results.py --root results/2026-10-15-v12-target-transform --output generated/reproduction/v12/independent-results-audit.json
 	$(PYTHON) scripts/plot_v12_target_transform.py --root results/2026-10-15-v12-target-transform --output generated/reproduction/v12/figures
+
+.PHONY: reproduce-v13 model-diagram
+reproduce-v13:
+	mkdir -p generated/reproduction/v13
+	$(PYTHON) scripts/audit_v13_comparison.py --action results --root results/2026-10-15-v13b-coverage-recovery --output generated/reproduction/v13/independent-results-audit.json
+	$(PYTHON) scripts/plot_v13_coverage.py --root results/2026-10-15-v13b-coverage-recovery --output generated/reproduction/v13/figures
+
+model-diagram:
+	$(PYTHON) scripts/plot_ml_model_overview.py --output generated/reproduction/ml-model

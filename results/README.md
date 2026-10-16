@@ -1,5 +1,6 @@
 # Research result archives
 
+- [V13 targeted coverage comparison](2026-10-15-v13b-coverage-recovery/README.md): 48 new verified measurements, 30 matched fits and 10,566 reproduced points; coverage gain with original-cohort regression, no promotion.
 - [V12 target-scale comparison](2026-10-15-v12-target-transform/README.md): all 30 grouped fits and 10,278 OOF points; raw-target fitting retained after log targets worsen primary MAE and false accepts.
 
 - [V10 paired hardware attempt](../docs/v10-csd-hardware-results.md): all 32 source proofs pass; 16 actual-RTL proofs pass and 16 time out, blocking all 64 area jobs. Raw evidence and independent audit retained.

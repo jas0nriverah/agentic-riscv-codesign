@@ -14,6 +14,14 @@ The current learned target is **isolated iCE40 LUT4 count**. Processor speedup i
 
 The diagram is an editable vector asset; regenerate it with `make diagram`. [Editable SVG](docs/assets/architecture.svg).
 
+## How the ML model works
+
+The current V9 area predictor uses **217 circuit features and 300 ExtraTrees** fitted on **1,713 measured circuits**. It predicts isolated iCE40 LUT4 count. The diagram shows its feature pipeline, separate measured training labels and the comparisons used to evaluate improvements.
+
+![ISAForge ML model and evidence-driven improvement process.](docs/figures/ml-model/ml-model-overview.png)
+
+[Model explanation](docs/ml-model.md) · [Editable SVG](docs/figures/ml-model/ml-model-overview.svg) · [Presentation PDF](docs/figures/ml-model/ml-model-overview.pdf)
+
 ## Research methodology
 
 1. **Collect real workloads.** Compile pinned Embench programs for RISC-V, verify their self-checks, and trace execution with Spike. Extract bounded computation graphs with at most two inputs and one output.
@@ -27,6 +35,8 @@ The [methodology](docs/methodology.md) defines the data splits, feature boundary
 ## Results at a glance
 
 ### Latest controlled model experiment
+
+The [V13 matched coverage experiment](docs/v13-coverage-results.md) completes 48 new synthesis measurements and 30 fits. Added training coverage sharply lowers new-cohort pooled MAE **480.7060 → 25.7168 LUT4**, but worsens the original-cohort primary macro MAE **5.5040 → 5.7882 (+5.16%)** and increases cap64 false rejections. All **10,566 held-out predictions** reproduce exactly from the 30 saved forests. The augmented model is **not promoted**; V9 remains the current development predictor. These results concern consumed development cohorts, not new independent transfer or processor speedups.
 
 The [V12 matched target-scale experiment](docs/v12-target-transform-results.md) completes 30 fits on identical leakage-closed folds. Log-target fitting reduces MAPE but worsens the primary macro MAE **5.0777 → 5.3200 LUT4 (+4.77%)** and increases cap64 false accepts in every seed. We retain raw-target fitting; this negative development result prevents adopting a model that looks better only on percentage error.
 

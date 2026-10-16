@@ -1,5 +1,7 @@
 # Documentation
 
+- [ML model overview](ml-model.md): an editable diagram of the 217-feature, 300-tree predictor and its measured improvement process.
+- [V13 targeted coverage results](v13-coverage-results.md): 48 new measurements and 30 matched fits; new coverage improves but original-cohort primary error worsens 5.16%, so V9 is retained.
 - [V12 target-scale results](v12-target-transform-results.md): 30 matched fits; log targets lower MAPE but worsen MAE and over-budget acceptance, so raw-target fitting is retained.
 
 - [Hardware tradeoff ledger](hardware-tradeoffs.md): resource costs, feasibility mistakes, processor timing evidence and unmeasured quantities.

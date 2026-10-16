@@ -41,6 +41,14 @@ jobs:
           path: generated/ci-v10d-selection/
           if-no-files-found: ignore
       - run: python -I -S scripts/audit_v12_results.py --root results/2026-10-15-v12-target-transform --output generated/ci-v12/independent-results-audit.json
+      - run: mkdir -p generated/ci-v13
+      - run: python scripts/audit_v13_comparison.py --action results --root results/2026-10-15-v13b-coverage-recovery --output generated/ci-v13/independent-results-audit.json
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v13-point-replay-python-${{ matrix.python-version }}
+          path: generated/ci-v13/
+          if-no-files-found: ignore
       - if: always()
         uses: actions/upload-artifact@v4
         with:
