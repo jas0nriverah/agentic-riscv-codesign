@@ -1,6 +1,6 @@
 # ISAForge team progress — 2026-10-16
 
-Evidence snapshot: **05:22 UTC, 2026-10-16**. V9 remains the current development model. Targeted training and routing have produced useful development findings, but no new model is promoted and reserved-program input collection is complete, with independent replay passed and model evaluation not yet started. The subsequent feature launch was rejected before any native job by an incomplete local-metadata allowlist. Its evidence is preserved; a narrow amendment is in review. No new features, predictions, area labels or fits have been produced.
+Evidence snapshot: **05:19 UTC, 2026-10-16**. V9 remains the current development model. Targeted training and routing have produced useful development findings, but no new model is promoted and reserved-program input collection is complete, with independent replay passed and model evaluation not yet started. The subsequent feature launch was rejected before any native job by an incomplete local-metadata allowlist. Its evidence is preserved; a narrow amendment is in review. No new features, predictions, area labels or fits have been produced.
 
 ## Model and improvement evidence
 
