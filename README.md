@@ -1,5 +1,7 @@
 # ISAForge
 
+**Project paused.** [Team handoff and remaining work](docs/HANDOFF.md). Verified results and diagrams are below; unfinished recovery code is archived.
+
 **Measured RISC-V custom-instruction research: candidate discovery, learned hardware cost, and processor validation.**
 
 ISAForge explores whether machine learning can help choose useful RISC-V instruction extensions with fewer expensive hardware measurements. It extracts small computations from real programs, verifies their RTL, learns their FPGA resource cost, and evaluates the resulting estimates under controlled data splits. A separate PicoRV32 experiment checks what two CRC32 extensions actually do to processor cycles and FPGA resources.

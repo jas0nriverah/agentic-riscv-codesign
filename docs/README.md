@@ -1,5 +1,7 @@
 # Documentation
 
+[Paused-project handoff](HANDOFF.md) — verified checkpoint, unfinished work and retained data.
+
 - [V11c complete input collection](../results/2026-10-16-v11c-dtc-recovery/README.md): all six outcomes, 521 memberships and 327 originals; independent raw replay pending, no new model score.
 
 - [Team progress brief — October 16](team-progress-2026-10-16.md): current model, measured gains, tradeoffs and next evaluation.
