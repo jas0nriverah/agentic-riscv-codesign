@@ -1,0 +1,67 @@
+{
+  "scope": "Noncohort compiler-header engineering preflight; no RTL or target labels",
+  "sdk_path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+  "source_sha256": "db9d5fd039fc408b89b9d0e411da50651bc6fa759bd012087719652450ec1d96",
+  "runs": [
+    {
+      "name": "frozen_env",
+      "command": [
+        "c++",
+        "-std=c++17",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v13-sdk-preflight/probe.cpp",
+        "-o",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v13-sdk-preflight/frozen_env.bin"
+      ],
+      "returncode": 1,
+      "log_sha256": "14a6661fd43d6ecc4e190877696fdd7bff08f0753794ac08dad822548129d9b3",
+      "environment": {
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin:/opt/homebrew/Cellar/verilator/5.050/bin:/opt/homebrew/Cellar/yosys/0.69_1/bin:/usr/bin:/usr/bin:/bin",
+        "ABC": "/opt/homebrew/Cellar/yosys/0.69_1/bin/yosys-abc",
+        "LANG": "C",
+        "LC_ALL": "C",
+        "TZ": "UTC"
+      }
+    },
+    {
+      "name": "explicit_sdk",
+      "command": [
+        "c++",
+        "-std=c++17",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v13-sdk-preflight/probe.cpp",
+        "-o",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v13-sdk-preflight/explicit_sdk.bin"
+      ],
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "environment": {
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin:/opt/homebrew/Cellar/verilator/5.050/bin:/opt/homebrew/Cellar/yosys/0.69_1/bin:/usr/bin:/usr/bin:/bin",
+        "ABC": "/opt/homebrew/Cellar/yosys/0.69_1/bin/yosys-abc",
+        "LANG": "C",
+        "LC_ALL": "C",
+        "TZ": "UTC",
+        "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
+      },
+      "executable_returncode": 0
+    },
+    {
+      "name": "shim_first",
+      "command": [
+        "c++",
+        "-std=c++17",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v13-sdk-preflight/probe.cpp",
+        "-o",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v13-sdk-preflight/shim_first.bin"
+      ],
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "environment": {
+        "PATH": "/usr/bin:/bin:/Library/Developer/CommandLineTools/usr/bin:/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin:/opt/homebrew/Cellar/verilator/5.050/bin:/opt/homebrew/Cellar/yosys/0.69_1/bin:/usr/bin:/usr/bin:/bin",
+        "ABC": "/opt/homebrew/Cellar/yosys/0.69_1/bin/yosys-abc",
+        "LANG": "C",
+        "LC_ALL": "C",
+        "TZ": "UTC"
+      },
+      "executable_returncode": 0
+    }
+  ]
+}
