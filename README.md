@@ -38,7 +38,7 @@ The [methodology](docs/methodology.md) defines the data splits, feature boundary
 
 ### Transfer-input recovery
 
-The [V11c collection](results/2026-10-16-v11c-dtc-recovery/README.md) recovers both previously incomplete traces and retains all six program outcomes: **521 program/formula memberships and 327 unique originals**. Independent raw replay is pending; no new transfer accuracy score or model promotion is claimed.
+The [V11c collection](results/2026-10-16-v11c-dtc-recovery/README.md) recovers both previously incomplete traces and retains all six program outcomes: **521 program/formula memberships and 327 unique originals**. Independent raw replay has passed, and the complete pool is sealed for frozen V6/V9 evaluation. No new transfer accuracy score or model promotion is claimed.
 
 ### Latest controlled model experiment
 

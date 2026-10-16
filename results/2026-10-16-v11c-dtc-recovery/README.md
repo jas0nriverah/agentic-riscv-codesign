@@ -1,4 +1,4 @@
-# V11c: complete transfer-input collection; independent replay pending
+# V11c: complete transfer-input collection; independent replay passed
 
 The fixed input-only recovery completed at **2026-10-16 04:50:46 UTC**, with no collector failures. Both original missing programs were captured once, decoded through EOF, checked against their retained outputs/oracles, and extracted with the unchanged full ROI and fusion policy. The four previous outcomes were reused unchanged. This is **input collection evidence**, not a new ML evaluation or model improvement.
 
@@ -15,7 +15,7 @@ All six outcomes and five nonempty algorithm families are present: **521 program
 
 Fusion checks passed for 381 AMMUNITION occurrences and 168 PM occurrences, with 16 vectors each and zero opaque skips. The resulting 8,784 individual and 8,096 joint/block comparisons are randomized software-equivalence checks, not formal RTL proofs or modified-processor execution. Original program selfchecks and retained O0/O2 outputs remain part of the input contract.
 
-A separate independent raw-stream, decoder, ELF, extraction and fusion replay **is running; its result is not yet admitted**. Features, frozen-model predictions, area labels and fits all remain zero. The original equal-all-program MAE stays undefined because recursion has no formulas. The adopted [V11b-E1 endpoint](../../docs/v11b-transfer-protocol.md) can only be evaluated after independent input admission, a complete prediction freeze and complete-pool measurements.
+The [independent result audit](input-review/independent-recovery-audit.json) **passed at 05:13:38 UTC**. It replayed both recovered raw streams and authenticated the four reused outcomes unchanged. Its frozen parser, extractor, fusion and oracle helpers are shared; this is not an independent implementation of every component. Features, frozen-model predictions, area labels and fits all remain zero. The original equal-all-program MAE stays undefined because recursion has no formulas. The adopted [V11b-E1 endpoint](../../docs/v11b-transfer-protocol.md) can only be evaluated after independent input admission, a complete prediction freeze and complete-pool measurements.
 
 ## Evidence and reproduction boundary
 
