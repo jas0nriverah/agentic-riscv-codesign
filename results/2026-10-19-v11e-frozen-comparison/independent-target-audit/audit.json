@@ -1,0 +1,111 @@
+{
+  "schema": "isaforge-v11-independent-target-audit-v1",
+  "status": "pass",
+  "complete": true,
+  "audited_at_utc": "2026-10-19T16:08:36.367815+00:00",
+  "source_sha256": "042134ffa1e7a365e40d215259c7f0bb773340d91aa1807f89d6f325e5256119",
+  "source_tests_sha256": "2b87ac2795a891e1de65807a34e480469a5dd48ad614ebbdf1bfe4dc7e1026ad",
+  "oracle_sha256": "6d97a070e15e7ccad75051cf641ea7526be9ed25239b3622c405755985d983c3",
+  "measurement_plan_sha256": "b49d2cc519259315930222686e77c384380c6b2f1caeaa39860abedb3c6207be",
+  "point_freeze_sha256": "291d02a861b77375fbd0ce4fdd193a16f009ff1e71344447d332b7027d39ddb3",
+  "completion_sha256": "9503a61dad9cb3ce075b0d7da7a0d13ca13024bb550481b5e046e9105b50cb3a",
+  "raw_archive_sha256": "7bd84543318fc3e19f877afd8189d4019d7364747c28d8dafdb553111e13371d",
+  "raw_manifest_sha256": "9b2d0311cd03dce01320a9e9e146ba301c1c24ab067432e4e223f67ddc439950",
+  "program_count": 6,
+  "family_count": 5,
+  "program_formula_memberships": 521,
+  "original_count": 327,
+  "prediction_count": 654,
+  "rtl_comparisons": 702396,
+  "mapped_netlists_recounted": 327,
+  "maximum_overlapping_mapping_workers": 2,
+  "fallback_incidents": [
+    {
+      "batch_offset": 0,
+      "incident": {
+        "original_error": "RTL correctness failed: Mismatch formula 31 vector 89 got 20000000 expected a0000000\n",
+        "formula_index": 31,
+        "formula": "add(andi(mulhu(in0,in1),-4),srli(mulhu(in0,in1),2))",
+        "vector_index": 89,
+        "got_hex": "20000000",
+        "expected_hex": "a0000000",
+        "resolution": "identical RTL rebuilt with defined signed wrapping; boundary cross-check in Yosys"
+      },
+      "boundary_comparisons": 100
+    }
+  ],
+  "fallback_boundary_comparisons": 100,
+  "closure": {
+    "scientific_files": 6246,
+    "recorded_installed_files": 2079,
+    "archived_sources": 97,
+    "input_root": "results/2026-10-16-v11-model-inputs",
+    "predictor_runner": "scripts/predict_v11e_transfer.py",
+    "predictor_runner_sha256": "05c1d7f43a7c4a9ede5e1c168da431a8623bea3f618e71d18fab5535c41331eb",
+    "recovery_lineage": {
+      "reviewed_recovery_audit_sha256": "860592ca7a6570101972e72468b544d3f81f345f9d17a0be00bebcf59efdbbe4",
+      "recovery_completion_sha256": "4a26a8f73007cf5e4d74d29cf8fef0d116ce9badca3efaeb4292ff6cf2b4a45e",
+      "scope": "V11c profile/failure/startup/provenance checks with shared frozen V11b streaming raw parser, counters, ELF reader and occurrence replay. That replay shares frozen RV32 decode, candidate extraction, fusion execute and output oracles. Four original outcomes authenticated unchanged, not newly raw-replayed. No native jobs; Git commit bytes, historical native paths and OS hermeticity are not reverified."
+    },
+    "feature_packaging_recovery": {
+      "schema": "isaforge-v11-recovered-feature-admission-v1",
+      "source_feature_root": "../2026-10-16-v11d-frozen-predictions",
+      "recovery_root": "../2026-10-19-v11d-feature-packaging",
+      "original_collection_root": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/results/2026-10-16-v11d-frozen-predictions",
+      "source_feature_plan": {
+        "path": "../2026-10-16-v11d-frozen-predictions/feature-plan.json",
+        "sha256": "e3d6a33bde36b14c7a4d6d90760d600875372973476fd64b45d4238cc5271a1a",
+        "bytes": 104510
+      },
+      "source_failed_completion": {
+        "path": "../2026-10-16-v11d-frozen-predictions/features/completion.json",
+        "sha256": "d5f9b9167920cbfc81cb1e57881f601585299b910760dc1e1a2e9078a3c283a9",
+        "bytes": 846
+      },
+      "source_terminal_observation": {
+        "path": "../2026-10-16-v11d-frozen-predictions/archive-failure/terminal-observation.json",
+        "sha256": "f8566bd7bee568022c2e0ad78a14c3c52ea5b7f755590e7acdf64edab932ac3f",
+        "bytes": 2165
+      },
+      "features": {
+        "path": "../2026-10-16-v11d-frozen-predictions/features/attempt-0000/features.json",
+        "sha256": "f66f53a992f248f330325be6ef9e21ad2f257dddf836d3b2e2210d936fa4e65d",
+        "bytes": 1869585
+      },
+      "recovery_completion": {
+        "path": "../2026-10-19-v11d-feature-packaging/completion.json",
+        "sha256": "66b171ac8b3e5a7140f0ed88b39dd7ab3c8d5c2690cb7f75a0f765eb2ab00b34",
+        "bytes": 1177
+      },
+      "recovery_archive": {
+        "path": "../2026-10-19-v11d-feature-packaging/raw-evidence.zip",
+        "sha256": "0ae7aee791ac6c5c8d09ff23126cce0cb7ae2510f1f4d5f3bbb1e3c6056cdd52",
+        "bytes": 12917441
+      },
+      "recovery_manifest": {
+        "path": "../2026-10-19-v11d-feature-packaging/raw-evidence.json",
+        "sha256": "dd876376ac84b00448c7bdfc099b1c31f16bd82758d85973c734001f1b3ffc1b",
+        "bytes": 1620755
+      },
+      "reviewed_recovery_audit": {
+        "path": "../2026-10-19-v11d-feature-packaging/independent-packaging-audit.json",
+        "sha256": "7d72834a80fb553891851284492ea1efea843b9ced9cd2f71280beb6d20229c7",
+        "bytes": 2330
+      },
+      "reviewed_recovery_audit_sha256": "7d72834a80fb553891851284492ea1efea843b9ced9cd2f71280beb6d20229c7",
+      "reviewed_recovery_audit_scope": "Independent ZIP member hashing/inventory, ordered feature matrix and saved replay/release checks; shares recovery helper source/old-tree/saved-worker authentication. Same-host validation requires the retained original paths and live pinned Python alias/runtime dependencies. Authenticates the existing graph arithmetic replay; does not recompute features, rerun native commands or infer model predictions. Historical execution/OS provenance is not independently reproduced.",
+      "original_completion_remains_false": true
+    }
+  },
+  "native_jobs": 0,
+  "model_artifacts_loaded": 0,
+  "fits": 0,
+  "scope": [
+    "Independent primitive recount precedes generated-label comparison; all global originals and full memberships retained.",
+    "Pinned V9 unsigned oracle shared; full-grammar RTL/harness renderer, vector regeneration and provenance checks independently implemented.",
+    "Saved recovered-feature/point/model bytes authenticated; original feature packaging failure remains failed. Reviewed packaging admission shares old-tree authentication; raw ZIP member identities checked here. No inference or extraction replay.",
+    "Recorded native execution lineage and sampled original RTL comparisons, not universal or mapped-netlist functional proof.",
+    "Exact native tool/runtime identities checked against sealed inventory without requiring producer installations on replay host; producer Git validation is authenticated by saved approval/source closure, not rerun.",
+    "Final retained file sizes/receipts checked; historical live resource peaks cannot be independently reconstructed. Local trace/cache/model dependencies must be present; Git alone is not self-contained."
+  ]
+}

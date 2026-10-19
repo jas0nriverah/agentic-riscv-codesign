@@ -1,5 +1,8 @@
 # Research result archives
 
+[Completed327-circuit frozen comparison](2026-10-19-v11e-frozen-comparison/README.md): V6/V9 frozen before fresh labels; independent netlist and metric audits; V9 primary MAE +3.68% worse.
+
+
 - [V11c complete input collection](2026-10-16-v11c-dtc-recovery/README.md): all six outcomes, 521 memberships and 327 originals; independent raw replay passed, no new model score.
 
 - [V11b input recovery](2026-10-16-v11b-transfer-recovery/STATUS.md): controlled-environment startup failure retained for both missing programs; no new labels or model results.

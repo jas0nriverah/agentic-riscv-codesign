@@ -1,6 +1,6 @@
 # ISAForge
 
-**Project paused.** [Team handoff and remaining work](docs/HANDOFF.md). Verified results and diagrams are below; unfinished recovery code is archived.
+**October 19 update:** the 327-circuit frozen comparison is complete. V9 is 3.68% worse than V6 on the primary transfer metric; all measurements and negative results are retained. [Results](docs/v11e-transfer-results.md) · [Team handoff](docs/HANDOFF.md).
 
 **Measured RISC-V custom-instruction research: candidate discovery, learned hardware cost, and processor validation.**
 
@@ -38,9 +38,13 @@ The [methodology](docs/methodology.md) defines the data splits, feature boundary
 
 [Team progress brief — October 16](docs/team-progress-2026-10-16.md) collects the current model, measured gains, hardware tradeoffs and remaining research gaps.
 
-### Transfer-input recovery
+### Completed 327-circuit matched transfer comparison
 
-The [V11c collection](results/2026-10-16-v11c-dtc-recovery/README.md) recovers both previously incomplete traces and retains all six program outcomes: **521 program/formula memberships and 327 unique originals**. Independent raw replay has passed, and the complete pool is sealed for frozen V6/V9 evaluation. No new transfer accuracy score or model promotion is claimed.
+All **327 original circuits** now have fresh verified synthesis labels, following the freeze of all654 paired predictions. **V6: 0.506605; V9: 0.525239 LUT4 equal-family MAE**, a **3.68% regression**. V9 lowers maximum error, but cap32/64/128 feasibility mistakes are unchanged. All circuits passed **702,396 RTL comparisons**, with the recorded simulator-overflow fallback and independent netlist/metric audits.
+
+![Frozen V6/V9 comparison across all eligible families](docs/figures/v11e-transfer/01-primary-families.png)
+
+[Full results, compute bounds and caveats](docs/v11e-transfer-results.md) · [Audited evidence and replay](results/2026-10-19-v11e-frozen-comparison/README.md). The six outcomes retain the empty recursion pool; the E1 primary gives five eligible families equal weight. This comparison does not establish CPU speedup or superiority to published research.
 
 ### Latest controlled model experiment
 

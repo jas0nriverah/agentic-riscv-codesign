@@ -1,0 +1,71 @@
+[
+  {
+    "verified": true,
+    "formula_count": 128,
+    "vectors_per_formula": 2148,
+    "total_comparisons": 274944,
+    "random_seed": 2026101611,
+    "oracle": "Python RV32 integer semantics; Verilator with defined signed overflow; Yosys boundary cross-check",
+    "tool": "Verilator 5.050 2026-07-01 rev vUNKNOWN-built20260701",
+    "rtl_sha256": "8383f4ab396e275a34e5ae1782b4a68d32202f734613f44b3ecc222f01ada372",
+    "vectors_sha256": "0596ca6359c6e70203572706780b80b69da254006a6383b617bae3293a7ff84b",
+    "v4_validation_override_sha256": "193dd1b6780b1187e251db2dee08545b0391afead95a8f6d825dd51b58a694ff",
+    "compiler_path": "/Library/Developer/CommandLineTools/usr/bin/c++",
+    "compiler_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+    "signed_overflow_workaround_applied": true,
+    "build_command": [
+      "/opt/homebrew/Cellar/verilator/5.050/bin/verilator",
+      "--cc",
+      "--exe",
+      "--build",
+      "-j",
+      "2",
+      "-Wno-fatal",
+      "-CFLAGS",
+      "-fwrapv",
+      "--top-module",
+      "verification_top",
+      "--Mdir",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v11e-transfer-targets/attempt-0000/verification/batch-0000/obj_dir_wrapv",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v11e-transfer-targets/attempt-0000/verification/batch-0000/verification.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v11e-transfer-targets/attempt-0000/verification/batch-0000/verification.cpp"
+    ],
+    "incident": {
+      "original_error": "RTL correctness failed: Mismatch formula 31 vector 89 got 20000000 expected a0000000\n",
+      "formula_index": 31,
+      "formula": "add(andi(mulhu(in0,in1),-4),srli(mulhu(in0,in1),2))",
+      "vector_index": 89,
+      "got_hex": "20000000",
+      "expected_hex": "a0000000",
+      "resolution": "identical RTL rebuilt with defined signed wrapping; boundary cross-check in Yosys"
+    },
+    "independent_yosys_boundary_comparisons": 100,
+    "independent_yosys_log_sha256": "1b840dc6fbcd5aa45c36a5cd2a98a44e0b8907251584d22903d58d8c72f6ae0b"
+  },
+  {
+    "verified": true,
+    "formula_count": 128,
+    "vectors_per_formula": 2148,
+    "total_comparisons": 274944,
+    "random_seed": 2026101611,
+    "oracle": "Python integer RV32 semantics",
+    "tool": "Verilator 5.050 2026-07-01 rev vUNKNOWN-built20260701",
+    "rtl_sha256": "f7635d137d3add4f8eb10b434954d56ec959deda0547cdde4e0de051935318bf",
+    "vectors_sha256": "2e6d347653dce79d0751bb6c644804d698ea5e1a4735d92b2d0bc2776c8b5f0e",
+    "v4_validation_override_sha256": "193dd1b6780b1187e251db2dee08545b0391afead95a8f6d825dd51b58a694ff",
+    "signed_overflow_workaround_applied": false
+  },
+  {
+    "verified": true,
+    "formula_count": 71,
+    "vectors_per_formula": 2148,
+    "total_comparisons": 152508,
+    "random_seed": 2026101611,
+    "oracle": "Python integer RV32 semantics",
+    "tool": "Verilator 5.050 2026-07-01 rev vUNKNOWN-built20260701",
+    "rtl_sha256": "a77fba007cd8737680699bb433007eb08faacff18c70134da4423fe27f76a987",
+    "vectors_sha256": "da02d5b5ddef870e4d19fe7d421197cdf0a9d1733da746ffcc75e43ba6be3e67",
+    "v4_validation_override_sha256": "193dd1b6780b1187e251db2dee08545b0391afead95a8f6d825dd51b58a694ff",
+    "signed_overflow_workaround_applied": false
+  }
+]
