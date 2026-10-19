@@ -1,0 +1,882 @@
+{
+  "schema": "isaforge-v15-synthetic-stress-plan-v1",
+  "created_at_utc": "2026-10-19T16:16:58.303423+00:00",
+  "policy": {
+    "attempt_seconds": 900,
+    "worker_seconds": 360,
+    "workers": 2,
+    "vectors_per_original": 2148,
+    "minimum_free_bytes": 8589934592,
+    "maximum_attempt_bytes": 8589934592,
+    "initial_free_bytes": 17179869184,
+    "retries": 0,
+    "replacement_candidates": 0,
+    "fits": 0,
+    "calibration_jobs": 0
+  },
+  "candidate_count": 32,
+  "input_amendment": {
+    "id": "V15-I1",
+    "archive": "archive/2026-10-19-v15-preflight",
+    "manifest_sha256": "d8f75a42a9a4669421647bff41cfa7c6a9405d7a9f4a9c63468f271875abf594",
+    "scope": "Input-only pre-freeze rejection of complete fourth template; new and_signed_shift template retains all8 fixed k and the other24 exact. No scientific job or new target preceded this amendment."
+  },
+  "templates": [
+    {
+      "name": "xor_then_constmul",
+      "formula": "mul(xor(in0,in1),addi(0,{p}))",
+      "parameters": [
+        31,
+        47,
+        79,
+        95,
+        111,
+        127,
+        143,
+        159
+      ]
+    },
+    {
+      "name": "constmul_then_xor",
+      "formula": "xor(mul(in0,addi(0,{p})),in1)",
+      "parameters": [
+        31,
+        47,
+        79,
+        95,
+        111,
+        127,
+        143,
+        159
+      ]
+    },
+    {
+      "name": "xor_signed_shift",
+      "formula": "sub(srai(xor(in0,in1),{p}),srai(in1,31))",
+      "parameters": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16
+      ]
+    },
+    {
+      "name": "and_signed_shift",
+      "formula": "sub(srai(and(in0,in1),{p}),srai(in1,31))",
+      "parameters": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16
+      ]
+    }
+  ],
+  "candidates_sha256": "7066d215fc7c7002c00872f748db26c8f5fbe46f010ab04b4d401bd865fd1d02",
+  "novelty_sha256": "1ba985a8912d134c3fd294db50bce770b2eba6cc5d521be04cfe35b404a20663",
+  "tools_sha256": "69ad87bd80d555406ff7bb6f808d8bb6b752c849f12600b11c96bebe9f438793",
+  "runtime_sha256": "774b4f66fdc91c01866d3be4e409cc71e3997961a7a30decbedc8eee487ac4c5",
+  "models": {
+    "V6": {
+      "path": "results/2026-10-14-v6/models/mapping_v6.joblib",
+      "sha256": "1a1828d7089554fed050769aff5007c383fbd5158e063d6da89f366104f47f56",
+      "metadata_sha256": "42d21cd093ed9b863668fcc01d12ed4d09ebb1590e0bdffb408fdf66d5f74676",
+      "training_rows": 1665
+    },
+    "V9": {
+      "path": "results/2026-10-15-v9-coverage-development/fit-attempt-0000/models/mapping-coverage.joblib",
+      "sha256": "dbcfb6c8143900bfda567407c35bd1ced6600cf042db5485a8750bfdbebe977d",
+      "metadata_sha256": "0af6acebfd07cfa0688c36777a14bff816a5c254032050bcf75b1ff1c947dd06",
+      "training_rows": 1713
+    }
+  },
+  "columns": [
+    "sog_dff_bits",
+    "sog_register_fanout",
+    "sog_io_bits",
+    "sog_and_count",
+    "sog_or_count",
+    "sog_not_count",
+    "sog_xor_count",
+    "sog_mux_count",
+    "sog_estimated_sequential_area",
+    "sog_estimated_combinational_area",
+    "sog_estimated_total_area",
+    "sog_estimated_static_power",
+    "sog_estimated_dynamic_power",
+    "sog_estimated_total_power",
+    "original_gate_count",
+    "original_output_driven_bits",
+    "original_output_distinct_driven_bits",
+    "original_output_constant_bits",
+    "original_output_wire_bits",
+    "original_input_support_bits",
+    "original_depth_max",
+    "original_output_depth_mean",
+    "original_gate_depth_mean",
+    "original_fanout_max",
+    "original_fanout_mean",
+    "original_fanout_gt1_count",
+    "original_fanout_gt4_count",
+    "original_output_support_mean",
+    "original_output_support_max",
+    "original_support_le2_count",
+    "original_support_le4_count",
+    "original_support_gt4_count",
+    "original_greedy_lut4_cover",
+    "original_output_gate_reuse",
+    "original_edge_and_and",
+    "original_edge_and_or",
+    "original_edge_and_not",
+    "original_edge_and_xor",
+    "original_edge_and_mux",
+    "original_edge_or_and",
+    "original_edge_or_or",
+    "original_edge_or_not",
+    "original_edge_or_xor",
+    "original_edge_or_mux",
+    "original_edge_not_and",
+    "original_edge_not_or",
+    "original_edge_not_not",
+    "original_edge_not_xor",
+    "original_edge_not_mux",
+    "original_edge_xor_and",
+    "original_edge_xor_or",
+    "original_edge_xor_not",
+    "original_edge_xor_xor",
+    "original_edge_xor_mux",
+    "original_edge_mux_and",
+    "original_edge_mux_or",
+    "original_edge_mux_not",
+    "original_edge_mux_xor",
+    "original_edge_mux_mux",
+    "original_primitive_and",
+    "original_primitive_or",
+    "original_primitive_xor",
+    "original_primitive_not",
+    "original_primitive_mux",
+    "original_word_cell_count",
+    "original_word_add_count",
+    "original_word_sub_count",
+    "original_word_mul_count",
+    "original_word_arithmetic_output_bits",
+    "original_word_carry_span_proxy",
+    "original_word_carry_span_max_proxy",
+    "original_word_multiply_operand_bits",
+    "original_word_multiply_partial_terms_proxy",
+    "original_word_signed_arithmetic_count",
+    "normalized_gate_count",
+    "normalized_output_driven_bits",
+    "normalized_output_distinct_driven_bits",
+    "normalized_output_constant_bits",
+    "normalized_output_wire_bits",
+    "normalized_input_support_bits",
+    "normalized_depth_max",
+    "normalized_output_depth_mean",
+    "normalized_gate_depth_mean",
+    "normalized_fanout_max",
+    "normalized_fanout_mean",
+    "normalized_fanout_gt1_count",
+    "normalized_fanout_gt4_count",
+    "normalized_output_support_mean",
+    "normalized_output_support_max",
+    "normalized_support_le2_count",
+    "normalized_support_le4_count",
+    "normalized_support_gt4_count",
+    "normalized_greedy_lut4_cover",
+    "normalized_output_gate_reuse",
+    "normalized_edge_and_and",
+    "normalized_edge_and_or",
+    "normalized_edge_and_not",
+    "normalized_edge_and_xor",
+    "normalized_edge_and_mux",
+    "normalized_edge_or_and",
+    "normalized_edge_or_or",
+    "normalized_edge_or_not",
+    "normalized_edge_or_xor",
+    "normalized_edge_or_mux",
+    "normalized_edge_not_and",
+    "normalized_edge_not_or",
+    "normalized_edge_not_not",
+    "normalized_edge_not_xor",
+    "normalized_edge_not_mux",
+    "normalized_edge_xor_and",
+    "normalized_edge_xor_or",
+    "normalized_edge_xor_not",
+    "normalized_edge_xor_xor",
+    "normalized_edge_xor_mux",
+    "normalized_edge_mux_and",
+    "normalized_edge_mux_or",
+    "normalized_edge_mux_not",
+    "normalized_edge_mux_xor",
+    "normalized_edge_mux_mux",
+    "normalized_primitive_and",
+    "normalized_primitive_or",
+    "normalized_primitive_xor",
+    "normalized_primitive_not",
+    "normalized_primitive_mux",
+    "normalized_word_cell_count",
+    "normalized_word_add_count",
+    "normalized_word_sub_count",
+    "normalized_word_mul_count",
+    "normalized_word_arithmetic_output_bits",
+    "normalized_word_carry_span_proxy",
+    "normalized_word_carry_span_max_proxy",
+    "normalized_word_multiply_operand_bits",
+    "normalized_word_multiply_partial_terms_proxy",
+    "normalized_word_signed_arithmetic_count",
+    "absolute_channel_delta_gate_count",
+    "absolute_channel_delta_output_driven_bits",
+    "absolute_channel_delta_output_distinct_driven_bits",
+    "absolute_channel_delta_output_constant_bits",
+    "absolute_channel_delta_output_wire_bits",
+    "absolute_channel_delta_input_support_bits",
+    "absolute_channel_delta_depth_max",
+    "absolute_channel_delta_output_depth_mean",
+    "absolute_channel_delta_gate_depth_mean",
+    "absolute_channel_delta_fanout_max",
+    "absolute_channel_delta_fanout_mean",
+    "absolute_channel_delta_fanout_gt1_count",
+    "absolute_channel_delta_fanout_gt4_count",
+    "absolute_channel_delta_output_support_mean",
+    "absolute_channel_delta_output_support_max",
+    "absolute_channel_delta_support_le2_count",
+    "absolute_channel_delta_support_le4_count",
+    "absolute_channel_delta_support_gt4_count",
+    "absolute_channel_delta_greedy_lut4_cover",
+    "absolute_channel_delta_output_gate_reuse",
+    "absolute_channel_delta_edge_and_and",
+    "absolute_channel_delta_edge_and_or",
+    "absolute_channel_delta_edge_and_not",
+    "absolute_channel_delta_edge_and_xor",
+    "absolute_channel_delta_edge_and_mux",
+    "absolute_channel_delta_edge_or_and",
+    "absolute_channel_delta_edge_or_or",
+    "absolute_channel_delta_edge_or_not",
+    "absolute_channel_delta_edge_or_xor",
+    "absolute_channel_delta_edge_or_mux",
+    "absolute_channel_delta_edge_not_and",
+    "absolute_channel_delta_edge_not_or",
+    "absolute_channel_delta_edge_not_not",
+    "absolute_channel_delta_edge_not_xor",
+    "absolute_channel_delta_edge_not_mux",
+    "absolute_channel_delta_edge_xor_and",
+    "absolute_channel_delta_edge_xor_or",
+    "absolute_channel_delta_edge_xor_not",
+    "absolute_channel_delta_edge_xor_xor",
+    "absolute_channel_delta_edge_xor_mux",
+    "absolute_channel_delta_edge_mux_and",
+    "absolute_channel_delta_edge_mux_or",
+    "absolute_channel_delta_edge_mux_not",
+    "absolute_channel_delta_edge_mux_xor",
+    "absolute_channel_delta_edge_mux_mux",
+    "absolute_channel_delta_primitive_and",
+    "absolute_channel_delta_primitive_or",
+    "absolute_channel_delta_primitive_xor",
+    "absolute_channel_delta_primitive_not",
+    "absolute_channel_delta_primitive_mux",
+    "absolute_channel_delta_word_cell_count",
+    "absolute_channel_delta_word_add_count",
+    "absolute_channel_delta_word_sub_count",
+    "absolute_channel_delta_word_mul_count",
+    "absolute_channel_delta_word_arithmetic_output_bits",
+    "absolute_channel_delta_word_carry_span_proxy",
+    "absolute_channel_delta_word_carry_span_max_proxy",
+    "absolute_channel_delta_word_multiply_operand_bits",
+    "absolute_channel_delta_word_multiply_partial_terms_proxy",
+    "absolute_channel_delta_word_signed_arithmetic_count",
+    "v5_norm_v3_logic_output_bits",
+    "v5_norm_v3_adder_sum_bits",
+    "v5_norm_v3_compare_variable_bits",
+    "v5_norm_v3_compare_constant_count",
+    "v5_norm_v3_compare_constant_inverted_bits",
+    "v5_norm_v3_barrel_live_muxes",
+    "v5_norm_v3_mul_variable_partial_products",
+    "v5_norm_v3_mul_constant_adder_bits",
+    "v5_norm_v3_normalized_node_reduction",
+    "v5_norm_v3_proven_zero_lut",
+    "v5_norm_v3_output_constant_bits",
+    "v5_norm_v3_output_direct_wire_bits",
+    "v5_norm_v3_live_ops",
+    "v5_norm_v3_dead_ops",
+    "v5_norm_v3_live_edges",
+    "v5_norm_v3_shared_live_ops",
+    "v5_norm_v3_max_fanout",
+    "v5_norm_v3_live_depth",
+    "v5_norm_v3_live_demand_bits",
+    "v5_norm_v3_demand_span_sum",
+    "v5_norm_v3_operand_unknown_bits",
+    "v5_norm_v3_reconvergent_edges",
+    "v5_norm_v3_adder_sum_bits_max",
+    "v5_norm_v3_adder_carry_bits",
+    "v5_norm_v3_adder_carry_run_max",
+    "v5_norm_v3_adder_carry_start_sum",
+    "v5_norm_v3_adder_constant_count",
+    "v5_norm_v3_adder_constant_popcount",
+    "v5_norm_v3_adder_constant_transitions",
+    "v5_norm_v3_adder_constant_trailing_zeros",
+    "v5_norm_v3_adder_output_token_reuse",
+    "v5_norm_v3_barrel_live_muxes_max",
+    "v5_norm_v3_barrel_live_stages",
+    "v5_norm_v3_barrel_constant_data_count",
+    "v5_norm_v3_barrel_source_bits",
+    "v5_norm_v3_barrel_control_bits",
+    "v5_norm_v3_barrel_muxes_saved_by_equal_branches",
+    "v5_norm_v3_compare_constant_width",
+    "v5_norm_v3_compare_constant_popcount",
+    "v5_norm_v3_compare_constant_transitions",
+    "v5_norm_v3_compare_constant_trailing_zeros",
+    "v5_norm_v3_compare_boolean_operand_count",
+    "v5_norm_v3_compare_signed_count",
+    "v5_norm_v3_compare_polarity_folds",
+    "v5_norm_v3_mul_occupied_columns",
+    "v5_norm_v3_mul_peak_column_height",
+    "v5_norm_v3_mul_compressor_bits",
+    "v5_norm_v3_mul_high_half_count",
+    "v5_norm_v3_mul_signed_operand_count",
+    "v5_norm_v3_mul_constant_csd_terms",
+    "v5_norm_v3_mul_output_demand_span",
+    "v5_norm_v3_mul_repeated_operand_count",
+    "v5_norm_v3_edge_logic_logic",
+    "v5_norm_v3_edge_logic_adder",
+    "v5_norm_v3_edge_logic_shift",
+    "v5_norm_v3_edge_logic_compare",
+    "v5_norm_v3_edge_logic_multiply",
+    "v5_norm_v3_edge_adder_logic",
+    "v5_norm_v3_edge_adder_adder",
+    "v5_norm_v3_edge_adder_shift",
+    "v5_norm_v3_edge_adder_compare",
+    "v5_norm_v3_edge_adder_multiply",
+    "v5_norm_v3_edge_shift_logic",
+    "v5_norm_v3_edge_shift_adder",
+    "v5_norm_v3_edge_shift_shift",
+    "v5_norm_v3_edge_shift_compare",
+    "v5_norm_v3_edge_shift_multiply",
+    "v5_norm_v3_edge_compare_logic",
+    "v5_norm_v3_edge_compare_adder",
+    "v5_norm_v3_edge_compare_shift",
+    "v5_norm_v3_edge_compare_compare",
+    "v5_norm_v3_edge_compare_multiply",
+    "v5_norm_v3_edge_multiply_logic",
+    "v5_norm_v3_edge_multiply_adder",
+    "v5_norm_v3_edge_multiply_shift",
+    "v5_norm_v3_edge_multiply_compare",
+    "v5_norm_v3_edge_multiply_multiply",
+    "v5_norm_v4_original_ops",
+    "v5_norm_v4_normalized_ops",
+    "v5_norm_v4_normalized_formula_length",
+    "v5_norm_v4_removed_multiply_ops",
+    "v5_norm_v4_normalized_node_reduction",
+    "v5_norm_v4_mul_operand_support_bits",
+    "v5_norm_v4_mul_operand_support_holes",
+    "v5_norm_v4_mul_support_partial_terms",
+    "v5_norm_v4_mul_partial_product_gate_reuse",
+    "v5_norm_v4_mul_live_compressor_bits",
+    "v5_norm_v4_mul_final_adder_bits",
+    "v5_norm_v4_mul_low_half_count",
+    "v5_norm_v4_mul_demand_start_sum",
+    "v5_original_ops",
+    "v5_normalized_ops",
+    "v5_original_formula_length",
+    "v5_normalized_formula_length",
+    "v5_expanded_ops",
+    "v5_removed_ops",
+    "v5_original_mul_count",
+    "v5_original_mulh_count",
+    "v5_original_mulhu_count",
+    "v5_original_mulhsu_count",
+    "v5_original_mul_signed_operands",
+    "v5_original_mul_unsigned_second_operands",
+    "v5_original_mul_constant_operands",
+    "v5_original_mul_constant_popcount",
+    "v5_original_mul_constant_digits",
+    "v5_original_mul_operand_support_bits",
+    "v5_original_mul_distinct_symbols",
+    "v5_original_mul_repeated_symbols",
+    "v5_original_mul_demand_bits",
+    "v5_original_mul_demand_start",
+    "v5_original_mul_demand_span",
+    "v5_original_range_width",
+    "v5_normalized_range_width",
+    "v5_range_constant_rewrites",
+    "v5_conditional_negate_rewrites",
+    "v5_high_sign_product_rewrites",
+    "v5_sparse_high_slice_rewrites",
+    "v5_shift_and_rewrites",
+    "v5_proven_wire_or_constant",
+    "mapping_retained_cut_count",
+    "mapping_cuts_size0_count",
+    "mapping_cuts_size1_count",
+    "mapping_cuts_size2_count",
+    "mapping_cuts_size3_count",
+    "mapping_cuts_size4_count",
+    "mapping_alternative_cuts_mean",
+    "mapping_selected_cut_leaves_mean",
+    "mapping_selected_cut_depth_max",
+    "mapping_output_cut_depth_mean",
+    "mapping_area_flow_output_sum",
+    "mapping_area_flow_output_mean",
+    "mapping_selected_cover_gate_count",
+    "mapping_shared_output_cone_gate_fraction",
+    "mapping_exclusive_output_cone_gate_fraction",
+    "mapping_shared_internal_gate_fraction",
+    "mapping_reconvergent_input_support_gate_fraction",
+    "mapping_output_mffc_size_mean",
+    "mapping_output_mffc_size_max",
+    "mapping_truncated_gate_count",
+    "mapping_discarded_merge_states",
+    "mapping_direct_fanin_fallback_count",
+    "mapping_unreachable_gate_count"
+  ],
+  "frozen_tool": {
+    "version": "Yosys 0.69+post (git sha1 143eb14f9cc55d6f8927e68523b0c9d2166ed02c, Release, AppleClang clang++ 21.0.0.21000334)",
+    "executable_sha256": "1222a95c90c84f66238b0a5ecb8b228bf787318cf1c412b41363e26ace5544cf"
+  },
+  "bindings": [
+    {
+      "path": "archive/2026-10-19-v15-preflight/README.md",
+      "sha256": "d96a76ad816fdbf01d0f546deb4e73920117de32cb94c9fcdca54aec9181db84"
+    },
+    {
+      "path": "archive/2026-10-19-v15-preflight/amended-input-check.json",
+      "sha256": "4d83eb525cf5a8c8b1f32e59165689deba53d6dddc568dcfd56037fa299f3afc"
+    },
+    {
+      "path": "archive/2026-10-19-v15-preflight/candidates.json",
+      "sha256": "86364338a074435b43a1dd6073396a8ad4ee0e31af49bbba0410c4063136d32f"
+    },
+    {
+      "path": "archive/2026-10-19-v15-preflight/manifest.json",
+      "sha256": "d8f75a42a9a4669421647bff41cfa7c6a9405d7a9f4a9c63468f271875abf594"
+    },
+    {
+      "path": "archive/2026-10-19-v15-preflight/overlap-receipt.json",
+      "sha256": "cee338806a84d1d2a1c74964610086c77e77f1e5342a49628a42659a0707f152"
+    },
+    {
+      "path": "archive/2026-10-19-v15-preflight/rejected-evaluate_v15_scoped.py",
+      "sha256": "e0145c101c72ef850aa4bf652d8f924e1fdbabdbf4f2c2725ea218113f3d9b2f"
+    },
+    {
+      "path": "archive/2026-10-19-v15-preflight/rejected-test_evaluate_v15_scoped.py",
+      "sha256": "705cea375903dd50b79e58ce9dbb60a2b0ef5807574ea36b1ad25201412a9069"
+    },
+    {
+      "path": "docs/v13-coverage-protocol.md",
+      "sha256": "05d68e18200a02c4cf1f2a718eef12a4557664adb74349fccae0ee32c236bc81"
+    },
+    {
+      "path": "isaforge/__init__.py",
+      "sha256": "788b89398980996e41116e972bf0b790b077eda914cd1e630200d1911713109a"
+    },
+    {
+      "path": "isaforge/area_adaptation_v9.py",
+      "sha256": "a046dc654190f4edbf6b2cfa4c01382f9218bb1281a44c0dfb1ec7109b4bc56b"
+    },
+    {
+      "path": "isaforge/area_model.py",
+      "sha256": "ade5dcc32ef66d0ea03ea9ec4937687564dff36c4483afc76ac59f9dc4a69447"
+    },
+    {
+      "path": "isaforge/area_model_v2.py",
+      "sha256": "389f6592d6a3fb801638dcc5237cac65f8ab504caac10efef1a43e5d49cf6cf1"
+    },
+    {
+      "path": "isaforge/area_model_v3.py",
+      "sha256": "0560b5a3a1dff7085a374dd2d5bbc55f487ae1986830bd85899f255fa3299974"
+    },
+    {
+      "path": "isaforge/area_model_v4.py",
+      "sha256": "a912198d58203c821da4c3408c48eb2427cd84359071570158e7fd0b73d06357"
+    },
+    {
+      "path": "isaforge/area_model_v5.py",
+      "sha256": "6e39f1fae6ac0b7398dbfb80c6096dae0cfafe479ada441a4fa27af7938f990f"
+    },
+    {
+      "path": "isaforge/area_model_v6.py",
+      "sha256": "b46c90c47461d8888ece12711253c92cc2bac834d621c58e17a82af106db5114"
+    },
+    {
+      "path": "isaforge/area_model_v8.py",
+      "sha256": "e8e442689256155dc8563a0bb2041c5586ec217d36bd59d3cd28c16cb23d975d"
+    },
+    {
+      "path": "isaforge/area_selection.py",
+      "sha256": "88c14e3029620d61cc7da5fc429904216c69585dca497d5017dcb25d4f05a70e"
+    },
+    {
+      "path": "isaforge/cached_mapping_inference_v6.py",
+      "sha256": "d02b0dfdbddd15b52cfd9ba19c7edc590ec850860d2413e8f962bace325fa1c9"
+    },
+    {
+      "path": "isaforge/challenger_plots.py",
+      "sha256": "fa7df137b5b783b11e24c92e88474ede869db4472461de82b95fe6b31777bcc4"
+    },
+    {
+      "path": "isaforge/challenger_report.py",
+      "sha256": "e984754605417ec2c0c83ad4eda36a56ae989fcee4daa8930311d1eed9e140b1"
+    },
+    {
+      "path": "isaforge/cli.py",
+      "sha256": "d467551d205245f4afa1f7695c7a5bc0e7f6c8db95b64f9d19b60f43c79a87ee"
+    },
+    {
+      "path": "isaforge/conservative_policy.py",
+      "sha256": "1c318b94c0e2ad6287f2b6d470974c4ec581eb805018f7544bd438e9cd42d823"
+    },
+    {
+      "path": "isaforge/core_experiment.py",
+      "sha256": "3e300f3054224050cd600eea0a3a76db496b67951323115cdb5d349bb2f8acc8"
+    },
+    {
+      "path": "isaforge/core_routing.py",
+      "sha256": "dfe14bb5e7236630fe376a5131f4d492309933ae98c0a1e3ea9e798b28a36058"
+    },
+    {
+      "path": "isaforge/dataset.py",
+      "sha256": "bb568ef7ca5f6ad79fd6a9ffef9ff18c510b29ffb9f4b6a7e3bfd5cb4cae3cbc"
+    },
+    {
+      "path": "isaforge/demo.py",
+      "sha256": "f3ba4329895661972e0dfab7da6aa2bf507c577e6c12f2be4172f8fab2ecff14"
+    },
+    {
+      "path": "isaforge/deployment.py",
+      "sha256": "8f8bb3d72b6ca3bdc207abfb973cbac899377740a6729ddf38de2be8e4f3c971"
+    },
+    {
+      "path": "isaforge/evaluation.py",
+      "sha256": "f23f4d46a1193b0e0780f80c31c13a5662a24aaf6a46a87c46298a9015ecb98e"
+    },
+    {
+      "path": "isaforge/fast_graph_inference.py",
+      "sha256": "8c9546f380728abcceefc6156b3e2172e6cc5597c1712390a61fbe719b312b3f"
+    },
+    {
+      "path": "isaforge/features.py",
+      "sha256": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84"
+    },
+    {
+      "path": "isaforge/fresh_evaluation.py",
+      "sha256": "3117cb67e16c5a5f2bd429eaacc1927de77665f22e45c4fbfeaec26f513e2074"
+    },
+    {
+      "path": "isaforge/frozen_inference.py",
+      "sha256": "33cb0e231dc4a0797e55ce23b145d23a55b812e7ebfc4760507c81319efd47e7"
+    },
+    {
+      "path": "isaforge/graph_features_v5.py",
+      "sha256": "c0bb42fa3a4ae86bcaceffd35964fcf07a5dda0f36ab4e21ea8e1cfe6112c8cf"
+    },
+    {
+      "path": "isaforge/mapping_features_v6.py",
+      "sha256": "3b220e3775d536630656681df645b95e0ff3c44b55ec91fd002a6b06d231f5d3"
+    },
+    {
+      "path": "isaforge/masterrtl_baseline.py",
+      "sha256": "1473333e7b5d00d1ae91084fa5663697861504c4a411d6242a6160ff5f0a697f"
+    },
+    {
+      "path": "isaforge/midterm_report.py",
+      "sha256": "2efcbd710e1196126050bd449ade8694fe9685f8ce7c96d4a92263b6ecee3c96"
+    },
+    {
+      "path": "isaforge/model.py",
+      "sha256": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345"
+    },
+    {
+      "path": "isaforge/probe_audit.py",
+      "sha256": "b79eb74299ababd1c120f7eacd6fd93fab9355ee407fa94d9be9402c44b90620"
+    },
+    {
+      "path": "isaforge/probe_corpus.py",
+      "sha256": "2435c29388fbf2368aee3e736606dd017d21306e45377021d29650983be775a3"
+    },
+    {
+      "path": "isaforge/probe_evaluation.py",
+      "sha256": "0d44fbef8484bd610195fbfe393b8ec51285ea04cf5f38ebc846de6825a846d8"
+    },
+    {
+      "path": "isaforge/real_experiment.py",
+      "sha256": "5ccd516a9dfae09bb0b3b3ce4480058f79b2cb5a688e9f698e3713124c77e16e"
+    },
+    {
+      "path": "isaforge/research_report.py",
+      "sha256": "642c92a6c6dd146abc04d25304319c98316ee7a66cb0b7992176b099ca716b54"
+    },
+    {
+      "path": "isaforge/rtl.py",
+      "sha256": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e"
+    },
+    {
+      "path": "isaforge/selection.py",
+      "sha256": "cf76a3f37f86a35b60454beb2be9e69a03944cac287d7485b1a6f20a6fdd5c7e"
+    },
+    {
+      "path": "isaforge/semantic_features_v7.py",
+      "sha256": "eddc21bd80fd97dea7e02cbfe14bb5b50649f779ed53ec6068674adc1dc0f9e3"
+    },
+    {
+      "path": "isaforge/soc_experiment.py",
+      "sha256": "af8691054b626f687a8962b149bf3431ee7e34951d0aee0fd8692b0e334e3c1a"
+    },
+    {
+      "path": "isaforge/structural_features_v3.py",
+      "sha256": "b0a4c8233c2a39b675767151f21698d6418c5b3b7bb357741815986033396fb0"
+    },
+    {
+      "path": "isaforge/structural_features_v4.py",
+      "sha256": "78b506d9e20ed017f2724352b5c9e6d78eb67b3169fa19eb910b5a95c45905da"
+    },
+    {
+      "path": "isaforge/structural_features_v5.py",
+      "sha256": "386a324634d26a1a9fde0090a1116dd3ad4ba2303e2d3c7775e3128990ac4bc2"
+    },
+    {
+      "path": "isaforge/synthesis.py",
+      "sha256": "375e4858f08c2dc2cd793012ceee59d3f4146e2c7c12079d080a0299bfa0223f"
+    },
+    {
+      "path": "isaforge/v4_corpus.py",
+      "sha256": "37f30c52e0a330d631f324903c985c69e0cbc1eaa1be7950b1cd6ff3e355bcac"
+    },
+    {
+      "path": "isaforge/v4_validation.py",
+      "sha256": "193dd1b6780b1187e251db2dee08545b0391afead95a8f6d825dd51b58a694ff"
+    },
+    {
+      "path": "isaforge/v5_corpus.py",
+      "sha256": "98a53a2125aef0b4a43546f17473b13d5e42d28925971554c5053887bf75cd75"
+    },
+    {
+      "path": "isaforge/v6_corpus.py",
+      "sha256": "932b2f01dff404a7857c0e3107e8fab006aef3c0665280377d39ca15e7d007ee"
+    },
+    {
+      "path": "isaforge/v8_application_corpus.py",
+      "sha256": "191bc3a6c35cdd063bc64839a579952e3bf81166415e38b45764c2fe2e360a2f"
+    },
+    {
+      "path": "results/2026-10-14-v6/models/mapping_v6.joblib",
+      "sha256": "1a1828d7089554fed050769aff5007c383fbd5158e063d6da89f366104f47f56"
+    },
+    {
+      "path": "results/2026-10-14-v6/models/mapping_v6.json",
+      "sha256": "42d21cd093ed9b863668fcc01d12ed4d09ebb1590e0bdffb408fdf66d5f74676"
+    },
+    {
+      "path": "results/2026-10-15-v13-coverage-development/consumed-input-ledger.json",
+      "sha256": "b4d8068e5a6798cf48925854c3d7cadf264edd6523d6c857109568c2bf7ffb11"
+    },
+    {
+      "path": "results/2026-10-15-v13b-coverage-recovery/consumed-input-ledger.json",
+      "sha256": "b4d8068e5a6798cf48925854c3d7cadf264edd6523d6c857109568c2bf7ffb11"
+    },
+    {
+      "path": "results/2026-10-15-v13b-coverage-recovery/fitting/fitting.json",
+      "sha256": "14393781167ce10f686480337877d63092553a8b323c23fc98d9f31016fc7b73"
+    },
+    {
+      "path": "results/2026-10-15-v13b-coverage-recovery/measurement-tools.json",
+      "sha256": "69ad87bd80d555406ff7bb6f808d8bb6b752c849f12600b11c96bebe9f438793"
+    },
+    {
+      "path": "results/2026-10-15-v8-application-transfer/training/training-data.json",
+      "sha256": "0b4c158d2bafcbbab05545624b8d48d7048418d887d77cc8e1ca15720626c5fb"
+    },
+    {
+      "path": "results/2026-10-15-v9-coverage-development/consumed-input-ledger.json",
+      "sha256": "c8502a4133156fb7a4b19d69dcab5a61891eae658a7fcf09199891da63e31aad"
+    },
+    {
+      "path": "results/2026-10-15-v9-coverage-development/fit-attempt-0000/models/mapping-coverage.joblib",
+      "sha256": "dbcfb6c8143900bfda567407c35bd1ced6600cf042db5485a8750bfdbebe977d"
+    },
+    {
+      "path": "results/2026-10-15-v9-coverage-development/fit-attempt-0000/models/mapping-coverage.json",
+      "sha256": "0af6acebfd07cfa0688c36777a14bff816a5c254032050bcf75b1ff1c947dd06"
+    },
+    {
+      "path": "results/2026-10-16-v11-model-inputs/candidates.json",
+      "sha256": "5945857d25d8ce0cf1e478b50abb9074ae6e044a29f5652b1d6a417108b3800d"
+    },
+    {
+      "path": "results/2026-10-16-v11-model-inputs/pre-reservation-reference.json",
+      "sha256": "a13dc147116c5d96b93aea4a772526bac1284d662b8fcaf9d8d08afeee636f69"
+    },
+    {
+      "path": "scripts/capture_v11_spooled.py",
+      "sha256": "4c4a2a1ea7d61dd6758024ae7a59bd1657d5547fa18746fe97288495f80f7bd6"
+    },
+    {
+      "path": "scripts/develop_v13_coverage.py",
+      "sha256": "5a760ef878eb2e72b205ad253e82693503b59118a759286d16d16834a801eb52"
+    },
+    {
+      "path": "scripts/evaluate_v15_scoped.py",
+      "sha256": "e94e7a6551ec6d7d22275e8d1740bc69feff2bdb347b996d64dd193e2107e7d1"
+    },
+    {
+      "path": "scripts/evaluate_v4.py",
+      "sha256": "d2ffc5edffb7be5b3d5fada326425795bf8511001496469d910be3d38591ad38"
+    },
+    {
+      "path": "scripts/evaluate_v5.py",
+      "sha256": "811e70f3af2881e67be375a3be113b536b15cf60848b00a54b779713b5343ab0"
+    },
+    {
+      "path": "scripts/evaluate_v6.py",
+      "sha256": "30431c105962ad89f66778ae2cc05d80856d3c438db3d4c6886aaf2ef1349d85"
+    },
+    {
+      "path": "scripts/measure_v10_csd_hardware.py",
+      "sha256": "b57c80bac17553fd8a4f86357d9a024e64171997848ff351d9535cac0d253ef5"
+    },
+    {
+      "path": "scripts/measure_v11e_transfer.py",
+      "sha256": "913199159f9d293074b8414e73d958e9018da839b7127f3d4f54bbef79b70077"
+    },
+    {
+      "path": "scripts/measure_v13_coverage.py",
+      "sha256": "c59498654465385094efc8e2832e0045781227fcbd96f1cd1d4f86280c56a202"
+    },
+    {
+      "path": "scripts/measure_v13b_coverage.py",
+      "sha256": "534ce04fbc8880c9aae9ef22ddd5f57127a8b80de0968fc4037ae76272ef9f07"
+    },
+    {
+      "path": "scripts/measure_v6.py",
+      "sha256": "35cc71f5a3460f27c1ec9df0fbef230a17d43dd621b9badc987a1c046dce6b16"
+    },
+    {
+      "path": "scripts/model_v15_scoped.py",
+      "sha256": "31e4c9a3697bf5d8468da5d768a8f2880a8a75b00398b490c9387d4a235ada36"
+    },
+    {
+      "path": "scripts/predict_v11d_transfer.py",
+      "sha256": "2d70ea85b6217281ea76f4616a502f44c984ec5f8ebd0a0de2becabd9a01b7d7"
+    },
+    {
+      "path": "scripts/prepare_v11_model_comparison.py",
+      "sha256": "0a022e59320f02e1cfac875cf699e51683414c82a165e1b4aee6a608c626a4fb"
+    },
+    {
+      "path": "scripts/prepare_v13_coverage.py",
+      "sha256": "778d7f3c5152befbd82657466204e016100242d771ee47dadf1c463670a3d675"
+    },
+    {
+      "path": "tests/test_evaluate_v15_scoped.py",
+      "sha256": "9733c6d72c6f66021e6d3bb40e5dda500115de9799e19075406f0b2ba6f762f7"
+    },
+    {
+      "path": "tests/test_measure_v13_coverage.py",
+      "sha256": "0b48aa6d888518d6df69dbf4d843496a46aafca3d05e3d1793d047b6651b609b"
+    },
+    {
+      "path": "tests/test_measure_v13b_coverage.py",
+      "sha256": "682d7f2e2a1e916ca6697e150ab0c88db958351d995957710608076c3769145a"
+    },
+    {
+      "path": "tests/test_model_v15_scoped.py",
+      "sha256": "14c610bdf5e2cb42227a6c2aef7a8cd9240415e4382c217a125e42b78a65ab1d"
+    },
+    {
+      "path": "tests/test_prepare_v13_coverage.py",
+      "sha256": "8c520ee1926a55018b72990cf2b27e44296300067787b458a543042373c9f824"
+    }
+  ],
+  "source_paths": [
+    "archive/2026-10-19-v15-preflight/README.md",
+    "archive/2026-10-19-v15-preflight/amended-input-check.json",
+    "archive/2026-10-19-v15-preflight/candidates.json",
+    "archive/2026-10-19-v15-preflight/manifest.json",
+    "archive/2026-10-19-v15-preflight/overlap-receipt.json",
+    "archive/2026-10-19-v15-preflight/rejected-evaluate_v15_scoped.py",
+    "archive/2026-10-19-v15-preflight/rejected-test_evaluate_v15_scoped.py",
+    "docs/v13-coverage-protocol.md",
+    "isaforge/__init__.py",
+    "isaforge/area_adaptation_v9.py",
+    "isaforge/area_model.py",
+    "isaforge/area_model_v2.py",
+    "isaforge/area_model_v3.py",
+    "isaforge/area_model_v4.py",
+    "isaforge/area_model_v5.py",
+    "isaforge/area_model_v6.py",
+    "isaforge/area_model_v8.py",
+    "isaforge/area_selection.py",
+    "isaforge/cached_mapping_inference_v6.py",
+    "isaforge/challenger_plots.py",
+    "isaforge/challenger_report.py",
+    "isaforge/cli.py",
+    "isaforge/conservative_policy.py",
+    "isaforge/core_experiment.py",
+    "isaforge/core_routing.py",
+    "isaforge/dataset.py",
+    "isaforge/demo.py",
+    "isaforge/deployment.py",
+    "isaforge/evaluation.py",
+    "isaforge/fast_graph_inference.py",
+    "isaforge/features.py",
+    "isaforge/fresh_evaluation.py",
+    "isaforge/frozen_inference.py",
+    "isaforge/graph_features_v5.py",
+    "isaforge/mapping_features_v6.py",
+    "isaforge/masterrtl_baseline.py",
+    "isaforge/midterm_report.py",
+    "isaforge/model.py",
+    "isaforge/probe_audit.py",
+    "isaforge/probe_corpus.py",
+    "isaforge/probe_evaluation.py",
+    "isaforge/real_experiment.py",
+    "isaforge/research_report.py",
+    "isaforge/rtl.py",
+    "isaforge/selection.py",
+    "isaforge/semantic_features_v7.py",
+    "isaforge/soc_experiment.py",
+    "isaforge/structural_features_v3.py",
+    "isaforge/structural_features_v4.py",
+    "isaforge/structural_features_v5.py",
+    "isaforge/synthesis.py",
+    "isaforge/v4_corpus.py",
+    "isaforge/v4_validation.py",
+    "isaforge/v5_corpus.py",
+    "isaforge/v6_corpus.py",
+    "isaforge/v8_application_corpus.py",
+    "scripts/capture_v11_spooled.py",
+    "scripts/develop_v13_coverage.py",
+    "scripts/evaluate_v15_scoped.py",
+    "scripts/evaluate_v4.py",
+    "scripts/evaluate_v5.py",
+    "scripts/evaluate_v6.py",
+    "scripts/measure_v10_csd_hardware.py",
+    "scripts/measure_v11e_transfer.py",
+    "scripts/measure_v13_coverage.py",
+    "scripts/measure_v13b_coverage.py",
+    "scripts/measure_v6.py",
+    "scripts/model_v15_scoped.py",
+    "scripts/predict_v11d_transfer.py",
+    "scripts/prepare_v11_model_comparison.py",
+    "scripts/prepare_v13_coverage.py",
+    "tests/test_evaluate_v15_scoped.py",
+    "tests/test_measure_v13_coverage.py",
+    "tests/test_measure_v13b_coverage.py",
+    "tests/test_model_v15_scoped.py",
+    "tests/test_prepare_v13_coverage.py"
+  ],
+  "primary": "Equal four-template mean of within-template MAE,8 originals/template; V15 minus V6 and V9.",
+  "scope": "Prospective covered-domain synthetic composition stress, not fresh application transfer. All32 are inside the fixed gate; V15 equals V9 by construction. Gate fixed before labels; all32 retained or primary unavailable. No fits.",
+  "calls": {
+    "native_jobs": 0,
+    "model_artifacts_loaded": 0,
+    "new_labels": 0,
+    "fits": 0
+  }
+}
