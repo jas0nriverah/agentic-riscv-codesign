@@ -7,6 +7,7 @@ make hw-baseline        # everything, from a clean checkout; writes hw/results/b
 make hw-sim             # Verilator runs only  -> generated/hw/runs/<program>.json
 make hw-synth           # Yosys synth_ice40    -> generated/hw/synth/
 make hw-route           # nextpnr-ice40 seeds  -> generated/hw/route/seed<N>/
+make hw-pcf             # regenerates synth/core_top.pcf (not part of hw-baseline)
 ```
 
 ## Provenance
@@ -26,7 +27,8 @@ The ML branch fetched PicoRV32 at run time. Here it is vendored so the baseline 
   - The only change is in `sw/startup.S`: PicoRV32 has no `mtvec`, so `csrw mtvec` became a `nop`.
   - `hw/scripts/baseline.py` checks that each PicoRV32 image differs from the Spike image in exactly that one word. That proves both simulators run byte-identical benchmark code.
 - **Harness:** 16 MiB of zero-wait RAM at `0x80000000`. A run ends at the store to `tohost`, the same exit Spike uses, and passes only if Embench's `verify_benchmark` succeeded (exit word 1).
-- **Routing:** the ML branch fixed the I/O pins from a baseline-only bootstrap placement so it could compare two designs. With one design there is nothing to match, so nextpnr places I/O itself (`--pcf-allow-unconstrained`). Freeze a PCF before comparing against a fused-instruction core.
+- **Pins:** like the ML branch, every route uses fixed I/O pins so later designs can be compared against this one. `synth/core_top.pcf` was taken from a pin-free seed-3 placement of the stock core (`make hw-pcf`, which uses `scripts/pcf.py` and IceStorm's `chipdb-8k.txt`). It pins all 106 scalar ports, with `clk` on P9. It is committed and must stay unchanged for any fused-instruction comparison.
+- **Seeds:** 1–10, where the ML branch used 1–3.
 
 ## Measurement definitions
 
@@ -37,9 +39,10 @@ The ML branch fetched PicoRV32 at run time. Here it is vendored so the baseline 
 | `spike_instret` | Spike trace lines + 1. `src/tracing.py` aborts unless this equals Spike's own `instret` delta. |
 | `match` | `instret == spike_instret` |
 | `luts` | `SB_LUT4` cells after `synth_ice40` on `core_top`, counted the way the ML branch counted them |
-| `fmax_mhz` | Median over seeds 1–3 of nextpnr-ice40's achieved Fmax. Target: iCE40HX8K, CT256 package, 12 MHz constraint. Covers internal register-to-register paths only; external memory isn't modeled. |
+| `fmax_mhz` | Median over seeds 1–10 of nextpnr-ice40's achieved Fmax. Target: iCE40HX8K, CT256 package, pins from `synth/core_top.pcf`, 12 MHz constraint. Covers internal register-to-register paths only; external memory isn't modeled. |
+| `fmax_min_mhz`, `fmax_max_mhz` | Slowest and fastest of the same 10 seeds |
 
-`luts` and `fmax_mhz` describe the core, so every row repeats them.
+`luts` and the three Fmax columns describe the core, so every row repeats them.
 
 ## Results (2026-10-19)
 
@@ -58,8 +61,10 @@ The ML branch fetched PicoRV32 at run time. Here it is vendored so the baseline 
 - **Cross-check:** retired instructions equal Spike's exactly.
 - **Images:** each PicoRV32 image differs from its Spike image only in the word at `0x80000008` (`csrw mtvec` → `nop`).
 - **Area:** 2,439 `SB_LUT4`, 559 `SB_CARRY`, 1,010 flip-flops, and 2,751 of 7,680 logic cells after packing.
-- **Fmax:** 59.26, 63.64 and 61.56 MHz for seeds 1, 2 and 3, so the median is 61.56 MHz.
-- **Comparison with the ML branch:** its rv32i core without MUL/DIV was 1,488 LUT4 and 66.8 MHz median. That run used fixed pins, so the Fmax numbers aren't directly comparable.
+- **Fmax over seeds 1–10 with the committed pins:** median 61.48 MHz, min 59.86, max 64.98.
+  - Per seed: 60.21, 61.33, 60.16, 63.19, 60.31, 61.69, 61.64, 61.74, 59.86, 64.98.
+  - With the pins fixed, seed 3 gives 60.16 MHz, not the 61.56 MHz of the pin-free placement the PCF came from. Fixed pins change where the placer starts, so per-seed numbers aren't comparable across pin settings.
+- **Comparison with the ML branch:** its rv32i core without MUL/DIV was 1,488 LUT4 and 66.8 MHz median (3 seeds, its own pins). It is a different core and different pins, so it isn't a like-for-like comparison.
 - **Why cycles per instruction is high:** edn and matmult-int run many `mul` instructions, and the sequential multiplier takes about 40 cycles each. Fusions that remove a `mul` will therefore look very large on this core.
 
 ## Tools

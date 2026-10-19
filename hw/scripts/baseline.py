@@ -45,7 +45,7 @@ def main():
     parser.add_argument("--out", required=True)
     args = parser.parse_args()
 
-    # one area and one Fmax for the stock core, the median over the routing seeds like the ML branch
+    # one area for the stock core and its Fmax over the routing seeds, with fmax_mhz the median like the ML branch
     luts = countLuts("generated/hw/synth/core_top.json")
     perSeed = {}
     for seed in args.seeds:
@@ -54,6 +54,9 @@ def main():
         cells = utilization["ICESTORM_LC"]
         print(f"seed {seed}: fmax {fmax:.2f} MHz, {cells['used']}/{cells['available']} logic cells")
     fmax = round(statistics.median(perSeed.values()), 2)
+    fmaxMin = round(min(perSeed.values()), 2)
+    fmaxMax = round(max(perSeed.values()), 2)
+    print(f"fmax over {len(perSeed)} seeds: median {fmax}, min {fmaxMin}, max {fmaxMax} MHz")
 
     rows = []
     problems = []
@@ -70,7 +73,8 @@ def main():
         if not match:
             problems.append(f"{program}: PicoRV32 instret {run['instret']} vs Spike {spikeInstret}")
         rows.append({"benchmark": program, "cycles": run["window_cycles"], "instret": run["instret"],
-                     "spike_instret": spikeInstret, "match": match, "luts": luts, "fmax_mhz": fmax})
+                     "spike_instret": spikeInstret, "match": match, "luts": luts, "fmax_mhz": fmax,
+                     "fmax_min_mhz": fmaxMin, "fmax_max_mhz": fmaxMax})
 
     with open(args.out, "w", newline="") as out:
         writer = csv.DictWriter(out, fieldnames=list(rows[0]))

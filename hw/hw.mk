@@ -10,7 +10,7 @@ NM          := $(RISCV_PREFIX)nm
 
 HW          := hw
 HW_OUT      := generated/hw
-HW_SEEDS    := 1 2 3
+HW_SEEDS    := 1 2 3 4 5 6 7 8 9 10
 HW_FREQ_MHZ := 12
 HW_MAX_CYCLES := 4000000000
 
@@ -18,7 +18,7 @@ HW_MAX_CYCLES := 4000000000
 HW_SETUP    := $(HW)/sw/startup.S benchmarks/embench-hooks.c \
                $(EMBENCH)/support/main.c $(EMBENCH)/support/beebsc.c
 
-.PHONY: hw-baseline hw-sim hw-synth hw-route
+.PHONY: hw-baseline hw-sim hw-synth hw-route hw-pcf
 # keeps the ELFs that the .bin files are made from
 .SECONDARY: $(PROGRAMS:%=$(HW_OUT)/programs/%.elf) $(PROGRAMS:%=generated/programs/%.elf)
 
@@ -60,11 +60,24 @@ $(HW_OUT)/synth/core_top.json: $(HW)/synth/ice40.ys $(HW)/rtl/picorv32.v $(HW)/r
 
 hw-synth: $(HW_OUT)/synth/core_top.json
 
-# the ML branch's protocol: HX8K CT256, 12 MHz constraint, seeds 1 to 3
-$(HW_OUT)/route/seed%/report.json: $(HW_OUT)/synth/core_top.json
+# the ML branch's target: HX8K CT256 with a 12 MHz constraint, routed once per seed
+# every seed and every later design uses the same committed pins
+$(HW_OUT)/route/seed%/report.json: $(HW_OUT)/synth/core_top.json $(HW)/synth/core_top.pcf
 	mkdir -p $(dir $@)
-	$(NEXTPNR) --hx8k --package ct256 --json $< --pcf-allow-unconstrained \
+	$(NEXTPNR) --hx8k --package ct256 --json $< --pcf $(word 2,$^) \
 	  --freq $(HW_FREQ_MHZ) --seed $* --threads 1 --report $@ --log $(dir $@)nextpnr.log --quiet
+
+# regenerates hw/synth/core_top.pcf from a pin-free placement of the stock core
+# not part of hw-baseline because the committed pins must stay fixed
+HW_PCF_SEED := 3
+HW_CHIPDB    = $(dir $(shell command -v $(NEXTPNR)))../share/icebox/chipdb-8k.txt
+
+hw-pcf: $(HW_OUT)/synth/core_top.json
+	mkdir -p $(HW_OUT)/pcf
+	$(NEXTPNR) --hx8k --package ct256 --json $< --pcf-allow-unconstrained \
+	  --freq $(HW_FREQ_MHZ) --seed $(HW_PCF_SEED) --threads 1 --write $(HW_OUT)/pcf/placed.json \
+	  --log $(HW_OUT)/pcf/nextpnr.log --quiet
+	python3 $(HW)/scripts/pcf.py $(HW_OUT)/pcf/placed.json $(HW_CHIPDB) ct256 $(HW)/synth/core_top.pcf
 
 hw-route: $(HW_SEEDS:%=$(HW_OUT)/route/seed%/report.json)
 
