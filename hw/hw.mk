@@ -25,7 +25,9 @@ HW_SETUP    := $(HW)/sw/startup.S benchmarks/embench-hooks.c \
 hw-baseline: $(HW)/results/baseline.csv
 
 # clones Embench on a clean checkout
-$(EMBENCH)/support/main.c:
+$(EMBENCH)/support/main.c $(EMBENCH)/support/beebsc.c: | $(EMBENCH)/.git
+
+$(EMBENCH)/.git:
 	git submodule update --init $(EMBENCH)
 
 $(HW_OUT)/programs/%.elf: $(HW_SETUP) src/spike-setup/memory-layout.ld
