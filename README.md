@@ -40,11 +40,15 @@ The [methodology](docs/methodology.md) defines the data splits, feature boundary
 
 ### Completed 327-circuit matched transfer comparison
 
-All **327 original circuits** now have fresh verified synthesis labels, following the freeze of all654 paired predictions. **V6: 0.506605; V9: 0.525239 LUT4 equal-family MAE**, a **3.68% regression**. V9 lowers maximum error, but cap32/64/128 feasibility mistakes are unchanged. All circuits passed **702,396 RTL comparisons**, with the recorded simulator-overflow fallback and independent netlist/metric audits.
+All **327 original circuits** now have fresh verified synthesis labels, following the freeze of all 654 paired predictions. **V6: 0.506605; V9: 0.525239 LUT4 equal-family MAE**, a **3.68% regression**. V9 lowers maximum error, but cap32/64/128 feasibility mistakes are unchanged. All circuits passed **702,396 RTL comparisons**, with the recorded simulator-overflow fallback and independent netlist/metric audits.
 
 ![Frozen V6/V9 comparison across all eligible families](docs/figures/v11e-transfer/01-primary-families.png)
 
 [Full results, compute bounds and caveats](docs/v11e-transfer-results.md) · [Audited evidence and replay](results/2026-10-19-v11e-frozen-comparison/README.md). The six outcomes retain the empty recursion pool; the E1 primary gives five eligible families equal weight. This comparison does not establish CPU speedup or superiority to published research.
+
+### Bounded follow-up: scoped arithmetic coverage
+
+The implemented [V15 router](docs/v15-scoped-results.md) selects V9 on fixed arithmetic structures and V6 elsewhere. On 32 new related synthetic circuits, MAE falls **15.5211 →12.0093 LUT4 (22.63%)**, all four template means improve, and cap64 false rejections fall **4 →2**. Worst underprediction rises **2.83 →32.01 LUT4**, so the router remains experimental. All 32 select V9 by construction; this tests covered-domain behavior, not new application transfer. On the consumed 327-circuit panel it selects V6 everywhere and exactly preserves V6. The complete follow-up ran in 43.49 seconds with two workers and zero fits.
 
 ### Latest controlled model experiment
 

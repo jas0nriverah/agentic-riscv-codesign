@@ -1,5 +1,7 @@
 # The ISAForge area model
 
+**October 19 update:** [V11's 327-circuit frozen comparison](v11e-transfer-results.md) is complete: V9 primary MAE is 3.68% worse than V6. The new [V15 scoped-router diagram and results](v15-scoped-results.md) describe the bounded follow-up: 22.63% lower MAE on 32 related synthetic cases, with a larger underprediction tail. V15 remains experimental; the older V9 diagram below describes its frozen development artifact.
+
 ISAForge's current predictor estimates the number of iCE40 four-input lookup tables needed to implement an original RISC-V computation. It uses a **300-tree ExtraTrees regression model with 217 circuit features**. The V9 development artifact was fitted on **1,713 verified, synthesized circuits**. Its output is an area estimate; processor performance and routed timing have separate experiments.
 
 ![ISAForge area-model pipeline, training labels, improvement process and measured experiment outcomes.](figures/ml-model/ml-model-overview.png)

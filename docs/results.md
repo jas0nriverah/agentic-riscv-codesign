@@ -1,8 +1,13 @@
 # Results
 
+## Scoped follow-up: V15
+
+[Fixed arithmetic routing](v15-scoped-results.md) improves32-case synthetic macro MAE 22.63% and cap64 false rejections4→2, but worst underprediction worsens2.83→32.01LUT4. All 32 use V9; V15 remains experimental. The consumed 327-case panel uses V6 exclusively and is preserved exactly.
+
+
 ## Completed transfer comparison: V11e
 
-[All327 original circuits are measured](v11e-transfer-results.md). Frozen V9 loses to V6 on equal-family MAE **0.525239 versus0.506605 (+3.68%)**; cap32/64/128 mistakes are unchanged. All702,396 RTL comparisons and327 mappings passed, including a retained declared simulator fallback. Independent target and arithmetic audits passed.
+[All 327 original circuits are measured](v11e-transfer-results.md). Frozen V9 loses to V6 on equal-family MAE **0.525239 versus 0.506605 (+3.68%)**; cap32/64/128 mistakes are unchanged. All 702,396 RTL comparisons and327 mappings passed, including a retained declared simulator fallback. Independent target and arithmetic audits passed.
 
 
 The evidence supports resource-prediction and processor-integration results. V6 mapping features improve a frozen synthetic comparison by 6.32%, but error tails, feasibility mistakes and incomplete family coverage remain. Earlier V5 gains transfer weakly to three application families. Historical V4’s small advantage over a same-data MasterRTL retrain was inconclusive. Learned acquisition has not beaten simple merit on the prospective primary endpoint. The ML target is isolated LUT4 cost; the CRC32 cycle result comes from a separate matched processor experiment. [Methodology](methodology.md) defines those quantities and their boundaries.

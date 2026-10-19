@@ -1,5 +1,8 @@
 # Research result archives
 
+[V15 scoped stress](2026-10-19-v15-scoped-stress/README.md):32 new verified mappings, no fits,22.63% lower MAE versusV6 with worse underprediction; experimental.
+
+
 [Completed327-circuit frozen comparison](2026-10-19-v11e-frozen-comparison/README.md): V6/V9 frozen before fresh labels; independent netlist and metric audits; V9 primary MAE +3.68% worse.
 
 

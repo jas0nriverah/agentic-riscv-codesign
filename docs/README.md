@@ -1,5 +1,8 @@
 # Documentation
 
+[V15 scoped model and diagram](v15-scoped-results.md) — 32-circuit prospective stress, improvement and underprediction regression.
+
+
 [Latest: completed327-circuit comparison](v11e-transfer-results.md) — full measurements, negative transfer result, research figures and replay.
 
 
