@@ -1,0 +1,74 @@
+# Hardware: stock PicoRV32 baseline
+
+Stock PicoRV32 (rv32im) baseline for the fused-instruction work. It runs main's 8 Embench programs in Verilator, checks the retired instructions against main's Spike traces, and synthesizes and routes the core for the same iCE40 target the ML branch used. There are no custom instructions yet.
+
+```
+make hw-baseline        # everything, from a clean checkout; writes hw/results/baseline.csv
+make hw-sim             # Verilator runs only  -> generated/hw/runs/<program>.json
+make hw-synth           # Yosys synth_ice40    -> generated/hw/synth/
+make hw-route           # nextpnr-ice40 seeds  -> generated/hw/route/seed<N>/
+```
+
+## Provenance
+
+| Input | Source |
+|---|---|
+| `rtl/picorv32.v`, `rtl/PICORV32-COPYING` | [YosysHQ/picorv32 @ `ef203c2b0a3fb793280f5114941416c425c5b461`](https://github.com/YosysHQ/picorv32/tree/ef203c2b0a3fb793280f5114941416c425c5b461), unmodified, ISC license. sha256 of `picorv32.v`: `0836050971b3c6cdd28ac3b1e5719a67fb645161912bef1e472e63995ceb0622` |
+| `rtl/core_top.v`, `sim/core_sim.cpp`, synthesis and routing settings | Adapted from `origin/codex/isaforge-ml-foundation` @ `dc9ae16` (`hardware/core_top.v`, `hardware/core_sim.cpp`, `isaforge/core_experiment.py`, `isaforge/core_routing.py`). The CRC32 PCPI unit (`hardware/pcpi_candidates.v`) and its firmware and tests were left out |
+| `sw/startup.S` | Copy of main's `src/spike-setup/startup.S` |
+
+The ML branch fetched PicoRV32 at run time. Here it is vendored so the baseline needs no network access beyond the Embench submodule.
+
+## What differs from the ML branch's setup
+
+- **ISA:** rv32im, not rv32i. `ENABLE_MUL=1` and `ENABLE_DIV=1` turn on PicoRV32's sequential multiplier and divider inside its PCPI path. `ENABLE_FAST_MUL=0`. All other parameters are the ML branch's (`TWO_STAGE_SHIFT`, dual-port register file, no compressed instructions, no IRQ, counters on).
+- **Programs:** main's exact build (`-march=rv32im -mabi=ilp32 -O2`, main's linker script, RAM at `0x80000000`), not the ML branch's 64 KiB rv32i port.
+  - The only change is in `sw/startup.S`: PicoRV32 has no `mtvec`, so `csrw mtvec` became a `nop`.
+  - `hw/scripts/baseline.py` checks that each PicoRV32 image differs from the Spike image in exactly that one word. That proves both simulators run byte-identical benchmark code.
+- **Harness:** 16 MiB of zero-wait RAM at `0x80000000`. A run ends at the store to `tohost`, the same exit Spike uses, and passes only if Embench's `verify_benchmark` succeeded (exit word 1).
+- **Routing:** the ML branch fixed the I/O pins from a baseline-only bootstrap placement so it could compare two designs. With one design there is nothing to match, so nextpnr places I/O itself (`--pcf-allow-unconstrained`). Freeze a PCF before comparing against a fused-instruction core.
+
+## Measurement definitions
+
+| Column | Meaning |
+|---|---|
+| `cycles` | Clock cycles between the store to `instret_start` and the store to `instret_stop` in `benchmarks/embench-hooks.c`, counted by the harness. Covers `benchmark()` plus the trigger calls, the same window Spike traces. |
+| `instret` | PicoRV32's own `rdinstret` values that the hooks stored, `instret_stop - instret_start` |
+| `spike_instret` | Spike trace lines + 1. `src/tracing.py` aborts unless this equals Spike's own `instret` delta. |
+| `match` | `instret == spike_instret` |
+| `luts` | `SB_LUT4` cells after `synth_ice40` on `core_top`, counted the way the ML branch counted them |
+| `fmax_mhz` | Median over seeds 1–3 of nextpnr-ice40's achieved Fmax. Target: iCE40HX8K, CT256 package, 12 MHz constraint. Covers internal register-to-register paths only; external memory isn't modeled. |
+
+`luts` and `fmax_mhz` describe the core, so every row repeats them.
+
+## Results (2026-10-19)
+
+| benchmark | cycles | instret | spike_instret | match | cycles/instr |
+|---|---:|---:|---:|---|---:|
+| aha-mont64 | 25,631,371 | 4,475,851 | 4,475,851 | yes | 5.73 |
+| crc32 | 22,461,391 | 3,831,152 | 3,831,152 | yes | 5.86 |
+| edn | 34,849,402 | 3,466,139 | 3,466,139 | yes | 10.05 |
+| huffbench | 8,638,203 | 2,131,016 | 2,131,016 | yes | 4.05 |
+| matmult-int | 26,300,272 | 3,179,290 | 3,179,290 | yes | 8.27 |
+| nettle-aes | 18,773,912 | 4,083,360 | 4,083,360 | yes | 4.60 |
+| nettle-sha256 | 20,276,586 | 3,854,209 | 3,854,209 | yes | 5.26 |
+| wikisort | 6,916,129 | 1,182,160 | 1,182,160 | yes | 5.85 |
+
+- **Correctness:** all 8 programs pass Embench's `verify_benchmark` on PicoRV32.
+- **Cross-check:** retired instructions equal Spike's exactly.
+- **Images:** each PicoRV32 image differs from its Spike image only in the word at `0x80000008` (`csrw mtvec` → `nop`).
+- **Area:** 2,439 `SB_LUT4`, 559 `SB_CARRY`, 1,010 flip-flops, and 2,751 of 7,680 logic cells after packing.
+- **Fmax:** 59.26, 63.64 and 61.56 MHz for seeds 1, 2 and 3, so the median is 61.56 MHz.
+- **Comparison with the ML branch:** its rv32i core without MUL/DIV was 1,488 LUT4 and 66.8 MHz median. That run used fixed pins, so the Fmax numbers aren't directly comparable.
+- **Why cycles per instruction is high:** edn and matmult-int run many `mul` instructions, and the sequential multiplier takes about 40 cycles each. Fusions that remove a `mul` will therefore look very large on this core.
+
+## Tools
+
+| Tool | Version | Source |
+|---|---|---|
+| riscv-none-elf-gcc | xPack 15.2.0-1 | `~/tools/xpack-riscv-none-elf-gcc-15.2.0-1` |
+| Spike | `f8a060b7bea8da6f738f193ed1b66b665978d092` (the ML branch's recorded revision) | built from source into `~/tools/spike` |
+| dtc (needed by Spike) | 1.8.1 | Homebrew |
+| Verilator, Yosys, nextpnr-ice40 | 5.053-devel, 0.70+157, 0.11.1-65 | OSS CAD Suite 2026-10-19, `~/tools/oss-cad-suite` |
+
+The Makefile uses `riscv64-unknown-elf-` when it is on `PATH`, and xPack's `riscv-none-elf-` otherwise. Set `RISCV_PREFIX=` to choose one. The OSS CAD Suite Verilator needs a C++14 or newer compiler and Apple clang defaults to C++98, so the build passes `-std=c++17`.
