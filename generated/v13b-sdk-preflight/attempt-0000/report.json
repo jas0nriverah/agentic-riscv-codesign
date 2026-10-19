@@ -1,0 +1,47 @@
+{
+  "schema": "isaforge-v13b-sdk-header-preflight-v1",
+  "scope": "Noncohort C++ header environment propagation only; no RTL, vectors, physical labels or fits.",
+  "complete": true,
+  "environment": {
+    "PATH": "/Library/Developer/CommandLineTools/usr/bin:/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin:/opt/homebrew/Cellar/verilator/5.050/bin:/opt/homebrew/Cellar/yosys/0.69_1/bin:/usr/bin:/usr/bin:/bin",
+    "ABC": "/opt/homebrew/Cellar/yosys/0.69_1/bin/yosys-abc",
+    "LANG": "C",
+    "LC_ALL": "C",
+    "TZ": "UTC",
+    "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk"
+  },
+  "source_sha256": "db9d5fd039fc408b89b9d0e411da50651bc6fa759bd012087719652450ec1d96",
+  "collector_source_sha256": "534ce04fbc8880c9aae9ef22ddd5f57127a8b80de0968fc4037ae76272ef9f07",
+  "tools_sha256": "69ad87bd80d555406ff7bb6f808d8bb6b752c849f12600b11c96bebe9f438793",
+  "runs": [
+    {
+      "name": "build",
+      "command": [
+        "c++",
+        "-std=c++17",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v13b-sdk-preflight/attempt-0000/probe.cpp",
+        "-o",
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v13b-sdk-preflight/attempt-0000/probe.bin"
+      ],
+      "started_at_utc": "2026-10-15T23:44:11.280380+00:00",
+      "completed_at_utc": "2026-10-15T23:44:11.605261+00:00",
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "run",
+      "command": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/v13b-sdk-preflight/attempt-0000/probe.bin"
+      ],
+      "started_at_utc": "2026-10-15T23:44:11.605416+00:00",
+      "completed_at_utc": "2026-10-15T23:44:12.584997+00:00",
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "error": null,
+  "completed_at_utc": "2026-10-15T23:44:12.931504+00:00",
+  "rtl_comparisons": 0,
+  "physical_labels": 0,
+  "estimator_fits": 0
+}

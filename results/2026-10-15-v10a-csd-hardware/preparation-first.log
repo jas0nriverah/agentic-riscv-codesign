@@ -1,0 +1,16 @@
+{"stage": "first-amended32-input-preparation-start", "started_at_utc": "2026-10-15T20:32:51.637208+00:00", "new_measurements": 0, "model_fits": 0}
+Traceback (most recent call last):
+  File "<stdin>", line 8, in <module>
+  File "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/scripts/prepare_v10_csd_hardware.py", line 477, in run
+    validate_proof(proof, pair)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/scripts/prepare_v10_csd_hardware.py", line 266, in validate_proof
+    require(formula_query(certificate['lemma_original_formula'], certificate['lemma_rewritten_formula'], operand_lemma=True).to_smt2()
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        == proof['query_smt2'] and proof.get('query_scope') == 'universal unconstrained word:32; no range or reachability assumptions',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        'Proof query does not encode the exact unconstrained operand lemma')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/scripts/prepare_v10_csd_hardware.py", line 36, in require
+    raise ValueError(message)
+ValueError: Proof query does not encode the exact unconstrained operand lemma

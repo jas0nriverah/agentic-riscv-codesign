@@ -1,0 +1,1103 @@
+{
+  "status": "unsealed-input-feasibility-not-test-assignment",
+  "records": {
+    "bitcount": {
+      "status": "input-feasibility-complete",
+      "trace_deadline_seconds": 300,
+      "max_candidate_ops": 4,
+      "upstream_algorithm_changes": false,
+      "protocol_sealed": false,
+      "kernel_symbols": [
+        "bitcount_bit_count",
+        "bitcount_bitcount",
+        "bitcount_bit_shifter",
+        "bitcount_ntbl_bitcnt",
+        "bitcount_btbl_bitcnt",
+        "bitcount_ntbl_bitcount",
+        "bitcount_BW_btbl_bitcount",
+        "bitcount_AR_btbl_bitcount"
+      ],
+      "upstream_source_sha256": {
+        "bench/kernel/bitcount/bitcount.c": "7b0a5eccbf18e81cae1bcc948f0f0f47143cd177cf46de10b2d676e5b0d8d2fa",
+        "bench/kernel/bitcount/bitops.h": "8877c5de289c0e1f4fe17836db60fe0468b999f0ddefbfbf7f0e610d6d927f6c",
+        "bench/kernel/bitcount/bitcnt_4.c": "11b07b004c24843b44d203c7be2dc5e6cae930909f5b49752c5e592ec18582c4",
+        "bench/kernel/bitcount/LICENSE": "d5433a2f12b96fb7dd1ec0e09f8268ce220a93859fa2c6441ac11724169dad95",
+        "bench/kernel/bitcount/bitcnt_3.c": "9f9735c11c5f0f88a6a8206359a4d771bf5cd0f53e52229dfb44b74b3ac02a9f",
+        "bench/kernel/bitcount/bitcnt_2.c": "853c233e8d51db3f26b4e7e12491b4c4ef8633b49beda32f542c97dd2e240f33",
+        "bench/kernel/bitcount/ChangeLog.txt": "350b8e0b014bf5768693527e4aa003315d043113e634763b4fe4ba4fa1b57ee6",
+        "bench/kernel/bitcount/bitcnt_1.c": "8e22f9e70f40539484151d17b18fd31002fcb0106ef4fb0b70ed239b2ff9228c"
+      },
+      "build": {
+        "commands": [
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcount.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O2/bitcount.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/bitcount/O2/bitcount.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcnt_1.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O2/bitcnt_1.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/bitcount/O2/bitcnt_1.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcnt_2.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O2/bitcnt_2.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/bitcount/O2/bitcnt_2.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcnt_3.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O2/bitcnt_3.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/bitcount/O2/bitcnt_3.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcnt_4.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O2/bitcnt_4.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/bitcount/O2/bitcnt_4.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount",
+              "-DUPSTREAM_INIT=bitcount_init",
+              "-DUPSTREAM_RUN=bitcount_main",
+              "-DUPSTREAM_RETURN=bitcount_return",
+              "-DANAGRAM_PHRASE=-1",
+              "-DPARTIAL_DIJKSTRA=0",
+              "-nostartfiles",
+              "-T",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/memory-layout.ld",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/startup.S",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/embench-hooks.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/runtime.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/wrapper.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O2/snapshot.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O2/bitcount.o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O2/bitcnt_1.o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O2/bitcnt_2.o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O2/bitcnt_3.o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O2/bitcnt_4.o",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O2/bitcount.elf"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/bitcount/O2/link.log"
+          }
+        ],
+        "adapter_sha256": "23dd2fbb11d9c8f670a40a07451a3a7c8437d1a6273cbbe1f09704129262c81b",
+        "elf_sha256": "9793b52f920ae794736c7428a1b2e1c5fcfed3fc6db42c37ae0629e3b2133461"
+      },
+      "control_build": {
+        "commands": [
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcount.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O0/bitcount.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/bitcount/O0/bitcount.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcnt_1.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O0/bitcnt_1.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/bitcount/O0/bitcnt_1.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcnt_2.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O0/bitcnt_2.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/bitcount/O0/bitcnt_2.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcnt_3.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O0/bitcnt_3.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/bitcount/O0/bitcnt_3.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount/bitcnt_4.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O0/bitcnt_4.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/bitcount/O0/bitcnt_4.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/bitcount",
+              "-DUPSTREAM_INIT=bitcount_init",
+              "-DUPSTREAM_RUN=bitcount_main",
+              "-DUPSTREAM_RETURN=bitcount_return",
+              "-DANAGRAM_PHRASE=-1",
+              "-DPARTIAL_DIJKSTRA=0",
+              "-nostartfiles",
+              "-T",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/memory-layout.ld",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/startup.S",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/embench-hooks.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/runtime.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/wrapper.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O0/snapshot.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O0/bitcount.o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O0/bitcnt_1.o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O0/bitcnt_2.o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O0/bitcnt_3.o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O0/bitcnt_4.o",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O0/bitcount.elf"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/bitcount/O0/link.log"
+          }
+        ],
+        "adapter_sha256": "23dd2fbb11d9c8f670a40a07451a3a7c8437d1a6273cbbe1f09704129262c81b",
+        "elf_sha256": "b808865d090fa247215c32ba3c4624838c0d629d8ff5333da8580ef8521bf2bb"
+      },
+      "captured_outputs": [
+        1095,
+        16,
+        1457850878,
+        1457851008,
+        -1921305414,
+        -1921305414,
+        -1921305414,
+        -1921305414,
+        -1921305414,
+        -1921305414,
+        -1921305414,
+        -1921305414
+      ],
+      "O0_O2_output_identical": true,
+      "oracle": {
+        "independent": "Python integer Park-Miller +popcount, actualmeasuredaggregate/res/seed and8algorithms\u00d710positivemasks probes",
+        "expected": [
+          1095,
+          16,
+          1457850878,
+          1457851008,
+          -1921305414,
+          -1921305414,
+          -1921305414,
+          -1921305414,
+          -1921305414,
+          -1921305414,
+          -1921305414,
+          -1921305414
+        ],
+        "probe_inputs": [
+          0,
+          1,
+          2,
+          3,
+          7,
+          127,
+          255,
+          65535,
+          1431655765,
+          2147483647
+        ],
+        "scope": "Completeoriginalfixedinputaggregate plus outside-marker probes; not allinputsformalproof"
+      },
+      "trace": {
+        "instret_start": 7612,
+        "instret_stop": 13111,
+        "instret_delta": 5499,
+        "trace_instructions": 5498,
+        "unknown_instructions": 0,
+        "validated": true,
+        "measurement": "Spike retired instructions; not hardware cycles",
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "--log-commits",
+          "--log=/dev/fd/4",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/O2/bitcount.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.03834654200181831,
+        "trace_path": "generated/application-input-feasibility/bitcount/bitcount.jsonl.gz",
+        "trace_encoding": "gzip JSONL; complete measured window",
+        "trace_bytes": 40471,
+        "trace_sha256": "147d151ff30b576a9d90427c24fbeeac4ab5c4d1b89106f9a3a3df4450295617",
+        "program_output": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/bitcount/trace.stdout.log",
+        "program_output_sha256": "373339e7c385fcd0853ca0693b2cce181ea00a6c279ed41907d2ec887a47a96c",
+        "log": "generated/application-input-feasibility/bitcount/trace.log",
+        "stream_separation": "Commit pipe independent of HTIF stdout"
+      },
+      "fusion_verification": {
+        "seed": 2026101507,
+        "benchmarks": [
+          {
+            "benchmark": "bitcount",
+            "checked_occurrences": 52,
+            "skipped_opaque_block_occurrences": 0,
+            "vectors_per_occurrence": 16,
+            "individual_comparisons": 832,
+            "joint_formula_block_comparisons": 672
+          }
+        ],
+        "passed": true,
+        "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+      },
+      "error": "KeyError('verified')",
+      "prior_attempt_status": "failure-retained",
+      "prior_attempt_error": "KeyError('verified')",
+      "candidate_count": 33,
+      "kernel_retired_instructions": 2124,
+      "all_measured_retired_instructions": 5498,
+      "candidate_sha256": "1150f86c9816b66b3b710459d923a335e49b22fe133447d27f3930038d358c53"
+    },
+    "isqrt": {
+      "status": "input-feasibility-complete-with-oracle-limit",
+      "trace_deadline_seconds": 300,
+      "max_candidate_ops": 4,
+      "upstream_algorithm_changes": false,
+      "protocol_sealed": false,
+      "kernel_symbols": [
+        "isqrt_usqrt",
+        "isqrt_main"
+      ],
+      "upstream_source_sha256": {
+        "bench/kernel/isqrt/pi.h": "e96904dfd4c1c1fd2c7c89833c660680955fda779924a7bf9340fb7030e38e4e",
+        "bench/kernel/isqrt/wcclibm.h": "74424f837202e6bdbafe0907c0c6f8a6386a66d34cd8b2d66ecd0ebd19957902",
+        "bench/kernel/isqrt/basicmath_libc.c": "96ffe0f0c2629a08ebd0fcd7cb9850a359331c2d650747ee87219a52e821f476",
+        "bench/kernel/isqrt/math_private.h": "815b830cf333f1061574b933532382b16f1ee3e1759c600fd6640fce747b4638",
+        "bench/kernel/isqrt/wcclibm.c": "ffffe179f8715e269eecb00f7b23c0a4b6c94104177fba604d3ed0df1fd1534c",
+        "bench/kernel/isqrt/ChangeLog.txt": "f134b5a54af2bcae3ffd6406966e100c635588f1ff903a1f706a607de77a0fd5",
+        "bench/kernel/isqrt/snipmath.h": "b4972f2a7be15eef013947aeee7f646f80b1fac51db04b6734e3b2734f2b4b56",
+        "bench/kernel/isqrt/isqrt.c": "8a685fc29ec16db1abd1821a34c52f23cd51946843188000ca122c3a5e651a1b",
+        "bench/kernel/isqrt/basicmath_libc.h": "d3aeb042f1c60c406e4b8d7523ad272efebac8bddc00692cd38d68bcd6b2b108"
+      },
+      "build": {
+        "commands": [
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/isqrt",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/isqrt/isqrt.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/isqrt/O2/isqrt.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/isqrt/O2/isqrt.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/isqrt",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/isqrt/basicmath_libc.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/isqrt/O2/basicmath_libc.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/isqrt/O2/basicmath_libc.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/isqrt",
+              "-DUPSTREAM_INIT=isqrt_init",
+              "-DUPSTREAM_RUN=isqrt_main",
+              "-DUPSTREAM_RETURN=isqrt_return",
+              "-DANAGRAM_PHRASE=-1",
+              "-DPARTIAL_DIJKSTRA=0",
+              "-nostartfiles",
+              "-T",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/memory-layout.ld",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/startup.S",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/embench-hooks.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/runtime.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/wrapper.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/isqrt/O2/snapshot.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/isqrt/O2/isqrt.o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/isqrt/O2/basicmath_libc.o",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/isqrt/O2/isqrt.elf"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/isqrt/O2/link.log"
+          }
+        ],
+        "adapter_sha256": "ef84d563ce285a15b420e9cb181bc09ce1f02c3f7ac2457134d5eec5a9351fae",
+        "elf_sha256": "7d0508bf3b9c5e3319552bc5f65188b9e202072ff7e3c4f7d1c629e8c2790eb7"
+      },
+      "control_build": {
+        "commands": [
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/isqrt",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/isqrt/isqrt.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/isqrt/O0/isqrt.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/isqrt/O0/isqrt.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/isqrt",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/isqrt/basicmath_libc.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/isqrt/O0/basicmath_libc.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/isqrt/O0/basicmath_libc.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/isqrt",
+              "-DUPSTREAM_INIT=isqrt_init",
+              "-DUPSTREAM_RUN=isqrt_main",
+              "-DUPSTREAM_RETURN=isqrt_return",
+              "-DANAGRAM_PHRASE=-1",
+              "-DPARTIAL_DIJKSTRA=0",
+              "-nostartfiles",
+              "-T",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/memory-layout.ld",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/startup.S",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/embench-hooks.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/runtime.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/wrapper.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/isqrt/O0/snapshot.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/isqrt/O0/isqrt.o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/isqrt/O0/basicmath_libc.o",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/isqrt/O0/isqrt.elf"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/isqrt/O0/link.log"
+          }
+        ],
+        "adapter_sha256": "ef84d563ce285a15b420e9cb181bc09ce1f02c3f7ac2457134d5eec5a9351fae",
+        "elf_sha256": "30c712128aec1ccfa7b0e90e0a1cac76eb052a2de3a4c65bb3efd608d1b590b4"
+      },
+      "captured_outputs": [
+        53364,
+        0,
+        32749,
+        1072497001,
+        0,
+        65536,
+        92681,
+        113511,
+        131072,
+        253819,
+        262144,
+        270211,
+        16777087,
+        16777216,
+        -1257966799,
+        -1257966799,
+        -4,
+        2146238464,
+        16777216,
+        -32772
+      ],
+      "O0_O2_output_identical": true,
+      "error": "AssertionError(('isqrt', [53364, 0, 32749, 1072497001, 0, 65536, 92681, 113511, 131072, 253819, 262144, 270211, 16777087, 16777216, -1257966799, -1257966799, -4, 2146238464, 16777216, -32772], [53364, 0, 32749, 1072497001, 0, 65536, 92681, 113511, 131072, 253819, 262144, 270211, 16777087, 16777216, -1257966797, -1257966797, -1, 2146238464, 16777216, -32769]))",
+      "oracle": {
+        "original_application_aggregate_and_captured_final_word_match_independent_math": true,
+        "complete_u32_mathematical_oracle_pass": false,
+        "supplemental_outside_window_boundary_mismatches": [
+          {
+            "input": 2147483647,
+            "actual": -1257966799,
+            "ideal_mathematical": -1257966797,
+            "signed_difference": -2
+          },
+          {
+            "input": 2147483648,
+            "actual": -1257966799,
+            "ideal_mathematical": -1257966797,
+            "signed_difference": -2
+          },
+          {
+            "input": 4294967295,
+            "actual": -4,
+            "ideal_mathematical": -1,
+            "signed_difference": -3
+          },
+          {
+            "input": 4294901760,
+            "actual": -32772,
+            "ideal_mathematical": -32769,
+            "signed_difference": -3
+          }
+        ],
+        "scope": "Original1001inputaggregate/finalq pass independentmath; supplementaryfullu32 functioncontractfails by2or3LSBs at4highinputs. Originalsource/dataunchanged. DoNOTclaim exactsqrtalluint32; probesareoutsidewindow."
+      },
+      "trace": {
+        "instret_start": 1080,
+        "instret_stop": 390147,
+        "instret_delta": 389067,
+        "trace_instructions": 389066,
+        "unknown_instructions": 0,
+        "validated": true,
+        "measurement": "Spike retired instructions; not hardware cycles",
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "--log-commits",
+          "--log=/dev/fd/4",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/isqrt/O2/isqrt.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.819521541998256,
+        "trace_path": "generated/application-input-feasibility/isqrt/isqrt.jsonl.gz",
+        "trace_encoding": "gzip JSONL; complete measured window",
+        "trace_bytes": 2703516,
+        "trace_sha256": "e458d50347ec236ba79b9bbe70ffeeff735939dcf6f2635b917c327250aa3abe",
+        "program_output": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/isqrt/trace.stdout.log",
+        "program_output_sha256": "57b78d9657dafa223c70b9273b6e4d5979fc76465424a9a185beb564cb84cac0",
+        "log": "generated/application-input-feasibility/isqrt/trace.log",
+        "stream_separation": "Commit pipe independent of HTIF stdout"
+      },
+      "prior_attempt_status": "failure-retained",
+      "prior_attempt_error": "AssertionError(('isqrt', [53364, 0, 32749, 1072497001, 0, 65536, 92681, 113511, 131072, 253819, 262144, 270211, 16777087, 16777216, -1257966799, -1257966799, -4, 2146238464, 16777216, -32772], [53364, 0, 32749, 1072497001, 0, 65536, 92681, 113511, 131072, 253819, 262144, 270211, 16777087, 16777216, -1257966797, -1257966797, -1, 2146238464, 16777216, -32769]))",
+      "candidate_count": 2,
+      "kernel_retired_instructions": 366038,
+      "all_measured_retired_instructions": 389066,
+      "candidate_sha256": "469fc35f27402cbc14cd9d5116d5f8589392c5e404e1bb698ba100b8e1d18ab7",
+      "fusion_verification": {
+        "seed": 2026101507,
+        "benchmarks": [
+          {
+            "benchmark": "isqrt",
+            "checked_occurrences": 2,
+            "skipped_opaque_block_occurrences": 0,
+            "vectors_per_occurrence": 16,
+            "individual_comparisons": 32,
+            "joint_formula_block_comparisons": 32
+          }
+        ],
+        "passed": true,
+        "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+      }
+    },
+    "fft": {
+      "status": "input-feasibility-complete",
+      "trace_deadline_seconds": 300,
+      "max_candidate_ops": 4,
+      "upstream_algorithm_changes": false,
+      "protocol_sealed": false,
+      "kernel_symbols": [
+        "fft_bit_reduct"
+      ],
+      "upstream_source_sha256": {
+        "bench/kernel/fft/fft.c": "5ec513b40c9eca10c15e634e4462bc453ed68b97d110fc81027f428dcf0ab3ea",
+        "bench/kernel/fft/ChangeLog.txt": "b2fc01afa7c015057c7fc424e2de6022111f83c5194c204593d7448020b61a8c",
+        "bench/kernel/fft/fft_input.c": "0958354e2cf1b1df928b75a8b669c1d479a64ecf6d80b60688c4058e2c322630"
+      },
+      "build": {
+        "commands": [
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/fft",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/fft/fft.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/fft/O2/fft.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/fft/O2/fft.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/fft",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/fft/fft_input.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/fft/O2/fft_input.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/fft/O2/fft_input.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/fft",
+              "-DUPSTREAM_INIT=fft_init",
+              "-DUPSTREAM_RUN=fft_main",
+              "-DUPSTREAM_RETURN=fft_return",
+              "-DANAGRAM_PHRASE=-1",
+              "-DPARTIAL_DIJKSTRA=0",
+              "-nostartfiles",
+              "-T",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/memory-layout.ld",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/startup.S",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/embench-hooks.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/runtime.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/wrapper.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/fft/O2/snapshot.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/fft/O2/fft.o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/fft/O2/fft_input.o",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/fft/O2/fft.elf"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/fft/O2/link.log"
+          }
+        ],
+        "adapter_sha256": "f57049bcf8c85630f790a3e9519484ac7d0a68eda3602b10046e758c2fc1b706",
+        "elf_sha256": "2333eface14a1b7cfd566854a0df71a6375aa1f8a7429b3ad506fe0b5380343a"
+      },
+      "control_build": {
+        "commands": [
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/fft",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/fft/fft.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/fft/O0/fft.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/fft/O0/fft.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/fft",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/fft/fft_input.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/fft/O0/fft_input.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/fft/O0/fft_input.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/kernel/fft",
+              "-DUPSTREAM_INIT=fft_init",
+              "-DUPSTREAM_RUN=fft_main",
+              "-DUPSTREAM_RETURN=fft_return",
+              "-DANAGRAM_PHRASE=-1",
+              "-DPARTIAL_DIJKSTRA=0",
+              "-nostartfiles",
+              "-T",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/memory-layout.ld",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/startup.S",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/embench-hooks.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/runtime.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/wrapper.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/fft/O0/snapshot.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/fft/O0/fft.o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/fft/O0/fft_input.o",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/fft/O0/fft.elf"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/fft/O0/link.log"
+          }
+        ],
+        "adapter_sha256": "f57049bcf8c85630f790a3e9519484ac7d0a68eda3602b10046e758c2fc1b706",
+        "elf_sha256": "e69f272a7add83b0c24145923660f91f8e651f2814b7a3e97cf71620018ab8a7"
+      },
+      "captured_outputs": [
+        357374959,
+        -2275,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "O0_O2_output_identical": true,
+      "oracle": {
+        "independent_complete_oracle": false,
+        "scope": "Upstreamselfcheck +capturedpost-measuredoutput; O0/O2exactoutputcontrol, doesNOTestablishindependentwholealgorithmoracle"
+      },
+      "trace": {
+        "instret_start": 1081142,
+        "instret_stop": 1345297,
+        "instret_delta": 264155,
+        "trace_instructions": 264154,
+        "unknown_instructions": 0,
+        "validated": true,
+        "measurement": "Spike retired instructions; not hardware cycles",
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "--log-commits",
+          "--log=/dev/fd/4",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/fft/O2/fft.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.7035211249894928,
+        "trace_path": "generated/application-input-feasibility/fft/fft.jsonl.gz",
+        "trace_encoding": "gzip JSONL; complete measured window",
+        "trace_bytes": 1218086,
+        "trace_sha256": "d89f57987f4492ca08188cf78c0be1d8a381a8ec68e9cc3d794a90a5fcd7ca0d",
+        "program_output": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/fft/trace.stdout.log",
+        "program_output_sha256": "ba8b0245c1a175dc553f2d3760919cf413d53c483ef8edf0a8e0f91521997cd1",
+        "log": "generated/application-input-feasibility/fft/trace.log",
+        "stream_separation": "Commit pipe independent of HTIF stdout"
+      },
+      "fusion_verification": {
+        "seed": 2026101507,
+        "benchmarks": [
+          {
+            "benchmark": "fft",
+            "checked_occurrences": 5,
+            "skipped_opaque_block_occurrences": 0,
+            "vectors_per_occurrence": 16,
+            "individual_comparisons": 80,
+            "joint_formula_block_comparisons": 80
+          }
+        ],
+        "passed": true,
+        "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+      },
+      "error": "KeyError('verified')",
+      "prior_attempt_status": "failure-retained",
+      "prior_attempt_error": "KeyError('verified')",
+      "candidate_count": 5,
+      "kernel_retired_instructions": 264147,
+      "all_measured_retired_instructions": 264154,
+      "candidate_sha256": "a78b93e8e718ee51933c781d2b07c756fc9c30b15eedf9bedb893e2a76224bfd"
+    },
+    "ndes": {
+      "status": "input-feasibility-complete",
+      "trace_deadline_seconds": 300,
+      "max_candidate_ops": 4,
+      "upstream_algorithm_changes": false,
+      "protocol_sealed": false,
+      "kernel_symbols": [
+        "ndes_des",
+        "ndes_cyfun",
+        "ndes_getbit",
+        "ndes_ks"
+      ],
+      "upstream_source_sha256": {
+        "bench/sequential/ndes/ndes.c": "096933b0835dd7c8f4b9ceccd57419c74669218ad1c351d78f96138edab6cb34",
+        "bench/sequential/ndes/ChangeLog.txt": "a42173178d735351b7ff1bae08944b45e28ff65b95d300b77f2aafe9e302a282"
+      },
+      "build": {
+        "commands": [
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/ndes",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/ndes/ndes.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/ndes/O2/ndes.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/ndes/O2/ndes.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/ndes",
+              "-DUPSTREAM_INIT=ndes_init",
+              "-DUPSTREAM_RUN=ndes_main",
+              "-DUPSTREAM_RETURN=ndes_return",
+              "-DANAGRAM_PHRASE=-1",
+              "-DPARTIAL_DIJKSTRA=0",
+              "-nostartfiles",
+              "-T",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/memory-layout.ld",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/startup.S",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/embench-hooks.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/runtime.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/wrapper.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/ndes/O2/snapshot.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/ndes/O2/ndes.o",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/ndes/O2/ndes.elf"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/ndes/O2/link.log"
+          }
+        ],
+        "adapter_sha256": "ddd09e3b1111334a50f4203109c8da7c23cb13701e448c75ac0784290585198e",
+        "elf_sha256": "471d0a267d1be954be89bae4007445ac189270ba3452e413d6138fb0eb49a113"
+      },
+      "control_build": {
+        "commands": [
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/ndes",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/ndes/ndes.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/ndes/O0/ndes.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/ndes/O0/ndes.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/ndes",
+              "-DUPSTREAM_INIT=ndes_init",
+              "-DUPSTREAM_RUN=ndes_main",
+              "-DUPSTREAM_RETURN=ndes_return",
+              "-DANAGRAM_PHRASE=-1",
+              "-DPARTIAL_DIJKSTRA=0",
+              "-nostartfiles",
+              "-T",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/memory-layout.ld",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/startup.S",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/embench-hooks.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/runtime.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/wrapper.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/ndes/O0/snapshot.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/ndes/O0/ndes.o",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/ndes/O0/ndes.elf"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/ndes/O0/link.log"
+          }
+        ],
+        "adapter_sha256": "ddd09e3b1111334a50f4203109c8da7c23cb13701e448c75ac0784290585198e",
+        "elf_sha256": "276c2540744aa7b081c936b109b1922e836001c6f7ebc3980f1c26fc4a2102d3"
+      },
+      "captured_outputs": [
+        19,
+        37,
+        35,
+        26,
+        2,
+        16
+      ],
+      "O0_O2_output_identical": true,
+      "oracle": {
+        "independent_complete_oracle": false,
+        "scope": "Upstreamselfcheck +capturedpost-measuredoutput; O0/O2exactoutputcontrol, doesNOTestablishindependentwholealgorithmoracle"
+      },
+      "trace": {
+        "instret_start": 2206,
+        "instret_stop": 37942,
+        "instret_delta": 35736,
+        "trace_instructions": 35735,
+        "unknown_instructions": 0,
+        "validated": true,
+        "measurement": "Spike retired instructions; not hardware cycles",
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "--log-commits",
+          "--log=/dev/fd/4",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/ndes/O2/ndes.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.17257562499435153,
+        "trace_path": "generated/application-input-feasibility/ndes/ndes.jsonl.gz",
+        "trace_encoding": "gzip JSONL; complete measured window",
+        "trace_bytes": 261479,
+        "trace_sha256": "57a7ab3145dc8c19f31c859358d5b96ccc62e06d874fa998331ab684145f2184",
+        "program_output": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/ndes/trace.stdout.log",
+        "program_output_sha256": "d6dc31467a0d278b915ef93e9bba00996e99651b903cfe133839fb0fd7761984",
+        "log": "generated/application-input-feasibility/ndes/trace.log",
+        "stream_separation": "Commit pipe independent of HTIF stdout"
+      },
+      "fusion_verification": {
+        "seed": 2026101507,
+        "benchmarks": [
+          {
+            "benchmark": "ndes",
+            "checked_occurrences": 128,
+            "skipped_opaque_block_occurrences": 0,
+            "vectors_per_occurrence": 16,
+            "individual_comparisons": 2048,
+            "joint_formula_block_comparisons": 1472
+          }
+        ],
+        "passed": true,
+        "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+      },
+      "error": "KeyError('verified')",
+      "prior_attempt_status": "failure-retained",
+      "prior_attempt_error": "KeyError('verified')",
+      "candidate_count": 47,
+      "kernel_retired_instructions": 35721,
+      "all_measured_retired_instructions": 35735,
+      "candidate_sha256": "258e576106eab1e8255c6ccc0c7d909d99906bf2f340158f14196d8f4c144c89"
+    }
+  },
+  "prior_attempt_sha256": "48b06a70e8cf179d361f6ddf54751d582d1e9872142ef7eedaba28a88bca0878",
+  "reconcile_script_sha256": "00a352178a2b2053e4fa9ac1c34ffdc23bb09d5c73b03a1ba56313be2512e4c0",
+  "changes": "Firstattempt usedwrongverificationJSONkey; alreadycompleted3tracesreused/revalidated, notretraced. Isqrtmathprobe discrepanciesretained; originalfullinputwindownewlytraced unchanged.",
+  "no_target_labels_models_fits_protocol_seal": true,
+  "limits": "Full fixedsourcebenchmarkwindows only. No cycles/FPGAresources/selectionutility measured. Fusionissampledstatecomparison. FFT/NDES lackindependentcompletealgorithmoracles; isqrtfullu32mathematicalprobe failuresretained."
+}

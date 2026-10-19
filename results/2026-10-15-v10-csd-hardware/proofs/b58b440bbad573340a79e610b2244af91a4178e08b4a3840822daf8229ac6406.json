@@ -1,0 +1,17 @@
+{
+  "schema": "isaforge-v10-csd-source-proof-v1",
+  "original_formula": "mul(in0,addi(0,11))",
+  "rewritten_formula": "sub(sub(slli(in0,4),slli(in0,2)),in0)",
+  "method": "whole-expression universal QF_BV32 disequality",
+  "inputs": [
+    "in0:32",
+    "in1:32"
+  ],
+  "assumptions": [],
+  "timeout_ms": 5000,
+  "result": "unsat",
+  "elapsed_seconds": 0.01062487500894349,
+  "query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun in0 () (_ BitVec 32))\n(assert\n (and (distinct (bvmul in0 (bvadd (_ bv0 32) (_ bv11 32))) (bvsub (bvsub (bvshl in0 (_ bv4 32)) (bvshl in0 (_ bv2 32))) in0)) true))\n(check-sat)\n",
+  "query_sha256": "c5364c720ec5621bb26972c8fefba3d69d7b5c00507277283dbb89ca90fc0ce5",
+  "solver_version": "4.15.4"
+}

@@ -1,0 +1,187 @@
+{
+  "schema": "isaforge-v5-input-rejections-v1",
+  "policy": "fixed generator and seed; input independence only",
+  "attempts": [
+    {
+      "attempt_directory": "input-attempts/test-0000",
+      "candidate_sha256": "c50e9e31d1dc5bbca2955691d454d4d9e3040608a50703522ea5117ea39a3bb8",
+      "test_features_sha256": "9113a78f25c3eac322d78375146505ccb3180a70f60a91509ba3ad5bb3aa2f39",
+      "rejections": [
+        {
+          "formula": "andi(sub(andi(in0,1023),srai(in1,31)),2147483648)",
+          "candidate_id": "e1bb11cb462302e8b4ccbc617c5ddb2240922a34b783f4cdf6719bb251a87fc0",
+          "evaluation_scope": "known_families",
+          "stratum": "parallel_branches",
+          "reasons": [
+            "cross_cohort_identity_or_exact_feature_component"
+          ]
+        },
+        {
+          "formula": "or(andi(in1,2863311530),andi(in0,1431655765))",
+          "candidate_id": "9c604a78e407def9e4372e1c4672cbff61e9744fdfe56a19e34b018df420bb0e",
+          "evaluation_scope": "known_families",
+          "stratum": "mask_logic",
+          "reasons": [
+            "cross_cohort_identity_or_exact_feature_component"
+          ]
+        },
+        {
+          "formula": "or(andi(in1,4042322160),andi(in0,2147483647))",
+          "candidate_id": "437c4aa2585a0dba4d701af4db6820f948d4836f1696cd0bd1c84b6011eeb056",
+          "evaluation_scope": "known_families",
+          "stratum": "mask_logic",
+          "reasons": [
+            "cross_cohort_identity_or_exact_feature_component"
+          ]
+        },
+        {
+          "formula": "xor(andi(in0,252645135),andi(in1,2863311530))",
+          "candidate_id": "4c3142f4893eceab18bb40e853f6eff2fda59a890339f1ea5f66d19046e102c2",
+          "evaluation_scope": "known_families",
+          "stratum": "mask_logic",
+          "reasons": [
+            "cross_cohort_identity_or_exact_feature_component"
+          ]
+        },
+        {
+          "formula": "sll(andi(in0,3),andi(in1,3))",
+          "candidate_id": "b3596664a1351823ece5dfdc2d942b0aa0db600a8521efca22edf305b5c0cdea",
+          "evaluation_scope": "known_families",
+          "stratum": "variable_shifts",
+          "reasons": [
+            "cross_cohort_identity_or_exact_feature_component"
+          ]
+        },
+        {
+          "formula": "srl(xori(in1,63),andi(in0,63))",
+          "candidate_id": "f750cf3f31e2bb7cf177affb23875b199804fa10503772fe76968b84d6dd6030",
+          "evaluation_scope": "known_families",
+          "stratum": "variable_shifts",
+          "reasons": [
+            "cross_cohort_identity_or_exact_feature_component"
+          ]
+        },
+        {
+          "formula": "srl(andi(in0,2047),andi(in1,3))",
+          "candidate_id": "9079a2b455b60507315de2aa640c27862e07db7284ecbd7041e1762edbcf27a8",
+          "evaluation_scope": "known_families",
+          "stratum": "variable_shifts",
+          "reasons": [
+            "cross_cohort_identity_or_exact_feature_component"
+          ]
+        },
+        {
+          "formula": "srl(xori(in1,-33),andi(in0,3))",
+          "candidate_id": "b5229c2fa90701eb6db81ef3dfbf3f41d1941b15074627142377aa9d9a008f53",
+          "evaluation_scope": "known_families",
+          "stratum": "variable_shifts",
+          "reasons": [
+            "cross_cohort_identity_or_exact_feature_component"
+          ]
+        },
+        {
+          "formula": "srli(mulhsu(andi(in0,7),-1),13)",
+          "candidate_id": "64e67348d818c3ecb195f8fb4983ecf2e81205c3b80b4c7ec4eba102bbff7ffb",
+          "evaluation_scope": "known_families",
+          "stratum": "multiplication",
+          "reasons": [
+            "cross_cohort_identity_or_exact_feature_component"
+          ]
+        }
+      ],
+      "new_formula_features_extracted": 0,
+      "feature_extraction_seconds": 0.40421212500950787,
+      "source_sha256": {
+        "area_model_v4.py": "a912198d58203c821da4c3408c48eb2427cd84359071570158e7fd0b73d06357",
+        "structural_features_v4.py": "78b506d9e20ed017f2724352b5c9e6d78eb67b3169fa19eb910b5a95c45905da",
+        "masterrtl_baseline.py": "1473333e7b5d00d1ae91084fa5663697861504c4a411d6242a6160ff5f0a697f",
+        "structural_features_v3.py": "b0a4c8233c2a39b675767151f21698d6418c5b3b7bb357741815986033396fb0",
+        "area_model_v3.py": "0560b5a3a1dff7085a374dd2d5bbc55f487ae1986830bd85899f255fa3299974",
+        "area_model_v2.py": "389f6592d6a3fb801638dcc5237cac65f8ab504caac10efef1a43e5d49cf6cf1",
+        "area_model.py": "ade5dcc32ef66d0ea03ea9ec4937687564dff36c4483afc76ac59f9dc4a69447",
+        "features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+        "rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+        "synthesis.py": "375e4858f08c2dc2cd793012ceee59d3f4146e2c7c12079d080a0299bfa0223f",
+        "graph_features_v5.py": "c0bb42fa3a4ae86bcaceffd35964fcf07a5dda0f36ab4e21ea8e1cfe6112c8cf",
+        "structural_features_v5.py": "386a324634d26a1a9fde0090a1116dd3ad4ba2303e2d3c7775e3128990ac4bc2",
+        "area_model_v5.py": "eac9de675f4688c71b3c15536f514f562070f7a7a3e28b4b84d37a5f053deab9",
+        "v5_corpus.py": "964068bb5f6534cc8eeb0ae5e0dfc0f5a416026e28a4eee421fa40440a4eb8e7",
+        "v4_corpus.py": "37f30c52e0a330d631f324903c985c69e0cbc1eaa1be7950b1cd6ff3e355bcac",
+        "v4_validation.py": "193dd1b6780b1187e251db2dee08545b0391afead95a8f6d825dd51b58a694ff",
+        "probe_corpus.py": "2435c29388fbf2368aee3e736606dd017d21306e45377021d29650983be775a3"
+      },
+      "test_labels_accessed": false
+    },
+    {
+      "attempt_directory": "input-attempts/test-0001",
+      "candidate_sha256": "62e39e0c728bfa38cb26e8b7362041a4bfb52cac8f9afeee56d30d8bf2fb96b8",
+      "test_features_sha256": "0636788bd3a3cc0ec9eb8d49ed0ca6445515a1bb6fe8d759535904671e9f1faf",
+      "rejections": [
+        {
+          "formula": "sll(xori(in0,-257),andi(in1,31))",
+          "candidate_id": "187b4d34c71995af0f86dea7a453b24c8e053f80b7f8bd8fe6f671a0c83b0d6a",
+          "evaluation_scope": "known_families",
+          "stratum": "variable_shifts",
+          "reasons": [
+            "cross_cohort_identity_or_exact_feature_component"
+          ]
+        },
+        {
+          "formula": "srli(mulhu(addi(in0,-1023),andi(in1,255)),13)",
+          "candidate_id": "0c52a1adb100bc1a1f79ba1da820dc89a4805203abe751959523d4e351cc4b55",
+          "evaluation_scope": "known_families",
+          "stratum": "multiplication",
+          "reasons": [
+            "cross_cohort_identity_or_exact_feature_component"
+          ]
+        }
+      ],
+      "new_formula_features_extracted": 0,
+      "feature_extraction_seconds": 0.3977099170006113,
+      "source_sha256": {
+        "area_model_v4.py": "a912198d58203c821da4c3408c48eb2427cd84359071570158e7fd0b73d06357",
+        "structural_features_v4.py": "78b506d9e20ed017f2724352b5c9e6d78eb67b3169fa19eb910b5a95c45905da",
+        "masterrtl_baseline.py": "1473333e7b5d00d1ae91084fa5663697861504c4a411d6242a6160ff5f0a697f",
+        "structural_features_v3.py": "b0a4c8233c2a39b675767151f21698d6418c5b3b7bb357741815986033396fb0",
+        "area_model_v3.py": "0560b5a3a1dff7085a374dd2d5bbc55f487ae1986830bd85899f255fa3299974",
+        "area_model_v2.py": "389f6592d6a3fb801638dcc5237cac65f8ab504caac10efef1a43e5d49cf6cf1",
+        "area_model.py": "ade5dcc32ef66d0ea03ea9ec4937687564dff36c4483afc76ac59f9dc4a69447",
+        "features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+        "rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+        "synthesis.py": "375e4858f08c2dc2cd793012ceee59d3f4146e2c7c12079d080a0299bfa0223f",
+        "graph_features_v5.py": "c0bb42fa3a4ae86bcaceffd35964fcf07a5dda0f36ab4e21ea8e1cfe6112c8cf",
+        "structural_features_v5.py": "386a324634d26a1a9fde0090a1116dd3ad4ba2303e2d3c7775e3128990ac4bc2",
+        "area_model_v5.py": "6e39f1fae6ac0b7398dbfb80c6096dae0cfafe479ada441a4fa27af7938f990f",
+        "v5_corpus.py": "98a53a2125aef0b4a43546f17473b13d5e42d28925971554c5053887bf75cd75",
+        "v4_corpus.py": "37f30c52e0a330d631f324903c985c69e0cbc1eaa1be7950b1cd6ff3e355bcac",
+        "v4_validation.py": "193dd1b6780b1187e251db2dee08545b0391afead95a8f6d825dd51b58a694ff",
+        "probe_corpus.py": "2435c29388fbf2368aee3e736606dd017d21306e45377021d29650983be775a3"
+      },
+      "test_labels_accessed": false
+    }
+  ],
+  "test_labels_accessed": false,
+  "status": "sealed",
+  "final_candidate_sha256": "2a03c263fef6a65001499c81f5988bee2dbef7d5af9e2eb83dad6a729dc42fbf",
+  "final_test_features_sha256": "54c8e06081f60035ded213caa2e0a21e6b85d9801f50bacdfbdb0ada87f23a97",
+  "current_source_sha256": {
+    "area_model_v4.py": "a912198d58203c821da4c3408c48eb2427cd84359071570158e7fd0b73d06357",
+    "structural_features_v4.py": "78b506d9e20ed017f2724352b5c9e6d78eb67b3169fa19eb910b5a95c45905da",
+    "masterrtl_baseline.py": "1473333e7b5d00d1ae91084fa5663697861504c4a411d6242a6160ff5f0a697f",
+    "structural_features_v3.py": "b0a4c8233c2a39b675767151f21698d6418c5b3b7bb357741815986033396fb0",
+    "area_model_v3.py": "0560b5a3a1dff7085a374dd2d5bbc55f487ae1986830bd85899f255fa3299974",
+    "area_model_v2.py": "389f6592d6a3fb801638dcc5237cac65f8ab504caac10efef1a43e5d49cf6cf1",
+    "area_model.py": "ade5dcc32ef66d0ea03ea9ec4937687564dff36c4483afc76ac59f9dc4a69447",
+    "features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+    "synthesis.py": "375e4858f08c2dc2cd793012ceee59d3f4146e2c7c12079d080a0299bfa0223f",
+    "graph_features_v5.py": "c0bb42fa3a4ae86bcaceffd35964fcf07a5dda0f36ab4e21ea8e1cfe6112c8cf",
+    "structural_features_v5.py": "386a324634d26a1a9fde0090a1116dd3ad4ba2303e2d3c7775e3128990ac4bc2",
+    "area_model_v5.py": "6e39f1fae6ac0b7398dbfb80c6096dae0cfafe479ada441a4fa27af7938f990f",
+    "v5_corpus.py": "98a53a2125aef0b4a43546f17473b13d5e42d28925971554c5053887bf75cd75",
+    "v4_corpus.py": "37f30c52e0a330d631f324903c985c69e0cbc1eaa1be7950b1cd6ff3e355bcac",
+    "v4_validation.py": "193dd1b6780b1187e251db2dee08545b0391afead95a8f6d825dd51b58a694ff",
+    "probe_corpus.py": "2435c29388fbf2368aee3e736606dd017d21306e45377021d29650983be775a3"
+  },
+  "sealed_at_utc": "2026-10-14T19:43:33.778273+00:00"
+}

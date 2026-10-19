@@ -1,0 +1,46 @@
+.venv/bin/python scripts/audit_v12_results.py --root results/2026-10-15-v12-target-transform --output generated/reproduction/v12/independent-results-audit.json
+{
+  "schema": "isaforge-v12-independent-results-audit-v1",
+  "status": "pass",
+  "complete": true,
+  "preparation_sha256": "3934bf7dd0ef2c6c5dbc47e3ddd3a627f32523a9861c41697baa45e6d4e35377",
+  "completion_sha256": "f7494b47966a8b07994d73a4eb0c42a0eb5309055b323573dea216f43a95eafa",
+  "audit_source_sha256": "13b2db85adcb98a1db337ebac249ecf418a416bbeebb2a9f2e9e12f428f00a31",
+  "bound_files_verified": 74,
+  "fit_receipts_verified": 30,
+  "saved_point_sets_verified": 6,
+  "saved_point_rows_verified": 10278,
+  "primary_recomputed": {
+    "per_seed": {
+      "2026101421": 0.30856250385312833,
+      "2026101422": 0.2390350330542752,
+      "2026101423": 0.1793227350494364
+    },
+    "mean": 0.24230675731894666,
+    "sample_sd_algorithm_seeds": 0.06468197271926672
+  },
+  "available_models_hash_verified": 30,
+  "models_not_loaded": true,
+  "float_replay_policy": {
+    "score_absolute_tolerance": 1e-12,
+    "score_max_ulps": 8,
+    "decode_max_ulps": 4,
+    "counts_and_types": "exact"
+  },
+  "independence": "Standard library only; no model loading, sklearn/numpy, native tools, fit or runner-metric imports. Reconstructs all saved-point scores/cap choices and receipt chronology; hashes available model bytes without inference. Not an independent saved-model prediction replay or retraining proof. Fitting-only consumed development, no fresh transfer claim."
+}
+.venv/bin/python scripts/plot_v12_target_transform.py --root results/2026-10-15-v12-target-transform --output generated/reproduction/v12/figures
+{
+  "output": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/reproduction/v12/figures",
+  "figures": 2,
+  "files": 6,
+  "primary": {
+    "per_seed": {
+      "2026101421": 0.3085625038531292,
+      "2026101422": 0.2390350330542761,
+      "2026101423": 0.1793227350494364
+    },
+    "mean": 0.24230675731894724,
+    "sample_sd_algorithm_seeds": 0.06468197271926716
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "isaforge-v10-csd-source-proof-v2",
+  "original_formula": "mul(in0,addi(0,341))",
+  "rewritten_formula": "add(add(add(add(slli(in0,8),slli(in0,6)),slli(in0,4)),slli(in0,2)),in0)",
+  "method": "universal QF_BV32 operand lemma plus exact whole-expression AST congruence",
+  "inputs": [
+    "in0:32",
+    "in1:32"
+  ],
+  "assumptions": [],
+  "timeout_ms": 5000,
+  "result": "unsat",
+  "elapsed_seconds": 1.1004247079981724,
+  "query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun word () (_ BitVec 32))\n(assert\n (let ((?x18 (bvadd (bvadd (bvshl word (_ bv8 32)) (bvshl word (_ bv6 32))) (bvshl word (_ bv4 32)))))\n(and (distinct (bvmul word (bvadd (_ bv0 32) (_ bv341 32))) (bvadd (bvadd ?x18 (bvshl word (_ bv2 32))) word)) true)))\n(check-sat)\n",
+  "query_sha256": "47ca66610d24714dd6fb814d9c29e8279243fac685e2eb6c0e9aff72df07cfa5",
+  "solver_version": "4.15.4",
+  "query_scope": "universal unconstrained word:32; no range or reachability assumptions",
+  "congruence": {
+    "schema": "isaforge-v10-csd-congruence-v1",
+    "replacement_path": [],
+    "operand_formula": "in0",
+    "constant_u32": 341,
+    "original_product": "mul(in0,addi(0,341))",
+    "rewritten_product": "add(add(add(add(slli(in0,8),slli(in0,6)),slli(in0,4)),slli(in0,2)),in0)",
+    "lemma_original_formula": "mul(in0,addi(0,341))",
+    "lemma_rewritten_formula": "add(add(add(add(slli(in0,8),slli(in0,6)),slli(in0,4)),slli(in0,2)),in0)",
+    "checked": "All enclosing/unmodified AST nodes identical; each term uses the exact original operand AST",
+    "logical_rule": "Universal word identity instantiated with operand, then equality congruence through identical whole context"
+  },
+  "whole_expression_query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun in0 () (_ BitVec 32))\n(assert\n (let ((?x18 (bvadd (bvadd (bvshl in0 (_ bv8 32)) (bvshl in0 (_ bv6 32))) (bvshl in0 (_ bv4 32)))))\n(and (distinct (bvmul in0 (bvadd (_ bv0 32) (_ bv341 32))) (bvadd (bvadd ?x18 (bvshl in0 (_ bv2 32))) in0)) true)))\n(check-sat)\n",
+  "whole_expression_query_sha256": "3c9923f85f6f8f4e3191fe4ddcdb95aabce693e24800fcd04be6058119707b75",
+  "whole_expression_query_status": "diagnostic-only; not solved in amended preparation"
+}

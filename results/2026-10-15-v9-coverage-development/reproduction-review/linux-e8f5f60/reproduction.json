@@ -1,0 +1,75 @@
+{
+  "schema": "isaforge-v9-coverage-reproduction-v1",
+  "status": "pass",
+  "preparation_sha256": "468d264af46134f6717e317c9fcdc10c47f0f45e5938ec5da2999793d2977dca",
+  "point_freeze_sha256": "ba377ae7ee17d7f656a1e05e5139fa98ec04f1b63d29d73e9322662eabe333bc",
+  "published_evaluation_sha256": "d2c47c2c0f55397b68fd11a9e011f66e0ba0a896c3f7d76378cd4186ba046041",
+  "reproduced_evaluation_sha256": "5e1fdb8bbc80254ef65744ee37d2012cdd770f18f5aecbe1c49ea0d347537bd2",
+  "source_sha256": "74b4c57f0fe24154ad39159511805a21e367e8a1cd7a0af4fa8e6fc8113b6e20",
+  "feature_archive_members_verified": 768,
+  "saved_feature_inference": {
+    "cohort_rows": {
+      "applications": 152,
+      "v6_test_regression": 192,
+      "original_training_in_sample": 1665,
+      "coverage_training_in_sample": 48
+    },
+    "models_per_cohort": 2,
+    "all_prediction_fields_and_json_types_exact": true
+  },
+  "comparison": {
+    "status": "pass",
+    "accepted_rmsle_roundoff_count": 7,
+    "incompatible_difference_count": 0,
+    "accepted_rmsle_roundoff": [
+      {
+        "path": "/primary/by_program/fft/frozen/rmsle",
+        "expected": 0.030547051812597762,
+        "actual": 0.030547051812597856
+      },
+      {
+        "path": "/primary/by_program/h264_dec/frozen/rmsle",
+        "expected": 0.16386607709348813,
+        "actual": 0.16386607709348808
+      },
+      {
+        "path": "/primary/by_program/h264_dec/augmented/rmsle",
+        "expected": 0.14790191932341787,
+        "actual": 0.1479019193234178
+      },
+      {
+        "path": "/primary/by_program/ndes/augmented/rmsle",
+        "expected": 0.10563683765013944,
+        "actual": 0.10563683765013945
+      },
+      {
+        "path": "/primary/pooled_primary/frozen/rmsle",
+        "expected": 0.136246425651188,
+        "actual": 0.13624642565118797
+      },
+      {
+        "path": "/primary/pooled_primary/augmented/rmsle",
+        "expected": 0.12113845013226295,
+        "actual": 0.12113845013226293
+      },
+      {
+        "path": "/coverage_training_in_sample/frozen/rmsle",
+        "expected": 0.22092170438528394,
+        "actual": 0.22092170438528402
+      }
+    ],
+    "differences": [],
+    "rule": "Every field/type exact except top-level evaluation time and declared finite nonnegative RMSLE floats within1e-14 absolute/zero relative tolerance."
+  },
+  "independent_audits": {
+    "raw_expected_outputs_recomputed": 103104,
+    "netlists_recounted": 48,
+    "independent_metrics_passed": true
+  },
+  "new_fits": 0,
+  "new_feature_extractions": 0,
+  "new_target_measurements": 0,
+  "archives_restored": false,
+  "figures_generated": false,
+  "scope": "Replay of consumed-development evidence; no independent transfer confirmation."
+}

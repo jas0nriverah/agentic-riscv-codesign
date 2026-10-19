@@ -1,0 +1,163 @@
+V5 independent statistical audit: numerical/provenance checks PASSED;
+calibrated uncertainty fails on new compositions.
+
+Repository: work/agentic-riscv-codesign
+Frozen commit: fc338e8
+Audit date: 2026-10-14
+Machine result: work/v5-independent-statistics.json
+Supplementary diagnostics: work/v5-supplementary-statistics.json
+Replay script: work/audit_v5_statistics.py
+
+All 53 frozen source/data/artifact/schema/prediction files, including freeze.json,
+match Git commit fc338e8 exactly. Model bundle freeze is recorded at
+2026-10-14T19:52:37.841765+00:00; label release follows at
+2026-10-14T19:53:07.794602+00:00. All 256 test measurements completed without
+failure. No V5 source, model, calibration, candidate or result was changed by this
+audit. Recorded consistency/chronology is not proof of unrecorded prior access.
+
+The independent script imports neither evaluator nor hardware features. It
+reconstructs six full metric sets, all scope/stratum metrics and cap denominators,
+1,536 signed/absolute candidate errors, ten paired cluster-bootstrap comparisons,
+both coverage units, and four actual model calibration quantiles from frozen
+matrices using the trusted, hash-checked estimators. All agree with evaluation.json.
+
+Primary result and interpretation
+
+The declared primary is novel-composition macro-stratum MAE, comparing
+dual_semantics with equally tuned original SOG14. The complete primary scores are
+21.68984375 versus 52.90986979 LUT4, a 59.006% reduction. V5 minus SOG is
+-31.22002604 LUT4, descriptive cluster interval [-72.75014224, -2.10821896].
+The corresponding known-family scores are 3.57609375 versus 13.56320002 LUT4.
+This is evidence about the stated isolated original-RTL cost prediction task.
+It is not an application, acquisition-budget, CPU-speedup or energy result.
+
+The primary gain is concentrated in multiplication. Novel multiplier MAE is
+97.424375 versus SOG's 348.23135417; that stratum contributes -31.35087240 LUT4
+to the eight-stratum difference. The other seven strata together contribute
++0.13084635, slightly opposing the improvement. On their 112 rows, a supplementary
+non-multiplier MAE is 10.870625 for full semantics versus 10.72108631 for SOG.
+Keep the full eight-stratum primary; these decompositions explain its mechanism,
+not a reason to remove multipliers or replace the endpoint.
+
+Comparison of the four matched, equally tuned views
+
+                        Known MAE   Novel MAE   Novel RMSLE  Novel group coverage
+  tuned SOG14             13.56320    52.90987      0.37077          68.42%
+  SOG + original graph     4.12068    18.76872      0.16356          52.63%
+  SOG + dual graph         3.44143    19.13371      0.15668          73.68%
+  SOG + dual + semantics   3.57609    21.68984      0.17292          63.16%
+
+All four select ExtraTrees leaf1. Original graph is the best observed novel MAE;
+dual graph is the best observed known MAE and novel RMSLE. Full semantics loses
+novel MAE to original graph by +2.92111979 LUT4, descriptive interval
+[1.04384415, 4.97142226], and to dual graph by +2.55613281,
+interval [1.60013457, 4.02910872]. Report those losses. The observed winner cannot
+retroactively replace the preregistered primary view/comparison. Additional model
+choice or removal of semantic features belongs to subsequent development and a
+separately named fresh evaluation.
+
+How broadly does the simpler original graph help?
+
+Novel stratum MAE differences, original graph minus equally tuned SOG:
+  arithmetic_chain  +7.72395833
+  comparators       -4.52770833
+  constant_shifts   -4.06937500
+  mask_logic        -1.85250000
+  multiplication  -269.77302083
+  parallel_branches -0.99770833
+  shared_diamond    -0.56906250
+  variable_shifts   +0.93625000
+
+Five of seven non-multiplier strata improve, but arithmetic and variable shifts
+regress. Non-multiplier MAE is 10.24163690 versus SOG's 10.72108631, a small
+-0.47944940 difference. A post hoc descriptive non-multiplier cluster interval
+is [-3.29698905, 1.06882614], based on 15 clusters; it includes zero. Multiplication
+accounts for 98.77% of the original graph's total novel MAE gain. The current
+evidence does not demonstrate broad improvement across independently sampled
+non-multiplier families. The simpler original graph is a useful starting model
+for the next experiment, with retained arithmetic/shift failure diagnostics.
+
+Uncertainty is correctly calculated but does not transfer reliably
+
+There are 1,665 fitting formulas in 576 groups and 392 calibration formulas in
+145 groups. Independent calibration replay confirms rank 132 at alpha=0.1.
+The one-sided margins are 21.15666667 (SOG), 12.34 (original graph), 13.58666667
+(dual graph), and 13.58 LUT4 (full semantics). No quantile implementation error
+explains the coverage loss.
+
+The full semantics 90% nominal bound covers only 105/128 novel formulas (82.03%)
+and 12/19 complete novel clusters (63.16%). Known-family coverage is 125/128
+formulas (97.66%) and 91/94 clusters (96.81%). All bounds are finite. Novel
+arithmetic coverage is 3/16 formulas and 0/1 cluster; shared diamonds are 10/16
+formulas and 2/5 clusters. Variable shifts have 14/16 formula coverage but
+0/1 complete-cluster coverage. Formula coverage cannot substitute for the
+whole-cluster target. Original graph has still worse whole-cluster coverage
+(10/19) despite its best novel point MAE. Even dual graph covers only 14/19.
+
+This is a distribution-shift failure of an exchangeability-dependent bound,
+not a demonstrated safe area-cap screen. Raising the margin on these test
+outcomes would consume the holdout for development and require a new test.
+The calibration strata are also uneven: only two mask-logic rows and 14
+multiplier rows, versus 139 historical workload rows; group allocation explains
+those counts but cannot establish external family exchangeability.
+
+Limited family replication and bootstrap conditioning
+
+Known-family test inputs contain 94 clusters; novel inputs contain only 19.
+Five novel strata each contain one 16-row cluster. The remaining strata have
+four multiplier, five parallel and five shared-diamond clusters. Therefore
+the five single-family stratum contributions cannot vary between families in
+the retained bootstrap draws. Novel intervals use 10,000 valid draws out of
+116,355 attempts: 106,355 draws, 91.41%, are rejected for a missing stratum.
+Known intervals reject 181 of 10,181 attempts. This declared conditioning is
+implemented faithfully, but weakens any interpretation as general population
+uncertainty. The primary descriptive interval must be accompanied by these
+limits rather than presented as universal confidence or adjusted significance.
+
+Priority next diagnostics and changes, for a new model lineage
+
+1. Validate original graph as a candidate baseline on multiple independently
+   reserved families/programs. It is the strongest observed point fit here,
+   but non-multiplier gain is small and broad transfer remains unestablished.
+   Repeat development training seeds; all current differences compare one
+   fixed seed. Adding features changes random tree splits even when the seed
+   and estimator recipe are identical, so a poorer full fit does not alone
+   prove that the semantic descriptors are intrinsically harmful.
+
+2. Diagnose serial arithmetic and carry mapping. All 16 novel arithmetic rows
+   are underpredicted by original graph, dual graph and full semantics. Their
+   signed biases are -14.65354, -13.31604 and -19.09958 LUT4, versus SOG's -5.65.
+   Use original RTL and retained mapped carry/LUT counts as development analysis
+   to test carry-chain/output-sharing hypotheses; do not feed mapped counts
+   into an allegedly cheap inference feature. Add deeper, varied arithmetic
+   families to development and reserve structurally distinct external ones.
+
+3. Keep improving multipliers but target robust relative error and output demand,
+   not only headline MAE. Multiplication supplies 56.15% of full semantics novel
+   absolute error, with systematic overprediction: signed bias +90.3644 LUT4.
+   Original graph reduces that bias to +71.0352. Test separate signed/high-half,
+   sparse-support, sign-extension and output-truncation families with balanced
+   complexity and measured ranges. Retain normalized and original syntax since
+   their mapped costs can differ even for equivalent functions.
+
+4. Expand the calibration domain and measure bound performance honestly. The
+   full fit flags every novel test formula as outside its feature ranges.
+   v5_original_ops is 2–6 in both fitting and calibration, but 7–9 for every novel
+   formula; formula length exceeds the fitting maximum for 96/128 novel rows.
+   Those are reliable domain alarms, not a calibrated risk estimator. Semantic
+   descriptors collectively receive only ~0.61% of this ExtraTrees importance,
+   and original_ops ~0.0011%, so input-range flags do not establish the causal
+   mechanism of the regression. Develop OOD/residual diagnostics and calibration
+   on new independent composition families; evaluate coverage, slack and cap
+   errors together. A real abstention policy requires its own frozen experiment.
+
+5. Increase independent family replication before stronger claims. The saved
+   v5-next-design.txt recommends at least eight distinct connected family
+   components per stratum, preferably twelve, with nested operand settings,
+   plus separately reserved external application families. Preserve V5's exact
+   scores and all failures as development evidence for that future experiment.
+
+This audit verifies statistical computation and frozen consistency, not a
+raw-netlist recount. It found a meaningful matched-baseline cost-prediction
+improvement concentrated in multiplication, a simpler graph view with lower
+observed error, and unsuccessful transfer of nominal uncertainty coverage.

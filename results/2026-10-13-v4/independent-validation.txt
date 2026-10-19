@@ -1,0 +1,20 @@
+Independent V4 validation: PASSED
+Frozen sources/artifacts/predictions match manifest and commit 2383818.
+640 retained raw netlists, all five metric sets, 1280 errors, and four 10000-draw paired comparisons verified.
+
+masterrtl_frozen: MAE 22.149629; RMSLE 0.535582; positive MAPE 104.101852%
+masterrtl_retrained: MAE 15.324272; RMSLE 0.460041; positive MAPE 76.017225%
+v2_frozen: MAE 60.681539; RMSLE 0.901227; positive MAPE 610.951413%
+v3_frozen: MAE 66.747772; RMSLE 0.901830; positive MAPE 672.912401%
+v4: MAE 14.892057; RMSLE 0.571699; positive MAPE 77.927770%
+
+V4 minus masterrtl_frozen: -7.257572 LUT4; descriptive interval [-16.706488, 2.313618]; relative MAE reduction 32.7661%
+V4 minus masterrtl_retrained: -0.432214 LUT4; descriptive interval [-5.524052, 5.590622]; relative MAE reduction 2.8205%
+V4 minus v2_frozen: -45.789482 LUT4; descriptive interval [-71.512498, -23.362567]; relative MAE reduction 75.4587%
+V4 minus v3_frozen: -51.855714 LUT4; descriptive interval [-80.976903, -26.775577]; relative MAE reduction 77.6891%
+
+Synthetic isolated LUT4 target; no real workload, acquisition, CPU speedup or energy result.
+Exact canonical exclusion does not imply semantic independence.
+Paired intervals are descriptive conditional on fixed strata, not population coverage or adjusted significance.
+Recorded hashes, chronology and Git commit do not independently prove absence of prior label access.
+Verification is sampled; the simulator overflow incident remains retained.

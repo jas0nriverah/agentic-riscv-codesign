@@ -1,0 +1,250 @@
+{
+  "schema": "isaforge-v10d-timing-interpretation-review-v1",
+  "status": "descriptive review complete; full independent raw audit is separate",
+  "source_files": {
+    "pairs.json": "27b29762c706d24ca470887c1594c7cf75fea9412384845016a7ba8262c7634d",
+    "measurements/attempt-0000/completion.json": "4e72bad4c550e6622381e5961262d679422b7cc26a5e0189c8c6ab469e73d35c",
+    "measurements/attempt-0000/summary.json": "ccadce5a070512f9e57f3a4f25e1398f9f839c22408e4c1a11ddaa8e99183d5b",
+    "measurements/attempt-0000/routes.json": "8ac63ffbc59e556ac4f697173b3a3fa150e6a5aca0a8465e9ac6edeae8e518fa",
+    "measurements/attempt-0000/mappings.json": "fe127fa551ff0d23b9f3cd962ed742eb8e784d081bff78d86f5d4923a08666a7",
+    "preparation.json": "e0c2baa1a51e68e3f904e4b0ce7e321c4a6875d66b19e723445e2da21f716321"
+  },
+  "method": "Stdlib recomputation from all192 native route records and64 mapping records; no collector/model imports, fits, native commands, source edits, relabeling or outcome filtering. Reciprocal-Fmax deltas recomputed independently and checked against published primary.",
+  "complete_grid": {
+    "pairs": 32,
+    "mappings": 64,
+    "verified_sequential_arms": 64,
+    "routes": 192,
+    "native_failures": 0,
+    "routes_meeting_12mhz": 192,
+    "packed_132ff_routes": 192
+  },
+  "primary_32_formula_mean_period_deltas_ns": {
+    "count": 32,
+    "mean": -1.7108020859953776,
+    "median": -1.201666604357294,
+    "minimum": -4.4776669878097755,
+    "maximum": -0.1936665994707898,
+    "lower": 32,
+    "equal": 0,
+    "higher": 0
+  },
+  "descriptive_96_seed_period_deltas_ns": {
+    "count": 96,
+    "mean": -1.7108020859953779,
+    "median": -1.1689999082376863,
+    "minimum": -4.725000287552252,
+    "maximum": 0.006999866490614792,
+    "lower": 95,
+    "equal": 0,
+    "higher": 1
+  },
+  "non_improving_seed_pairs": [
+    {
+      "constant_u32": 85,
+      "context": "add_after_product",
+      "seed": 2,
+      "csd_minus_original_period_ns": 0.006999866490614792
+    }
+  ],
+  "interpretation_of_replication": "All32 formula three-seed means improve;31 formulas improve on each seed, one improves on two seeds. Three placement seeds are repeated implementations, not96 independent application cases. No bootstrap/statistical population claim.",
+  "resource_deltas_32_formulas": {
+    "wrapped_lut4": {
+      "count": 32,
+      "mean": -88.15625,
+      "median": -39.0,
+      "minimum": -273,
+      "maximum": 0,
+      "lower": 31,
+      "equal": 1,
+      "higher": 0
+    },
+    "carry": {
+      "count": 32,
+      "mean": -2.96875,
+      "median": 0.0,
+      "minimum": -29,
+      "maximum": 3,
+      "lower": 13,
+      "equal": 7,
+      "higher": 12
+    },
+    "packed_lc": {
+      "count": 32,
+      "mean": -88.875,
+      "median": -41.0,
+      "minimum": -274,
+      "maximum": 2,
+      "lower": 31,
+      "equal": 0,
+      "higher": 1
+    },
+    "packed_resource_counts_varying_across_seeds": 0,
+    "wrapped_minus_bare_lut4_range": [
+      25,
+      45
+    ],
+    "wrapped_minus_bare_lut4_equals_32_arms": 52,
+    "scope": "Mapped LUT4/carry and packed logic-cell counts are different resource views; wrapping is not a constant32-LUT subtraction."
+  },
+  "pareto": {
+    "packed_lc_and_three_seed_mean_period": {
+      "csd_dominates": 31,
+      "original_dominates": 0,
+      "tradeoffs": 1
+    },
+    "wrapped_lut4_carry_and_mean_period": {
+      "csd_dominates": 20,
+      "tradeoffs_due_to_carry_increase": 12
+    },
+    "packed_lc_and_period_at_96_seeds": {
+      "csd_dominates": 92,
+      "original_dominates": 0,
+      "tradeoffs": 4
+    },
+    "packed_lc_tradeoff_cases": [
+      {
+        "pair_id": "v10-csd:b4b8b1e1b8c4c40c949c16d0e4436562347dc78e56ef8cdb3d5465712d8f95cb",
+        "formula": "add(mul(in0,addi(0,44)),in1)",
+        "constant_u32": 44,
+        "context": "add_after_product",
+        "original_packed_lc": 245,
+        "csd_packed_lc": 247,
+        "wrapped_lut4_original": 173,
+        "wrapped_lut4_csd": 173,
+        "carry_original": 56,
+        "carry_csd": 28,
+        "three_seed_mean_period_delta_ns": -0.6439998149590908
+      }
+    ]
+  },
+  "path_attribution": {
+    "counts": {
+      "unknown": 72,
+      "datapath-boundary": 120
+    },
+    "by_arm": {
+      "original": {
+        "unknown": 36,
+        "datapath-boundary": 60
+      },
+      "csd": {
+        "unknown": 36,
+        "datapath-boundary": 60
+      }
+    },
+    "unknown_first_failure_reasons": {
+      "'launch_q[0]'": 48,
+      "'launch_q[32]'": 24
+    },
+    "unknown_cohorts": [
+      {
+        "constant_u32": 11,
+        "context": "direct_product",
+        "routes": 6
+      },
+      {
+        "constant_u32": 44,
+        "context": "direct_product",
+        "routes": 6
+      },
+      {
+        "constant_u32": 44,
+        "context": "add_after_product",
+        "routes": 6
+      },
+      {
+        "constant_u32": 85,
+        "context": "direct_product",
+        "routes": 6
+      },
+      {
+        "constant_u32": 340,
+        "context": "direct_product",
+        "routes": 6
+      },
+      {
+        "constant_u32": 340,
+        "context": "add_after_product",
+        "routes": 6
+      },
+      {
+        "constant_u32": 341,
+        "context": "direct_product",
+        "routes": 6
+      },
+      {
+        "constant_u32": 511,
+        "context": "direct_product",
+        "routes": 6
+      },
+      {
+        "constant_u32": 1364,
+        "context": "direct_product",
+        "routes": 6
+      },
+      {
+        "constant_u32": 1364,
+        "context": "add_after_product",
+        "routes": 6
+      },
+      {
+        "constant_u32": 2044,
+        "context": "direct_product",
+        "routes": 6
+      },
+      {
+        "constant_u32": 2044,
+        "context": "add_after_product",
+        "routes": 6
+      }
+    ],
+    "first_missing_alias_has_retained_exact_mapped_bit_alias_and_unique_enabled_packed_ff_o_driver": 72,
+    "examples": [
+      {
+        "pair_id": "v10-csd:b58b440bbad573340a79e610b2244af91a4178e08b4a3840822daf8229ac6406",
+        "arm": "original",
+        "seed": 1,
+        "first_missing_launch_index": 0,
+        "equivalent_aliases": [
+          {
+            "mapped_and_packed_alias": "candidate_result[0]",
+            "packed_wire": 707,
+            "enabled_ff_o_driver": "launch_00_DFFLC"
+          }
+        ]
+      },
+      {
+        "pair_id": "v10-csd:b4b8b1e1b8c4c40c949c16d0e4436562347dc78e56ef8cdb3d5465712d8f95cb",
+        "arm": "original",
+        "seed": 1,
+        "first_missing_launch_index": 32,
+        "equivalent_aliases": [
+          {
+            "mapped_and_packed_alias": "candidate_result[0]",
+            "packed_wire": 881,
+            "enabled_ff_o_driver": "launch_32_DFFLC"
+          }
+        ]
+      }
+    ],
+    "diagnosis": "The conservative classifier demands launch_q[i] aliases; synthesis/packing retains equivalent candidate_result[j] identities instead when arithmetic low bits are direct launch bits. This explains every reported first missing alias. All132FF counts and mandatory actual clock/pin checks passed. No evidence of FF loss; frozen unknown verdicts remain unknown.",
+    "limits": "This read-only alias diagnosis is not a replacement full boundary/critical-path certificate.120 routes have authenticated datapath-boundary attribution;72 do not. Full-harness Fmax remains the primary endpoint for all192. Do not claim universal arithmetic-only timing or reclassify these frozen records."
+  },
+  "concentration": {
+    "constants_511_2044_fraction_of_total_mean_period_reduction": 0.5622363116709974,
+    "other24_formula_mean_period_delta_ns": -0.998569374888384
+  },
+  "defensible_claim": "On this consumed fixed32-case cohort, under one frozen132FF four-pin iCE40HX8K CT256 wrapper and pinned tools, CSD improves every formula mean full-harness routed period and31/32 packed-LC counts. All192 routes satisfy the12MHz target. One formula spends2more packedLC for faster mean timing,12 formulas increase carry count, and one seed pair is slightly slower.",
+  "suspicious_structure": "No outcome filtering or false universal Pareto pattern is supported: one seed reversal and one packed-area reversal are retained. Resource counts are seed-invariant for every arm, as expected for packing before placement;59/64 arms have seed-varying Fmax. The72 missing-alias attributions are a narrow checker coverage limitation, not evidence that all paths are wrapper-limited.",
+  "priorities": [
+    "Keep current primary full-harness scope and exact unknown labels; optionally review a new offline alias-equivalence attribution checker on these archived bytes without rerouting, as a separately versioned post-result analysis.",
+    "Use paired packed-LC/period and carry views when selecting implementations; investigate the K44 add-after packing tradeoff and K85 add-after seed sensitivity before any deployment decision.",
+    "Preserve all original-RTL model targets. CSD and wrapped/packed targets need explicit implementation lineage; this hardware study does not improve or recalibrate the original-area predictor."
+  ],
+  "limits": [
+    "Static routed whole-harness estimates, not measured silicon or arithmetic-only Fmax.",
+    "At12MHz every arm was already feasible; timing improvement is not a newly feasible-design count.",
+    "No CPU instruction latency, board throughput, power/energy, ASIC, integrated area or fresh generalization claim."
+  ]
+}

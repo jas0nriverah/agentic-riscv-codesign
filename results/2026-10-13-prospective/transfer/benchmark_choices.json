@@ -1,0 +1,56 @@
+{
+  "programs": [
+    "statemate",
+    "nsichneu",
+    "minver",
+    "nbody",
+    "slre",
+    "ud"
+  ],
+  "families": {
+    "statemate": "state-machine control",
+    "nsichneu": "Petri-net/control",
+    "minver": "matrix inversion (RV32IM software floating point)",
+    "nbody": "physics (RV32IM software floating point)",
+    "slre": "regular-expression matching",
+    "ud": "integer LU decomposition"
+  },
+  "max_size": 4,
+  "per_benchmark": 48,
+  "seed": 20261013,
+  "sampling_method": "half_top_merit_half_seeded_random_remainder",
+  "sources": {
+    "statemate": {
+      "benchmarks/embench/src/statemate/libstatemate.c": "0522d5a9b7502a8f78e5210a35df9ba0e31874d77b22bb7e56e47fce9bc0f3c9"
+    },
+    "nsichneu": {
+      "benchmarks/embench/src/nsichneu/libnsichneu.c": "e4515f435c8d8d13c13f9a7204536a376527f3fbe2737803d8f16d0a0a3747d6"
+    },
+    "minver": {
+      "benchmarks/embench/src/minver/libminver.c": "1840042f2bc683f5bb373aaf9c9441a3dac2a9080aa812384d455b7416243662"
+    },
+    "nbody": {
+      "benchmarks/embench/src/nbody/nbody.c": "ae4aa56e7cf9c65cc7a74ab974ec756c40d36c5785b382c600bd5117096efb6f"
+    },
+    "slre": {
+      "benchmarks/embench/src/slre/libslre.c": "fb2f84e5133b60655fa7e3a72a6128e63dadd53408fdf38eff5a2ed1732c014d"
+    },
+    "ud": {
+      "benchmarks/embench/src/ud/libud.c": "b03de5ab8657c509a1d314725a0f082f512047b32b5bbd82e9cdbc1f4133d37d"
+    }
+  },
+  "compiler_flags": [
+    "-march=rv32im",
+    "-mabi=ilp32",
+    "-O2",
+    "-std=gnu17",
+    "-DCPU_MHZ=1",
+    "-DWARMUP_HEAT=1"
+  ],
+  "spike_flags": [
+    "--isa=rv32im_zicntr",
+    "-m16"
+  ],
+  "frozen_at_utc": "2026-10-13T05:07:06.111075+00:00",
+  "before_candidate_extraction_and_labels": true
+}

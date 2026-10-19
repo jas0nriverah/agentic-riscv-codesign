@@ -1,0 +1,19 @@
+# Research update: objectives, budgets and the next model experiment
+
+Read 2026-10-15. These primary-source reports motivate experiments; they are not matched benchmarks against ISAForge.
+
+## Multi-objective RTL optimization
+
+**POET (March 2026)** uses non-dominated sorting with a declared power preference, rather than combining all resources into one tuned weighted score. The paper reports correct outputs on all 40 RTL-OPT designs, best power on 40, area on 29 and delay on 27. It compares GPT-4o-mini methods with equal generation-call counts and uses Nangate45 synthesis/timing/power analysis. It selects the higher-power reference version of each design. Its results concern ASIC RTL optimization, not isolated iCE40 LUT prediction. Our inference is to preserve separate resource coordinates and an explicit objective after feasibility filtering; ISAForge cannot reproduce the power preference without power evidence. [Primary paper, sections 2.1 and 3](https://arxiv.org/html/2603.19333v1).
+
+**Alpha-RTL (June 2026)** trains a Qwen3-8B policy during design-specific optimization with executable EDA feedback. It reports a geometric-mean PPA-product ratio of 0.349 on the 44-design intersection where all compared methods succeed, plus 48/49 coverage and a separately disclosed full-benchmark failure convention. Published baselines use another backbone, so this is a system comparison rather than an isolated algorithm ablation. Its 100-step search uses many generated implementations and ASIC flows. Our inference is to charge search, verification and target measurements explicitly, and separate coverage from improvement. ISAForge has neither this training regime nor measured power, and cannot compare its LUT or harness-period percentages to that PPA product. [Primary paper, sections 4.1–4.2](https://arxiv.org/html/2606.05253v1).
+
+## Representation learning is a different experiment
+
+**StructRTL (August 2025)** combines structural graph learning with optional distillation from a post-mapping teacher. Its 13,200-design dataset uses an 80/20 training/validation split; only the earlier-stage predictor is retained at validation. The tables report area MAPE 0.06 without distillation and 0.07 with it, while delay improves from 0.10 to 0.04. Thus distillation does not improve every metric. The method transforms targets logarithmically; the reported scale and inverse transformation need checking before treating these as directly comparable raw-LUT percentage errors. It does not supply ISAForge's held-out source-family or feasibility-error experiment. Our inference is to test a particular representation hypothesis under the same split and compute budget, rather than assume that a larger graph model fixes our diagnosed coverage gaps. [Primary paper, quality estimation, experiments and tables 1–2](https://arxiv.org/html/2508.18730v1).
+
+## What we implement now
+
+The completed V10d timing evidence supports a measured implementation selector. It must authenticate every original/CSD arm, apply independent resource limits and a minimum clock across all three measured seeds, retain the nondominated feasible alternatives, and state the final tie-breaking objective. A per-circuit wrapper budget is not a sum of 32 circuits or a CPU area budget. Unknown critical-path attribution does not become known through selection. This is a post-measurement development lookup, with no learned-selection or measurement-saving claim.
+
+For the model, the remaining original-area cap64 mistakes concern comparators, branches and shifts; high-multiply error and arithmetic-chain overprediction dominate other tails. A model change needs a fitting-only experiment with matched controls before a new full fit or reserved application evaluation. The 32 successful CSD pairs must not replace original-RTL targets. Power, CPU workload effects, original-area prediction and implementation choice remain separate questions with separate evidence.

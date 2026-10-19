@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/scripts/predict_v11_transfer.py", line 475, in <module>
+    else:need(a.approval is not None,'Separate stage approval required');r=(extract if a.action=='extract' else predict)(a.root,a.approval)
+                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/scripts/predict_v11_transfer.py", line 292, in extract
+    root=Path(root).resolve();p,candidates,models,tools,bindings=validate(root);review=approval(root,review_path,'feature',p,bindings)
+                                                                                       ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/scripts/predict_v11_transfer.py", line 283, in approval
+    git_freeze(bindings,r['freeze_commit'],local_archive=root/'features/attempt-0000/raw-evidence.zip' if kind=='prediction' else None,installed_runtime=installed);bindings[Path(path).resolve()]=sha(path);return r
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/scripts/predict_v11_transfer.py", line 170, in git_freeze
+    exempt=local_payloads(bindings)
+  File "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/scripts/predict_v11_transfer.py", line 166, in local_payloads
+    need(generated<=allowed,'Unreviewed generated source/input cannot bypass Git binding');return generated
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/scripts/prepare_v11_model_comparison.py", line 34, in need
+    if not condition:raise ValueError(message)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unreviewed generated source/input cannot bypass Git binding

@@ -1,0 +1,241 @@
+{
+  "schema": "isaforge-v15-independent-review-v1",
+  "status": "pass",
+  "complete": true,
+  "reviewed_at_utc": "2026-10-19T16:21:16.975478+00:00",
+  "auditor": {
+    "path": "scripts/audit_v15_scoped.py",
+    "sha256": "59bc0876cf5aeb02df11704f1087ec4980cc2bfc462d5b0cd06984ec9b060a72"
+  },
+  "producer_freeze_commit": "9860124c8f405b2cbd9443646a340946f27f9175",
+  "inputs": [
+    {
+      "path": "results/2026-10-19-v15-scoped-stress/plan.json",
+      "sha256": "0fa8e7e51fcc8fb3a5053b1e06060dd58c2f74ef34e73e13d243a118452f7e7f",
+      "bytes": 31952
+    },
+    {
+      "path": "results/2026-10-19-v15-scoped-stress/claim.json",
+      "sha256": "5d8dc6d03cae137ceda2e57f81dc8eb8289f732e2d4c530b12f6a9e417f5cfca",
+      "bytes": 239
+    },
+    {
+      "path": "results/2026-10-19-v15-scoped-stress/candidates.json",
+      "sha256": "7066d215fc7c7002c00872f748db26c8f5fbe46f010ab04b4d401bd865fd1d02",
+      "bytes": 6947
+    },
+    {
+      "path": "results/2026-10-19-v15-scoped-stress/point-freeze.json",
+      "sha256": "72ad9f8bfe35ed025fccd8ce3e6e8b7759bbae68deea362be4b3e5e13df4dc5b",
+      "bytes": 471
+    },
+    {
+      "path": "results/2026-10-19-v15-scoped-stress/novelty.json",
+      "sha256": "1ba985a8912d134c3fd294db50bce770b2eba6cc5d521be04cfe35b404a20663",
+      "bytes": 2341
+    },
+    {
+      "path": "results/2026-10-19-v15-scoped-stress/attempt/completion.json",
+      "sha256": "fc78e9e8d7bc4b45980014d2e38f06d142446e6c21538942a7a05a6e801c73c8",
+      "bytes": 603
+    },
+    {
+      "path": "results/2026-10-19-v15-scoped-stress/attempt/metrics.json",
+      "sha256": "94333194584568f093758b0db74e395fc09ed9a3d229096d01e5d035dd822d4b",
+      "bytes": 4055
+    },
+    {
+      "path": "results/2026-10-19-v15-scoped-stress/attempt/raw-evidence.json",
+      "sha256": "19c47da0f3be5c942a9fe224f8a1878ccda0aeba7158b81d6b3f15bc4667b9ea",
+      "bytes": 229617
+    },
+    {
+      "path": "results/2026-10-19-v15-scoped-stress/attempt/labels.json",
+      "sha256": "e76ba236922fed15958381f6e2bf76b445f37d2eaff6bec0b90c933aee5adf97",
+      "bytes": 6803
+    },
+    {
+      "path": "results/2026-10-19-v15-scoped-stress/attempt/predictions.json",
+      "sha256": "da324ba703629b09c2e27a027ac3e6580367b156479da584ef9872c0a8abfe56",
+      "bytes": 61461
+    },
+    {
+      "path": "results/2026-10-19-v15-scoped-stress/attempt/features.json",
+      "sha256": "4e4c08c2e470b77ac782323be45a3fe36447ea5f8478ae7adab9699cdff9e1b1",
+      "bytes": 201023
+    },
+    {
+      "path": "results/2026-10-19-v15-scoped-stress/attempt/verification.json",
+      "sha256": "1696a28cb38df68d105a62def5d58afc2d417b148ea54ed6aaa7fee09b7e0021",
+      "bytes": 600
+    }
+  ],
+  "original_count": 32,
+  "prediction_count": 96,
+  "template_count": 4,
+  "mapped_netlists_recounted": 32,
+  "original_RTL_renderings_checked": 32,
+  "verification_expected_outcomes_recomputed": 68736,
+  "raw_files_hashed": 867,
+  "raw_bytes_hashed": 55207672,
+  "successful_cleaned_owned_workers": 66,
+  "maximum_overlapping_workers": 2,
+  "point_freeze_precedes_all_targets": true,
+  "input_amendment": {
+    "id": "V15-I1",
+    "retained_first24": true,
+    "whole_fourth_template_replaced_before_claim": true,
+    "rejected_unique_overlap_count": 4
+  },
+  "metrics": {
+    "models": {
+      "V6": {
+        "macro_template_mae": 15.521145833333335,
+        "template_mae": {
+          "xor_then_constmul": 27.81833333333334,
+          "constmul_then_xor": 18.342083333333335,
+          "xor_signed_shift": 7.397916666666667,
+          "and_signed_shift": 8.526250000000001
+        },
+        "pooled_mae": 15.521145833333335,
+        "bias": 15.34447916666667,
+        "rmsle": 0.13855756444939873,
+        "absolute_error_quantiles": {
+          "90": 35.767333333333355,
+          "95": 37.07566666666666,
+          "99": 40.06766666666668
+        },
+        "worst_underprediction": {
+          "lut4": 2.826666666666654,
+          "candidate_id": "v15-stress:050b512cc3c600b6df4cf421d0cce5cbcbafa45a4faa0d7958b11d9749613505"
+        },
+        "caps": {
+          "32": {
+            "false_accept": 0,
+            "false_reject": 0,
+            "predicted_accept": 0,
+            "actual_accept": 0,
+            "total": 32
+          },
+          "64": {
+            "false_accept": 0,
+            "false_reject": 4,
+            "predicted_accept": 12,
+            "actual_accept": 16,
+            "total": 32
+          },
+          "128": {
+            "false_accept": 0,
+            "false_reject": 0,
+            "predicted_accept": 16,
+            "actual_accept": 16,
+            "total": 32
+          }
+        }
+      },
+      "V9": {
+        "macro_template_mae": 12.00927083333333,
+        "template_mae": {
+          "xor_then_constmul": 18.546249999999993,
+          "constmul_then_xor": 14.907499999999995,
+          "xor_signed_shift": 6.740833333333334,
+          "and_signed_shift": 7.842499999999999
+        },
+        "pooled_mae": 12.00927083333333,
+        "bias": -2.514270833333331,
+        "rmsle": 0.12543931856627263,
+        "absolute_error_quantiles": {
+          "90": 23.79166666666666,
+          "95": 26.81,
+          "99": 30.6685
+        },
+        "worst_underprediction": {
+          "lut4": 32.00666666666666,
+          "candidate_id": "v15-stress:8eba2977f72bc86359d36847fecede4df96133b0b93b503d876601c640630f47"
+        },
+        "caps": {
+          "32": {
+            "false_accept": 0,
+            "false_reject": 0,
+            "predicted_accept": 0,
+            "actual_accept": 0,
+            "total": 32
+          },
+          "64": {
+            "false_accept": 0,
+            "false_reject": 2,
+            "predicted_accept": 14,
+            "actual_accept": 16,
+            "total": 32
+          },
+          "128": {
+            "false_accept": 0,
+            "false_reject": 0,
+            "predicted_accept": 16,
+            "actual_accept": 16,
+            "total": 32
+          }
+        }
+      },
+      "V15": {
+        "macro_template_mae": 12.00927083333333,
+        "template_mae": {
+          "xor_then_constmul": 18.546249999999993,
+          "constmul_then_xor": 14.907499999999995,
+          "xor_signed_shift": 6.740833333333334,
+          "and_signed_shift": 7.842499999999999
+        },
+        "pooled_mae": 12.00927083333333,
+        "bias": -2.514270833333331,
+        "rmsle": 0.12543931856627263,
+        "absolute_error_quantiles": {
+          "90": 23.79166666666666,
+          "95": 26.81,
+          "99": 30.6685
+        },
+        "worst_underprediction": {
+          "lut4": 32.00666666666666,
+          "candidate_id": "v15-stress:8eba2977f72bc86359d36847fecede4df96133b0b93b503d876601c640630f47"
+        },
+        "caps": {
+          "32": {
+            "false_accept": 0,
+            "false_reject": 0,
+            "predicted_accept": 0,
+            "actual_accept": 0,
+            "total": 32
+          },
+          "64": {
+            "false_accept": 0,
+            "false_reject": 2,
+            "predicted_accept": 14,
+            "actual_accept": 16,
+            "total": 32
+          },
+          "128": {
+            "false_accept": 0,
+            "false_reject": 0,
+            "predicted_accept": 16,
+            "actual_accept": 16,
+            "total": 32
+          }
+        }
+      }
+    },
+    "delta_v15_minus_v6": -3.511875000000005,
+    "delta_v15_minus_v9": 0.0
+  },
+  "metric_numeric_comparisons": 83,
+  "maximum_metric_difference": 1.7763568394002505e-15,
+  "V15_relative_MAE_change_vs_V6_percent": -22.62639007268313,
+  "native_jobs": 0,
+  "models_loaded": 0,
+  "fits": 0,
+  "limits": [
+    "Independent stdlib-only limited-grammar RTL renderer, RV32 vector oracle, primitive recount and metric arithmetic; no producer/scorer modules imported.",
+    "Saved successful Verilator execution authenticated; no native rerun, universal proof or mapped-netlist functional proof.",
+    "V15-I1 pre-freeze input-only rejection authenticated from retained receipts; absence of unrecorded historical activity cannot be proved.",
+    "All32 are covered-domain syntactic stress and route to V9: V15 equals V9 by construction. No fresh application-transfer or router-generalization result.",
+    "Source/model/input and raw-byte lineage checked; OS hermeticity, historical live disk peaks and absence of external processes cannot be independently reconstructed."
+  ]
+}

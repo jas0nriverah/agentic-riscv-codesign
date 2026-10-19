@@ -1,2 +1,301 @@
-# agentic-riscv-codesign
-AI-guided hardware-software co-design for RISC-V kernel acceleration using custom instructions and matched software implementations.
+# ISAForge
+
+**October 19 update:** the 327-circuit frozen comparison is complete. V9 is 3.68% worse than V6 on the primary transfer metric; all measurements and negative results are retained. [Results](docs/v11e-transfer-results.md) · [Team handoff](docs/HANDOFF.md).
+
+**Measured RISC-V custom-instruction research: candidate discovery, learned hardware cost, and processor validation.**
+
+ISAForge explores whether machine learning can help choose useful RISC-V instruction extensions with fewer expensive hardware measurements. It extracts small computations from real programs, verifies their RTL, learns their FPGA resource cost, and evaluates the resulting estimates under controlled data splits. A separate PicoRV32 experiment checks what two CRC32 extensions actually do to processor cycles and FPGA resources.
+
+The current learned target is **isolated iCE40 LUT4 count**. Processor speedup is evaluated separately through RTL simulation and routing. This is a research prototype with reproducible measured evidence; an LLM-driven selector remains future work.
+
+[Methodology](docs/methodology.md) · [Hardware tradeoffs](docs/hardware-tradeoffs.md) · [V9 development](docs/v9-coverage-results.md) · [V8 application results](docs/v8-application-results.md) · [V6 results](docs/v6-results.md) · [External transfer](docs/external-v5-results.md) · [All results](docs/results.md) · [Documentation](docs/README.md) · [Evidence index](results/README.md)
+
+## System architecture
+
+![ISAForge architecture: candidate discovery and measurement, frozen model comparison, and a separate RISC-V processor validation experiment.](docs/assets/architecture.png)
+
+The diagram is an editable vector asset; regenerate it with `make diagram`. [Editable SVG](docs/assets/architecture.svg).
+
+## How the ML model works
+
+The current V9 area predictor uses **217 circuit features and 300 ExtraTrees** fitted on **1,713 measured circuits**. It predicts isolated iCE40 LUT4 count. The diagram shows its feature pipeline, separate measured training labels and the comparisons used to evaluate improvements.
+
+![ISAForge ML model and evidence-driven improvement process.](docs/figures/ml-model/ml-model-overview.png)
+
+[Model explanation](docs/ml-model.md) · [Editable SVG](docs/figures/ml-model/ml-model-overview.svg) · [Presentation PDF](docs/figures/ml-model/ml-model-overview.pdf)
+
+## Research methodology
+
+1. **Collect real workloads.** Compile pinned Embench programs for RISC-V, verify their self-checks, and trace execution with Spike. Extract bounded computation graphs with at most two inputs and one output.
+2. **Measure verified circuits.** Generate RV32 RTL, compare Verilator outputs against an integer oracle, and synthesize with Yosys. Preserve formulas, labels, tool versions, logs, and hashes.
+3. **Train comparable predictors.** Deduplicate formulas and exclude held-out formulas from training. Compare formula-derived features with a MasterRTL-inspired pre-ABC graph pipeline on identical LUT4 labels.
+4. **Freeze before testing.** Fix models and predictions before releasing fresh probe labels. Report all declared circuit groups, true-zero errors, large failures, inference costs, and paired uncertainty estimates.
+5. **Validate processor effects separately.** Integrate two extracted CRC32 formulas through PicoRV32 PCPI; check full-workload execution, whole-SoC resources, and paired FPGA routing.
+
+The [methodology](docs/methodology.md) defines the data splits, feature boundary, primary endpoint, and limits of each measurement. Protocols and negative findings are retained alongside successful runs.
+
+## Results at a glance
+
+[Team progress brief — October 16](docs/team-progress-2026-10-16.md) collects the current model, measured gains, hardware tradeoffs and remaining research gaps.
+
+### Completed 327-circuit matched transfer comparison
+
+All **327 original circuits** now have fresh verified synthesis labels, following the freeze of all 654 paired predictions. **V6: 0.506605; V9: 0.525239 LUT4 equal-family MAE**, a **3.68% regression**. V9 lowers maximum error, but cap32/64/128 feasibility mistakes are unchanged. All circuits passed **702,396 RTL comparisons**, with the recorded simulator-overflow fallback and independent netlist/metric audits.
+
+![Frozen V6/V9 comparison across all eligible families](docs/figures/v11e-transfer/01-primary-families.png)
+
+[Full results, compute bounds and caveats](docs/v11e-transfer-results.md) · [Audited evidence and replay](results/2026-10-19-v11e-frozen-comparison/README.md). The six outcomes retain the empty recursion pool; the E1 primary gives five eligible families equal weight. This comparison does not establish CPU speedup or superiority to published research.
+
+### Bounded follow-up: scoped arithmetic coverage
+
+The implemented [V15 router](docs/v15-scoped-results.md) selects V9 on fixed arithmetic structures and V6 elsewhere. On 32 new related synthetic circuits, MAE falls **15.5211 →12.0093 LUT4 (22.63%)**, all four template means improve, and cap64 false rejections fall **4 →2**. Worst underprediction rises **2.83 →32.01 LUT4**, so the router remains experimental. All 32 select V9 by construction; this tests covered-domain behavior, not new application transfer. On the consumed 327-circuit panel it selects V6 everywhere and exactly preserves V6. The complete follow-up ran in 43.49 seconds with two workers and zero fits.
+
+### Latest controlled model experiment
+
+The [V13 matched coverage experiment](docs/v13-coverage-results.md) completes 48 new synthesis measurements and 30 fits. Added training coverage sharply lowers new-cohort pooled MAE **480.7060 → 25.7168 LUT4**, but worsens the original-cohort primary macro MAE **5.5040 → 5.7882 (+5.16%)** and increases cap64 false rejections. All **10,566 held-out predictions** reproduce exactly from the 30 saved forests. The augmented model is **not promoted**; V9 remains the current development predictor. These results concern consumed development cohorts, not new independent transfer or processor speedups.
+
+The [V14 exploratory follow-up](docs/v14-specialist-results.md) uses one formula-only structural gate over those same held-out predictions. It preserves every original-cohort control prediction while reducing new-cohort pooled MAE **480.7060 → 27.4819 LUT4**. The gate matches 0 original and 16 new circuits; preservation outside it is mechanical, and new-cohort worst underprediction still worsens. This is post-hoc routing analysis, with no new fits, independent transfer claim or promotion.
+
+The [V12 matched target-scale experiment](docs/v12-target-transform-results.md) completes 30 fits on identical leakage-closed folds. Log-target fitting reduces MAPE but worsens the primary macro MAE **5.0777 → 5.3200 LUT4 (+4.77%)** and increases cap64 false accepts in every seed. We retain raw-target fitting; this negative development result prevents adopting a model that looks better only on percentage error.
+
+### Latest development: targeted training coverage
+
+One fixed augmentation adds **48 verified and synthesized circuits** to the original 1,665 training examples, retaining the same 217 mapping features and 300-tree learner. On the consumed V8 application set, equal-family MAE improves **3.4092 → 2.5434 LUT4 (25.40%)**, with all four families improving. The six diagnosed constant-product cases improve **49.72%** in aggregate; two individual cases worsen. All 48 new circuits passed **103,104 RTL output checks**, and actual CLI inference reproduced their frozen predictions exactly.
+
+This is **development on previously examined applications**, not a new independent transfer result. The consumed 192-circuit V6 regression set improves **32.1609 → 29.0538 LUT4 (9.66%)**, but P99 error, maximum underprediction and cap128 false rejections worsen. Application cap64 false rejections remain three: one repaired mistake is offset by a new mistake. No instruction-selection or CPU speedup gain follows from these prediction results.
+
+![Fixed training-coverage augmentation: all families, constant-product cases and regression tradeoffs.](docs/figures/v9-coverage/v9-fixed-training-coverage.png)
+
+[Complete results, inference and reproduction](docs/v9-coverage-results.md) preserve all cases, raw evidence and independent audits. The earlier [three-example local correction](docs/v9-adaptation-results.md) improved its different remaining-case pool by 1.94%; its lack of support for the hardest cases motivated the [tree-level coverage diagnosis](docs/v9-training-coverage-direction.md). Those percentages are not a matched method comparison.
+
+### Complete application-pool transfer
+
+Six frozen models predicted **146 original circuits across 152 application rows** before fresh synthesis. The primary panel covers four families and 150 rows; related-source isqrt is secondary. All circuits passed **313,608 RTL comparisons**, with zero synthesis failures.
+
+| Frozen predictor | Primary family-macro MAE, LUT4 |
+| :--- | ---: |
+| Legacy original336, secondary control | **3.3509** |
+| V6 mapping, primary incumbent | 3.4092 |
+| Legacy rewritten336, primary challenger | 3.4319 |
+| Frozen dual graph | 3.6382 |
+| Frozen tuned SOG | 5.3395 |
+| Frozen MasterRTL recipe adaptation | 7.3124 |
+
+**The rewritten model did not improve the primary prediction metric:** its difference is +0.0227 LUT4 (+0.67%). Development gains did not transfer across all four families. At the 64-LUT cap with one measurement per program, both new models find an oracle-best instruction—but **merit alone does too**, so a learned-selection advantage is not established. These are instruction-count proxies, not new CPU speedups.
+
+![V8 errors and paired family sensitivity](docs/figures/v8/v8-error-and-family-sensitivity.png)
+
+[Complete results, failure analysis and reproduction](docs/v8-application-results.md) retain all models, original zeros, novelty limits and policy outcomes. Run `make reproduce-v8` to authenticate raw evidence and regenerate scores and publication figures without training or synthesis. [Next research direction](docs/research-update-2026-10-15.md).
+
+### New development study: proved semantic rewrites
+
+A fixed **90-fit** ablation on the original 1,665 fitting circuits tests six feature views across three paired seeds. New bit and affine descriptors lower development macro MAE **4.9351 → 4.8601 LUT4 (1.52%)**, but worsen MAPE and error tails slightly. The best observed view applies the proved rewrite before the existing semantic descriptors: **4.7384 LUT4 (3.99% below baseline)**. These are development scores on consumed folds, with a newly detected cross-fold equivalence; they do not replace the independent V6 test below. Neither new correlated-bit pattern occurs in training. [All controls, correctness evidence and limitations](docs/v7-development-results.md).
+
+### V6 mapping features on fresh structural families
+
+V6 adds 23 generic-graph mapping descriptors to the previous dual-graph model, keeping the same **1,665 fitting circuits, 300-tree estimator settings and seed**. Models and predictions were frozen before measuring a separate 192-case calibration cohort and **192 test circuits in 96 structural families**. All 384 circuits passed verification and synthesis: **824,832 sampled/boundary RTL comparisons**, with no failed or replaced cases.
+
+| Frozen predictor | Test MAE, LUT4 |
+| :--- | ---: |
+| **V6 mapping** | **32.161** |
+| V6 fixed multiply router, secondary | 33.191 |
+| SOG + original graph | 33.844 |
+| SOG + dual graphs, primary control | 34.332 |
+| Dual graphs + semantics | 34.903 |
+| Equally tuned SOG | 46.339 |
+| Fixed MasterRTL recipe | 61.469 |
+| V4, unchanged | 101.580 |
+
+The preregistered comparison improves equal-stratum MAE **6.32%**, with paired difference **−2.171 LUT4** and a descriptive 95% component interval **[−3.473, −0.938]**. Six of eight strata improve. Multiplication still has large failures: the two worst cases contribute 26.95% of total absolute error. Mapping's positive MAPE is **43.63%** over 186 targets; all six zero targets remain in MAE. Scores across different experiment cohorts are not directly comparable.
+
+![V6 frozen test and preregistered paired contrast](docs/figures/v6/v6-primary.png)
+
+Fresh bounds cover **92.71% of candidates but 88.54% of complete families**, below the nominal 90% at the family unit. At a 64-LUT cap, mapping's point predictor falsely accepts six infeasible cases versus the control's three. Lower MAE has not established a better selection policy. [Complete results and failure analysis](docs/v6-results.md) retain all eight predictors, strata, caps and outliers. [Run inference or replay](docs/v6-reproduction.md) with `make reproduce-v6`.
+
+### External application transfer
+
+The six frozen models now predict **79 unique circuits from three TACLeBench programs**, retaining all **80 program/formula occurrences** and equal family weights. Predictions were committed before measurements; all circuits pass **169,692 RTL comparisons**, with no synthesis failures.
+
+| Frozen predictor | External family-macro MAE, LUT4 |
+| :--- | ---: |
+| Fixed MasterRTL recipe | **5.808** |
+| SOG + dual graphs | 6.111 |
+| Full V5: dual graphs + semantics | 6.256 |
+| Equally tuned SOG | 6.537 |
+| SOG + original graph | 7.005 |
+| V4, unchanged | 8.316 |
+
+Full V5 improves its preregistered comparator by **4.31%**, but the fixed MasterRTL adaptation wins this primary metric. The much larger synthetic gain does not transfer at the same scale. Full V5's positive MAPE is **3.13%** over 61 positive targets; 19 zero targets remain in MAE. These are different distributions from published ASIC and FPGA studies.
+
+![External application-derived comparison](docs/figures/external-v5/external-primary.png)
+
+All five Dijkstra formulas are familiar under our novelty rule. Strict novelty leaves 20 rows from only ADPCM and anagram, so a three-family novel score is unavailable. Full V5's upper bounds cover 95% of candidates but only one of three complete families. [Results, failure analysis and reproduction](docs/external-v5-results.md) include all predictors, overlap, bounds and the portable raw-evidence archive. Run `make reproduce-external-v5` to replay scores and vector figures.
+
+<details>
+<summary>Previous V5 matched synthetic feature comparison</summary>
+
+### V5 matched synthetic feature comparison
+
+V5 adds original and normalized graph channels, stronger range/output-demand features, structural group splits, and held-out calibration. All four V5 views use **1,665 fitting circuits**, identical folds and six estimator configurations; **392 separate circuits** calibrate upper bounds. Models and all predictions were committed before measuring **256 fresh circuits**, split equally between familiar families and unseen compositions.
+
+| Frozen predictor | Known-family MAE, LUT4 | Unseen-composition MAE, LUT4 |
+| :--- | ---: | ---: |
+| V4, unchanged | 17.92 | 92.58 |
+| Fixed MasterRTL recipe, matched fitting rows | 16.24 | 72.23 |
+| Equally tuned original SOG | 13.56 | 52.91 |
+| SOG + original graph | 4.12 | **18.77** |
+| SOG + original/normalized graphs | **3.44** | 19.13 |
+| Full V5: dual graphs + semantics | 3.58 | 21.69 |
+
+The preregistered full-V5 comparison reduces unseen-composition MAE **59.01% against equally tuned SOG**. Its descriptive paired cluster interval for the difference is **[−72.75, −2.11] LUT4**. The aggregate gain comes entirely from multiplication; across the other seven strata, full V5 is slightly worse (10.87 versus 10.72 LUT4). The simpler original-graph view has the lowest observed primary MAE: added semantic features did not improve this test. The primary endpoint remains the full V5 comparison.
+
+There are only **19 unseen structural clusters**, and five strata have one cluster each, so the conditional interval cannot establish broad population superiority. Nominal 90% upper bounds cover only **63.16% of whole unseen clusters**; they are not reliable safety guarantees under this shift. Full V5's positive MAPE is 22.86% on known families and 13.28% on unseen compositions. These are different curated distributions from the historical tests and published ASIC/FPGA studies.
+
+![V5 matched feature comparison on both fresh test scopes.](docs/figures/v5/scope-comparison.png)
+
+All 256 original circuits passed RTL checks and synthesis; no failures or outliers were removed. See [V5 results](docs/v5-results.md), the [frozen protocol](docs/v5-protocol.md), [reproduction guide](docs/v5-reproduction.md), and [literature-informed next steps](docs/research-direction-v5.md). Run `make reproduce-v5` to regenerate scores and vector figures.
+
+</details>
+
+<details>
+<summary>Historical model comparisons: V4 and the original six-model study</summary>
+
+### Historical V4: separate 256-circuit holdout
+
+
+V4 combines RV32 algebraic normalization, sparse multiplier features, and pre-ABC graph topology with a 300-tree ExtraTrees regressor selected using development-only grouped validation. It trains on **1,289 circuits**: the earlier 713 workload circuits, the now-development 192-circuit probe, and 384 newly verified/synthesized development circuits. Models and all predictions were committed before measuring the new **256-circuit test**.
+
+| Predictor | Training circuits | MAE, LUT4 | RMSLE | Positive MAPE | Median percentage error |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| **V4** | 1,289 | **14.89** | 0.572 | 77.93% | **1.36%** |
+| MasterRTL adaptation, same-data retrain | 1,289 | 15.32 | **0.460** | **76.02%** | 5.55% |
+| MasterRTL adaptation, frozen earlier fit | 713 | 22.15 | 0.536 | 104.10% | 11.51% |
+| Residual XGBoost v2, frozen | 713 | 60.68 | 0.901 | 610.95% | 24.82% |
+| Structural v3, frozen | 713 | 66.75 | 0.902 | 672.91% | 21.62% |
+
+V4 reduces MAE **75.46% versus the previous residual model** on this same test. The additional training data contributes to that improvement. Against the same-data MasterRTL retrain, the MAE difference is only −0.43 LUT4, with a descriptive paired 95% interval **[−5.52, 5.59]**: broad superiority is not established. V4 improves seven of eight stratum MAEs and makes 11 rather than 19 feasibility mistakes at a 64-LUT cap, but loses on multiplication, RMSLE, and zero-target error. One zero-LUT circuit is predicted at 556.21 LUTs; all failures remain in the scores. MAPE uses 235 positive targets; all 21 zero targets remain in MAE/RMSLE.
+
+![V4 and its frozen and same-data comparators on the new 256-circuit test.](docs/figures/v4-comparison.png)
+
+The [V4 results and reproduction guide](docs/v4-results.md) includes the fixed protocol, semantic checks, independent audit, inference commands, and remaining failures. These are synthetic isolated-circuit results, not a new CPU-speedup or instruction-selection result.
+
+### Historical six-model comparison: 192 circuits
+
+All six models below train on **713 unique formulas** and predict the same **192 unseen synthetic circuits**, balanced across eight predeclared groups. Every circuit is synthesized and passes sampled/boundary RTL checks: **412,416 comparisons** in total. Lower error is better.
+
+| Frozen predictor | MAE, LUT4 | RMSLE | Positive-label MAPE |
+| :--- | ---: | ---: | ---: |
+| **MasterRTL SOG adaptation** | **35.07** | **0.494** | **36.50%** |
+| Residual XGBoost v2 | 41.59 | 0.808 | 320.14% |
+| Structural v3 | 56.40 | 0.839 | 478.13% |
+| Resource regression v2 | 60.72 | 0.930 | 514.20% |
+| Original-feature v3 | 60.72 | 0.930 | 514.20% |
+| Initial XGBoost architecture, retrained | 80.86 | 1.239 | 165.81% |
+
+MAPE uses all 181 positive targets; the 11 zero targets remain in MAE and RMSLE. The large percentage errors reflect real missed simplifications on tiny circuits and are retained. Original-feature v3 selected the resource-regression configuration, so those predictions coincide.
+
+![Matched development and fresh-probe error for all six predictors.](docs/figures/model-comparison.png)
+
+**The MasterRTL adaptation has the lowest observed probe MAE; our structural revision did not win.** Its paired MAE advantage over residual v2 is 6.52 LUT4, with a descriptive 95% interval of −4.89 to 18.04, which includes zero. Against structural v3, the advantage is 21.33 LUT4, interval 2.88 to 40.58. These intervals condition on the eight curated circuit groups.
+
+MasterRTL processes all 192 formulas in **7.431 s with a fresh graph cache** and **0.205 s median with cached graphs**; structural v3 takes **0.047 s warm**. The graph method has an additional preprocessing cost. This is a matched adaptation of a published recipe to our FPGA target, not replication of its ASIC benchmark.
+
+</details>
+
+### Processor and earlier workload experiments
+
+| Experiment | Recorded result | Interpretation |
+| :--- | :--- | :--- |
+| Embench collection | 19 programs pass self-checks; 1,098 program/formula rows, 713 unique formulas | Two programs have no eligible candidates; 17 supply model data |
+| Earlier prospective workload test | Resource model MAE 23.15 vs initial model 87.59 LUT4 on 331 novel formulas | Separate experiment using models frozen on 301 training formulas |
+| Budgeted instruction selection | V1 and residual v2 lose to merit on first transfer; resource v2 ties. All point models tie merit on the final primary endpoint | No established selection advantage |
+| Full CRC32 SoC | 32,387,382 → 29,602,102 simulated cycles (**−8.60%**) | Two custom instructions, complete workload and correctness checks |
+| Whole-SoC mapping | 1,633 → 1,704 LUT4 (**+4.35%**); 20 BRAMs in both | Includes on-chip memory and integration overhead |
+| Matched routing | Six runs pass 12 MHz; paired cycle/Fmax ratios **1.022×–1.140×** | Timing-model estimates across three seeds; no physical-board measurement |
+
+See [results and interpretation](docs/results.md) for sources, per-group behavior, uncertainty, and remaining research questions.
+
+![CRC32 integrated hardware tradeoffs: resources, routed timing and runtime across every matched seed.](docs/figures/cpu-hardware-tradeoffs/crc32-hardware-tradeoffs.png)
+
+The [hardware tradeoff ledger](docs/hardware-tradeoffs.md) combines these measurements. The custom CPU is faster and larger under the stated timing assumptions; its LUT4 × runtime proxy worsens slightly in two of three modeled-Fmax cases. The model still predicts area only, and power/energy are unmeasured. [Vector PDF](docs/figures/cpu-hardware-tradeoffs/crc32-hardware-tradeoffs.pdf).
+
+## Reproduce the comparison
+
+Use **Python 3.13** for the exact research replay environment. The general package also supports Python 3.11, but some frozen numerical versions require a newer interpreter. Replay uses committed predictions and needs no RISC-V or FPGA tools. Install the [recorded numerical-library versions](docs/reproduce-matched-comparison.md#runtime-requirements-and-cache) for exact artifact compatibility.
+
+```sh
+git clone https://github.com/jas0nriverah/agentic-riscv-codesign.git
+cd agentic-riscv-codesign
+git checkout codex/isaforge-ml-foundation
+python3.13 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e '.[dev,reports]' -r requirements-research.txt
+make reproduce
+make reproduce-v4
+make reproduce-v5
+make reproduce-external-v5
+make reproduce-v6
+make reproduce-v8
+make reproduce-v9-coverage
+make reproduce-v10d-hardware
+make reproduce-v10d-timing
+make reproduce-v10d-selection
+```
+
+These commands validate their respective frozen experiments and regenerate scores and vector PDF/SVG plus PNG figures under `generated/reproduction/`. External and V6 replay also restore and hash retained raw synthesis artifacts, and check the reviewed freezes against Git history. They do not retrain models or synthesize new circuits.
+
+```sh
+make test                         # Python suite; hardware checks run when tools exist
+make help                         # Research and hardware entry points
+python scripts/reproduce_matched.py --skip-figures  # Scores + audit only
+```
+
+On macOS, XGBoost may require `brew install libomp`. Hardware regeneration additionally requires the pinned GCC, Spike, Yosys, Verilator, and nextpnr tools described in the [toolchain](docs/toolchain.md) and [full research reproduction guide](docs/reproduce-research.md).
+
+### Run actual frozen-model inference
+
+The latest development artifact is the **V9 coverage-augmented mapping model**. Its CLI predicts isolated original-RTL LUT4 count from formulas; new formulas require compatible Yosys preprocessing, while a complete verified cache avoids rebuilding those features:
+
+```sh
+python -m isaforge.area_model_v6 \
+  --model results/2026-10-15-v9-coverage-development/fit-attempt-0000/models/mapping-coverage.joblib \
+  --candidates results/2026-10-15-v9-coverage-development/candidates.json \
+  --cache-root generated/v9-coverage-features/fit-attempt-0000 \
+  --output generated/v9-coverage-inference.json
+```
+
+For inference without hardware tools, `make reproduce-v9-coverage` loads both fitted forests and predicts from authenticated saved features across all four recorded cohorts. The [V9 artifact guide](results/2026-10-15-v9-coverage-development/README.md) distinguishes this portable replay from native formula extraction. The artifact remains a development model awaiting fresh transfer evaluation.
+
+Earlier [V6](docs/v6-reproduction.md), [V5](docs/v5-reproduction.md#feature-extraction-and-portable-cache-replay), [V4](docs/v4-results.md#run-frozen-v4-inference) and [six-model inference](docs/reproduce-matched-comparison.md#run-all-six-frozen-predictors-then-score) entry points remain available. Formula-only historical models need no Yosys. Feature caches and raw target-measurement archives have different roles; do not substitute one for the other.
+
+## Repository map
+
+| Path | Purpose |
+| :--- | :--- |
+| [`isaforge/`](isaforge/) | Prediction, evaluation, synthesis, verification, and processor experiment modules |
+| [`src/`](src/) | Benchmark collection, instruction tracing, candidate extraction, and bare-metal startup |
+| [`hardware/`](hardware/) | PicoRV32 integration RTL, firmware, simulation harnesses, and hardware methodology |
+| [`benchmarks/`](benchmarks/) | Pinned Embench submodule and platform hooks |
+| [`results/`](results/README.md) | Immutable experiment snapshots: data, models, predictions, protocols, and provenance |
+| [`docs/`](docs/README.md) | Methodology, results, reproduction guides, protocol records, diagrams, and figures |
+| [`scripts/`](scripts/README.md) | Short entry points for result replay and architecture-diagram generation |
+| [`tests/`](tests/) | Unit, evidence-contract, artifact-integrity, and installed-tool checks |
+| `generated/` | Ignored local outputs: traces, builds, caches, replays, and new experiments |
+
+Frozen model modules and experiment paths remain stable because saved artifacts validate their source hashes. New research revisions should use new modules and snapshots. See [contribution and evidence conventions](CONTRIBUTING.md).
+
+## Scope and next steps
+
+The [completed constant-multiply hardware study](docs/v10-csd-hardware-results.md) now compares all 32 fixed original/CSD pairs with fresh synthesis: **31 LUT4 reductions, one tie, no increases**, averaging 88.5625 fewer LUT4. Carry usage increases in 12 cases. All 32 parsed-RTL proofs and 64 mapped measurements passed, with every original count matching its earlier control. This is an isolated hardware implementation result; no new predictor fit or CPU speedup is claimed.
+
+![All 32 fixed original/CSD hardware pairs.](docs/figures/v10d-csd-hardware/v10-csd-paired-hardware.png)
+
+The [matched timing study](docs/v10d-timing-results.md) also completed **192 routes**: all 32 formula means improve in registered-harness period (average −1.710802 ns), while one of 96 seed pairs regresses slightly. All carry tradeoffs remain visible, and 72 paths have unresolved attribution.
+
+![Every matched resource and timing tradeoff.](docs/figures/v10d-timing/v10d-resource-timing-tradeoffs.png)
+
+The [measured implementation selector](docs/v10d-selection-policy.md) enforces explicit resource/clock budgets across all three seeds and retains Pareto alternatives. Under each original implementation's worst-case limits, it chooses **19 rewrites and retains 13 originals** because of carry or packed-cell growth. [All decisions and figures](results/2026-10-15-v10d-selection/README.md). This is an audited measured lookup; a learned multi-objective selector remains future work.
+
+The next targets are [reserved application transfer](docs/v9-reserved-transfer-direction.md), measured CPU integration of the rewrites, and selection under a total measurement budget. V9 coverage improves consumed-application prediction, while the independently measured V8 rewritten-feature comparison remains negative and merit-only selection ties the best learned policies. Error tails and feasibility mistakes still matter. [Recent literature](docs/research-update-2026-10-15.md) motivates better training coverage and explicit label-budget controls. LLM-guided selection and power/energy prediction remain unimplemented. Current evidence does not establish published-system superiority or a general CPU speedup model.
+
+The [related-work comparison](docs/research-model-comparison.md) and [MasterRTL adaptation protocol](docs/masterrtl-matched-protocol.md) identify the primary research sources and the differences from their settings. The code and measurements are a research checkpoint, not a peer-reviewed result. Third-party components retain their upstream licenses; see [reuse and attribution](docs/reuse.md).

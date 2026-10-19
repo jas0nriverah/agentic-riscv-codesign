@@ -1,0 +1,378 @@
+{
+  "status": "unsealed-input-feasibility",
+  "script_sha256": "dafd9884b397acc2104048e52f16c8a7abb6f9ca34618791c861927f5fd77fbc",
+  "records": {
+    "mpeg2": {
+      "status": "failure-retained",
+      "trace_deadline_seconds": 300,
+      "scope": "Complete declared mpeg2_main computation; init/selfcheck/outputprobes excluded; allcalledhelpersretained inallROI",
+      "kernel_symbols": [
+        "mpeg2_"
+      ],
+      "upstream_source_sha256": {
+        "bench/sequential/mpeg2/mpeg2.c": "6aa276ff896fe35c9e73bcb125009856a6f81e3ab0f2015bafa9fd668847c6ff",
+        "bench/sequential/mpeg2/ChangeLog.txt": "810fe4cc7eaf377c21d8b1e4c8dacd6da38f66d74400c54d702cb570a40c7c2c"
+      },
+      "build": {
+        "commands": [
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/mpeg2",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/mpeg2/mpeg2.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/mpeg2/O2/mpeg2.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/mpeg2/O2/mpeg2.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/mpeg2",
+              "-DUPSTREAM_INIT=mpeg2_init",
+              "-DUPSTREAM_RUN=mpeg2_main",
+              "-DUPSTREAM_RETURN=feasibility_status",
+              "-DANAGRAM_PHRASE=-1",
+              "-DPARTIAL_DIJKSTRA=0",
+              "-nostartfiles",
+              "-T",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/memory-layout.ld",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/startup.S",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/embench-hooks.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/runtime.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/wrapper.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/mpeg2/O2/snapshot.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/mpeg2/O2/mpeg2.o",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/mpeg2/O2/mpeg2.elf"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/mpeg2/O2/link.log"
+          }
+        ],
+        "adapter_sha256": "790c72772d9e7d5a6390a556f9a6ad4321c9a388dcad04dbc070072ccb9854d1",
+        "elf_sha256": "908956008ca8dc30ded130c95605bcf65cb39677129848b59c4b407ea3441af4"
+      },
+      "control_build": {
+        "commands": [
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/mpeg2",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/mpeg2/mpeg2.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/mpeg2/O0/mpeg2.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/mpeg2/O0/mpeg2.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/mpeg2",
+              "-DUPSTREAM_INIT=mpeg2_init",
+              "-DUPSTREAM_RUN=mpeg2_main",
+              "-DUPSTREAM_RETURN=feasibility_status",
+              "-DANAGRAM_PHRASE=-1",
+              "-DPARTIAL_DIJKSTRA=0",
+              "-nostartfiles",
+              "-T",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/memory-layout.ld",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/startup.S",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/embench-hooks.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/runtime.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/wrapper.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/mpeg2/O0/snapshot.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/mpeg2/O0/mpeg2.o",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/mpeg2/O0/mpeg2.elf"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/mpeg2/O0/link.log"
+          }
+        ],
+        "adapter_sha256": "790c72772d9e7d5a6390a556f9a6ad4321c9a388dcad04dbc070072ccb9854d1",
+        "elf_sha256": "02d522d2b8a8d465ed72ee72b69a164222674063542b024cad9050e08d1ac948"
+      },
+      "captured_outputs": [
+        -116
+      ],
+      "O0_O2_output_identical": true,
+      "independent_complete_algorithm_oracle": false,
+      "error": "PermissionError(1, 'Operation not permitted')"
+    },
+    "h264_dec": {
+      "status": "complete-input-feasibility",
+      "trace_deadline_seconds": 300,
+      "scope": "Complete declared h264_dec_main computation; init/selfcheck/outputprobes excluded; allcalledhelpersretained inallROI",
+      "kernel_symbols": [
+        "h264_dec_decode_one_macroblock"
+      ],
+      "upstream_source_sha256": {
+        "bench/sequential/h264_dec/h264_dec.c": "ea8b87fe930bea1088a1d29eb8a6603d0af23b14676ace0577100e0153bf9d21",
+        "bench/sequential/h264_dec/copyright.txt": "0c1a2d8d08247b183d80bb16d4db45a3b74c3421acacd68ff4e1c3163e6cf761",
+        "bench/sequential/h264_dec/changeLog.txt": "93190d9a539acbef32cfc36f6dbae2c52dca3e2f1dc8162105269e2b31e4c688",
+        "bench/sequential/h264_dec/h264_dec.h": "2467c48b9e14dda3d4aeb858056fa4cdde45b3834313cc77755daf0359f1e91a",
+        "bench/sequential/h264_dec/h264_decinput.c": "a69db1024ec77b1d05b325189adb5506edcf3e71247a7c4ca660a71d544e2d90"
+      },
+      "build": {
+        "commands": [
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/h264_dec",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/h264_dec/h264_dec.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/h264_dec/O2/h264_dec.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/h264_dec/O2/h264_dec.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/h264_dec",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/h264_dec/h264_decinput.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/h264_dec/O2/h264_decinput.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/h264_dec/O2/h264_decinput.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O2",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/h264_dec",
+              "-DUPSTREAM_INIT=h264_dec_init",
+              "-DUPSTREAM_RUN=h264_dec_main",
+              "-DUPSTREAM_RETURN=h264_dec_return",
+              "-DANAGRAM_PHRASE=-1",
+              "-DPARTIAL_DIJKSTRA=0",
+              "-nostartfiles",
+              "-T",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/memory-layout.ld",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/startup.S",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/embench-hooks.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/runtime.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/wrapper.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/h264_dec/O2/snapshot.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/h264_dec/O2/h264_dec.o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/h264_dec/O2/h264_decinput.o",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/h264_dec/O2/h264_dec.elf"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/h264_dec/O2/link.log"
+          }
+        ],
+        "adapter_sha256": "df65b030422bfdf526401114d2e0245b023e576c895e4978375e1a6659100094",
+        "elf_sha256": "c16021175fc760fbce2c803ad6fdfefdf42337f37220a9d2ef3d079bd9998587"
+      },
+      "control_build": {
+        "commands": [
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/h264_dec",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/h264_dec/h264_dec.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/h264_dec/O0/h264_dec.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/h264_dec/O0/h264_dec.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/h264_dec",
+              "-Dmain=tacle_original_main",
+              "-c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/h264_dec/h264_decinput.c",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/h264_dec/O0/h264_decinput.o"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/h264_dec/O0/h264_decinput.build.log"
+          },
+          {
+            "command": [
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+              "-march=rv32im",
+              "-mabi=ilp32",
+              "-O0",
+              "-std=gnu17",
+              "-Wno-unknown-pragmas",
+              "-I",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/references/tacle-bench/bench/sequential/h264_dec",
+              "-DUPSTREAM_INIT=h264_dec_init",
+              "-DUPSTREAM_RUN=h264_dec_main",
+              "-DUPSTREAM_RETURN=h264_dec_return",
+              "-DANAGRAM_PHRASE=-1",
+              "-DPARTIAL_DIJKSTRA=0",
+              "-nostartfiles",
+              "-T",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/memory-layout.ld",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/src/spike-setup/startup.S",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/embench-hooks.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/runtime.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/benchmarks/external-v5/wrapper.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/h264_dec/O0/snapshot.c",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/h264_dec/O0/h264_dec.o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/h264_dec/O0/h264_decinput.o",
+              "-o",
+              "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/h264_dec/O0/h264_dec.elf"
+            ],
+            "exit_code": 0,
+            "log": "generated/application-input-feasibility/h264_dec/O0/link.log"
+          }
+        ],
+        "adapter_sha256": "df65b030422bfdf526401114d2e0245b023e576c895e4978375e1a6659100094",
+        "elf_sha256": "972bfec3e5e77e137ac579934ec2b0a2a14fa01e82156348b48899fb8ba4a599"
+      },
+      "captured_outputs": [
+        1973330381,
+        1121524165,
+        -128,
+        0
+      ],
+      "O0_O2_output_identical": true,
+      "independent_complete_algorithm_oracle": false,
+      "trace": {
+        "instret_start": 123532,
+        "instret_stop": 144671,
+        "instret_delta": 21139,
+        "trace_instructions": 21138,
+        "unknown_instructions": 0,
+        "validated": true,
+        "measurement": "Spike retired instructions; not hardware cycles",
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "--log-commits",
+          "--log=/dev/fd/4",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/h264_dec/O2/h264_dec.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.18342845799634233,
+        "trace_path": "generated/application-input-feasibility/h264_dec/h264_dec.jsonl.gz",
+        "trace_encoding": "gzip JSONL; complete measured window",
+        "trace_bytes": 203233,
+        "trace_sha256": "0765384587f60ae51e8960f8f8555f3f7eba409b80cab8d90c6ddfc2e0b52f94",
+        "program_output": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/application-input-feasibility/h264_dec/trace.stdout.log",
+        "program_output_sha256": "a898dba876ea9b9e1681c6564d73249158c44fad622bad44c56eeea3182936cb",
+        "log": "generated/application-input-feasibility/h264_dec/trace.log",
+        "stream_separation": "Commit pipe independent of HTIF stdout"
+      },
+      "all_roi_candidate_count": null,
+      "all-roi": {
+        "candidate_count": 50,
+        "retired_instructions": 21138,
+        "candidate_sha256": "1ef6b85745d2fc81ed6b8f5c6ec265dbc706adf236570ea02692e5bb6643fd9e",
+        "fusion_verification": {
+          "seed": 2026101507,
+          "benchmarks": [
+            {
+              "benchmark": "h264_dec",
+              "checked_occurrences": 115,
+              "skipped_opaque_block_occurrences": 0,
+              "vectors_per_occurrence": 16,
+              "individual_comparisons": 1840,
+              "joint_formula_block_comparisons": 1664
+            }
+          ],
+          "passed": true,
+          "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+        }
+      },
+      "kernel": {
+        "candidate_count": 50,
+        "retired_instructions": 21131,
+        "candidate_sha256": "3b33881f59c75e9b5c17446efcf13cc0404951ceb38604b162af4eb649efc6f2",
+        "fusion_verification": {
+          "seed": 2026101507,
+          "benchmarks": [
+            {
+              "benchmark": "h264_dec",
+              "checked_occurrences": 115,
+              "skipped_opaque_block_occurrences": 0,
+              "vectors_per_occurrence": 16,
+              "individual_comparisons": 1840,
+              "joint_formula_block_comparisons": 1664
+            }
+          ],
+          "passed": true,
+          "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+        }
+      }
+    }
+  },
+  "no_target_labels_models_fits_protocol_seal": true,
+  "source_reference_commit": "c6a0d73e47bbd2bc86e34637156fb26dd4d5cf08",
+  "limits": "Video kernels, not completevideo codecs/applications; oneconservativevideo family. Noindependentcompletealgorithmoracle, norewrittenalgorithm, no targetmapping/performanceclaims. Thin MPEGstatusadapterexactlymatchesupstreammain declaredselfcheck."
+}

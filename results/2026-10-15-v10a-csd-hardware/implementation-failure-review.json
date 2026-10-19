@@ -1,0 +1,23 @@
+{
+  "status": "preserved-premeasurement-query-serialization-failure",
+  "successful_universal_lemmas_before_failure": 5,
+  "new_area_measurements": 0,
+  "native_rtl_proof_jobs": 0,
+  "new_model_fits": 0,
+  "reason": "Z3 SMT2 let aliases depend on shared-context allocation; recomputed equal query serialized with different aliases. This is an identity checker failure, not a counterexample.",
+  "sources": [
+    {
+      "path": "scripts/prepare_v10_csd_hardware.py",
+      "sha256": "0f5a3369a49530dab52c79ba4c22582c8bb3851e13848963e922029817918c4f"
+    },
+    {
+      "path": "tests/test_prepare_v10_csd_hardware.py",
+      "sha256": "0f501bde9764b02b6c791b142e7c7a7b12038dd791f578a6c801a23b7bc48349"
+    },
+    {
+      "path": "docs/v10-csd-hardware-protocol.md",
+      "sha256": "598dc43f12e340fd2044928a76c142fa5894e17f997657fa20886b012e4ce4eb"
+    }
+  ],
+  "proposed_fix": "Dedicated Z3 context per query; unchanged theorem, budget, inputs, rewrites and native RTL proof gate; deterministic context-churn regression test."
+}

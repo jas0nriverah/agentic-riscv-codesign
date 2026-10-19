@@ -1,0 +1,115 @@
+{
+  "schema": "isaforge-external-input-plan-v2",
+  "upstream": {
+    "schema": "isaforge-external-fetch-v1",
+    "repository": "https://github.com/tacle/tacle-bench",
+    "commit": "c6a0d73e47bbd2bc86e34637156fb26dd4d5cf08",
+    "programs": {
+      "dijkstra": {
+        "family": "graph_shortest_paths",
+        "directory": "bench/sequential/dijkstra",
+        "files_sha256": {
+          "bench/sequential/dijkstra/ChangeLog.txt": "b86fb8c323f4836d483eb12da5ae5bbe244f7d0b26ac77d133b2d21670ea77aa",
+          "bench/sequential/dijkstra/dijkstra.c": "ffa37cd0725262ef946bc1946ca39f168d19d95b816b6483939b322bd44df43c",
+          "bench/sequential/dijkstra/input.c": "31de2ec9cb93102533bc9ce26872e853c0bd8a5861b60019db6af7705ae82fee",
+          "bench/sequential/dijkstra/input.h": "2c942256da80e579b805ee6baed2bba3186b59668a48b10f486568c6c1d4a474"
+        }
+      },
+      "adpcm_dec": {
+        "family": "speech_codec",
+        "directory": "bench/sequential/adpcm_dec",
+        "files_sha256": {
+          "bench/sequential/adpcm_dec/ChangeLog.txt": "aa9448954cc800379bcd213ffdd17edafcc5062913d13bd3d1e74d2cee0b295a",
+          "bench/sequential/adpcm_dec/adpcm_dec.c": "162af092c94771911ba58acc08b73ddb30dcb0d25ac48f7aa72a45060ce90514"
+        }
+      },
+      "anagram": {
+        "family": "multiset_word_search",
+        "directory": "bench/sequential/anagram",
+        "files_sha256": {
+          "bench/sequential/anagram/ChangeLog.txt": "8a59091d2a94f79b6bd364e641ab9fd6956397743e510fb1017e0e6822c279ea",
+          "bench/sequential/anagram/anagram.c": "82bf3e3bd28ff96a024b2768e197b5641d123dbf505ff3aaf275e7d1eb4b7572",
+          "bench/sequential/anagram/anagram_compare.h": "e8bc7e3b799d56aed616c46a3b0647be8aca6a0eb802399828f9076627ae5a2c",
+          "bench/sequential/anagram/anagram_ctype.h": "f42db274ace3e22d548dbe73aeb3bcb71864cb38b9a83ff205bd435faa7b1a61",
+          "bench/sequential/anagram/anagram_input.c": "cb58259e3948fc77d3017a8de5916d772f4633af36751d3b93ba5f9b1b08aea8",
+          "bench/sequential/anagram/anagram_stdlib.c": "742be8c1842ef5f8f0de8b22d9a20144ee78d2208d214240048b26c9ff3c1a9b",
+          "bench/sequential/anagram/anagram_stdlib.h": "454212007a96868de5d6b2249767c29a0717ae9012586926e264b9c5e4c4ffb0",
+          "bench/sequential/anagram/anagram_strings.h": "2b94fa6b31eb90008fa6b92d2ee2819489601b8719594af3e20e2550a09ede7d"
+        }
+      }
+    },
+    "license_policy": "Per-program upstream notices; no blanket suite license or inferred GPL version. Upstream source is fetched by exact file hash, not relicensed."
+  },
+  "programs": [
+    "dijkstra",
+    "adpcm_dec",
+    "anagram"
+  ],
+  "families": {
+    "dijkstra": "graph_shortest_paths",
+    "adpcm_dec": "speech_codec",
+    "anagram": "multiset_word_search"
+  },
+  "compiler_flags": [
+    "-march=rv32im",
+    "-mabi=ilp32",
+    "-O2",
+    "-std=gnu17",
+    "-Wno-unknown-pragmas"
+  ],
+  "spike_flags": [
+    "--isa=rv32im_zicntr",
+    "-m16"
+  ],
+  "tools": {
+    "cc": {
+      "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "sha256": "d21f58713e7f2f9a9ef9de8762b2c2d1995cd4cdeda724d5fe4834f3af4737b2"
+    },
+    "objdump": {
+      "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objdump",
+      "sha256": "87a57cf5bdabdf2ca91ebca54fe568bd6c3524f2558782520547b1b8f29b925b"
+    },
+    "spike": {
+      "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+      "sha256": "e4bbfc59a6fdf3244f3c2234e6b03e74ccbd114ab704e2d47bfc4bcf08ec853e"
+    }
+  },
+  "source_sha256": {
+    "scripts/collect_external_v5.py": "aa692212fd123b9484d38d08feae37f4c02d745554937a4f6a0eb7bf16fd24a8",
+    "docs/external-v5-protocol.md": "e26702122aae8aa3b72295d9dee280db7ae2558fcb684fb2800d25777f950470",
+    "src/tracing.py": "b3010ece9ef1bbc261a9efa801981a55a640468c8c6a87ed29386ccf89f49724",
+    "src/candidates.py": "44f83fb2f0c421fd1bae5d89c90787a4dd997f4df1a2c433680c696f6b9486eb",
+    "src/verify_candidate_fusions.py": "0bff84bb4f787ef6fee7ce3935369964242286b714a2fd162ae490ef0ec3cc03",
+    "src/run_holdout_benchmarks.py": "01d4d79f43845b8a705a805864f7c8f280c0286158a13c91498ae5f07c6b6674",
+    "src/spike-setup/startup.S": "78df2e67776c4534a8ee37480cb030f8ab45a4e935b87e32af218dc920e36e0b",
+    "src/spike-setup/memory-layout.ld": "c48e0ce8c455d3550463c56b1b315e63427591fa61eac79cf7e1926c33bda4c2",
+    "benchmarks/embench-hooks.c": "09b4e9ead297e2f6a9dc16fe62e69d87c2d7f44b2b9ed0ef31b4d96daa82c10a",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/dataset.py": "bb568ef7ca5f6ad79fd6a9ffef9ff18c510b29ffb9f4b6a7e3bfd5cb4cae3cbc",
+    "benchmarks/external-v5/README.md": "c8205dec80535f09f96d0a357136aaf6843d0a64e0214c7d0287e39ee4dc5f0d",
+    "benchmarks/external-v5/fetch.json": "50c20aed70a2609dd2fc60350e375ac503f03ab3bb7dbc32d8787ff5e0ab1e1f",
+    "benchmarks/external-v5/licenses/adpcm_dec.txt": "0fcf0f761b3709258103a44e26c7879f19a55997ec0e5fe890604f8a350bf7b5",
+    "benchmarks/external-v5/licenses/anagram.txt": "17549a5e8867554d44d94873fed7f93a78227c1e847261385d4b16ebfcc25e51",
+    "benchmarks/external-v5/licenses/dijkstra.txt": "a8735b3db1bbe14f4c3f59b8b87bd93b81c0749605d3b04612b4c8dc3bcf4a79",
+    "benchmarks/external-v5/runtime.c": "e78179a6398fc58d81aa8274f3fb28b5530bab328de967b31885586379333e42",
+    "benchmarks/external-v5/wrapper.c": "53ce15331fb2714c1dd6a3266075c6c87facc70a771da5289ae4b9b92135fb42"
+  },
+  "max_size": 4,
+  "per_program_limit": 200,
+  "downselection_seed": 2026101503,
+  "downselection": "SHA256(seed:canonical_formula), first200 perprogram, no labels/predictions",
+  "inclusion": "Only functions with program_ namespace; split at symbol boundaries. Init/output/check helpers excluded by markers.",
+  "controls": "Same pinned sources, RV32 ILP32 atO0 andO2; anagram single-phrase witness probes outside scored cohort",
+  "target_labels_allowed": false,
+  "model_predictions_allowed": false,
+  "timeout_seconds": 300,
+  "measured_scope": {
+    "dijkstra": "One shortest-path search (0,50) on original100x100 graph; full20-path self-check before markers and replay afterward",
+    "adpcm_dec": "Original two-code core",
+    "anagram": "Original three-phrase core"
+  },
+  "scope_amendment": "Cohort01 retained after trace infrastructure failure; Dijkstra partial-workload trace explicitly selected on input/runtime evidence only",
+  "commit_stream": "Separate inherited pipe; HTIF stdout and commit logger never share descriptor",
+  "frozen_at_utc": "2026-10-14T20:03:10.748770+00:00"
+}

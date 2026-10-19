@@ -1,0 +1,30 @@
+Independent completed V6 test audit — PASS
+
+The frozen primary is independently reconstructed: mapping217-column view MAE32.1609461806 vs unchanged194-column dual graph34.3321701389 LUT4; difference(mapping−DG)−2.17122395833 LUT4,6.324167536% lower. The exact10000 paired whole-component bootstrap draws reproduce descriptive95% interval[−3.47253862847,−0.937534288194], seed2026101443. All8 fixed strata contain12 disjoint two-row test components. Resampling occurs separately within strata, without empty-stratum rejection. This interval conditions on the synthetic grammar/strata, not a general application population.
+
+Matched primary uses the same1665 fitting labels and exact ExtraTrees parameters/seed2026101401; only23 original-graph mapping columns are added. New point/upper predictions and evaluator were frozen before separate calibration/test releases. Preserved failedprelabel attempt reflects only unstable structured-node padding in a serialization hash, corrected before outcomes; candidate/component bytes, all384x336 fresh feature values and2380x336 consumed feature values stayed identical. No failed measurement or unfavorable test row was replaced.
+
+All frozen models' equal-eight-stratum MAE(LUT4):
+ mapping_v6       32.1609461806
+ router_v6        33.1910069444
+ original_graph   33.8438628472
+ dual_graph       34.3321701389
+ dual_semantics   34.9028125000
+ sog_tuned        46.3389908234
+ masterrtl_fixed  61.4685552549
+ v4_frozen       101.5797916667
+The fixed exploratory multiply router is worse than mapping by1.0300607639 LUT4. It remains a reported secondary, not a replacement primary. Comparisons with V4 include different historical data/selection, so they do not isolate a mapping-feature effect or reproduce published ASIC accuracy.
+
+Independent raw and artifact checks
+All192 original test netlists were recounted independently: LUT4sum41902,carrysum5965, matching retained labels/cell inventories. All412416 test oracle outputs match a separate exact-integer RV32 evaluator, including100 boundary+2048 seededrandom pairs per formula in128/64 batches(seed2026101521). Both simulator success logs match; no wrap incidents or acquisition failures. All1358 rawarchive members/hashes, original RTL bytes, source/measurement chronology and reviewed commit membership verify. Test release2026-10-14T21:12:41.964153UTC followed calibration commitabf321cc6abbb1c09e58eec9ee2446dfea1fd534; completed21:14:27.537010UTC. Test rawarchiveSHA2566ca5745e9f220a117e95b9bb6dc40e616b4831fe5b62b43180eeec789f49d48c.
+
+Calibration was independently reaudited:96 component maxima, ascending rank88; mapping margin30.823333333333323,router28.949999999999818 LUT4. Loaded point/calibrated artifacts retain exact named tree fields/leaf values/learned dimensions/fullparameters and embedded semanticexpert. Each model's384 point,spread,domain androute records remain identical; uppers exactly equal points+declaredmargin. Required calibration records/schemas/bytes also verify. No new fit occurred after either fresh label release.
+
+Reconstructed all8 models' full/per-stratum/per-component MAE,RMSLE, positive-only MAPE/medianAPE, zero-target handling, bias, tails,worst underprediction, cap counts/denominators, every1536 candidate error, upper coverage/slack/cap decisions and tree-spread/range diagnostics, plus all primary bootstrap replicates/signs. Mapping has106 smaller errors,12 ties and74 larger errors than DG. Its positive-only MAPE43.6295%,signedbias+19.5400 and worstunderprediction94.83 LUT4 show substantial residual error despite the average improvement.
+
+Uncertainty and decision limits
+Fresh mapping and router upper bounds each cover178/192 candidates(92.7083%) but only85/96 COMPLETE components(88.5417%), below90% at the intended group unit. All bounds are finite. Mapping minimumslack−64.0067 LUT4;14 missed rows span11 components, including4 rows inside selected-feature training ranges. Old DG covers75/96 groups with its OLD V5 calibration; direct coverage differences combine representation and calibration-cohort changes and do not isolate feature effects. Synthetic exchangeability remains assumed, not proved; application/device transfer is untested.
+
+Mapping point falseaccept/falsereject counts at caps16,32,64,128,256 are(2,10),(4,14),(6,5),(1,4),(2,10). DG counts are(1,12),(2,19),(3,8),(1,5),(2,10). Thus lower MAE increases point false acceptance at three small caps. Mapping uppers reduce false acceptance to0 through128, but retain2 false accepts at256; their false rejections are49,68,38,12,12 respectively. Both cap256 failures are dynamic-shift variants with true258 and upper223.25/224.0933 LUT4. No fitted screening/abstention policy or safe sole-feasibility gate is established.
+
+Frozen primary and all failures/tails are retained. Separate consumed post-test decomposition is in v6-posttest-diagnostics.json/.txt; it does not alter this primary, models, rules or uncertainty calculation. Machine reconstruction: v6-test-independent-audit.json. Exact audit source is audit_v6_statistics.py with SHA4a530c5b9323d5815bc8605afd42845132b8b75d9646a94499044ee9bda05486, retained with statistics-source-provenance.json. Finite sampled RTL verification is not a proof over all2^64 input pairs.

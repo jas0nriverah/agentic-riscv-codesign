@@ -1,0 +1,526 @@
+{
+  "created_at_utc": "2026-10-13T04:28:48.008111+00:00",
+  "source": "actual Embench RV32IM execution in Spike",
+  "cpu_mhz_scale": 1,
+  "warmup_heat": 1,
+  "measurement_limits": "Retired instructions only. Spike is not cycle accurate; these are not CPU speedup measurements.",
+  "compiler_version": "riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC arm64) 15.2.0",
+  "spike_version": "Spike RISC-V ISA Simulator 1.1.1-dev",
+  "embench_commit": "0466a18e4f6b47e19598d7c6ba72916d54b68f65",
+  "benchmarks": [
+    {
+      "benchmark": "aha-mont64",
+      "build": {
+        "command": [
+          "make",
+          "-B",
+          "generated/programs/aha-mont64.elf",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.343,
+        "log": "generated/real/aha-mont64.build.log"
+      },
+      "elf_sha256": "92067a1f11c7c431d613ccc0e03e23483898abd7602bc98292af84426fbfaa1b",
+      "elf_bytes": 9892,
+      "self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/aha-mont64.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.287,
+        "log": "generated/real/aha-mont64.run.log"
+      },
+      "self_check_passed": true,
+      "trace": {
+        "command": [
+          "make",
+          "-B",
+          "generated/traces/aha-mont64.jsonl",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+          "SPIKE=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "PYTHON=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/bin/python"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 14.408,
+        "log": "generated/real/aha-mont64.trace.log"
+      },
+      "instret_start": 10749,
+      "instret_stop": 4486600,
+      "instret_delta": 4475851,
+      "trace_instructions": 4475850,
+      "unknown_instructions": 0,
+      "validated": true,
+      "measurement": "Spike retired instructions; not hardware cycles",
+      "trace_bytes": 450863867,
+      "trace_sha256": "31ba1a2746bb9360579df7832db0f3dfa722adb20c8239cd1832d9b130aceb68",
+      "trace_path": "generated/traces/aha-mont64.jsonl",
+      "initial_self_check_elf_sha256": "ea51397d37978fd7f0c09d887da428e701eb16157cf014b29db2168850d83449",
+      "trace_elf_self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/aha-mont64.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.04,
+        "log": "generated/real/aha-mont64.trace-elf-check.log"
+      },
+      "self_check_elf_matches_trace_elf": true
+    },
+    {
+      "benchmark": "crc32",
+      "build": {
+        "command": [
+          "make",
+          "-B",
+          "generated/programs/crc32.elf",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.179,
+        "log": "generated/real/crc32.build.log"
+      },
+      "elf_sha256": "af7b9b513d78aa3f81c6c3c59f721fdea4dc8c41e61e31e91925cd48010d97ca",
+      "elf_bytes": 8420,
+      "self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/crc32.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.02,
+        "log": "generated/real/crc32.run.log"
+      },
+      "self_check_passed": true,
+      "trace": {
+        "command": [
+          "make",
+          "-B",
+          "generated/traces/crc32.jsonl",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+          "SPIKE=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "PYTHON=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/bin/python"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 13.45,
+        "log": "generated/real/crc32.trace.log"
+      },
+      "instret_start": 22611,
+      "instret_stop": 3853763,
+      "instret_delta": 3831152,
+      "trace_instructions": 3831151,
+      "unknown_instructions": 0,
+      "validated": true,
+      "measurement": "Spike retired instructions; not hardware cycles",
+      "trace_bytes": 388677088,
+      "trace_sha256": "c89820d09e690a78ed4b1d52593cbebb31719d6043fb0caa1ec235512d9b2936",
+      "trace_path": "generated/traces/crc32.jsonl",
+      "initial_self_check_elf_sha256": "cef2c6762353fd96bd237c2547202c2877ab2ffe8b3b2ad689ddf9b99e10eb21",
+      "trace_elf_self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/crc32.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.019,
+        "log": "generated/real/crc32.trace-elf-check.log"
+      },
+      "self_check_elf_matches_trace_elf": true
+    },
+    {
+      "benchmark": "edn",
+      "build": {
+        "command": [
+          "make",
+          "-B",
+          "generated/programs/edn.elf",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.389,
+        "log": "generated/real/edn.build.log"
+      },
+      "elf_sha256": "91adf3a2d2c2ce7a15b3bbee7a9a3a47ba867b87448a4d5c96ecdf9d0bec1faa",
+      "elf_bytes": 11300,
+      "self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/edn.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.019,
+        "log": "generated/real/edn.run.log"
+      },
+      "self_check_passed": true,
+      "trace": {
+        "command": [
+          "make",
+          "-B",
+          "generated/traces/edn.jsonl",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+          "SPIKE=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "PYTHON=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/bin/python"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 11.695,
+        "log": "generated/real/edn.trace.log"
+      },
+      "instret_start": 41548,
+      "instret_stop": 3507687,
+      "instret_delta": 3466139,
+      "trace_instructions": 3466138,
+      "unknown_instructions": 0,
+      "validated": true,
+      "measurement": "Spike retired instructions; not hardware cycles",
+      "trace_bytes": 347274687,
+      "trace_sha256": "4235fa66d3920fd955d353966e2fef8d2b05eccad2db5f1e3db3f842b5cd9d22",
+      "trace_path": "generated/traces/edn.jsonl",
+      "initial_self_check_elf_sha256": "2eba1dbe9e612e6ad740a4e6604166ded56c6370f8590f6455742fe03e06fa2b",
+      "trace_elf_self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/edn.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.017,
+        "log": "generated/real/edn.trace-elf-check.log"
+      },
+      "self_check_elf_matches_trace_elf": true
+    },
+    {
+      "benchmark": "huffbench",
+      "build": {
+        "command": [
+          "make",
+          "-B",
+          "generated/programs/huffbench.elf",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.441,
+        "log": "generated/real/huffbench.build.log"
+      },
+      "elf_sha256": "f76fca4d079d7e97f8224353ff416a5e327bc15db8947ae2840e928ca68f642e",
+      "elf_bytes": 10436,
+      "self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/huffbench.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.02,
+        "log": "generated/real/huffbench.run.log"
+      },
+      "self_check_passed": true,
+      "trace": {
+        "command": [
+          "make",
+          "-B",
+          "generated/traces/huffbench.jsonl",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+          "SPIKE=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "PYTHON=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/bin/python"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 7.513,
+        "log": "generated/real/huffbench.trace.log"
+      },
+      "instret_start": 202495,
+      "instret_stop": 2333511,
+      "instret_delta": 2131016,
+      "trace_instructions": 2131015,
+      "unknown_instructions": 0,
+      "validated": true,
+      "measurement": "Spike retired instructions; not hardware cycles",
+      "trace_bytes": 214431887,
+      "trace_sha256": "f85c98f595ce9a2a9625d0c839905cc6645a7742b0b99aaf80fb6663076eb6b2",
+      "trace_path": "generated/traces/huffbench.jsonl",
+      "initial_self_check_elf_sha256": "43736e29122dc21142929be850b9529d2b007730878e643a3aa1e9f3c222e0cf",
+      "trace_elf_self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/huffbench.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.02,
+        "log": "generated/real/huffbench.trace-elf-check.log"
+      },
+      "self_check_elf_matches_trace_elf": true
+    },
+    {
+      "benchmark": "matmult-int",
+      "build": {
+        "command": [
+          "make",
+          "-B",
+          "generated/programs/matmult-int.elf",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.236,
+        "log": "generated/real/matmult-int.build.log"
+      },
+      "elf_sha256": "b586e18c0178f373ab08c4f1ce7e0aef3a4646e3392d2d27fb6ff43b6750ccc6",
+      "elf_bytes": 9940,
+      "self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/matmult-int.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.022,
+        "log": "generated/real/matmult-int.run.log"
+      },
+      "self_check_passed": true,
+      "trace": {
+        "command": [
+          "make",
+          "-B",
+          "generated/traces/matmult-int.jsonl",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+          "SPIKE=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "PYTHON=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/bin/python"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 10.506,
+        "log": "generated/real/matmult-int.trace.log"
+      },
+      "instret_start": 88541,
+      "instret_stop": 3267831,
+      "instret_delta": 3179290,
+      "trace_instructions": 3179289,
+      "unknown_instructions": 0,
+      "validated": true,
+      "measurement": "Spike retired instructions; not hardware cycles",
+      "trace_bytes": 318210440,
+      "trace_sha256": "547fd91348e7ef76ec32ae181872d217d3f94aad0615d4e8c20bffc144cce6b9",
+      "trace_path": "generated/traces/matmult-int.jsonl",
+      "initial_self_check_elf_sha256": "5a1df58b0148c5f04d8eed555d5e01fa160dc2d7144e9d4a80e5a5f1ded8f8bb",
+      "trace_elf_self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/matmult-int.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.02,
+        "log": "generated/real/matmult-int.trace-elf-check.log"
+      },
+      "self_check_elf_matches_trace_elf": true
+    },
+    {
+      "benchmark": "nettle-aes",
+      "build": {
+        "command": [
+          "make",
+          "-B",
+          "generated/programs/nettle-aes.elf",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.241,
+        "log": "generated/real/nettle-aes.build.log"
+      },
+      "elf_sha256": "de1dc27abcab588f1f99631a5f333b5656a3aa2c7931e12631164c041845a564",
+      "elf_bytes": 36420,
+      "self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/nettle-aes.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.019,
+        "log": "generated/real/nettle-aes.run.log"
+      },
+      "self_check_passed": true,
+      "trace": {
+        "command": [
+          "make",
+          "-B",
+          "generated/traces/nettle-aes.jsonl",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+          "SPIKE=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "PYTHON=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/bin/python"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 16.246,
+        "log": "generated/real/nettle-aes.trace.log"
+      },
+      "instret_start": 54259,
+      "instret_stop": 4137619,
+      "instret_delta": 4083360,
+      "trace_instructions": 4083359,
+      "unknown_instructions": 0,
+      "validated": true,
+      "measurement": "Spike retired instructions; not hardware cycles",
+      "trace_bytes": 411012823,
+      "trace_sha256": "cddd65525aceddb2177103f62801bbe5d6122798afddf63b0255888f4a2470b3",
+      "trace_path": "generated/traces/nettle-aes.jsonl",
+      "initial_self_check_elf_sha256": "b449282c489b592346d7eb632365277e5b2ed631fce2b8b410cd4d49547aa65c",
+      "trace_elf_self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/nettle-aes.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.02,
+        "log": "generated/real/nettle-aes.trace-elf-check.log"
+      },
+      "self_check_elf_matches_trace_elf": true
+    },
+    {
+      "benchmark": "nettle-sha256",
+      "build": {
+        "command": [
+          "make",
+          "-B",
+          "generated/programs/nettle-sha256.elf",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.238,
+        "log": "generated/real/nettle-sha256.build.log"
+      },
+      "elf_sha256": "933e8f8a964fec8f0a48260cc5c9ea4fd9d1d11d6a3bf3a1c6b57e0872c71186",
+      "elf_bytes": 29396,
+      "self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/nettle-sha256.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.02,
+        "log": "generated/real/nettle-sha256.run.log"
+      },
+      "self_check_passed": true,
+      "trace": {
+        "command": [
+          "make",
+          "-B",
+          "generated/traces/nettle-sha256.jsonl",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+          "SPIKE=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "PYTHON=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/bin/python"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 14.095,
+        "log": "generated/real/nettle-sha256.trace.log"
+      },
+      "instret_start": 9054,
+      "instret_stop": 3863263,
+      "instret_delta": 3854209,
+      "trace_instructions": 3854208,
+      "unknown_instructions": 0,
+      "validated": true,
+      "measurement": "Spike retired instructions; not hardware cycles",
+      "trace_bytes": 387578924,
+      "trace_sha256": "5fd132f316cc6ad5c573a054f48a02f506cc7d796eb79f2b327fd64588454dc3",
+      "trace_path": "generated/traces/nettle-sha256.jsonl",
+      "initial_self_check_elf_sha256": "6bbf8435dad4b473b622818744d8ad6c4fb2e2b6cbae8ac89923d92d1a40c59f",
+      "trace_elf_self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/nettle-sha256.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.02,
+        "log": "generated/real/nettle-sha256.trace-elf-check.log"
+      },
+      "self_check_elf_matches_trace_elf": true
+    },
+    {
+      "benchmark": "wikisort",
+      "build": {
+        "command": [
+          "make",
+          "-B",
+          "generated/programs/wikisort.elf",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.455,
+        "log": "generated/real/wikisort.build.log"
+      },
+      "elf_sha256": "e159e990264505838c02d8c5a40782c9803d7dec4bb252c75f62e3d3709d8c1e",
+      "elf_bytes": 45312,
+      "self_check": {
+        "command": [
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "--isa=rv32im_zicntr",
+          "-m16",
+          "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/generated/programs/wikisort.elf"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.02,
+        "log": "generated/real/wikisort.run.log"
+      },
+      "self_check_passed": true,
+      "trace": {
+        "command": [
+          "make",
+          "generated/traces/wikisort.jsonl",
+          "CC=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+          "SPIKE=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/spike/bin/spike",
+          "PYTHON=/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/.venv/bin/python"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 4.382,
+        "log": "generated/real/wikisort.trace.log"
+      },
+      "instret_start": 1185805,
+      "instret_stop": 2367965,
+      "instret_delta": 1182160,
+      "trace_instructions": 1182159,
+      "unknown_instructions": 0,
+      "validated": true,
+      "measurement": "Spike retired instructions; not hardware cycles",
+      "trace_bytes": 119084134,
+      "trace_sha256": "8e0e839154c17519e4db3d57555f43371aa8128b4cdd6ab50ab82b6cbcac7eff",
+      "trace_path": "generated/traces/wikisort.jsonl",
+      "self_check_elf_matches_trace_elf": true
+    }
+  ],
+  "all_passed": true,
+  "spike_commit": "f8a060b7bea8da6f738f193ed1b66b665978d092",
+  "compiler_flags": "-march=rv32im -mabi=ilp32 -O2 -std=gnu17 -DCPU_MHZ=1 -DWARMUP_HEAT=1",
+  "spike_flags": [
+    "--isa=rv32im_zicntr",
+    "-m16"
+  ],
+  "build_note": "The first run rebuilt ELFs for tracing. Rebuilding can change the assembler temporary filename in the non-loaded ELF symbol table. All exact trace ELFs were subsequently self-checked again, and both initial and trace ELF hashes are retained.",
+  "total_trace_instructions": 26203169,
+  "reproduction_check": {
+    "benchmark": "wikisort",
+    "instruction_count_identical": true,
+    "trace_sha256_identical": true,
+    "exact_elf_preserved_during_trace": true
+  }
+}

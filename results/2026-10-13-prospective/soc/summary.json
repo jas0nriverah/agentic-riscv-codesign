@@ -1,0 +1,411 @@
+{
+  "scope": "closed PicoRV32 SoC with initialized synchronous on-chip memory, full source-modified Embench CRC32 benchmark",
+  "provenance": {
+    "upstream_url": "https://github.com/YosysHQ/picorv32.git",
+    "upstream_commit": "ef203c2b0a3fb793280f5114941416c425c5b461",
+    "embench_commit": "0466a18e4f6b47e19598d7c6ba72916d54b68f65",
+    "tools": {
+      "gcc": "riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC arm64) 15.2.0",
+      "verilator": "Verilator 5.050 2026-07-01 rev vUNKNOWN-built20260701",
+      "yosys": "Yosys 0.69+post (git sha1 143eb14f9cc55d6f8927e68523b0c9d2166ed02c, Release, AppleClang clang++ 21.0.0.21000334)"
+    },
+    "source_sha256": {
+      "COPYING": "041ebc727233e5bf096dd41260cbb81014d3d29ca007a15f3b1807d4e9ff288e",
+      "core_crc_firmware.c": "e327ab1768dc8dc8d140cde0aff20f9d93d1cca8cd6d4b165e3e83aa9d5be041",
+      "embench/beebsc.c": "4fa588eefa678fa89b16f2b898970cfed162845bd494fa47e619fa636ff5d1e1",
+      "embench/beebsc.h": "9a9fdef180978ec3caa6531d3c2dc6823bc5387731b568402c6c65442a2d7c6c",
+      "embench/crc32-fused.c": "9dfc67ab85cef32399e829596e6a366db3b21b81b72f66815025a0e8cd2631fe",
+      "embench/crc32-upstream.c": "8180991358e28507a14426207840ec5c340e2491beac8e72658b3832621efb9c",
+      "embench/support.h": "3c0862b8279c8d01951b2c8a180f04bd996431c2fb63ffb91773e38895f25e53",
+      "pcpi_candidates.v": "a5bb67e9528d00806a411984d520c0f6dcfcb9ae671f1c8d208954a048c5d1b0",
+      "picorv32.v": "0836050971b3c6cdd28ac3b1e5719a67fb645161912bef1e472e63995ceb0622",
+      "soc_invalid_memory.S": "50c7b30b4dde360478301d36ff76f67196a41c4ff166f96d6dd36936dea278be",
+      "soc_link.ld": "03a68ad454871b9d0092972107a7900c24c56fb5f6cbf5bec21d055e040a80dc",
+      "soc_memory_check.S": "0da808e6a0a7f08712d71b6c303f89ec3cc4713b542a611b84a3ee483d5e639e",
+      "soc_sim.cpp": "def529598ca2113b2b44891dbad268c3d2d5999a3d5650989c0686cab2c544cf",
+      "soc_start.S": "5f80f0e780ab4f8eb2bd18846dbeb5ab4406ca1efaa3221fb4c1e305bb4b0447",
+      "soc_top.v": "912829da3e0754ff2522754b57368b11a9d38b8fb2494ca73ff8abaf38f2cb98"
+    }
+  },
+  "configuration": {
+    "top": "soc_top",
+    "ram_bytes": 8192,
+    "ram_words": 2048,
+    "ram_word_bits": 32,
+    "memory": "one synchronous read/request edge followed by native-interface acknowledgement; same RTL in simulation and synthesis",
+    "memory_ports": "internal byte-write RAM shared by instructions/data; no external address/data/ready pins",
+    "program_limit_bytes": 4096,
+    "stack_top": "0x2000",
+    "minimum_stack_reservation_bytes": 4096,
+    "reset_cycles": 8,
+    "pcpi_response_latency": 0,
+    "cpu": "same RV32I configuration as the core experiment except stack address",
+    "package_pins": 8,
+    "result_stream": "32 LSB-first bits per MMIO word, one bit per clk rising edge while report_strobe=1",
+    "benchmark_repetitions": 170,
+    "crc_updates_per_repetition": 1024,
+    "warmup_repetitions": 1,
+    "independent_full_checksum_repetitions": 1
+  },
+  "firmware": {
+    "stock": {
+      "program_bytes": 1688,
+      "program_end": 1692,
+      "binary_sha256": "d7d0cb3dd4bbff7149ec1b7896b85ef3dad3014032f6fe8a62e076dcf4df8d6a",
+      "elf_sha256": "7986c63e21d75f8cbc2f851517c13a287cc92384cbc2763f9485c5e47c1e2478",
+      "memory_image_sha256": "566984c9de3a41b119d9ed9cac249224e0f21e468d5fb06babb375c494d06a4d"
+    },
+    "source-control": {
+      "program_bytes": 1688,
+      "program_end": 1692,
+      "binary_sha256": "506320c4ff89f541fd1d2a8b296684750ca22a5680c737a578ebb52123129180",
+      "elf_sha256": "e44b6ae16d0ff46118463e0d5b401e0e88a1d0d9f13d56e0715a857bcf03b0bd",
+      "memory_image_sha256": "8e40d8e14afd2b285733504f15e31644d63c5f4505f423ce114949065e2fd67c"
+    },
+    "both": {
+      "program_bytes": 1664,
+      "program_end": 1668,
+      "binary_sha256": "a28d432a2caa4028e6c453d55e5eeda71d335ccc2e5258493d1e344a52e5bdc5",
+      "elf_sha256": "3cf02bcf0e035f0490036807106e1a1787f59a17c538d7bcca8786161b4bec32",
+      "memory_image_sha256": "c78f8013a0ee2fd998c576bf0268b4dbbdd11387a4ff14b1cc21f98246d0f6d5"
+    }
+  },
+  "measurements": {
+    "baseline": {
+      "full_checksum": 1703161001,
+      "benchmark_result": 11433,
+      "cycles": 32387382,
+      "instructions": 6094532,
+      "self_check_passed": true,
+      "protocol_statistics": {
+        "status": 1611489293,
+        "host_cycles": 32768991,
+        "pcpi_handshakes": 0,
+        "pcpi_valid_cycles": 0,
+        "pcpi_wait_cycles": 0,
+        "fault": 0,
+        "partial_report_bits": 0
+      },
+      "extension_mask": 0,
+      "fusion_mask": 0,
+      "firmware": "stock"
+    },
+    "custom": {
+      "full_checksum": 1703161001,
+      "benchmark_result": 11433,
+      "cycles": 29602102,
+      "instructions": 5572292,
+      "self_check_passed": true,
+      "protocol_statistics": {
+        "status": 1611489293,
+        "host_cycles": 29950943,
+        "pcpi_handshakes": 352256,
+        "pcpi_valid_cycles": 352256,
+        "pcpi_wait_cycles": 0,
+        "fault": 0,
+        "partial_report_bits": 0
+      },
+      "extension_mask": 3,
+      "fusion_mask": 3,
+      "firmware": "both"
+    },
+    "source-control": {
+      "full_checksum": 1703161001,
+      "benchmark_result": 11433,
+      "cycles": 32387382,
+      "instructions": 6094532,
+      "self_check_passed": true,
+      "protocol_statistics": {
+        "status": 1611489293,
+        "host_cycles": 32768991,
+        "pcpi_handshakes": 0,
+        "pcpi_valid_cycles": 0,
+        "pcpi_wait_cycles": 0,
+        "fault": 0,
+        "partial_report_bits": 0
+      },
+      "extension_mask": 0,
+      "fusion_mask": 0,
+      "firmware": "source-control"
+    },
+    "stock-on-custom": {
+      "full_checksum": 1703161001,
+      "benchmark_result": 11433,
+      "cycles": 32387382,
+      "instructions": 6094532,
+      "self_check_passed": true,
+      "protocol_statistics": {
+        "status": 1611489293,
+        "host_cycles": 32768991,
+        "pcpi_handshakes": 0,
+        "pcpi_valid_cycles": 0,
+        "pcpi_wait_cycles": 0,
+        "fault": 0,
+        "partial_report_bits": 0
+      },
+      "extension_mask": 3,
+      "fusion_mask": 0,
+      "firmware": "stock"
+    }
+  },
+  "synthesis": [
+    {
+      "configuration": "baseline",
+      "extension_mask": 0,
+      "firmware": "stock",
+      "netlist_sha256": "eea94a48070a467cff1d70d4a3668231bd5be26b970e09de79dddd61628bd43b",
+      "firmware_image_sha256": "566984c9de3a41b119d9ed9cac249224e0f21e468d5fb06babb375c494d06a4d",
+      "cell_types": {
+        "$scopeinfo": 1,
+        "SB_CARRY": 295,
+        "SB_DFF": 126,
+        "SB_DFFE": 250,
+        "SB_DFFESR": 164,
+        "SB_DFFESS": 5,
+        "SB_DFFSR": 109,
+        "SB_DFFSS": 1,
+        "SB_LUT4": 1633,
+        "SB_RAM40_4K": 20
+      },
+      "lut4_count": 1633,
+      "carry_count": 295,
+      "memory_blocks": 20,
+      "flip_flop_count": 655,
+      "top_ports": {
+        "clk": {
+          "direction": "input",
+          "width": 1
+        },
+        "done": {
+          "direction": "output",
+          "width": 1
+        },
+        "fault": {
+          "direction": "output",
+          "width": 1
+        },
+        "passed": {
+          "direction": "output",
+          "width": 1
+        },
+        "report_bit": {
+          "direction": "output",
+          "width": 1
+        },
+        "report_strobe": {
+          "direction": "output",
+          "width": 1
+        },
+        "resetn": {
+          "direction": "input",
+          "width": 1
+        },
+        "trap": {
+          "direction": "output",
+          "width": 1
+        }
+      },
+      "fits_hx8k_resource_counts": true,
+      "program_data_memory_blocks": 16,
+      "all_bram_clocks_use_top_clock": true
+    },
+    {
+      "configuration": "custom",
+      "extension_mask": 3,
+      "firmware": "both",
+      "netlist_sha256": "448d7d4a6f6677a7d2cedd27c82f7273a09c630e648ac09c896314c35a8d0a1c",
+      "firmware_image_sha256": "c78f8013a0ee2fd998c576bf0268b4dbbdd11387a4ff14b1cc21f98246d0f6d5",
+      "cell_types": {
+        "$scopeinfo": 2,
+        "SB_CARRY": 297,
+        "SB_DFF": 126,
+        "SB_DFFE": 268,
+        "SB_DFFESR": 165,
+        "SB_DFFESS": 9,
+        "SB_DFFSR": 110,
+        "SB_DFFSS": 1,
+        "SB_LUT4": 1704,
+        "SB_RAM40_4K": 20
+      },
+      "lut4_count": 1704,
+      "carry_count": 297,
+      "memory_blocks": 20,
+      "flip_flop_count": 679,
+      "top_ports": {
+        "clk": {
+          "direction": "input",
+          "width": 1
+        },
+        "done": {
+          "direction": "output",
+          "width": 1
+        },
+        "fault": {
+          "direction": "output",
+          "width": 1
+        },
+        "passed": {
+          "direction": "output",
+          "width": 1
+        },
+        "report_bit": {
+          "direction": "output",
+          "width": 1
+        },
+        "report_strobe": {
+          "direction": "output",
+          "width": 1
+        },
+        "resetn": {
+          "direction": "input",
+          "width": 1
+        },
+        "trap": {
+          "direction": "output",
+          "width": 1
+        }
+      },
+      "fits_hx8k_resource_counts": true,
+      "program_data_memory_blocks": 16,
+      "all_bram_clocks_use_top_clock": true
+    },
+    {
+      "configuration": "source-control",
+      "extension_mask": 0,
+      "firmware": "source-control",
+      "netlist_sha256": "07a4ac1ce9b750c6308e178f30cf7ed2a359ec66d71b8092ba22d5945565845e",
+      "firmware_image_sha256": "8e40d8e14afd2b285733504f15e31644d63c5f4505f423ce114949065e2fd67c",
+      "cell_types": {
+        "$scopeinfo": 1,
+        "SB_CARRY": 295,
+        "SB_DFF": 126,
+        "SB_DFFE": 250,
+        "SB_DFFESR": 164,
+        "SB_DFFESS": 5,
+        "SB_DFFSR": 109,
+        "SB_DFFSS": 1,
+        "SB_LUT4": 1633,
+        "SB_RAM40_4K": 20
+      },
+      "lut4_count": 1633,
+      "carry_count": 295,
+      "memory_blocks": 20,
+      "flip_flop_count": 655,
+      "top_ports": {
+        "clk": {
+          "direction": "input",
+          "width": 1
+        },
+        "done": {
+          "direction": "output",
+          "width": 1
+        },
+        "fault": {
+          "direction": "output",
+          "width": 1
+        },
+        "passed": {
+          "direction": "output",
+          "width": 1
+        },
+        "report_bit": {
+          "direction": "output",
+          "width": 1
+        },
+        "report_strobe": {
+          "direction": "output",
+          "width": 1
+        },
+        "resetn": {
+          "direction": "input",
+          "width": 1
+        },
+        "trap": {
+          "direction": "output",
+          "width": 1
+        }
+      },
+      "fits_hx8k_resource_counts": true,
+      "program_data_memory_blocks": 16,
+      "all_bram_clocks_use_top_clock": true
+    }
+  ],
+  "memory_checks": [
+    {
+      "name": "memory_check",
+      "passed": true,
+      "evidence": {
+        "status": 1611489293,
+        "host_cycles": 167,
+        "pcpi_handshakes": 0,
+        "pcpi_valid_cycles": 0,
+        "pcpi_wait_cycles": 0,
+        "fault": 0,
+        "partial_report_bits": 0,
+        "words": [
+          15719748
+        ]
+      }
+    },
+    {
+      "name": "invalid_memory",
+      "passed": true,
+      "evidence": {
+        "status": 0,
+        "host_cycles": 22,
+        "pcpi_handshakes": 0,
+        "pcpi_valid_cycles": 0,
+        "pcpi_wait_cycles": 0,
+        "fault": 1,
+        "partial_report_bits": 0,
+        "words": []
+      }
+    }
+  ],
+  "controls": {
+    "source_wrapper_binary_identical_to_stock": false,
+    "source_wrapper_execution_identical_to_stock": true,
+    "stock_on_extended_core_identical": true,
+    "byte_write_and_signed_unsigned_loads_passed": true,
+    "out_of_bounds_memory_fault_passed": true
+  },
+  "comparisons": {
+    "baseline_cycles": 32387382,
+    "custom_cycles": 29602102,
+    "cycle_ratio": 1.0940906155920955,
+    "deleted_instructions": 522240,
+    "lut4_delta": 71
+  },
+  "limitations": [
+    "Full benchmark is a RV32I port with GCC constant multiplication lowered to shifts/adds/subtracts; original RV32IM Spike traces remain separate evidence.",
+    "The source macro lowers two extracted formulas; this is not an automatic patch of the prior ELF.",
+    "RAM is initialized by the FPGA image; reset does not reload RAM. Standalone simulations each instantiate a new initialized design.",
+    "Resource limits establish potential HX8K fit; only actual place-and-route establishes routing feasibility and achieved clock.",
+    "These measurements are architectural cycles. A paired clock analysis is required for wall-time comparison.",
+    "The simple single-bit report protocol is synchronous to clk; reset/status/report boundary pins need declared external timing assumptions in routing."
+  ],
+  "prior_core_firmware_comparison": {
+    "stock": {
+      "previous_binary_sha256": "3879b9492332190a1723af4995eb615fbb50c8a5e68a9c1ac004825a30e6ea4e",
+      "current_binary_sha256": "d7d0cb3dd4bbff7149ec1b7896b85ef3dad3014032f6fe8a62e076dcf4df8d6a",
+      "different_byte_offsets": [
+        1,
+        2
+      ],
+      "previous_stack_top": "0x10000",
+      "current_stack_top": "0x2000",
+      "all_other_binary_bytes_identical": true
+    },
+    "both": {
+      "previous_binary_sha256": "3fadd287c33e9e36d959240b4a350d40b803d9fca375be96ce3182a565f95d7c",
+      "current_binary_sha256": "a28d432a2caa4028e6c453d55e5eeda71d335ccc2e5258493d1e344a52e5bdc5",
+      "different_byte_offsets": [
+        1,
+        2
+      ],
+      "previous_stack_top": "0x10000",
+      "current_stack_top": "0x2000",
+      "all_other_binary_bytes_identical": true
+    }
+  }
+}

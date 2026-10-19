@@ -1,0 +1,101 @@
+{
+  "schema": "isaforge-v10d-measured-selection-independent-review-v1",
+  "status": "pass",
+  "reviewed_at_utc": "2026-10-15T22:07:02.973819+00:00",
+  "policy_results_sha256": "380b8c115c0fee568c6eba46d03c7ed61c54e8c3877a115a9334e5b60ecc4912",
+  "manifest_sha256": "34e55b90e973267da98ac152380b6e26e324dd31db4ef2a87764bfbb6f29ed60",
+  "source_audit_sha256": "826549818aa88083e65f8b2bf55e0a7b7876198beba90b617bc2f6557f90d7f5",
+  "source_hashes": {
+    "scripts/select_v10d_implementations.py": "afa057d1b3fe6f187b71a0ac76fd97529b29ba394a65f7349d034cda7d9378af",
+    "tests/test_select_v10d_implementations.py": "cfd6bbba0cd571efee2069c418a395651dd4831508d782bd2e251629425a795f",
+    "scripts/reproduce_v10d_selection.py": "7840cbad4c85b305396d7225313f65f5a857fe75e89db0aab5d47d56ed60dfd5",
+    "docs/v10d-selection-policy.md": "350c29046a14d1963464632365fb1e926e94de70084fa59361a79348846e8998"
+  },
+  "tests": {
+    "passed": 64,
+    "elapsed_seconds": 0.12,
+    "log": "review-evidence/selector-tests.log",
+    "log_sha256": "a5af1796bbf3b0e542fa00ad63de39fcd7d87ee2ddad287fba5688f3a9d7081b"
+  },
+  "independent_checks": {
+    "file": "review-evidence/independent-invariant-checks.json",
+    "sha256": "4b3753360bf05a109f79fa154b0f97fac578446eac6192863cb65c9810097003",
+    "method": "Recomputed per-arm resource maxima directly from raw mapped/route fields and worst periods directly as1000/Fmax; no selector evaluation/dominance/choice helper reused. Compared budgets,all96choices,all/feasiblepairwiseParetofronts,worstseedIDs,full192routeevidence retention,inputimmutability,andpolicycounts.",
+    "arithmetic_invariant_groups": 1728,
+    "published_choice_and_front_field_comparisons": 384,
+    "published_policy_objects_equal_source_replay": true,
+    "all_source_and_output_manifest_hashes_verified": true,
+    "raw_preparation_completion_archive_digests_match_authenticated_audit": true
+  },
+  "policy_counts": {
+    "unconstrained": {
+      "formulas": 32,
+      "chosen_original": 0,
+      "chosen_csd": 32,
+      "no_feasible_implementation": 0,
+      "both_arms_feasible": 32,
+      "single_arm_pareto_front": 19,
+      "two_arm_pareto_front": 13,
+      "csd_violated_constraints_by_formula": {}
+    },
+    "common_12mhz": {
+      "formulas": 32,
+      "chosen_original": 0,
+      "chosen_csd": 32,
+      "no_feasible_implementation": 0,
+      "both_arms_feasible": 32,
+      "single_arm_pareto_front": 19,
+      "two_arm_pareto_front": 13,
+      "csd_violated_constraints_by_formula": {}
+    },
+    "original_worst_case_limits": {
+      "formulas": 32,
+      "chosen_original": 13,
+      "chosen_csd": 19,
+      "no_feasible_implementation": 0,
+      "both_arms_feasible": 19,
+      "single_arm_pareto_front": 19,
+      "two_arm_pareto_front": 13,
+      "csd_violated_constraints_by_formula": {
+        "max_carry": 12,
+        "max_packed_lc": 1
+      }
+    }
+  },
+  "resolved_findings": [
+    "Supplied JSON null is rejected instead of silently unconstraining CLI budgets.",
+    "Counts and countcaps reject floats/booleans; frequencycaps remain finite nonnegative with explicitzero permitted.",
+    "Production select authentication metadata uses repo-relative paths when possible."
+  ],
+  "contract_review": [
+    "Perimplementation hardcaps,not summed32function/CPUbudget; wrappedLUT4/carry/FF and packedLC remain distinct.",
+    "All3seeds mustsatisfy eachcap; objective worstreciprocalFmaxperiod,then explicit resourcelexorder,then original.",
+    "No feasiblecandidate meansnull,no violatingfallback; tests covermeanvsworst reversal,one-seedbreach,equality,ties.",
+    "Paretoall/feasible fronts compare onlysamefunction; vectors are conservative maxima that maycome fromdifferentseeds.",
+    "All64alternatives/192observations and72unknownpathattributions retained; fullharness timing only.",
+    "Three fixedpostmeasurementpolicies are developmentlookups,not learned/prospective/measurement-saving validation."
+  ],
+  "visual_review": {
+    "png_sha256": "ff27791b655b57beb1e0256d50ee095c51720dde69cbcfa98520a633580a5e62",
+    "status": "Final legend moved abovebars,clear offooter; textlegible,no clipping/overlaps observed; plottedcounts32/32/19CSDand13original matchdata."
+  },
+  "limits": [
+    "No learnedmodel,prospectivewinner,CPU/workloadspeedup,power,energy,physical-boardorpopulationclaim.",
+    "Policy3 usesoriginal measured worstcaseenvelopes; itdoesnotban every same-seedresource regression.",
+    "Wrappermanifest absoluteprovenancepaths differ acrosscheckouts evenwhen policy-results semanticsmatch."
+  ],
+  "native_hardware_jobs": 0,
+  "new_fits": 0,
+  "frozen_source_or_data_edits": false,
+  "earlier_layout_review": {
+    "path": "v10d-selection-independent-review-before-final-layout.json",
+    "sha256": "088baa84a37b4a733295422fe8cab91bf829682c1bf82a49366bad0ddf2a9681",
+    "preserved_unchanged": true,
+    "policy_results_byte_identical_after_layout_change": true
+  },
+  "parent_full_suite_log": {
+    "path": "full-suite.log",
+    "sha256": "9f5925ee5484ff036d052bd413bacf074c63bccb6497ac00310ef6718f356e4b",
+    "scope": "Parent-run log independently hashed; this reviewer executed64selector tests."
+  }
+}

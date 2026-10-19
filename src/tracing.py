@@ -1,4 +1,6 @@
+import argparse
 import json
+from pathlib import Path
 import re
 import sys
 
@@ -75,41 +77,64 @@ def decode(word):
     return "unknown", None, None, None, None
 
 
-def main():
-    # opens the trace file named on the command line
-    out = open(sys.argv[1], "w")
+COMMIT = re.compile(r"^core\s+\d+:\s+\d+\s+(0x[0-9a-f]+)\s+\((0x[0-9a-f]+)\)(.*)$", re.I)
+REGISTER_VALUE = re.compile(r"\bx\s*(\d+)\s+(0x[0-9a-f]+)", re.I)
+
+
+def parse_trace(lines, output):
+    """Stream commits from exactly one start/stop instret measurement window."""
     readings = []
-    linesBetween = 0
-    unknown = 0
-
-    # reads the Spike log one line at a time
-    for seq, line in enumerate(sys.stdin):
-        if MARKER.search(line):
-            # saves the counter value
-            readings.append(int(line.split()[-1], 16))
+    count = unknown = 0
+    for seq, line in enumerate(lines):
+        match = COMMIT.match(line)
+        if not match:
+            if line.startswith("core"):
+                raise ValueError(f"Malformed Spike commit at line {seq + 1}")
+            continue
+        pc, raw, writes = match.groups()
+        word = int(raw, 16)
+        # CSRRS rd, instret, zero (the benchmark hooks read this counter).
+        if word & 0xFFFFF07F == 0xC0202073:
+            rd = bits(word, 11, 7)
+            values = {int(reg): int(value, 16) for reg, value in REGISTER_VALUE.findall(writes)}
+            if rd not in values:
+                raise ValueError("instret marker has no destination register value")
+            readings.append(values[rd])
+            if len(readings) > 2:
+                raise ValueError("Expected exactly two instret markers")
         elif len(readings) == 1:
-            # writes one record for this instruction
-            parts = line.split()
-            # raw bits of the instruction as a number
-            word = int(parts[4].strip("()"), 16)
             op, rd, rs1, rs2, imm = decode(word)
-            record = {"pc": parts[3], "raw": f"0x{word:08x}", "op": op,
+            record = {"pc": pc, "raw": f"0x{word:08x}", "op": op,
                       "rd": rd, "rs1": rs1, "rs2": rs2, "imm": imm, "seq": seq}
-            out.write(json.dumps(record) + "\n")
-            linesBetween += 1
-            # counts instructions the decoder did not recognize
+            output.write(json.dumps(record, separators=(",", ":")) + "\n")
+            count += 1
             unknown += op == "unknown"
+    if len(readings) != 2:
+        raise ValueError(f"Expected two instret markers, found {len(readings)}")
+    delta = (readings[1] - readings[0]) & 0xFFFFFFFF
+    if delta != count + 1 or unknown:
+        raise ValueError(f"Trace mismatch: instret delta={delta}, commits={count}, unknown={unknown}")
+    return {"instret_start": readings[0], "instret_stop": readings[1],
+            "instret_delta": delta, "trace_instructions": count,
+            "unknown_instructions": unknown, "validated": True,
+            "measurement": "Spike retired instructions; not hardware cycles"}
 
-    out.close()
 
-    # compares the counter with the log
-    counter = readings[1] - readings[0]
+def main():
+    parser = argparse.ArgumentParser(description="Validate and decode Spike commits")
+    parser.add_argument("output", type=Path)
+    args = parser.parse_args()
+    partial = args.output.with_suffix(args.output.suffix + ".partial")
+    try:
+        with partial.open("w") as output:
+            summary = parse_trace(sys.stdin, output)
+        partial.replace(args.output)
+        args.output.with_suffix(".summary.json").write_text(json.dumps(summary, indent=2) + "\n")
+        print(json.dumps(summary), file=sys.stderr)
+    except (ValueError, OSError) as exc:
+        partial.unlink(missing_ok=True)
+        sys.exit(str(exc))
 
-    # stops with an error when the checks fail
-    if counter != linesBetween + 1 or unknown != 0:
-        sys.exit("MISMATCH")
 
-
-# runs main only when this file is run directly
 if __name__ == "__main__":
     main()

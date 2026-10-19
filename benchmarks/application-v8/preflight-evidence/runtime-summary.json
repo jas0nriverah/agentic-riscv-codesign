@@ -1,0 +1,1838 @@
+{
+  "status": "unsealed-input-feasibility-only",
+  "source_reference_commit": "c6a0d73e47bbd2bc86e34637156fb26dd4d5cf08",
+  "consumed_unique_input_formulas": 2764,
+  "consumed_input_sha256": {
+    "results/2026-10-14-v6/corpus/consumed-features.json": "70de2daa0f9abf644ae6058bae6aa110677f98a1834e8b5ef495caf1b7d5f229",
+    "results/2026-10-14-v6/corpus/calibration/features.json": "a4f327a8ba2bcd5ebdbd5b25d521fd80cd434ceca51e4935af8e0e04635292b1",
+    "results/2026-10-14-v6/corpus/test/features.json": "7436f8a1603e84a0d32e0911d84c75fb26419c47c652e7248f870c5dc455ddf3"
+  },
+  "records": {
+    "bitcount": {
+      "status": "input-feasibility-complete",
+      "all_upstream_bytes_unchanged": true,
+      "upstream_sha256": {
+        "bench/kernel/bitcount/bitcount.c": "7b0a5eccbf18e81cae1bcc948f0f0f47143cd177cf46de10b2d676e5b0d8d2fa",
+        "bench/kernel/bitcount/bitops.h": "8877c5de289c0e1f4fe17836db60fe0468b999f0ddefbfbf7f0e610d6d927f6c",
+        "bench/kernel/bitcount/bitcnt_4.c": "11b07b004c24843b44d203c7be2dc5e6cae930909f5b49752c5e592ec18582c4",
+        "bench/kernel/bitcount/LICENSE": "d5433a2f12b96fb7dd1ec0e09f8268ce220a93859fa2c6441ac11724169dad95",
+        "bench/kernel/bitcount/bitcnt_3.c": "9f9735c11c5f0f88a6a8206359a4d771bf5cd0f53e52229dfb44b74b3ac02a9f",
+        "bench/kernel/bitcount/bitcnt_2.c": "853c233e8d51db3f26b4e7e12491b4c4ef8633b49beda32f542c97dd2e240f33",
+        "bench/kernel/bitcount/ChangeLog.txt": "350b8e0b014bf5768693527e4aa003315d043113e634763b4fe4ba4fa1b57ee6",
+        "bench/kernel/bitcount/bitcnt_1.c": "8e22f9e70f40539484151d17b18fd31002fcb0106ef4fb0b70ed239b2ff9228c"
+      },
+      "elf_sha256": "9793b52f920ae794736c7428a1b2e1c5fcfed3fc6db42c37ae0629e3b2133461",
+      "captured_outputs": [
+        1095,
+        16,
+        1457850878,
+        1457851008,
+        -1921305414,
+        -1921305414,
+        -1921305414,
+        -1921305414,
+        -1921305414,
+        -1921305414,
+        -1921305414,
+        -1921305414
+      ],
+      "independent_complete_oracle": true,
+      "scope": "Complete declared bitcount_main; init/status/outputprobes excluded; allcalledhelpers retained.",
+      "candidate_count": 47,
+      "candidate_sha256": "1311a80094ba81043f2f06ee030a82e9c80f41955d7f309e1092fd48fb2cccdc",
+      "input_only_formula_screen": [
+        {
+          "formula": "add(in0,andi(in1,15))",
+          "normalized_v5_formula": "add(in0,andi(in1,15))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,andi(in1,255))",
+          "normalized_v5_formula": "add(in0,andi(in1,255))",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,16),255))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,16),255))",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,8),255))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,8),255))",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(and(srli(in0,1),in1),and(in0,in1))",
+          "normalized_v5_formula": "add(and(srli(in0,1),in1),and(in0,in1))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(and(srli(in0,2),in1),and(in0,in1))",
+          "normalized_v5_formula": "add(and(srli(in0,2),in1),and(in0,in1))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(and(srli(in0,4),in1),and(in0,in1))",
+          "normalized_v5_formula": "add(and(srli(in0,4),in1),and(in0,in1))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(srai(add(in0,in1),16),srai(in1,31))",
+          "normalized_v5_formula": "sub(srai(add(in0,in1),16),srai(in1,31))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,12),15))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,12),15))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,16),15))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,16),15))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,20),15))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,20),15))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,24),15))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,24),15))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,4),15))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,4),15))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,andi(srli(in1,8),15))",
+          "normalized_v5_formula": "add(in0,andi(srli(in1,8),15))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srli(in0,16),255)",
+          "normalized_v5_formula": "andi(srli(in0,16),255)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srli(in0,8),255)",
+          "normalized_v5_formula": "andi(srli(in0,8),255)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srai(add(mulh(in0,in1),in0),16)",
+          "normalized_v5_formula": "srai(add(mulh(in0,in1),in0),16)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 1,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(srai(in0,16),srai(in1,31))",
+          "normalized_v5_formula": "sub(srai(in0,16),srai(in1,31))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,srli(in1,16))",
+          "normalized_v5_formula": "add(in0,srli(in1,16))",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,srli(in1,24))",
+          "normalized_v5_formula": "add(in0,srli(in1,24))",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,srli(in1,28))",
+          "normalized_v5_formula": "add(in0,srli(in1,28))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(1431654400),1365)",
+          "normalized_v5_formula": "lui(1431655765)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(16711680),255)",
+          "normalized_v5_formula": "lui(16711935)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(252645376),-241)",
+          "normalized_v5_formula": "lui(252645135)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(858992640),819)",
+          "normalized_v5_formula": "lui(858993459)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "and(srli(in0,1),in1)",
+          "normalized_v5_formula": "and(srli(in0,1),in1)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "and(srli(in0,2),in1)",
+          "normalized_v5_formula": "and(srli(in0,2),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "and(srli(in0,4),in1)",
+          "normalized_v5_formula": "and(srli(in0,4),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "and(srli(in0,8),in1)",
+          "normalized_v5_formula": "and(srli(in0,8),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srli(in0,12),15)",
+          "normalized_v5_formula": "andi(srli(in0,12),15)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srli(in0,16),15)",
+          "normalized_v5_formula": "andi(srli(in0,16),15)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srli(in0,20),15)",
+          "normalized_v5_formula": "andi(srli(in0,20),15)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srli(in0,24),15)",
+          "normalized_v5_formula": "andi(srli(in0,24),15)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srli(in0,4),15)",
+          "normalized_v5_formula": "andi(srli(in0,4),15)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srli(in0,8),15)",
+          "normalized_v5_formula": "andi(srli(in0,8),15)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srli(slli(in0,16),16)",
+          "normalized_v5_formula": "srli(slli(in0,16),16)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(mulh(in0,in1),in0)",
+          "normalized_v5_formula": "add(mulh(in0,in1),in0)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 1,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(slli(in0,2),in1)",
+          "normalized_v5_formula": "add(slli(in0,2),in1)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(-4096),1260)",
+          "normalized_v5_formula": "lui(4294964460)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srai(add(in0,in1),16)",
+          "normalized_v5_formula": "srai(add(in0,in1),16)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(in0,srai(in1,31))",
+          "normalized_v5_formula": "sub(in0,srai(in1,31))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(srai(in0,16),in1)",
+          "normalized_v5_formula": "sub(srai(in0,16),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(-2092036096),-1185)",
+          "normalized_v5_formula": "lui(2202930015)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(-2147479552),264)",
+          "normalized_v5_formula": "lui(2147488008)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(-2147483648),-1)",
+          "normalized_v5_formula": "lui(2147483647)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(126976),797)",
+          "normalized_v5_formula": "lui(127773)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(16384),423)",
+          "normalized_v5_formula": "lui(16807)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        }
+      ],
+      "exact_overlap": 11,
+      "normalized_overlap": 11,
+      "new_bit_pattern_formula_count": 0,
+      "high_product_formula_count": 2,
+      "trace_sha256": "147d151ff30b576a9d90427c24fbeeac4ab5c4d1b89106f9a3a3df4450295617",
+      "retired_instructions": 5498,
+      "kernel_candidate_count": 33,
+      "fusion": {
+        "seed": 2026101507,
+        "benchmarks": [
+          {
+            "benchmark": "bitcount",
+            "checked_occurrences": 66,
+            "skipped_opaque_block_occurrences": 0,
+            "vectors_per_occurrence": 16,
+            "individual_comparisons": 1056,
+            "joint_formula_block_comparisons": 896
+          }
+        ],
+        "passed": true,
+        "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+      }
+    },
+    "isqrt": {
+      "status": "input-feasibility-complete-with-oracle-limit",
+      "all_upstream_bytes_unchanged": true,
+      "upstream_sha256": {
+        "bench/kernel/isqrt/pi.h": "e96904dfd4c1c1fd2c7c89833c660680955fda779924a7bf9340fb7030e38e4e",
+        "bench/kernel/isqrt/wcclibm.h": "74424f837202e6bdbafe0907c0c6f8a6386a66d34cd8b2d66ecd0ebd19957902",
+        "bench/kernel/isqrt/basicmath_libc.c": "96ffe0f0c2629a08ebd0fcd7cb9850a359331c2d650747ee87219a52e821f476",
+        "bench/kernel/isqrt/math_private.h": "815b830cf333f1061574b933532382b16f1ee3e1759c600fd6640fce747b4638",
+        "bench/kernel/isqrt/wcclibm.c": "ffffe179f8715e269eecb00f7b23c0a4b6c94104177fba604d3ed0df1fd1534c",
+        "bench/kernel/isqrt/ChangeLog.txt": "f134b5a54af2bcae3ffd6406966e100c635588f1ff903a1f706a607de77a0fd5",
+        "bench/kernel/isqrt/snipmath.h": "b4972f2a7be15eef013947aeee7f646f80b1fac51db04b6734e3b2734f2b4b56",
+        "bench/kernel/isqrt/isqrt.c": "8a685fc29ec16db1abd1821a34c52f23cd51946843188000ca122c3a5e651a1b",
+        "bench/kernel/isqrt/basicmath_libc.h": "d3aeb042f1c60c406e4b8d7523ad272efebac8bddc00692cd38d68bcd6b2b108"
+      },
+      "elf_sha256": "7d0508bf3b9c5e3319552bc5f65188b9e202072ff7e3c4f7d1c629e8c2790eb7",
+      "captured_outputs": [
+        53364,
+        0,
+        32749,
+        1072497001,
+        0,
+        65536,
+        92681,
+        113511,
+        131072,
+        253819,
+        262144,
+        270211,
+        16777087,
+        16777216,
+        -1257966799,
+        -1257966799,
+        -4,
+        2146238464,
+        16777216,
+        -32772
+      ],
+      "independent_complete_oracle": false,
+      "scope": "Complete declared isqrt_main; init/status/outputprobes excluded; allcalledhelpers retained.",
+      "candidate_count": 2,
+      "candidate_sha256": "09777c60b872c5058625d7cbab5de4966a101a1c162d1e1d93e3c7d0ab294b7f",
+      "input_only_formula_screen": [
+        {
+          "formula": "add(in0,slli(in1,2))",
+          "normalized_v5_formula": "add(in0,slli(in1,2))",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(slli(in0,2),1)",
+          "normalized_v5_formula": "addi(slli(in0,2),1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        }
+      ],
+      "exact_overlap": 1,
+      "normalized_overlap": 1,
+      "new_bit_pattern_formula_count": 0,
+      "high_product_formula_count": 0,
+      "trace_sha256": "e458d50347ec236ba79b9bbe70ffeeff735939dcf6f2635b917c327250aa3abe",
+      "retired_instructions": 389066,
+      "kernel_candidate_count": 2,
+      "fusion": {
+        "seed": 2026101507,
+        "benchmarks": [
+          {
+            "benchmark": "isqrt",
+            "checked_occurrences": 2,
+            "skipped_opaque_block_occurrences": 0,
+            "vectors_per_occurrence": 16,
+            "individual_comparisons": 32,
+            "joint_formula_block_comparisons": 32
+          }
+        ],
+        "passed": true,
+        "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+      }
+    },
+    "fft": {
+      "status": "input-feasibility-complete",
+      "all_upstream_bytes_unchanged": true,
+      "upstream_sha256": {
+        "bench/kernel/fft/fft.c": "5ec513b40c9eca10c15e634e4462bc453ed68b97d110fc81027f428dcf0ab3ea",
+        "bench/kernel/fft/ChangeLog.txt": "b2fc01afa7c015057c7fc424e2de6022111f83c5194c204593d7448020b61a8c",
+        "bench/kernel/fft/fft_input.c": "0958354e2cf1b1df928b75a8b669c1d479a64ecf6d80b60688c4058e2c322630"
+      },
+      "elf_sha256": "2333eface14a1b7cfd566854a0df71a6375aa1f8a7429b3ad506fe0b5380343a",
+      "captured_outputs": [
+        357374959,
+        -2275,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "independent_complete_oracle": false,
+      "scope": "Complete declared fft_main; init/status/outputprobes excluded; allcalledhelpers retained.",
+      "candidate_count": 6,
+      "candidate_sha256": "0145661178d1ee10f71a8faa6104bdc566356067d7e72c08a452395effc0fa85",
+      "input_only_formula_screen": [
+        {
+          "formula": "srai(sub(in0,in1),13)",
+          "normalized_v5_formula": "srai(sub(in0,in1),13)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(slli(in0,2),in1)",
+          "normalized_v5_formula": "add(slli(in0,2),in1)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,lui(8192))",
+          "normalized_v5_formula": "addi(in0,8192)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(-2147459072),1692)",
+          "normalized_v5_formula": "lui(2147509916)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(-2147471360),648)",
+          "normalized_v5_formula": "lui(2147496584)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(4096),-2048)",
+          "normalized_v5_formula": "lui(2048)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        }
+      ],
+      "exact_overlap": 2,
+      "normalized_overlap": 2,
+      "new_bit_pattern_formula_count": 0,
+      "high_product_formula_count": 0,
+      "trace_sha256": "d89f57987f4492ca08188cf78c0be1d8a381a8ec68e9cc3d794a90a5fcd7ca0d",
+      "retired_instructions": 264154,
+      "kernel_candidate_count": 5,
+      "fusion": {
+        "seed": 2026101507,
+        "benchmarks": [
+          {
+            "benchmark": "fft",
+            "checked_occurrences": 6,
+            "skipped_opaque_block_occurrences": 0,
+            "vectors_per_occurrence": 16,
+            "individual_comparisons": 96,
+            "joint_formula_block_comparisons": 96
+          }
+        ],
+        "passed": true,
+        "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+      }
+    },
+    "ndes": {
+      "status": "input-feasibility-complete",
+      "all_upstream_bytes_unchanged": true,
+      "upstream_sha256": {
+        "bench/sequential/ndes/ndes.c": "096933b0835dd7c8f4b9ceccd57419c74669218ad1c351d78f96138edab6cb34",
+        "bench/sequential/ndes/ChangeLog.txt": "a42173178d735351b7ff1bae08944b45e28ff65b95d300b77f2aafe9e302a282"
+      },
+      "elf_sha256": "471d0a267d1be954be89bae4007445ac189270ba3452e413d6138fb0eb49a113",
+      "captured_outputs": [
+        19,
+        37,
+        35,
+        26,
+        2,
+        16
+      ],
+      "independent_complete_oracle": false,
+      "scope": "Complete declared ndes_main; init/status/outputprobes excluded; allcalledhelpers retained.",
+      "candidate_count": 47,
+      "candidate_sha256": "3c2c90823b01cad61e066577fa34c8b9603be088db7c32429c5ebef0d9346003",
+      "input_only_formula_screen": [
+        {
+          "formula": "add(in0,slli(in1,2))",
+          "normalized_v5_formula": "add(in0,slli(in1,2))",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sltu(0,and(in0,in1))",
+          "normalized_v5_formula": "sltu(0,and(in0,in1))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,slli(addi(in1,-28),2))",
+          "normalized_v5_formula": "add(in0,slli(addi(in1,4294967268),2))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "or(in0,slli(in1,1))",
+          "normalized_v5_formula": "or(in0,slli(in1,1))",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "slli(addi(in0,-28),2)",
+          "normalized_v5_formula": "slli(addi(in0,4294967268),2)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,slli(addi(in1,16),2))",
+          "normalized_v5_formula": "add(in0,slli(addi(in1,16),2))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "or(andi(in0,2),andi(srai(in1,5),1))",
+          "normalized_v5_formula": "or(andi(in0,2),andi(srai(in1,5),1))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "or(andi(slli(in0,1),2),andi(in1,1))",
+          "normalized_v5_formula": "or(andi(slli(in0,1),2),andi(in1,1))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(add(slli(in0,3),in0),in1)",
+          "normalized_v5_formula": "add(add(slli(in0,3),in0),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,andi(srai(in1,4),1))",
+          "normalized_v5_formula": "add(in0,andi(srai(in1,4),1))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(slli(in0,3),in0)",
+          "normalized_v5_formula": "add(slli(in0,3),in0)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "or(andi(in0,2),andi(in1,1))",
+          "normalized_v5_formula": "or(andi(in0,2),andi(in1,1))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "or(andi(slli(in0,1),2),in1)",
+          "normalized_v5_formula": "or(andi(slli(in0,1),2),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "or(andi(slli(in0,2),8),in1)",
+          "normalized_v5_formula": "or(andi(slli(in0,2),8),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "or(in0,andi(srai(in1,5),1))",
+          "normalized_v5_formula": "or(in0,andi(srai(in1,5),1))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "slli(addi(in0,16),2)",
+          "normalized_v5_formula": "slli(addi(in0,16),2)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "slli(addi(in0,-32),2)",
+          "normalized_v5_formula": "slli(addi(in0,4294967264),2)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srli(or(and(slli(in0,28),in1),in0),1)",
+          "normalized_v5_formula": "srli(or(and(slli(in0,28),in1),in0),1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "slli(add(in0,in1),2)",
+          "normalized_v5_formula": "slli(add(in0,in1),2)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,andi(in1,1))",
+          "normalized_v5_formula": "add(in0,andi(in1,1))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(slli(in0,1),2)",
+          "normalized_v5_formula": "andi(slli(in0,1),2)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(slli(in0,2),8)",
+          "normalized_v5_formula": "andi(slli(in0,2),8)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srai(in0,2),2)",
+          "normalized_v5_formula": "andi(srai(in0,2),2)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srai(in0,4),1)",
+          "normalized_v5_formula": "andi(srai(in0,4),1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srai(in0,5),1)",
+          "normalized_v5_formula": "andi(srai(in0,5),1)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "or(andi(in0,2),in1)",
+          "normalized_v5_formula": "or(andi(in0,2),in1)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "or(andi(in0,8),in1)",
+          "normalized_v5_formula": "or(andi(in0,8),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "or(in0,andi(in1,1))",
+          "normalized_v5_formula": "or(in0,andi(in1,1))",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "or(in0,slli(in1,4))",
+          "normalized_v5_formula": "or(in0,slli(in1,4))",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,slli(addi(in1,-32),2))",
+          "normalized_v5_formula": "add(in0,slli(addi(in1,4294967264),2))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "or(and(slli(in0,28),in1),in0)",
+          "normalized_v5_formula": "or(and(slli(in0,28),in1),in0)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "and(slli(in0,28),in1)",
+          "normalized_v5_formula": "and(slli(in0,28),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srli(or(in0,in1),1)",
+          "normalized_v5_formula": "srli(or(in0,in1),1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,slli(add(slli(in1,1),in1),2))",
+          "normalized_v5_formula": "add(in0,slli(add(slli(in1,1),in1),2))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srl(addi(lui(65536),518),in0),1)",
+          "normalized_v5_formula": "andi(srl(66054,in0),1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srl(addi(in0,518),in1),1)",
+          "normalized_v5_formula": "andi(srl(addi(in0,518),in1),1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "slli(add(slli(in0,1),in0),2)",
+          "normalized_v5_formula": "slli(add(slli(in0,1),in0),2)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srl(addi(lui(65536),518),in0)",
+          "normalized_v5_formula": "srl(66054,in0)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(-2147479552),-312)",
+          "normalized_v5_formula": "lui(2147487432)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(slli(in0,1),in0)",
+          "normalized_v5_formula": "add(slli(in0,1),in0)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(slli(in0,8),in1)",
+          "normalized_v5_formula": "add(slli(in0,8),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(-2147479552),-440)",
+          "normalized_v5_formula": "lui(2147487304)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(-2147479552),264)",
+          "normalized_v5_formula": "lui(2147488008)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(65536),518)",
+          "normalized_v5_formula": "lui(66054)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srl(in0,in1),1)",
+          "normalized_v5_formula": "andi(srl(in0,in1),1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "slli(xor(in0,in1),8)",
+          "normalized_v5_formula": "slli(xor(in0,in1),8)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srl(addi(in0,518),in1)",
+          "normalized_v5_formula": "srl(addi(in0,518),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        }
+      ],
+      "exact_overlap": 8,
+      "normalized_overlap": 8,
+      "new_bit_pattern_formula_count": 0,
+      "high_product_formula_count": 0,
+      "trace_sha256": "57a7ab3145dc8c19f31c859358d5b96ccc62e06d874fa998331ab684145f2184",
+      "retired_instructions": 35735,
+      "kernel_candidate_count": 47,
+      "fusion": {
+        "seed": 2026101507,
+        "benchmarks": [
+          {
+            "benchmark": "ndes",
+            "checked_occurrences": 128,
+            "skipped_opaque_block_occurrences": 0,
+            "vectors_per_occurrence": 16,
+            "individual_comparisons": 2048,
+            "joint_formula_block_comparisons": 1472
+          }
+        ],
+        "passed": true,
+        "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+      }
+    },
+    "mpeg2": {
+      "status": "failure-retained",
+      "all_upstream_bytes_unchanged": true,
+      "upstream_sha256": {
+        "bench/sequential/mpeg2/mpeg2.c": "6aa276ff896fe35c9e73bcb125009856a6f81e3ab0f2015bafa9fd668847c6ff",
+        "bench/sequential/mpeg2/ChangeLog.txt": "810fe4cc7eaf377c21d8b1e4c8dacd6da38f66d74400c54d702cb570a40c7c2c"
+      },
+      "elf_sha256": "908956008ca8dc30ded130c95605bcf65cb39677129848b59c4b407ea3441af4",
+      "captured_outputs": [
+        -116
+      ],
+      "independent_complete_oracle": false,
+      "scope": "Complete declared mpeg2_main; init/status/outputprobes excluded; allcalledhelpers retained.",
+      "error": "PermissionError(1, 'Operation not permitted')",
+      "candidate_count": null,
+      "trace_complete": false,
+      "partial_trace": {
+        "path": "generated/application-input-feasibility/mpeg2/mpeg2.jsonl.gz.partial",
+        "bytes": 493297489,
+        "sha256": "4f0aff569ff53345b985d98bb0f98661864832e6b3dbc28700bf9c4f3b92fadf"
+      },
+      "failure_interpretation": "300s owned-group timer ended incomplete streaming trace; observed PermissionError in cleanup masks original trace exception. No completed trace/summary or candidate pool. No rerun/window shrink. No process remains at final check."
+    },
+    "h264_dec": {
+      "status": "complete-input-feasibility",
+      "all_upstream_bytes_unchanged": true,
+      "upstream_sha256": {
+        "bench/sequential/h264_dec/h264_dec.c": "ea8b87fe930bea1088a1d29eb8a6603d0af23b14676ace0577100e0153bf9d21",
+        "bench/sequential/h264_dec/copyright.txt": "0c1a2d8d08247b183d80bb16d4db45a3b74c3421acacd68ff4e1c3163e6cf761",
+        "bench/sequential/h264_dec/changeLog.txt": "93190d9a539acbef32cfc36f6dbae2c52dca3e2f1dc8162105269e2b31e4c688",
+        "bench/sequential/h264_dec/h264_dec.h": "2467c48b9e14dda3d4aeb858056fa4cdde45b3834313cc77755daf0359f1e91a",
+        "bench/sequential/h264_dec/h264_decinput.c": "a69db1024ec77b1d05b325189adb5506edcf3e71247a7c4ca660a71d544e2d90"
+      },
+      "elf_sha256": "c16021175fc760fbce2c803ad6fdfefdf42337f37220a9d2ef3d079bd9998587",
+      "captured_outputs": [
+        1973330381,
+        1121524165,
+        -128,
+        0
+      ],
+      "independent_complete_oracle": false,
+      "scope": "Complete declared h264_dec_main; init/status/outputprobes excluded; allcalledhelpers retained.",
+      "candidate_count": 50,
+      "candidate_sha256": "1ef6b85745d2fc81ed6b8f5c6ec265dbc706adf236570ea02692e5bb6643fd9e",
+      "input_only_formula_screen": [
+        {
+          "formula": "add(slli(sub(in0,srai(in1,31)),1),sub(in0,srai(in1,31)))",
+          "normalized_v5_formula": "add(slli(sub(in0,srai(in1,31)),1),sub(in0,srai(in1,31)))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(slli(sub(srai(in0,5),in1),1),sub(srai(in0,5),in1))",
+          "normalized_v5_formula": "add(slli(sub(srai(in0,5),in1),1),sub(srai(in0,5),in1))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(srai(add(in0,in1),5),srai(in1,31))",
+          "normalized_v5_formula": "sub(srai(add(in0,in1),5),srai(in1,31))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(slli(sub(in0,in1),1),sub(in0,in1))",
+          "normalized_v5_formula": "add(slli(sub(in0,in1),1),sub(in0,in1))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srai(add(mulh(in0,in1),in0),5)",
+          "normalized_v5_formula": "srai(add(mulh(in0,in1),in0),5)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 1,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(in0,sub(slli(in1,4),in1))",
+          "normalized_v5_formula": "sub(in0,sub(slli(in1,4),in1))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(srai(in0,5),srai(in1,31))",
+          "normalized_v5_formula": "sub(srai(in0,5),srai(in1,31))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(in0,slli(in1,1))",
+          "normalized_v5_formula": "add(in0,slli(in1,1))",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(slli(in0,1),in0)",
+          "normalized_v5_formula": "add(slli(in0,1),in0)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(andi(add(in0,srli(in1,26)),63),srli(in1,26))",
+          "normalized_v5_formula": "sub(andi(add(in0,srli(in1,26)),63),srli(in1,26))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(slli(add(slli(in0,1),in0),4),add(slli(in0,1),in0))",
+          "normalized_v5_formula": "sub(slli(add(slli(in0,1),in0),4),add(slli(in0,1),in0))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(slli(in0,4),in0)",
+          "normalized_v5_formula": "sub(slli(in0,4),in0)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(andi(add(in0,in1),63),in1)",
+          "normalized_v5_formula": "sub(andi(add(in0,in1),63),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(in0,srai(in1,31))",
+          "normalized_v5_formula": "sub(in0,srai(in1,31))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(mulh(in0,in1),in0)",
+          "normalized_v5_formula": "add(mulh(in0,in1),in0)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 1,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "slli(add(in0,in1),1)",
+          "normalized_v5_formula": "slli(add(in0,in1),1)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srai(add(in0,in1),5)",
+          "normalized_v5_formula": "srai(add(in0,in1),5)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(srai(in0,5),in1)",
+          "normalized_v5_formula": "sub(srai(in0,5),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "mul(sub(andi(in0,63),in1),addi(0,54))",
+          "normalized_v5_formula": "add(sub(sub(0,slli(sub(andi(in0,63),in1),1)),slli(sub(andi(in0,63),in1),3)),slli(sub(andi(in0,63),in1),6))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(add(in0,in1),63)",
+          "normalized_v5_formula": "andi(add(in0,in1),63)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srli(srai(in0,31),26)",
+          "normalized_v5_formula": "srli(srai(in0,31),26)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(andi(in0,63),in1)",
+          "normalized_v5_formula": "sub(andi(in0,63),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(mul(in0,addi(0,54)),in1)",
+          "normalized_v5_formula": "add(add(sub(sub(0,slli(in0,1)),slli(in0,3)),slli(in0,6)),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(sub(slli(in0,4),in0),in1)",
+          "normalized_v5_formula": "add(sub(slli(in0,4),in0),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "mul(sub(in0,in1),addi(0,54))",
+          "normalized_v5_formula": "add(sub(sub(0,slli(sub(in0,in1),1)),slli(sub(in0,in1),3)),slli(sub(in0,in1),6))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srai(xori(in0,-1),31)",
+          "normalized_v5_formula": "srai(xori(in0,4294967295),31)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(slli(add(in0,in1),4),add(in0,in1))",
+          "normalized_v5_formula": "sub(slli(add(in0,in1),4),add(in0,in1))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "mul(in0,addi(0,54))",
+          "normalized_v5_formula": "add(sub(sub(0,slli(in0,1)),slli(in0,3)),slli(in0,6))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(srai(mulh(in0,in1),4),srai(in0,31))",
+          "normalized_v5_formula": "sub(srai(mulh(in0,in1),4),srai(in0,31))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 1,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(srai(in0,4),srai(in1,31))",
+          "normalized_v5_formula": "sub(srai(in0,4),srai(in1,31))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(slli(in0,6),in0)",
+          "normalized_v5_formula": "add(slli(in0,6),in0)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "sub(srai(in0,4),in1)",
+          "normalized_v5_formula": "sub(srai(in0,4),in1)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srai(add(andi(srai(in0,31),3),in0),2)",
+          "normalized_v5_formula": "srai(add(andi(srai(in0,31),3),in0),2)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(andi(srai(in0,31),3),in0)",
+          "normalized_v5_formula": "add(andi(srai(in0,31),3),in0)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "andi(srai(in0,31),3)",
+          "normalized_v5_formula": "andi(srai(in0,31),3)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srai(add(andi(in0,3),in1),2)",
+          "normalized_v5_formula": "srai(add(andi(in0,3),in1),2)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srai(add(in0,in1),2)",
+          "normalized_v5_formula": "srai(add(in0,in1),2)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(andi(in0,3),in1)",
+          "normalized_v5_formula": "add(andi(in0,3),in1)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "mul(in0,addi(lui(4096),-640))",
+          "normalized_v5_formula": "add(sub(sub(0,slli(in0,7)),slli(in0,9)),slli(in0,12))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srai(add(srli(in0,31),in0),1)",
+          "normalized_v5_formula": "srai(add(srli(in0,31),in0),1)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "add(srli(in0,31),in0)",
+          "normalized_v5_formula": "add(srli(in0,31),in0)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(-1240768512),183)",
+          "normalized_v5_formula": "lui(3054198967)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(-2147463168),-420)",
+          "normalized_v5_formula": "lui(2147503708)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(-2147471360),604)",
+          "normalized_v5_formula": "lui(2147496540)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(1272582144),759)",
+          "normalized_v5_formula": "lui(1272582903)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "addi(lui(4096),-640)",
+          "normalized_v5_formula": "lui(3456)",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "mul(in0,addi(0,2025))",
+          "normalized_v5_formula": "add(sub(add(in0,slli(in0,3)),slli(in0,5)),slli(in0,11))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "mul(in0,addi(in1,-640))",
+          "normalized_v5_formula": "mul(in0,addi(in1,4294966656))",
+          "exact_consumed": false,
+          "normalized_v5_consumed": false,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srai(add(in0,in1),1)",
+          "normalized_v5_formula": "srai(add(in0,in1),1)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        },
+        {
+          "formula": "srai(mul(in0,in1),1)",
+          "normalized_v5_formula": "srai(mul(in0,in1),1)",
+          "exact_consumed": true,
+          "normalized_v5_consumed": true,
+          "correlated_bit_pattern": false,
+          "mulh_count": 0,
+          "mulhu_count": 0,
+          "mulhsu_count": 0
+        }
+      ],
+      "exact_overlap": 10,
+      "normalized_overlap": 10,
+      "new_bit_pattern_formula_count": 0,
+      "high_product_formula_count": 3,
+      "trace_sha256": "0765384587f60ae51e8960f8f8555f3f7eba409b80cab8d90c6ddfc2e0b52f94",
+      "retired_instructions": 21138,
+      "kernel_candidate_count": 50,
+      "fusion": {
+        "seed": 2026101507,
+        "benchmarks": [
+          {
+            "benchmark": "h264_dec",
+            "checked_occurrences": 115,
+            "skipped_opaque_block_occurrences": 0,
+            "vectors_per_occurrence": 16,
+            "individual_comparisons": 1840,
+            "joint_formula_block_comparisons": 1664
+          }
+        ],
+        "passed": true,
+        "limitation": "Randomized software register/memory/control equivalence on static blocks; no formal proof or modified processor execution."
+      }
+    }
+  },
+  "primary_proposed_family_map": {
+    "bitcount": "bitcount",
+    "fft": "fft",
+    "ndes": "des",
+    "h264_dec": "video"
+  },
+  "related_source_secondary": {
+    "isqrt": "MiBench-basicmath"
+  },
+  "failed_family_member": "mpeg2: no complete pool; explicit admission decision needed before any future seal",
+  "no_predictions_fit_target_mapping_seal": true,
+  "script_sha256": "0cb82f19d40abe6e25a008737eaa6d05ab1002f50e2e92d3d09f54a34f94bd1b"
+}

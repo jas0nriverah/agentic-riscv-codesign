@@ -1,0 +1,40 @@
+Independent V8 released-target audit: PASS on first run.
+Prepared audit source was unchanged from prelabel readiness.
+All 1,036 raw ZIP members authenticated; all 313,608 expected vector outputs recomputed with an independent unsigned32 oracle; all 146 physical netlists recounted.
+All six model metric summaries, paired four-family primary, and 600 cap64/budget1 decisions plus 24 aggregates match the frozen scorer; zero mismatches.
+
+Equal-four-family MAE (LUT4):
+  mapping_v6: 3.409190721
+  legacy_original336: 3.350930615
+  legacy_rewritten336: 3.431883333
+  dual_graph: 3.638177187
+  sog_tuned: 5.339467773
+  masterrtl_fixed: 7.312379320
+
+Primary rewritten minus mapping: +0.022692612 LUT4 (rewritten slightly worse).
+Family differences: bitcount +0.158404255, DES +0.161843972, FFT +0.047222222, video -0.276700000.
+Leaving out one family changes the sign: -0.023691174 through +0.122490150 LUT4. This is a small descriptive four-family result.
+
+Observed error concentration:
+  H264 supplies 66.9% of mapping macro MAE contribution and 71.3% of mapping pooled primary absolute error.
+  Six constant-operand low-multiply rows (4% of primary rows) supply 43.3% of mapping, 40.7% of rewritten, 61.7% of SOG, and 55.0% of MasterRTL pooled absolute error.
+  Mapping predicts 301.22 for true 201 on mul(sub(in0,in1),addi(0,54)); rewritten predicts 286.77.
+  SOG predicts 62.61 and MasterRTL 53.4556 for true 326 on mul(in0,addi(0,2025)), creating cap64 false accepts.
+  Largest mapping underprediction is DES andi(srl(addi(in0,518),in1),1): true 57 vs 34.12.
+  Largest rewritten underprediction is bitcount add(and(srli(in0,1),in1),and(in0,in1)): true 94 vs 69.8233.
+  These dominant constant-multiply failures are within the old target range. Training spans 0..3050; fresh targets span 0..3052 with only one target above the old maximum.
+  There are 41 unique zero-target circuits / 41 primary rows; all five tree predictors have zero MAE on those rows, while MasterRTL zero-target MAE is 0.0800598.
+
+Primary acquisition:
+  Merit alone attains zero regret and 100% oracle retention for every program at cap64/budget1. Predicted area has no observed gain over that reference.
+  Mapping/dual/SOG reject the true56-LUT H264 candidate sub(srai(add(in0,in1),5),srai(in1,31)), predicting 64.7767/68/66.3067.
+  They query a true29-LUT candidate saving 1024 instructions instead of an oracle-feasible 1536: H264 regret 2.422178% of trace instructions; family-mean regret 0.605545%; family-mean retention 91.6667%.
+  Original/rewrite/MasterRTL query that true56-LUT candidate, predicting 63.11/62.2867/63.1776, and attain zero regret.
+  Mapping and rewritten each have 0 cap64 false accepts and 3 false rejects over 150 primary rows; this is an observed diagnostic, not calibrated safety.
+
+Development implications supported by these observations:
+  Prioritize constant-multiply and surrounding add/sub mapping cost; blanket multiplication size or greater training target range does not explain the failure concentration.
+  Investigate signed-shift/add/sub and shifted-mask patterns near the cap, where small overestimates remove high-savings choices.
+  Keep the merit-only reference. A future untouched application cohort needs meaningful area/merit tradeoffs to establish acquisition value. These labels are now development evidence.
+
+Limits: this audit replays archived expected values and authenticates archived successful runtime logs; it does not rerun RTL or establish universal equivalence. Cap32/128 and budgets 3/5 remain outside this independent acquisition replay.

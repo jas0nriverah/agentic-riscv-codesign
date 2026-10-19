@@ -1,0 +1,38 @@
+{
+  "schema": "isaforge-v8-pre-fit-amendment-v1",
+  "amended_at_utc": "2026-10-15T18:53:59.785640+00:00",
+  "original_commit": "771bd389d355efeb8ff8215a521ffd07bcb85319",
+  "reason": "Correct one synthetic test fixture omission and bind the independently reviewed raw-evidence scoring wrapper before any fits or target release. The production model, pure evaluator, collector, cohort, feature outcomes and original training labels are unchanged.",
+  "original_input_seal_sha256": "c7fb0c695c1ab81e98d9a1e2601bfec2251b3338b136462560590e39ad038577",
+  "original_training_preparation_sha256": "81db638b1ad3dd45bd5b44852e09543f58c55e060d5415d95c385883febf27c8",
+  "test_correction": {
+    "path": "tests/test_seal_v8_application_inputs.py",
+    "old_sha256": "255e7be4a889331a36eab0c03e0adcd18d05d88e73a1550f97aa41cc3727e93a",
+    "new_sha256": "359a486166c24ff486e4b37040ed8b9507ed733715708432a4c4bda623a1d622",
+    "change": "Create synthetic tests/test_semantic_features_v7_independent.py in the test-only repository fixture."
+  },
+  "added_sources": [
+    {
+      "path": "scripts/score_v8_applications.py",
+      "sha256": "847892e109deee1b97ce68f9c424be61ccc950d18ac853d3fa9d371850382fcb"
+    },
+    {
+      "path": "tests/test_score_v8_applications.py",
+      "sha256": "6ce835f75557efcfc077d34349e64ff3129f91b2299ccf7ec7f260af1f1f8b40"
+    }
+  ],
+  "byte_identical_data": {
+    "rows.json": "c901a7115125ab6ca3a1321ce7d68734cddf2b9660120960d5baad9ef696dec6",
+    "features.json": "abd5586aa897937ce2596ba677289b835a3d8ffa08d09e9401324c8460768eac",
+    "programs.json": "a345395425d0ecc198e2cf545bd532e51871090e53d565b485de883dbb13f215",
+    "novelty.json": "4089afef0d35efbf3d6a7ce72a2a682e72cb4b35c73812940db81b0f0598f529",
+    "training/training-data.json": "0b4c158d2bafcbbab05545624b8d48d7048418d887d77cc8e1ca15720626c5fb",
+    "prelabel-audit.zip": "c337f91dd9c9adec976ea6824b621f944acd2b81885d03715886629b6f338075",
+    "materialization-coverage.json": "d52c04ec9046f95ed6dff05fd212b16632757e555fe9cb5b3d13318c9be305f9"
+  },
+  "new_estimator_fits": 0,
+  "model_predictions_read": false,
+  "fresh_application_labels_read": false,
+  "validation": "151 V8 tests and 7 subtests passed. Earlier fixture failure retained. Local full suite also has an independently diagnosed existing macOS 200ms process-start timeout failure; not claimed green.",
+  "preservation": "Original complete checkpoint remains in Git; exact changed seal/preparation/test bytes and failed test logs are retained here."
+}

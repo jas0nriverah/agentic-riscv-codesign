@@ -1,0 +1,94 @@
+{
+  "schema": "isaforge-v8-independent-input-audit-v1",
+  "status": "pass",
+  "inputs": {
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/v8-application-inputs-attempt-0000/input-preparation.json": "5e520e12af96dbbefc61ffd4c02696a9e26f39447288d7832d13b56d8afa619c",
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/v8-application-inputs-attempt-0000/features.json": "abd5586aa897937ce2596ba677289b835a3d8ffa08d09e9401324c8460768eac",
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/v8-application-inputs-attempt-0000/rows.json": "c901a7115125ab6ca3a1321ce7d68734cddf2b9660120960d5baad9ef696dec6",
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/v8-application-inputs-attempt-0000/novelty.json": "4089afef0d35efbf3d6a7ce72a2a682e72cb4b35c73812940db81b0f0598f529",
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/v8-training-preparation-attempt-0001/preparation.json": "9c0f607a98d878f65ce74c0e8d67e67177f176d95a60fa08a2bf19e5c67acbeb",
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/v8-consumed-inputs-attempt-0002/completion.json": "2f68d164768a5aac49dcdcc53e995967759fe2af998205b7bca0c75ec6bce6b4"
+  },
+  "audit_source_sha256": {
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/../v8-input-independent-audit/replay_inputs.py": "3b9f297ddc76c2b2916c0ec4e16acb29b2d089810173a0c4b3bb99f6efc0e179",
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/tests/test_semantic_features_v7_independent.py": "0f928b781cef490063cb2b6dc19189316768ba5c7365ed7044fd3f4d5dc2707e",
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/isaforge/v8_application_corpus.py": "191bc3a6c35cdd063bc64839a579952e3bf81166415e38b45764c2fe2e360a2f",
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/scripts/prepare_v8_applications.py": "482d87135352e091e5ce123fb55858e74d5ce9da571e5a4c3cc2a501a723dec1",
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/scripts/prepare_v8_training.py": "f1510941ea920f089b09f6f05baf976835a036d8f3e489cb8c6f8f14470d37fe",
+    "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/agentic-riscv-codesign/scripts/prepare_v8_consumed.py": "93d89111124203572e3da27ffc197b9dc523b7937063b6edf9dcb4ca2cf3ebfc"
+  },
+  "application_rows": 152,
+  "unique_original_formulas": 146,
+  "primary_family_rows": 150,
+  "related_source_rows": 2,
+  "consumed_formulas": 2764,
+  "training_rows": 1665,
+  "training_consumed_full455_differences": [],
+  "sources_and_native_solver_consistent": true,
+  "exact_restored_prefix_columns": 336,
+  "deterministic_suffix_columns": 119,
+  "native_subprocess_calls": 0,
+  "feature_archive": {
+    "path": "feature-evidence.zip",
+    "sha256": "8cb6df35b099f15e58a27c9b102143004899318021d767b92257384230c3058f",
+    "bytes": 5884797
+  },
+  "restored_files": 1968,
+  "cache_directories": 328,
+  "modes": {
+    "bit": {
+      "accepted": 145,
+      "fallback_original": 1
+    },
+    "affine": {
+      "accepted": 145,
+      "fallback_original": 1
+    },
+    "combined": {
+      "accepted": 145,
+      "fallback_original": 1
+    }
+  },
+  "fallback_records": [
+    {
+      "formula": "sub(slli(add(slli(in0,1),in0),4),add(slli(in0,1),in0))",
+      "engine": {
+        "scope": "one input formula, all modes and passes; charge once per formula",
+        "solver_seconds": 0.4594199999999997,
+        "solver_wall_seconds": 0.5048265829973388,
+        "unique_solver_calls": 1,
+        "local_cache_hits": 0,
+        "fallback_reason": "proof_unknown",
+        "timeout_ms": 500
+      },
+      "unknown_query_sha256": [
+        "96f6336e5e0c7e47988b80464a9e03a4c8c92635aac7a2b675cc2afb19c9940d"
+      ]
+    }
+  ],
+  "accepted_local_certificate_steps_reproved": 182,
+  "unique_independent_accepted_local_queries": 69,
+  "unknown_rewrite_retries": 0,
+  "independent_recursive_word_comparisons": 140598,
+  "novelty_match_unique_counts": {
+    "canonical": 29,
+    "original_or_normalized": 30,
+    "commutative_normalized": 30,
+    "ordered_skeleton": 105,
+    "mapping217_vector": 68,
+    "legacy_original336_vector": 47,
+    "legacy_rewritten336_vector": 47
+  },
+  "strict_no_declared_match_unique": 33,
+  "strict_no_declared_match_program_counts": {
+    "bitcount": 7,
+    "fft": 0,
+    "ndes": 9,
+    "h264_dec": 18,
+    "isqrt": 0
+  },
+  "strict_novel_complete_primary_family_macro_available": false,
+  "original_zero_unique_count": 41,
+  "scope": "No experiment fit, fresh label, or actual model prediction. Replayed raw input graphs/first proof ledger only; unknown rewrite was retained without retry. Absence of declared identity match is not complete functional novelty.",
+  "elapsed_seconds": 13.609390208992409
+}

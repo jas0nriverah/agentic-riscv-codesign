@@ -1,0 +1,89 @@
+{
+  "schema": "isaforge-v10-csd-hardware-recipe-v1",
+  "scope": "Consumed32-case hardware development study; no area predictor fit",
+  "pairs": 32,
+  "arms": [
+    "original",
+    "csd"
+  ],
+  "fresh_synthesis_jobs": 64,
+  "model_fits": 0,
+  "constants": [
+    11,
+    44,
+    85,
+    340,
+    341,
+    511,
+    1364,
+    2044
+  ],
+  "contexts": [
+    "direct_product",
+    "add_after_product",
+    "sub_before_product",
+    "masked_sub_before_product"
+  ],
+  "rewrite": {
+    "method": "nonadjacent signed digits; highest positive term then descending add/subtract",
+    "max_nonzero_digits": 5,
+    "max_shift": 11,
+    "max_output_operations": 32,
+    "alternatives_per_original": 1
+  },
+  "source_equivalence": {
+    "logic": "QF_BV32 unconstrained-word lemma + exact whole-context AST congruence",
+    "timeout_ms": 60000,
+    "required_result": "unsat",
+    "input_assumptions": [],
+    "whole_expression_queries": "retained diagnostic-only, not solved again",
+    "amendment_commit": "05b19728803d96a5754ed695f543a97fc49ba1b1"
+  },
+  "rtl_equivalence": {
+    "pairs": 32,
+    "timeout_seconds": 60,
+    "script_commands": [
+      "prep -top pair_miter -flatten",
+      "check -assert",
+      "sat -timeout 60 -verify -prove trigger 0 -show-inputs -show-outputs"
+    ],
+    "scope": "Universal actual emitted original-vs-csd RTL miter; mandatory before any optimization claim"
+  },
+  "measurement": {
+    "workers": 2,
+    "verification_seed": 2026101522,
+    "random_vectors": 2048,
+    "boundary_vectors": 100,
+    "vectors_per_arm": 2148,
+    "timeout_seconds_per_arm": 360,
+    "synthesis_commands": [
+      "synth_ice40 -top candidate",
+      "check -assert"
+    ],
+    "dsp": false,
+    "carry": true,
+    "mapped_verification": "2148 samples perarm via strict raw SB_LUT4/SB_CARRY interpreter; not universal",
+    "original_rtl_verification": "2148 Yosys eval samples perarm against independent original u32 oracle"
+  },
+  "reporting": {
+    "primary": "paired csd LUT4 minus original LUT4 on all32 pairs",
+    "summaries": [
+      "all32 mean",
+      "median",
+      "minimum",
+      "maximum",
+      "wins/ties/losses",
+      "8constants x4contexts full matrix"
+    ],
+    "carry": "descriptive counts and deltas, separate from LUT4",
+    "failed_pairs": "retain all; complete primary pending",
+    "filtering": false,
+    "replacements": false,
+    "timing_cpu_power_claims": false,
+    "historical_original_labels": "development context only; all64 arms measured fresh"
+  },
+  "tools": {
+    "path": "tools.json",
+    "sha256": "ee267f729fb235c4a60b0688b9130cea987bcbf7076a347b0316d8f7089f547a"
+  }
+}

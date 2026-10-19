@@ -1,0 +1,50 @@
+{
+  "policy": "empirical one-sided log-error margin before resource rejection",
+  "frozen_at_utc": "2026-10-13T05:21:06.423733+00:00",
+  "quantile": 0.9,
+  "order_statistic_rank": 4,
+  "log_overprediction_margin": 1.8284853422391674,
+  "calibration_novel_formula_count": 81,
+  "calibration_program_count": 4,
+  "program_maximum_log_overpredictions": {
+    "minver": 1.5577758072705845,
+    "nbody": 0.045939066363208436,
+    "slre": 1.8284853422391674,
+    "ud": 0.05752143393440434
+  },
+  "training_benchmarks": [
+    "aha-mont64",
+    "crc32",
+    "edn",
+    "huffbench",
+    "matmult-int",
+    "nettle-aes",
+    "nettle-sha256",
+    "wikisort"
+  ],
+  "calibration_benchmarks": [
+    "minver",
+    "nbody",
+    "slre",
+    "ud"
+  ],
+  "limitations": [
+    "An empirical margin; correlated formulas/programs prevent a distribution-free coverage claim.",
+    "Calibration labels are additional historical measurements outside the target budget.",
+    "Discounted scores only order measurements; actual measured feasibility is mandatory."
+  ],
+  "input_sha256": {
+    "results/2026-10-13/dataset.json": "76babc8f611d0dd29cf836ac7f0b225d20fb928d242605752a951449ed0042a2",
+    "generated/holdout/experiment/dataset.json": "73ee8893354bcd38d9dbbeee981725d1d7ca966de211cd36f1191608ccf762bf",
+    "generated/holdout/inference/v2.json": "827028c73952d2800e98dfe4729b919ee9077f492b58c0e9514d8ff6d8cd74c4"
+  },
+  "policy_source_sha256": "1c318b94c0e2ad6287f2b6d470974c4ec581eb805018f7544bd438e9cd42d823",
+  "final_test_benchmarks": [
+    "cubic",
+    "picojpeg",
+    "qrduino",
+    "sglib-combined",
+    "st"
+  ],
+  "development_note": "Before final labels, changed formula-weighted draft margin to program-max weighting to match program-level decision endpoint. No final labels inspected."
+}

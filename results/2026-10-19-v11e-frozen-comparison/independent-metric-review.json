@@ -1,0 +1,770 @@
+{
+  "schema": "isaforge-v11e-independent-metric-review-v1",
+  "status": "pass",
+  "reviewed_at_utc": "2026-10-19T16:11:43.435761+00:00",
+  "inputs": [
+    {
+      "path": "results/2026-10-19-v11e-frozen-comparison/independent-target-audit/scoring-inputs.json",
+      "sha256": "7b87dc039fa38c05d666abc4e9d54c570a8b9f81b30b9dd5f3b94dfd8af9b77e",
+      "bytes": 181039
+    },
+    {
+      "path": "results/2026-10-19-v11e-frozen-comparison/scores.json",
+      "sha256": "3792e04d6e9730ccf78bec7aaa034f9c017af1cdbe0a36bfc7d0a6447fcb7947",
+      "bytes": 40550
+    },
+    {
+      "path": "results/2026-10-19-v11e-frozen-comparison/independent-target-audit/audit.json",
+      "sha256": "0dcd70b990774fff33fc766fd6fa0163ee540d43414e123034a931fefd83f6ce",
+      "bytes": 6815
+    }
+  ],
+  "implementation": "Independent Python standard library arithmetic executed from inline script; did not import or invoke score_v11_transfer.py. math.fsum means, explicit type7 quantiles, explicit <=cap feasibility.",
+  "comparison": {
+    "numeric_and_structural_checks": 722,
+    "relative_tolerance": 1e-12,
+    "absolute_tolerance": 1e-12,
+    "maximum_absolute_numeric_difference": 2.220446049250313e-16,
+    "mismatches": []
+  },
+  "coverage": {
+    "unique_canonical_originals": 327,
+    "program_formula_memberships": 521,
+    "complete_program_outcomes": 6,
+    "nonempty_programs": 5,
+    "families": 5,
+    "empty_programs": [
+      "recursion"
+    ]
+  },
+  "primary": {
+    "V6": 0.5066049144989216,
+    "V9": 0.5252390771809372,
+    "delta_v9_minus_v6": 0.018634162682015565,
+    "relative_change_percent": 3.678243567859275
+  },
+  "per_program": {
+    "ammunition": {
+      "V6": {
+        "n": 129,
+        "mae": 1.5495994832041344,
+        "bias_prediction_minus_actual": 0.3987984496124029,
+        "rmsle": 0.3548947288840402,
+        "absolute_error_p90": 4.5666666666666655,
+        "absolute_error_p95": 8.15533333333332,
+        "absolute_error_p99": 18.239866666666664,
+        "maximum_absolute_error": 43.663333333333334,
+        "maximum_underprediction": 17.11666666666666,
+        "zero_area_count": 36,
+        "zero_area_mae": 0.0,
+        "cap_decisions": {
+          "32": {
+            "false_accept_count": 1,
+            "false_reject_count": 4,
+            "all_rows_denominator": 129,
+            "predicted_feasible_denominator": 88,
+            "predicted_infeasible_denominator": 41,
+            "truly_feasible_denominator": 91,
+            "truly_infeasible_denominator": 38
+          },
+          "64": {
+            "false_accept_count": 1,
+            "false_reject_count": 1,
+            "all_rows_denominator": 129,
+            "predicted_feasible_denominator": 111,
+            "predicted_infeasible_denominator": 18,
+            "truly_feasible_denominator": 111,
+            "truly_infeasible_denominator": 18
+          },
+          "128": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 129,
+            "predicted_feasible_denominator": 125,
+            "predicted_infeasible_denominator": 4,
+            "truly_feasible_denominator": 125,
+            "truly_infeasible_denominator": 4
+          }
+        },
+        "positive_area_count": 93,
+        "positive_area_mape_fraction": 0.6965535514291401,
+        "positive_area_mape_percent": 69.655355142914
+      },
+      "V9": {
+        "n": 129,
+        "mae": 1.4986434108527118,
+        "bias_prediction_minus_actual": 0.40298449612403253,
+        "rmsle": 0.3537976656323149,
+        "absolute_error_p90": 4.767333333333335,
+        "absolute_error_p95": 7.664666666666667,
+        "absolute_error_p99": 15.991599999999995,
+        "maximum_absolute_error": 40.026666666666664,
+        "maximum_underprediction": 12.399999999999999,
+        "zero_area_count": 36,
+        "zero_area_mae": 0.0,
+        "cap_decisions": {
+          "32": {
+            "false_accept_count": 1,
+            "false_reject_count": 4,
+            "all_rows_denominator": 129,
+            "predicted_feasible_denominator": 88,
+            "predicted_infeasible_denominator": 41,
+            "truly_feasible_denominator": 91,
+            "truly_infeasible_denominator": 38
+          },
+          "64": {
+            "false_accept_count": 1,
+            "false_reject_count": 1,
+            "all_rows_denominator": 129,
+            "predicted_feasible_denominator": 111,
+            "predicted_infeasible_denominator": 18,
+            "truly_feasible_denominator": 111,
+            "truly_infeasible_denominator": 18
+          },
+          "128": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 129,
+            "predicted_feasible_denominator": 125,
+            "predicted_infeasible_denominator": 4,
+            "truly_feasible_denominator": 125,
+            "truly_infeasible_denominator": 4
+          }
+        },
+        "positive_area_count": 93,
+        "positive_area_mape_fraction": 0.6719288204288468,
+        "positive_area_mape_percent": 67.19288204288468
+      }
+    },
+    "audiobeam": {
+      "V6": {
+        "n": 169,
+        "mae": 0.2853057199211046,
+        "bias_prediction_minus_actual": -0.1740039447731755,
+        "rmsle": 0.032756743264082636,
+        "absolute_error_p90": 0.3253333333333335,
+        "absolute_error_p95": 1.9753333333333323,
+        "absolute_error_p99": 4.8430666666666635,
+        "maximum_absolute_error": 6.638333333333321,
+        "maximum_underprediction": 6.638333333333321,
+        "zero_area_count": 55,
+        "zero_area_mae": 0.0,
+        "cap_decisions": {
+          "32": {
+            "false_accept_count": 0,
+            "false_reject_count": 2,
+            "all_rows_denominator": 169,
+            "predicted_feasible_denominator": 127,
+            "predicted_infeasible_denominator": 42,
+            "truly_feasible_denominator": 129,
+            "truly_infeasible_denominator": 40
+          },
+          "64": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 169,
+            "predicted_feasible_denominator": 150,
+            "predicted_infeasible_denominator": 19,
+            "truly_feasible_denominator": 150,
+            "truly_infeasible_denominator": 19
+          },
+          "128": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 169,
+            "predicted_feasible_denominator": 163,
+            "predicted_infeasible_denominator": 6,
+            "truly_feasible_denominator": 163,
+            "truly_infeasible_denominator": 6
+          }
+        },
+        "positive_area_count": 114,
+        "positive_area_mape_fraction": 0.014148627132524872,
+        "positive_area_mape_percent": 1.4148627132524871
+      },
+      "V9": {
+        "n": 169,
+        "mae": 0.3132051282051279,
+        "bias_prediction_minus_actual": -0.18561143984220896,
+        "rmsle": 0.03313746852525502,
+        "absolute_error_p90": 0.6166666666666671,
+        "absolute_error_p95": 2.0969999999999955,
+        "absolute_error_p99": 4.3577333333333215,
+        "maximum_absolute_error": 9.696666666666658,
+        "maximum_underprediction": 9.696666666666658,
+        "zero_area_count": 55,
+        "zero_area_mae": 0.0,
+        "cap_decisions": {
+          "32": {
+            "false_accept_count": 0,
+            "false_reject_count": 2,
+            "all_rows_denominator": 169,
+            "predicted_feasible_denominator": 127,
+            "predicted_infeasible_denominator": 42,
+            "truly_feasible_denominator": 129,
+            "truly_infeasible_denominator": 40
+          },
+          "64": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 169,
+            "predicted_feasible_denominator": 150,
+            "predicted_infeasible_denominator": 19,
+            "truly_feasible_denominator": 150,
+            "truly_infeasible_denominator": 19
+          },
+          "128": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 169,
+            "predicted_feasible_denominator": 163,
+            "predicted_infeasible_denominator": 6,
+            "truly_feasible_denominator": 163,
+            "truly_infeasible_denominator": 6
+          }
+        },
+        "positive_area_count": 114,
+        "positive_area_mape_fraction": 0.014417908913812639,
+        "positive_area_mape_percent": 1.4417908913812638
+      }
+    },
+    "pm": {
+      "V6": {
+        "n": 74,
+        "mae": 0.42076576576576563,
+        "bias_prediction_minus_actual": -0.37211711711711704,
+        "rmsle": 0.013502751584488801,
+        "absolute_error_p90": 1.5753333333333366,
+        "absolute_error_p95": 3.0108333333333306,
+        "absolute_error_p99": 6.285499999999995,
+        "maximum_absolute_error": 6.638333333333321,
+        "maximum_underprediction": 6.638333333333321,
+        "zero_area_count": 20,
+        "zero_area_mae": 0.0,
+        "cap_decisions": {
+          "32": {
+            "false_accept_count": 0,
+            "false_reject_count": 2,
+            "all_rows_denominator": 74,
+            "predicted_feasible_denominator": 42,
+            "predicted_infeasible_denominator": 32,
+            "truly_feasible_denominator": 44,
+            "truly_infeasible_denominator": 30
+          },
+          "64": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 74,
+            "predicted_feasible_denominator": 58,
+            "predicted_infeasible_denominator": 16,
+            "truly_feasible_denominator": 58,
+            "truly_infeasible_denominator": 16
+          },
+          "128": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 74,
+            "predicted_feasible_denominator": 66,
+            "predicted_infeasible_denominator": 8,
+            "truly_feasible_denominator": 66,
+            "truly_infeasible_denominator": 8
+          }
+        },
+        "positive_area_count": 54,
+        "positive_area_mape_fraction": 0.006197589245205123,
+        "positive_area_mape_percent": 0.6197589245205123
+      },
+      "V9": {
+        "n": 74,
+        "mae": 0.5058558558558554,
+        "bias_prediction_minus_actual": -0.42765765765765706,
+        "rmsle": 0.01575449919064108,
+        "absolute_error_p90": 1.5243333333333369,
+        "absolute_error_p95": 2.9929999999999937,
+        "absolute_error_p99": 8.170966666666647,
+        "maximum_absolute_error": 9.696666666666658,
+        "maximum_underprediction": 9.696666666666658,
+        "zero_area_count": 20,
+        "zero_area_mae": 0.0,
+        "cap_decisions": {
+          "32": {
+            "false_accept_count": 0,
+            "false_reject_count": 2,
+            "all_rows_denominator": 74,
+            "predicted_feasible_denominator": 42,
+            "predicted_infeasible_denominator": 32,
+            "truly_feasible_denominator": 44,
+            "truly_infeasible_denominator": 30
+          },
+          "64": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 74,
+            "predicted_feasible_denominator": 58,
+            "predicted_infeasible_denominator": 16,
+            "truly_feasible_denominator": 58,
+            "truly_infeasible_denominator": 16
+          },
+          "128": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 74,
+            "predicted_feasible_denominator": 66,
+            "predicted_infeasible_denominator": 8,
+            "truly_feasible_denominator": 66,
+            "truly_infeasible_denominator": 8
+          }
+        },
+        "positive_area_count": 54,
+        "positive_area_mape_fraction": 0.007473315522765789,
+        "positive_area_mape_percent": 0.7473315522765789
+      }
+    },
+    "fmref": {
+      "V6": {
+        "n": 148,
+        "mae": 0.2773536036036036,
+        "bias_prediction_minus_actual": -0.23433558558558554,
+        "rmsle": 0.024146920740278365,
+        "absolute_error_p90": 0.3349999999999982,
+        "absolute_error_p95": 1.7070000000000036,
+        "absolute_error_p99": 4.934766666666667,
+        "maximum_absolute_error": 6.638333333333321,
+        "maximum_underprediction": 6.638333333333321,
+        "zero_area_count": 48,
+        "zero_area_mae": 0.0,
+        "cap_decisions": {
+          "32": {
+            "false_accept_count": 0,
+            "false_reject_count": 2,
+            "all_rows_denominator": 148,
+            "predicted_feasible_denominator": 106,
+            "predicted_infeasible_denominator": 42,
+            "truly_feasible_denominator": 108,
+            "truly_infeasible_denominator": 40
+          },
+          "64": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 148,
+            "predicted_feasible_denominator": 126,
+            "predicted_infeasible_denominator": 22,
+            "truly_feasible_denominator": 126,
+            "truly_infeasible_denominator": 22
+          },
+          "128": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 148,
+            "predicted_feasible_denominator": 143,
+            "predicted_infeasible_denominator": 5,
+            "truly_feasible_denominator": 143,
+            "truly_infeasible_denominator": 5
+          }
+        },
+        "positive_area_count": 100,
+        "positive_area_mape_fraction": 0.009318125502942483,
+        "positive_area_mape_percent": 0.9318125502942483
+      },
+      "V9": {
+        "n": 148,
+        "mae": 0.30849099099099075,
+        "bias_prediction_minus_actual": -0.25047297297297266,
+        "rmsle": 0.025372109157522856,
+        "absolute_error_p90": 0.5419999999999999,
+        "absolute_error_p95": 2.2083333333333286,
+        "absolute_error_p99": 4.6734333333333336,
+        "maximum_absolute_error": 9.696666666666658,
+        "maximum_underprediction": 9.696666666666658,
+        "zero_area_count": 48,
+        "zero_area_mae": 0.0,
+        "cap_decisions": {
+          "32": {
+            "false_accept_count": 0,
+            "false_reject_count": 2,
+            "all_rows_denominator": 148,
+            "predicted_feasible_denominator": 106,
+            "predicted_infeasible_denominator": 42,
+            "truly_feasible_denominator": 108,
+            "truly_infeasible_denominator": 40
+          },
+          "64": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 148,
+            "predicted_feasible_denominator": 126,
+            "predicted_infeasible_denominator": 22,
+            "truly_feasible_denominator": 126,
+            "truly_infeasible_denominator": 22
+          },
+          "128": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 148,
+            "predicted_feasible_denominator": 143,
+            "predicted_infeasible_denominator": 5,
+            "truly_feasible_denominator": 143,
+            "truly_infeasible_denominator": 5
+          }
+        },
+        "positive_area_count": 100,
+        "positive_area_mape_fraction": 0.009637712580791196,
+        "positive_area_mape_percent": 0.9637712580791196
+      }
+    },
+    "fac": {
+      "V6": {
+        "n": 1,
+        "mae": 0.0,
+        "bias_prediction_minus_actual": 0.0,
+        "rmsle": 0.0,
+        "absolute_error_p90": 0.0,
+        "absolute_error_p95": 0.0,
+        "absolute_error_p99": 0.0,
+        "maximum_absolute_error": 0.0,
+        "maximum_underprediction": 0.0,
+        "zero_area_count": 1,
+        "zero_area_mae": 0.0,
+        "cap_decisions": {
+          "32": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 1,
+            "predicted_feasible_denominator": 1,
+            "predicted_infeasible_denominator": 0,
+            "truly_feasible_denominator": 1,
+            "truly_infeasible_denominator": 0
+          },
+          "64": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 1,
+            "predicted_feasible_denominator": 1,
+            "predicted_infeasible_denominator": 0,
+            "truly_feasible_denominator": 1,
+            "truly_infeasible_denominator": 0
+          },
+          "128": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 1,
+            "predicted_feasible_denominator": 1,
+            "predicted_infeasible_denominator": 0,
+            "truly_feasible_denominator": 1,
+            "truly_infeasible_denominator": 0
+          }
+        },
+        "positive_area_count": 0,
+        "positive_area_mape_fraction": null,
+        "positive_area_mape_percent": null
+      },
+      "V9": {
+        "n": 1,
+        "mae": 0.0,
+        "bias_prediction_minus_actual": 0.0,
+        "rmsle": 0.0,
+        "absolute_error_p90": 0.0,
+        "absolute_error_p95": 0.0,
+        "absolute_error_p99": 0.0,
+        "maximum_absolute_error": 0.0,
+        "maximum_underprediction": 0.0,
+        "zero_area_count": 1,
+        "zero_area_mae": 0.0,
+        "cap_decisions": {
+          "32": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 1,
+            "predicted_feasible_denominator": 1,
+            "predicted_infeasible_denominator": 0,
+            "truly_feasible_denominator": 1,
+            "truly_infeasible_denominator": 0
+          },
+          "64": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 1,
+            "predicted_feasible_denominator": 1,
+            "predicted_infeasible_denominator": 0,
+            "truly_feasible_denominator": 1,
+            "truly_infeasible_denominator": 0
+          },
+          "128": {
+            "false_accept_count": 0,
+            "false_reject_count": 0,
+            "all_rows_denominator": 1,
+            "predicted_feasible_denominator": 1,
+            "predicted_infeasible_denominator": 0,
+            "truly_feasible_denominator": 1,
+            "truly_infeasible_denominator": 0
+          }
+        },
+        "positive_area_count": 0,
+        "positive_area_mape_fraction": null,
+        "positive_area_mape_percent": null
+      }
+    }
+  },
+  "per_family_equal_eligible_program_mae": {
+    "arbitrary-precision-bit-strings": {
+      "V6": 1.5495994832041344,
+      "V9": 1.4986434108527118
+    },
+    "audio-beamforming": {
+      "V6": 0.2853057199211046,
+      "V9": 0.3132051282051279
+    },
+    "numeric-template-matching": {
+      "V6": 0.42076576576576563,
+      "V9": 0.5058558558558554
+    },
+    "fm-reception": {
+      "V6": 0.2773536036036036,
+      "V9": 0.30849099099099075
+    },
+    "integer-recurrences": {
+      "V6": 0.0,
+      "V9": 0.0
+    }
+  },
+  "pooled_membership_metrics": {
+    "V6": {
+      "n": 521,
+      "mae": 0.6147792706333973,
+      "bias_prediction_minus_actual": -0.07712092130518236,
+      "rmsle": 0.17811504660900943,
+      "absolute_error_p90": 1.5199999999999996,
+      "absolute_error_p95": 3.6066666666666656,
+      "absolute_error_p99": 9.760666666666628,
+      "maximum_absolute_error": 43.663333333333334,
+      "maximum_underprediction": 17.11666666666666,
+      "zero_area_count": 160,
+      "zero_area_mae": 0.0,
+      "cap_decisions": {
+        "32": {
+          "false_accept_count": 1,
+          "false_reject_count": 10,
+          "all_rows_denominator": 521,
+          "predicted_feasible_denominator": 364,
+          "predicted_infeasible_denominator": 157,
+          "truly_feasible_denominator": 373,
+          "truly_infeasible_denominator": 148
+        },
+        "64": {
+          "false_accept_count": 1,
+          "false_reject_count": 1,
+          "all_rows_denominator": 521,
+          "predicted_feasible_denominator": 446,
+          "predicted_infeasible_denominator": 75,
+          "truly_feasible_denominator": 446,
+          "truly_infeasible_denominator": 75
+        },
+        "128": {
+          "false_accept_count": 0,
+          "false_reject_count": 0,
+          "all_rows_denominator": 521,
+          "predicted_feasible_denominator": 498,
+          "predicted_infeasible_denominator": 23,
+          "truly_feasible_denominator": 498,
+          "truly_infeasible_denominator": 23
+        }
+      },
+      "positive_area_count": 361,
+      "positive_area_mape_fraction": 0.18742079264696174,
+      "positive_area_mape_percent": 18.742079264696173
+    },
+    "V9": {
+      "n": 521,
+      "mae": 0.6321433141394748,
+      "bias_prediction_minus_actual": -0.092322456813819,
+      "rmsle": 0.17767159212128653,
+      "absolute_error_p90": 1.673333333333332,
+      "absolute_error_p95": 3.759999999999998,
+      "absolute_error_p99": 9.696666666666658,
+      "maximum_absolute_error": 40.026666666666664,
+      "maximum_underprediction": 12.399999999999999,
+      "zero_area_count": 160,
+      "zero_area_mae": 0.0,
+      "cap_decisions": {
+        "32": {
+          "false_accept_count": 1,
+          "false_reject_count": 10,
+          "all_rows_denominator": 521,
+          "predicted_feasible_denominator": 364,
+          "predicted_infeasible_denominator": 157,
+          "truly_feasible_denominator": 373,
+          "truly_infeasible_denominator": 148
+        },
+        "64": {
+          "false_accept_count": 1,
+          "false_reject_count": 1,
+          "all_rows_denominator": 521,
+          "predicted_feasible_denominator": 446,
+          "predicted_infeasible_denominator": 75,
+          "truly_feasible_denominator": 446,
+          "truly_infeasible_denominator": 75
+        },
+        "128": {
+          "false_accept_count": 0,
+          "false_reject_count": 0,
+          "all_rows_denominator": 521,
+          "predicted_feasible_denominator": 498,
+          "predicted_infeasible_denominator": 23,
+          "truly_feasible_denominator": 498,
+          "truly_infeasible_denominator": 23
+        }
+      },
+      "positive_area_count": 361,
+      "positive_area_mape_fraction": 0.18144141887081958,
+      "positive_area_mape_percent": 18.144141887081958
+    }
+  },
+  "unique_original_metrics_secondary": {
+    "V6": {
+      "n": 327,
+      "mae": 0.832986748216106,
+      "bias_prediction_minus_actual": 0.011641182466870499,
+      "rmsle": 0.22424148813101516,
+      "absolute_error_p90": 1.9926666666666715,
+      "absolute_error_p95": 4.591666666666665,
+      "absolute_error_p99": 12.361000000000013,
+      "maximum_absolute_error": 43.663333333333334,
+      "maximum_underprediction": 17.11666666666666,
+      "zero_area_count": 99,
+      "zero_area_mae": 0.0,
+      "cap_decisions": {
+        "32": {
+          "false_accept_count": 1,
+          "false_reject_count": 6,
+          "all_rows_denominator": 327,
+          "predicted_feasible_denominator": 226,
+          "predicted_infeasible_denominator": 101,
+          "truly_feasible_denominator": 231,
+          "truly_infeasible_denominator": 96
+        },
+        "64": {
+          "false_accept_count": 1,
+          "false_reject_count": 1,
+          "all_rows_denominator": 327,
+          "predicted_feasible_denominator": 273,
+          "predicted_infeasible_denominator": 54,
+          "truly_feasible_denominator": 273,
+          "truly_infeasible_denominator": 54
+        },
+        "128": {
+          "false_accept_count": 0,
+          "false_reject_count": 0,
+          "all_rows_denominator": 327,
+          "predicted_feasible_denominator": 313,
+          "predicted_infeasible_denominator": 14,
+          "truly_feasible_denominator": 313,
+          "truly_infeasible_denominator": 14
+        }
+      },
+      "positive_area_count": 228,
+      "positive_area_mape_fraction": 0.2927004346190423,
+      "positive_area_mape_percent": 29.270043461904233
+    },
+    "V9": {
+      "n": 327,
+      "mae": 0.8316513761467881,
+      "bias_prediction_minus_actual": 0.006819571865444206,
+      "rmsle": 0.22360490049014872,
+      "absolute_error_p90": 2.1613333333333333,
+      "absolute_error_p95": 4.446666666666658,
+      "absolute_error_p99": 11.0944,
+      "maximum_absolute_error": 40.026666666666664,
+      "maximum_underprediction": 12.399999999999999,
+      "zero_area_count": 99,
+      "zero_area_mae": 0.0,
+      "cap_decisions": {
+        "32": {
+          "false_accept_count": 1,
+          "false_reject_count": 6,
+          "all_rows_denominator": 327,
+          "predicted_feasible_denominator": 226,
+          "predicted_infeasible_denominator": 101,
+          "truly_feasible_denominator": 231,
+          "truly_infeasible_denominator": 96
+        },
+        "64": {
+          "false_accept_count": 1,
+          "false_reject_count": 1,
+          "all_rows_denominator": 327,
+          "predicted_feasible_denominator": 273,
+          "predicted_infeasible_denominator": 54,
+          "truly_feasible_denominator": 273,
+          "truly_infeasible_denominator": 54
+        },
+        "128": {
+          "false_accept_count": 0,
+          "false_reject_count": 0,
+          "all_rows_denominator": 327,
+          "predicted_feasible_denominator": 313,
+          "predicted_infeasible_denominator": 14,
+          "truly_feasible_denominator": 313,
+          "truly_infeasible_denominator": 14
+        }
+      },
+      "positive_area_count": 228,
+      "positive_area_mape_fraction": 0.28282836809097256,
+      "positive_area_mape_percent": 28.282836809097255
+    }
+  },
+  "leave_one_family_out_sensitivity": {
+    "arbitrary-precision-bit-strings": {
+      "V6": 0.24585627232261847,
+      "V9": 0.2818879937629935,
+      "delta_v9_minus_v6": 0.03603172144037503,
+      "relative_change_percent": 14.65560390222355,
+      "retained_families": 4,
+      "retained_program_formula_memberships": 392
+    },
+    "audio-beamforming": {
+      "V6": 0.5619297131433759,
+      "V9": 0.5782475644248894,
+      "delta_v9_minus_v6": 0.01631785128151353,
+      "relative_change_percent": 2.9038954338671967,
+      "retained_families": 4,
+      "retained_program_formula_memberships": 352
+    },
+    "numeric-template-matching": {
+      "V6": 0.5280647016822106,
+      "V9": 0.5300848825122076,
+      "delta_v9_minus_v6": 0.002020180829996998,
+      "relative_change_percent": 0.3825631259884405,
+      "retained_families": 4,
+      "retained_program_formula_memberships": 447
+    },
+    "fm-reception": {
+      "V6": 0.5639177422227512,
+      "V9": 0.5794260987284238,
+      "delta_v9_minus_v6": 0.015508356505672616,
+      "relative_change_percent": 2.7501096958830415,
+      "retained_families": 4,
+      "retained_program_formula_memberships": 373
+    },
+    "integer-recurrences": {
+      "V6": 0.6332561431236521,
+      "V9": 0.6565488464761715,
+      "delta_v9_minus_v6": 0.023292703352519428,
+      "relative_change_percent": 3.6782435678592704,
+      "retained_families": 4,
+      "retained_program_formula_memberships": 520
+    }
+  },
+  "four_family_excluding_fac_sensitivity": {
+    "V6": 0.6332561431236521,
+    "V9": 0.6565488464761715,
+    "delta_v9_minus_v6": 0.023292703352519428,
+    "relative_change_percent": 3.6782435678592704,
+    "retained_families": 4,
+    "retained_program_formula_memberships": 520
+  },
+  "positive_area_mape_definition": "Mean abs(prediction-actual)/actual over actual>0 only, times100 for percent; zero counts and zero-area MAE reported separately. Pooled membership and unique-original denominators remain separate.",
+  "interpretation": "Frozen V9 family-macro MAE is higher than frozen V6 on this panel. Original all-program endpoint remains undefined because recursion is empty. Leave-one-family-out is post-result sensitivity only, not endpoint replacement.",
+  "new_native_jobs": 0,
+  "models_loaded": 0,
+  "new_predictions": 0,
+  "fits": 0
+}

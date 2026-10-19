@@ -1,0 +1,111 @@
+name: Python tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - if: matrix.python-version == '3.13'
+        run: python -m pip install -e '.[dev,proofs,reports]' -r requirements-research.txt
+      - if: matrix.python-version == '3.11'
+        run: python -m pip install -e '.[dev,proofs,reports]'
+      - run: python -m pytest -q
+      - run: python scripts/audit_v10d_hardware.py --root results/2026-10-15-v10d-csd-hardware --output generated/ci-v10d-area/independent-audit.json
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v10d-area-replay-python-${{ matrix.python-version }}
+          path: generated/ci-v10d-area/
+          if-no-files-found: ignore
+      - run: python scripts/audit_v10d_timing.py --root results/2026-10-15-v10d-timing --output generated/ci-v10d-timing/independent-audit.json
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v10d-timing-replay-python-${{ matrix.python-version }}
+          path: generated/ci-v10d-timing/
+          if-no-files-found: ignore
+      - run: python scripts/reproduce_v10d_selection.py --root results/2026-10-15-v10d-timing --output generated/ci-v10d-selection --skip-figures
+      - run: cmp generated/ci-v10d-selection/policy-results.json results/2026-10-15-v10d-selection/policy-results.json
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v10d-selection-replay-python-${{ matrix.python-version }}
+          path: generated/ci-v10d-selection/
+          if-no-files-found: ignore
+      - run: python -I -S scripts/audit_v12_results.py --root results/2026-10-15-v12-target-transform --output generated/ci-v12/independent-results-audit.json
+      - run: mkdir -p generated/ci-v13
+      - run: python scripts/audit_v13_comparison.py --action results --root results/2026-10-15-v13b-coverage-recovery --output generated/ci-v13/independent-results-audit.json
+      - run: python scripts/audit_v14_routing.py --output generated/ci-v14/independent-routing-audit.json
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v14-routing-replay-python-${{ matrix.python-version }}
+          path: generated/ci-v14/
+          if-no-files-found: ignore
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v13-point-replay-python-${{ matrix.python-version }}
+          path: generated/ci-v13/
+          if-no-files-found: ignore
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v12-point-replay-python-${{ matrix.python-version }}
+          path: generated/ci-v12/
+          if-no-files-found: ignore
+      - run: python -m unittest discover -s results/2026-10-14-development-semantics-v7/evidence/tests -p 'test_*.py'
+      - run: isaforge demo --output generated/demo
+      - run: python -m isaforge.frozen_inference --model results/2026-10-13-prospective/models/resource-ridge.joblib --kind v2 --candidates results/2026-10-13-prospective/final/dataset.json --output generated/inference-smoke.json
+      - run: python -m isaforge.frozen_inference --model results/2026-10-13-v3/models/area-model-v3.joblib --kind v3 --candidates results/2026-10-13-v3/probe/candidates.json --output generated/v3-inference-smoke.json
+      - run: python scripts/reproduce_matched.py --skip-figures --output generated/ci-replay
+      - run: python scripts/evaluate_v4.py --manifest results/2026-10-13-v4/freeze.json --release results/2026-10-13-v4/label-release.json --output generated/ci-v4/evaluation.json
+      - run: python scripts/evaluate_v5.py --root results/2026-10-14-v5 --output generated/ci-v5/evaluation.json
+      - run: python scripts/archive_external_v5.py restore
+      - run: python scripts/evaluate_external_v5.py score --output generated/ci-external-v5/evaluation.json
+      - if: matrix.python-version == '3.13'
+        run: python scripts/measure_v6.py restore --scope calibration
+      - if: matrix.python-version == '3.13'
+        run: python scripts/measure_v6.py restore --scope test
+      - if: matrix.python-version == '3.13'
+        run: python scripts/evaluate_v6.py score --output generated/ci-v6/evaluation.json
+      - if: matrix.python-version == '3.13'
+        run: python scripts/reproduce_v8_applications.py --skip-figures --output generated/ci-v8
+      - if: always() && matrix.python-version == '3.13'
+        uses: actions/upload-artifact@v4
+        with:
+          name: v8-replay-python-3.13
+          path: generated/ci-v8/
+          if-no-files-found: ignore
+      - if: matrix.python-version == '3.13'
+        run: python scripts/reproduce_v9_coverage.py --skip-figures --output generated/ci-v9-coverage
+      - if: always() && matrix.python-version == '3.13'
+        uses: actions/upload-artifact@v4
+        with:
+          name: v9-coverage-replay-python-3.13
+          path: generated/ci-v9-coverage/
+          if-no-files-found: ignore
+      - if: matrix.python-version == '3.13'
+        run: python results/2026-10-14-development-semantics-v7/evidence/package_v7_evidence.py restore --manifest results/2026-10-14-development-semantics-v7/evidence/evidence-manifest.json --repo-root "$PWD" --destination ../v7-ci-evidence
+      - if: matrix.python-version == '3.13'
+        run: python results/2026-10-14-development-semantics-v7/evidence/package_v7_evidence.py score --restored ../v7-ci-evidence --repo-root "$PWD" --output ../v7-ci-score-replay --python "$(command -v python)"
+  hardware-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: sudo apt-get update && sudo apt-get install -y verilator yosys
+      - run: python -m pip install -e '.[dev]' -r requirements-research.txt
+      - run: python -m pytest -q tests/test_rtl.py tests/test_synthesis.py tests/test_masterrtl_baseline.py

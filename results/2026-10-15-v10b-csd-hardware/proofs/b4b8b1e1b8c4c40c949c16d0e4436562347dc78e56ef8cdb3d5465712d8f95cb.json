@@ -1,0 +1,35 @@
+{
+  "schema": "isaforge-v10-csd-source-proof-v2",
+  "original_formula": "add(mul(in0,addi(0,44)),in1)",
+  "rewritten_formula": "add(sub(sub(slli(in0,6),slli(in0,4)),slli(in0,2)),in1)",
+  "method": "universal QF_BV32 operand lemma plus exact whole-expression AST congruence",
+  "inputs": [
+    "in0:32",
+    "in1:32"
+  ],
+  "assumptions": [],
+  "timeout_ms": 5000,
+  "result": "unsat",
+  "elapsed_seconds": 0.12474250000377651,
+  "query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun word () (_ BitVec 32))\n(assert\n (let ((?x18 (bvsub (bvsub (bvshl word (_ bv6 32)) (bvshl word (_ bv4 32))) (bvshl word (_ bv2 32)))))\n(and (distinct (bvmul word (bvadd (_ bv0 32) (_ bv44 32))) ?x18) true)))\n(check-sat)\n",
+  "query_sha256": "6b74aaada4e32689ceb6395eafed0deb581429f67b462e238609c2673eccaa48",
+  "solver_version": "4.15.4",
+  "query_scope": "universal unconstrained word:32; no range or reachability assumptions",
+  "congruence": {
+    "schema": "isaforge-v10-csd-congruence-v1",
+    "replacement_path": [
+      0
+    ],
+    "operand_formula": "in0",
+    "constant_u32": 44,
+    "original_product": "mul(in0,addi(0,44))",
+    "rewritten_product": "sub(sub(slli(in0,6),slli(in0,4)),slli(in0,2))",
+    "lemma_original_formula": "mul(in0,addi(0,44))",
+    "lemma_rewritten_formula": "sub(sub(slli(in0,6),slli(in0,4)),slli(in0,2))",
+    "checked": "All enclosing/unmodified AST nodes identical; each term uses the exact original operand AST",
+    "logical_rule": "Universal word identity instantiated with operand, then equality congruence through identical whole context"
+  },
+  "whole_expression_query_smt2": "; benchmark generated from python API\n(set-info :status unknown)\n(declare-fun in1 () (_ BitVec 32))\n(declare-fun in0 () (_ BitVec 32))\n(assert\n (let ((?x19 (bvsub (bvsub (bvshl in0 (_ bv6 32)) (bvshl in0 (_ bv4 32))) (bvshl in0 (_ bv2 32)))))\n(and (distinct (bvadd (bvmul in0 (bvadd (_ bv0 32) (_ bv44 32))) in1) (bvadd ?x19 in1)) true)))\n(check-sat)\n",
+  "whole_expression_query_sha256": "91c830ef6b3b0c0f4720dce44bd923984932f822567a1fdba1cdebf20239f40c",
+  "whole_expression_query_status": "diagnostic-only; not solved in amended preparation"
+}

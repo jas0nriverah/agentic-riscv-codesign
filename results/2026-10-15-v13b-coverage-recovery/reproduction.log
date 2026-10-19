@@ -1,0 +1,125 @@
+mkdir -p generated/reproduction/v13
+.venv/bin/python scripts/audit_v13_comparison.py --action results --root results/2026-10-15-v13b-coverage-recovery --output generated/reproduction/v13/independent-results-audit.json
+{
+  "schema": "isaforge-v13-independent-results-audit-v1",
+  "status": "pass",
+  "complete": true,
+  "preparation_sha256": "36f3d1d91e836b0876349d0e37094cd176d4b63e686c9bc49695ea09fa56a1ad",
+  "completion_sha256": "27e9873b4468c9dff43789761f1f6093e2622887b67f2ddb4b3ba46f811e3063",
+  "audit_source_sha256": "34370fc5dc3862c8cb977f4518a175dc5b21c130ef251b6082fc8f304f41b3d2",
+  "input_audit": {
+    "schema": "isaforge-v13-independent-input-audit-v1",
+    "status": "pass",
+    "preparation_sha256": "36f3d1d91e836b0876349d0e37094cd176d4b63e686c9bc49695ea09fa56a1ad",
+    "audit_source_sha256": "34370fc5dc3862c8cb977f4518a175dc5b21c130ef251b6082fc8f304f41b3d2",
+    "bound_files_verified": 139,
+    "rows_verified": 1761,
+    "primary_original_rows": 1713,
+    "secondary_coverage_rows": 48,
+    "features_verified": 217,
+    "component_count": 538,
+    "fold_validation_counts": [
+      372,
+      382,
+      349,
+      329,
+      329
+    ],
+    "control_training_counts": [
+      1345,
+      1339,
+      1368,
+      1408,
+      1392
+    ],
+    "all_control_and_augmented_training_have9strata": true,
+    "target_poison_geometry_unchanged": true,
+    "fits_run": 0,
+    "native_jobs": 0,
+    "evaluation_target_reads": 0,
+    "independence": "No trainer import. Reuses independent V12 adjacency/float32/greedy-fold auditor, shared frozen parser/V4 normalization; independently joins savedV12+V13whitelists and verifies exactjointmatrix/groups/control exclusions. New336 native-feature geometry was checked by frozen feature workflow; not independently re-extracted here."
+  },
+  "fit_receipts_verified": 30,
+  "saved_point_sets_verified": 6,
+  "saved_point_rows_verified": 10566,
+  "primary_recomputed": {
+    "per_seed": {
+      "2026101421": 0.36193297934496815,
+      "2026101422": 0.24371190654411823,
+      "2026101423": 0.24705099456754365
+    },
+    "mean": 0.28423196015221003,
+    "sample_sd_algorithm_seeds": 0.06731176468420712
+  },
+  "available_model_hashes_verified": 30,
+  "float_replay_policy": {
+    "absolute_tolerance": 1e-12,
+    "max_ulps": 8,
+    "types_counts_rawdecode": "exact"
+  },
+  "independence": "Standard-library saved-point metric/cap/tail arithmetic; no V13 trainer/model/native import or inference/retraining. Group helper and parser/V4 reuse disclosed in input_audit. Separate frozen nativefeature workflow supplies336 records; local model bytes hashed only if present."
+}
+.venv/bin/python scripts/plot_v13_coverage.py --root results/2026-10-15-v13b-coverage-recovery --output generated/reproduction/v13/figures
+{
+  "schema": "isaforge-v13-coverage-figure-manifest-v1",
+  "matplotlib_version": "3.11.2",
+  "figure_data": {
+    "path": "generated/reproduction/v13/figures/figure-data.json",
+    "sha256": "1ede069ecad55c21b187793dcbeb8055f987f2decb05fe9fac8826f326c0b014"
+  },
+  "files": [
+    {
+      "path": "generated/reproduction/v13/figures/v13-primary-and-coverage.png",
+      "sha256": "e9e156350ff29aa739df369b8e7da5aaf7242e0330569902c1c25bfbc2c574c1"
+    },
+    {
+      "path": "generated/reproduction/v13/figures/v13-primary-and-coverage.svg",
+      "sha256": "7501887c1f763cf3e4b2e1881e8d6fcafda8f6b161ba82cc5321c413c3d5b892"
+    },
+    {
+      "path": "generated/reproduction/v13/figures/v13-primary-and-coverage.pdf",
+      "sha256": "64e1a222e2465479203b58741cbd7a50ff029963882ffaa556b0bc08ea3b5278"
+    },
+    {
+      "path": "generated/reproduction/v13/figures/v13-cap64-and-tails.png",
+      "sha256": "7c92efe15f5bdcc82095c178179b1bf0348a271e7fd4ca42cd1b77509e8399da"
+    },
+    {
+      "path": "generated/reproduction/v13/figures/v13-cap64-and-tails.svg",
+      "sha256": "1132937b81319a0ccba8c3c32dbe273639dfb7c4ff790f38826902519c5f6560"
+    },
+    {
+      "path": "generated/reproduction/v13/figures/v13-cap64-and-tails.pdf",
+      "sha256": "8069a4ad04707cdbd4cd0c3468372e94d122bc8cd05c96336ebbd54318b6d847"
+    }
+  ],
+  "native_jobs": 0,
+  "model_imports_or_fits": 0,
+  "scope": "Targeted consumed-development augmentation; identical joint closed held-out groups. Old1713 primary, new48 secondary. All three seeds; no selected seed, statistical confidence interval, final refit, independent transfer, calibration, hardware timing, power or CPU claim."
+}
+.venv/bin/python scripts/plot_ml_model_overview.py --output generated/reproduction/ml-model
+{
+  "schema": "isaforge-ml-model-overview-manifest-v1",
+  "matplotlib_version": "3.11.2",
+  "data": {
+    "path": "generated/reproduction/ml-model/figure-data.json",
+    "sha256": "98a2cab174c94b9b6b3ba82e0346c422982b2980426f298cc1f659b56aab66ec"
+  },
+  "files": [
+    {
+      "path": "generated/reproduction/ml-model/ml-model-overview.png",
+      "sha256": "a62fb607f054b745563a616e29e3f992ee04a4981a514b812b5e0b7c2482d2b8"
+    },
+    {
+      "path": "generated/reproduction/ml-model/ml-model-overview.svg",
+      "sha256": "c804bf699fd5d1fe9b0b560b1ae63cb24d58b2da296a6b18e9b4f8b0e32ff64c"
+    },
+    {
+      "path": "generated/reproduction/ml-model/ml-model-overview.pdf",
+      "sha256": "72e5c7cc6fd12b8708cbcfca67f0b965fe1034a906ea06fd4cfbf92ca67f9a11"
+    }
+  ],
+  "native_jobs": 0,
+  "model_imports_or_fits": 0,
+  "scope": "Isolated LUT4 area prediction and targeted consumed-development model comparison; no hardware timing, power, CPU speedup, calibrated safety or independent-transfer claim."
+}
