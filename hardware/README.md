@@ -1,6 +1,6 @@
 # Measured PicoRV32 custom instructions
 
-This page documents the core with an external memory model. The later [closed-memory SoC experiment](../docs/soc-integration.md) and [matched SoC routing](../docs/soc-routing.md) include on-chip RAM; [current results](../docs/results.md) keeps their cycle and resource counts separate.
+This page documents the core with an external memory model. The later [closed-memory SoC experiment](https://github.com/jas0nriverah/agentic-riscv-codesign/blob/b64716a2b94b332fdbced677869620bb949c073d/docs/soc-integration.md) and [matched SoC routing](https://github.com/jas0nriverah/agentic-riscv-codesign/blob/b64716a2b94b332fdbced677869620bb949c073d/docs/soc-routing.md) include on-chip RAM; [current results](https://github.com/jas0nriverah/agentic-riscv-codesign/blob/b64716a2b94b332fdbced677869620bb949c073d/docs/results.md) keeps their cycle and resource counts separate.
 
 ISAForge now executes two extracted formulas as real instructions on the
 official PicoRV32 processor. The experiment measures both a controlled formula

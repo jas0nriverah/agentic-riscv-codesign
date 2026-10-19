@@ -1,109 +1,47 @@
-# Research result archives
+# Results
 
-[V15 scoped stress](2026-10-19-v15-scoped-stress/README.md):32 new verified mappings, no fits,22.63% lower MAE versusV6 with worse underprediction; experimental.
+Three curated datasets retain every original circuit, measured LUT count and comparator prediction. Run `make reproduce` to verify their hashes and regenerate [summary.json](summary.json). No training or synthesis is needed.
 
+## 1. Research-baseline comparison
 
-[Completed327-circuit frozen comparison](2026-10-19-v11e-frozen-comparison/README.md): V6/V9 frozen before fresh labels; independent netlist and metric audits; V9 primary MAE +3.68% worse.
+192 synthetic circuits, eight equally sized structural strata. All models below use the same 1,665 fitting circuits and original-RTL targets. MAE includes all 192 circuits; MAPE uses 186 positive targets, with six zeros retained separately.
 
+| Model | MAE, LUT4 ↓ | MAPE ↓ |
+| --- | ---: | ---: |
+| **ISAForge base** | **32.1609** | **43.63%** |
+| Dual-graph control | 34.3322 | 49.37% |
+| Tuned simple operator graph | 46.3390 | 75.63% |
+| MasterRTL recipe adaptation | 61.4686 | 85.67% |
 
-- [V11c complete input collection](2026-10-16-v11c-dtc-recovery/README.md): all six outcomes, 521 memberships and 327 originals; independent raw replay passed, no new model score.
+Adding mapping descriptors lowers primary MAE by **6.32%** against the dual-graph control. These are our FPGA recipe comparisons, not the published MasterRTL ASIC results. All eight historical comparator predictions, including additional ablations, remain in [observations](research-baselines/observations.json).
 
-- [V11b input recovery](2026-10-16-v11b-transfer-recovery/STATUS.md): controlled-environment startup failure retained for both missing programs; no new labels or model results.
+## 2. Application transfer
 
-- [V14 exploratory routing](2026-10-16-v14-specialist-development/README.md): one input-only gate, 5,283 audited selections, original control preserved exactly; consumed-development evidence only.
-- [V13 targeted coverage comparison](2026-10-15-v13b-coverage-recovery/README.md): 48 new verified measurements, 30 matched fits and 10,566 reproduced points; coverage gain with original-cohort regression, no promotion.
-- [V12 target-scale comparison](2026-10-15-v12-target-transform/README.md): all 30 grouped fits and 10,278 OOF points; raw-target fitting retained after log targets worsen primary MAE and false accepts.
+327 unique original circuits across five nonempty application families. All base/coverage predictions were frozen before new labels. The original input pool has recorded overlap with earlier data. The scoped policy was designed afterward and selects base on every case.
 
-- [V10 paired hardware attempt](../docs/v10-csd-hardware-results.md): all 32 source proofs pass; 16 actual-RTL proofs pass and 16 time out, blocking all 64 area jobs. Raw evidence and independent audit retained.
-- [Synthetic proof and timing preparation](2026-10-15-v10-hardware-preparation/README.md): standalone proof checker and fixed-register wrapper validation; no study result or timing route.
+| Model | Primary family-macro MAE, LUT4 ↓ | Unique positive-circuit MAPE ↓ |
+| --- | ---: | ---: |
+| **Base** | **0.506605** | 29.27% |
+| Coverage | 0.525239 | **28.28%** |
+| Scoped, retrospective | 0.506605 | 29.27% |
 
-- [V11 reserved transfer input feasibility](2026-10-15-v11-reserved-transfer/README.md): 318 complete-pool rows from three programs, two incomplete traces and one empty pool. The reserved five-family primary remains incomplete; no new model features, predictions, targets or fits.
+Coverage **worsens the primary endpoint by 3.68%**, despite slightly lower MAPE. MAPE uses 228 positive physical circuits; all 99 zero targets remain in MAE. Family-macro MAE weights families equally through 521 program/formula memberships. Circuit-pooled MAE is 0.832987 for base and 0.831651 for coverage; changing that weighting changes the conclusion, so the original primary remains explicit. Threshold mistakes are unchanged. [Observations](application-transfer/observations.json) · [Audit](application-transfer/audit.json).
 
-- [V9 training coverage](2026-10-15-v9-coverage-development/README.md): 48 new measured training circuits, one fixed fit, 25.40% consumed-application MAE reduction; independent raw and inference audits.
+## 3. Prospective arithmetic stress
 
-- [V9 adaptation development](2026-10-15-v9-adaptation-development/README.md): 1.94% remaining-case MAE reduction after three charged reveals per family; consumed development only.
-- [Training support diagnosis](2026-10-15-development-diagnosis/README.md): archived leaf-level analysis with no new fits or labels.
+32 new related synthetic circuits, four templates with eight parameters each. All 32 route to coverage, so scoped and coverage predictions are identical. This tests arithmetic coverage, not transfer to new application families.
 
-These directories preserve completed experimental stages, including negative
-results, model freezes, predictions, and measurement provenance. Read
-[current conclusions](../docs/results.md) and [methodology](../docs/methodology.md)
-before comparing scores across stages. A historical snapshot describes what
-was known at that stage; later development can reuse its labels.
+| Model | MAE, LUT4 ↓ | MAPE ↓ | Cap64 false rejections ↓ | Worst underprediction, LUT4 ↓ |
+| --- | ---: | ---: | ---: | ---: |
+| Base | 15.5211 | 13.42% | 4 | **2.83** |
+| Coverage / scoped | **12.0093** | **11.57%** | **2** | 32.01 |
 
-## Stage map
+All 32 targets are positive. All four template MAEs improve; aggregate MAE falls **22.63%**. The larger underprediction tail keeps the scoped policy experimental. All 68,736 sampled RTL checks and 32 measurements passed. [Observations](arithmetic-stress/observations.json) · [Audit](arithmetic-stress/audit.json).
 
-| Archive | Evidence and evaluation status | Entry point |
-| --- | --- | --- |
-| `2026-10-15-v8-application-transfer/` | Six point predictors frozen before146 original circuit measurements; four primary application families plus related-source secondary; complete errors and budgeted decisions | [V8 results and replay](../docs/v8-application-results.md) |
-| `2026-10-14-development-semantics-v7/` | Six fixed feature views, 90 fits and 29,970 OOF predictions; proved transformations, independent metric replay and explicit cross-fold limitations; development only | [V7 results](../docs/v7-development-results.md), [portable evidence](2026-10-14-development-semantics-v7/evidence/REPRODUCE.md) |
-| `2026-10-14-v6/` | Eight frozen predictors on 192 test circuits / 96 structural components after separate 192-circuit calibration; all original RTL and failures retained | [V6 evidence](2026-10-14-v6/README.md), [results](../docs/v6-results.md) |
-| `2026-10-13/` | Original eight-program pilot: 339 program/formula rows, 301 distinct synthesized circuits; grouped model development and offline selection replay | [Pilot summary](2026-10-13/README.md) |
-| `2026-10-13-prospective/` | Six-program transfer collection followed by a five-program final test using models frozen on the original 301 circuits; transfer labels subsequently calibrate the final acquisition policy | [Prospective and hardware summary](2026-10-13-prospective/README.md) |
-| `2026-10-13-v3/` | Six matched-target predictors trained on the combined 713-formula development corpus; frozen evaluation on 192 novel synthetic circuits, including the MasterRTL recipe adaptation | [Six-model comparison](2026-10-13-v3/README.md) |
-| `2026-10-13-v4/` | Semantics-aware V4 and same-data MasterRTL train on 1,289 circuits; new 256-circuit frozen holdout includes three unchanged historical comparators | [V4 results and replay](../docs/v4-results.md) |
-| `2026-10-14-v5-external/` | Six frozen models on 80 application-derived rows / 79 measured original circuits; input overlap and all failures retained | [External results](../docs/external-v5-results.md) |
-| `2026-10-14-v5/` | Four equally tuned feature views fit 1,665 circuits, reserve 392 for calibration, and compare six frozen predictors on 256 new circuits | [V5 results](../docs/v5-results.md) |
+## Evidence and interpretation
 
-The [post-V5 development diagnostics](2026-10-14-development-diagnostics/README.md) retain 75 fitting-only seed runs and an exact-output inference optimization. These are development/runtime results, not a replacement independent test.
+The iteration diagram also shows an earlier **25.40% development improvement** on previously examined applications. It uses a different cohort and is not another independent test. Its full measured record is linked from the diagram source to the immutable archive.
 
-The three workload collections together cover all 19 pinned Embench programs,
-with 1,098 program/formula occurrences and 713 unique circuits. Two transfer
-programs have no legal candidates, so candidate-bearing program counts total
-17. The 192-formula probe is a separate synthetic circuit source with eight
-equal strata; it adds no executed workload.
+Each dataset has `candidates.json`, cached `features.json`, `observations.json` and an original audit receipt. [Provenance](provenance.json) records the source commit and SHA256 of every source/export. Audits retain their original historical paths; resolve those paths in the [preserved archive](https://github.com/jas0nriverah/agentic-riscv-codesign/tree/b64716a2b94b332fdbced677869620bb949c073d), where raw netlists, verification logs, protocols, input amendments and failed experiments remain available. No failed case was removed to produce this presentation.
 
-## Find the evidence
-
-| Question | Files |
-| --- | --- |
-| What was executed and measured in the pilot? | [Benchmark provenance](2026-10-13/benchmarks.json), [candidate summaries](2026-10-13/candidate-summary.json), [RTL verification](2026-10-13/verification.json), [mapped resource measurements](2026-10-13/synthesis-metrics.json) |
-| What were the prospective prediction and selection outcomes? | [Transfer evaluation](2026-10-13-prospective/transfer/evaluation.json), [final evaluation](2026-10-13-prospective/final/evaluation.json), [frozen original-cohort models](2026-10-13-prospective/models/) |
-| Were zero-candidate programs retained? | [Transfer coverage](2026-10-13-prospective/transfer/benchmarks.json), [zero-candidate diagnostics](2026-10-13-prospective/transfer/zero_candidate_diagnostics.json) |
-| What changed in the integrated processor? | [Core cycle measurements](2026-10-13-prospective/core/crc32-measurements.json), [SoC measurements](2026-10-13-prospective/soc/measurements.json), [matched SoC routing](2026-10-13-prospective/soc/routing-summary.json) |
-| Which six-model inputs and artifacts were frozen? | [Five-model preregistration](2026-10-13-v3/models/preregistration.json), [MasterRTL preregistration](2026-10-13-v3/masterrtl/preregistration.json), [probe freeze](2026-10-13-v3/probe/freeze.json), [predictions and timing sidecars](2026-10-13-v3/probe-inference/) |
-| What supports the final matched comparison? | [Probe scores](2026-10-13-v3/probe-evaluation.json), [verified labels](2026-10-13-v3/probe/dataset.json), [collector audit](2026-10-13-v3/probe/collector_checks.json), [independent numerical audit](2026-10-13-v3/independent-audit.txt), [full error and bootstrap data](2026-10-13-v3/independent-audit.json) |
-
-The v3 development folder contains both a readable evaluation summary and a
-compressed full evaluation with detailed inner-fold records. They are distinct
-representations, not interchangeable duplicate files. Artifact schemas and
-preregistrations retain their original hashes and provenance paths.
-
-## Interpret stage labels
-
-The transfer and final workload sets were held out from the earlier models
-trained on 301 formulas. All their labels become development data in the later
-713-formula matched comparison. The earlier deployment refit is recorded as
-untested at its historical stage; the later probe evaluates the full-cohort
-resource model alongside the other five matched predictors.
-
-LUT4 labels describe isolated combinational circuits. Instruction-saving
-selection scores do not measure CPU cycles. Integrated CRC32 cycles come from
-RTL simulation, and routed runtime ratios depend on timing-model assumptions;
-they are not physical-board measurements. The MasterRTL comparison retrains a
-published recipe on the shared LUT4 target and synthetic probe, rather than
-replicating the paper's ASIC benchmark.
-
-## Replay or recollect
-
-Use the [matched reproduction guide](../docs/reproduce-matched-comparison.md) to
-replay tracked scores, the independent bootstrap audit, and figures. Use the
-[workload and processor reproduction guide](../docs/reproduce-research.md) for
-earlier frozen-model inference or fresh measurement collection.
-
-Bulky traces, toolchains, circuit logs/netlists, and the MasterRTL SOG cache are
-outside tracked Git files. The evidence archive supplies selected retained
-hardware artifacts and the complete SOG cache; the guides explain where to put
-them and which external tools are needed. Preserve frozen files when replaying:
-write new outputs under `generated/` or `work/`.
-
-[Fixed-router development study](2026-10-14-development-router/README.md): two predeclared input-only gates on existing fitting-only OOF predictions; all controls and seeds retained.
-
-[Mapping-feature development study](2026-10-14-development-mapping/README.md): fixed 23-descriptor ablation, 30 matched fits, all three seeds and nine strata. Development only; fresh V6 validation is a separate lineage.
-
-## Verified constant-multiply hardware
-
-[V10d](2026-10-15-v10d-csd-hardware/README.md) retains all 32 fixed original/CSD pairs, 64 fresh measurements and the complete raw-evidence audit. LUT4 decreases in 31 pairs and ties once; carry increases in 12. The prior V10c SAT failure remains unchanged. No timing or CPU gain is inferred.
-
-[V10d matched timing](2026-10-15-v10d-timing/README.md) subsequently retains 64 wrapped mappings, 64 sequential checks and 192 routes: all 32 formula means improve in period, with one individual seed regression and 72 unresolved path attributions. These are registered-harness timing estimates; CPU effects remain unmeasured.
-
-[V10d constrained selection](2026-10-15-v10d-selection/README.md) applies three declared postmeasurement policies to every authenticated alternative. Original worst-case resource/clock limits select 19 rewrites and retain 13 originals; the unconstrained and common-12-MHz policies select all 32 rewrites. This is measured selection, not a learned or CPU result.
+These are three different benchmark distributions. Their raw error values do not form a learning curve. The estimates concern isolated FPGA area; no learned instruction-selection or CPU-performance advantage follows from these scores alone. [Definitions and MAPE calculation](../docs/benchmarks.md).

@@ -187,13 +187,6 @@ def test_random_compositions_preserve_wrapping_and_signed_ranges():
         assert_sound(formula, random_count=48)
 
 
-def test_broad_previous_corpus_is_now_development():
-    root = Path(__file__).resolve().parents[1] / 'results/2026-10-13-v4'
-    rows = json.loads((root/'development-data.json').read_text())
-    rows += json.loads((root/'corpus/test/candidates.json').read_text())
-    assert len(rows) == 1545
-    for row in rows:
-        assert_sound(row['formula'], random_count=64)
 
 
 FORMAL_FORMULAS = (

@@ -1,47 +1,36 @@
-# Speedup prediction and benchmark-held-out evaluation
+# Model
 
-`SpeedupPredictor` estimates measured elapsed-time speedup using small XGBoost
-regressors trained on bootstrap samples. Training rows must contain the fixed
-`FEATURE_COLUMNS`, positive `speedup`, and one consistent `measurement_source`.
-Only those feature columns reach the model; area, cycle counts, benchmark names,
-formulas, IDs, and labels are excluded from its inputs.
+ISAForge predicts the number of iCE40 four-input lookup tables required by an original RV32 instruction candidate. A candidate is a bounded computation with up to two inputs and one output. Training targets come from verified RTL and actual Yosys synthesis.
 
-```python
-from isaforge.model import SpeedupPredictor
-from isaforge.evaluation import leave_one_benchmark_out
+![Model architecture](figures/research/model.svg)
 
-model = SpeedupPredictor(seed=0).fit(measured_rows)
-predictions = model.predict(unmeasured_rows)
-report = leave_one_benchmark_out(measured_rows, seed=0)
-```
+## Representation and estimator
 
-Prediction rows can omit all measurement fields but need `candidate_id` and every
-feature. Each returned dictionary contains `candidate_id`, `mean`, `lower`,
-`upper`, and `std`. The default interval spans the ensemble's 5th and 95th
-percentiles. Standard deviation measures disagreement between ensemble members.
-The seed and single-threaded training make reruns deterministic within the same
-dependency/platform environment. XGBoost is required for nonconstant regression;
-NumPy and SciPy support prediction and evaluation.
+The extractor computes 336 descriptors; the forest uses a fixed 217-feature view:
 
-These intervals are **not calibrated prediction intervals**. They omit several
-sources of error, including benchmark distribution shift and measurement noise.
-With a singleton or constant-label training set, the model returns a constant
-prediction and zero disagreement, accompanied by explicit warnings. Zero
-disagreement does not establish confidence. Fewer than ten training rows also
-trigger a warning.
+| Feature block | Count |
+| --- | ---: |
+| Simple operator graph | 14 |
+| Original generic graph | 60 |
+| Normalized generic graph | 60 |
+| Absolute differences between the two graph views | 60 |
+| Mapping-related graph descriptors | 23 |
+| **Model inputs** | **217** |
 
-Leave-one-benchmark-out evaluation trains a fresh ensemble after excluding every
-row belonging to the held-out benchmark. The JSON report includes training
-benchmarks/counts, held-out predictions, MAE, Spearman correlation, interval
-coverage, and average interval width. Spearman is `null` for singleton or constant
-cases. Pooled metrics concatenate all held-out predictions and weight each row
-equally; they are not macro-averages of folds. At least two benchmarks are required.
-Hyperparameter tuning must use training benchmarks only; selecting settings after
-reading held-out scores invalidates an unbiased generalization claim.
+The model is an ExtraTrees regressor with 300 trees, one-sample minimum leaves, all features considered at splits, randomized split thresholds, and no bootstrap sampling. Every tree sees the training dataset. Its prediction is the equally weighted mean of tree outputs, clipped to nonnegative values, with the frozen original-generic-zero rule preserved. Tree disagreement is recorded but is not a calibrated uncertainty bound.
 
-Training and evaluation reject mixed measurement sources, including mixtures of
-synthetic, synthesis-estimate, gem5, and hardware labels. Synthetic reports are
-explicitly marked and establish software behavior only. Synthesis estimates and
-gem5 results are distinct from hardware measurements. An evaluation run does not
-establish actual hardware acceleration unless its input labels were measured on
-the hardware under the stated experimental conditions.
+Both graph views describe the same original implementation. Labels always measure original RTL, never a cheaper rewritten implementation substituted after observing the result. Cached features avoid preprocessing; a new formula still requires compatible pre-mapping graph extraction.
+
+## Available predictors
+
+| Name | Training circuits | Role |
+| --- | ---: | --- |
+| `base` | 1,665 | Default; strongest primary result on the completed application-transfer panel |
+| `coverage` | 1,713 | Same representation and estimator, with 48 targeted arithmetic examples |
+| `scoped` | Uses the two saved forests | Experimental input-only selection of one forest |
+
+The scoped policy selects coverage when the original formula contains a low multiplication with a syntactic positive constant from 1 through 2047, or a signed-shift difference `sub(srai(A,k),srai(B,31))`, with input-containing A/B and k from 0 through 31. Otherwise it selects base. It does not inspect labels, predicted error or benchmark identity. The CLI computes only the required model subsets and returns the selected original points.
+
+On the 32-case arithmetic test every case selects coverage, so the scoped policy equals coverage by construction. On the consumed 327-case application panel every case selects base. These checks do not establish routing generalization to a new mixed application distribution.
+
+The weights and adjacent metadata in [models/](../models/) are byte-identical to their archived artifacts. Their original internal module names remain unchanged to preserve serialization and source validation. [Inference and reproduction](reproduce.md).

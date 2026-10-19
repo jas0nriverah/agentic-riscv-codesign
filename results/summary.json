@@ -1,0 +1,476 @@
+{
+  "unit": "one unique original circuit; repeated program memberships are used only in the application family-macro endpoint",
+  "mape": "100 * mean(abs(prediction - measured) / measured) over strictly positive measured LUT4 counts",
+  "benchmarks": {
+    "research-baselines": {
+      "scope": "Frozen 192-case synthetic test; eight equally sized strata; all predictors evaluated on identical original-RTL iCE40 labels. Historical research comparison, not a published-system leaderboard.",
+      "models": {
+        "base": {
+          "n": 192,
+          "positive_n": 186,
+          "zero_n": 6,
+          "mae_lut4": 32.160946180555555,
+          "mape_percent": 43.62947391663286,
+          "zero_mae_lut4": 3.786111111111111,
+          "max_underprediction_lut4": 94.82999999999993,
+          "caps": {
+            "32": {
+              "false_accept": 4,
+              "false_reject": 14
+            },
+            "64": {
+              "false_accept": 6,
+              "false_reject": 5
+            },
+            "128": {
+              "false_accept": 1,
+              "false_reject": 4
+            }
+          },
+          "group_mae_lut4": {
+            "arithmetic_chain": 76.42930555555556,
+            "comparators": 10.802916666666667,
+            "constant_shifts": 4.350416666666667,
+            "mask_logic": 5.655972222222222,
+            "multiplication": 123.2004861111111,
+            "parallel_branches": 8.231458333333334,
+            "shared_diamond": 10.662916666666666,
+            "variable_shifts": 17.95409722222222
+          },
+          "primary_group_macro_mae_lut4": 32.160946180555555
+        },
+        "dual_graph": {
+          "n": 192,
+          "positive_n": 186,
+          "zero_n": 6,
+          "mae_lut4": 34.33217013888889,
+          "mape_percent": 49.36990332453858,
+          "zero_mae_lut4": 4.061111111111111,
+          "max_underprediction_lut4": 121.04333333333352,
+          "caps": {
+            "32": {
+              "false_accept": 2,
+              "false_reject": 19
+            },
+            "64": {
+              "false_accept": 3,
+              "false_reject": 8
+            },
+            "128": {
+              "false_accept": 1,
+              "false_reject": 5
+            }
+          },
+          "group_mae_lut4": {
+            "arithmetic_chain": 87.16013888888888,
+            "comparators": 10.465833333333334,
+            "constant_shifts": 5.392777777777778,
+            "mask_logic": 7.405972222222221,
+            "multiplication": 124.77499999999999,
+            "parallel_branches": 7.752222222222223,
+            "shared_diamond": 12.248472222222224,
+            "variable_shifts": 19.456944444444446
+          },
+          "primary_group_macro_mae_lut4": 34.332170138888884
+        },
+        "earlier_predictor": {
+          "n": 192,
+          "positive_n": 186,
+          "zero_n": 6,
+          "mae_lut4": 101.57979166666667,
+          "mape_percent": 181.8685572870949,
+          "zero_mae_lut4": 6.7188888888888885,
+          "max_underprediction_lut4": 282.5833333333335,
+          "caps": {
+            "32": {
+              "false_accept": 1,
+              "false_reject": 32
+            },
+            "64": {
+              "false_accept": 0,
+              "false_reject": 33
+            },
+            "128": {
+              "false_accept": 2,
+              "false_reject": 25
+            }
+          },
+          "group_mae_lut4": {
+            "arithmetic_chain": 372.3670833333333,
+            "comparators": 30.9575,
+            "constant_shifts": 40.30736111111111,
+            "mask_logic": 17.255972222222223,
+            "multiplication": 162.78888888888892,
+            "parallel_branches": 78.70805555555556,
+            "shared_diamond": 92.71666666666665,
+            "variable_shifts": 17.536805555555556
+          },
+          "primary_group_macro_mae_lut4": 101.57979166666667
+        },
+        "masterrtl_recipe": {
+          "n": 192,
+          "positive_n": 186,
+          "zero_n": 6,
+          "mae_lut4": 61.46855525486171,
+          "mape_percent": 85.6678846239906,
+          "zero_mae_lut4": 5.846466938654582,
+          "max_underprediction_lut4": 399.40289306640625,
+          "caps": {
+            "32": {
+              "false_accept": 4,
+              "false_reject": 23
+            },
+            "64": {
+              "false_accept": 4,
+              "false_reject": 16
+            },
+            "128": {
+              "false_accept": 2,
+              "false_reject": 13
+            }
+          },
+          "group_mae_lut4": {
+            "arithmetic_chain": 184.35819943745932,
+            "comparators": 16.559802105029423,
+            "constant_shifts": 7.426770399014155,
+            "mask_logic": 11.881987596551577,
+            "multiplication": 216.09402084350586,
+            "parallel_branches": 10.113331884145737,
+            "shared_diamond": 18.680543144543964,
+            "variable_shifts": 26.633786628643673
+          },
+          "primary_group_macro_mae_lut4": 61.46855525486171
+        },
+        "multiplication_router": {
+          "n": 192,
+          "positive_n": 186,
+          "zero_n": 6,
+          "mae_lut4": 33.191006944444446,
+          "mape_percent": 43.731752652801966,
+          "zero_mae_lut4": 3.786111111111111,
+          "max_underprediction_lut4": 75.1533333333332,
+          "caps": {
+            "32": {
+              "false_accept": 4,
+              "false_reject": 14
+            },
+            "64": {
+              "false_accept": 6,
+              "false_reject": 5
+            },
+            "128": {
+              "false_accept": 1,
+              "false_reject": 4
+            }
+          },
+          "group_mae_lut4": {
+            "arithmetic_chain": 76.42930555555556,
+            "comparators": 10.802916666666667,
+            "constant_shifts": 4.350416666666667,
+            "mask_logic": 5.655972222222222,
+            "multiplication": 131.4409722222222,
+            "parallel_branches": 8.231458333333334,
+            "shared_diamond": 10.662916666666666,
+            "variable_shifts": 17.95409722222222
+          },
+          "primary_group_macro_mae_lut4": 33.19100694444444
+        },
+        "original_graph": {
+          "n": 192,
+          "positive_n": 186,
+          "zero_n": 6,
+          "mae_lut4": 33.84386284722222,
+          "mape_percent": 52.338034657889715,
+          "zero_mae_lut4": 3.931111111111111,
+          "max_underprediction_lut4": 95.33666666666659,
+          "caps": {
+            "32": {
+              "false_accept": 2,
+              "false_reject": 17
+            },
+            "64": {
+              "false_accept": 3,
+              "false_reject": 8
+            },
+            "128": {
+              "false_accept": 1,
+              "false_reject": 6
+            }
+          },
+          "group_mae_lut4": {
+            "arithmetic_chain": 84.65138888888889,
+            "comparators": 10.914027777777777,
+            "constant_shifts": 5.913472222222222,
+            "mask_logic": 7.295694444444444,
+            "multiplication": 119.77243055555556,
+            "parallel_branches": 7.707152777777778,
+            "shared_diamond": 12.649305555555555,
+            "variable_shifts": 21.847430555555558
+          },
+          "primary_group_macro_mae_lut4": 33.843862847222226
+        },
+        "semantic_features": {
+          "n": 192,
+          "positive_n": 186,
+          "zero_n": 6,
+          "mae_lut4": 34.902812499999996,
+          "mape_percent": 50.42307852473807,
+          "zero_mae_lut4": 3.9483333333333337,
+          "max_underprediction_lut4": 75.1533333333332,
+          "caps": {
+            "32": {
+              "false_accept": 3,
+              "false_reject": 19
+            },
+            "64": {
+              "false_accept": 3,
+              "false_reject": 8
+            },
+            "128": {
+              "false_accept": 1,
+              "false_reject": 5
+            }
+          },
+          "group_mae_lut4": {
+            "arithmetic_chain": 83.27972222222222,
+            "comparators": 11.175972222222223,
+            "constant_shifts": 5.476944444444444,
+            "mask_logic": 5.725833333333333,
+            "multiplication": 131.4409722222222,
+            "parallel_branches": 8.259305555555557,
+            "shared_diamond": 13.276388888888889,
+            "variable_shifts": 20.58736111111111
+          },
+          "primary_group_macro_mae_lut4": 34.902812499999996
+        },
+        "sog_tuned": {
+          "n": 192,
+          "positive_n": 186,
+          "zero_n": 6,
+          "mae_lut4": 46.3389908234127,
+          "mape_percent": 75.63226214584293,
+          "zero_mae_lut4": 4.171666666666667,
+          "max_underprediction_lut4": 268.51,
+          "caps": {
+            "32": {
+              "false_accept": 3,
+              "false_reject": 19
+            },
+            "64": {
+              "false_accept": 3,
+              "false_reject": 10
+            },
+            "128": {
+              "false_accept": 2,
+              "false_reject": 16
+            }
+          },
+          "group_mae_lut4": {
+            "arithmetic_chain": 126.81861111111111,
+            "comparators": 14.632430555555556,
+            "constant_shifts": 9.30587962962963,
+            "mask_logic": 9.682063492063492,
+            "multiplication": 157.72256944444447,
+            "parallel_branches": 9.563263888888889,
+            "shared_diamond": 20.379583333333333,
+            "variable_shifts": 22.607525132275146
+          },
+          "primary_group_macro_mae_lut4": 46.3389908234127
+        }
+      }
+    },
+    "application-transfer": {
+      "scope": "327 unique application-derived originals; six program outcomes, five nonempty families, 521 program/formula memberships. Inputs have documented prior overlap. Base/coverage frozen before targets; scoped result retrospective and mechanically identical to base.",
+      "models": {
+        "base": {
+          "n": 327,
+          "positive_n": 228,
+          "zero_n": 99,
+          "mae_lut4": 0.832986748216106,
+          "mape_percent": 29.27004346190423,
+          "zero_mae_lut4": 0.0,
+          "max_underprediction_lut4": 17.11666666666666,
+          "caps": {
+            "32": {
+              "false_accept": 1,
+              "false_reject": 6
+            },
+            "64": {
+              "false_accept": 1,
+              "false_reject": 1
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          },
+          "family_mae_lut4": {
+            "arbitrary-precision-bit-strings": 1.5495994832041344,
+            "audio-beamforming": 0.2853057199211046,
+            "fm-reception": 0.2773536036036036,
+            "integer-recurrences": 0.0,
+            "numeric-template-matching": 0.42076576576576563
+          },
+          "primary_family_macro_mae_lut4": 0.5066049144989216
+        },
+        "coverage": {
+          "n": 327,
+          "positive_n": 228,
+          "zero_n": 99,
+          "mae_lut4": 0.8316513761467881,
+          "mape_percent": 28.28283680909726,
+          "zero_mae_lut4": 0.0,
+          "max_underprediction_lut4": 12.399999999999999,
+          "caps": {
+            "32": {
+              "false_accept": 1,
+              "false_reject": 6
+            },
+            "64": {
+              "false_accept": 1,
+              "false_reject": 1
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          },
+          "family_mae_lut4": {
+            "arbitrary-precision-bit-strings": 1.4986434108527118,
+            "audio-beamforming": 0.3132051282051279,
+            "fm-reception": 0.30849099099099075,
+            "integer-recurrences": 0.0,
+            "numeric-template-matching": 0.5058558558558554
+          },
+          "primary_family_macro_mae_lut4": 0.5252390771809372
+        },
+        "scoped": {
+          "n": 327,
+          "positive_n": 228,
+          "zero_n": 99,
+          "mae_lut4": 0.832986748216106,
+          "mape_percent": 29.27004346190423,
+          "zero_mae_lut4": 0.0,
+          "max_underprediction_lut4": 17.11666666666666,
+          "caps": {
+            "32": {
+              "false_accept": 1,
+              "false_reject": 6
+            },
+            "64": {
+              "false_accept": 1,
+              "false_reject": 1
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          },
+          "family_mae_lut4": {
+            "arbitrary-precision-bit-strings": 1.5495994832041344,
+            "audio-beamforming": 0.2853057199211046,
+            "fm-reception": 0.2773536036036036,
+            "integer-recurrences": 0.0,
+            "numeric-template-matching": 0.42076576576576563
+          },
+          "primary_family_macro_mae_lut4": 0.5066049144989216
+        }
+      }
+    },
+    "arithmetic-stress": {
+      "scope": "32 prospective related synthetic originals; four equally sized templates. All route to coverage, so scoped equals coverage. Input-only template amendment before freeze; not new application-family transfer.",
+      "models": {
+        "base": {
+          "n": 32,
+          "positive_n": 32,
+          "zero_n": 0,
+          "mae_lut4": 15.521145833333335,
+          "mape_percent": 13.417607960688125,
+          "zero_mae_lut4": null,
+          "max_underprediction_lut4": 2.826666666666654,
+          "caps": {
+            "32": {
+              "false_accept": 0,
+              "false_reject": 0
+            },
+            "64": {
+              "false_accept": 0,
+              "false_reject": 4
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          },
+          "group_mae_lut4": {
+            "and_signed_shift": 8.526250000000001,
+            "constmul_then_xor": 18.342083333333335,
+            "xor_signed_shift": 7.397916666666667,
+            "xor_then_constmul": 27.81833333333334
+          },
+          "primary_group_macro_mae_lut4": 15.521145833333335
+        },
+        "coverage": {
+          "n": 32,
+          "positive_n": 32,
+          "zero_n": 0,
+          "mae_lut4": 12.00927083333333,
+          "mape_percent": 11.570917749834845,
+          "zero_mae_lut4": null,
+          "max_underprediction_lut4": 32.00666666666666,
+          "caps": {
+            "32": {
+              "false_accept": 0,
+              "false_reject": 0
+            },
+            "64": {
+              "false_accept": 0,
+              "false_reject": 2
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          },
+          "group_mae_lut4": {
+            "and_signed_shift": 7.842499999999999,
+            "constmul_then_xor": 14.907499999999995,
+            "xor_signed_shift": 6.740833333333334,
+            "xor_then_constmul": 18.546249999999993
+          },
+          "primary_group_macro_mae_lut4": 12.00927083333333
+        },
+        "scoped": {
+          "n": 32,
+          "positive_n": 32,
+          "zero_n": 0,
+          "mae_lut4": 12.00927083333333,
+          "mape_percent": 11.570917749834845,
+          "zero_mae_lut4": null,
+          "max_underprediction_lut4": 32.00666666666666,
+          "caps": {
+            "32": {
+              "false_accept": 0,
+              "false_reject": 0
+            },
+            "64": {
+              "false_accept": 0,
+              "false_reject": 2
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          },
+          "group_mae_lut4": {
+            "and_signed_shift": 7.842499999999999,
+            "constmul_then_xor": 14.907499999999995,
+            "xor_signed_shift": 6.740833333333334,
+            "xor_then_constmul": 18.546249999999993
+          },
+          "primary_group_macro_mae_lut4": 12.00927083333333
+        }
+      }
+    }
+  }
+}

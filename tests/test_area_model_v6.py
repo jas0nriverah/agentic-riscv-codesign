@@ -132,30 +132,8 @@ def test_estimator_weights_are_bound_beyond_parameters(tmp_path):
     with pytest.raises(ValueError,match='weights'):v6.load_model(path)
 
 
-def test_train_blocks_fresh_release_before_reading_inputs(tmp_path,monkeypatch):
-    import sys
-    sys.path.insert(0,str(Path(__file__).parents[1]/'scripts'))
-    import train_v6
-    fresh=tmp_path/'corpus/calibration';fresh.mkdir(parents=True);(fresh/'label-release.json').write_text('{}')
-    calls=[];monkeypatch.setattr(train_v6,'validate_inputs',lambda *a,**k:calls.append(a))
-    with pytest.raises(ValueError,match='released'):train_v6.run(tmp_path,tmp_path,tmp_path/'cache')
-    assert calls==[] and not (tmp_path/'training-start.json').exists()
 
 
-def test_fit_selection_uses_exact_old_fit_only_and_checks_feature_prefix():
-    import sys
-    sys.path.insert(0,str(Path(__file__).parents[1]/'scripts'))
-    import train_v6
-    root=Path(__file__).parents[1]/'results/2026-10-14-v5'
-    frozen=train_v6.read(root/'development-features.json');split=train_v6.read(root/'split.json')
-    records=[{'formula':r['formula'],'values':r['values']+[0.]*23} for r in frozen['records']]
-    # An unused old calibration feature cannot enter any fitting array.
-    records[split['calibration_indices'][0]]['values'][-1]=float('nan')
-    selected,indices,x,y,_=train_v6.select_fitting(root,records)
-    assert indices==split['fit_indices'] and x.shape==(1665,336) and np.isfinite(x).all()
-    assert len(selected)==len(y)==1665
-    records[indices[0]]['values'][0]+=1
-    with pytest.raises(ValueError,match='replay differs'):train_v6.select_fitting(root,records)
 
 
 def test_real300tree217column_roundtrip_and_padding_vs_named_fields(tmp_path):

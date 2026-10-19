@@ -11,4 +11,4 @@ These are the hardware-facing collection programs. They are separate from the in
 | `run_holdout_benchmarks.py` | Collect declared prospective workload groups with pinned inputs |
 | `spike-setup/` | Bare-metal startup and memory layout used for tracing |
 
-The root Makefile retains the original eight-program build/trace targets. Full 19-program collection is documented in the [research reproduction guide](../docs/reproduce-research.md). Script paths are preserved because existing commands and evidence manifests refer to them.
+The root Makefile retains the original eight-program build/trace targets. Full 19-program collection is documented in the [research reproduction guide](https://github.com/jas0nriverah/agentic-riscv-codesign/blob/b64716a2b94b332fdbced677869620bb949c073d/docs/reproduce-research.md). Script paths are preserved because existing commands and evidence manifests refer to them.
