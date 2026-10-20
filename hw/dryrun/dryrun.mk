@@ -8,7 +8,7 @@ DR_RTL      := $(HW)/rtl/picorv32.v $(HW)/rtl/core_top.v $(HW)/rtl/pcpi_fused.v 
 DR_MICRO    := micro-check micro-fused-1x micro-fused-2x micro-original-1x micro-original-2x \
                micro-xor-1x micro-xor-2x trap-f3-1 trap-f7-1 trap-f7-3 trap-custom1
 
-.PHONY: hw-dryrun hw-dryrun-rtl hw-dryrun-micro hw-dryrun-route
+.PHONY: hw-dryrun hw-dryrun-rtl hw-dryrun-micro hw-dryrun-route hw-critpath
 .SECONDARY: $(DR)/programs/crc32-fused.elf $(DR)/programs/crc32-control.elf \
             $(DR_MICRO:%=$(DR)/micro/%.elf)
 
@@ -91,9 +91,25 @@ $(DR)/route/seed%/report.json: $(DR)/synth/core_top.json $(HW)/synth/core_top.pc
 
 hw-dryrun-route: $(HW_SEEDS:%=$(DR)/route/seed%/report.json)
 
+# --- critical paths of both cores, classified on the netlist (names in the reports mislead)
+
+DR_CRIT_SCRIPTS := $(HW)/scripts/critpath.py $(HW)/scripts/critcone.py $(HW)/scripts/critends.py $(HW)/scripts/critgroups.py
+
+$(HW)/dryrun/critical_paths.csv: $(DR_CRIT_SCRIPTS) $(HW_OUT)/synth/core_top.json $(DR)/synth/core_top.json \
+                                 $(HW_SEEDS:%=$(HW_OUT)/route/seed%/report.json) $(HW_SEEDS:%=$(DR)/route/seed%/report.json)
+	python3 $(HW)/scripts/critcone.py --selftest --netlist $(DR)/synth/core_top.json
+	rm -f $@
+	python3 $(HW)/scripts/critpath.py --core stock --netlist $(HW_OUT)/synth/core_top.json \
+	  --routes $(HW_OUT)/route --seeds $(HW_SEEDS) --out $@
+	python3 $(HW)/scripts/critpath.py --core fused --netlist $(DR)/synth/core_top.json \
+	  --routes $(DR)/route --seeds $(HW_SEEDS) --out $@
+
+hw-critpath: $(HW)/dryrun/critical_paths.csv
+
 # --- the report checks every expectation and writes the measurement row
 
 $(HW)/dryrun/results.json: $(HW)/dryrun/report.py $(HW)/results/baseline.csv hw-dryrun-rtl hw-dryrun-micro hw-dryrun-route \
+                           $(HW)/dryrun/critical_paths.csv \
                            $(DR)/runs/fused/crc32-fused.json $(PROGRAMS:%=$(DR)/runs/fused/stock-%.json) \
                            $(DR)/programs/crc32-control.bin generated/traces/crc32.jsonl generated/candidates/crc32.json
 	RISCV_PREFIX=$(RISCV_PREFIX) python3 -I $< --formula '$(DR_FORMULA)' --seeds $(HW_SEEDS) --programs $(PROGRAMS) --out $@

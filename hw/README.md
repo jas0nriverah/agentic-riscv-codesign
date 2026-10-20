@@ -8,6 +8,7 @@ make hw-sim             # Verilator runs only  -> generated/hw/runs/<program>.js
 make hw-synth           # Yosys synth_ice40    -> generated/hw/synth/
 make hw-route           # nextpnr-ice40 seeds  -> generated/hw/route/seed<N>/
 make hw-pcf             # regenerates synth/core_top.pcf (not part of hw-baseline)
+make hw-critpath        # critical path per seed for the stock and dry-run cores -> dryrun/critical_paths.csv
 ```
 
 ## Provenance
@@ -60,6 +61,18 @@ Every other custom-0 encoding traps through PicoRV32's PCPI timeout and `CATCH_I
 | `fmax_min_mhz`, `fmax_max_mhz` | Slowest and fastest of the same 10 seeds |
 
 `luts` and the three Fmax columns describe the core, so every row repeats them.
+
+### Clock period of a modified core (PROVISIONAL, pending team agreement)
+
+A modified core gets credit for a change in clock period only if its fused unit's logic is on the critical arc. Otherwise **T_fused = T_base** (the baseline's median period), and speedup = `base_cycles / fused_cycles`.
+
+- **Why:** extra logic changes where the placer starts, so routed Fmax moves by several MHz even when the new logic is nowhere near the slowest path. The dry run is an example: +42 LUTs, unit off the arc in every seed, and the median still went up 3.6 MHz.
+- **What is still reported:** the routed Fmax median, min and max are always reported. The protocol (frozen PCF, seeds 1–10) is unchanged, and the routed period is kept beside the credited one.
+- **The structural check** is `make hw-critpath` (`scripts/critpath.py`, `critcone.py`, `critends.py`, `critgroups.py`). It runs on each seed's post-route clk→clk path in nextpnr, classified on the Yosys netlist, never by cell names, which synthesis borrows from nearby signals.
+- **When the unit counts as on the arc:** the arc starts at a unit register, ends at one, or enters logic that depends on unit state through a net that feeds a unit register.
+- **Shared logic doesn't count.** An example is a XOR merged between the unit and the ALU's compare.
+- **When the routed period is credited:** if the unit is on the arc in **any** of seeds 1–10, `candidate_period_ns` = 1000 / routed median Fmax.
+- **Self-test:** `critcone.py --selftest` must pass on the modified netlist first. It proves all three on-arc cases are detected with nextpnr's real cell naming.
 
 ## Results (2026-10-19)
 

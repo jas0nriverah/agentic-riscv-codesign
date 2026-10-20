@@ -1,12 +1,13 @@
 # Dry run: one crc32 candidate end to end (PROVISIONAL)
 
-> **Every choice here is provisional and is not a team decision.** That covers the PCPI interface, the encoding (custom-0, funct7=2, funct3=0), assembly-level rewriting, the 1-cycle PCPI handshake, and the proposed `candidate_id`. The point is to show that the whole path, from candidate to RTL, rewritten binary and measurement, works on one real candidate under the baseline's protocol.
+> **Every choice here is provisional and is not a team decision.** That covers the PCPI interface, the encoding (custom-0, funct7=2, funct3=0), assembly-level rewriting, the 1-cycle PCPI handshake, the clock-period rule (`hw/README.md`), and the proposed `candidate_id`. The point is to show that the whole path, from candidate to RTL, rewritten binary and measurement, works on one real candidate under the baseline's protocol.
 
 ```
 make hw-dryrun          # everything below; writes hw/dryrun/results.json (about 80 s after hw-baseline)
 make hw-dryrun-rtl      # regenerates the datapath and fails if hw/rtl/cx_crc32_xoridx.v differs
 make hw-dryrun-micro    # directed microtests and trap tests
 make hw-dryrun-route    # fused core, seeds 1-10, frozen pins
+make hw-critpath        # critical path per seed, stock and fused cores -> hw/dryrun/critical_paths.csv
 ```
 
 ## Result (2026-10-20)
@@ -16,19 +17,28 @@ make hw-dryrun-route    # fused core, seeds 1-10, frozen pins
 | crc32 cycles | 22,461,391 | 21,242,831 | −1,218,560 (−5.43%) |
 | crc32 instret | 3,831,152 | 3,482,992 | −348,160 (−9.09%) |
 | `SB_LUT4` | 2,439 | 2,481 | +42 |
-| Fmax median (seeds 1–10) | 61.48 MHz | 65.04 MHz | see caveat |
-| Fmax min / max | 59.86 / 64.98 | 62.81 / 67.59 | |
-| speedup, protocol formula | | **1.1185** | cycles × period |
-| speedup, cycles only | | **1.0574** | same clock |
+| Fmax median, routed (seeds 1–10) | 61.48 MHz | 65.04 MHz | not credited, see below |
+| Fmax min / max, routed | 59.86 / 64.98 | 62.81 / 67.59 | |
+| unit on the critical arc | | 0 of 10 seeds | `critical_paths.csv` |
+| period used (provisional rule) | 16.2655 ns | 16.2655 ns | T_fused = T_base |
+| **speedup** | | **1.0574** | equals cycles only |
+| speedup if the routed Fmax were credited | | 1.1185 | for reference only |
 
 - **Correctness:** the fused crc32 passes `verify_benchmark` on the fused core (exit word 1).
 - **Stock programs on the fused core:** all 8 match the baseline's cycles and instret exactly.
 - **Stock flow with `FUSED=0`:** reproduces `hw/results/baseline.csv` byte for byte, and gives the same per-seed Fmax and the same Yosys stats.
 - **All checks in `report.py` pass** (`"problems": []`).
 
-**Fmax caveat.** In short, the rise from 61.48 to 65.04 MHz is placement noise, not something the fused unit earned. Both cores were routed with the same frozen PCF and seeds 1–10, so the numbers are comparable by protocol, but the gain shouldn't be credited to the design.
+**Fmax.** In short, the unit isn't on the critical path in any seed, so the faster routed clock (61.48 → 65.04 MHz) is placement noise and isn't credited. Under the provisional rule in `hw/README.md` the fused core keeps the baseline's period, and the speedup is the cycle saving alone: 1.0574.
 
-In detail, the fused core adds 42 LUTs and puts one more LUT on the worst path. In seed 5 the path runs from a `pcpi_mul` register through the divider carry chain and the branch compare, then through a LUT Yosys named after `fused.unit.active` (the merged PCPI `ready`/`wait` logic), and ends at the `mem_do_rinst` enable. Different logic gives the placer different starting points. The two seed ranges overlap (59.86–64.98 vs 62.81–67.59), and nextpnr's pre-route estimate for that same seed was 60.37 MHz. **1.0574 (cycles only) is the defensible speedup.** The 1.1185 figure follows the agreed formula, but about half of it is clock variance.
+In detail, `make hw-critpath` classifies every seed's post-route clk→clk path on the Yosys netlist (`critical_paths.csv`, table below):
+- **Fused core:** all 10 paths are PicoRV32's branch decision. They run from `reg_op2` through the ALU compare (a carry chain in 9 seeds, the equality XOR/NOR tree in seed 7) to the `mem_do_rinst` clock enable.
+- **Stock core:** seeds 2–3 and 5–10 have the same path shape. Seeds 1 and 4 are inside the divider (`dividend[1]` → `quotient[21]`).
+- **No arc touches the unit:** in no seed does the arc start or end at a unit register (`active`, `result[9:2]`), or enter unit-dependent logic through unit logic.
+- **The last LUT on every fused path,** the `mem_do_rinst` enable, does also read the unit's `active` register (via PCPI `ready`). That's on input I1; the arc enters on I3, the branch result.
+- **Seed 7** passes one LUT shared with the unit: `reg_op1[0] ^ reg_op2[0]`, which feeds both the ALU equality compare and `result[2]`. The arc uses the comparator side; the unit only adds one load on that net.
+- **Names in the reports are misleading.** A LUT named `fused.unit.active_SB_LUT4_…` sits on every fused path, but its inputs are `cpu_state`, the branch flag, `resetn` and the compare result; it's PicoRV32's branch-not-taken logic, and Yosys just borrowed the name. *An earlier version of this README read that name as the unit adding a LUT to the critical path. That was wrong.* For the same reason `critends.py` reports `pcpi_mul.pcpi_rs2` as `reg_op2`, since `picorv32.v:192` has `assign pcpi_rs2 = reg_op2`.
+- **The rise is placement noise:** the fused core's branch-path delays (14.80–15.92 ns) are shorter than the stock core's (15.39–16.71 ns), even though the unit isn't on those arcs.
 
 ### Measurement row
 
@@ -37,11 +47,33 @@ In detail, the fused core adds 42 LUTs and puts one more LUT on the worst path. 
  "benchmark": "crc32", "formula": "slli(andi(xor(in0,in1),255),2)",
  "measurement_source": "hardware",
  "baseline_cycles": 22461391, "candidate_cycles": 21242831,
- "baseline_period_ns": 16.2655, "candidate_period_ns": 15.376,
- "luts": 2481, "speedup": 1.1185}
+ "baseline_period_ns": 16.2655, "candidate_period_ns": 16.2655,
+ "luts": 2481, "speedup": 1.0574}
 ```
 
-`candidate_id` is the proposed `sha256(json([benchmark, canonical_formula]))`. It's computed with the ML branch's own `candidate_id()` (compact JSON separators), so both sides hash the same way. The team still has to agree on it. The periods are 1000 / median Fmax.
+`candidate_id` is the proposed `sha256(json([benchmark, canonical_formula]))`. It's computed with the ML branch's own `candidate_id()` (compact JSON separators), so both sides hash the same way. The team still has to agree on it. `baseline_period_ns` is 1000 / the baseline's median Fmax. `candidate_period_ns` follows the provisional rule: the baseline period here, because the unit is off the critical arc in every seed. The routed fused period (15.376 ns) is kept in `results.json` under `period_rule`.
+
+### Critical paths (`critical_paths.csv`)
+
+| seed | stock Fmax | stock path: start → end (pin) | fused Fmax | fused path: start → end (pin) | unit on arc | shared with unit |
+|---:|---:|---|---:|---|---|---:|
+| 1 | 60.21 | `pcpi_div.dividend[1]` → `pcpi_div.quotient[21]` (CEN) | 67.30 | `reg_op2[4]` → `mem_do_rinst` (CEN) | no | 0 |
+| 2 | 61.33 | `reg_op2[4]` → `mem_do_rinst` (SR) | 65.10 | `reg_op2[0]` → `mem_do_rinst` (CEN) | no | 0 |
+| 3 | 60.16 | `reg_op2[4]` → `mem_do_rinst` (SR) | 62.81 | `reg_op2[1]` → `mem_do_rinst` (CEN) | no | 0 |
+| 4 | 63.19 | `pcpi_div.dividend[1]` → `pcpi_div.quotient[21]` (CEN) | 67.59 | `reg_op2[2]` → `mem_do_rinst` (CEN) | no | 0 |
+| 5 | 60.31 | `reg_op2[0]` → `mem_do_rinst` (CEN) | 66.80 | `reg_op2[4]` → `mem_do_rinst` (CEN) | no | 0 |
+| 6 | 61.69 | `reg_op2[0]` → `mem_do_rinst` (CEN) | 64.98 | `reg_op2[4]` → `mem_do_rinst` (CEN) | no | 0 |
+| 7 | 61.64 | `reg_op2[0]` → `mem_do_rinst` (CEN) | 63.75 | `reg_op2[0]` → `mem_do_rinst` (CEN) | no | 1 (shared XOR) |
+| 8 | 61.74 | `reg_op2[0]` → `mem_do_rinst` (CEN) | 63.98 | `reg_op2[0]` → `mem_do_rinst` (CEN) | no | 0 |
+| 9 | 59.86 | `reg_op2[4]` → `mem_do_rinst` (CEN) | 66.46 | `reg_op2[0]` → `mem_do_rinst` (CEN) | no | 0 |
+| 10 | 64.98 | `reg_op2[4]` → `mem_do_rinst` (CEN) | 64.19 | `reg_op2[0]` → `mem_do_rinst` (CEN) | no | 0 |
+
+**How the check works** (`hw/scripts/critcone.py`):
+- **Unit registers:** flip-flops whose output is `fused…active` or the result register that drives `pcpi_rd` (9 here).
+- **On the arc** means any of: (a) the path starts at a unit register; (b) it ends at one; (c) it enters a cell whose output depends on unit state, through a net that feeds a unit register. Condition (c) catches a combinational decode path such as `pcpi_insn` → match → `wait` → core state.
+- **Shared logic doesn't count:** a gate that also serves the ALU, like seed 7's XOR, isn't "on the arc".
+- **Self-test:** before building the table, `critcone.py --selftest` runs synthetic paths that use nextpnr's real cell naming (`_LC`, `_DFFLC`) through each of (a), (b) and (c) on the fused netlist, and fails unless all three come back as on the arc.
+- **Shared-logic columns:** `critgroups.py` counts how many path cells also compute the next state of the unit, the PCPI handshake (`pcpi_valid`, `pcpi_timeout`), the multiplier, or the divider.
 
 ## Steps
 

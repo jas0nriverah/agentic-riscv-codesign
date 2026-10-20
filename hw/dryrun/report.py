@@ -133,7 +133,15 @@ def main():
     fmax = statistics.median(perSeed.values())
     baseFmax = float(base["crc32"]["fmax_mhz"])
 
-    basePeriod, fusedPeriod = 1000 / baseFmax, 1000 / fmax
+    # PROVISIONAL rule (hw/README.md): a period change counts only if the unit's logic is on the
+    # critical arc in at least one seed; otherwise the fused core keeps the baseline's period
+    with open("hw/dryrun/critical_paths.csv") as f:
+        arcs = {r["seed"]: r["unit_on_arc"] == "True" for r in csv.DictReader(f) if r["core"] == "fused"}
+    if sorted(arcs, key=int) != sorted(args.seeds, key=int):
+        problems.append(f"critical-path table covers seeds {sorted(arcs, key=int)}, not {args.seeds}")
+    onArc = [s for s, on in arcs.items() if on]
+    basePeriod, routedPeriod = 1000 / baseFmax, 1000 / fmax
+    fusedPeriod = routedPeriod if onArc else basePeriod
     speedup = (baseCycles * basePeriod) / (fused["window_cycles"] * fusedPeriod)
     row = {"candidate_id": candidate_id("crc32", args.formula),
            "benchmark": "crc32", "formula": parse_formula(args.formula).canonical(),
@@ -158,6 +166,11 @@ def main():
         "fmax_mhz": {"per_seed": {s: round(v, 2) for s, v in perSeed.items()},
                      "median": round(fmax, 2), "min": round(min(perSeed.values()), 2),
                      "max": round(max(perSeed.values()), 2), "baseline_median": baseFmax},
+        "period_rule": {"unit_on_arc_seeds": sorted(onArc, key=int),
+                        "candidate_period": "routed" if onArc else "baseline (unit off the critical arc in every seed)",
+                        "routed_period_ns": round(routedPeriod, 4),
+                        "speedup_with_routed_period": round((baseCycles * basePeriod) /
+                                                            (fused["window_cycles"] * routedPeriod), 4)},
         "speedup_cycles_only": round(baseCycles / fused["window_cycles"], 4),
         "measurement_row": row,
         "problems": problems,
