@@ -1,5 +1,6 @@
 import argparse
 import csv
+import glob
 import itertools
 import json
 import os
@@ -86,6 +87,52 @@ def frequency(args):
     print(f"wrote {args.out}")
 
 
+def frequencyBudget(args):
+    # the frequency rule under a LUT budget: rank by placeable saved summed over the programs, take a
+    # formula if it doesn't conflict with a pick and its estimated LUT cost (its single-candidate
+    # lut_delta from the sweep) still fits; a formula never measured alone has no estimate and is skipped
+    sites = finderSites()
+    total, sizes = {}, {}
+    for r in csv.DictReader(open("hw/engine/results/placeability.csv")):
+        total[r["formula"]] = total.get(r["formula"], 0) + int(r["placeable_saved"])
+        sizes[r["formula"]] = int(r["size"])
+    lutOf = {}
+    for r in csv.DictReader(open(args.sweep)):
+        if r["status"] == "ok":
+            lutOf.setdefault(r["formula"], int(r["lut_delta"]))
+    picked, used, log = [], 0, []
+    for i, f in enumerate(sorted(total, key=lambda f: (-total[f], f)), 1):
+        if total[f] <= 0 or len(picked) == 3:
+            break
+        clash = [g for g in picked if conflicts(f, g, sites)]
+        if clash:
+            outcome = "conflicts with " + ", ".join(clash)
+        elif f not in lutOf:
+            outcome = "no LUT estimate (never measured alone)"
+        elif used + lutOf[f] > args.budget:
+            outcome = f"does not fit: +{lutOf[f]} with +{used} used of +{args.budget}"
+        else:
+            picked.append(f)
+            used += lutOf[f]
+            outcome = f"picked (+{lutOf[f]}, +{used} used)"
+        log.append({"rank": i, "formula": f, "total_placeable_saved": total[f], "lut_estimate": lutOf.get(f), "outcome": outcome})
+    for e in log:
+        print(f"{e['rank']:>3} {e['total_placeable_saved']:>8} {e['formula']:55} {e['outcome']}")
+    # reuse an existing build when the same set was built before, by taking that request's order
+    for existing in sorted(glob.glob("hw/engine/results/*.request.json")):
+        order = [e["formula"] for e in json.load(open(existing))]
+        if set(order) == set(picked) and len(order) == len(picked) and order != picked:
+            print(f"same set as {existing}; reusing its slot order")
+            picked = order
+            break
+    writeRequest(args.out, picked, sizes)
+    with open(args.out.replace(".request.json", ".selection.json"), "w") as f:
+        json.dump({"method": "frequency-budget", "budget": args.budget, "ranked_by": "placeable_saved",
+                   "lut_estimate": "single-candidate lut_delta from " + args.sweep, "log": log, "picked": picked,
+                   "estimated_luts": used}, f, indent=1)
+    print(f"wrote {args.out}: {len(picked)} formulas, estimated +{used} LUT4")
+
+
 def oracle(args):
     # per formula: LUT delta, routed Fmax, and cycles saved in every program, each measured alone
     sites = finderSites()
@@ -136,13 +183,17 @@ def main():
     f = sub.add_parser("frequency")
     f.add_argument("--placeable", action="store_true")
     f.add_argument("--out", required=True)
+    fb = sub.add_parser("frequency-budget")
+    fb.add_argument("--budget", type=int, required=True)
+    fb.add_argument("--sweep", default="hw/engine/results/sweep-top10-placeable.csv")
+    fb.add_argument("--out", required=True)
     o = sub.add_parser("oracle")
     o.add_argument("--sweep", default="hw/engine/results/sweep-top10-placeable.csv")
     o.add_argument("--budget", type=int, required=True)
     o.add_argument("--keep", type=int, default=3)
     o.add_argument("--out", required=True)
     args = parser.parse_args()
-    (frequency if args.mode == "frequency" else oracle)(args)
+    {"frequency": frequency, "frequency-budget": frequencyBudget, "oracle": oracle}[args.mode](args)
 
 
 if __name__ == "__main__":

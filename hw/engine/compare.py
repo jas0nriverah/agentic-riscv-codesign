@@ -76,8 +76,18 @@ def main():
     ident, res = load(f"{R}/frequency-placeable-top3.request.json")
     experiments.append(summarize("C1 frequency (placeable saved)", "frequency-placeable",
                                  f"{R}/frequency-placeable-top3.request.json", res, 1))
+    budgets = (100, 250, 500, 750)
+    freqBudget = {}
+    for budget in budgets:
+        request = f"{R}/frequency-budget-lut{budget}.request.json"
+        sel = json.load(open(request.replace(".request.json", ".selection.json")))
+        ident, res = load(request)
+        x = summarize(f"C3 frequency-budget +{budget}", "frequency-budget", request, res, 1)
+        x["est_luts_delta"] = sel["estimated_luts"]
+        freqBudget[budget] = x
+        experiments.append(x)
     seen = {}
-    for budget in (100, 250, 500, 750):
+    for budget in budgets:
         est = json.load(open(f"{R}/oracle-lut{budget}.estimates.json"))
         for i, e in enumerate(est["top"], 1):
             request = f"{R}/oracle-lut{budget}-set{i}.request.json"
@@ -108,8 +118,31 @@ def main():
                           "above_noise": lo_a > hi_b or lo_b > hi_a})
     above = sum(p["above_noise"] for p in pairs)
     noise = {"distinct_oracle_sets": len(sets), "pairs": len(pairs), "pairs_above_noise": above, "detail": pairs}
+    # per budget: the frequency rule's one core against the oracle's best set under each score
+    byBudget = []
+    for budget in budgets:
+        oracleSets = [x for x in experiments if x["experiment"].startswith(f"C2 oracle +{budget} ")]
+        fq = freqBudget[budget]
+        bestRule = max(oracleSets, key=lambda x: x["geomean_max_rule"])
+        bestCyc = max(oracleSets, key=lambda x: x["geomean_cycles_only"])
+        byBudget.append({"budget": budget,
+                         "frequency": {k: fq[k] for k in ("experiment", "formulas", "luts_delta", "est_luts_delta", "fmax_median",
+                                                           "geomean_max_rule", "geomean_cycles_only", "build")},
+                         "frequency_builds": "1 core (+ the 60 single-candidate cores its LUT estimates come from)",
+                         "oracle_best_by_rule": {k: bestRule[k] for k in ("experiment", "formulas", "luts_delta", "fmax_median",
+                                                                           "geomean_max_rule", "geomean_cycles_only", "build")},
+                         "oracle_best_cycles_only": {k: bestCyc[k] for k in ("experiment", "formulas", "luts_delta", "fmax_median",
+                                                                             "geomean_max_rule", "geomean_cycles_only", "build")},
+                         "oracle_builds": f"{len(oracleSets)} cores for this budget (+ the 60 single-candidate cores)"})
     with open(args.out + ".json", "w") as f:
-        json.dump({"experiments": experiments, "distinct_oracle_cores": seen, "fmax_noise": noise}, f, indent=1)
+        json.dump({"experiments": experiments, "distinct_oracle_cores": seen, "fmax_noise": noise,
+                   "frequency_vs_oracle_by_budget": byBudget}, f, indent=1)
+    print("\nfrequency vs oracle per budget (geomean rule / cycles-only, LUT delta):")
+    for b in byBudget:
+        fq, o1, o2 = b["frequency"], b["oracle_best_by_rule"], b["oracle_best_cycles_only"]
+        print(f"  +{b['budget']:<4} frequency {fq['geomean_max_rule']:.4f} / {fq['geomean_cycles_only']:.4f} (+{fq['luts_delta']}, "
+              f"{len(fq['formulas'])} formulas)  oracle best-by-rule {o1['geomean_max_rule']:.4f} / {o1['geomean_cycles_only']:.4f} "
+              f"(+{o1['luts_delta']})  oracle best-cycles {o2['geomean_max_rule']:.4f} / {o2['geomean_cycles_only']:.4f} (+{o2['luts_delta']})")
     fields = [k for k in experiments[-1] if k != "est_cycles_saved"]
     with open(args.out + ".csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")

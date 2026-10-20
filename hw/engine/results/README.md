@@ -12,6 +12,7 @@ Committed results of the PROVISIONAL measurement engine. Every row was produced 
 | `sweep-top10-placeable.csv`, `rankcheck-top10.csv` | the top-10 placeable sweep and its rank check |
 | `frequency-placeable-top3.*` | the placement-aware frequency pick (request, selection log) |
 | `oracle-lut<budget>.estimates.json`, `oracle-lut<budget>-set<n>.request.json` | the oracle's estimated sets per LUT budget and the requests built |
+| `frequency-budget-lut<budget>.*` | the budget-constrained frequency pick per LUT budget (request, selection log with the LUT estimate used) |
 | `experiments.csv`, `experiments.json` | the comparison of all selection experiments: per-program speedups under both rules, geomeans, LUTs, Fmax, builds needed |
 | `builds/<id>.json` | the full result of every measured core, including every fused and skipped site |
 

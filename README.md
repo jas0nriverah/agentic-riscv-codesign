@@ -166,6 +166,7 @@ Three ways to pick up to 3 formulas for one core, scored by the geometric mean o
 - **E, frequency by finder `saved`** (above): one build.
 - **C1, frequency by placeable saved:** the same rule with the pre-check's placeable saved instead of the finder's. Picks `add(in0,slli(in1,2))`, `add(srli(in0,31),slli(in1,1))`, `mul(in0,addi(lui(1103515648),-403))`. One build.
 - **C2, oracle under a LUT budget:** from the 60 single-candidate cores, every non-conflicting set of up to 3 within the budget, assuming cycles and LUTs add and the clock is the slowest member's; the top 3 sets by estimated cycles-only geomean were built, for budgets +100, +250, +500 and +750. +500 chose the same sets as +250, because the only candidate that could use the room (the constant multiplier, +624) doesn't fit; +750 is the first budget that admits it, and its best set is the C1 core. 60 + 9 builds.
+- **C3, frequency under a LUT budget:** the C1 rule with a budget: take the next formula by placeable saved if it doesn't conflict and its estimated LUT cost (its single-candidate `lut_delta` from the sweep) still fits. A formula never measured alone has no estimate and is skipped. One core per budget; +100 holds only `add(in0,slli(in1,2))` (+76; the smallest measured unit is +37, so nothing fits beside it), +500 picks the +250 set, +750 picks the C1 core. One new build in all (+250); the rest reused.
 
 | experiment | formulas | LUT Δ (est.) | Fmax | on arc | geomean, period rule | geomean, cycles only (est.) |
 |---|---|---:|---:|---:|---:|---:|
@@ -189,6 +190,19 @@ Per-program speedups for every row are in `experiments.csv`. What the comparison
 - **Placement awareness fixes the frequency baseline:** C1 beats E on both scores (1.028 vs 0.968; 1.097 vs 1.042) by swapping the unplaceable `mul` chain for the placeable constant multiplier, which alone gives crc32 1.439. It is still a 725-LUT core at 57.6 MHz, so under the period rule it loses to a 139-LUT oracle set. At +750 the oracle picks that same core: the constant multiplier is the best use of a large budget, cycles-only (1.097 against 1.060 at +250), but under the period rule the three +750 sets are within 0.003 of each other and within 0.01 of the +100 sets, which cost a tenth of the LUTs.
 - **Most set-to-set differences under the period rule are inside the Fmax noise.** Recomputing each set's geomean at its own 10-seed Fmax min and max gives an interval; of the 36 pairs among the 9 distinct oracle sets, only 2 have non-overlapping intervals (+250 set 2 against the two weaker +100 sets, differences of 0.023 and 0.026). The best set's lead over its runner-up (1.054 vs 1.039) is within noise. `experiments.json` has every pair.
 - **Cost:** frequency ranking needs 1 hardware build; the oracle needed 69 (60 single-candidate cores plus the 9 distinct sets built here).
+
+**Frequency vs oracle per budget** (`frequency_vs_oracle_by_budget` in `experiments.json`; geomeans as rule / cycles-only):
+
+| budget | frequency (C3): formulas | LUT Δ | geomean | oracle, best by rule | oracle, best cycles-only | new cores built, frequency / oracle |
+|---|---|---:|---:|---|---|---|
+| +100 | `add(in0,slli(in1,2))` | +76 | 1.003 / 1.022 | +82: **1.037** / 1.037 | same set | 0 (a sweep core) / 3 |
+| +250 | `add(in0,slli(in1,2))`, `add(srli(in0,31),slli(in1,1))`, `srli(slli(add(in0,in1),1),1)` | +144 | 0.997 / 1.051 | +139: **1.054** / 1.054 | +107: 1.039 / **1.060** | 1 / 3 |
+| +500 | same as +250 | +144 | 0.997 / 1.051 | same as +250 | same as +250 | 0 / 0 |
+| +750 | `add(in0,slli(in1,2))`, `add(srli(in0,31),slli(in1,1))`, `mul(in0,addi(lui(1103515648),-403))` (= C1) | +725 | 1.028 / **1.097** | +725: 1.030 / 1.090 | same core as frequency | 0 (= C1) / 3 |
+
+- **The oracle wins every budget under the period rule, and the gap is largest where the budget is tight.** At +250 the frequency rule's third pick is the `rand_beebs` chain (`srli(slli(add(in0,in1),1),1)`, 4 cycles per instruction, crc32 only) where the oracle takes a second aha-mont64 unit (`or(srli(in0,31),in1)`, 12 cycles per instruction); the frequency core also routes slower (58.33 vs 62.83 MHz) and ends below stock at 0.997. At +100 the frequency rule can afford one unit, the oracle a cheap pair: 1.003 vs 1.037.
+- **At +750 the two methods converge** on the same core cycles-only (1.097), and tie within the Fmax noise under the rule (1.028 vs 1.030).
+- **Both methods lean on the same 60 single-candidate cores:** the oracle for cycles and LUTs, the frequency rule for LUT estimates only. What the frequency rule saves is the per-budget set builds (1 new core in all, against 9), not the sweep.
 
 ### Dry run (2026-10-20)
 
