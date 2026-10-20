@@ -11,7 +11,7 @@ make hw-route           # nextpnr-ice40 seeds  -> generated/hw/route/seed<N>/
 make hw-pcf             # regenerates synth/core_top.pcf (never part of a comparison; ask before re-pinning)
 ```
 
-`hw-baseline`, `hw-measure`, `hw-sweep`, `hw-dryrun`, `hw-critpath` and `hw-figures` are described in the root README. Every rule lives in `hw.mk`, `dryrun/dryrun.mk` and `engine/engine.mk`, included from the top-level Makefile.
+`hw-baseline`, `hw-measure`, `hw-sweep`, `hw-dryrun` and `hw-critpath` are described in the root README. Every rule lives in `hw.mk`, `dryrun/dryrun.mk` and `engine/engine.mk`, included from the top-level Makefile.
 
 ## Tools
 
@@ -22,7 +22,7 @@ make hw-pcf             # regenerates synth/core_top.pcf (never part of a compar
 | dtc (needed by Spike) | 1.8.1 | Homebrew |
 | Verilator, Yosys, nextpnr-ice40 | 5.053-devel, 0.70+157, 0.11.1-65 | OSS CAD Suite 2026-10-19, `~/tools/oss-cad-suite` |
 
-The Makefile uses `riscv64-unknown-elf-` when it is on `PATH`, and xPack's `riscv-none-elf-` otherwise. Set `RISCV_PREFIX=` to choose one. `src/candidates.py` hard-codes `riscv64-unknown-elf-objdump`; a symlink to xPack's objdump under `~/tools/bin` satisfies it. The OSS CAD Suite Verilator needs a C++14 or newer compiler and Apple clang defaults to C++98, so the build passes `-std=c++17`. `scripts/figures.py` needs only the standard library.
+The Makefile uses `riscv64-unknown-elf-` when it is on `PATH`, and xPack's `riscv-none-elf-` otherwise. Set `RISCV_PREFIX=` to choose one. `src/candidates.py` hard-codes `riscv64-unknown-elf-objdump`; a symlink to xPack's objdump under `~/tools/bin` satisfies it. The OSS CAD Suite Verilator needs a C++14 or newer compiler and Apple clang defaults to C++98, so the build passes `-std=c++17`.
 
 ## What differs from the ML branch's setup
 
