@@ -11,6 +11,25 @@ make hw-pcf             # regenerates synth/core_top.pcf (not part of hw-baselin
 make hw-critpath        # critical path per seed for the stock and dry-run cores -> dryrun/critical_paths.csv
 ```
 
+Where this sits in the team pipeline (the hardware stage is highlighted):
+
+```mermaid
+flowchart LR
+    E["Embench programs<br/>benchmarks/embench, 8 programs"]
+    S["Spike<br/>commit log → src/tracing.py"]
+    C["Candidate finder<br/>src/candidates.py"]
+    SEL["Selection<br/>frequency ranking or ML-guided"]
+    HW["Hardware measurement<br/>hw/: PicoRV32 + PCPI unit,<br/>Verilator, Yosys, nextpnr"]
+    ML["ML side / selection"]
+    E -->|"ELF per program<br/>-march=rv32im -O2, main's linker script"| S
+    S -->|"trace .jsonl<br/>one line per retired instruction"| C
+    C -->|"candidates JSON<br/>formula, size, runs, places, saved"| SEL
+    SEL -->|"selected formulas<br/>1 to 3 per core"| HW
+    HW -->|"measurement rows<br/>candidate_id, cycles, periods, LUTs, speedup"| ML
+    classDef hw fill:#2a78d6,color:#ffffff,stroke:#1c5cab,stroke-width:2px
+    class HW hw
+```
+
 ## Provenance
 
 | Input | Source |
@@ -64,6 +83,31 @@ Every other custom-0 encoding traps through PicoRV32's PCPI timeout and `CATCH_I
 
 `luts` and the three Fmax columns describe the core, so every row repeats them.
 
+One measurement end to end. The hardware lane and the software lane run independently and meet at the checks:
+
+```mermaid
+flowchart TB
+    subgraph HWL["Hardware lane"]
+        direction TB
+        F["candidate formula"] --> R["hw/isaforge/rtl.py<br/>generate_rtl"]
+        R --> U["unit in core_top via PCPI<br/>custom-0, funct7=2, funct3=slot"]
+        U --> Y["Yosys synth_ice40"]
+        Y --> N["nextpnr-ice40<br/>frozen PCF, seeds 1–10"]
+        N --> HWO["LUT4 count<br/>Fmax median, min, max"]
+    end
+    subgraph SWL["Software lane"]
+        direction TB
+        P["program .s<br/>main's flags, stopped at assembly"] --> RW["rewriter<br/>dependent chain → .insn"]
+        RW --> ELF["ELF<br/>hw/sw/startup.S, main's linker script"]
+        ELF --> V["Verilator run<br/>on the modified core"]
+        V --> SWO["cycles in the window<br/>instret"]
+    end
+    HWO --> CHK
+    SWO --> CHK
+    CHK["checks<br/>verify_benchmark passes · stock programs unchanged ·<br/>instret delta = Σ (size−1) × runs · critical-path check"]
+    CHK --> ROW["measurement row<br/>candidate_id, baseline and candidate cycles,<br/>periods, luts, speedup, speedup_cycles_only"]
+```
+
 ### Clock period of a modified core (PROVISIONAL, pending team agreement)
 
 **T_fused = max(T_base, T_fused_measured)**, where T_base is the baseline's median period (1000 / 61.48 MHz = 16.2655 ns) and T_fused_measured is 1000 / the modified core's routed median Fmax over seeds 1–10. A faster routed clock is never credited; a slower one is always charged.
@@ -101,6 +145,16 @@ Every other custom-0 encoding traps through PicoRV32's PCPI timeout and `CATCH_I
   - With the pins fixed, seed 3 gives 60.16 MHz, not the 61.56 MHz of the pin-free placement the PCF came from. Fixed pins change where the placer starts, so per-seed numbers aren't comparable across pin settings.
 - **Comparison with the ML branch:** its rv32i core without MUL/DIV was 1,488 LUT4 and 66.8 MHz median (3 seeds, its own pins). It is a different core and different pins, so it isn't a like-for-like comparison.
 - **Why cycles per instruction is high:** edn and matmult-int run many `mul` instructions, and the sequential multiplier takes about 40 cycles each. Fusions that remove a `mul` will therefore look very large on this core.
+
+### Engine results (2026-10-20)
+
+![Scatter plot of 22 sweep rows, cycles saved against instructions saved, with dashed reference lines at 1, 4 and 12 cycles per instruction. Points fall between the 1 and 12 lines; aha-mont64's candidates sit near 8.5 to 12 cycles per instruction, most others near 4, and 5 rows sit at the origin because they fused nothing.](docs/img/sweep-cycles-vs-instructions.png)
+
+*Each program's top 3 candidates, each measured alone on its own core; from `engine/results/sweep-top3.csv`, drawn by `make hw-plots` (`scripts/plots.py`).*
+
+![Grouped bar chart of speedup per program for the frequency-ranked three-unit core, bars anchored at 1.0. Cycles-only bars reach 1.168 for aha-mont64 and 1.127 for nettle-aes and sit at 1.0 to 1.032 elsewhere; under the max period rule only aha-mont64 at 1.084 and nettle-aes at 1.046 stay above 1.0, and the other six programs fall to 0.929 to 0.958.](docs/img/frequency-top3-speedup.png)
+
+*One core with the top 3 non-conflicting formulas by total finder saved (+747 LUT4, Fmax median 57.09 MHz); from `engine/results/frequency-top3.json`, drawn by `make hw-plots` (`scripts/plots.py`).*
 
 ## Tools
 
