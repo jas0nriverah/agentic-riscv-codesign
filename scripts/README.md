@@ -1,5 +1,7 @@
 # Research entry points
 
+Current processor replays: `python scripts/reproduce_codesign.py replay` and `python scripts/reproduce_workload.py replay`. New native collection uses `python -m isaforge.workload_experiment`; see [automatic workloads](../docs/automatic-workloads.md). The older commands below are historical cost-model entry points.
+
 Run these scripts from the repository root with the Python environment activated.
 
 | Command | Inputs | Output |

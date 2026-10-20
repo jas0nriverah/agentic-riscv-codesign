@@ -1,0 +1,205 @@
+"""A bounded rule-based RTL optimization agent over a fixed CRC instruction.
+
+This is a feedback controller, not an LLM code generator. It chooses between
+reviewable, combinational rewrite rules. The evaluator owns the reference,
+firmware, interface, latency, correctness gates, and area/timing measurements.
+"""
+from __future__ import annotations
+
+import argparse
+import copy
+import hashlib
+from pathlib import Path
+import subprocess
+import time
+
+from .codesign import (CANDIDATES, CONFIG, ProcessorEvaluator, generate_rtl,
+                       require, seal, sha, unseal, write)
+
+ATTEMPTS = 2
+RULES = ('compact', 'bitwise', 'factored', 'carry_select')
+COMPACT = {
+    'index_offset': "{22'b0, (in0[7:0] ^ in1[7:0]), 2'b0}",
+    'index_byte': "{24'b0, (in0[7:0] ^ in1[7:0])}",
+    'address_mask': "in0 + {22'b0, in1[7:0], 2'b0}",
+    'address': "in0 + {in1[29:0], 2'b0}",
+    'mask_offset': "{22'b0, in0[7:0], 2'b0}",
+    'shift_xor': "in0 ^ {8'b0, in1[31:8]}",
+}
+
+
+def rewrite(name, rule):
+    """Return only a fixed-interface datapath; no arbitrary commands or HDL."""
+    require(name in CANDIDATES and rule in (*RULES, 'repair'), 'Unsupported RTL rewrite')
+    if rule == 'repair':
+        return generate_rtl(CANDIDATES[name][0])
+    lines = ['module candidate(input wire [31:0] in0,in1,output wire [31:0] result);']
+    if rule == 'compact' or name == 'mask_offset':
+        lines.append('assign result = '+COMPACT[name]+';')
+    elif name in ('address', 'address_mask'):
+        operand = "{in1[29:0],2'b0}" if name == 'address' else "{22'b0,in1[7:0],2'b0}"
+        lines.append('wire [31:0] b = '+operand+';')
+        if rule == 'carry_select':
+            lines += ["wire [16:0] lo = {1'b0,in0[15:0]} + {1'b0,b[15:0]};",
+                      "wire [15:0] hi0 = in0[31:16] + b[31:16];",
+                      "wire [15:0] hi1 = in0[31:16] + b[31:16] + 16'd1;",
+                      'assign result = {lo[16] ? hi1 : hi0, lo[15:0]};']
+        elif rule == 'factored':
+            lines.append("wire [4:0] carry; assign carry[0] = 1'b0;")
+            for i in range(4):
+                hi, lo = i*8+7, i*8
+                lines += [f"wire [8:0] chunk{i} = {{1'b0,in0[{hi}:{lo}]}} + {{1'b0,b[{hi}:{lo}]}} + carry[{i}];",
+                          f'assign result[{hi}:{lo}] = chunk{i}[7:0]; assign carry[{i+1}] = chunk{i}[8];']
+        else:
+            lines.append("wire [32:0] carry; assign carry[0] = 1'b0;")
+            for i in range(32):
+                lines += [f'assign result[{i}] = in0[{i}] ^ b[{i}] ^ carry[{i}];',
+                          f'assign carry[{i+1}] = (in0[{i}] & b[{i}]) | ((in0[{i}] ^ b[{i}]) & carry[{i}]);']
+    else:
+        # Bit slicing and Boolean factoring preserve RV32 truncation explicitly.
+        for bit in range(32):
+            if name == 'shift_xor':
+                a, b = f'in0[{bit}]', f'in1[{bit+8}]' if bit < 24 else "1'b0"
+            elif name == 'index_offset' and 2 <= bit < 10:
+                a,b = f'in0[{bit-2}]',f'in1[{bit-2}]'
+            elif name == 'index_byte' and bit < 8:
+                a,b = f'in0[{bit}]',f'in1[{bit}]'
+            else:
+                a,b = "1'b0", "1'b0"
+            expression = f'{a} ^ {b}' if rule == 'bitwise' else f'({a} | {b}) & ~({a} & {b})'
+            lines.append(f'assign result[{bit}] = {expression};')
+    return '\n'.join(lines+['endmodule',''])
+
+
+def feedback(record, starting, area_cap):
+    fmax = min(r['limiting_internal_fmax_mhz'] for r in record['routes'])
+    cycles_same = record['performance']['cycles'] == starting['performance']['cycles']
+    feasible = cycles_same and record['resources']['lut4_count'] <= area_cap and all(
+        r['internal_timing_pass'] and r['device_fits'] for r in record['routes'])
+    return {'correct': True, 'feasible': feasible, 'cycles_unchanged': cycles_same,
+            'cycles': record['performance']['cycles'], 'lut4': record['resources']['lut4_count'],
+            'flip_flops': record['resources']['flip_flop_count'], 'worst_seed_fmax_mhz': fmax,
+            'evaluation_id': record['evaluation_id']}
+
+
+def choose_rule(history, start_feedback, policy):
+    if not history:
+        return 'compact', 'Remove constant shift/mask scaffolding with exact bit slices.'
+    if policy == 'one_shot':
+        return 'bitwise', 'Precommitted second proposal, independent of tool feedback.'
+    last = history[-1]['feedback']
+    if not last['correct']:
+        return 'repair', 'Reject failed proposal and restore the verified starting datapath.'
+    if not last['feasible'] or last['worst_seed_fmax_mhz'] < start_feedback['worst_seed_fmax_mhz']:
+        return 'carry_select', 'Timing feedback favors a parallel carry alternative / Boolean factoring.'
+    if last['lut4'] >= start_feedback['lut4']:
+        return 'factored', 'No area reduction: try Boolean factoring or byte-sized carry groups.'
+    return 'bitwise', 'Area improved: examine a bit-level expression before retaining the best verified result.'
+
+
+def score(value):
+    # Common-clock cycles are invariant. Area is primary; worst of three matched
+    # route seeds is a tie-break, not evidence of general timing superiority.
+    return value['lut4'], -value['worst_seed_fmax_mhz']
+
+
+def run(root):
+    evaluator = ProcessorEvaluator(root)
+    root = evaluator.root
+    live = unseal(root/'live-selection.json')
+    require(live['context_id'] == evaluator.plan['context_id'], 'Selection context changed')
+    require(live['selected'] is not None, 'No beneficial instruction selected; retain baseline')
+    name = live['selected']['name']
+    starting = evaluator.measure(name)
+    baseline = evaluator.measure('baseline')
+    area_cap = baseline['resources']['lut4_count'] + CONFIG['max_added_lut4']
+    start_feedback = feedback(starting, starting, area_cap)
+    require(start_feedback['feasible'], 'Starting design must be feasible')
+    plan = {'schema': 'isaforge-bounded-rtl-agent-v1', 'context_id': evaluator.plan['context_id'],
+            'source_sha256': sha(__file__), 'name': name, 'specification': CANDIDATES[name][0],
+            'starting_evaluation_id': starting['evaluation_id'], 'attempts_per_policy': ATTEMPTS,
+            'policies': ['feedback', 'one_shot'], 'area_cap_lut4': area_cap,
+            'objective': 'Minimize integrated LUT4; break ties by worst-seed internal Fmax. Require unchanged cycles, fixed interface and latency, correctness, and 12 MHz timing.',
+            'proposal_space': 'Fixed reviewable combinational rewrite rules; rule-based controller, no LLM.',
+            'one_shot_rules': ['compact','bitwise']}
+    directory = root/'rtl-search'
+    directory.mkdir(exist_ok=True)
+    if (directory/'plan.json').exists():
+        require(unseal(directory/'plan.json') == plan, 'RTL optimization protocol changed')
+    else:
+        seal(directory/'plan.json', plan)
+        (directory/'agent-source.py').write_bytes(Path(__file__).read_bytes())
+    results = []
+    for policy in plan['policies']:
+        history, best = [], copy.deepcopy(start_feedback)
+        for index in range(ATTEMPTS):
+            require(sha(__file__) == plan['source_sha256'], 'Agent rules changed during optimization')
+            rule, rationale = choose_rule(history, start_feedback, policy)
+            rtl = rewrite(name, rule)
+            rtl_hash = hashlib.sha256(rtl.encode()).hexdigest()
+            path = directory/policy/f'attempt-{index}.json'
+            if path.exists():
+                event = unseal(path)
+                require(event['rule'] == rule and event['rtl_sha256'] == rtl_hash, 'Saved proposal changed')
+                # Cache-read the full evidence before trusting a completed result.
+                if event['feedback']['correct']:
+                    require(feedback(evaluator.measure(name, implementation=rtl), starting, area_cap) == event['feedback'],
+                            'Saved optimization feedback changed')
+            else:
+                began = time.monotonic()
+                proposal = path.with_suffix('.v')
+                proposal.parent.mkdir(parents=True, exist_ok=True)
+                proposal.write_text(rtl)
+                write(path.with_suffix('.request.json'), {'rule': rule, 'rationale': rationale,
+                      'fixed_spec': plan['specification'], 'previous_feedback': history[-1]['feedback'] if history else start_feedback})
+                before_commands, before_hits = len(evaluator.runner.receipts), evaluator.cache_hits
+                charged_seconds = 0
+                try:
+                    record = evaluator.measure(name, implementation=rtl)
+                    outcome = feedback(record, starting, area_cap)
+                    charged_seconds = record['elapsed_seconds']
+                except (ValueError, RuntimeError, subprocess.SubprocessError, OSError) as error:
+                    # Integrity/configuration failures stop the run; they cannot
+                    # be downgraded to an ordinary rejected RTL proposal.
+                    evaluator.runner.check()
+                    outcome = {'correct': False, 'feasible': False, 'error': str(error)}
+                    charged_seconds = sum(r['elapsed_seconds'] for r in evaluator.runner.receipts[before_commands:])
+                event = {'index': index, 'rule': rule, 'rationale': rationale, 'rtl_sha256': rtl_hash,
+                         'feedback': outcome, 'seconds': time.monotonic()-began,
+                         'equivalent_uncached_measurement_seconds': charged_seconds,
+                         'native_commands': len(evaluator.runner.receipts)-before_commands,
+                         'cache_hits': evaluator.cache_hits-before_hits, 'charged_attempts': 1}
+                seal(path, event)
+            history.append(event)
+            if event['feedback']['feasible'] and score(event['feedback']) < score(best):
+                best = event['feedback']
+        repairs = [e for e in history if e['rule'] == 'repair']
+        results.append({'policy': policy, 'attempts': history, 'best': best,
+                        'correctness_rate': sum(e['feedback']['correct'] for e in history)/ATTEMPTS,
+                        'repair_attempts': len(repairs), 'repair_successes': sum(e['feedback']['correct'] for e in repairs),
+                        'added_lut4_change_from_start': best['lut4']-start_feedback['lut4'],
+                        'cycles_change_from_start': best['cycles']-start_feedback['cycles'],
+                        'charged_measurement_seconds': sum(e['equivalent_uncached_measurement_seconds'] for e in history),
+                        'charged_attempts': ATTEMPTS})
+    report = {'plan': plan, 'starting': start_feedback, 'results': results,
+              'physical_native_commands_total': len(evaluator.runner.receipts),
+              'physical_native_seconds_total': sum(r['elapsed_seconds'] for r in evaluator.runner.receipts),
+              'limitations': ['A two-attempt rule-based agent, not autonomous LLM RTL generation.',
+                             'Each successful proposal is universally checked against the frozen reference, checked with independent integer vectors, and remeasured in the processor.',
+                             'Shared exact-proposal cache saves physical work; both policies pay one logical attempt per proposal. Failed attempts count.',
+                             'Three routing seeds are development measurements; timing tie-break gains are not held-out-seed claims.',
+                             'No OS sandbox: only trusted in-process rewrite rules can generate proposals.']}
+    seal(directory/'report.json', report)
+    return report
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--root', type=Path, required=True)
+    args = parser.parse_args(argv)
+    result = run(args.root)
+    print({r['policy']: r['best'] for r in result['results']})
+
+
+if __name__ == '__main__':
+    main()

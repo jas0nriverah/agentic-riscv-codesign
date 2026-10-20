@@ -1,3 +1,5 @@
+> Historical research direction. Its proposed priorities are superseded by the [current project contract](../README.md) and [handoff](HANDOFF.md). Preserve the evidence below; it does not authorize new LUT-model, RTL-agent, or GNN work.
+
 # Literature-informed research direction
 
 This is a research agenda, not a claim that ISAForge reproduces or exceeds a

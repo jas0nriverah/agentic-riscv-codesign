@@ -1,0 +1,53 @@
+{
+  "python": "3.12.14",
+  "commands": [
+    {
+      "command": "make test",
+      "exit_code": 0,
+      "result": "2506 passed, 179 subtests; one expected duplicate-ZIP warning; 166.09 seconds",
+      "log": "tests.log",
+      "sha256": "3a4b53ff82fdbb9353c3463ad9613b2970ac678c32cf8f08fe84df0c1568a6b7"
+    },
+    {
+      "command": "make reproduce",
+      "exit_code": 0,
+      "result": "All six historical scores match over 192 candidates; paired bootstrap and figure regeneration passed",
+      "log": "historical-replay.log",
+      "sha256": "11efa27e84a1643407f18ea6539c11dea71f5142e76a07eca1a51cd631127fb5"
+    },
+    {
+      "command": "make reproduce-speedup",
+      "exit_code": 0,
+      "result": "14 processor designs, 42 routes, and 240 policy/budget/seed outcomes verified; no native measurement jobs",
+      "log": "processor-replay.log",
+      "sha256": "f9c9d09765b6c6e09162c9d0861d9951927c0c674b45ef6ca083f63755452f65"
+    }
+  ],
+  "limitations": [
+    "No new physical board measurement.",
+    "Literature full-method access remains incomplete for Sun 2004 and Hussein 2026."
+  ],
+  "documentation_check": {
+    "path": "documentation-check.json",
+    "sha256": "14c4c5a68d0d51b4586476bab17b6aed315f98a09b0188439bb52f13c96b3235"
+  },
+  "tested_runtime_sources": {
+    "hardware/candidate_sim.cpp": "e03f8ee324c1fd039e10621a8779b438070405ba6f4547b0cc612fe5b6e61a34",
+    "hardware/pcpi_single.v": "1382dac78eed053726c34a127bb8355c3b2c2894e4995f9c61471f8bf18623ca",
+    "hardware/profile_sim.cpp": "76770bcff03f67a82bfdb410c7687f24f733326b2a221d615f11c8116da43b45",
+    "isaforge/assembly_lowering.py": "e656f5591ce1fa70f8621f94349c7a1c1f90837fb572a8d42fe9a3ce88dc4554",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "isaforge/codesign_audit.py": "cddf51329b76b919acfd560e7b6dab7dca423b04147d9dbd7fe08e41325ef603",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/workload_audit.py": "250d3c175232b67e16983256d2267e5451c4de854ae010fe0751a0f2f1403fe7",
+    "isaforge/workload_experiment.py": "2aaf44ead779ae43dabf2da4d85a62bb463632da68ee89ae2115c236e7f54fa8",
+    "isaforge/workload_probe.py": "b5779445c1f242acc7c2c5137dc971bcd21b6be31b8df1f805e3201dec7776c0",
+    "isaforge/workload_selection.py": "8fee0084944c81fe09a2224424f0408f419ca17c7a85e323eb881b4a7f74f80c",
+    "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+    "scripts/reproduce_workload.py": "16b3d74650d8b0b9558d2b2c8c217fe8a3d001069494578fbda6baa2dd3f19e4",
+    "tests/test_assembly_lowering.py": "f4379764d8d45be53c3c7dc2d87e52b0780a041a4176ad7884f1b6003892994f",
+    "tests/test_codesign.py": "52cf3bf29d7cbcf91b04af6f76d5386a227a7e8e0e71b9c99f563b40a1488530",
+    "tests/test_speedup_corpus.py": "6253c9937128a466b101e8813fc70f92bfebb723c947d656e31ef6a9ec07f334",
+    "tests/test_workload_probe.py": "574eee2db2160a19c545efa91aea24a859e2f3240b67b17377ef1e44897221b8"
+  }
+}

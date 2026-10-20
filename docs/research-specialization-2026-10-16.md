@@ -1,3 +1,5 @@
+> Historical research direction. Its proposed priorities are superseded by the [current project contract](../README.md) and [handoff](HANDOFF.md). Preserve the evidence below; it does not authorize new LUT-model, RTL-agent, or GNN work.
+
 # Specialization after V13: preserve the control outside one structural domain
 
 Research/design note, 2026-10-16. No gate membership counts, routed scores, fits, features, solver queries or native measurements were computed for this note. The parent owns the single gate recipe and its release before scoring.

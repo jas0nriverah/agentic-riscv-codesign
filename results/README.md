@@ -1,5 +1,15 @@
 # Research result archives
 
+[Automatic aha-mont64 processor experiment](2026-10-19-automatic-aha-mont64/README.md): 21 discovered executable formulas, six frozen candidates, seven integrated designs, all correctness controls and routes, measured whole-program speedup, and 120 equal-budget policy outcomes. Merit wins; learned acquisition shows no advantage.
+
+The [project contract](../README.md) governs new work. Historical priorities inside frozen snapshots remain unchanged as evidence.
+
+[Measured CRC32 selection loop](2026-10-19-codesign/README.md): six executable candidates, seven complete processor measurements including baseline, 120 equal-budget policy outcomes, portable raw-evidence replay, and all failures. Merit wins; no learned-selection advantage or cross-workload claim.
+
+[Current validation](2026-10-19-research-contract-validation/README.md): full tests, historical-model replay, and both processor checkpoints.
+
+## Historical cost-model and hardware studies
+
 [V15 scoped stress](2026-10-19-v15-scoped-stress/README.md):32 new verified mappings, no fits,22.63% lower MAE versusV6 with worse underprediction; experimental.
 
 

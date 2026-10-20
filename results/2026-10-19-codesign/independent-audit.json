@@ -1,0 +1,556 @@
+{
+  "context_id": "cf16df2e04d6c845c4d990e9355bfe2060a79d71e5a92cc22afc4dedb5373fb2",
+  "raw_records_recounted": 7,
+  "policy_replay_verified": true,
+  "baseline": {
+    "cycles": 32387382,
+    "resources": {
+      "cell_types": {
+        "$scopeinfo": 1,
+        "SB_CARRY": 295,
+        "SB_DFF": 126,
+        "SB_DFFE": 250,
+        "SB_DFFESR": 164,
+        "SB_DFFESS": 5,
+        "SB_DFFSR": 109,
+        "SB_DFFSS": 1,
+        "SB_LUT4": 1653,
+        "SB_RAM40_4K": 20
+      },
+      "lut4_count": 1653,
+      "carry_count": 295,
+      "memory_blocks": 20,
+      "flip_flop_count": 655,
+      "top_ports": {
+        "clk": {
+          "direction": "input",
+          "width": 1
+        },
+        "done": {
+          "direction": "output",
+          "width": 1
+        },
+        "fault": {
+          "direction": "output",
+          "width": 1
+        },
+        "passed": {
+          "direction": "output",
+          "width": 1
+        },
+        "report_bit": {
+          "direction": "output",
+          "width": 1
+        },
+        "report_strobe": {
+          "direction": "output",
+          "width": 1
+        },
+        "resetn": {
+          "direction": "input",
+          "width": 1
+        },
+        "trap": {
+          "direction": "output",
+          "width": 1
+        }
+      },
+      "program_data_memory_blocks": 16,
+      "all_bram_clocks_use_top_clock": true,
+      "fits_hx8k_resource_counts": true
+    },
+    "fmax_mhz": [
+      77.16049194335938,
+      68.49314880371094,
+      70.3878402709961
+    ]
+  },
+  "hardware": [
+    {
+      "name": "index_offset",
+      "cycles": 30820662,
+      "speedup": 1.050833431157319,
+      "cycle_reduction_percent": 4.837439469482286,
+      "lut4": 1684,
+      "added_lut4": 31,
+      "flip_flops": 688,
+      "carry_cells": 297,
+      "bram": 20,
+      "unit_lut4": 8,
+      "unit_carry": 0,
+      "fmax_mhz": [
+        76.5931396484375,
+        72.04092407226562,
+        71.4898452758789
+      ],
+      "conditional_fmax_speedups": [
+        1.0431067728153094,
+        1.105263997185383,
+        1.0672854731005739
+      ],
+      "correct": true,
+      "handshakes": 176128,
+      "evaluation_seconds": 39.412739416991826
+    },
+    {
+      "name": "index_byte",
+      "cycles": 31865142,
+      "speedup": 1.0163890686569041,
+      "cycle_reduction_percent": 1.6124798231607618,
+      "lut4": 1689,
+      "added_lut4": 36,
+      "flip_flops": 688,
+      "carry_cells": 297,
+      "bram": 20,
+      "unit_lut4": 8,
+      "unit_carry": 0,
+      "fmax_mhz": [
+        65.66419219970703,
+        67.68647766113281,
+        68.1338119506836
+      ],
+      "conditional_fmax_speedups": [
+        0.8649551794324974,
+        1.004418649050893,
+        0.9838412630076843
+      ],
+      "correct": true,
+      "handshakes": 176128,
+      "evaluation_seconds": 39.95498062498518
+    },
+    {
+      "name": "address_mask",
+      "cycles": 31516982,
+      "speedup": 1.0276168574770261,
+      "cycle_reduction_percent": 2.6874663719345993,
+      "lut4": 1722,
+      "added_lut4": 69,
+      "flip_flops": 712,
+      "carry_cells": 326,
+      "bram": 20,
+      "unit_lut4": 30,
+      "unit_carry": 29,
+      "fmax_mhz": [
+        60.70539855957031,
+        68.6012191772461,
+        68.17097473144531
+      ],
+      "conditional_fmax_speedups": [
+        0.808469325797822,
+        1.0292382596110823,
+        0.9952520571019677
+      ],
+      "correct": true,
+      "handshakes": 176128,
+      "evaluation_seconds": 45.12252887501381
+    },
+    {
+      "name": "address",
+      "cycles": 31516982,
+      "speedup": 1.0276168574770261,
+      "cycle_reduction_percent": 2.6874663719345993,
+      "lut4": 1723,
+      "added_lut4": 70,
+      "flip_flops": 712,
+      "carry_cells": 326,
+      "bram": 20,
+      "unit_lut4": 30,
+      "unit_carry": 29,
+      "fmax_mhz": [
+        61.85439682006836,
+        71.04795837402344,
+        64.91820526123047
+      ],
+      "conditional_fmax_speedups": [
+        0.8237715867342389,
+        1.065947193108413,
+        0.9477637305925842
+      ],
+      "correct": true,
+      "handshakes": 176128,
+      "evaluation_seconds": 48.16954270898714
+    },
+    {
+      "name": "mask_offset",
+      "cycles": 32909622,
+      "speedup": 0.9841310848237637,
+      "cycle_reduction_percent": -1.6124798231607729,
+      "lut4": 1687,
+      "added_lut4": 34,
+      "flip_flops": 688,
+      "carry_cells": 297,
+      "bram": 20,
+      "unit_lut4": 0,
+      "unit_carry": 0,
+      "fmax_mhz": [
+        72.7484359741211,
+        72.59528350830078,
+        74.17847442626953
+      ],
+      "conditional_fmax_speedups": [
+        0.9278582265519817,
+        1.0430718452856698,
+        1.0371300245417143
+      ],
+      "correct": true,
+      "handshakes": 176128,
+      "evaluation_seconds": 46.368478666001465
+    },
+    {
+      "name": "shift_xor",
+      "cycles": 31516982,
+      "speedup": 1.0276168574770261,
+      "cycle_reduction_percent": 2.6874663719345993,
+      "lut4": 1718,
+      "added_lut4": 65,
+      "flip_flops": 712,
+      "carry_cells": 297,
+      "bram": 20,
+      "unit_lut4": 24,
+      "unit_carry": 0,
+      "fmax_mhz": [
+        71.3419418334961,
+        68.39009857177734,
+        71.75659942626953
+      ],
+      "conditional_fmax_speedups": [
+        0.950125902865702,
+        1.0260707735642343,
+        1.0475998542044394
+      ],
+      "correct": true,
+      "handshakes": 176128,
+      "evaluation_seconds": 44.39059929200448
+    }
+  ],
+  "policies": [
+    {
+      "policy": "active_learning",
+      "budget": 1,
+      "seeds": 5,
+      "mean_best_speedup": 1.0267368007176796,
+      "mean_regret": 0.02409663043963959,
+      "oracle_hits": 1,
+      "mean_charged_measurement_seconds": 44.839163708401614
+    },
+    {
+      "policy": "active_learning",
+      "budget": 2,
+      "seeds": 5,
+      "mean_best_speedup": 1.0322601722130846,
+      "mean_regret": 0.01857325894423436,
+      "oracle_hits": 1,
+      "mean_charged_measurement_seconds": 91.03411220040289
+    },
+    {
+      "policy": "active_learning",
+      "budget": 3,
+      "seeds": 5,
+      "mean_best_speedup": 1.0322601722130846,
+      "mean_regret": 0.01857325894423436,
+      "oracle_hits": 1,
+      "mean_charged_measurement_seconds": 134.80182858379558
+    },
+    {
+      "policy": "active_learning",
+      "budget": 4,
+      "seeds": 5,
+      "mean_best_speedup": 1.0461901164212606,
+      "mean_regret": 0.00464331473605859,
+      "oracle_hits": 4,
+      "mean_charged_measurement_seconds": 176.60128782559187
+    },
+    {
+      "policy": "active_learning",
+      "budget": 5,
+      "seeds": 5,
+      "mean_best_speedup": 1.0461901164212606,
+      "mean_regret": 0.00464331473605859,
+      "oracle_hits": 4,
+      "mean_charged_measurement_seconds": 221.929424783797
+    },
+    {
+      "policy": "active_learning",
+      "budget": 6,
+      "seeds": 5,
+      "mean_best_speedup": 1.050833431157319,
+      "mean_regret": 0.0,
+      "oracle_hits": 5,
+      "mean_charged_measurement_seconds": 263.4188695839839
+    },
+    {
+      "policy": "frequency",
+      "budget": 1,
+      "seeds": 5,
+      "mean_best_speedup": 1.0267368007176796,
+      "mean_regret": 0.02409663043963959,
+      "oracle_hits": 1,
+      "mean_charged_measurement_seconds": 44.839163708401614
+    },
+    {
+      "policy": "frequency",
+      "budget": 2,
+      "seeds": 5,
+      "mean_best_speedup": 1.0322601722130846,
+      "mean_regret": 0.01857325894423436,
+      "oracle_hits": 1,
+      "mean_charged_measurement_seconds": 91.03411220040289
+    },
+    {
+      "policy": "frequency",
+      "budget": 3,
+      "seeds": 5,
+      "mean_best_speedup": 1.0322601722130846,
+      "mean_regret": 0.01857325894423436,
+      "oracle_hits": 1,
+      "mean_charged_measurement_seconds": 134.80182858379558
+    },
+    {
+      "policy": "frequency",
+      "budget": 4,
+      "seeds": 5,
+      "mean_best_speedup": 1.0461901164212606,
+      "mean_regret": 0.00464331473605859,
+      "oracle_hits": 4,
+      "mean_charged_measurement_seconds": 176.60128782559187
+    },
+    {
+      "policy": "frequency",
+      "budget": 5,
+      "seeds": 5,
+      "mean_best_speedup": 1.0461901164212606,
+      "mean_regret": 0.00464331473605859,
+      "oracle_hits": 4,
+      "mean_charged_measurement_seconds": 221.929424783797
+    },
+    {
+      "policy": "frequency",
+      "budget": 6,
+      "seeds": 5,
+      "mean_best_speedup": 1.050833431157319,
+      "mean_regret": 0.0,
+      "oracle_hits": 5,
+      "mean_charged_measurement_seconds": 263.4188695839839
+    },
+    {
+      "policy": "merit",
+      "budget": 1,
+      "seeds": 5,
+      "mean_best_speedup": 1.0369034869491434,
+      "mean_regret": 0.013929944208175771,
+      "oracle_hits": 2,
+      "mean_charged_measurement_seconds": 42.838613091805016
+    },
+    {
+      "policy": "merit",
+      "budget": 2,
+      "seeds": 5,
+      "mean_best_speedup": 1.050833431157319,
+      "mean_regret": 0.0,
+      "oracle_hits": 5,
+      "mean_charged_measurement_seconds": 84.53526829200564
+    },
+    {
+      "policy": "merit",
+      "budget": 3,
+      "seeds": 5,
+      "mean_best_speedup": 1.050833431157319,
+      "mean_regret": 0.0,
+      "oracle_hits": 5,
+      "mean_charged_measurement_seconds": 132.34459819239564
+    },
+    {
+      "policy": "merit",
+      "budget": 4,
+      "seeds": 5,
+      "mean_best_speedup": 1.050833431157319,
+      "mean_regret": 0.0,
+      "oracle_hits": 5,
+      "mean_charged_measurement_seconds": 174.9609500175924
+    },
+    {
+      "policy": "merit",
+      "budget": 5,
+      "seeds": 5,
+      "mean_best_speedup": 1.050833431157319,
+      "mean_regret": 0.0,
+      "oracle_hits": 5,
+      "mean_charged_measurement_seconds": 220.93385280879448
+    },
+    {
+      "policy": "merit",
+      "budget": 6,
+      "seeds": 5,
+      "mean_best_speedup": 1.050833431157319,
+      "mean_regret": 0.0,
+      "oracle_hits": 5,
+      "mean_charged_measurement_seconds": 263.4188695839839
+    },
+    {
+      "policy": "random",
+      "budget": 1,
+      "seeds": 5,
+      "mean_best_speedup": 1.0267368007176796,
+      "mean_regret": 0.02409663043963959,
+      "oracle_hits": 1,
+      "mean_charged_measurement_seconds": 44.839163708401614
+    },
+    {
+      "policy": "random",
+      "budget": 2,
+      "seeds": 5,
+      "mean_best_speedup": 1.0322601722130846,
+      "mean_regret": 0.01857325894423436,
+      "oracle_hits": 1,
+      "mean_charged_measurement_seconds": 91.03411220040289
+    },
+    {
+      "policy": "random",
+      "budget": 3,
+      "seeds": 5,
+      "mean_best_speedup": 1.0322601722130846,
+      "mean_regret": 0.01857325894423436,
+      "oracle_hits": 1,
+      "mean_charged_measurement_seconds": 134.80182858379558
+    },
+    {
+      "policy": "random",
+      "budget": 4,
+      "seeds": 5,
+      "mean_best_speedup": 1.0461901164212606,
+      "mean_regret": 0.00464331473605859,
+      "oracle_hits": 4,
+      "mean_charged_measurement_seconds": 176.60128782559187
+    },
+    {
+      "policy": "random",
+      "budget": 5,
+      "seeds": 5,
+      "mean_best_speedup": 1.0461901164212606,
+      "mean_regret": 0.00464331473605859,
+      "oracle_hits": 4,
+      "mean_charged_measurement_seconds": 221.929424783797
+    },
+    {
+      "policy": "random",
+      "budget": 6,
+      "seeds": 5,
+      "mean_best_speedup": 1.050833431157319,
+      "mean_regret": 0.0,
+      "oracle_hits": 5,
+      "mean_charged_measurement_seconds": 263.4188695839839
+    }
+  ],
+  "queries_to_exact_oracle_by_seed": {
+    "frequency": [
+      4,
+      4,
+      6,
+      1,
+      4
+    ],
+    "merit": [
+      2,
+      2,
+      2,
+      1,
+      1
+    ],
+    "random": [
+      4,
+      4,
+      6,
+      1,
+      4
+    ],
+    "active_learning": [
+      4,
+      4,
+      6,
+      1,
+      4
+    ]
+  },
+  "learned_query_orders_different_from_random_out_of_five": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "native_commands": 127,
+  "native_seconds": 280.9981816728832,
+  "phase_seconds": {
+    "compilation_and_other_checks": 3.7348555839271285,
+    "formal_proof": 0.170353958994383,
+    "native_build": 52.93492775296909,
+    "processor_simulation": 27.11118808100582,
+    "routing": 140.50543746101903,
+    "synthesis": 56.54141883496777
+  },
+  "live_selection": {
+    "context_id": "cf16df2e04d6c845c4d990e9355bfe2060a79d71e5a92cc22afc4dedb5373fb2",
+    "policy": "active_learning",
+    "measurements_used": 3,
+    "measured_candidate_ids": [
+      "28d68b1c30fc8e60109844d569524e6f6a057b7b3fd74c1cfaba981508db9b4c",
+      "8368f6671fc44ab1c8599a3ef9074e311c1897c77290319869cf7c73ac294d63",
+      "fa52fc957502aa97956f33f90147c3819e1ea9051cf11dcafc7d96ae3daa7ca1"
+    ],
+    "selected": {
+      "candidate_id": "8368f6671fc44ab1c8599a3ef9074e311c1897c77290319869cf7c73ac294d63",
+      "benchmark": "crc32:cf16df2e04d6c845c4d990e9355bfe2060a79d71e5a92cc22afc4dedb5373fb2",
+      "formula": "add(in0,slli(andi(in1,255),2))",
+      "name": "address_mask",
+      "size": 3,
+      "runs": 174080,
+      "places": 1,
+      "saved": 348160,
+      "saved_percent": 9.088,
+      "depth": 3,
+      "tree_op_count": 3,
+      "input_count": 2,
+      "constant_count": 2,
+      "unique_constant_count": 2,
+      "max_abs_constant": 255,
+      "op_add": 1,
+      "op_sub": 0,
+      "op_and": 0,
+      "op_or": 0,
+      "op_xor": 0,
+      "op_sll": 0,
+      "op_srl": 0,
+      "op_sra": 0,
+      "op_slt": 0,
+      "op_sltu": 0,
+      "op_addi": 0,
+      "op_andi": 1,
+      "op_ori": 0,
+      "op_xori": 0,
+      "op_slli": 1,
+      "op_srli": 0,
+      "op_srai": 0,
+      "op_slti": 0,
+      "op_sltiu": 0,
+      "op_lui": 0,
+      "op_mul": 0,
+      "op_mulh": 0,
+      "op_mulhu": 0,
+      "op_mulhsu": 0,
+      "measurement_source": "synthesis_estimate",
+      "measurement_detail": "Measured RTL cycles at common routed 12 MHz; not board measurements.",
+      "baseline_cycles": 32387382,
+      "candidate_cycles": 31516982,
+      "baseline_period_ns": 83.33333333333333,
+      "candidate_period_ns": 83.33333333333333,
+      "speedup": 1.0276168574770261,
+      "area": 1722,
+      "timing_feasible": true,
+      "evaluation_id": "7c1c250e283ddc85c02e7f64a267bd70bff88adb1f215da0510eb13b6226318d",
+      "measurement_seconds": 45.12252887501381
+    },
+    "best_speedup": 1.0276168574770261
+  },
+  "training_scope": "Paid within-CRC32 application-speedup observations only; zero historical speedup labels; no area predictor."
+}

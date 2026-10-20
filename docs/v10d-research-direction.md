@@ -1,3 +1,5 @@
+> Historical research direction. Its proposed priorities are superseded by the [current project contract](../README.md) and [handoff](HANDOFF.md). Preserve the evidence below; it does not authorize new LUT-model, RTL-agent, or GNN work.
+
 # From verified area savings to a useful hardware decision
 
 The [complete V10d result](v10-csd-hardware-results.md) establishes that one exact CSD rewrite can reduce mapped LUT4 cost on the fixed development cohort. It does not establish a new constant-multiplication algorithm or prove that CSD is optimal.

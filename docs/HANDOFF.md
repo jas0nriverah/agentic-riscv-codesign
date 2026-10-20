@@ -1,32 +1,37 @@
-# Team handoff — October 19, 2026
+# Current handoff — October 19, 2026
 
-The requested bounded batch is complete on `codex/isaforge-ml-foundation`: first the full 327-circuit frozen comparison, then one implemented model router and a separate 32-circuit prospective stress test. No further training or hardware jobs are queued; the recurring automation remains paused.
+Read [README](../README.md), [AGENTS](../AGENTS.md), and [the method review](research-foundation.md) first. This handoff replaces the [historical cost-model priorities](HANDOFF-history-2026-10-19.md). The working branch is `ai-guided-ml`.
 
-## Show the team
+## Completed and preserved
 
-- [Project overview and architecture](../README.md).
-- [327-circuit matched comparison and research figures](v11e-transfer-results.md).
-- [Scoped model diagram, improvements and remaining failure](v15-scoped-results.md).
-- [Hardware tradeoffs](hardware-tradeoffs.md): separate processor-cycle/routing evidence; no new CPU or energy claim from these LUT-prediction tests.
+- **CRC32:** six executable source-adapter candidates, actual whole-benchmark cycles, correctness controls, integrated resources, three routing seeds, a live bounded selector, and 120 policy replays. Best 1.050833×, 4.8374% fewer cycles, +31 LUT4. Merit wins the budget-three comparison. The slowdown from `mask_offset` remains in the evidence.
+- **aha-mont64:** automatic RV32I profiling, established dataflow extraction, assembly lowering, six executable candidates, full correctness controls, integrated synthesis/routing, and 120 policy replays. Best 1.094120×, 8.6024% fewer cycles, +42 LUT4. Merit finds the optimum with one measurement in all five seeds. Learned acquisition shows no advantage and loses to random at budget four. [All measurements and commands](automatic-workloads.md).
+- **Corpus:** 12 actual single-instruction outcomes, two workload groups, one pinned processor context. Features and labels have explicit provenance. Cross-workload readiness is false; do not present contract tests as measured generalization.
+- **Contract and cleanup:** the README/AGENTS now define measured performance selection, historical-label costs, strong baselines, hidden target outcomes, and joint-set validation. The unused RTL-search module and its tests are retained as non-importable text in `archive/`. Historical model results and negative outcomes are preserved.
+- **Literature:** actual methods reviewed for Atasu, CIDRE, LACE, Gardner, and Sun's separate 2002 conference paper, plus relevant regression/cost-aware/ranking sources. The exact Sun 2004 and Hussein 2026 full methods remain inaccessible; no detailed reproduction/novelty claim may rely on them.
 
-## Verified findings
+## Next smallest data experiment
 
-The frozen V11 comparison completes all 327 fresh original-RTL targets and 521 program/formula memberships. All 654 V6/V9 predictions were frozen first. **V9 loses the equal-five-family primary: 0.525239 versus 0.506605 LUT4 MAE (+3.68%).** Threshold mistakes at 32/64/128 LUT4 are unchanged. Every family-omission sensitivity retains the same direction. All 702,396 RTL comparisons passed, including one retained predeclared simulator-overflow fallback with 100 additional independent Yosys boundary checks. Independent netlist and arithmetic audits passed.
+Preserve both checkpoints. Run CRC32 through the automatic RV32I extraction path in a **new** context to harmonize feature provenance, then try an independent proposal workload such as `edn` through the same baseline/fit gates. Do not reuse consumed CRC32 or aha outcomes as an untouched final test. Freeze the new pool, feature definitions, policies, seeds, clocks/caps, and cost accounting before its labels. Existing SHA-256 and matrix probes failed linker/memory requirements; those failures remain in the CRC archive.
 
-V15 is a fixed input-only router over the frozen forests, with V6 as fallback and V9 for two arithmetic coverage classes. On 32 new related synthetic originals, **MAE improves 22.63% and cap64 false rejections fall from four to two**. However, **worst underprediction grows from 2.83 to 32.01 LUT4**. V15 remains experimental. All 32 stress cases use V9, so the result concerns covered-domain arithmetic behavior. On the consumed V11 panel all 327 cases use V6, preserving its predictions exactly; this is mechanical fallback, not a new gain over V6.
+The minimum group gate is three, but three small groups are not evidence of broad transfer. Keep collecting diverse manageable pools before the primary held-out-workload study. Avoid shortlisting every future pool exclusively by merit: freeze a broader legal pool when affordable, report exclusions, and charge its oracle construction separately.
 
-The final 32-input panel and code were committed before its predictions and labels. One input-only rejected draft is preserved because four proposed originals overlapped historical data; the entire affected template changed before the final freeze. All 68,736 RTL comparisons and 32 mappings passed; an independent stdlib-only reviewer recounted every netlist and regenerated every expected vector outcome.
+## Selection experiment after the data connection
 
-## Validation and compute
+Use fixed XGBoost regression and pairwise ranking trained only on other workload/source groups. Report zero-shot predictions before any paid target observations, then a separate limited-budget adaptation curve. Add a PicoRV32 latency/timing-aware merit baseline with separately charged microbenchmark calibration, and a constrained-EI comparator. Cost-aware acquisition must use observed/predicted durations rather than hidden target durations. Use existing model recipes before introducing new variants; modify one only to address a measured selection failure.
 
-The final full suite passed **2,468 tests and 179 subtests** in 135.57 seconds. Its one warning is intentionally generated by a duplicate-ZIP-member rejection test. Focused router/evaluator tests passed 70 cases. [Saved validation log and receipt](../results/2026-10-19-validation/).
+The endpoint is best verified feasible whole-program performance versus evaluations and actual evaluation time, with oracle regret. Include training-label counts/time, profiling/baseline setup, failed attempts, inference, and shared-cost amortization. Preserve heuristic wins. Report uncertainty calibration on untouched workload groups; bootstrap spread alone is not confidence.
 
-Feature archive recovery took 12.02 seconds, frozen paired inference 7.00 seconds, and V11 label release to recorded measurement completion 194.68 seconds. The separate 32-case feature/inference/verification/target pipeline took **43.49 seconds** under its 900-second cap. Native mapping concurrency stayed at two. No new model fits, parameter sweep, cloud compute purchase or post-freeze candidate replacement ran.
+Only then connect an LLM **instruction-selection** agent with isolated access to list/predict/measure/choose tools and the same budget/information as non-agent policies. `LiveSelectionTools` is not an OS sandbox. Automatic multi-instruction selection needs a conflict/encoding contract and **joint** lowering, simulation, correctness, synthesis, and routing for one to three instructions; never add individual speedups or area deltas.
 
-## Next research step
+## Reproduce and validate
 
-The useful unresolved issue is conservative feasibility under unfamiliar compositions. Freeze a group-held calibration plan for upper resource bounds, then evaluate on a genuinely new mixed application panel with a fixed synthesis budget. Compare V6, V9, scoped routing and merit-only selection on false accepts and best-feasible-instruction regret, with inference and measurement cost. Do not tune a bound on the just-observed 32-case underprediction tail or describe this synthetic result as published-system superiority.
+```sh
+make test
+make reproduce
+make reproduce-speedup
+```
 
-## Evidence retained
+Use the README's Python extras and initialized Embench submodule. `make reproduce` checks historical cost-model scores; `make reproduce-speedup` authenticates and replays both current processor snapshots without native jobs. [Automatic-workload instructions](automatic-workloads.md) distinguish portable evidence replay from native recollection with pinned tools.
 
-Small raw archives for recovered features, all 327 targets and the 32-case stress test are committed with manifests and audits. Expanded raw trees, historical traces and some earlier forests remain local and hash-bound. **Do not delete `generated/`, the V11d feature cache or the V15 raw tree when continuing research.** Cached score/figure replay is documented; a full historical native audit may additionally require the recorded local dependencies. No original failed attempt or negative result was removed.
+Do not edit frozen hash-bound measurement sources to make an old audit pass. Extend with new modules/contexts and preserve source snapshots. Do not delete local raw evidence merely because a snapshot exists. The [alignment review](scope-review.md) records the remaining gaps and what the cleanup changed.

@@ -1,3 +1,5 @@
+> Historical research direction. Its proposed priorities are superseded by the [current project contract](../README.md) and [handoff](HANDOFF.md). Preserve the evidence below; it does not authorize new LUT-model, RTL-agent, or GNN work.
+
 # ISAForge research audit — October 19, 2026
 
 ISAForge has a useful experimental foundation, a real development improvement, and several informative failures. Its strongest next research question is whether a small, structure-aware predictor can reduce hardware-evaluation cost while preserving good processor choices on new applications. That has not yet been demonstrated. Chasing a lower percentage error on repeatedly inspected circuits would not establish it.

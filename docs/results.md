@@ -1,5 +1,7 @@
 # Results
 
+Current processor evidence: [automatic aha-mont64](automatic-workloads.md) and the [preserved six-candidate CRC32 study](codesign-loop.md). The following versioned cost-model results are historical. They do not establish the primary whole-program selection endpoint. See the [current contract](../README.md) for active priorities.
+
 ## Scoped follow-up: V15
 
 [Fixed arithmetic routing](v15-scoped-results.md) improves32-case synthetic macro MAE 22.63% and cap64 false rejections4→2, but worst underprediction worsens2.83→32.01LUT4. All 32 use V9; V15 remains experimental. The consumed 327-case panel uses V6 exclusively and is preserved exactly.
@@ -10,7 +12,7 @@
 [All 327 original circuits are measured](v11e-transfer-results.md). Frozen V9 loses to V6 on equal-family MAE **0.525239 versus 0.506605 (+3.68%)**; cap32/64/128 mistakes are unchanged. All 702,396 RTL comparisons and327 mappings passed, including a retained declared simulator fallback. Independent target and arithmetic audits passed.
 
 
-The evidence supports resource-prediction and processor-integration results. V6 mapping features improve a frozen synthetic comparison by 6.32%, but error tails, feasibility mistakes and incomplete family coverage remain. Earlier V5 gains transfer weakly to three application families. Historical V4’s small advantage over a same-data MasterRTL retrain was inconclusive. Learned acquisition has not beaten simple merit on the prospective primary endpoint. The ML target is isolated LUT4 cost; the CRC32 cycle result comes from a separate matched processor experiment. [Methodology](methodology.md) defines those quantities and their boundaries.
+The evidence supports resource-prediction and processor-integration results. V6 mapping features improve a frozen synthetic comparison by 6.32%, but error tails, feasibility mistakes and incomplete family coverage remain. Earlier V5 gains transfer weakly to three application families. Historical V4’s small advantage over a same-data MasterRTL retrain was inconclusive. Learned acquisition has not beaten simple merit on the prospective primary endpoint. In these historical studies the ML target was isolated LUT4 cost; CRC32 cycle results came from separate processor experiments. The current speedup experiment is linked above. [Methodology](methodology.md) defines those quantities and their boundaries.
 
 ## Latest fitting-only result: V12 target scale
 
@@ -128,4 +130,4 @@ The earlier core-only experiment assumes immediate external memory and must rema
 
 ## What remains unproven
 
-The current evidence does not establish improved acquisition over merit, a learned integrated-performance predictor, formal equivalence, broad application or processor transfer, energy savings, or measured FPGA-board speedup. One integrated benchmark and processor, small correlated workload samples, and synthetic probe strata constrain generalization. Useful next measurements must evaluate integrated cycles, clocks, feasibility, and jointly selected instruction sets under an explicit cost budget; isolated resource accuracy alone cannot answer those questions.
+Those historical cost-model studies do not establish learned whole-program performance or broad transfer. The current CRC32 and aha-mont64 checkpoints add real speedup regression/acquisition and two integrated workloads, but still show no acquisition advantage over merit, no cross-workload model result, no universal program proof, and no energy or board-runtime result. Small correlated workload samples and synthetic historical probe strata constrain generalization. Useful next measurements must evaluate integrated cycles, clocks, feasibility, and jointly selected instruction sets under an explicit cost budget; isolated resource accuracy alone cannot answer those questions.

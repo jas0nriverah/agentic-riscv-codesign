@@ -1,16 +1,16 @@
 # Contributing to ISAForge
 
-ISAForge is organized around reproducible experiments. Start with the [methodology](docs/methodology.md), [results](docs/results.md), and [evidence index](results/README.md) before changing an experiment.
+ISAForge is organized around reproducible experiments. Start with the [project scope contract](README.md), [agent instructions](AGENTS.md), [current handoff](docs/HANDOFF.md), and [methodology](docs/methodology.md). Historical model roadmaps do not define current work.
 
 ## Work in a branch
 
-Install `.[dev,reports]` in a virtual environment. Keep implementation changes separate from generated experiment outputs. Use `generated/` for local runs, simulator builds, caches, and plots. Do not commit toolchains, virtual environments, instruction traces, or simulator build directories.
+Install `.[dev,reports,proofs]` in a virtual environment. Keep implementation changes separate from generated experiment outputs. Use `generated/` for local runs, simulator builds, caches, and plots. Do not commit toolchains, virtual environments, instruction traces, or simulator build directories.
 
 ## Preserve frozen evidence
 
 Files under `results/` describe completed experiments. Do not overwrite their datasets, weights, predictions, split definitions, or preregistrations. Preserve failed runs and empty candidate pools. Apparent duplicate artifacts can belong to different historical protocols and are intentionally retained.
 
-Saved model schemas hash their runtime source files. Existing `area_model*.py`, `features.py`, `structural_features_v3.py`, `rtl.py`, `synthesis.py`, and `masterrtl_baseline.py` participate in those contracts. A new research variant should use separately versioned modules and artifacts rather than silently breaking an old model's loader. Check each artifact's schema for the precise frozen dependencies.
+Saved model schemas hash their runtime source files. Existing `area_model*.py`, `features.py`, `structural_features_v3.py`, `rtl.py`, `synthesis.py`, and `masterrtl_baseline.py` participate in those contracts. Preserve those modules and artifacts. A new module is justified only when it fixes an in-scope engineering or selection problem; frozen-source protection is not permission to launch another model-version study. Check each artifact's schema for the precise frozen dependencies.
 
 ## Add an experiment
 
@@ -22,6 +22,7 @@ Write a new result snapshot with a short README, commands, input/source hashes, 
 
 - Run `make test` for code changes. Hardware tests run when their required tools are installed; CI includes a hardware-tool job.
 - Run `make reproduce` when changing evaluation, reporting, or its entry points. The replay checks exact agreement with the committed six-model scores.
+- Run `make reproduce-speedup` for changes affecting processor evidence or selection reports.
 - Regenerate and visually inspect diagrams and figures after layout edits. Preserve vector exports and the numerical evidence behind research plots.
 - Check relative documentation links and make sure quick-start commands work from the repository root.
 

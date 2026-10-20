@@ -1,0 +1,91 @@
+{
+  "plan": {
+    "schema": "isaforge-next-workloads-baseline-v1",
+    "reference_context": "cf16df2e04d6c845c4d990e9355bfe2060a79d71e5a92cc22afc4dedb5373fb2",
+    "source_sha256": "b5779445c1f242acc7c2c5137dc971bcd21b6be31b8df1f805e3201dec7776c0",
+    "files": {
+      "hardware/embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+      "hardware/embench_memory.c": "343b26ae849f9bfab8ed197636449c4a91c5d78f26fe7f6ff4f960901520b847",
+      "benchmarks/embench/src/aha-mont64/mont64.c": "e18ee3f518de0431597a16cf27c27c08dba9a540f45ecc9e9ed13956e4f1eb49",
+      "benchmarks/embench/src/nettle-sha256/nettle-sha256.c": "2770ad46ac26fac096821eb3ae558364600bdaeb6d96bc06049327c90138959f",
+      "benchmarks/embench/src/matmult-int/matmult-int.c": "d070416c56a5fe1c66ae8f16ca10f59e7c0002a6dbd62ff1db633914220f959d"
+    },
+    "workloads": {
+      "aha-mont64": "aha-mont64/mont64.c",
+      "nettle-sha256": "nettle-sha256/nettle-sha256.c",
+      "matmult-int": "matmult-int/matmult-int.c"
+    },
+    "isa": "rv32i_zicsr",
+    "abi": "ilp32",
+    "optimization": "-O2",
+    "cpu_mhz_scale": 1,
+    "ram_bytes": 8192,
+    "program_data_limit": 4096,
+    "stack_reservation": 4096,
+    "custom_interface": "unchanged two-input one-output PCPI; disabled for baselines",
+    "native_workers": 1,
+    "build_workers": 2,
+    "max_commands": 24,
+    "command_seconds": 60,
+    "total_native_seconds": 240,
+    "scope": "Compatibility, memory fit, and upstream self-check. No new instruction-speedup labels."
+  },
+  "results": [
+    {
+      "workload": "aha-mont64",
+      "status": "passed",
+      "isa_validation": {
+        "instruction_words_checked": 776,
+        "custom_static_sites": 0,
+        "isa": "rv32i_zicsr + custom-0/funct7=1/funct3=0"
+      },
+      "program_and_bss_end": 3152,
+      "performance": {
+        "cycles": 62311489,
+        "instructions": 10973336,
+        "benchmark_result_u32": 0,
+        "upstream_self_check": true,
+        "custom_instructions": 0
+      },
+      "seconds": 8.036989667016314,
+      "artifacts": {
+        "attempt-000/symbols.txt": "d87f758b96131747bbc975fd7d95994b1b1a1aa63c5aaa6f964b7979e9bdfec2",
+        "attempt-000/candidate.v": "b8d826d8899911549e3db787ea47aff9eb34e462aabba5aa5c03683c0d045866",
+        "attempt-000/program.c": "e18ee3f518de0431597a16cf27c27c08dba9a540f45ecc9e9ed13956e4f1eb49",
+        "attempt-000/firmware.elf": "22bf309c0ad01d89572043b98bcdc086c667d8fd0df66e2176ffb6e6c1879948",
+        "attempt-000/soc_top.v": "8e74079a7a9f957d3b06e23e1bd1fc04ee988f8f8b1181c204eb2a586573ac1c",
+        "attempt-000/compile.log": "4949f09bbd4fd0d446d097cdc4f18512478903de6891dce417d21f626741fad4",
+        "attempt-000/firmware.hex": "ba0968106b99c85ac42bfb35ec06991ca502c260264eb434dbfa7680a90b1a40",
+        "attempt-000/firmware.bin": "33b6fb2b7438c60f3810ab6b7536fc6d5c6c8dd127f80105d41f1d543f91cd01",
+        "attempt-000/objcopy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "attempt-000/disassembly.txt": "2793926c3a60d54c3934dcdea1648a2fe3e66897809dd57b9d06ef87af72cb63",
+        "attempt-000/simulation.json": "e3a698e34d9832a4ba53e05bea1946103c800cabf5f399fcfba21be719a397dc",
+        "attempt-000/build.log": "da83fb75ea2eab5500a124979a070caf26835daac54ca6126c93b38722a3b351"
+      }
+    },
+    {
+      "workload": "nettle-sha256",
+      "status": "does_not_fit_current_memory_contract",
+      "error": "Command failed: /Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/next-workload-probe-2026-10-19/nettle-sha256/attempt-000/compile.log",
+      "seconds": 0.5160288749902975,
+      "artifacts": {
+        "attempt-000/program.c": "2770ad46ac26fac096821eb3ae558364600bdaeb6d96bc06049327c90138959f",
+        "attempt-000/compile.log": "d37b56f51fb8fb4192cbbd9e544736ea0846ab137ac384996fbc7f4fdc9c086e"
+      }
+    },
+    {
+      "workload": "matmult-int",
+      "status": "does_not_fit_current_memory_contract",
+      "error": "Command failed: /Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/next-workload-probe-2026-10-19/matmult-int/attempt-000/compile.log",
+      "seconds": 0.3614740830089431,
+      "artifacts": {
+        "attempt-000/program.c": "d070416c56a5fe1c66ae8f16ca10f59e7c0002a6dbd62ff1db633914220f959d",
+        "attempt-000/compile.log": "3c2460807b4587323c221333abd94e803f5b0eb3e77ef1c0f3590daa065ccb93"
+      }
+    }
+  ],
+  "native_commands": 8,
+  "native_seconds": 7.832417625992093,
+  "new_candidate_speedup_labels": 0,
+  "cross_workload_model_trained": false
+}

@@ -1,0 +1,187 @@
+{
+  "context_id": "1bd107eac10ff77bff15d8903da582a8f03b4db1a1294df085c3fc02642df997",
+  "workload": "aha-mont64",
+  "observations": [
+    {
+      "name": "baseline",
+      "formula": null,
+      "cycles": 62311489,
+      "instructions": 10973336,
+      "speedup": 1.0,
+      "cycle_reduction_percent": 0.0,
+      "lut4": 1653,
+      "added_lut4": 0,
+      "flip_flops": 655,
+      "carry": 295,
+      "ram4k": 20,
+      "routed_fmax_mhz": [
+        77.16049194335938,
+        68.49314880371094,
+        70.3878402709961
+      ],
+      "conditional_fmax_speedup": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "timing_feasible": true,
+      "correctness_passed": true
+    },
+    {
+      "name": "candidate_00",
+      "formula": "add(srli(in0,31),slli(in1,1))",
+      "cycles": 56951233,
+      "instructions": 10377752,
+      "speedup": 1.0941201044760522,
+      "cycle_reduction_percent": 8.602355819165219,
+      "lut4": 1695,
+      "added_lut4": 42,
+      "flip_flops": 712,
+      "carry": 297,
+      "ram4k": 20,
+      "routed_fmax_mhz": [
+        75.19927978515625,
+        69.50236511230469,
+        64.88029479980469
+      ],
+      "conditional_fmax_speedup": [
+        1.0663105143945366,
+        1.110241481172603,
+        1.0085099166489144
+      ],
+      "timing_feasible": true,
+      "correctness_passed": true
+    },
+    {
+      "name": "candidate_01",
+      "formula": "or(srli(in0,31),slli(in1,1))",
+      "cycles": 59387713,
+      "instructions": 10648472,
+      "speedup": 1.0492320019125843,
+      "cycle_reduction_percent": 4.692194083181045,
+      "lut4": 1693,
+      "added_lut4": 40,
+      "flip_flops": 712,
+      "carry": 297,
+      "ram4k": 20,
+      "routed_fmax_mhz": [
+        59.30846405029297,
+        65.78082275390625,
+        77.91195678710938
+      ],
+      "conditional_fmax_speedup": [
+        0.8064792862068443,
+        1.007682455121679,
+        1.1613897809328064
+      ],
+      "timing_feasible": true,
+      "correctness_passed": true
+    },
+    {
+      "name": "candidate_02",
+      "formula": "add(srli(in0,31),in1)",
+      "cycles": 58440193,
+      "instructions": 10675544,
+      "speedup": 1.0662437237330822,
+      "cycle_reduction_percent": 6.212812536063783,
+      "lut4": 1726,
+      "added_lut4": 73,
+      "flip_flops": 712,
+      "carry": 328,
+      "ram4k": 20,
+      "routed_fmax_mhz": [
+        72.69026947021484,
+        71.26567840576172,
+        65.17630004882812
+      ],
+      "conditional_fmax_speedup": [
+        1.0044718695673553,
+        1.1094041323094601,
+        0.9872986668670765
+      ],
+      "timing_feasible": true,
+      "correctness_passed": true
+    },
+    {
+      "name": "candidate_03",
+      "formula": "add(in0,slli(in1,1))",
+      "cycles": 61228609,
+      "instructions": 10702616,
+      "speedup": 1.0176858500901107,
+      "cycle_reduction_percent": 1.7378496604374294,
+      "lut4": 1733,
+      "added_lut4": 80,
+      "flip_flops": 712,
+      "carry": 327,
+      "ram4k": 20,
+      "routed_fmax_mhz": [
+        70.8115005493164,
+        71.19464874267578,
+        65.17630004882812
+      ],
+      "conditional_fmax_speedup": [
+        0.9339476760410858,
+        1.0578253138163698,
+        0.9423360351099053
+      ],
+      "timing_feasible": true,
+      "correctness_passed": true
+    },
+    {
+      "name": "candidate_04",
+      "formula": "or(in0,slli(in1,1))",
+      "cycles": 61661761,
+      "instructions": 10810904,
+      "speedup": 1.01053696795977,
+      "cycle_reduction_percent": 1.042709796262442,
+      "lut4": 1725,
+      "added_lut4": 72,
+      "flip_flops": 712,
+      "carry": 297,
+      "ram4k": 20,
+      "routed_fmax_mhz": [
+        73.41065979003906,
+        73.6756820678711,
+        75.42615509033203
+      ],
+      "conditional_fmax_speedup": [
+        0.9614270683319142,
+        1.0869992352461486,
+        1.0828705324157386
+      ],
+      "timing_feasible": true,
+      "correctness_passed": true
+    },
+    {
+      "name": "candidate_05",
+      "formula": "or(srli(in0,31),in1)",
+      "cycles": 60199873,
+      "instructions": 10810904,
+      "speedup": 1.0350767517399913,
+      "cycle_reduction_percent": 3.3888068378529757,
+      "lut4": 1696,
+      "added_lut4": 43,
+      "flip_flops": 712,
+      "carry": 297,
+      "ram4k": 20,
+      "routed_fmax_mhz": [
+        69.65243530273438,
+        67.86563110351562,
+        67.60868072509766
+      ],
+      "conditional_fmax_speedup": [
+        0.9343592124432913,
+        1.0255936283309777,
+        0.9942082803639617
+      ],
+      "timing_feasible": true,
+      "correctness_passed": true
+    }
+  ],
+  "raw_formulas": 21,
+  "executable_formulas": 21,
+  "native_commands": 119,
+  "failed_native_commands": 0,
+  "native_seconds": 301.54153757786844,
+  "audit_scope": "Hash verification; re-extracted and re-lowered candidates; sampled block checks; raw processor counters/controls; recounted netlists and all routes. Reuses the original extractor, integer interpreter and resource/timing parsers."
+}

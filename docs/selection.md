@@ -1,5 +1,7 @@
 # Budgeted single-candidate selection
 
+The [CRC32 loop](codesign-loop.md) and [automatic aha-mont64 replay](automatic-workloads.md) use `codesign.LiveSelectionTools`, with two charged bootstrap observations and measured area **and timing** feasibility for final selection. Both preserve negative learned-versus-merit results. This page documents the earlier generic replay API, whose default bootstrap is three and whose final filter checks area only. Use the current processor interface for hardware experiments. Two measured workload pools are insufficient for the predeclared cross-workload evaluation; no LLM selector has been evaluated.
+
 This milestone implements an offline measurement replay and a tool interface
 for a future LLM runner. No LLM selector or live gem5 invocation is implemented.
 An input pool contains candidate rows for exactly one benchmark, including

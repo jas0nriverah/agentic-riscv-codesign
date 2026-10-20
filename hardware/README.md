@@ -1,5 +1,7 @@
 # Measured PicoRV32 custom instructions
 
+Current integrated experiments: [automatic aha-mont64](../docs/automatic-workloads.md) and [six-candidate CRC32](../docs/codesign-loop.md). This page preserves an earlier external-memory experiment. RTL generation and synthesis are implementation/measurement tools; RTL optimization agents are outside the [project scope](../README.md).
+
 This page documents the core with an external memory model. The later [closed-memory SoC experiment](../docs/soc-integration.md) and [matched SoC routing](../docs/soc-routing.md) include on-chip RAM; [current results](../docs/results.md) keeps their cycle and resource counts separate.
 
 ISAForge now executes two extracted formulas as real instructions on the

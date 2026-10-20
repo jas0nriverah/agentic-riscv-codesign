@@ -1,3 +1,5 @@
+# Legacy RV32IM/Spike extraction flow below. Current integrated RV32I processor
+# experiments use isaforge.workload_experiment; see docs/automatic-workloads.md.
 # Command-line overrides support toolchains such as xPack's riscv-none-elf.
 CC          = riscv64-unknown-elf-gcc
 OBJDUMP     = riscv64-unknown-elf-objdump
@@ -52,6 +54,7 @@ candidates: $(PROGRAMS:%=generated/candidates/%.json)
 # Research entry points. Activate .venv first, or set PYTHON=.venv/bin/python.
 .PHONY: help test reproduce reproduce-v4 reproduce-v5 reproduce-external-v5 reproduce-v6 reproduce-v8 reproduce-v9-coverage reproduce-v10d-hardware reproduce-v10d-timing reproduce-v10d-selection reproduce-v12 diagram
 help:
+	@echo 'Current processor evidence: make reproduce-speedup (CRC32 and automatic aha-mont64)'
 	@echo 'Research: make test | make reproduce | make reproduce-v4 | make reproduce-v5 | make reproduce-external-v5 | make reproduce-v6 | make reproduce-v8 | make reproduce-v9-coverage | make reproduce-v10d-hardware | make reproduce-v10d-timing | make reproduce-v10d-selection | make reproduce-v12 | make diagram'
 	@echo 'make reproduce replays frozen scores/audit/figures; no training or synthesis.'
 	@echo 'Hardware collection: make all | make run | make trace | make candidates'
@@ -62,6 +65,11 @@ test:
 
 reproduce:
 	$(PYTHON) scripts/reproduce_matched.py
+
+.PHONY: reproduce-speedup
+reproduce-speedup:
+	$(PYTHON) scripts/reproduce_codesign.py replay
+	$(PYTHON) scripts/reproduce_workload.py replay
 
 reproduce-v4:
 	$(PYTHON) scripts/evaluate_v4.py --manifest results/2026-10-13-v4/freeze.json --release results/2026-10-13-v4/label-release.json --output generated/reproduction/v4/evaluation.json

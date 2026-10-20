@@ -1,0 +1,113 @@
+ECE 4803 AI for Engineering Project Proposal
+Agent-Guided Custom Instruction Selection for RISC-V Using Learned Prediction
+ Sooraj Tharumia, Jason Rivera-Hernandez, Yuuto Matsuki
+
+1. What We Are Doing
+RISC-V lets designers add custom instructions. If a program repeatedly runs the same short chain of operations, that chain can be fused into one instruction so the program runs faster. Each custom instruction costs a chip area, so a design can afford only two or three, and choosing which chains to build is hard. The standard method picks the most frequent chains and ignores hardware cost. which can cancel the benefit. The only reliable check is to build each candidate in hardware, which is too slow to do for all of them.
+2. How We Are Going to Do It
+We run standard benchmarks on a RISC-V simulator and look for short chains of instructions that repeat often enough to be worth fusing into one.
+For each candidate, we calculate how many cycles it saves, how much it slows down the processor's clock and how much chip space it uses. Combining these gives the real speedup, not just how often the chain shows up.
+Building every candidate in hardware is slow, so we train a machine learning model on easy-to-measure features, like chain length and instruction type, to predict a candidate's speedup and area without building it. The model also gives a confidence score, so we know when to trust its guess and when we don't.
+An AI agent picks the final set of instructions to fit the chip's space budget. It leans on the model's predictions when confidence is high.
+We build the top picks into a real RISC-V processor and measure the actual speedup and chip space, to confirm the predictions held up.
+3. Expected Results and Contribution
+Frequency ranking will disagree noticeably with true speedup, and some frequent chains will produce little gain or a net slowdown.
+The predictor will rank unseen candidates well enough to filter out poor ones. It will not be perfect, so the confidence estimate is a key part of the result.
+Agent-selected instructions will beat frequency ranking and approach the oracle with far fewer hardware evaluations. If the agent gives little advantage over the simpler method, that is still a useful finding about when an agent is worth using.
+Hardware results will follow the predicted ordering of methods, with some gap from prediction error.
+Deliverables: A dataset of candidates with measured speedup, delay, and area; a trained predictor with confidence estimates; a selection agent compared against three baselines; and hardware-verified results.
+
+ECE 4803 AI for Engineering Project Proposal
+Agent-Guided Custom Instruction Selection for RISC-V Using Learned Prediction
+Sooraj Tharumia, Jason Rivera-Hernandez, Yuuto Matsuki
+Problem
+RISC-V processors let designers add their own instructions. If a program keeps repeating the same short chain of steps, that chain can be combined into one instruction so the program runs faster. The hard part is choosing which chains to build, since each one takes chip space and only two or three can fit. Today's method picks the chains that run most often, but ignores hardware cost: a combined instruction can be a slow circuit that slows down the whole processor, sometimes cancelling the benefit. Checking the real benefit means building each candidate in hardware, which is too slow to do for all of them.
+
+Approach
+Find candidates. Run standard test programs in a RISC-V simulator and find repeated chains that fit in a single instruction.
+Measure. For each candidate, calculate the steps it saves and how much it slows the processor, giving its real speedup. Early on, confirm that this disagrees with today's ranking.
+Predict. Train a model to estimate a candidate's speedup, and how confident it is, without building it.
+Choose. An AI agent uses the model to pick the best instructions within a chip space budget. We compare its picks against today's method and a simpler approach without an agent.
+Build. Implement the top choices in a real RISC-V processor design and measure the actual speedup and chip space
+
+Roles
+Sooraj: toolchain, tracing, candidates, instruction integration, measurement tools. 
+Jason: predictor, active learning, agent. 
+Yuuto: synthesis and hardware.
+
+Schedule
+Weeks 3-4
+Weeks 5-7
+Weeks 8-11
+Weeks 12-14
+Tools, trace, premise, check
+All candidates measured, predictor
+Agent comparison, hardware list
+Synthesis, report, presentation
+
+
+
+ECE 4803 Project Proposal
+Agent-Guided Custom Instruction Selection for RISC-V Using Learned Speedup Prediction
+Sooraj Tharumia, Jason Rivera-Hernandez, Yuuto Matsuki
+Problem Statement
+A processor runs programs as long lists of simple instructions. RISC-V leaves room for designers to add their own. If a program keeps running the same short chain of instructions, where each step uses the previous step's result, that chain can be combined into one custom instruction, so the program runs fewer instructions. Finding these chains is a solved problem. The hard part is choosing which ones to build, because each one costs chip area and only two or three can realistically be added.
+Today, candidates are ranked with a merit score: instructions saved multiplied by how many times the chain runs, keeping only chains that fit the instruction format's input and output limits [1, 2].
+merit = (chain length − 1) × times the chain runs
+This score counts steps saved but ignores hardware cost. A combined instruction can be a slow circuit, and the processor's clock must slow down to match its slowest instruction, which makes every instruction slower. In one reported case this completely erased the benefit of a candidate the score favored [2]. The score also depends on which input was used for counting, and it judges each candidate alone even though candidates affect each other. Measuring real benefit means building and synthesizing each candidate, which is too slow to do for all of them, so the field relies on the score [3].
+Related Work
+RL-GNN-CI uses reinforcement learning to pick custom instructions [6]. LACE uses LLM agents to implement instructions a designer has already chosen [7]. Regression models trained on a small number of simulations can predict processor performance accurately [4, 5]. Our project differs by predicting real, timing-aware speedup with a confidence estimate, and by testing whether an agent using those predictions chooses better than a standard method without an LLM. [Confirm how RL-GNN-CI measures benefit]
+Approach
+The project is a pipeline of seven stages. Each stage feeds the next.
+1.	Run the programs. We compile eight integer programs from the Embench benchmark suite [8] for 32-bit RISC-V and run them in Spike, the standard RISC-V simulator. Each program checks its own output, so we always know whether it still works.
+2.	Record and find candidates. Spike logs every instruction a program executes (a trace). A script scans the trace for chains of two to four connected instructions and keeps only chains with at most two inputs and one output, which is what a standard instruction allows. We expect about 30 candidates per program.
+3.	Measure each candidate. Each candidate has a benefit and a cost. The benefit, steps saved, comes directly from the trace. The cost comes from writing the chain as a small circuit and synthesizing it with Yosys and nextpnr, which report its delay and area. We combine them into a real speedup:
+speedup = (old steps × old clock period) ÷ (new steps × new clock period)
+ new clock period = the longer of the old period and the circuit's delay
+This gives one table row per candidate, about 240 in total [confirm after first run], and that table is the dataset for the rest of the project. About 25 candidates are also checked on the full processor to confirm the estimate holds.
+4.	Check the premise. In week 4 we compare the merit score against real speedup for 30 candidates. If they disagree, the premise holds. If they line up, we add harder programs before going further.
+5.	Train the predictor. A supervised regression model learns to predict a candidate's real speedup without synthesizing it. Its inputs describe the software side (chain length, times run, number of places it appears, loop depth) and the hardware side (operation types such as multiplies and shifts, and circuit depth). Using quantile regression and a Gaussian process, it also reports how confident it is [10]. We train on seven programs and test on the eighth, repeating for each program.
+6.	Let the agent choose. An LLM agent gets a goal (choose the best set of instructions within a chip area budget) and a limited number of synthesis runs. It has four tools: list candidates, predict a candidate's speedup, measure a candidate, and choose a final set. We compare it with a standard active learning loop that uses the same predictor and budget but no LLM, to see whether the agent's reasoning helps.
+7.	Build the winners. For the top two or three instructions, we give each an encoding in RISC-V's custom-0 opcode space, add it to Spike as a plugin, rewrite the program to use it, and confirm the output is still correct. We then build each into the VexRiscv processor using CFU Playground [9], simulate it, and synthesize the full design for area and timing.
+Evaluation
+We compare five ways of choosing instructions: the merit score, frequency ranking, random choice, active learning, and the agent. An oracle that measures every candidate gives the best possible choice. The main result is how close each method gets to the oracle for a given number of measurements.
+We also report how well predicted and real rankings agree (Spearman correlation), whether the model's confidence ranges are accurate (calibration), and average whole-program speedup across benchmarks. The agent is run five times because LLM results vary. For the instructions we build, we compare predicted, estimated, simulated, and real hardware speedup.
+Scope
+·       32-bit integer RISC-V (RV32IM) only.
+·       Eight Embench programs: crc32, matmult-int, edn, nettle-aes, nettle-sha256, aha-mont64, huffbench, wikisort.
+·       Instructions with at most two inputs and one output.
+·       No compiler changes.
+·       FPGA synthesis only; no physical board required. [Yuuto to confirm FPGA part]
+·       Use of an LLM inside the system to be confirmed with the instructor.
+Division of Work
+·       Sooraj: tool setup, running programs, tracing, finding candidates, the steps-saved calculation, adding new instructions to Spike and the programs, the instruction spec for the hardware, and the measurement tools the agent calls.
+·       Jason: predictor, confidence estimates, active learning, the agent, and experiment comparisons.
+·       Yuuto: synthesis of candidate circuits for delay and area, building the chosen instructions into the processor, simulation checks, and final synthesis.
+Documentation and the contribution matrix live in a shared GitHub repository from week one.
+Milestones
+Weeks 3–4
+Tools installed, all eight programs running in Spike, first trace and candidate list, synthesis working on small circuits, 30-candidate premise check.
+Weeks 5–7
+One hand-picked instruction working end to end in Spike. All candidates measured. First predictor trained. Progress report covers how the data is collected and the first comparison with the merit score.
+Weeks 8–11
+Confidence estimates, agent versus active learning, testing on unseen programs. Final instruction list to hardware by week 9. Full-processor checks.
+Weeks 12–14
+Final synthesis, results comparison, report, and presentation.
+
+Expectations for an A
+Required: the full pipeline from programs to measured candidates; the predictor and agent compared against all baselines and the oracle; testing on unseen programs; a check that confidence ranges are accurate; at least two instructions built in hardware with measured speedup and area.
+Stretch: the agent also writes the Spike plugin and program changes for its chosen instructions, scored by how many work correctly.
+If the merit score already works well, we report when it is enough and what makes it fail. If the agent does not beat active learning, we report that the predictor's confidence alone is enough. Both are useful results.
+References
+[1]  	K. Atasu, L. Pozzi, and P. Ienne, “Automatic application-specific instruction-set extensions under microarchitectural constraints,” in Proc. Design Automation Conference (DAC), 2003.
+[2]  	E. Rezunov, N. Zurstraßen, L. M. Reimann, and R. Leupers, “Automatic microarchitecture-aware custom instruction design for RISC-V processors,” in Proc. IEEE/ACM ICCAD, 2025. arXiv:2509.15782.
+[3]  	C. Galuzzi and K. Bertels, “The instruction-set extension problem: A survey,” ACM Trans. Reconfigurable Technology and Systems, vol. 4, no. 2, 2011.
+[4]  	B. C. Lee and D. M. Brooks, “Accurate and efficient regression modeling for microarchitectural performance and power prediction,” in Proc. ASPLOS, 2006, pp. 185–194.
+[5]  	C. Mendis, A. Renda, S. Amarasinghe, and M. Carbin, “Ithemal: Accurate, portable and fast basic block throughput estimation using deep neural networks,” in Proc. ICML, 2019.
+[6]  	“Reinforcement learning on data-dependence graphs for custom instruction identification,” ACM Trans. Architecture and Code Optimization. [add authors and year]
+[7]  	P. Zheng et al., “LACE: Large language model aided multi-agent framework for agile RISC-V instruction extension,” arXiv:2608.02915, 2026.
+[8]  	Embench-IoT benchmark suite, github.com/embench/embench-iot.
+[9]  	S. Prakash et al., “CFU Playground: Full-stack open-source framework for tiny machine learning (tinyML) acceleration on FPGAs,” arXiv:2201.01863, 2022.
+[10]	M. G. Kapteyn, J. V. R. Pretorius, and K. E. Willcox, “A probabilistic graphical model foundation for enabling predictive digital twins at scale,” Nature Computational Science, vol. 1, 2021. [check title against the Module 2 reading]
+
+

@@ -1,3 +1,5 @@
+> Historical research direction. Its proposed priorities are superseded by the [current project contract](../README.md) and [handoff](HANDOFF.md). Preserve the evidence below; it does not authorize new LUT-model, RTL-agent, or GNN work.
+
 # Research update: objectives, budgets and the next model experiment
 
 Read 2026-10-15. These primary-source reports motivate experiments; they are not matched benchmarks against ISAForge.

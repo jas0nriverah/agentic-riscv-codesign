@@ -1,5 +1,7 @@
 # Workload collection and tracing
 
+The current [automatic workload pipeline](../docs/automatic-workloads.md) reuses `candidates.py` and `verify_candidate_fusions.py`, profiles actual PicoRV32 execution, and lowers marked assembly. The older Spike/RV32IM targets below remain for historical reproduction; do not mix their counts with current RV32I labels.
+
 These are the hardware-facing collection programs. They are separate from the installable [`isaforge/`](../isaforge/) learning and evaluation package.
 
 | File | Role |

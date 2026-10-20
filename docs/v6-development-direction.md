@@ -1,3 +1,5 @@
+> Historical research direction. Its proposed priorities are superseded by the [current project contract](../README.md) and [handoff](HANDOFF.md). Preserve the evidence below; it does not authorize new LUT-model, RTL-agent, or GNN work.
+
 > Evidence: [complete retained development study](../results/2026-10-14-development-router/README.md). This is development-only, not a new independent test.
 
 # V6 development: conditional semantics and mapping-aware representation

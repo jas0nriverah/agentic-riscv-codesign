@@ -1,0 +1,46 @@
+import shutil
+import subprocess
+
+import pytest
+
+from isaforge.codesign import CANDIDATES, generate_rtl
+from isaforge.rtl_search import RULES, choose_rule, feedback, rewrite, score
+
+
+@pytest.mark.skipif(not shutil.which('yosys'), reason='Yosys unavailable')
+@pytest.mark.parametrize('name', CANDIDATES)
+@pytest.mark.parametrize('rule', (*RULES, 'repair'))
+def test_every_declared_rewrite_is_universally_equivalent(name, rule, tmp_path):
+    reference = tmp_path/'reference.v'
+    reference.write_text(generate_rtl(CANDIDATES[name][0], 'reference'))
+    candidate = tmp_path/'candidate.v'; candidate.write_text(rewrite(name, rule))
+    result = subprocess.run(['yosys', '-Q', '-p', f'read_verilog {reference} {candidate}; proc; opt; '
+                             'equiv_make reference candidate equiv; hierarchy -top equiv; equiv_simple; equiv_status -assert'],
+                            capture_output=True, text=True, timeout=30)
+    assert result.returncode == 0, result.stdout+result.stderr
+
+
+def test_controller_uses_feedback_and_repairs_failed_proposals():
+    start = {'correct':True, 'feasible':True, 'lut4':100, 'worst_seed_fmax_mhz':20}
+    history = [{'feedback': dict(start)}]
+    assert choose_rule(history,start,'feedback')[0] == 'factored'
+    history[0]['feedback']['worst_seed_fmax_mhz'] = 10
+    assert choose_rule(history,start,'feedback')[0] == 'carry_select'
+    assert choose_rule(history,start,'one_shot')[0] == 'bitwise'
+    history[0]['feedback'] = {'correct':False}
+    assert choose_rule(history,start,'feedback')[0] == 'repair'
+    assert choose_rule(history,start,'one_shot')[0] == 'bitwise'
+
+
+def test_integration_and_constraints_gate_the_score():
+    start = {'performance': {'cycles':100}}
+    record = {'performance': {'cycles':100}, 'resources': {'lut4_count':100,'flip_flop_count':40},
+              'routes':[{'limiting_internal_fmax_mhz':20,'internal_timing_pass':True,'device_fits':True}],
+              'evaluation_id':'x'}
+    assert feedback(record,start,128)['feasible']
+    record['performance']['cycles'] = 99
+    assert not feedback(record,start,128)['feasible']
+    record['performance']['cycles'] = 100
+    record['routes'][0]['internal_timing_pass'] = False
+    assert not feedback(record,start,128)['feasible']
+    assert score({'lut4':99,'worst_seed_fmax_mhz':15}) < score({'lut4':100,'worst_seed_fmax_mhz':30})

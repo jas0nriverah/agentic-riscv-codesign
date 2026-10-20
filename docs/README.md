@@ -1,12 +1,24 @@
 # Documentation
 
+[Project scope contract](../README.md) · [Agent instructions](../AGENTS.md) · [Current handoff](HANDOFF.md)
+
+- [Automatic workload milestone](automatic-workloads.md): actual aha-mont64 extraction, lowering, program execution, hardware results, and reproduction.
+- [Established methods and research decisions](research-foundation.md): primary publications, algorithm assumptions, feasible baselines, and remaining gaps.
+- [Current methodology](methodology.md): measured endpoints, whole-workload splits, fair budgets, and joint-set validation.
+- [Preserved CRC32 selection study](codesign-loop.md): six candidates and the negative learned-versus-merit result.
+- [Repository alignment review](scope-review.md): completed cleanup, remaining engineering gaps, and next experiment.
+
+## Historical evidence and earlier roadmaps
+
+All versioned cost-model studies, old directions, diagrams, and literature notes below are historical evidence. Their statements about the next model or current priority are superseded by the scope contract. Preserve their measurements and negative results; do not resume their roadmaps automatically.
+
 [V15 scoped model and diagram](v15-scoped-results.md) — 32-circuit prospective stress, improvement and underprediction regression.
 
 
-[Latest: completed327-circuit comparison](v11e-transfer-results.md) — full measurements, negative transfer result, research figures and replay.
+[Historical: completed 327-circuit comparison](v11e-transfer-results.md) — full measurements, negative transfer result, research figures and replay.
 
 
-[Paused-project handoff](HANDOFF.md) — verified checkpoint, unfinished work and retained data.
+[Historical project handoff](HANDOFF-history-2026-10-19.md) — verified checkpoint, unfinished work and retained data.
 
 - [V11c complete input collection](../results/2026-10-16-v11c-dtc-recovery/README.md): all six outcomes, 521 memberships and 327 originals; independent raw replay pending, no new model score.
 

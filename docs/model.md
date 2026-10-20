@@ -1,5 +1,7 @@
 # Speedup prediction and benchmark-held-out evaluation
 
+The [CRC32 loop](codesign-loop.md) and [automatic aha-mont64 experiment](automatic-workloads.md) each supply six genuine program-level speedup labels through paid within-workload acquisition. They use no area-model predictions and do not train on one another's labels. `speedup_corpus.py` adds workload/source-family and implementation identity, related-tree exclusions, and separate zero-shot versus paid-adaptation reporting. Its gate requires at least three independent workload groups; the current 12 rows have only two groups and mixed discovery-ISA provenance. Multi-workload contract tests are synthetic fixtures, not research results.
+
 `SpeedupPredictor` estimates measured elapsed-time speedup using small XGBoost
 regressors trained on bootstrap samples. Training rows must contain the fixed
 `FEATURE_COLUMNS`, positive `speedup`, and one consistent `measurement_source`.
