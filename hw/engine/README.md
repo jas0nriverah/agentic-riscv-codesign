@@ -124,6 +124,48 @@ A build takes about 50 s at `-j8` after `make hw-baseline`. The clean sweep (21 
 - **Cycles per instruction saved varies widely, from 1.0 to 12.0.** Shifts by 31 are slow on this core (TWO_STAGE_SHIFT), so aha-mont64 #3 saves 12 cycles per instruction removed. wikisort #1 replaces two 3-cycle `addi`s with one 5-cycle instruction, so it saves only 1.
 - **A formula can help other programs too.** For example, `add(in0,slli(in1,2))` also saves 174,080 instructions in crc32. See the `other_programs` column.
 
+### Frequency-ranking baseline (2026-10-20): one core with the top 3 non-conflicting formulas
+
+**Selection, done before any measurement.** Canonical formulas are ranked by the finder's `saved` summed over all 8 programs.
+- **Conflict rule:** two formulas conflict if, in any program, a site the finder counted for one shares an instruction (PC) with a site it counted for the other, because they compete for the same instructions.
+- **Picks:** greedy in rank order, taking a formula if it conflicts with no earlier pick, until there are 3. Picks are kept even if they turn out unplaceable or expensive.
+- Request: `results/frequency-top3.request.json`. Full result: `results/frequency-top3.json` (build `4c116ca54af0`, `ALLOW_MUL=1`).
+
+| rank | total saved | formula | outcome |
+|---:|---:|---|---|
+| 1 | 748,675 | `add(in0,slli(in1,2))` | picked, slot 0 |
+| 2 | 704,320 | `slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)` | picked, slot 1 (`mul`) |
+| 3 | 640,192 | `add(in0,slli(andi(in1,255),2))` | conflicts with rank 1 |
+| 4 | 528,240 | `add(mul(in0,addi(lui(1103515648),-403)),in1)` | conflicts with rank 2 |
+| 5 | 434,988 | `add(srli(in0,31),slli(in1,1))` | picked, slot 2 |
+
+**The core:**
+- 3,186 `SB_LUT4`, **+747** over the baseline.
+- Fmax median 57.09 MHz (min 54.98, max 59.14), so T_fused = 17.515 ns against T_base = 16.2655 ns.
+- **The unit is on the critical arc in 5 of 10 seeds** (2, 3, 4, 7, 9): `reg_op1` → multiplier → `result[26/28]`. In the other 5 the branch path is still the worst.
+- All checks pass, and the microtests show 5 cycles per instruction for each slot.
+
+| program | instructions saved | cycles saved | cycles / instr saved | speedup (max rule) | speedup, cycles only |
+|---|---:|---:|---:|---:|---:|
+| aha-mont64 | 433,152 | 3,681,792 | 8.50 | 1.0844 | 1.1677 |
+| crc32 | 174,080 | 696,320 | 4.00 | 0.9584 | 1.0320 |
+| edn | 0 | 0 | — | 0.9287 | 1.0000 |
+| huffbench | 46,684 | 186,736 | 4.00 | 0.9492 | 1.0221 |
+| matmult-int | 0 | 0 | — | 0.9287 | 1.0000 |
+| nettle-aes | 527,436 | 2,109,744 | 4.00 | 1.0462 | 1.1266 |
+| nettle-sha256 | 475 | 1,900 | 4.00 | 0.9287 | 1.0001 |
+| wikisort | 0 | 0 | — | 0.9287 | 1.0000 |
+| **total** | **1,181,827** | **6,676,492** | **5.65** | | |
+
+**Reading it:**
+- **The rank-2 pick fuses nothing anywhere.**
+  - Its crc32 site (696,320) and its wikisort site (8,000) both have no legal position: `rand_beebs` loads 12345 between the members, and the `mul` overwrites `in0`.
+  - Rank 5 also gives up 1,836 instructions in wikisort, because that site is in libm's `__ieee754_sqrt`.
+  - So the core carries a ~650-LUT multiplier that never executes, and that multiplier is the critical path in half the seeds.
+- **The slower clock is charged to every program.** It costs 7.1% on all of them, so the 4 programs with no fused sites (or 475 instructions) come out at 0.929. Of the programs that do gain cycles, only aha-mont64 and nettle-aes stay above 1.
+- **Savings add up exactly.** The picks don't conflict, so each program's instruction and cycle savings equal the sum of the same formulas measured alone in the sweep.
+- **Being on the critical arc depends on the rest of the core.** Measured alone, the same `mul` unit was never on the arc (58.52 MHz median). With two more units it becomes critical.
+
 ## Known limits
 
 - **One schedule only.** Sites that would need instructions reordered aren't fused. Example: crc32's `mul` candidates, where `rand_beebs` loads the constant 12345 between the members.

@@ -12,10 +12,11 @@ EN_UNITS     = python3 hw/engine/units.py --candidates $(CANDIDATES) $(if $(ALLO
 .PHONY: hw-measure
 
 # the first call only validates the request (it stops here on a flagged mul) without writing
-# anything, so an unchanged build is not redone; the second builds it
+# anything, so an unchanged build is not redone; then the manifest, then everything that reads it
 hw-measure:
 	@test -n "$(CANDIDATES)" || { echo "usage: make hw-measure CANDIDATES=<json> [ALLOW_MUL=1]"; exit 2; }
 	$(EN_UNITS) --id-only > /dev/null
+	$(MAKE) --no-print-directory $(EN)/$$($(EN_UNITS) --id-only)/manifest.json EN_B=$(EN)/$$($(EN_UNITS) --id-only)
 	$(MAKE) --no-print-directory $(EN)/$$($(EN_UNITS) --id-only)/results.json EN_B=$(EN)/$$($(EN_UNITS) --id-only)
 
 # --- shared by every build: main's compile of each program's C sources, stopped at assembly,
@@ -34,7 +35,8 @@ $(EN)/finder/%.json: generated/traces/%.jsonl generated/programs/%.elf generated
 	python3 hw/engine/finder.py $(word 1,$^) $(word 2,$^) $(word 3,$^) $@ --prefix $(RISCV_PREFIX)
 
 ifdef EN_B
-EN_MICRO := $(shell python3 -c "import json; print(' '.join(json.load(open('$(EN_B)/manifest.json'))['microtests']))")
+# the microtest list comes from the manifest, which the first sub-make creates
+EN_MICRO := $(if $(wildcard $(EN_B)/manifest.json),$(shell python3 -c "import json; print(' '.join(json.load(open('$(EN_B)/manifest.json'))['microtests']))"))
 
 # keeps every file of the build: make 3.81 would otherwise delete the chain's intermediates
 EN_KEEP := $(foreach p,$(PROGRAMS),$(EN)/asm/$(p)/done $(EN_B)/sw/$(p)/sites.json \
