@@ -1,0 +1,106 @@
+{
+  "schema": "isaforge-prospective-cohort-v1",
+  "target_labels_read": 0,
+  "primary_added_lut4_cap": 64,
+  "primary_budget": 3,
+  "added_lut4_caps": [
+    32,
+    64,
+    128
+  ],
+  "budgets": [
+    1,
+    2,
+    3
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "clock_mhz": 12.0,
+  "route_seeds": [
+    1,
+    2,
+    3
+  ],
+  "historical_costs": {
+    "contexts": [
+      {
+        "workload": "embench-aha-mont64",
+        "context_id": "1bd107eac10ff77bff15d8903da582a8f03b4db1a1294df085c3fc02642df997",
+        "candidate_labels": 6,
+        "candidate_wall_seconds": 280.24387375003425,
+        "native_command_seconds": 301.54153757786844,
+        "native_command_count": 119,
+        "baseline_wall_seconds": 28.05179358299938,
+        "setup_command_seconds": 7.123722039948916
+      },
+      {
+        "workload": "embench-crc32",
+        "context_id": "63c7f40f7e906b046f5a1911d5ed91824bb1aa15673f8fa753a818ccc0d5f511",
+        "candidate_labels": 6,
+        "candidate_wall_seconds": 253.56272849900415,
+        "native_command_seconds": 272.7776287130255,
+        "native_command_count": 119,
+        "baseline_wall_seconds": 26.83464212497347,
+        "setup_command_seconds": 5.603812336019473
+      },
+      {
+        "workload": "embench-slre",
+        "context_id": "a19fb0306623215e50eed26a0ea8ff85b9238ebccb6e453724f5570ef1decb24",
+        "candidate_labels": 6,
+        "candidate_wall_seconds": 260.11972479405813,
+        "native_command_seconds": 283.40151175588835,
+        "native_command_count": 133,
+        "baseline_wall_seconds": 29.62814345798688,
+        "setup_command_seconds": 8.47726499903365
+      }
+    ],
+    "candidate_labels": 18,
+    "candidate_wall_seconds": 793.9263270430965,
+    "note": "Native command and evaluation wall scopes overlap; do not add them. All available historical labels are charged, including excluded families."
+  },
+  "targets": {
+    "embench-edn": {
+      "context_id": "3f53183b901bbd833b93bb6b1d88c74eef9fc851e99847a4c58e9ac1d1b54567",
+      "baseline_snapshot": "embench-edn-baseline.json",
+      "baseline_snapshot_sha256": "a2dadbfb00a4d58dd7cdcc062faabbe261b4ab2a0ae115db8b4d61312f688b0e",
+      "selection_artifacts": {
+        "protocol.json.sha256": "87c063b3b9a589354ed80be56cd35dfd92a6de8149594ce4c2c7ad760222e809",
+        "history.json.sha256": "deaf7c4c826f8ce53afdb94b9f0ee5c2caaf27917d9a2aed8e1210078d0221f1",
+        "history.json": "2d7f480a740928433cc24dc0dfd9e8c5189011c37aefa8b2508ce009aaea869d",
+        "public.json": "82f4f390b67dec29d89b506cd8eb7b5e168f37fc82fa0d2006443c970e339018",
+        "protocol.json": "be5df47fb0562c1d264b69d5f463732cfe9819420c5d3c4654b8babc59e95cb4",
+        "predictions.json": "10886f465e007694e91742b97423ffe23dbe65c63b4c4a856681b237520da304",
+        "predictions.json.sha256": "7082a1da0c0072954eb0b629483535e7d618711b2f8a1b95e41a0db3fbe05d01",
+        "public.json.sha256": "410c8470bfb242f1d818b415e0a925e298c9e01fe1ff059231f725a25b9cb046"
+      },
+      "original_root": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/extended-edn-2026-10-20"
+    },
+    "embench-ud": {
+      "context_id": "dff930b3f62af548560facf4403cb3bbd411bda014b383a8383a127dd21b4d29",
+      "baseline_snapshot": "embench-ud-baseline.json",
+      "baseline_snapshot_sha256": "c59184888d15cd2f88b29abae2b481ab8e47681893cc307500ca2f7d611766b0",
+      "selection_artifacts": {
+        "protocol.json.sha256": "39e6013726bd86693ce834470534bea2e39e9fbcd061b6f69b1af8384854a4d6",
+        "history.json.sha256": "deaf7c4c826f8ce53afdb94b9f0ee5c2caaf27917d9a2aed8e1210078d0221f1",
+        "history.json": "2d7f480a740928433cc24dc0dfd9e8c5189011c37aefa8b2508ce009aaea869d",
+        "public.json": "a06593911abcb603b5542ceb2c6ff2d9b0889f61b96f088d2dd4cbad9f68a8eb",
+        "protocol.json": "42c1b24fd8d7b891e0f99efe223db5a27f8c25f3429ff776c460e632286231ef",
+        "predictions.json": "79d500e24923092b9c923078f8ac237eb0b602d24db74f33c4de9dcbc7841b08",
+        "predictions.json.sha256": "e15a625723195336638c7bedfcd5d9a94866007739776424db45df01f32ebe3a",
+        "public.json.sha256": "0aaacc24bf7c61a1d2fa722d6afa9d3a5f6b05ff4c2fe677e7aec0d99e981905"
+      },
+      "original_root": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/qualified-ud-2026-10-20"
+    }
+  },
+  "source_bindings": {
+    "isaforge/campaign_evidence.py": "96e4a96379dc336e1c04fc8a3bbfb9971cf65281d14cfe140f4eecaec51a748e"
+  },
+  "chronology": "Commit and push this manifest before candidate collection; hashes alone do not establish wall-clock chronology.",
+  "independent_unit": "Workload/source family; seeds and compiler/input contexts are dependent repetitions.",
+  "policy_isolation": "Cooperative replay only; no external LLM operating-system isolation."
+}

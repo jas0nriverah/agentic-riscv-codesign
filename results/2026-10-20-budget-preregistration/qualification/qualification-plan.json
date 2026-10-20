@@ -1,0 +1,49 @@
+{
+  "schema": "isaforge-campaign-qualification-v1",
+  "base_commit": "ee30bd38c34bad6306fbc79cffeed0bdbd93b001",
+  "primary_endpoint": {
+    "added_lut4_cap": 64,
+    "candidate_budget": 3,
+    "clock_mhz": 12,
+    "timing_seeds": [
+      1,
+      2,
+      3
+    ]
+  },
+  "secondary_area_caps": [
+    32,
+    128
+  ],
+  "candidate_budgets": [
+    1,
+    2,
+    3
+  ],
+  "policy_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "ordered_workloads": [
+    "ud",
+    "nettle-sha256",
+    "statemate"
+  ],
+  "qualification": "Baseline compile/execution/correctness/partition conformance and at least six calibrated executable formulas. No candidate performance/hardware outcomes used for qualification. Collect every qualified pool.",
+  "pool_size": 6,
+  "pool_rule": "Six evenly spaced merit ranks over all calibrated executable formulas.",
+  "fallback": "If fewer than two initial workloads qualify, attempt EDN in a separately recorded checked 8KiB context with program_limit6400 and stack_floor6528; preserve the failed contexts.",
+  "historical_training": "18 previous automatic CRC32/aha-mont64/SLRE outcomes; exclude held-out workload and candidate families; no other campaign workload outcomes may enter fitting or adaptation.",
+  "native_limits": {
+    "concurrency": 1,
+    "build_workers": 2,
+    "max_qualification_contexts": 4,
+    "command_count_budget_per_context": 240,
+    "command_seconds_budget_per_context": 2400,
+    "command_seconds_timeout": 180
+  },
+  "status": "Frozen before new candidate labels; full model protocol and all target baseline artifacts must be committed before collection."
+}
