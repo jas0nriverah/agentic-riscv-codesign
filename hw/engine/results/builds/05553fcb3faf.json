@@ -1,0 +1,970 @@
+{
+ "provisional": true,
+ "id": "05553fcb3faf",
+ "slots": [
+  {
+   "slot": 0,
+   "funct7": 2,
+   "funct3": 0,
+   "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+   "module": "cx_s0",
+   "size": 5,
+   "inputs": [
+    "in0",
+    "in1"
+   ],
+   "has_mul": true,
+   "source": "crc32"
+  }
+ ],
+ "priority": [
+  "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)"
+ ],
+ "microtest": {
+  "checks": 1185,
+  "runs": {
+   "micro-check": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-stock-s0": {
+    "expect": "trap",
+    "core": "stock",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "micro-xor-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-xor-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-f3-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-2": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-4": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-5": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-6": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-7": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-custom1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   }
+  },
+  "cycles_per_insn": {
+   "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)": 5.0
+  },
+  "cycles_per_xor": 3.0
+ },
+ "luts": {
+  "baseline": 2439,
+  "engine": 3092,
+  "delta": 653
+ },
+ "fmax_mhz": {
+  "per_seed": {
+   "1": 57.34,
+   "2": 59.02,
+   "3": 58.58,
+   "4": 59.68,
+   "5": 58.39,
+   "6": 58.3,
+   "7": 59.02,
+   "8": 59.26,
+   "9": 56.92,
+   "10": 58.46
+  },
+  "median": 58.52,
+  "min": 56.92,
+  "max": 59.68
+ },
+ "critical_path": {
+  "unit_on_arc_seeds": [],
+  "rows": [
+   {
+    "core": "engine",
+    "seed": "1",
+    "fmax_mhz": "57.34",
+    "path_ns": "17.44",
+    "logic_stages": "42",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "2",
+    "fmax_mhz": "59.02",
+    "path_ns": "16.94",
+    "logic_stages": "41",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "3",
+    "fmax_mhz": "58.58",
+    "path_ns": "17.07",
+    "logic_stages": "42",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "4",
+    "fmax_mhz": "59.68",
+    "path_ns": "16.75",
+    "logic_stages": "42",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "5",
+    "fmax_mhz": "58.39",
+    "path_ns": "17.13",
+    "logic_stages": "42",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "6",
+    "fmax_mhz": "58.3",
+    "path_ns": "17.15",
+    "logic_stages": "38",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "7",
+    "fmax_mhz": "59.02",
+    "path_ns": "16.94",
+    "logic_stages": "41",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "8",
+    "fmax_mhz": "59.26",
+    "path_ns": "16.87",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[2]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "9",
+    "fmax_mhz": "56.92",
+    "path_ns": "17.57",
+    "logic_stages": "38",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "10",
+    "fmax_mhz": "58.46",
+    "path_ns": "17.11",
+    "logic_stages": "38",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   }
+  ]
+ },
+ "period_rule": {
+  "rule": "T_fused = max(T_base, T_fused_measured)",
+  "candidate_period_ns": 17.088,
+  "routed_period_ns": 17.088,
+  "used": "routed (slower than the baseline)"
+ },
+ "programs": {
+  "aha-mont64": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 25631371,
+   "cycles": 25631371,
+   "cycles_saved": 0,
+   "baseline_instret": 4475851,
+   "instret": 4475851,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14,
+      15,
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403",
+      "mul\ta0,a0,a5",
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+     ],
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2",
+      "hws_beebsc_0_3",
+      "hws_beebsc_0_4"
+     ],
+     "pcs": [
+      "0x800000c8",
+      "0x800000cc",
+      "0x800000d0",
+      "0x800000dc",
+      "0x800000e0"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "crc32": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 22461391,
+   "cycles": 22461391,
+   "cycles_saved": 0,
+   "baseline_instret": 3831152,
+   "instret": 3831152,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)": {
+     "finder_saved": 696320,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 696320,
+     "gap_reasons": {
+      "skipped by the rewriter: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root": {
+       "sites": 1,
+       "runs": 174080,
+       "saved": 696320
+      }
+     }
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14,
+      15,
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403",
+      "mul\ta0,a0,a5",
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+     ],
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2",
+      "hws_beebsc_0_3",
+      "hws_beebsc_0_4"
+     ],
+     "pcs": [
+      "0x800000d4",
+      "0x800000d8",
+      "0x800000dc",
+      "0x800000e8",
+      "0x800000ec"
+     ],
+     "runs": 174080
+    }
+   ]
+  },
+  "edn": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 34849402,
+   "cycles": 34849402,
+   "cycles_saved": 0,
+   "baseline_instret": 3466139,
+   "instret": 3466139,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14,
+      15,
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403",
+      "mul\ta0,a0,a5",
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+     ],
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2",
+      "hws_beebsc_0_3",
+      "hws_beebsc_0_4"
+     ],
+     "pcs": [
+      "0x800000d4",
+      "0x800000d8",
+      "0x800000dc",
+      "0x800000e8",
+      "0x800000ec"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "huffbench": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 8638203,
+   "cycles": 8638203,
+   "cycles_saved": 0,
+   "baseline_instret": 2131016,
+   "instret": 2131016,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14,
+      15,
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403",
+      "mul\ta0,a0,a5",
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+     ],
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2",
+      "hws_beebsc_0_3",
+      "hws_beebsc_0_4"
+     ],
+     "pcs": [
+      "0x800000d4",
+      "0x800000d8",
+      "0x800000dc",
+      "0x800000e8",
+      "0x800000ec"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "matmult-int": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 26300272,
+   "cycles": 26300272,
+   "cycles_saved": 0,
+   "baseline_instret": 3179290,
+   "instret": 3179290,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14,
+      15,
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403",
+      "mul\ta0,a0,a5",
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+     ],
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2",
+      "hws_beebsc_0_3",
+      "hws_beebsc_0_4"
+     ],
+     "pcs": [
+      "0x800000d4",
+      "0x800000d8",
+      "0x800000dc",
+      "0x800000e8",
+      "0x800000ec"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "nettle-aes": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 18773912,
+   "cycles": 18773912,
+   "cycles_saved": 0,
+   "baseline_instret": 4083360,
+   "instret": 4083360,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14,
+      15,
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403",
+      "mul\ta0,a0,a5",
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+     ],
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2",
+      "hws_beebsc_0_3",
+      "hws_beebsc_0_4"
+     ],
+     "pcs": [
+      "0x800000c8",
+      "0x800000cc",
+      "0x800000d0",
+      "0x800000dc",
+      "0x800000e0"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "nettle-sha256": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 20276586,
+   "cycles": 20276586,
+   "cycles_saved": 0,
+   "baseline_instret": 3854209,
+   "instret": 3854209,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14,
+      15,
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403",
+      "mul\ta0,a0,a5",
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+     ],
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2",
+      "hws_beebsc_0_3",
+      "hws_beebsc_0_4"
+     ],
+     "pcs": [
+      "0x800000c8",
+      "0x800000cc",
+      "0x800000d0",
+      "0x800000dc",
+      "0x800000e0"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "wikisort": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 6916129,
+   "cycles": 6916129,
+   "cycles_saved": 0,
+   "baseline_instret": 1182160,
+   "instret": 1182160,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)": {
+     "finder_saved": 8000,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 8000,
+     "gap_reasons": {
+      "skipped by the rewriter: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root": {
+       "sites": 1,
+       "runs": 2000,
+       "saved": 8000
+      }
+     }
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14,
+      15,
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403",
+      "mul\ta0,a0,a5",
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+     ],
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2",
+      "hws_beebsc_0_3",
+      "hws_beebsc_0_4"
+     ],
+     "pcs": [
+      "0x800000c8",
+      "0x800000cc",
+      "0x800000d0",
+      "0x800000dc",
+      "0x800000e0"
+     ],
+     "runs": 2000
+    }
+   ]
+  }
+ },
+ "rows": [
+  {
+   "candidate_id": "315cb537854bfd7a3545fc2470352e1cf09ff93acfdf684ebb5e5d23ae845671",
+   "benchmark": "aha-mont64",
+   "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 25631371,
+   "candidate_cycles": 25631371,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.088,
+   "luts": 3092,
+   "speedup": 0.9519,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "67bf5120fc3ccb9e0c7719023452078cc5064d1babd2192b31973ca47f1902ec",
+   "benchmark": "crc32",
+   "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 22461391,
+   "candidate_cycles": 22461391,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.088,
+   "luts": 3092,
+   "speedup": 0.9519,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "5f0a44527f70716154dcc081d9e219caf54f283ac37e93c41894b116fdc8672c",
+   "benchmark": "edn",
+   "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 34849402,
+   "candidate_cycles": 34849402,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.088,
+   "luts": 3092,
+   "speedup": 0.9519,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "a4db24f22b2b4f3a61638c9b2e4394bc36e572f142bc270d0bafd0c8a0a87ef4",
+   "benchmark": "huffbench",
+   "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 8638203,
+   "candidate_cycles": 8638203,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.088,
+   "luts": 3092,
+   "speedup": 0.9519,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "5e28b21b64fe4ffa190b0f2f8d0df90786da4ea9cc7033f61da6a597e73562e5",
+   "benchmark": "matmult-int",
+   "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 26300272,
+   "candidate_cycles": 26300272,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.088,
+   "luts": 3092,
+   "speedup": 0.9519,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "6ccb9e5ad01b24faaef039d62b6b4c7793215594750ba6d5a00a1a4ce1b405b3",
+   "benchmark": "nettle-aes",
+   "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 18773912,
+   "candidate_cycles": 18773912,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.088,
+   "luts": 3092,
+   "speedup": 0.9519,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "3e80c13bf1ef5d6270e32556170d2e3b202f45cfdeacddf68dd00306c1f90a6c",
+   "benchmark": "nettle-sha256",
+   "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 20276586,
+   "candidate_cycles": 20276586,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.088,
+   "luts": 3092,
+   "speedup": 0.9519,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "844f219ac65048d111bcd09ccd9ce6a14b8dfbaf8b5d94a020bdd60139daeff9",
+   "benchmark": "wikisort",
+   "formula": "slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 6916129,
+   "candidate_cycles": 6916129,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.088,
+   "luts": 3092,
+   "speedup": 0.9519,
+   "speedup_cycles_only": 1.0
+  }
+ ],
+ "problems": []
+}

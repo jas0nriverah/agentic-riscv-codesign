@@ -87,3 +87,4 @@ $(HW)/results/baseline.csv: $(HW)/scripts/baseline.py hw-sim hw-route \
 	python3 $< --programs $(PROGRAMS) --seeds $(HW_SEEDS) --out $@
 
 include $(HW)/dryrun/dryrun.mk
+include $(HW)/engine/engine.mk

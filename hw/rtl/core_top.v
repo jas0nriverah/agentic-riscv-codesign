@@ -1,7 +1,8 @@
 // Stock PicoRV32 configured for rv32im, with its native memory port exposed.
 // Adapted from the ML branch's hardware/core_top.v with the CRC32 PCPI unit removed.
-// FUSED=1 adds the PROVISIONAL dry-run PCPI unit (pcpi_fused.v); the default FUSED=0
-// is the stock core. The ports are the same either way so the frozen PCF applies.
+// FUSED=1 adds the PROVISIONAL dry-run PCPI unit (pcpi_fused.v), FUSED=2 the PROVISIONAL
+// engine unit generated per build (pcpi_engine.v, hw/engine); the default FUSED=0 is the
+// stock core. The ports are the same in every case so the frozen PCF applies.
 module core_top #(
     parameter FUSED = 0
 ) (
@@ -34,8 +35,14 @@ module core_top #(
         .pcpi_wr(pcpi_wr), .pcpi_rd(pcpi_rd), .pcpi_wait(pcpi_wait), .pcpi_ready(pcpi_ready),
         .irq(32'b0)
     );
-    generate if (FUSED != 0) begin : fused
+    generate if (FUSED == 1) begin : fused
         pcpi_fused unit (
+            .clk(clk), .resetn(resetn), .valid(pcpi_valid),
+            .insn(pcpi_insn), .rs1(pcpi_rs1), .rs2(pcpi_rs2),
+            .wr(pcpi_wr), .wait_req(pcpi_wait), .ready(pcpi_ready), .rd(pcpi_rd)
+        );
+    end else if (FUSED == 2) begin : engine
+        pcpi_engine unit (
             .clk(clk), .resetn(resetn), .valid(pcpi_valid),
             .insn(pcpi_insn), .rs1(pcpi_rs1), .rs2(pcpi_rs2),
             .wr(pcpi_wr), .wait_req(pcpi_wait), .ready(pcpi_ready), .rd(pcpi_rd)

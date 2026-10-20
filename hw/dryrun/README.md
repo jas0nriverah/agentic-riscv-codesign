@@ -20,8 +20,9 @@ make hw-critpath        # critical path per seed, stock and fused cores -> hw/dr
 | Fmax median, routed (seeds 1–10) | 61.48 MHz | 65.04 MHz | not credited, see below |
 | Fmax min / max, routed | 59.86 / 64.98 | 62.81 / 67.59 | |
 | unit on the critical arc | | 0 of 10 seeds | `critical_paths.csv` |
-| period used (provisional rule) | 16.2655 ns | 16.2655 ns | T_fused = T_base |
-| **speedup** | | **1.0574** | equals cycles only |
+| period used (provisional rule) | 16.2655 ns | 16.2655 ns | max(T_base, 15.376) = T_base |
+| **speedup** | | **1.0574** | |
+| speedup, cycles only | | 1.0574 | same here, because the routed clock isn't slower |
 | speedup if the routed Fmax were credited | | 1.1185 | for reference only |
 
 - **Correctness:** the fused crc32 passes `verify_benchmark` on the fused core (exit word 1).
@@ -29,7 +30,7 @@ make hw-critpath        # critical path per seed, stock and fused cores -> hw/dr
 - **Stock flow with `FUSED=0`:** reproduces `hw/results/baseline.csv` byte for byte, and gives the same per-seed Fmax and the same Yosys stats.
 - **All checks in `report.py` pass** (`"problems": []`).
 
-**Fmax.** In short, the unit isn't on the critical path in any seed, so the faster routed clock (61.48 → 65.04 MHz) is placement noise and isn't credited. Under the provisional rule in `hw/README.md` the fused core keeps the baseline's period, and the speedup is the cycle saving alone: 1.0574.
+**Fmax.** In short, the faster routed clock (61.48 → 65.04 MHz) is placement noise and isn't credited. The provisional rule in `hw/README.md` is T_fused = max(T_base, T_fused_measured): a faster clock is never credited and a slower one is always charged. Here the routed clock is faster, so the fused core keeps the baseline's period, and the speedup equals the cycles-only figure, 1.0574. The critical-path analysis below shows why the faster clock isn't real: the unit isn't on the critical path in any seed.
 
 In detail, `make hw-critpath` classifies every seed's post-route clk→clk path on the Yosys netlist (`critical_paths.csv`, table below):
 - **Fused core:** all 10 paths are PicoRV32's branch decision. They run from `reg_op2` through the ALU compare (a carry chain in 9 seeds, the equality XOR/NOR tree in seed 7) to the `mem_do_rinst` clock enable.
@@ -48,10 +49,10 @@ In detail, `make hw-critpath` classifies every seed's post-route clk→clk path 
  "measurement_source": "hardware",
  "baseline_cycles": 22461391, "candidate_cycles": 21242831,
  "baseline_period_ns": 16.2655, "candidate_period_ns": 16.2655,
- "luts": 2481, "speedup": 1.0574}
+ "luts": 2481, "speedup": 1.0574, "speedup_cycles_only": 1.0574}
 ```
 
-`candidate_id` is the proposed `sha256(json([benchmark, canonical_formula]))`. It's computed with the ML branch's own `candidate_id()` (compact JSON separators), so both sides hash the same way. The team still has to agree on it. `baseline_period_ns` is 1000 / the baseline's median Fmax. `candidate_period_ns` follows the provisional rule: the baseline period here, because the unit is off the critical arc in every seed. The routed fused period (15.376 ns) is kept in `results.json` under `period_rule`.
+`candidate_id` is the proposed `sha256(json([benchmark, canonical_formula]))`. It's computed with the ML branch's own `candidate_id()` (compact JSON separators), so both sides hash the same way. The team still has to agree on it. `baseline_period_ns` is 1000 / the baseline's median Fmax. `candidate_period_ns` follows the provisional rule, max(T_base, T_fused_measured): the baseline period here, because the routed fused clock is faster than the baseline. The routed fused period (15.376 ns) is kept in `results.json` under `period_rule`.
 
 ### Critical paths (`critical_paths.csv`)
 
