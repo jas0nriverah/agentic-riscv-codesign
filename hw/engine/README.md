@@ -1,6 +1,6 @@
 # Measurement engine (PROVISIONAL)
 
-> **Every choice here is provisional and is not a team decision.** That covers PCPI as the interface; custom-0 with funct7=2 and funct3 = slot; up to 3 units per core with a registered 1-cycle handshake; assembly-level rewriting; PicoRV32's sequential multiplier; the clock-period rule (`hw/README.md`); and the proposed `candidate_id`.
+> **Every choice here is provisional and is not a team decision.** That covers PCPI as the interface; custom-0 with funct7=2 and funct3 = slot; up to 3 units per core with a registered 1-cycle handshake; assembly-level rewriting; PicoRV32's sequential multiplier; the clock-period rule (root [README](../../README.md#measurement-protocol)); and the proposed `candidate_id`.
 
 ```
 make hw-measure CANDIDATES=<json> [ALLOW_MUL=1]   # one core, all 8 programs -> generated/hw/engine/<id>/results.json

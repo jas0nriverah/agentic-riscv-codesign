@@ -133,7 +133,7 @@ def main():
         problems.append(f"critical-path table covers {[r['seed'] for r in crit]}")
     basePeriod = 1000 / float(base["crc32"]["fmax_mhz"])
     routedPeriod = 1000 / fmax
-    # PROVISIONAL rule (hw/README.md): never credit a faster clock, always take a slower one
+    # PROVISIONAL rule (root README.md, "Measurement protocol"): never credit a faster clock, always take a slower one
     period = max(basePeriod, routedPeriod)
 
     programs, rows = {}, []
@@ -189,6 +189,11 @@ def main():
             json.dump(result, f, indent=1)
     with open(os.path.join(build, "rows.jsonl"), "w") as f:
         f.writelines(json.dumps(r) + "\n" for r in rows)
+    # the same rows as CSV, list-valued fields (multi-unit builds) as JSON text in one cell
+    with open(os.path.join(build, "rows.csv"), "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows({k: json.dumps(v) if isinstance(v, list) else v for k, v in r.items()} for r in rows)
     for p, v in programs.items():
         print(f"{p}: instret saved {v['instret_saved']} (predicted {v['instret_saved_predicted']}), "
               f"cycles saved {v['cycles_saved']}")

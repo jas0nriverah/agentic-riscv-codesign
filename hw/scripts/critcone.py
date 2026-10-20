@@ -4,7 +4,7 @@ import re
 
 from critpath import arcs, cellOf, readPath
 
-# The structural test behind the clock-period rule in hw/README.md: is the fused unit's
+# The structural test behind the clock-period rule in the root README.md: is the fused unit's
 # logic on the critical arc? A unit register is a flip-flop holding the unit's state
 # (fused...active or engine...active, and the result register, which drives the core's pcpi_rd port).
 UNIT_REGISTER = re.compile(r"(fused|engine)(\.\w+)*\.(active|result)|(cpu\.)?pcpi_rd")
