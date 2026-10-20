@@ -15,7 +15,6 @@ make hw-sweep [CLEAN=1] [ALLOW_MUL=1]             # each program's top 3 candida
                                                   #   -> hw/engine/results/sweep-top3.csv (about 20 min from clean)
 make hw-dryrun                                    # the first end-to-end run, one crc32 candidate -> hw/dryrun/results.json
 make hw-critpath                                  # critical path per seed, stock and dry-run cores
-make hw-figures                                   # the figures in this README, from the committed CSVs
 ```
 
 `CANDIDATES` is a JSON list of 1 to 3 entries like `{"formula": "add(in0,slli(in1,2))"}`. The tools (xPack GCC, Spike, OSS CAD Suite) and the knobs for them are listed in [hw/README.md](hw/README.md). The Embench submodule is cloned on first use.
@@ -33,9 +32,8 @@ hw/
   engine/      the measurement engine: units.py, asmscan.py, rewrite.py, finder.py, report.py, sweep.py
                results/ (committed CSVs and per-build results) · README.md (full detail and tables)
   dryrun/      the first end-to-end run of one candidate · README.md
-  scripts/     baseline.py, pcf.py · critpath.py, critcone.py, critends.py, critgroups.py · figures.py
+  scripts/     baseline.py, pcf.py · critpath.py, critcone.py, critends.py, critgroups.py
   results/     baseline.csv
-  docs/img/    the figures below, SVG in a light and a dark variant
   hw.mk        the make targets, included from the top-level Makefile
 generated/     every build output, git-ignored
 src/, benchmarks/   the team's pipeline: Spike tracing and the candidate finder (not changed by this track)
@@ -43,19 +41,13 @@ src/, benchmarks/   the team's pipeline: Spike tracing and the candidate finder 
 
 ## Where this sits in the pipeline
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="hw/docs/img/pipeline-dark.svg">
-  <img alt="The six pipeline stages as a vertical flow: Embench programs, Spike, candidate finder, selection, hardware measurement (highlighted), ML side. Each arrow is labelled with what it carries: an ELF per program, a trace .jsonl, candidates JSON, selected formulas, measurement rows." src="hw/docs/img/pipeline-light.svg" width="720">
-</picture>
+Embench programs → Spike trace (`src/tracing.py`) → candidate finder (`src/candidates.py`, candidates JSON with `formula`, `size`, `runs`, `places`, `saved`) → selection (frequency ranking or ML-guided, 1 to 3 formulas per core) → **hardware measurement (this track)** → measurement rows back to the ML side.
 
 The hardware stage takes selected formulas in and gives measurement rows back. A row carries `candidate_id`, the baseline and candidate cycles, the two clock periods, the LUT count, and the speedup under the [protocol](#measurement-protocol) below, plus the cycles-only speedup.
 
 ## How a measurement works
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="hw/docs/img/measurement-dark.svg">
-  <img alt="Two lanes. Hardware lane: candidate formula, rtl.py to unit Verilog, unit in core_top via PCPI, Yosys synth_ice40, nextpnr with the frozen PCF and seeds 1 to 10, then LUT4 count and Fmax. Software lane: program assembly with main's flags, rewriter replacing the dependent chain with .insn, ELF, Verilator run on the modified core, then cycles and instret. Both lanes feed a checks box (verify_benchmark passes, stock programs unchanged, instret delta equals the sum of size minus one times runs, critical-path check), which feeds the measurement row." src="hw/docs/img/measurement-light.svg" width="880">
-</picture>
+Two lanes run independently and meet at the checks.
 
 - **Hardware lane.** The formula goes through the ML branch's `generate_rtl` unchanged. The result is a combinational unit wrapped in a PCPI module that decodes one custom-0 encoding, latches the result, and acknowledges on the next cycle. `core_top` instantiates it when `FUSED` is set, with the same ports as the stock core, so the frozen pin file applies. Yosys and nextpnr run exactly as for the baseline.
 - **Software lane.** Each program is compiled with main's exact flags, stopped at assembly. The rewriter decodes every line with main's own decoder, matches the formula's operator tree with the operands in order and the same immediates, confirms every intermediate is dead inside the block, and replaces the chain with `.insn r 0x0b, <funct3>, 2, rd, rs1, rs2`. It fuses only sites the candidate finder counted, so the measurement tests the finder's `saved` and not the rewriter's reach. Every fused and skipped site is logged with its reason.
@@ -107,13 +99,6 @@ PicoRV32 is a multicycle core and its `mul` takes about 40 cycles, so cycle savi
 
 Each program's top 3 candidates by the finder's `saved`, each built and measured alone on its own core: 21 cores, 22 rows (one formula tops two programs). All 21 pass every check, and a clean rebuild reproduces the CSV byte for byte. Source: [hw/engine/results/sweep-top3.csv](hw/engine/results/sweep-top3.csv); the full 22-row table with gap reasons is in [hw/engine/README.md](hw/engine/README.md#single-candidate-sweep-2026-10-20-each-programs-top-3-each-measured-alone).
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="hw/docs/img/sweep-cycles-vs-instructions-dark.svg">
-  <img alt="Scatter of cycles saved against instructions saved for the 22 sweep rows, with dashed reference lines at 1, 4 and 12 cycles per instruction. aha-mont64's three candidates sit between the 8.5 and 12 lines; nettle-aes, crc32 and nettle-sha256 sit near 4; seven small sites crowd the corner below 50k instructions; five rows sit at the origin because they fused nothing." src="hw/docs/img/sweep-cycles-vs-instructions-light.svg" width="880">
-</picture>
-
-*Figure: cycles saved against instructions saved per sweep row; data from `hw/engine/results/sweep-top3.csv` (columns `instret_delta`, `cycle_delta`), drawn by `make hw-figures`.*
-
 The rank-1 candidate of each program:
 
 | program | formula | instr saved | cycles saved | cycles / instr | LUT Δ | Fmax median | speedup | cycles only |
@@ -135,13 +120,6 @@ The rank-1 candidate of each program:
 ### Frequency-ranking baseline (2026-10-20)
 
 Formulas ranked by the finder's `saved` summed over all 8 programs; two formulas conflict if, in any program, a site counted for one shares an instruction with a site counted for the other; the top 3 non-conflicting were taken as they came. Picks: `add(in0,slli(in1,2))`, `slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)` (`mul`, built with `ALLOW_MUL=1`), `add(srli(in0,31),slli(in1,1))`. Ranks 3 and 4 were skipped as conflicting. One core with all three: **3,186 LUT4 (+747)**, Fmax median **57.09 MHz** (54.98–59.14), and the unit **on the critical arc in 5 of 10 seeds** through the multiplier. Source: [hw/engine/results/frequency-top3.csv](hw/engine/results/frequency-top3.csv) (the measurement rows) and [frequency-top3.json](hw/engine/results/frequency-top3.json) (the full result).
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="hw/docs/img/frequency-top3-speedup-dark.svg">
-  <img alt="Grouped bars per program, anchored at 1.0. Cycles-only speedup: 1.168 aha-mont64, 1.032 crc32, 1.000 edn, 1.022 huffbench, 1.000 matmult-int, 1.127 nettle-aes, 1.000 nettle-sha256, 1.000 wikisort. Under the max period rule: 1.084, 0.958, 0.929, 0.949, 0.929, 1.046, 0.929, 0.929. Six of eight programs end below 1.0." src="hw/docs/img/frequency-top3-speedup-light.svg" width="880">
-</picture>
-
-*Figure: speedup per program for the frequency-ranked core, cycles only beside the period rule; data from `hw/engine/results/frequency-top3.csv` (columns `speedup_cycles_only`, `speedup`), drawn by `make hw-figures`.*
 
 | program | instr saved | cycles saved | cycles / instr | speedup | cycles only |
 |---|---:|---:|---:|---:|---:|
