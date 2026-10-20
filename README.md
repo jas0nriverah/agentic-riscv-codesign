@@ -194,6 +194,28 @@ Per-program speedups for every row are in `experiments.csv`. What the comparison
 
 The first end-to-end run, one crc32 candidate (`slli(andi(xor(in0,in1),255),2)`) on a hand-wired unit: instret −348,160 (exactly the finder's `saved`), cycles −1,218,560, +42 LUT4, speedup 1.0574. Details and its critical-path table: [hw/dryrun/README.md](hw/dryrun/README.md).
 
+## Data for the ML side
+
+PRELIMINARY: baseline multiplier choice pending team confirmation; numbers may change.
+
+Every file below was produced under the protocol above (frozen PCF, seeds 1–10, every check passing) and is committed. Column definitions for all of them are in [hw/engine/results/README.md](hw/engine/results/README.md#columns).
+
+**Training labels** (one row per candidate measured alone on its own core; `speedup` and `speedup_cycles_only` are the targets, `lut_delta`, `fmax_median` and `cycle_delta` the other measured outcomes):
+
+- [hw/engine/results/sweep-top10-placeable.csv](hw/engine/results/sweep-top10-placeable.csv): each program's top 10 placeable candidates by finder `saved`, 70 rows from 60 cores (2 with `mul`). The larger and more varied set; use this one.
+- [hw/engine/results/sweep-top3.csv](hw/engine/results/sweep-top3.csv): each program's top 3 by finder `saved` regardless of placeability, 22 rows from 21 cores; 5 rows fused nothing. A subset of the above plus the unplaceable ones.
+
+**Features and filter:**
+
+- [hw/engine/results/placeability.csv](hw/engine/results/placeability.csv): all 348 candidates, rewriter only, no hardware: `placeable_sites`, `placeable_saved` and the gap against the finder's `saved` with its reason. Use `placeable_saved > 0` as the filter and `placeable_saved` as a feature; it predicted the measured instruction saving exactly in all 70 sweep rows.
+
+**Context:**
+
+- [hw/results/baseline.csv](hw/results/baseline.csv): the stock core every row is measured against: cycles and instret per program, 2,439 LUT4, Fmax 61.48 MHz median.
+- [hw/results/fastmul-probe.csv](hw/results/fastmul-probe.csv): the same stock core with the single-cycle multiplier, as a reference for what the multiplier choice is worth (+2,912 LUT4, 47.05 MHz). Not the baseline.
+
+`candidate_id` for a row is `sha256(json([benchmark, canonical_formula]))` as in `hw/engine/results/*.json`; the CSVs carry `program` and `formula` instead so the hash can be recomputed either way.
+
 ## Custom instruction encoding
 
 custom-0 (opcode `0x0b`), R-type, `rd = f(rs1, rs2)`. `core_top`'s `FUSED` parameter selects the unit: 0 is the stock core (`ENABLE_PCPI=0`, reproduces `baseline.csv` exactly), 1 the dry-run unit, 2 the engine's per-build unit. The ports are the same in every case. Update this table in the same commit as any decode change.
