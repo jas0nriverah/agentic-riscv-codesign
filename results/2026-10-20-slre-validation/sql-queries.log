@@ -1,0 +1,26 @@
+workload    name          cycles    speedup   integrated_lut4  added_lut4  worst_routed_fmax_mhz
+----------  ------------  --------  --------  ---------------  ----------  ---------------------
+aha-mont64  candidate_00  56951233  1.09412   1695             42          64.88                
+crc32       candidate_01  30820662  1.050833  1684             31          71.49                
+slre        candidate_00  16221562  1.006896  1730             77          71.266               
+workload    status             kind             phase               records  seconds
+----------  -----------------  ---------------  ------------------  -------  -------
+aha-mont64  verified_complete  evaluation_wall  baseline            1        28.052 
+aha-mont64  verified_complete  evaluation_wall  candidate           6        280.244
+aha-mont64  verified_complete  native_command   baseline            6        27.284 
+aha-mont64  verified_complete  native_command   candidate           102      267.134
+aha-mont64  verified_complete  native_command   discovery_or_setup  11       7.124  
+crc32       verified_complete  evaluation_wall  baseline            1        26.835 
+crc32       verified_complete  evaluation_wall  candidate           6        253.563
+crc32       verified_complete  native_command   baseline            6        26.143 
+crc32       verified_complete  native_command   candidate           102      241.031
+crc32       verified_complete  native_command   discovery_or_setup  11       5.604  
+slre        incomplete         native_command   discovery_or_setup  16       5.296  
+slre        verified_complete  evaluation_wall  baseline            1        29.628 
+slre        verified_complete  evaluation_wall  candidate           6        260.12 
+slre        verified_complete  native_command   baseline            8        28.64  
+slre        verified_complete  native_command   candidate           102      246.284
+slre        verified_complete  native_command   discovery_or_setup  23       8.477  
+workload  context_id                                                        source_path   authentication          error                                                                                                                                                                  
+--------  ----------------------------------------------------------------  ------------  ----------------------  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+slre      a43f308832a684bbd04d06e11cea6b0949623af30312805300fff463beeb6ae5  failure.json  observed_unsealed_file  ValueError: legacy memory_image enforces4096 bytes even though explicit linker and compiler partition gates pass; no baseline execution or candidate outcomes occurred.

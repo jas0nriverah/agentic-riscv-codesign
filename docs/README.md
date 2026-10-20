@@ -2,6 +2,8 @@
 
 [Project scope contract](../README.md) · [Agent instructions](../AGENTS.md) · [Current handoff](HANDOFF.md)
 
+- [Prospective SLRE transfer and offline demo](prospective-slre.md): third real workload, 18 automatic outcomes in total, frozen predictions, exact replay, SQL evidence ledger, and negative learned-selection result.
+- [Runnable SQL analysis](experiment-queries.sql): best verified feasible designs, separate cost scopes, and preserved failures.
 - [October 20 methods review](selection-methods-review.md): six additional primary methods and their precise adaptation limits.
 - [Full speedup-model diagnosis](model-analysis.md): measured failure mechanisms, independent latency calibration, stronger baseline, new public features, and a prospective improvement plan.
 - [Fixed ranking and automatic CRC32 results](selection-pilot-results.md): 420 development outcomes, poor uncertainty coverage, nine preserved fit failures, and the next data blocker.

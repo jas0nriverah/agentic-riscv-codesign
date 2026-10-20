@@ -189,7 +189,7 @@ def render(data, selection):
         [(r['workload'],r['status'],r['context_id'],r['manifest_sha256']) for r in data['contexts']])
     limits = ['One prospective workload; the five seed runs reuse the same candidate labels and are dependent repetitions, not five workload tests.',
               'Bootstrap ensemble intervals are descriptive spread, not calibrated confidence. Feature-support ranges do not establish coverage under workload shift.',
-              'Candidate pools were shortlisted by merit. Their measured oracle covers only those pools.',
+              'Historical pools use top-merit shortlists; SLRE samples six evenly spaced merit ranks from sixteen eligible formulas. Each measured oracle covers only its six-candidate pool.',
               'Simulated processor cycles and FPGA synthesis/routing estimates; no physical-board, energy, production, or hiring-outcome claims.',
               'Single instructions are measured separately. Their speedups and area changes cannot be added for instruction sets.',
               'The original CRC32 source-adapter experiment is excluded from uniform automatic-workload counts. Incomplete contexts never contribute verified labels.']

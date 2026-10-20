@@ -54,6 +54,7 @@ candidates: $(PROGRAMS:%=generated/candidates/%.json)
 # Research entry points. Activate .venv first, or set PYTHON=.venv/bin/python.
 .PHONY: help test reproduce reproduce-v4 reproduce-v5 reproduce-external-v5 reproduce-v6 reproduce-v8 reproduce-v9-coverage reproduce-v10d-hardware reproduce-v10d-timing reproduce-v10d-selection reproduce-v12 diagram
 help:
+	@echo 'Current prospective transfer: make demo | make reproduce-prospective (no native hardware jobs)'
 	@echo 'Current processor evidence: make reproduce-speedup (CRC32 and automatic aha-mont64)'
 	@echo 'Research: make test | make reproduce | make reproduce-v4 | make reproduce-v5 | make reproduce-external-v5 | make reproduce-v6 | make reproduce-v8 | make reproduce-v9-coverage | make reproduce-v10d-hardware | make reproduce-v10d-timing | make reproduce-v10d-selection | make reproduce-v12 | make diagram'
 	@echo 'make reproduce replays frozen scores/audit/figures; no training or synthesis.'
@@ -129,6 +130,15 @@ model-diagram:
 .PHONY: reproduce-model-analysis
 reproduce-model-analysis:
 	$(PYTHON) scripts/reproduce_model_analysis.py
+
+.PHONY: reproduce-prospective demo
+reproduce-prospective:
+	$(PYTHON) scripts/reproduce_prospective.py replay
+
+demo:
+	$(PYTHON) scripts/reproduce_prospective.py demo
+	$(PYTHON) scripts/style_research_demo.py generated/reproduction/prospective-slre/index.html
+	@echo 'Open generated/reproduction/prospective-slre/index.html; SQLite is alongside it.'
 
 .PHONY: reproduce-v14
 reproduce-v14:

@@ -2,6 +2,22 @@
 
 **An AI-guided RISC-V program optimization system that selects custom instructions using learned performance predictions and bounded hardware measurements.**
 
+**Working research prototype:** three executed Embench workloads, 18 automatically extracted candidates, 21 measured processor designs, and 63 routing results. A prospective SLRE experiment freezes predictions before measurement, then compares seven selection policies against actual processor outcomes. The repository includes a validated SQLite experiment ledger and an offline results demo.
+
+```sh
+# Python 3.12; install the pinned replay environment first.
+python -m pip install -r requirements-speedup.txt
+make demo PYTHON=python
+# Open generated/reproduction/prospective-slre/index.html.
+# Its experiments.sqlite contains queryable measurements and provenance.
+```
+
+This command verifies preserved raw evidence, exactly reproduces the frozen predictions, and builds the report without new hardware jobs. [Prospective results and commands](docs/prospective-slre.md) explain the full experiment. **The strongest heuristics currently outperform ML.** The execution-feature ablation reduces prediction MAE by 21.14% on SLRE but does not improve the selected design. Honest failure analysis and repeatable processor validation are part of this project.
+
+![Prospective SLRE: best verified feasible speedup versus charged evaluations](docs/assets/prospective-slre.svg)
+
+One held-out workload, six candidates, five dependent seed repetitions. Overlapping curves indicate equal performance; the measured oracle covers only this pool. [Validation: 2,639 tests and all research replays pass](results/2026-10-20-slre-validation/README.md). [Runnable SQL analysis](docs/experiment-queries.sql) queries the measured designs and costs.
+
 This README is the current project scope contract. It follows the [original project proposal](docs/original-project-proposal.txt) and the project owner's October 19, 2026 clarification. Contributors and coding agents must read it before choosing new work. [AGENTS.md](AGENTS.md) defines the engineering and evaluation guardrails.
 
 ## Research objective
@@ -38,9 +54,9 @@ The LLM agent is an **instruction-selection agent**. Its bounded interface shoul
 ## Current engineering scope
 
 - Real integer Embench workloads with fixed, recorded inputs. The proposal's initial programs are CRC32, aha-mont64, edn, huffbench, matmult-int, nettle-aes, nettle-sha256, and wikisort; support is conditional on compilation, memory fit, and correctness.
-- The working processor target is pinned **PicoRV32**, using **RV32I plus supported counter reads**, ILP32, GCC `-O2`, and PCPI. Software helpers implement unsupported multiply operations. Compiler, simulator, and synthesized processor must agree on the ISA.
+- The working processor target is pinned **PicoRV32**, using **RV32I plus supported counter reads**, ILP32, and PCPI. CRC32 and aha-mont64 use GCC `-O2`; SLRE explicitly uses `-Os` in a separate recorded context. Software helpers implement unsupported multiply operations. Compiler, simulator, and synthesized processor must agree on the ISA.
 - Automatically discovered patterns contain two to four connected integer operations, at most two register inputs and one output, and no memory or control-flow operations inside the instruction. Lowering removes original instructions and reassembles labels and relocations.
-- The current SoC has 8 KiB synchronous RAM, including a 4 KiB stack reservation. Designs are measured at a common 12 MHz target and routed with seeds 1, 2, and 3 on iCE40 HX8K CT256.
+- The SoC has 8 KiB synchronous RAM. The original contexts reserve 4 KiB for the stack. SLRE uses a separately declared 3,840-byte stack with continuous partition checks and deliberate overflow controls; all original evidence stays unchanged. Designs are measured at a common 12 MHz target and routed with seeds 1, 2, and 3 on iCE40 HX8K CT256.
 - The final system should select one to three compatible instructions under a hardware budget, with an unmodified baseline always available. Selected combinations require joint execution and synthesis; individual speedups and area increments are not additive.
 
 PicoRV32/RV32I is the current feasible implementation of the proposal's objective. The proposal's RV32IM, Spike-extension, and VexRiscv integration choices are not additional integration requirements for this milestone. Arbitrary RISC-V binaries are outside the initial support contract.
@@ -51,12 +67,14 @@ PicoRV32/RV32I is the current feasible implementation of the proposal's objectiv
 | --- | --- |
 | Six-candidate CRC32 experiment | Complete and preserved. Real program cycles, correctness, integrated area, three routing seeds, and equal-budget policy replay. Best single candidate reduces cycles 4.84%. Merit beats learned acquisition at the reported three-measurement budget. |
 | Automatic second-workload pipeline | Complete for six `aha-mont64` candidates: automatic profiling/extraction/lowering, correctness, execution, integrated synthesis/routing, and 120 policy replays. Best cycle reduction **8.60%**, +42 LUT4. Merit finds the pool optimum in one measurement in all five seeds. [Results and replay](docs/automatic-workloads.md). |
-| Automatic CRC32 / measured dataset | CRC32 was reprofiled, automatically lowered, and remeasured in a new RV32I context. Twelve automatic outcomes now share compatible feature provenance across CRC32 and aha-mont64; six older CRC32 adapter outcomes remain historical evidence. Still only **two workload groups**. [New results](docs/selection-pilot-results.md). |
+| Automatic CRC32 / historical training data | CRC32 was reprofiled, automatically lowered, and remeasured in a new RV32I context. Twelve automatic outcomes share compatible feature provenance across CRC32 and aha-mont64; six older CRC32 adapter outcomes remain historical evidence. This earlier comparison has two workload groups; the new SLRE context is listed below. [Development results](docs/selection-pilot-results.md). |
+| Automatic third workload / prospective transfer | **SLRE complete:** six candidates from 16 eligible formulas, seven integrated designs, 21 routes, and 105 policy/budget/seed outcomes. Best 16,333,432 → 16,221,562 cycles (**1.006896×**, +77 LUT4). Upstream self-check and every hardware control pass. Combined automatic evidence now covers **18 candidates across three workloads**, with the compiler/partition shift explicitly recorded. [Results](docs/prospective-slre.md). |
 | Speedup regression and acquisition | Existing bootstrap XGBoost predicts measured application speedup from paid observations. Historical V6/V9 models predict isolated LUT4 cost and remain separate evidence. |
-| Held-out-workload evaluation | Group/family split gates exist. More independent measured workload pools are needed before a meaningful generalization claim. Random candidate splits are not the primary evaluation. |
+| Held-out-workload evaluation | Predictions trained on 12 historical CRC32/aha outcomes were committed before SLRE candidate measurements. Exact prediction replay, family exclusions, baseline receipt chronology, and target-label access are checked. One prospective workload is insufficient for broad generalization; repeated model seeds are not independent workload tests. |
 | Ranking and uncertainty | Fixed XGBoost pairwise ranking is implemented and compared in 420 consumed-data policy/budget/seed outcomes. It does not improve selection over regression or merit. Ensemble interval coverage is poor on aha-mont64; held-out calibration remains missing. |
-| Execution-aware features and baseline | A separate 222-case processor calibration supplies operation and PCPI costs. A latency heuristic exactly explains the twelve existing automatic cycle labels and matches merit's one-query selection result. New baseline-cycle and dynamic-latency features are implemented for a prospective ML ablation; the frozen XGBoost models are unchanged. This is consumed-data diagnosis, not learned-model improvement. [Analysis and replay](docs/model-analysis.md). |
-| Additional workload eligibility | Nine failed build contexts are preserved. EDN exceeds the program/data guard; SLRE with minimal runtime is 68 bytes over it, and its final compiler fallback also fails. No third measured workload is claimed. |
+| Execution-aware features and baseline | A separate 222-case processor calibration supplies operation and PCPI costs. Its heuristic predicts all six new SLRE cycle deltas exactly. The fixed execution-feature regression ablation lowers MAE but still ranks the best candidate fifth; both regression ensembles have **0% interval coverage** on SLRE in every seed. [Prior diagnosis](docs/model-analysis.md) and [prospective test](docs/prospective-slre.md). |
+| Data and reproducibility | Typed SQLite tables retain contexts, features, measurements, routes, failures, costs, and source hashes. Imports authenticate evidence, are transactional, and reject changed repeat imports. `make demo` rebuilds this analysis view and the offline report from preserved raw archives. The ledger is not exposed to selection policies. |
+| Additional workload eligibility | Nine earlier failed build contexts remain preserved, plus the first failed SLRE partition attempt. The checked partition now executes SLRE for the recorded inputs; EDN and larger workloads still require validated runtime/memory support. |
 | LLM selection agent | Required later milestone; not implemented or evaluated yet. It must share candidate information and measurement budgets with non-agent methods. |
 | Joint final instruction set | Fixed historical CRC32 pair experiments exist. Automatic selection, lowering, and measurement of compatible sets of one to three instructions remain to be connected. |
 
@@ -64,7 +82,7 @@ The small CRC32 study and historical LUT-prediction studies are not the finished
 
 ## Priority order and milestone acceptance
 
-1. **Preserve the completed automatic workload milestone.** The second workload now has automatically extracted executable candidates, upstream checks, actual cycles, integrated resources, and routing. Keep both original pools and their negative learned-selection results.
+1. **Preserve the completed three-workload milestone.** Keep the original CRC32 experiment, both historical automatic pools, SLRE's prelabel commit, all raw outcomes, and the negative learned-selection result. SLRE is now consumed data; do not tune on it and report another held-out win.
 2. **Build the measured multi-workload corpus.** Add independent workload pools and inputs using the same evaluator. Record features, trace/firmware/tool identities, individual and combined measurements, costs, and all failures.
 3. **Evaluate learned selection.** Train XGBoost regression and ranking on measured outcomes; hold out entire workloads and related candidate families. Evaluate uncertainty calibration and non-agent active learning. Add hardware-cost prediction only when real measurements support it and it helps selection.
 4. **Connect the LLM selection agent.** Use a bounded, auditable tool interface and the same public features, training data, constraints, and target measurement budget as the baselines. Record model/provider settings, prompts, decisions, repeated seeds, and inference cost.

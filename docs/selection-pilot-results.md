@@ -1,5 +1,7 @@
 # Ranking and automatic CRC32 — October 20, 2026
 
+> Historical checkpoint: the subsequent [prospective SLRE experiment](prospective-slre.md) completes the third-workload milestone and tests the fixed models. Preserve these original findings; use the current README and handoff for next work.
+
 The [expanded primary-method review](selection-methods-review.md) led to one fixed XGBoost ranking comparison and a correction to the measured-data connection. **Ranking did not improve verified selection over regression, and neither beat merit.** This is consumed-data development evidence, not broad generalization or a prospective ML win.
 
 ## Completed engineering

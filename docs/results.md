@@ -1,6 +1,8 @@
 # Results
 
-Current processor evidence: [automatic aha-mont64](automatic-workloads.md) and the [preserved six-candidate CRC32 study](codesign-loop.md). The following versioned cost-model results are historical. They do not establish the primary whole-program selection endpoint. See the [current contract](../README.md) for active priorities.
+Current processor evidence includes [prospective SLRE transfer](prospective-slre.md), [automatic CRC32](selection-pilot-results.md), [automatic aha-mont64](automatic-workloads.md), and the [preserved original CRC32 study](codesign-loop.md). The three automatic pools total 18 candidate outcomes; original adapter outcomes remain separate. On the new SLRE workload, heuristic selectors find the best 1.006896× design in one evaluation, while fixed learned policies miss it through three. Execution features lower MAE 21.14% without improving selection. The offline demo and SQLite ledger are available through `make demo`.
+
+The following versioned cost-model results are historical. They do not establish the primary whole-program selection endpoint. See the [current contract](../README.md) for active priorities.
 
 ## Scoped follow-up: V15
 

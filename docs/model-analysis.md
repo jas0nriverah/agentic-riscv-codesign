@@ -1,5 +1,7 @@
 # Speedup-model analysis — October 20, 2026
 
+> Historical checkpoint: the subsequent [prospective SLRE experiment](prospective-slre.md) completes the third-workload milestone and tests the fixed models. Preserve these original findings; use the current README and handoff for next work.
+
 The current models are limited most by missing execution information and a very small, biased training corpus. Increasing tree count or trying another model family would not resolve either problem. A separately measured processor-latency baseline now explains **all twelve existing automatic candidates' cycle reductions exactly**, without fitting application speedup labels. It matches simple merit's one-measurement selection result. This is evidence for a stronger baseline and better model inputs; it is not evidence of improved ML generalization.
 
 The original CRC32, automatic aha-mont64, automatic CRC32, and fixed ranking experiments remain unchanged. Three GPT-6.1-Sol subagents independently reviewed the ML diagnosis, calibration/evaluation code, and primary research. Their reviews identified integration and evidence-validation issues that were corrected before the new comparison. No model hyperparameter search or new XGBoost variant was conducted.

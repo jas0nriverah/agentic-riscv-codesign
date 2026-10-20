@@ -1,0 +1,44 @@
+{
+  "base_commit": "9920641bce97f917a15e75b2480a99d00164cae1",
+  "prelabel_commit": "1c812e1c6c09070ae45931241c37163d53ee05ee",
+  "python": "3.12.14",
+  "full_suite": {
+    "passed": 2639,
+    "subtests_passed": 179,
+    "warnings": 1,
+    "seconds": 143.88,
+    "exit_code": 0
+  },
+  "new_component_tests": {
+    "passed": 88,
+    "seconds": 2.87
+  },
+  "replay_targets": [
+    "reproduce",
+    "reproduce-speedup",
+    "reproduce-selection-research",
+    "reproduce-model-analysis",
+    "reproduce-prospective"
+  ],
+  "demo_and_sql": "Passed, including actual SQLite joins/window ranking and offline HTML render inspection.",
+  "source_hashes": {
+    "hardware/checked_sim.cpp": "477635f316551bf85bd7ac1addc11bb9fa2c252969202621e75692ea5cfd9f07",
+    "hardware/stack_monitor.hpp": "387f968d6960846d3f45aba87f8031d599616cc9fa48eab941e7a033a23d2f08",
+    "isaforge/experiment_ledger.py": "36c2611bb96e89316be668961f571bcdb8147493a7284dbd8d355d8a22ceef43",
+    "isaforge/partitioned_workload.py": "55ea4e3a98bed427d08c92b56fdbe431bd177054931c84128413f176e79a85e3",
+    "isaforge/prospective_inputs.py": "90abbebb74ad967d498c126134b30401e195da7e12ceef405661e5742ef5f446",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+    "scripts/reproduce_prospective.py": "cc88f1f264a11fdc4397b9645dae225a2201ab01aacbd9849dba54c3cf5ba905",
+    "scripts/verify_prospective_predictions.py": "639a7ac09be3a716fa8baf1a264a5adc61b5f3bc930d5dab0236ce73acb8224d",
+    "scripts/build_research_demo.py": "e772bf801dffab1cd257ea121356bd7155da4d8736f7289cb69b4a5dcbab5280",
+    "scripts/style_research_demo.py": "35847863bbabc379e946db32e9be209259ce741358ad69721cba559455306e31",
+    "docs/experiment-queries.sql": "aeef12a31e766aad1a4754ed933884853a9e5d49964243e4fe0b43a96c26a28b"
+  },
+  "prior_failure": "Unchanged legacy process-cleanup failure did not recur in this full run; no causal fix claimed. Prior logs remain in 2026-10-20-model-analysis-validation.",
+  "visual_check": "Actual browser render checked; workload tables show complete cycle counts and correctness columns; policy SVG and table agree. Added a presentation-only CSS wrapper without changing frozen renderer/scientific values.",
+  "agents": [
+    "GPT-6.1-Sol: observer/runtime review",
+    "GPT-6.1-Sol: ML diagnosis and independent prediction refit",
+    "GPT-6.1-Sol: ledger/demo and internship brief"
+  ]
+}
