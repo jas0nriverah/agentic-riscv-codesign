@@ -18,7 +18,7 @@ HW_MAX_CYCLES := 4000000000
 HW_SETUP    := $(HW)/sw/startup.S benchmarks/embench-hooks.c \
                $(EMBENCH)/support/main.c $(EMBENCH)/support/beebsc.c
 
-.PHONY: hw-baseline hw-sim hw-synth hw-route hw-pcf hw-plots
+.PHONY: hw-baseline hw-sim hw-synth hw-route hw-pcf hw-figures
 # keeps the ELFs that the .bin files are made from
 .SECONDARY: $(PROGRAMS:%=$(HW_OUT)/programs/%.elf) $(PROGRAMS:%=generated/programs/%.elf)
 
@@ -81,11 +81,10 @@ hw-pcf: $(HW_OUT)/synth/core_top.json
 
 hw-route: $(HW_SEEDS:%=$(HW_OUT)/route/seed%/report.json)
 
-# the README's charts, from the committed result files only; the PNGs are committed too
-HW_PYTHON ?= $(HOME)/tools/venv/bin/python
-
-hw-plots:
-	$(HW_PYTHON) $(HW)/scripts/plots.py --out $(HW)/docs/img
+# the root README's figures (SVG, light and dark), from the committed CSVs only; committed too,
+# the one generated output that is, so GitHub can show them
+hw-figures:
+	python3 $(HW)/scripts/figures.py --out $(HW)/docs/img
 
 $(HW)/results/baseline.csv: $(HW)/scripts/baseline.py hw-sim hw-route \
                             $(PROGRAMS:%=generated/traces/%.jsonl) \
