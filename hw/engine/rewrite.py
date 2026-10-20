@@ -143,13 +143,14 @@ class FusedLine:
         return {self.ops[0][1]} if self.ops[0][1] else set()
 
 
-def rewrite(files, manifest, workDir, prefix, flags):
+def rewrite(files, manifest, workDir, prefix, flags, scanned=None):
     # sites are found on the original code (so every one gets labels and a log entry) and decided
-    # in priority order; each fusion is applied to the in-memory block before the next site is checked
+    # in priority order; each fusion is applied to the in-memory block before the next site is checked.
+    # `scanned` (path -> lines from asmscan.scan) lets a caller reuse one scan for many formulas
     sites, edits, defined = [], {}, set()
     for path in files:
         stem = re.sub(r"\W", "_", os.path.basename(path)[:-2])
-        lines = scan(path, workDir, prefix, flags)
+        lines = scanned[path] if scanned and path in scanned else scan(path, workDir, prefix, flags)
         functions = functionOf(lines)
         defined |= {f for f in functions.values() if f}
         original = list(blocks(lines))

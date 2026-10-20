@@ -34,6 +34,12 @@ $(EN)/finder/%.json: generated/traces/%.jsonl generated/programs/%.elf generated
 	mkdir -p $(dir $@)
 	python3 hw/engine/finder.py $(word 1,$^) $(word 2,$^) $(word 3,$^) $@ --prefix $(RISCV_PREFIX)
 
+# placeability pre-check: the rewriter alone, no hardware, for every candidate of every program
+.PHONY: hw-placeability
+hw-placeability: $(PROGRAMS:%=$(EN)/asm/%/done) $(PROGRAMS:%=$(EN)/finder/%.json) hw/engine/placeability.py
+	python3 hw/engine/placeability.py --prefix $(RISCV_PREFIX) --cflags "$(CFLAGS) -I $(EMBENCH)/support" \
+	  --ldflags "$(LDFLAGS)" --programs $(PROGRAMS) --out hw/engine/results/placeability.csv
+
 ifdef EN_B
 # the microtest list comes from the manifest, which the first sub-make creates
 EN_MICRO := $(if $(wildcard $(EN_B)/manifest.json),$(shell python3 -c "import json; print(' '.join(json.load(open('$(EN_B)/manifest.json'))['microtests']))"))

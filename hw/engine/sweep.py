@@ -16,17 +16,46 @@ PROGRAMS = ["aha-mont64", "crc32", "edn", "huffbench", "matmult-int", "nettle-ae
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--top", type=int, default=3)
+    parser.add_argument("--placeable", action="store_true",
+                        help="rank by finder saved but keep only candidates hw/engine/results/placeability.csv "
+                             "says the rewriter can fuse somewhere (placeable_saved > 0)")
+    parser.add_argument("--plan", action="store_true", help="print the candidate list and the mul count, build nothing")
     parser.add_argument("--allow-mul", action="store_true")
+    parser.add_argument("--skip-mul", action="store_true", help="leave mul candidates out of the plan")
     parser.add_argument("--jobs", default="8")
-    parser.add_argument("--out", default="hw/engine/results/sweep-top3")
+    parser.add_argument("--out", default=None)
     args = parser.parse_args()
+    if args.out is None:
+        args.out = f"hw/engine/results/sweep-top{args.top}" + ("-placeable" if args.placeable else "")
     os.makedirs("generated/hw/engine/requests", exist_ok=True)
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
 
+    placeable = None
+    if args.placeable:
+        placeable = {(r["program"], r["formula"]): int(r["placeable_saved"])
+                     for r in csv.DictReader(open("hw/engine/results/placeability.csv"))}
     wanted = []
     for p in PROGRAMS:
-        for rank, c in enumerate(json.load(open(f"generated/candidates/{p}.json"))[:args.top], 1):
+        taken = 0
+        for rank, c in enumerate(json.load(open(f"generated/candidates/{p}.json")), 1):
+            if placeable is not None and placeable.get((p, c["formula"]), 0) <= 0:
+                continue
             wanted.append((p, rank, c))
+            taken += 1
+            if taken == args.top:
+                break
+    if args.skip_mul:
+        wanted = [(p, rank, c) for p, rank, c in wanted if not re.search(r"\bmul", c["formula"])]
+    distinct = sorted({c["formula"] for _, _, c in wanted})
+    withMul = [f for f in distinct if re.search(r"\bmul", f)]
+    print(f"{len(wanted)} rows, {len(distinct)} distinct formulas to build, {len(withMul)} with mul", flush=True)
+    if args.plan:
+        for p, rank, c in wanted:
+            flag = "MUL " if c["formula"] in withMul else "    "
+            print(f"  {p:14} finder rank {rank:>3}  {flag}{c['formula']}")
+        return
+    if withMul and not args.allow_mul:
+        sys.exit("mul candidates in the plan; rerun with --allow-mul to build them: " + ", ".join(withMul))
 
     builds = {}
     for p, rank, c in wanted:
