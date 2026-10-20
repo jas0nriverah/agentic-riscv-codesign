@@ -18,7 +18,7 @@ HW_MAX_CYCLES := 4000000000
 HW_SETUP    := $(HW)/sw/startup.S benchmarks/embench-hooks.c \
                $(EMBENCH)/support/main.c $(EMBENCH)/support/beebsc.c
 
-.PHONY: hw-baseline hw-sim hw-synth hw-route hw-pcf
+.PHONY: hw-baseline hw-sim hw-synth hw-route hw-pcf hw-plots
 # keeps the ELFs that the .bin files are made from
 .SECONDARY: $(PROGRAMS:%=$(HW_OUT)/programs/%.elf) $(PROGRAMS:%=generated/programs/%.elf)
 
@@ -81,9 +81,16 @@ hw-pcf: $(HW_OUT)/synth/core_top.json
 
 hw-route: $(HW_SEEDS:%=$(HW_OUT)/route/seed%/report.json)
 
+# the README's charts, from the committed result files only; the PNGs are committed too
+HW_PYTHON ?= $(HOME)/tools/venv/bin/python
+
+hw-plots:
+	$(HW_PYTHON) $(HW)/scripts/plots.py --out $(HW)/docs/img
+
 $(HW)/results/baseline.csv: $(HW)/scripts/baseline.py hw-sim hw-route \
                             $(PROGRAMS:%=generated/traces/%.jsonl) \
                             $(PROGRAMS:%=generated/programs/%.bin) $(PROGRAMS:%=$(HW_OUT)/programs/%.bin)
 	python3 $< --programs $(PROGRAMS) --seeds $(HW_SEEDS) --out $@
 
 include $(HW)/dryrun/dryrun.mk
+include $(HW)/engine/engine.mk

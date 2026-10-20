@@ -11,6 +11,25 @@ make hw-pcf             # regenerates synth/core_top.pcf (not part of hw-baselin
 make hw-critpath        # critical path per seed for the stock and dry-run cores -> dryrun/critical_paths.csv
 ```
 
+Where this sits in the team pipeline (the hardware stage is highlighted):
+
+```mermaid
+flowchart LR
+    E["Embench programs<br/>benchmarks/embench, 8 programs"]
+    S["Spike<br/>commit log → src/tracing.py"]
+    C["Candidate finder<br/>src/candidates.py"]
+    SEL["Selection<br/>frequency ranking or ML-guided"]
+    HW["Hardware measurement<br/>hw/: PicoRV32 + PCPI unit,<br/>Verilator, Yosys, nextpnr"]
+    ML["ML side / selection"]
+    E -->|"ELF per program<br/>-march=rv32im -O2, main's linker script"| S
+    S -->|"trace .jsonl<br/>one line per retired instruction"| C
+    C -->|"candidates JSON<br/>formula, size, runs, places, saved"| SEL
+    SEL -->|"selected formulas<br/>1 to 3 per core"| HW
+    HW -->|"measurement rows<br/>candidate_id, cycles, periods, LUTs, speedup"| ML
+    classDef hw fill:#2a78d6,color:#ffffff,stroke:#1c5cab,stroke-width:2px
+    class HW hw
+```
+
 ## Provenance
 
 | Input | Source |
@@ -36,7 +55,7 @@ The ML branch fetched PicoRV32 at run time. Here it is vendored so the baseline 
 
 ## Custom instructions
 
-`core_top` has a `FUSED` parameter. The default, 0, is the stock core above: `ENABLE_PCPI=0`, with the PCPI inputs tied off. With `FUSED=0` the flow reproduces `results/baseline.csv` exactly. `FUSED=1` adds the provisional dry-run unit (`make hw-dryrun`, see `dryrun/README.md`). The ports are the same either way, so the frozen PCF applies to both.
+`core_top` has a `FUSED` parameter. The default, 0, is the stock core above: `ENABLE_PCPI=0`, with the PCPI inputs tied off. With `FUSED=0` the flow reproduces `results/baseline.csv` exactly. `FUSED=1` adds the provisional dry-run unit (`make hw-dryrun`, see `dryrun/README.md`). `FUSED=2` adds the provisional measurement engine's unit, which is generated per build (`make hw-measure`, see `engine/README.md`). The ports are the same in every case, so the frozen PCF applies to all of them.
 
 custom-0 (opcode `0x0b`), R-type, `rd = f(rs1, rs2)`. Allocation table; update it in the same commit as any decode change:
 
@@ -44,7 +63,9 @@ custom-0 (opcode `0x0b`), R-type, `rd = f(rs1, rs2)`. Allocation table; update i
 |---:|---:|---|---|
 | 1 | 0 | `((rs1 ^ rs2) & 255) << 2` | Used by the ML branch's earlier PicoRV32 experiment (`hardware/pcpi_candidates.v`). Not used here; don't reuse without checking with the team |
 | 1 | 1 | `rs1 ^ (rs2 >> 8)` | Same as above |
-| 2 | 0 | `((rs1 ^ rs2) & 255) << 2`, `slli(andi(xor(in0,in1),255),2)` | **Provisional**, dry run only (`rtl/pcpi_fused.v`) |
+| 2 | 0 | `((rs1 ^ rs2) & 255) << 2`, `slli(andi(xor(in0,in1),255),2)` | **Provisional**, dry-run core only (`FUSED=1`, `rtl/pcpi_fused.v`) |
+| 2 | 0, 1, 2 | Engine slots 0–2: the formula is chosen per build, in the order of the request | **Provisional**, engine cores only (`FUSED=2`). Each build's assignment is in `generated/hw/engine/<id>/manifest.json` and its `results.json`, and committed results list theirs |
+| 2 | 3–7 | none | Reserved; the engine's microtests check that they trap |
 
 Every other custom-0 encoding traps through PicoRV32's PCPI timeout and `CATCH_ILLINSN`.
 
@@ -62,17 +83,45 @@ Every other custom-0 encoding traps through PicoRV32's PCPI timeout and `CATCH_I
 
 `luts` and the three Fmax columns describe the core, so every row repeats them.
 
+One measurement end to end. The hardware lane and the software lane run independently and meet at the checks:
+
+```mermaid
+flowchart TB
+    subgraph HWL["Hardware lane"]
+        direction TB
+        F["candidate formula"] --> R["hw/isaforge/rtl.py<br/>generate_rtl"]
+        R --> U["unit in core_top via PCPI<br/>custom-0, funct7=2, funct3=slot"]
+        U --> Y["Yosys synth_ice40"]
+        Y --> N["nextpnr-ice40<br/>frozen PCF, seeds 1–10"]
+        N --> HWO["LUT4 count<br/>Fmax median, min, max"]
+    end
+    subgraph SWL["Software lane"]
+        direction TB
+        P["program .s<br/>main's flags, stopped at assembly"] --> RW["rewriter<br/>dependent chain → .insn"]
+        RW --> ELF["ELF<br/>hw/sw/startup.S, main's linker script"]
+        ELF --> V["Verilator run<br/>on the modified core"]
+        V --> SWO["cycles in the window<br/>instret"]
+    end
+    HWO --> CHK
+    SWO --> CHK
+    CHK["checks<br/>verify_benchmark passes · stock programs unchanged ·<br/>instret delta = Σ (size−1) × runs · critical-path check"]
+    CHK --> ROW["measurement row<br/>candidate_id, baseline and candidate cycles,<br/>periods, luts, speedup, speedup_cycles_only"]
+```
+
 ### Clock period of a modified core (PROVISIONAL, pending team agreement)
 
-A modified core gets credit for a change in clock period only if its fused unit's logic is on the critical arc. Otherwise **T_fused = T_base** (the baseline's median period), and speedup = `base_cycles / fused_cycles`.
+**T_fused = max(T_base, T_fused_measured)**, where T_base is the baseline's median period (1000 / 61.48 MHz = 16.2655 ns) and T_fused_measured is 1000 / the modified core's routed median Fmax over seeds 1–10. A faster routed clock is never credited; a slower one is always charged.
 
-- **Why:** extra logic changes where the placer starts, so routed Fmax moves by several MHz even when the new logic is nowhere near the slowest path. The dry run is an example: +42 LUTs, unit off the arc in every seed, and the median still went up 3.6 MHz.
-- **What is still reported:** the routed Fmax median, min and max are always reported. The protocol (frozen PCF, seeds 1–10) is unchanged, and the routed period is kept beside the credited one.
-- **The structural check** is `make hw-critpath` (`scripts/critpath.py`, `critcone.py`, `critends.py`, `critgroups.py`). It runs on each seed's post-route clk→clk path in nextpnr, classified on the Yosys netlist, never by cell names, which synthesis borrows from nearby signals.
-- **When the unit counts as on the arc:** the arc starts at a unit register, ends at one, or enters logic that depends on unit state through a net that feeds a unit register.
-- **Shared logic doesn't count.** An example is a XOR merged between the unit and the ALU's compare.
-- **When the routed period is credited:** if the unit is on the arc in **any** of seeds 1–10, `candidate_period_ns` = 1000 / routed median Fmax.
-- **Self-test:** `critcone.py --selftest` must pass on the modified netlist first. It proves all three on-arc cases are detected with nextpnr's real cell naming.
+- **Speedup** = `(base_cycles · T_base) / (fused_cycles · T_fused)`.
+- **Cycles-only speedup** = `base_cycles / fused_cycles`. It's reported beside the speedup in every result and measurement row.
+- **Why never credit a faster clock:** extra logic changes where the placer starts, so routed Fmax moves by several MHz even when the new logic is nowhere near the slowest path. The dry run is an example: +42 LUTs, unit off the critical arc in every seed, and the median still went up 3.6 MHz. Reordering two generate branches in `core_top.v` around the same logic once moved one of its seeds by 3.4 MHz.
+- **Why always take a slower one:** a large unit can lower Fmax without being on the critical arc. The engine's two `mul` cores were off the arc in every seed but routed at 58.52 and 60.70 MHz median. The earlier version of this rule (credit a period change only when the unit is on the arc) would have charged them nothing.
+- **What is still reported:** the routed Fmax median, min and max. The protocol (frozen PCF, seeds 1–10) is unchanged.
+- **The structural check stays as a diagnostic:** `make hw-critpath` and the engine's per-build table still say whether the unit is on the critical arc, but they no longer decide the period.
+  - Scripts: `scripts/critpath.py`, `critcone.py`, `critends.py`, `critgroups.py`.
+  - Each seed's post-route clk→clk path is classified on the Yosys netlist, never by cell names.
+  - The unit is on the arc if the arc starts at a unit register, ends at one, or enters unit-dependent logic through a net that feeds a unit register. Shared logic doesn't count.
+  - `critcone.py --selftest` has to pass first.
 
 ## Results (2026-10-19)
 
@@ -96,6 +145,16 @@ A modified core gets credit for a change in clock period only if its fused unit'
   - With the pins fixed, seed 3 gives 60.16 MHz, not the 61.56 MHz of the pin-free placement the PCF came from. Fixed pins change where the placer starts, so per-seed numbers aren't comparable across pin settings.
 - **Comparison with the ML branch:** its rv32i core without MUL/DIV was 1,488 LUT4 and 66.8 MHz median (3 seeds, its own pins). It is a different core and different pins, so it isn't a like-for-like comparison.
 - **Why cycles per instruction is high:** edn and matmult-int run many `mul` instructions, and the sequential multiplier takes about 40 cycles each. Fusions that remove a `mul` will therefore look very large on this core.
+
+### Engine results (2026-10-20)
+
+![Scatter plot of 22 sweep rows, cycles saved against instructions saved, with dashed reference lines at 1, 4 and 12 cycles per instruction. Points fall between the 1 and 12 lines; aha-mont64's candidates sit near 8.5 to 12 cycles per instruction, most others near 4, and 5 rows sit at the origin because they fused nothing.](docs/img/sweep-cycles-vs-instructions.png)
+
+*Each program's top 3 candidates, each measured alone on its own core; from `engine/results/sweep-top3.csv`, drawn by `make hw-plots` (`scripts/plots.py`).*
+
+![Grouped bar chart of speedup per program for the frequency-ranked three-unit core, bars anchored at 1.0. Cycles-only bars reach 1.168 for aha-mont64 and 1.127 for nettle-aes and sit at 1.0 to 1.032 elsewhere; under the max period rule only aha-mont64 at 1.084 and nettle-aes at 1.046 stay above 1.0, and the other six programs fall to 0.929 to 0.958.](docs/img/frequency-top3-speedup.png)
+
+*One core with the top 3 non-conflicting formulas by total finder saved (+747 LUT4, Fmax median 57.09 MHz); from `engine/results/frequency-top3.json`, drawn by `make hw-plots` (`scripts/plots.py`).*
 
 ## Tools
 

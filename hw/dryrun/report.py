@@ -133,22 +133,23 @@ def main():
     fmax = statistics.median(perSeed.values())
     baseFmax = float(base["crc32"]["fmax_mhz"])
 
-    # PROVISIONAL rule (hw/README.md): a period change counts only if the unit's logic is on the
-    # critical arc in at least one seed; otherwise the fused core keeps the baseline's period
+    # PROVISIONAL rule (hw/README.md): T_fused = max(T_base, T_fused_measured), never crediting a
+    # faster clock and always taking a slower one; the critical-path table is kept as a diagnostic
     with open("hw/dryrun/critical_paths.csv") as f:
         arcs = {r["seed"]: r["unit_on_arc"] == "True" for r in csv.DictReader(f) if r["core"] == "fused"}
     if sorted(arcs, key=int) != sorted(args.seeds, key=int):
         problems.append(f"critical-path table covers seeds {sorted(arcs, key=int)}, not {args.seeds}")
     onArc = [s for s, on in arcs.items() if on]
     basePeriod, routedPeriod = 1000 / baseFmax, 1000 / fmax
-    fusedPeriod = routedPeriod if onArc else basePeriod
+    fusedPeriod = max(basePeriod, routedPeriod)
     speedup = (baseCycles * basePeriod) / (fused["window_cycles"] * fusedPeriod)
     row = {"candidate_id": candidate_id("crc32", args.formula),
            "benchmark": "crc32", "formula": parse_formula(args.formula).canonical(),
            "measurement_source": "hardware",
            "baseline_cycles": baseCycles, "candidate_cycles": fused["window_cycles"],
            "baseline_period_ns": round(basePeriod, 4), "candidate_period_ns": round(fusedPeriod, 4),
-           "luts": luts, "speedup": round(speedup, 4)}
+           "luts": luts, "speedup": round(speedup, 4),
+           "speedup_cycles_only": round(baseCycles / fused["window_cycles"], 4)}
 
     result = {
         "provisional": True,
@@ -166,8 +167,10 @@ def main():
         "fmax_mhz": {"per_seed": {s: round(v, 2) for s, v in perSeed.items()},
                      "median": round(fmax, 2), "min": round(min(perSeed.values()), 2),
                      "max": round(max(perSeed.values()), 2), "baseline_median": baseFmax},
-        "period_rule": {"unit_on_arc_seeds": sorted(onArc, key=int),
-                        "candidate_period": "routed" if onArc else "baseline (unit off the critical arc in every seed)",
+        "period_rule": {"rule": "T_fused = max(T_base, T_fused_measured)",
+                        "candidate_period": "routed (slower than the baseline)" if routedPeriod > basePeriod
+                                            else "baseline (the routed clock is not slower)",
+                        "unit_on_arc_seeds": sorted(onArc, key=int),
                         "routed_period_ns": round(routedPeriod, 4),
                         "speedup_with_routed_period": round((baseCycles * basePeriod) /
                                                             (fused["window_cycles"] * routedPeriod), 4)},

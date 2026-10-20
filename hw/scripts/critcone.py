@@ -6,8 +6,8 @@ from critpath import arcs, cellOf, readPath
 
 # The structural test behind the clock-period rule in hw/README.md: is the fused unit's
 # logic on the critical arc? A unit register is a flip-flop holding the unit's state
-# (fused...active and the result register, which drives the core's pcpi_rd port).
-UNIT_REGISTER = re.compile(r"fused(\.\w+)*\.(active|result)|(cpu\.)?pcpi_rd")
+# (fused...active or engine...active, and the result register, which drives the core's pcpi_rd port).
+UNIT_REGISTER = re.compile(r"(fused|engine)(\.\w+)*\.(active|result)|(cpu\.)?pcpi_rd")
 
 
 class Netlist:
@@ -117,11 +117,17 @@ def selfTest(netlist):
     if not netlist.unit:
         return ["no unit registers found (run it on a fused netlist)"]
     register = sorted(netlist.unit)[0]
-    feeding = netlist.driver[netlist.cells[register]["connections"]["D"][0]]
     cases = {"starts at a unit register": [("clk-to-q", 0.5, "Source", register + "_DFFLC.O"),
-                                           ("sink", None, "Sink", "core_DFFLC.D")],
-             "ends at a unit register": [("clk-to-q", 0.5, "Source", "core_DFFLC.O"),
-                                         ("sink", None, "Sink", feeding + "_LC.I0")]}
+                                           ("sink", None, "Sink", "core_DFFLC.D")]}
+    # nextpnr names the capturing cell after the LUT feeding D, or after the flip-flop when D
+    # comes straight from another register (e.g. a result bit that is just rs1[i])
+    for unit in sorted(netlist.unit):
+        feeding = netlist.driver.get(netlist.cells[unit]["connections"]["D"][0])
+        kind = "LUT" if feeding and not netlist.isRegister(feeding) else "lone flip-flop"
+        name = f"ends at a unit register ({kind})"
+        if name not in cases:
+            sink = feeding + "_LC.I0" if kind == "LUT" else unit + "_DFFLC.D"
+            cases[name] = [("clk-to-q", 0.5, "Source", "core_DFFLC.O"), ("sink", None, "Sink", sink)]
     entry = next(((cell, pin, bit) for cell in sorted(netlist.forward) for pin in ("I0", "I1", "I2", "I3")
                   for bit in netlist.cells[cell]["connections"].get(pin, [])[:1] if bit in netlist.backNets), None)
     if entry:
