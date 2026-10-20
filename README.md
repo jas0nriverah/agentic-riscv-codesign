@@ -135,6 +135,57 @@ Formulas ranked by the finder's `saved` summed over all 8 programs; two formulas
 
 The rank-2 pick fuses nothing anywhere (its sites have no legal placement) yet costs about 650 LUTs and sets the clock, so every program pays the 7.1% slower period. Savings equal the sum of the same formulas measured alone, because the picks don't conflict. The lesson for selection: ranking by the finder's `saved` alone chose a candidate that can't be placed.
 
+### Placeability pre-check and top-10 sweep (2026-10-20)
+
+**Pre-check** (`make hw-placeability` → [hw/engine/results/placeability.csv](hw/engine/results/placeability.csv)): the rewriter alone, no hardware, on all 348 candidates of the 8 programs, each as if alone on a core. Placeable (the rewriter can fuse at least one counted site): aha-mont64 18 of 20, crc32 14 of 17, edn 17 of 24, huffbench 16 of 20, matmult-int 0 of 1, nettle-aes 47 of 52, nettle-sha256 57 of 67, wikisort 44 of 147. Every gap is explained; the common reasons are sites in libgcc soft-float (`__muldf3`, `__adddf3`, `__divdf3`, `__subdf3`), no legal position, and linker-filled address constants. The pre-check agrees with all 22 measured top-3 rows exactly.
+
+**Sweep** (`make hw-sweep10 ALLOW_MUL=1` → [hw/engine/results/sweep-top10-placeable.csv](hw/engine/results/sweep-top10-placeable.csv)): each program's top 10 placeable candidates by finder `saved`, each measured alone: 70 rows from 60 cores, all clean. Rank agreement between finder `saved` and measured cycles saved ([rankcheck-top10.csv](hw/engine/results/rankcheck-top10.csv)):
+
+| program | ρ(saved, cycles) | ρ(saved, instret) | finder's #1 is the best? | best by cycles |
+|---|---:|---:|---|---|
+| aha-mont64 | 0.939 | 1.000 | yes | `add(srli(in0,31),slli(in1,1))` |
+| crc32 | 0.644 | 1.000 | no | `mul(in0,addi(lui(1103515648),-403))` (finder #4) |
+| edn | 0.842 | 1.000 | yes | `add(srai(add(slli(in0,1),in0),15),in1)` |
+| huffbench | 0.954 | 1.000 | yes | `add(in0,slli(in1,2))` |
+| nettle-aes | 0.893 | 0.978 | yes | `add(in0,slli(in1,2))` |
+| nettle-sha256 | 1.000 | 1.000 | yes | `xor(add(srli(in0,2),slli(in0,30)),in1)` |
+| wikisort | 0.729 | 1.000 | no | `mul(in0,addi(lui(1103515648),-403))` (finder #21) |
+
+- Instruction counts are predicted perfectly; the disagreement is all cycles per instruction, which runs from 1.0 to 38 across these rows.
+- **The multiply-by-constant fusion is the best single result in the study:** `mul(in0,addi(lui(1103515648),-403))` replaces the ~40-cycle sequential multiply with a 5-cycle operation, 20.5 cycles per instruction removed, crc32 speedup **1.439** under the period rule (1.466 cycles only), +624 LUT4, off the critical arc. The general multiplier `mul(in0,addi(in1,-403))` is not worth it: +1,458 LUT4, 48.41 MHz, on the critical arc in every seed, 1.116 after the clock penalty.
+- 51 of the 70 rows route below the baseline clock and 24 end below 1.0 under the period rule.
+
+### Multiplier probe (PRELIMINARY, 2026-10-20)
+
+Not a baseline change. The stock core with PicoRV32's single-cycle multiplier (`ENABLE_FAST_MUL=1`, no fused units) under the same protocol (`make hw-fastmul-probe` → [hw/results/fastmul-probe.csv](hw/results/fastmul-probe.csv)): **5,351 LUT4 (+2,912)**, Fmax median **47.05 MHz** (45.91–48.49), the multiplier is the critical arc in 10 of 10 seeds. Cycles: edn −55.9%, matmult-int −47.6%, crc32 −26.4%, wikisort −14.4%, aha-mont64 −6.4%, the other three unchanged. Geometric-mean speedup 1.283 cycles only, **0.982** under the period rule (the three programs without `mul` pay the 30.7% slower clock for nothing). The baseline multiplier choice is pending team confirmation; the numbers above and the fused-`mul` results depend on it.
+
+### Selection experiments (2026-10-20)
+
+Three ways to pick up to 3 formulas for one core, scored by the geometric mean of the 8 per-program speedups under both rules ([hw/engine/results/experiments.csv](hw/engine/results/experiments.csv); requests, estimates and full results beside it). Two formulas conflict if a site the finder counted for one shares an instruction with a site counted for the other, in any program.
+
+- **E, frequency by finder `saved`** (above): one build.
+- **C1, frequency by placeable saved:** the same rule with the pre-check's placeable saved instead of the finder's. Picks `add(in0,slli(in1,2))`, `add(srli(in0,31),slli(in1,1))`, `mul(in0,addi(lui(1103515648),-403))`. One build.
+- **C2, oracle under a LUT budget:** from the 60 single-candidate cores, every non-conflicting set of up to 3 within the budget, assuming cycles and LUTs add and the clock is the slowest member's; the top 3 sets by estimated cycles-only geomean were built. +500 chose the same sets as +250, because the only candidate that could use the room (the constant multiplier, +624) doesn't fit. 60 + 6 builds.
+
+| experiment | formulas | LUT Δ (est.) | Fmax | on arc | geomean, period rule | geomean, cycles only (est.) |
+|---|---|---:|---:|---:|---:|---:|
+| E frequency, finder saved | `add(in0,slli(in1,2))`, `slli(add(mul(…),in1),1)`, `add(srli(in0,31),slli(in1,1))` | +747 | 57.09 | 5/10 | 0.968 | 1.042 |
+| C1 frequency, placeable saved | `add(in0,slli(in1,2))`, `add(srli(in0,31),slli(in1,1))`, `mul(in0,addi(lui(1103515648),-403))` | +725 | 57.63 | 2/10 | **1.028** | **1.097** |
+| C2 +100, set 1 | `add(srli(in0,31),slli(in1,1))`, `or(srli(in0,31),slli(in1,1))` | +82 (+99) | 62.67 | 0 | 1.037 | 1.037 (1.037) |
+| C2 +100, set 2 | `add(srli(in0,31),slli(in1,1))`, `or(srli(in0,31),in1)` | +81 (+88) | 61.52 | 0 | 1.032 | 1.032 (1.032) |
+| C2 +100, set 3 | `add(srli(in0,31),slli(in1,1))`, `srli(slli(add(in0,in1),1),1)` | +83 (+100) | 63.34 | 0 | 1.028 | 1.028 (1.028) |
+| C2 +250 / +500, set 1 | `add(in0,slli(in1,2))`, `add(srli(in0,31),slli(in1,1))`, `or(srli(in0,31),slli(in1,1))` | +107 (+175) | 60.26 | 0 | 1.039 | 1.060 (1.060) |
+| C2 +250 / +500, set 2 | `add(in0,slli(in1,2))`, `add(srli(in0,31),slli(in1,1))`, `or(srli(in0,31),in1)` | +139 (+164) | 62.83 | 0 | **1.054** | 1.054 (1.054) |
+| C2 +250 / +500, set 3 | `add(in0,slli(in1,2))`, `add(srli(in0,31),in1)`, `or(srli(in0,31),slli(in1,1))` | +175 (+208) | 58.28 | 0 | 0.998 | 1.052 (1.052) |
+
+Per-program speedups for every row are in `experiments.csv`. What the comparison shows:
+
+- **Cycles add exactly.** In every oracle set, the measured cycles saved equals the sum of the members' single-candidate savings for every program. There were no interaction effects in cycles, because the picks don't share sites.
+- **LUTs are sub-additive.** Every set cost less than the sum of its members (+107 measured against +175 estimated for the best 3-set), because the units share one PCPI decoder and result register and synthesis merges logic between them.
+- **The clock is the part no estimate caught.** The pessimistic clock guess (slowest member) was too pessimistic every time, and routed Fmax decides the ranking under the period rule: the +250 set that is best cycles-only (1.060) routes at 60.26 MHz and lands at 1.039, while set 2 routes at 62.83 MHz and wins at 1.054. The two sets are identical in cycles for 6 of 8 programs.
+- **Placement awareness fixes the frequency baseline:** C1 beats E on both scores (1.028 vs 0.968; 1.097 vs 1.042) by swapping the unplaceable `mul` chain for the placeable constant multiplier, which alone gives crc32 1.439. It is still a 725-LUT core at 57.6 MHz, so under the period rule it loses to a 139-LUT oracle set.
+- **Cost:** frequency ranking needs 1 hardware build; the oracle needed 66 (60 single-candidate cores plus the 6 distinct sets built here).
+
 ### Dry run (2026-10-20)
 
 The first end-to-end run, one crc32 candidate (`slli(andi(xor(in0,in1),255),2)`) on a hand-wired unit: instret −348,160 (exactly the finder's `saved`), cycles −1,218,560, +42 LUT4, speedup 1.0574. Details and its critical-path table: [hw/dryrun/README.md](hw/dryrun/README.md).

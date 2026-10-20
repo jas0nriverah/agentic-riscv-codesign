@@ -40,6 +40,17 @@ hw-placeability: $(PROGRAMS:%=$(EN)/asm/%/done) $(PROGRAMS:%=$(EN)/finder/%.json
 	python3 hw/engine/placeability.py --prefix $(RISCV_PREFIX) --cflags "$(CFLAGS) -I $(EMBENCH)/support" \
 	  --ldflags "$(LDFLAGS)" --programs $(PROGRAMS) --out hw/engine/results/placeability.csv
 
+# the selection experiments (needs hw-sweep10): placement-aware frequency pick, oracle sets under
+# LUT budgets, one core each, then the comparison -> hw/engine/results/experiments.csv
+EN_R := hw/engine/results
+.PHONY: hw-experiments
+hw-experiments:
+	python3 hw/engine/selection.py frequency --placeable --out $(EN_R)/frequency-placeable-top3.request.json
+	for b in 100 250 500; do python3 hw/engine/selection.py oracle --budget $$b --keep 3 --out $(EN_R)/oracle-lut$$b || exit 1; done
+	for r in $(EN_R)/frequency-top3.request.json $(EN_R)/frequency-placeable-top3.request.json $(EN_R)/oracle-lut*-set*.request.json; do \
+	  $(MAKE) --no-print-directory hw-measure CANDIDATES=$$r ALLOW_MUL=1 || exit 1; done
+	python3 hw/engine/compare.py --single-candidate-builds 60
+
 ifdef EN_B
 # the microtest list comes from the manifest, which the first sub-make creates
 EN_MICRO := $(if $(wildcard $(EN_B)/manifest.json),$(shell python3 -c "import json; print(' '.join(json.load(open('$(EN_B)/manifest.json'))['microtests']))"))

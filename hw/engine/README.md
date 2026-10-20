@@ -166,6 +166,10 @@ A build takes about 50 s at `-j8` after `make hw-baseline`. The clean sweep (21 
 - **Savings add up exactly.** The picks don't conflict, so each program's instruction and cycle savings equal the sum of the same formulas measured alone in the sweep.
 - **Being on the critical arc depends on the rest of the core.** Measured alone, the same `mul` unit was never on the arc (58.52 MHz median). With two more units it becomes critical.
 
+### Later results (2026-10-20)
+
+The placeability pre-check (`make hw-placeability`), the top-10 placeable sweep (`make hw-sweep10`), the multiplier probe (`make hw-fastmul-probe`) and the selection experiments (`make hw-experiments`: placement-aware frequency pick and the LUT-budget oracle) are summarized in the root README's Results section; the files are listed in [results/README.md](results/README.md).
+
 ## Known limits
 
 - **One schedule only.** Sites that would need instructions reordered aren't fused. Example: crc32's `mul` candidates, where `rand_beebs` loads the constant 12345 between the members.
