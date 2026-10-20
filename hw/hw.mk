@@ -18,7 +18,7 @@ HW_MAX_CYCLES := 4000000000
 HW_SETUP    := $(HW)/sw/startup.S benchmarks/embench-hooks.c \
                $(EMBENCH)/support/main.c $(EMBENCH)/support/beebsc.c
 
-.PHONY: hw-baseline hw-sim hw-synth hw-route hw-pcf
+.PHONY: hw-baseline hw-sim hw-synth hw-route hw-pcf hw-fastmul-probe
 # keeps the ELFs that the .bin files are made from
 .SECONDARY: $(PROGRAMS:%=$(HW_OUT)/programs/%.elf) $(PROGRAMS:%=generated/programs/%.elf)
 
@@ -80,6 +80,13 @@ hw-pcf: $(HW_OUT)/synth/core_top.json
 	python3 $(HW)/scripts/pcf.py $(HW_OUT)/pcf/placed.json $(HW_CHIPDB) ct256 $(HW)/synth/core_top.pcf
 
 hw-route: $(HW_SEEDS:%=$(HW_OUT)/route/seed%/report.json)
+
+# probe: the stock core with PicoRV32's single-cycle multiplier (FAST_MUL=1), same protocol,
+# compared with the sequential baseline -> hw/results/fastmul-probe.csv (not a baseline change)
+.PHONY: hw-fastmul-probe
+hw-fastmul-probe: $(PROGRAMS:%=$(HW_OUT)/programs/%.bin) $(HW)/results/baseline.csv
+	RISCV_PREFIX=$(RISCV_PREFIX) python3 $(HW)/scripts/fastmul_probe.py --programs $(PROGRAMS) --seeds $(HW_SEEDS) \
+	  --freq $(HW_FREQ_MHZ) --max-cycles $(HW_MAX_CYCLES) --out $(HW)/results/fastmul-probe
 
 $(HW)/results/baseline.csv: $(HW)/scripts/baseline.py hw-sim hw-route \
                             $(PROGRAMS:%=generated/traces/%.jsonl) \
