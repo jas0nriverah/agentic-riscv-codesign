@@ -85,3 +85,5 @@ $(HW)/results/baseline.csv: $(HW)/scripts/baseline.py hw-sim hw-route \
                             $(PROGRAMS:%=generated/traces/%.jsonl) \
                             $(PROGRAMS:%=generated/programs/%.bin) $(PROGRAMS:%=$(HW_OUT)/programs/%.bin)
 	python3 $< --programs $(PROGRAMS) --seeds $(HW_SEEDS) --out $@
+
+include $(HW)/dryrun/dryrun.mk

@@ -1,0 +1,7 @@
+# The baseline's synthesis (hw/synth/ice40.ys) with the PROVISIONAL dry-run unit: FUSED=1.
+read_verilog hw/rtl/picorv32.v hw/rtl/core_top.v hw/rtl/pcpi_fused.v hw/rtl/cx_crc32_xoridx.v
+chparam -set FUSED 1 core_top
+synth_ice40 -top core_top
+check -assert
+write_json generated/hw/dryrun/synth/core_top.json
+tee -o generated/hw/dryrun/synth/stat.txt stat
