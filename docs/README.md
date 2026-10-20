@@ -3,6 +3,7 @@
 [Project scope contract](../README.md) · [Agent instructions](../AGENTS.md) · [Current handoff](HANDOFF.md)
 
 - [October 20 methods review](selection-methods-review.md): six additional primary methods and their precise adaptation limits.
+- [Full speedup-model diagnosis](model-analysis.md): measured failure mechanisms, independent latency calibration, stronger baseline, new public features, and a prospective improvement plan.
 - [Fixed ranking and automatic CRC32 results](selection-pilot-results.md): 420 development outcomes, poor uncertainty coverage, nine preserved fit failures, and the next data blocker.
 - [Automatic workload milestone](automatic-workloads.md): actual aha-mont64 extraction, lowering, program execution, hardware results, and reproduction.
 - [Established methods and research decisions](research-foundation.md): primary publications, algorithm assumptions, feasible baselines, and remaining gaps.

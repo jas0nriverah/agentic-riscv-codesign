@@ -126,6 +126,10 @@ reproduce-v13:
 model-diagram:
 	$(PYTHON) scripts/plot_ml_model_overview.py --output generated/reproduction/ml-model
 
+.PHONY: reproduce-model-analysis
+reproduce-model-analysis:
+	$(PYTHON) scripts/reproduce_model_analysis.py
+
 .PHONY: reproduce-v14
 reproduce-v14:
 	$(PYTHON) scripts/audit_v14_routing.py --output generated/reproduction/v14/independent-routing-audit.json

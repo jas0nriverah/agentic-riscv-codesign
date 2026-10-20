@@ -10,6 +10,8 @@ Prioritize the first missing engineering connection. The second-workload milesto
 
 The contribution under test is measurement-efficient, uncertainty-aware custom-instruction selection validated against real processor performance and hardware constraints. Read [the primary-method review](docs/research-foundation.md) before major new ML or selection features. Reuse established extraction and architectural constraints; do not invent another enumerator or RTL-generation framework. Identify a paper's exact version and methods before claiming adaptation or reproduction. Record inaccessible methods as unresolved; abstracts do not satisfy method review. No novelty claim is authorized by the proposal's expectations alone.
 
+The [model diagnosis](docs/model-analysis.md) now provides independently calibrated PicoRV32 latency merit and baseline-normalized features. It exactly explains the twelve consumed automatic outcomes; this is a strong heuristic result, not ML generalization. Include it in future comparisons. Keep existing learned models fixed until independent data can test a predeclared feature ablation. Train a residual model only if new measurements reveal a systematic error in this baseline. Its timing costs do not predict routed Fmax or area, and cannot be summed across selected instruction sets.
+
 The agent selects instructions; it does not rewrite RTL. Do not develop RTL optimization agents, GNNs, multi-agent frameworks, or unrelated extensions. Do not start another isolated LUT-model study or model-version sequence unless an observed selection failure demonstrates why it is necessary. Historical roadmaps, archived scripts, synthetic demos, and literature suggestions are not current assignments.
 
 ## Reuse and correctness

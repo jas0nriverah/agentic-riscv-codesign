@@ -1,0 +1,147 @@
+[
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-nostdlib",
+      "-nostartfiles",
+      "-Wl,--no-relax",
+      "-Wl,-T,/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/inputs/soc_link.ld",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/inputs/firmware.S",
+      "-o",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/firmware.elf"
+    ],
+    "cwd": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20",
+    "elapsed_seconds": 0.40084337498410605,
+    "returncode": 0,
+    "expected_returncode": 0,
+    "failure": null,
+    "log": "compile.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy",
+      "-O",
+      "binary",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/firmware.elf",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/firmware.bin"
+    ],
+    "cwd": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20",
+    "elapsed_seconds": 0.009400583017850295,
+    "returncode": 0,
+    "expected_returncode": 0,
+    "failure": null,
+    "log": "objcopy.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objdump",
+      "-d",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/firmware.elf"
+    ],
+    "cwd": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20",
+    "elapsed_seconds": 0.010107834008522332,
+    "returncode": 0,
+    "expected_returncode": 0,
+    "failure": null,
+    "log": "disassembly.txt",
+    "log_sha256": "842b88a17515df52d76a11aa5143ae8c5443ced87299fbd704613e733038e24d"
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-nm",
+      "-n",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/firmware.elf"
+    ],
+    "cwd": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20",
+    "elapsed_seconds": 0.01999479197547771,
+    "returncode": 0,
+    "expected_returncode": 0,
+    "failure": null,
+    "log": "symbols.txt",
+    "log_sha256": "5242ff1017d7f8009265163f3e87cf67b236dc216dab33154a43be1fd0178e8b"
+  },
+  {
+    "argv": [
+      "/opt/homebrew/Cellar/verilator/5.050/bin/verilator",
+      "--cc",
+      "--exe",
+      "--build",
+      "-j",
+      "2",
+      "-Wno-fatal",
+      "--top-module",
+      "soc_top",
+      "--Mdir",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/extended/obj_dir",
+      "-GEXTENSION_MASK=1",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/profile_core.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/inputs/pcpi_single.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/inputs/candidate.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/soc_top.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/inputs/latency_sim.cpp"
+    ],
+    "cwd": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20",
+    "elapsed_seconds": 2.4179819169803523,
+    "returncode": 0,
+    "expected_returncode": 0,
+    "failure": null,
+    "log": "extended/build.log",
+    "log_sha256": "3c68346ddfcfebca98dae2dbea852066ba3e2e76bf2026edc0214384bb85c701"
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/extended/obj_dir/Vsoc_top"
+    ],
+    "cwd": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20",
+    "elapsed_seconds": 0.187171458004741,
+    "returncode": 0,
+    "expected_returncode": 0,
+    "failure": null,
+    "log": "extended/simulation.json",
+    "log_sha256": "7056d57d0abcdc112c2f61202da4b1291160c02445f62d203c0355426482ea64"
+  },
+  {
+    "argv": [
+      "/opt/homebrew/Cellar/verilator/5.050/bin/verilator",
+      "--cc",
+      "--exe",
+      "--build",
+      "-j",
+      "2",
+      "-Wno-fatal",
+      "--top-module",
+      "soc_top",
+      "--Mdir",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/stock/obj_dir",
+      "-GEXTENSION_MASK=0",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/profile_core.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/inputs/pcpi_single.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/inputs/candidate.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/soc_top.v",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/inputs/latency_sim.cpp"
+    ],
+    "cwd": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20",
+    "elapsed_seconds": 1.8653022079961374,
+    "returncode": 0,
+    "expected_returncode": 0,
+    "failure": null,
+    "log": "stock/build.log",
+    "log_sha256": "3de32be27b533cb392409b1fff76b1a19376e0eaf2d0354ac89cd08786de0160"
+  },
+  {
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/stock/obj_dir/Vsoc_top"
+    ],
+    "cwd": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20",
+    "elapsed_seconds": 0.1849739579774905,
+    "returncode": 6,
+    "expected_returncode": 6,
+    "failure": null,
+    "log": "stock/simulation.json",
+    "log_sha256": "833e785b63d23986a01e0af7f198cfb4ff6040d34c3a75bbc4eb7632744d76f0"
+  }
+]

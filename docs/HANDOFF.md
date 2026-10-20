@@ -13,6 +13,10 @@ Read [README](../README.md), [AGENTS](../AGENTS.md), [the original method review
 
 ## Next blocker: an independent workload that fits
 
+The subsequent [model analysis](model-analysis.md) explains the current ML failure: five training rows from one workload, unlearnable source-constant features, absent cycle normalization, and missing shift latency. A new independent processor calibration passed 222 cases, and its latency heuristic predicts all twelve consumed automatic cycle deltas exactly. Sixty additional heuristic replay outcomes match merit's one-query optimum. The new `latency_features` module provides inputs for future models; no XGBoost variant was trained or promoted. Run `make reproduce-model-analysis` for the raw calibration and full diagnostic replay. Use that calibrated baseline in the next frozen workload experiment; testing more variants on these same pools has no demonstrated value.
+
+The [latest validation](../results/2026-10-20-model-analysis-validation/README.md) retains a full-suite limitation: all research replays and 49 targeted tests pass, but both complete runs fail one unchanged legacy process-cleanup assertion after a denied process-group signal. Do not report a clean full suite; preserve the logs while resolving its cause separately from ML claims.
+
 Nine failed workload/build contexts are archived. EDN needs 6,356 program/data bytes with `-Os`; huffbench/AES/wikisort exceed memory and some need missing runtime functions. SLRE now has tested C-locale character/string support, but the `-Os` build occupies 4,164 bytes, 68 beyond the unchanged 4,096-byte guard. A recorded `-Oz` benchmark-function fallback also fails. No third measured workload exists.
 
 Stop compiler-flag trial proliferation. The next smallest engineering experiment should establish stack usage and a checked program/stack partition for SLRE, or explicitly prepare a separate memory context. Preserve the 8 KiB SoC and 4 KiB reservation in all existing evidence. Any new partition needs overflow detection, baseline self-checks, and exact tool/input binding before candidate collection; never silently remove the guard. Runtime helper component tests do not establish workload correctness.
@@ -34,6 +38,7 @@ make test
 make reproduce
 make reproduce-speedup
 make reproduce-selection-research
+make reproduce-model-analysis
 ```
 
-Use Python 3.12, the [pinned replay requirements](../requirements-speedup.txt), and the initialized Embench submodule. The last command authenticates automatic CRC32, all 420 development outcomes and nine failed fit contexts without native jobs. Source hashes and negative evidence must remain intact.
+Use Python 3.12, the [pinned replay requirements](../requirements-speedup.txt), and the initialized Embench submodule. `reproduce-selection-research` authenticates automatic CRC32, all 420 development outcomes and nine failed fit contexts. `reproduce-model-analysis` checks the independent calibration, diagnostic calculations and 60 added latency-policy outcomes. Both run without native jobs. Source hashes and negative evidence must remain intact.

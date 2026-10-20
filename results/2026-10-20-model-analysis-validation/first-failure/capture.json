@@ -1,0 +1,41 @@
+{
+  "schema": "isaforge-v11-spooled-capture-v1",
+  "status": "failure-retained",
+  "producer_command": [
+    "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/work/audit-venv/bin/python",
+    "-c",
+    "import os;os.write(12,b'x'*(1024*1024))"
+  ],
+  "compressor_command": [
+    "/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-404/test_blocked_pipe_or_compresso0/blocked-compressor",
+    "-1",
+    "-n",
+    "-c"
+  ],
+  "compressor_sha256": "0ff630b4895cd4443264a1388d659578ccd51b97765c2305c737bba8808f6237",
+  "environment": {
+    "PATH": "/usr/bin:/bin"
+  },
+  "capture_and_drain_wall_seconds": 0.10933754200232215,
+  "producer_returncode": 1,
+  "compressor_returncode": -9,
+  "primary_error": "TimeoutError('Trace capture deadline')",
+  "cleanup_errors": [
+    {
+      "process": "producer",
+      "operation": "killpg",
+      "error": "PermissionError(1, 'Operation not permitted')"
+    }
+  ],
+  "remaining_owned_children": [
+    {
+      "process": "producer",
+      "pid": 23991,
+      "scope": "owned-process-group"
+    }
+  ],
+  "raw_path": "raw-spike.log.gz.partial",
+  "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "raw_bytes": 0,
+  "scope": "Byte capture only; no marker/CRC/ROI/output validation, extraction, model prediction or target label."
+}

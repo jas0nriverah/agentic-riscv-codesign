@@ -1,0 +1,1256 @@
+
+/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/latency-calibration-2026-10-20/firmware.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	a5a562b7          	lui	t0,0xa5a56
+   4:	a5a28293          	addi	t0,t0,-1446 # a5a55a5a <_program_end+0xa5a54dce>
+   8:	5aa5a337          	lui	t1,0x5aa5a
+   c:	55a30313          	addi	t1,t1,1370 # 5aa5a55a <_program_end+0x5aa598ce>
+
+00000010 <probe_0>:
+  10:	006283b3          	add	t2,t0,t1
+  14:	004b0e37          	lui	t3,0x4b0
+  18:	fb4e0e13          	addi	t3,t3,-76 # 4affb4 <_program_end+0x4af328>
+  1c:	45c39ee3          	bne	t2,t3,c78 <fail>
+
+00000020 <probe_1>:
+  20:	406283b3          	sub	t2,t0,t1
+  24:	4affbe37          	lui	t3,0x4affb
+  28:	500e0e13          	addi	t3,t3,1280 # 4affb500 <_program_end+0x4affa874>
+  2c:	45c396e3          	bne	t2,t3,c78 <fail>
+
+00000030 <probe_2>:
+  30:	0062f3b3          	and	t2,t0,t1
+  34:	00a50e37          	lui	t3,0xa50
+  38:	05ae0e13          	addi	t3,t3,90 # a5005a <_program_end+0xa4f3ce>
+  3c:	43c39ee3          	bne	t2,t3,c78 <fail>
+
+00000040 <probe_3>:
+  40:	0062e3b3          	or	t2,t0,t1
+  44:	ffa60e37          	lui	t3,0xffa60
+  48:	f5ae0e13          	addi	t3,t3,-166 # ffa5ff5a <_program_end+0xffa5f2ce>
+  4c:	43c396e3          	bne	t2,t3,c78 <fail>
+
+00000050 <probe_4>:
+  50:	0062c3b3          	xor	t2,t0,t1
+  54:	ff010e37          	lui	t3,0xff010
+  58:	f00e0e13          	addi	t3,t3,-256 # ff00ff00 <_program_end+0xff00f274>
+  5c:	41c39ee3          	bne	t2,t3,c78 <fail>
+
+00000060 <probe_5>:
+  60:	0062a3b3          	slt	t2,t0,t1
+  64:	00100e13          	li	t3,1
+  68:	41c398e3          	bne	t2,t3,c78 <fail>
+
+0000006c <probe_6>:
+  6c:	0062b3b3          	sltu	t2,t0,t1
+  70:	00000e13          	li	t3,0
+  74:	41c392e3          	bne	t2,t3,c78 <fail>
+
+00000078 <probe_7>:
+  78:	ffd28393          	addi	t2,t0,-3
+  7c:	a5a56e37          	lui	t3,0xa5a56
+  80:	a57e0e13          	addi	t3,t3,-1449 # a5a55a57 <_program_end+0xa5a54dcb>
+  84:	3fc39ae3          	bne	t2,t3,c78 <fail>
+
+00000088 <probe_8>:
+  88:	0ff2f393          	zext.b	t2,t0
+  8c:	05a00e13          	li	t3,90
+  90:	3fc394e3          	bne	t2,t3,c78 <fail>
+
+00000094 <probe_9>:
+  94:	0ff2e393          	ori	t2,t0,255
+  98:	a5a56e37          	lui	t3,0xa5a56
+  9c:	affe0e13          	addi	t3,t3,-1281 # a5a55aff <_program_end+0xa5a54e73>
+  a0:	3dc39ce3          	bne	t2,t3,c78 <fail>
+
+000000a4 <probe_10>:
+  a4:	0ff2c393          	xori	t2,t0,255
+  a8:	a5a56e37          	lui	t3,0xa5a56
+  ac:	aa5e0e13          	addi	t3,t3,-1371 # a5a55aa5 <_program_end+0xa5a54e19>
+  b0:	3dc394e3          	bne	t2,t3,c78 <fail>
+
+000000b4 <probe_11>:
+  b4:	ffd2a393          	slti	t2,t0,-3
+  b8:	00100e13          	li	t3,1
+  bc:	3bc39ee3          	bne	t2,t3,c78 <fail>
+
+000000c0 <probe_12>:
+  c0:	ffd2b393          	sltiu	t2,t0,-3
+  c4:	00100e13          	li	t3,1
+  c8:	3bc398e3          	bne	t2,t3,c78 <fail>
+
+000000cc <probe_13>:
+  cc:	123453b7          	lui	t2,0x12345
+  d0:	12345e37          	lui	t3,0x12345
+  d4:	3bc392e3          	bne	t2,t3,c78 <fail>
+
+000000d8 <probe_14>:
+  d8:	00029393          	slli	t2,t0,0x0
+  dc:	a5a56e37          	lui	t3,0xa5a56
+  e0:	a5ae0e13          	addi	t3,t3,-1446 # a5a55a5a <_program_end+0xa5a54dce>
+  e4:	39c39ae3          	bne	t2,t3,c78 <fail>
+
+000000e8 <probe_15>:
+  e8:	00129393          	slli	t2,t0,0x1
+  ec:	4b4abe37          	lui	t3,0x4b4ab
+  f0:	4b4e0e13          	addi	t3,t3,1204 # 4b4ab4b4 <_program_end+0x4b4aa828>
+  f4:	39c392e3          	bne	t2,t3,c78 <fail>
+
+000000f8 <probe_16>:
+  f8:	00229393          	slli	t2,t0,0x2
+  fc:	96957e37          	lui	t3,0x96957
+ 100:	968e0e13          	addi	t3,t3,-1688 # 96956968 <_program_end+0x96955cdc>
+ 104:	37c39ae3          	bne	t2,t3,c78 <fail>
+
+00000108 <probe_17>:
+ 108:	00329393          	slli	t2,t0,0x3
+ 10c:	2d2ade37          	lui	t3,0x2d2ad
+ 110:	2d0e0e13          	addi	t3,t3,720 # 2d2ad2d0 <_program_end+0x2d2ac644>
+ 114:	37c392e3          	bne	t2,t3,c78 <fail>
+
+00000118 <probe_18>:
+ 118:	00429393          	slli	t2,t0,0x4
+ 11c:	5a55ae37          	lui	t3,0x5a55a
+ 120:	5a0e0e13          	addi	t3,t3,1440 # 5a55a5a0 <_program_end+0x5a559914>
+ 124:	35c39ae3          	bne	t2,t3,c78 <fail>
+
+00000128 <probe_19>:
+ 128:	00529393          	slli	t2,t0,0x5
+ 12c:	b4ab5e37          	lui	t3,0xb4ab5
+ 130:	b40e0e13          	addi	t3,t3,-1216 # b4ab4b40 <_program_end+0xb4ab3eb4>
+ 134:	35c392e3          	bne	t2,t3,c78 <fail>
+
+00000138 <probe_20>:
+ 138:	00629393          	slli	t2,t0,0x6
+ 13c:	69569e37          	lui	t3,0x69569
+ 140:	680e0e13          	addi	t3,t3,1664 # 69569680 <_program_end+0x695689f4>
+ 144:	33c39ae3          	bne	t2,t3,c78 <fail>
+
+00000148 <probe_21>:
+ 148:	00729393          	slli	t2,t0,0x7
+ 14c:	d2ad3e37          	lui	t3,0xd2ad3
+ 150:	d00e0e13          	addi	t3,t3,-768 # d2ad2d00 <_program_end+0xd2ad2074>
+ 154:	33c392e3          	bne	t2,t3,c78 <fail>
+
+00000158 <probe_22>:
+ 158:	00829393          	slli	t2,t0,0x8
+ 15c:	a55a6e37          	lui	t3,0xa55a6
+ 160:	a00e0e13          	addi	t3,t3,-1536 # a55a5a00 <_program_end+0xa55a4d74>
+ 164:	31c39ae3          	bne	t2,t3,c78 <fail>
+
+00000168 <probe_23>:
+ 168:	00929393          	slli	t2,t0,0x9
+ 16c:	4ab4be37          	lui	t3,0x4ab4b
+ 170:	400e0e13          	addi	t3,t3,1024 # 4ab4b400 <_program_end+0x4ab4a774>
+ 174:	31c392e3          	bne	t2,t3,c78 <fail>
+
+00000178 <probe_24>:
+ 178:	00a29393          	slli	t2,t0,0xa
+ 17c:	95697e37          	lui	t3,0x95697
+ 180:	800e0e13          	addi	t3,t3,-2048 # 95696800 <_program_end+0x95695b74>
+ 184:	2fc39ae3          	bne	t2,t3,c78 <fail>
+
+00000188 <probe_25>:
+ 188:	00b29393          	slli	t2,t0,0xb
+ 18c:	2ad2de37          	lui	t3,0x2ad2d
+ 190:	2fc394e3          	bne	t2,t3,c78 <fail>
+
+00000194 <probe_26>:
+ 194:	00c29393          	slli	t2,t0,0xc
+ 198:	55a5ae37          	lui	t3,0x55a5a
+ 19c:	2dc39ee3          	bne	t2,t3,c78 <fail>
+
+000001a0 <probe_27>:
+ 1a0:	00d29393          	slli	t2,t0,0xd
+ 1a4:	ab4b4e37          	lui	t3,0xab4b4
+ 1a8:	2dc398e3          	bne	t2,t3,c78 <fail>
+
+000001ac <probe_28>:
+ 1ac:	00e29393          	slli	t2,t0,0xe
+ 1b0:	56968e37          	lui	t3,0x56968
+ 1b4:	2dc392e3          	bne	t2,t3,c78 <fail>
+
+000001b8 <probe_29>:
+ 1b8:	00f29393          	slli	t2,t0,0xf
+ 1bc:	ad2d0e37          	lui	t3,0xad2d0
+ 1c0:	2bc39ce3          	bne	t2,t3,c78 <fail>
+
+000001c4 <probe_30>:
+ 1c4:	01029393          	slli	t2,t0,0x10
+ 1c8:	5a5a0e37          	lui	t3,0x5a5a0
+ 1cc:	2bc396e3          	bne	t2,t3,c78 <fail>
+
+000001d0 <probe_31>:
+ 1d0:	01129393          	slli	t2,t0,0x11
+ 1d4:	b4b40e37          	lui	t3,0xb4b40
+ 1d8:	2bc390e3          	bne	t2,t3,c78 <fail>
+
+000001dc <probe_32>:
+ 1dc:	01229393          	slli	t2,t0,0x12
+ 1e0:	69680e37          	lui	t3,0x69680
+ 1e4:	29c39ae3          	bne	t2,t3,c78 <fail>
+
+000001e8 <probe_33>:
+ 1e8:	01329393          	slli	t2,t0,0x13
+ 1ec:	d2d00e37          	lui	t3,0xd2d00
+ 1f0:	29c394e3          	bne	t2,t3,c78 <fail>
+
+000001f4 <probe_34>:
+ 1f4:	01429393          	slli	t2,t0,0x14
+ 1f8:	a5a00e37          	lui	t3,0xa5a00
+ 1fc:	27c39ee3          	bne	t2,t3,c78 <fail>
+
+00000200 <probe_35>:
+ 200:	01529393          	slli	t2,t0,0x15
+ 204:	4b400e37          	lui	t3,0x4b400
+ 208:	27c398e3          	bne	t2,t3,c78 <fail>
+
+0000020c <probe_36>:
+ 20c:	01629393          	slli	t2,t0,0x16
+ 210:	96800e37          	lui	t3,0x96800
+ 214:	27c392e3          	bne	t2,t3,c78 <fail>
+
+00000218 <probe_37>:
+ 218:	01729393          	slli	t2,t0,0x17
+ 21c:	2d000e37          	lui	t3,0x2d000
+ 220:	25c39ce3          	bne	t2,t3,c78 <fail>
+
+00000224 <probe_38>:
+ 224:	01829393          	slli	t2,t0,0x18
+ 228:	5a000e37          	lui	t3,0x5a000
+ 22c:	25c396e3          	bne	t2,t3,c78 <fail>
+
+00000230 <probe_39>:
+ 230:	01929393          	slli	t2,t0,0x19
+ 234:	b4000e37          	lui	t3,0xb4000
+ 238:	25c390e3          	bne	t2,t3,c78 <fail>
+
+0000023c <probe_40>:
+ 23c:	01a29393          	slli	t2,t0,0x1a
+ 240:	68000e37          	lui	t3,0x68000
+ 244:	23c39ae3          	bne	t2,t3,c78 <fail>
+
+00000248 <probe_41>:
+ 248:	01b29393          	slli	t2,t0,0x1b
+ 24c:	d0000e37          	lui	t3,0xd0000
+ 250:	23c394e3          	bne	t2,t3,c78 <fail>
+
+00000254 <probe_42>:
+ 254:	01c29393          	slli	t2,t0,0x1c
+ 258:	a0000e37          	lui	t3,0xa0000
+ 25c:	21c39ee3          	bne	t2,t3,c78 <fail>
+
+00000260 <probe_43>:
+ 260:	01d29393          	slli	t2,t0,0x1d
+ 264:	40000e37          	lui	t3,0x40000
+ 268:	21c398e3          	bne	t2,t3,c78 <fail>
+
+0000026c <probe_44>:
+ 26c:	01e29393          	slli	t2,t0,0x1e
+ 270:	80000e37          	lui	t3,0x80000
+ 274:	21c392e3          	bne	t2,t3,c78 <fail>
+
+00000278 <probe_45>:
+ 278:	01f29393          	slli	t2,t0,0x1f
+ 27c:	00000e13          	li	t3,0
+ 280:	1fc39ce3          	bne	t2,t3,c78 <fail>
+
+00000284 <probe_46>:
+ 284:	0002d393          	srli	t2,t0,0x0
+ 288:	a5a56e37          	lui	t3,0xa5a56
+ 28c:	a5ae0e13          	addi	t3,t3,-1446 # a5a55a5a <_program_end+0xa5a54dce>
+ 290:	1fc394e3          	bne	t2,t3,c78 <fail>
+
+00000294 <probe_47>:
+ 294:	0012d393          	srli	t2,t0,0x1
+ 298:	52d2be37          	lui	t3,0x52d2b
+ 29c:	d2de0e13          	addi	t3,t3,-723 # 52d2ad2d <_program_end+0x52d2a0a1>
+ 2a0:	1dc39ce3          	bne	t2,t3,c78 <fail>
+
+000002a4 <probe_48>:
+ 2a4:	0022d393          	srli	t2,t0,0x2
+ 2a8:	29695e37          	lui	t3,0x29695
+ 2ac:	696e0e13          	addi	t3,t3,1686 # 29695696 <_program_end+0x29694a0a>
+ 2b0:	1dc394e3          	bne	t2,t3,c78 <fail>
+
+000002b4 <probe_49>:
+ 2b4:	0032d393          	srli	t2,t0,0x3
+ 2b8:	14b4be37          	lui	t3,0x14b4b
+ 2bc:	b4be0e13          	addi	t3,t3,-1205 # 14b4ab4b <_program_end+0x14b49ebf>
+ 2c0:	1bc39ce3          	bne	t2,t3,c78 <fail>
+
+000002c4 <probe_50>:
+ 2c4:	0042d393          	srli	t2,t0,0x4
+ 2c8:	0a5a5e37          	lui	t3,0xa5a5
+ 2cc:	5a5e0e13          	addi	t3,t3,1445 # a5a55a5 <_program_end+0xa5a4919>
+ 2d0:	1bc394e3          	bne	t2,t3,c78 <fail>
+
+000002d4 <probe_51>:
+ 2d4:	0052d393          	srli	t2,t0,0x5
+ 2d8:	052d3e37          	lui	t3,0x52d3
+ 2dc:	ad2e0e13          	addi	t3,t3,-1326 # 52d2ad2 <_program_end+0x52d1e46>
+ 2e0:	19c39ce3          	bne	t2,t3,c78 <fail>
+
+000002e4 <probe_52>:
+ 2e4:	0062d393          	srli	t2,t0,0x6
+ 2e8:	02969e37          	lui	t3,0x2969
+ 2ec:	569e0e13          	addi	t3,t3,1385 # 2969569 <_program_end+0x29688dd>
+ 2f0:	19c394e3          	bne	t2,t3,c78 <fail>
+
+000002f4 <probe_53>:
+ 2f4:	0072d393          	srli	t2,t0,0x7
+ 2f8:	014b5e37          	lui	t3,0x14b5
+ 2fc:	ab4e0e13          	addi	t3,t3,-1356 # 14b4ab4 <_program_end+0x14b3e28>
+ 300:	17c39ce3          	bne	t2,t3,c78 <fail>
+
+00000304 <probe_54>:
+ 304:	0082d393          	srli	t2,t0,0x8
+ 308:	00a5ae37          	lui	t3,0xa5a
+ 30c:	55ae0e13          	addi	t3,t3,1370 # a5a55a <_program_end+0xa598ce>
+ 310:	17c394e3          	bne	t2,t3,c78 <fail>
+
+00000314 <probe_55>:
+ 314:	0092d393          	srli	t2,t0,0x9
+ 318:	0052de37          	lui	t3,0x52d
+ 31c:	2ade0e13          	addi	t3,t3,685 # 52d2ad <_program_end+0x52c621>
+ 320:	15c39ce3          	bne	t2,t3,c78 <fail>
+
+00000324 <probe_56>:
+ 324:	00a2d393          	srli	t2,t0,0xa
+ 328:	00297e37          	lui	t3,0x297
+ 32c:	956e0e13          	addi	t3,t3,-1706 # 296956 <_program_end+0x295cca>
+ 330:	15c394e3          	bne	t2,t3,c78 <fail>
+
+00000334 <probe_57>:
+ 334:	00b2d393          	srli	t2,t0,0xb
+ 338:	0014be37          	lui	t3,0x14b
+ 33c:	4abe0e13          	addi	t3,t3,1195 # 14b4ab <_program_end+0x14a81f>
+ 340:	13c39ce3          	bne	t2,t3,c78 <fail>
+
+00000344 <probe_58>:
+ 344:	00c2d393          	srli	t2,t0,0xc
+ 348:	000a6e37          	lui	t3,0xa6
+ 34c:	a55e0e13          	addi	t3,t3,-1451 # a5a55 <_program_end+0xa4dc9>
+ 350:	13c394e3          	bne	t2,t3,c78 <fail>
+
+00000354 <probe_59>:
+ 354:	00d2d393          	srli	t2,t0,0xd
+ 358:	00053e37          	lui	t3,0x53
+ 35c:	d2ae0e13          	addi	t3,t3,-726 # 52d2a <_program_end+0x5209e>
+ 360:	11c39ce3          	bne	t2,t3,c78 <fail>
+
+00000364 <probe_60>:
+ 364:	00e2d393          	srli	t2,t0,0xe
+ 368:	00029e37          	lui	t3,0x29
+ 36c:	695e0e13          	addi	t3,t3,1685 # 29695 <_program_end+0x28a09>
+ 370:	11c394e3          	bne	t2,t3,c78 <fail>
+
+00000374 <probe_61>:
+ 374:	00f2d393          	srli	t2,t0,0xf
+ 378:	00015e37          	lui	t3,0x15
+ 37c:	b4ae0e13          	addi	t3,t3,-1206 # 14b4a <_program_end+0x13ebe>
+ 380:	0fc39ce3          	bne	t2,t3,c78 <fail>
+
+00000384 <probe_62>:
+ 384:	0102d393          	srli	t2,t0,0x10
+ 388:	0000ae37          	lui	t3,0xa
+ 38c:	5a5e0e13          	addi	t3,t3,1445 # a5a5 <_program_end+0x9919>
+ 390:	0fc394e3          	bne	t2,t3,c78 <fail>
+
+00000394 <probe_63>:
+ 394:	0112d393          	srli	t2,t0,0x11
+ 398:	00005e37          	lui	t3,0x5
+ 39c:	2d2e0e13          	addi	t3,t3,722 # 52d2 <_program_end+0x4646>
+ 3a0:	0dc39ce3          	bne	t2,t3,c78 <fail>
+
+000003a4 <probe_64>:
+ 3a4:	0122d393          	srli	t2,t0,0x12
+ 3a8:	00003e37          	lui	t3,0x3
+ 3ac:	969e0e13          	addi	t3,t3,-1687 # 2969 <_program_end+0x1cdd>
+ 3b0:	0dc394e3          	bne	t2,t3,c78 <fail>
+
+000003b4 <probe_65>:
+ 3b4:	0132d393          	srli	t2,t0,0x13
+ 3b8:	00001e37          	lui	t3,0x1
+ 3bc:	4b4e0e13          	addi	t3,t3,1204 # 14b4 <_program_end+0x828>
+ 3c0:	0bc39ce3          	bne	t2,t3,c78 <fail>
+
+000003c4 <probe_66>:
+ 3c4:	0142d393          	srli	t2,t0,0x14
+ 3c8:	00001e37          	lui	t3,0x1
+ 3cc:	a5ae0e13          	addi	t3,t3,-1446 # a5a <probe_189+0x6>
+ 3d0:	0bc394e3          	bne	t2,t3,c78 <fail>
+
+000003d4 <probe_67>:
+ 3d4:	0152d393          	srli	t2,t0,0x15
+ 3d8:	52d00e13          	li	t3,1325
+ 3dc:	09c39ee3          	bne	t2,t3,c78 <fail>
+
+000003e0 <probe_68>:
+ 3e0:	0162d393          	srli	t2,t0,0x16
+ 3e4:	29600e13          	li	t3,662
+ 3e8:	09c398e3          	bne	t2,t3,c78 <fail>
+
+000003ec <probe_69>:
+ 3ec:	0172d393          	srli	t2,t0,0x17
+ 3f0:	14b00e13          	li	t3,331
+ 3f4:	09c392e3          	bne	t2,t3,c78 <fail>
+
+000003f8 <probe_70>:
+ 3f8:	0182d393          	srli	t2,t0,0x18
+ 3fc:	0a500e13          	li	t3,165
+ 400:	07c39ce3          	bne	t2,t3,c78 <fail>
+
+00000404 <probe_71>:
+ 404:	0192d393          	srli	t2,t0,0x19
+ 408:	05200e13          	li	t3,82
+ 40c:	07c396e3          	bne	t2,t3,c78 <fail>
+
+00000410 <probe_72>:
+ 410:	01a2d393          	srli	t2,t0,0x1a
+ 414:	02900e13          	li	t3,41
+ 418:	07c390e3          	bne	t2,t3,c78 <fail>
+
+0000041c <probe_73>:
+ 41c:	01b2d393          	srli	t2,t0,0x1b
+ 420:	01400e13          	li	t3,20
+ 424:	05c39ae3          	bne	t2,t3,c78 <fail>
+
+00000428 <probe_74>:
+ 428:	01c2d393          	srli	t2,t0,0x1c
+ 42c:	00a00e13          	li	t3,10
+ 430:	05c394e3          	bne	t2,t3,c78 <fail>
+
+00000434 <probe_75>:
+ 434:	01d2d393          	srli	t2,t0,0x1d
+ 438:	00500e13          	li	t3,5
+ 43c:	03c39ee3          	bne	t2,t3,c78 <fail>
+
+00000440 <probe_76>:
+ 440:	01e2d393          	srli	t2,t0,0x1e
+ 444:	00200e13          	li	t3,2
+ 448:	03c398e3          	bne	t2,t3,c78 <fail>
+
+0000044c <probe_77>:
+ 44c:	01f2d393          	srli	t2,t0,0x1f
+ 450:	00100e13          	li	t3,1
+ 454:	03c392e3          	bne	t2,t3,c78 <fail>
+
+00000458 <probe_78>:
+ 458:	4002d393          	srai	t2,t0,0x0
+ 45c:	a5a56e37          	lui	t3,0xa5a56
+ 460:	a5ae0e13          	addi	t3,t3,-1446 # a5a55a5a <_program_end+0xa5a54dce>
+ 464:	01c39ae3          	bne	t2,t3,c78 <fail>
+
+00000468 <probe_79>:
+ 468:	4012d393          	srai	t2,t0,0x1
+ 46c:	d2d2be37          	lui	t3,0xd2d2b
+ 470:	d2de0e13          	addi	t3,t3,-723 # d2d2ad2d <_program_end+0xd2d2a0a1>
+ 474:	01c392e3          	bne	t2,t3,c78 <fail>
+
+00000478 <probe_80>:
+ 478:	4022d393          	srai	t2,t0,0x2
+ 47c:	e9695e37          	lui	t3,0xe9695
+ 480:	696e0e13          	addi	t3,t3,1686 # e9695696 <_program_end+0xe9694a0a>
+ 484:	7fc39a63          	bne	t2,t3,c78 <fail>
+
+00000488 <probe_81>:
+ 488:	4032d393          	srai	t2,t0,0x3
+ 48c:	f4b4be37          	lui	t3,0xf4b4b
+ 490:	b4be0e13          	addi	t3,t3,-1205 # f4b4ab4b <_program_end+0xf4b49ebf>
+ 494:	7fc39263          	bne	t2,t3,c78 <fail>
+
+00000498 <probe_82>:
+ 498:	4042d393          	srai	t2,t0,0x4
+ 49c:	fa5a5e37          	lui	t3,0xfa5a5
+ 4a0:	5a5e0e13          	addi	t3,t3,1445 # fa5a55a5 <_program_end+0xfa5a4919>
+ 4a4:	7dc39a63          	bne	t2,t3,c78 <fail>
+
+000004a8 <probe_83>:
+ 4a8:	4052d393          	srai	t2,t0,0x5
+ 4ac:	fd2d3e37          	lui	t3,0xfd2d3
+ 4b0:	ad2e0e13          	addi	t3,t3,-1326 # fd2d2ad2 <_program_end+0xfd2d1e46>
+ 4b4:	7dc39263          	bne	t2,t3,c78 <fail>
+
+000004b8 <probe_84>:
+ 4b8:	4062d393          	srai	t2,t0,0x6
+ 4bc:	fe969e37          	lui	t3,0xfe969
+ 4c0:	569e0e13          	addi	t3,t3,1385 # fe969569 <_program_end+0xfe9688dd>
+ 4c4:	7bc39a63          	bne	t2,t3,c78 <fail>
+
+000004c8 <probe_85>:
+ 4c8:	4072d393          	srai	t2,t0,0x7
+ 4cc:	ff4b5e37          	lui	t3,0xff4b5
+ 4d0:	ab4e0e13          	addi	t3,t3,-1356 # ff4b4ab4 <_program_end+0xff4b3e28>
+ 4d4:	7bc39263          	bne	t2,t3,c78 <fail>
+
+000004d8 <probe_86>:
+ 4d8:	4082d393          	srai	t2,t0,0x8
+ 4dc:	ffa5ae37          	lui	t3,0xffa5a
+ 4e0:	55ae0e13          	addi	t3,t3,1370 # ffa5a55a <_program_end+0xffa598ce>
+ 4e4:	79c39a63          	bne	t2,t3,c78 <fail>
+
+000004e8 <probe_87>:
+ 4e8:	4092d393          	srai	t2,t0,0x9
+ 4ec:	ffd2de37          	lui	t3,0xffd2d
+ 4f0:	2ade0e13          	addi	t3,t3,685 # ffd2d2ad <_program_end+0xffd2c621>
+ 4f4:	79c39263          	bne	t2,t3,c78 <fail>
+
+000004f8 <probe_88>:
+ 4f8:	40a2d393          	srai	t2,t0,0xa
+ 4fc:	ffe97e37          	lui	t3,0xffe97
+ 500:	956e0e13          	addi	t3,t3,-1706 # ffe96956 <_program_end+0xffe95cca>
+ 504:	77c39a63          	bne	t2,t3,c78 <fail>
+
+00000508 <probe_89>:
+ 508:	40b2d393          	srai	t2,t0,0xb
+ 50c:	fff4be37          	lui	t3,0xfff4b
+ 510:	4abe0e13          	addi	t3,t3,1195 # fff4b4ab <_program_end+0xfff4a81f>
+ 514:	77c39263          	bne	t2,t3,c78 <fail>
+
+00000518 <probe_90>:
+ 518:	40c2d393          	srai	t2,t0,0xc
+ 51c:	fffa6e37          	lui	t3,0xfffa6
+ 520:	a55e0e13          	addi	t3,t3,-1451 # fffa5a55 <_program_end+0xfffa4dc9>
+ 524:	75c39a63          	bne	t2,t3,c78 <fail>
+
+00000528 <probe_91>:
+ 528:	40d2d393          	srai	t2,t0,0xd
+ 52c:	fffd3e37          	lui	t3,0xfffd3
+ 530:	d2ae0e13          	addi	t3,t3,-726 # fffd2d2a <_program_end+0xfffd209e>
+ 534:	75c39263          	bne	t2,t3,c78 <fail>
+
+00000538 <probe_92>:
+ 538:	40e2d393          	srai	t2,t0,0xe
+ 53c:	fffe9e37          	lui	t3,0xfffe9
+ 540:	695e0e13          	addi	t3,t3,1685 # fffe9695 <_program_end+0xfffe8a09>
+ 544:	73c39a63          	bne	t2,t3,c78 <fail>
+
+00000548 <probe_93>:
+ 548:	40f2d393          	srai	t2,t0,0xf
+ 54c:	ffff5e37          	lui	t3,0xffff5
+ 550:	b4ae0e13          	addi	t3,t3,-1206 # ffff4b4a <_program_end+0xffff3ebe>
+ 554:	73c39263          	bne	t2,t3,c78 <fail>
+
+00000558 <probe_94>:
+ 558:	4102d393          	srai	t2,t0,0x10
+ 55c:	ffffae37          	lui	t3,0xffffa
+ 560:	5a5e0e13          	addi	t3,t3,1445 # ffffa5a5 <_program_end+0xffff9919>
+ 564:	71c39a63          	bne	t2,t3,c78 <fail>
+
+00000568 <probe_95>:
+ 568:	4112d393          	srai	t2,t0,0x11
+ 56c:	ffffde37          	lui	t3,0xffffd
+ 570:	2d2e0e13          	addi	t3,t3,722 # ffffd2d2 <_program_end+0xffffc646>
+ 574:	71c39263          	bne	t2,t3,c78 <fail>
+
+00000578 <probe_96>:
+ 578:	4122d393          	srai	t2,t0,0x12
+ 57c:	fffffe37          	lui	t3,0xfffff
+ 580:	969e0e13          	addi	t3,t3,-1687 # ffffe969 <_program_end+0xffffdcdd>
+ 584:	6fc39a63          	bne	t2,t3,c78 <fail>
+
+00000588 <probe_97>:
+ 588:	4132d393          	srai	t2,t0,0x13
+ 58c:	fffffe37          	lui	t3,0xfffff
+ 590:	4b4e0e13          	addi	t3,t3,1204 # fffff4b4 <_program_end+0xffffe828>
+ 594:	6fc39263          	bne	t2,t3,c78 <fail>
+
+00000598 <probe_98>:
+ 598:	4142d393          	srai	t2,t0,0x14
+ 59c:	a5a00e13          	li	t3,-1446
+ 5a0:	6dc39c63          	bne	t2,t3,c78 <fail>
+
+000005a4 <probe_99>:
+ 5a4:	4152d393          	srai	t2,t0,0x15
+ 5a8:	d2d00e13          	li	t3,-723
+ 5ac:	6dc39663          	bne	t2,t3,c78 <fail>
+
+000005b0 <probe_100>:
+ 5b0:	4162d393          	srai	t2,t0,0x16
+ 5b4:	e9600e13          	li	t3,-362
+ 5b8:	6dc39063          	bne	t2,t3,c78 <fail>
+
+000005bc <probe_101>:
+ 5bc:	4172d393          	srai	t2,t0,0x17
+ 5c0:	f4b00e13          	li	t3,-181
+ 5c4:	6bc39a63          	bne	t2,t3,c78 <fail>
+
+000005c8 <probe_102>:
+ 5c8:	4182d393          	srai	t2,t0,0x18
+ 5cc:	fa500e13          	li	t3,-91
+ 5d0:	6bc39463          	bne	t2,t3,c78 <fail>
+
+000005d4 <probe_103>:
+ 5d4:	4192d393          	srai	t2,t0,0x19
+ 5d8:	fd200e13          	li	t3,-46
+ 5dc:	69c39e63          	bne	t2,t3,c78 <fail>
+
+000005e0 <probe_104>:
+ 5e0:	41a2d393          	srai	t2,t0,0x1a
+ 5e4:	fe900e13          	li	t3,-23
+ 5e8:	69c39863          	bne	t2,t3,c78 <fail>
+
+000005ec <probe_105>:
+ 5ec:	41b2d393          	srai	t2,t0,0x1b
+ 5f0:	ff400e13          	li	t3,-12
+ 5f4:	69c39263          	bne	t2,t3,c78 <fail>
+
+000005f8 <probe_106>:
+ 5f8:	41c2d393          	srai	t2,t0,0x1c
+ 5fc:	ffa00e13          	li	t3,-6
+ 600:	67c39c63          	bne	t2,t3,c78 <fail>
+
+00000604 <probe_107>:
+ 604:	41d2d393          	srai	t2,t0,0x1d
+ 608:	ffd00e13          	li	t3,-3
+ 60c:	67c39663          	bne	t2,t3,c78 <fail>
+
+00000610 <probe_108>:
+ 610:	41e2d393          	srai	t2,t0,0x1e
+ 614:	ffe00e13          	li	t3,-2
+ 618:	67c39063          	bne	t2,t3,c78 <fail>
+
+0000061c <probe_109>:
+ 61c:	41f2d393          	srai	t2,t0,0x1f
+ 620:	fff00e13          	li	t3,-1
+ 624:	65c39a63          	bne	t2,t3,c78 <fail>
+ 628:	800002b7          	lui	t0,0x80000
+ 62c:	fff28293          	addi	t0,t0,-1 # 7fffffff <_program_end+0x7ffff373>
+ 630:	fff00313          	li	t1,-1
+
+00000634 <probe_110>:
+ 634:	006283b3          	add	t2,t0,t1
+ 638:	80000e37          	lui	t3,0x80000
+ 63c:	ffee0e13          	addi	t3,t3,-2 # 7ffffffe <_program_end+0x7ffff372>
+ 640:	63c39c63          	bne	t2,t3,c78 <fail>
+
+00000644 <probe_111>:
+ 644:	406283b3          	sub	t2,t0,t1
+ 648:	80000e37          	lui	t3,0x80000
+ 64c:	63c39663          	bne	t2,t3,c78 <fail>
+
+00000650 <probe_112>:
+ 650:	0062f3b3          	and	t2,t0,t1
+ 654:	80000e37          	lui	t3,0x80000
+ 658:	fffe0e13          	addi	t3,t3,-1 # 7fffffff <_program_end+0x7ffff373>
+ 65c:	61c39e63          	bne	t2,t3,c78 <fail>
+
+00000660 <probe_113>:
+ 660:	0062e3b3          	or	t2,t0,t1
+ 664:	fff00e13          	li	t3,-1
+ 668:	61c39863          	bne	t2,t3,c78 <fail>
+
+0000066c <probe_114>:
+ 66c:	0062c3b3          	xor	t2,t0,t1
+ 670:	80000e37          	lui	t3,0x80000
+ 674:	61c39263          	bne	t2,t3,c78 <fail>
+
+00000678 <probe_115>:
+ 678:	0062a3b3          	slt	t2,t0,t1
+ 67c:	00000e13          	li	t3,0
+ 680:	5fc39c63          	bne	t2,t3,c78 <fail>
+
+00000684 <probe_116>:
+ 684:	0062b3b3          	sltu	t2,t0,t1
+ 688:	00100e13          	li	t3,1
+ 68c:	5fc39663          	bne	t2,t3,c78 <fail>
+
+00000690 <probe_117>:
+ 690:	ffd28393          	addi	t2,t0,-3
+ 694:	80000e37          	lui	t3,0x80000
+ 698:	ffce0e13          	addi	t3,t3,-4 # 7ffffffc <_program_end+0x7ffff370>
+ 69c:	5dc39e63          	bne	t2,t3,c78 <fail>
+
+000006a0 <probe_118>:
+ 6a0:	0ff2f393          	zext.b	t2,t0
+ 6a4:	0ff00e13          	li	t3,255
+ 6a8:	5dc39863          	bne	t2,t3,c78 <fail>
+
+000006ac <probe_119>:
+ 6ac:	0ff2e393          	ori	t2,t0,255
+ 6b0:	80000e37          	lui	t3,0x80000
+ 6b4:	fffe0e13          	addi	t3,t3,-1 # 7fffffff <_program_end+0x7ffff373>
+ 6b8:	5dc39063          	bne	t2,t3,c78 <fail>
+
+000006bc <probe_120>:
+ 6bc:	0ff2c393          	xori	t2,t0,255
+ 6c0:	80000e37          	lui	t3,0x80000
+ 6c4:	f00e0e13          	addi	t3,t3,-256 # 7fffff00 <_program_end+0x7ffff274>
+ 6c8:	5bc39863          	bne	t2,t3,c78 <fail>
+
+000006cc <probe_121>:
+ 6cc:	ffd2a393          	slti	t2,t0,-3
+ 6d0:	00000e13          	li	t3,0
+ 6d4:	5bc39263          	bne	t2,t3,c78 <fail>
+
+000006d8 <probe_122>:
+ 6d8:	ffd2b393          	sltiu	t2,t0,-3
+ 6dc:	00100e13          	li	t3,1
+ 6e0:	59c39c63          	bne	t2,t3,c78 <fail>
+
+000006e4 <probe_123>:
+ 6e4:	123453b7          	lui	t2,0x12345
+ 6e8:	12345e37          	lui	t3,0x12345
+ 6ec:	59c39663          	bne	t2,t3,c78 <fail>
+
+000006f0 <probe_124>:
+ 6f0:	00029393          	slli	t2,t0,0x0
+ 6f4:	80000e37          	lui	t3,0x80000
+ 6f8:	fffe0e13          	addi	t3,t3,-1 # 7fffffff <_program_end+0x7ffff373>
+ 6fc:	57c39e63          	bne	t2,t3,c78 <fail>
+
+00000700 <probe_125>:
+ 700:	00129393          	slli	t2,t0,0x1
+ 704:	ffe00e13          	li	t3,-2
+ 708:	57c39863          	bne	t2,t3,c78 <fail>
+
+0000070c <probe_126>:
+ 70c:	00229393          	slli	t2,t0,0x2
+ 710:	ffc00e13          	li	t3,-4
+ 714:	57c39263          	bne	t2,t3,c78 <fail>
+
+00000718 <probe_127>:
+ 718:	00329393          	slli	t2,t0,0x3
+ 71c:	ff800e13          	li	t3,-8
+ 720:	55c39c63          	bne	t2,t3,c78 <fail>
+
+00000724 <probe_128>:
+ 724:	00429393          	slli	t2,t0,0x4
+ 728:	ff000e13          	li	t3,-16
+ 72c:	55c39663          	bne	t2,t3,c78 <fail>
+
+00000730 <probe_129>:
+ 730:	00529393          	slli	t2,t0,0x5
+ 734:	fe000e13          	li	t3,-32
+ 738:	55c39063          	bne	t2,t3,c78 <fail>
+
+0000073c <probe_130>:
+ 73c:	00629393          	slli	t2,t0,0x6
+ 740:	fc000e13          	li	t3,-64
+ 744:	53c39a63          	bne	t2,t3,c78 <fail>
+
+00000748 <probe_131>:
+ 748:	00729393          	slli	t2,t0,0x7
+ 74c:	f8000e13          	li	t3,-128
+ 750:	53c39463          	bne	t2,t3,c78 <fail>
+
+00000754 <probe_132>:
+ 754:	00829393          	slli	t2,t0,0x8
+ 758:	f0000e13          	li	t3,-256
+ 75c:	51c39e63          	bne	t2,t3,c78 <fail>
+
+00000760 <probe_133>:
+ 760:	00929393          	slli	t2,t0,0x9
+ 764:	e0000e13          	li	t3,-512
+ 768:	51c39863          	bne	t2,t3,c78 <fail>
+
+0000076c <probe_134>:
+ 76c:	00a29393          	slli	t2,t0,0xa
+ 770:	c0000e13          	li	t3,-1024
+ 774:	51c39263          	bne	t2,t3,c78 <fail>
+
+00000778 <probe_135>:
+ 778:	00b29393          	slli	t2,t0,0xb
+ 77c:	80000e13          	li	t3,-2048
+ 780:	4fc39c63          	bne	t2,t3,c78 <fail>
+
+00000784 <probe_136>:
+ 784:	00c29393          	slli	t2,t0,0xc
+ 788:	fffffe37          	lui	t3,0xfffff
+ 78c:	4fc39663          	bne	t2,t3,c78 <fail>
+
+00000790 <probe_137>:
+ 790:	00d29393          	slli	t2,t0,0xd
+ 794:	ffffee37          	lui	t3,0xffffe
+ 798:	4fc39063          	bne	t2,t3,c78 <fail>
+
+0000079c <probe_138>:
+ 79c:	00e29393          	slli	t2,t0,0xe
+ 7a0:	ffffce37          	lui	t3,0xffffc
+ 7a4:	4dc39a63          	bne	t2,t3,c78 <fail>
+
+000007a8 <probe_139>:
+ 7a8:	00f29393          	slli	t2,t0,0xf
+ 7ac:	ffff8e37          	lui	t3,0xffff8
+ 7b0:	4dc39463          	bne	t2,t3,c78 <fail>
+
+000007b4 <probe_140>:
+ 7b4:	01029393          	slli	t2,t0,0x10
+ 7b8:	ffff0e37          	lui	t3,0xffff0
+ 7bc:	4bc39e63          	bne	t2,t3,c78 <fail>
+
+000007c0 <probe_141>:
+ 7c0:	01129393          	slli	t2,t0,0x11
+ 7c4:	fffe0e37          	lui	t3,0xfffe0
+ 7c8:	4bc39863          	bne	t2,t3,c78 <fail>
+
+000007cc <probe_142>:
+ 7cc:	01229393          	slli	t2,t0,0x12
+ 7d0:	fffc0e37          	lui	t3,0xfffc0
+ 7d4:	4bc39263          	bne	t2,t3,c78 <fail>
+
+000007d8 <probe_143>:
+ 7d8:	01329393          	slli	t2,t0,0x13
+ 7dc:	fff80e37          	lui	t3,0xfff80
+ 7e0:	49c39c63          	bne	t2,t3,c78 <fail>
+
+000007e4 <probe_144>:
+ 7e4:	01429393          	slli	t2,t0,0x14
+ 7e8:	fff00e37          	lui	t3,0xfff00
+ 7ec:	49c39663          	bne	t2,t3,c78 <fail>
+
+000007f0 <probe_145>:
+ 7f0:	01529393          	slli	t2,t0,0x15
+ 7f4:	ffe00e37          	lui	t3,0xffe00
+ 7f8:	49c39063          	bne	t2,t3,c78 <fail>
+
+000007fc <probe_146>:
+ 7fc:	01629393          	slli	t2,t0,0x16
+ 800:	ffc00e37          	lui	t3,0xffc00
+ 804:	47c39a63          	bne	t2,t3,c78 <fail>
+
+00000808 <probe_147>:
+ 808:	01729393          	slli	t2,t0,0x17
+ 80c:	ff800e37          	lui	t3,0xff800
+ 810:	47c39463          	bne	t2,t3,c78 <fail>
+
+00000814 <probe_148>:
+ 814:	01829393          	slli	t2,t0,0x18
+ 818:	ff000e37          	lui	t3,0xff000
+ 81c:	45c39e63          	bne	t2,t3,c78 <fail>
+
+00000820 <probe_149>:
+ 820:	01929393          	slli	t2,t0,0x19
+ 824:	fe000e37          	lui	t3,0xfe000
+ 828:	45c39863          	bne	t2,t3,c78 <fail>
+
+0000082c <probe_150>:
+ 82c:	01a29393          	slli	t2,t0,0x1a
+ 830:	fc000e37          	lui	t3,0xfc000
+ 834:	45c39263          	bne	t2,t3,c78 <fail>
+
+00000838 <probe_151>:
+ 838:	01b29393          	slli	t2,t0,0x1b
+ 83c:	f8000e37          	lui	t3,0xf8000
+ 840:	43c39c63          	bne	t2,t3,c78 <fail>
+
+00000844 <probe_152>:
+ 844:	01c29393          	slli	t2,t0,0x1c
+ 848:	f0000e37          	lui	t3,0xf0000
+ 84c:	43c39663          	bne	t2,t3,c78 <fail>
+
+00000850 <probe_153>:
+ 850:	01d29393          	slli	t2,t0,0x1d
+ 854:	e0000e37          	lui	t3,0xe0000
+ 858:	43c39063          	bne	t2,t3,c78 <fail>
+
+0000085c <probe_154>:
+ 85c:	01e29393          	slli	t2,t0,0x1e
+ 860:	c0000e37          	lui	t3,0xc0000
+ 864:	41c39a63          	bne	t2,t3,c78 <fail>
+
+00000868 <probe_155>:
+ 868:	01f29393          	slli	t2,t0,0x1f
+ 86c:	80000e37          	lui	t3,0x80000
+ 870:	41c39463          	bne	t2,t3,c78 <fail>
+
+00000874 <probe_156>:
+ 874:	0002d393          	srli	t2,t0,0x0
+ 878:	80000e37          	lui	t3,0x80000
+ 87c:	fffe0e13          	addi	t3,t3,-1 # 7fffffff <_program_end+0x7ffff373>
+ 880:	3fc39c63          	bne	t2,t3,c78 <fail>
+
+00000884 <probe_157>:
+ 884:	0012d393          	srli	t2,t0,0x1
+ 888:	40000e37          	lui	t3,0x40000
+ 88c:	fffe0e13          	addi	t3,t3,-1 # 3fffffff <_program_end+0x3ffff373>
+ 890:	3fc39463          	bne	t2,t3,c78 <fail>
+
+00000894 <probe_158>:
+ 894:	0022d393          	srli	t2,t0,0x2
+ 898:	20000e37          	lui	t3,0x20000
+ 89c:	fffe0e13          	addi	t3,t3,-1 # 1fffffff <_program_end+0x1ffff373>
+ 8a0:	3dc39c63          	bne	t2,t3,c78 <fail>
+
+000008a4 <probe_159>:
+ 8a4:	0032d393          	srli	t2,t0,0x3
+ 8a8:	10000e37          	lui	t3,0x10000
+ 8ac:	fffe0e13          	addi	t3,t3,-1 # fffffff <_program_end+0xffff373>
+ 8b0:	3dc39463          	bne	t2,t3,c78 <fail>
+
+000008b4 <probe_160>:
+ 8b4:	0042d393          	srli	t2,t0,0x4
+ 8b8:	08000e37          	lui	t3,0x8000
+ 8bc:	fffe0e13          	addi	t3,t3,-1 # 7ffffff <_program_end+0x7fff373>
+ 8c0:	3bc39c63          	bne	t2,t3,c78 <fail>
+
+000008c4 <probe_161>:
+ 8c4:	0052d393          	srli	t2,t0,0x5
+ 8c8:	04000e37          	lui	t3,0x4000
+ 8cc:	fffe0e13          	addi	t3,t3,-1 # 3ffffff <_program_end+0x3fff373>
+ 8d0:	3bc39463          	bne	t2,t3,c78 <fail>
+
+000008d4 <probe_162>:
+ 8d4:	0062d393          	srli	t2,t0,0x6
+ 8d8:	02000e37          	lui	t3,0x2000
+ 8dc:	fffe0e13          	addi	t3,t3,-1 # 1ffffff <_program_end+0x1fff373>
+ 8e0:	39c39c63          	bne	t2,t3,c78 <fail>
+
+000008e4 <probe_163>:
+ 8e4:	0072d393          	srli	t2,t0,0x7
+ 8e8:	01000e37          	lui	t3,0x1000
+ 8ec:	fffe0e13          	addi	t3,t3,-1 # ffffff <_program_end+0xfff373>
+ 8f0:	39c39463          	bne	t2,t3,c78 <fail>
+
+000008f4 <probe_164>:
+ 8f4:	0082d393          	srli	t2,t0,0x8
+ 8f8:	00800e37          	lui	t3,0x800
+ 8fc:	fffe0e13          	addi	t3,t3,-1 # 7fffff <_program_end+0x7ff373>
+ 900:	37c39c63          	bne	t2,t3,c78 <fail>
+
+00000904 <probe_165>:
+ 904:	0092d393          	srli	t2,t0,0x9
+ 908:	00400e37          	lui	t3,0x400
+ 90c:	fffe0e13          	addi	t3,t3,-1 # 3fffff <_program_end+0x3ff373>
+ 910:	37c39463          	bne	t2,t3,c78 <fail>
+
+00000914 <probe_166>:
+ 914:	00a2d393          	srli	t2,t0,0xa
+ 918:	00200e37          	lui	t3,0x200
+ 91c:	fffe0e13          	addi	t3,t3,-1 # 1fffff <_program_end+0x1ff373>
+ 920:	35c39c63          	bne	t2,t3,c78 <fail>
+
+00000924 <probe_167>:
+ 924:	00b2d393          	srli	t2,t0,0xb
+ 928:	00100e37          	lui	t3,0x100
+ 92c:	fffe0e13          	addi	t3,t3,-1 # fffff <_program_end+0xff373>
+ 930:	35c39463          	bne	t2,t3,c78 <fail>
+
+00000934 <probe_168>:
+ 934:	00c2d393          	srli	t2,t0,0xc
+ 938:	00080e37          	lui	t3,0x80
+ 93c:	fffe0e13          	addi	t3,t3,-1 # 7ffff <_program_end+0x7f373>
+ 940:	33c39c63          	bne	t2,t3,c78 <fail>
+
+00000944 <probe_169>:
+ 944:	00d2d393          	srli	t2,t0,0xd
+ 948:	00040e37          	lui	t3,0x40
+ 94c:	fffe0e13          	addi	t3,t3,-1 # 3ffff <_program_end+0x3f373>
+ 950:	33c39463          	bne	t2,t3,c78 <fail>
+
+00000954 <probe_170>:
+ 954:	00e2d393          	srli	t2,t0,0xe
+ 958:	00020e37          	lui	t3,0x20
+ 95c:	fffe0e13          	addi	t3,t3,-1 # 1ffff <_program_end+0x1f373>
+ 960:	31c39c63          	bne	t2,t3,c78 <fail>
+
+00000964 <probe_171>:
+ 964:	00f2d393          	srli	t2,t0,0xf
+ 968:	00010e37          	lui	t3,0x10
+ 96c:	fffe0e13          	addi	t3,t3,-1 # ffff <_program_end+0xf373>
+ 970:	31c39463          	bne	t2,t3,c78 <fail>
+
+00000974 <probe_172>:
+ 974:	0102d393          	srli	t2,t0,0x10
+ 978:	00008e37          	lui	t3,0x8
+ 97c:	fffe0e13          	addi	t3,t3,-1 # 7fff <_program_end+0x7373>
+ 980:	2fc39c63          	bne	t2,t3,c78 <fail>
+
+00000984 <probe_173>:
+ 984:	0112d393          	srli	t2,t0,0x11
+ 988:	00004e37          	lui	t3,0x4
+ 98c:	fffe0e13          	addi	t3,t3,-1 # 3fff <_program_end+0x3373>
+ 990:	2fc39463          	bne	t2,t3,c78 <fail>
+
+00000994 <probe_174>:
+ 994:	0122d393          	srli	t2,t0,0x12
+ 998:	00002e37          	lui	t3,0x2
+ 99c:	fffe0e13          	addi	t3,t3,-1 # 1fff <_program_end+0x1373>
+ 9a0:	2dc39c63          	bne	t2,t3,c78 <fail>
+
+000009a4 <probe_175>:
+ 9a4:	0132d393          	srli	t2,t0,0x13
+ 9a8:	00001e37          	lui	t3,0x1
+ 9ac:	fffe0e13          	addi	t3,t3,-1 # fff <_program_end+0x373>
+ 9b0:	2dc39463          	bne	t2,t3,c78 <fail>
+
+000009b4 <probe_176>:
+ 9b4:	0142d393          	srli	t2,t0,0x14
+ 9b8:	7ff00e13          	li	t3,2047
+ 9bc:	2bc39e63          	bne	t2,t3,c78 <fail>
+
+000009c0 <probe_177>:
+ 9c0:	0152d393          	srli	t2,t0,0x15
+ 9c4:	3ff00e13          	li	t3,1023
+ 9c8:	2bc39863          	bne	t2,t3,c78 <fail>
+
+000009cc <probe_178>:
+ 9cc:	0162d393          	srli	t2,t0,0x16
+ 9d0:	1ff00e13          	li	t3,511
+ 9d4:	2bc39263          	bne	t2,t3,c78 <fail>
+
+000009d8 <probe_179>:
+ 9d8:	0172d393          	srli	t2,t0,0x17
+ 9dc:	0ff00e13          	li	t3,255
+ 9e0:	29c39c63          	bne	t2,t3,c78 <fail>
+
+000009e4 <probe_180>:
+ 9e4:	0182d393          	srli	t2,t0,0x18
+ 9e8:	07f00e13          	li	t3,127
+ 9ec:	29c39663          	bne	t2,t3,c78 <fail>
+
+000009f0 <probe_181>:
+ 9f0:	0192d393          	srli	t2,t0,0x19
+ 9f4:	03f00e13          	li	t3,63
+ 9f8:	29c39063          	bne	t2,t3,c78 <fail>
+
+000009fc <probe_182>:
+ 9fc:	01a2d393          	srli	t2,t0,0x1a
+ a00:	01f00e13          	li	t3,31
+ a04:	27c39a63          	bne	t2,t3,c78 <fail>
+
+00000a08 <probe_183>:
+ a08:	01b2d393          	srli	t2,t0,0x1b
+ a0c:	00f00e13          	li	t3,15
+ a10:	27c39463          	bne	t2,t3,c78 <fail>
+
+00000a14 <probe_184>:
+ a14:	01c2d393          	srli	t2,t0,0x1c
+ a18:	00700e13          	li	t3,7
+ a1c:	25c39e63          	bne	t2,t3,c78 <fail>
+
+00000a20 <probe_185>:
+ a20:	01d2d393          	srli	t2,t0,0x1d
+ a24:	00300e13          	li	t3,3
+ a28:	25c39863          	bne	t2,t3,c78 <fail>
+
+00000a2c <probe_186>:
+ a2c:	01e2d393          	srli	t2,t0,0x1e
+ a30:	00100e13          	li	t3,1
+ a34:	25c39263          	bne	t2,t3,c78 <fail>
+
+00000a38 <probe_187>:
+ a38:	01f2d393          	srli	t2,t0,0x1f
+ a3c:	00000e13          	li	t3,0
+ a40:	23c39c63          	bne	t2,t3,c78 <fail>
+
+00000a44 <probe_188>:
+ a44:	4002d393          	srai	t2,t0,0x0
+ a48:	80000e37          	lui	t3,0x80000
+ a4c:	fffe0e13          	addi	t3,t3,-1 # 7fffffff <_program_end+0x7ffff373>
+ a50:	23c39463          	bne	t2,t3,c78 <fail>
+
+00000a54 <probe_189>:
+ a54:	4012d393          	srai	t2,t0,0x1
+ a58:	40000e37          	lui	t3,0x40000
+ a5c:	fffe0e13          	addi	t3,t3,-1 # 3fffffff <_program_end+0x3ffff373>
+ a60:	21c39c63          	bne	t2,t3,c78 <fail>
+
+00000a64 <probe_190>:
+ a64:	4022d393          	srai	t2,t0,0x2
+ a68:	20000e37          	lui	t3,0x20000
+ a6c:	fffe0e13          	addi	t3,t3,-1 # 1fffffff <_program_end+0x1ffff373>
+ a70:	21c39463          	bne	t2,t3,c78 <fail>
+
+00000a74 <probe_191>:
+ a74:	4032d393          	srai	t2,t0,0x3
+ a78:	10000e37          	lui	t3,0x10000
+ a7c:	fffe0e13          	addi	t3,t3,-1 # fffffff <_program_end+0xffff373>
+ a80:	1fc39c63          	bne	t2,t3,c78 <fail>
+
+00000a84 <probe_192>:
+ a84:	4042d393          	srai	t2,t0,0x4
+ a88:	08000e37          	lui	t3,0x8000
+ a8c:	fffe0e13          	addi	t3,t3,-1 # 7ffffff <_program_end+0x7fff373>
+ a90:	1fc39463          	bne	t2,t3,c78 <fail>
+
+00000a94 <probe_193>:
+ a94:	4052d393          	srai	t2,t0,0x5
+ a98:	04000e37          	lui	t3,0x4000
+ a9c:	fffe0e13          	addi	t3,t3,-1 # 3ffffff <_program_end+0x3fff373>
+ aa0:	1dc39c63          	bne	t2,t3,c78 <fail>
+
+00000aa4 <probe_194>:
+ aa4:	4062d393          	srai	t2,t0,0x6
+ aa8:	02000e37          	lui	t3,0x2000
+ aac:	fffe0e13          	addi	t3,t3,-1 # 1ffffff <_program_end+0x1fff373>
+ ab0:	1dc39463          	bne	t2,t3,c78 <fail>
+
+00000ab4 <probe_195>:
+ ab4:	4072d393          	srai	t2,t0,0x7
+ ab8:	01000e37          	lui	t3,0x1000
+ abc:	fffe0e13          	addi	t3,t3,-1 # ffffff <_program_end+0xfff373>
+ ac0:	1bc39c63          	bne	t2,t3,c78 <fail>
+
+00000ac4 <probe_196>:
+ ac4:	4082d393          	srai	t2,t0,0x8
+ ac8:	00800e37          	lui	t3,0x800
+ acc:	fffe0e13          	addi	t3,t3,-1 # 7fffff <_program_end+0x7ff373>
+ ad0:	1bc39463          	bne	t2,t3,c78 <fail>
+
+00000ad4 <probe_197>:
+ ad4:	4092d393          	srai	t2,t0,0x9
+ ad8:	00400e37          	lui	t3,0x400
+ adc:	fffe0e13          	addi	t3,t3,-1 # 3fffff <_program_end+0x3ff373>
+ ae0:	19c39c63          	bne	t2,t3,c78 <fail>
+
+00000ae4 <probe_198>:
+ ae4:	40a2d393          	srai	t2,t0,0xa
+ ae8:	00200e37          	lui	t3,0x200
+ aec:	fffe0e13          	addi	t3,t3,-1 # 1fffff <_program_end+0x1ff373>
+ af0:	19c39463          	bne	t2,t3,c78 <fail>
+
+00000af4 <probe_199>:
+ af4:	40b2d393          	srai	t2,t0,0xb
+ af8:	00100e37          	lui	t3,0x100
+ afc:	fffe0e13          	addi	t3,t3,-1 # fffff <_program_end+0xff373>
+ b00:	17c39c63          	bne	t2,t3,c78 <fail>
+
+00000b04 <probe_200>:
+ b04:	40c2d393          	srai	t2,t0,0xc
+ b08:	00080e37          	lui	t3,0x80
+ b0c:	fffe0e13          	addi	t3,t3,-1 # 7ffff <_program_end+0x7f373>
+ b10:	17c39463          	bne	t2,t3,c78 <fail>
+
+00000b14 <probe_201>:
+ b14:	40d2d393          	srai	t2,t0,0xd
+ b18:	00040e37          	lui	t3,0x40
+ b1c:	fffe0e13          	addi	t3,t3,-1 # 3ffff <_program_end+0x3f373>
+ b20:	15c39c63          	bne	t2,t3,c78 <fail>
+
+00000b24 <probe_202>:
+ b24:	40e2d393          	srai	t2,t0,0xe
+ b28:	00020e37          	lui	t3,0x20
+ b2c:	fffe0e13          	addi	t3,t3,-1 # 1ffff <_program_end+0x1f373>
+ b30:	15c39463          	bne	t2,t3,c78 <fail>
+
+00000b34 <probe_203>:
+ b34:	40f2d393          	srai	t2,t0,0xf
+ b38:	00010e37          	lui	t3,0x10
+ b3c:	fffe0e13          	addi	t3,t3,-1 # ffff <_program_end+0xf373>
+ b40:	13c39c63          	bne	t2,t3,c78 <fail>
+
+00000b44 <probe_204>:
+ b44:	4102d393          	srai	t2,t0,0x10
+ b48:	00008e37          	lui	t3,0x8
+ b4c:	fffe0e13          	addi	t3,t3,-1 # 7fff <_program_end+0x7373>
+ b50:	13c39463          	bne	t2,t3,c78 <fail>
+
+00000b54 <probe_205>:
+ b54:	4112d393          	srai	t2,t0,0x11
+ b58:	00004e37          	lui	t3,0x4
+ b5c:	fffe0e13          	addi	t3,t3,-1 # 3fff <_program_end+0x3373>
+ b60:	11c39c63          	bne	t2,t3,c78 <fail>
+
+00000b64 <probe_206>:
+ b64:	4122d393          	srai	t2,t0,0x12
+ b68:	00002e37          	lui	t3,0x2
+ b6c:	fffe0e13          	addi	t3,t3,-1 # 1fff <_program_end+0x1373>
+ b70:	11c39463          	bne	t2,t3,c78 <fail>
+
+00000b74 <probe_207>:
+ b74:	4132d393          	srai	t2,t0,0x13
+ b78:	00001e37          	lui	t3,0x1
+ b7c:	fffe0e13          	addi	t3,t3,-1 # fff <_program_end+0x373>
+ b80:	0fc39c63          	bne	t2,t3,c78 <fail>
+
+00000b84 <probe_208>:
+ b84:	4142d393          	srai	t2,t0,0x14
+ b88:	7ff00e13          	li	t3,2047
+ b8c:	0fc39663          	bne	t2,t3,c78 <fail>
+
+00000b90 <probe_209>:
+ b90:	4152d393          	srai	t2,t0,0x15
+ b94:	3ff00e13          	li	t3,1023
+ b98:	0fc39063          	bne	t2,t3,c78 <fail>
+
+00000b9c <probe_210>:
+ b9c:	4162d393          	srai	t2,t0,0x16
+ ba0:	1ff00e13          	li	t3,511
+ ba4:	0dc39a63          	bne	t2,t3,c78 <fail>
+
+00000ba8 <probe_211>:
+ ba8:	4172d393          	srai	t2,t0,0x17
+ bac:	0ff00e13          	li	t3,255
+ bb0:	0dc39463          	bne	t2,t3,c78 <fail>
+
+00000bb4 <probe_212>:
+ bb4:	4182d393          	srai	t2,t0,0x18
+ bb8:	07f00e13          	li	t3,127
+ bbc:	0bc39e63          	bne	t2,t3,c78 <fail>
+
+00000bc0 <probe_213>:
+ bc0:	4192d393          	srai	t2,t0,0x19
+ bc4:	03f00e13          	li	t3,63
+ bc8:	0bc39863          	bne	t2,t3,c78 <fail>
+
+00000bcc <probe_214>:
+ bcc:	41a2d393          	srai	t2,t0,0x1a
+ bd0:	01f00e13          	li	t3,31
+ bd4:	0bc39263          	bne	t2,t3,c78 <fail>
+
+00000bd8 <probe_215>:
+ bd8:	41b2d393          	srai	t2,t0,0x1b
+ bdc:	00f00e13          	li	t3,15
+ be0:	09c39c63          	bne	t2,t3,c78 <fail>
+
+00000be4 <probe_216>:
+ be4:	41c2d393          	srai	t2,t0,0x1c
+ be8:	00700e13          	li	t3,7
+ bec:	09c39663          	bne	t2,t3,c78 <fail>
+
+00000bf0 <probe_217>:
+ bf0:	41d2d393          	srai	t2,t0,0x1d
+ bf4:	00300e13          	li	t3,3
+ bf8:	09c39063          	bne	t2,t3,c78 <fail>
+
+00000bfc <probe_218>:
+ bfc:	41e2d393          	srai	t2,t0,0x1e
+ c00:	00100e13          	li	t3,1
+ c04:	07c39a63          	bne	t2,t3,c78 <fail>
+
+00000c08 <probe_219>:
+ c08:	41f2d393          	srai	t2,t0,0x1f
+ c0c:	00000e13          	li	t3,0
+ c10:	07c39463          	bne	t2,t3,c78 <fail>
+ c14:	a5a562b7          	lui	t0,0xa5a56
+ c18:	a5a28293          	addi	t0,t0,-1446 # a5a55a5a <_program_end+0xa5a54dce>
+ c1c:	5aa5a337          	lui	t1,0x5aa5a
+ c20:	55a30313          	addi	t1,t1,1370 # 5aa5a55a <_program_end+0x5aa598ce>
+
+00000c24 <probe_220>:
+ c24:	0262838b          	.insn	4, 0x0262838b
+ c28:	004b0e37          	lui	t3,0x4b0
+ c2c:	fb4e0e13          	addi	t3,t3,-76 # 4affb4 <_program_end+0x4af328>
+ c30:	05c39463          	bne	t2,t3,c78 <fail>
+ c34:	800002b7          	lui	t0,0x80000
+ c38:	fff28293          	addi	t0,t0,-1 # 7fffffff <_program_end+0x7ffff373>
+ c3c:	fff00313          	li	t1,-1
+
+00000c40 <probe_221>:
+ c40:	0262838b          	.insn	4, 0x0262838b
+ c44:	80000e37          	lui	t3,0x80000
+ c48:	ffee0e13          	addi	t3,t3,-2 # 7ffffffe <_program_end+0x7ffff372>
+ c4c:	03c39663          	bne	t2,t3,c78 <fail>
+ c50:	10000437          	lui	s0,0x10000
+ c54:	495342b7          	lui	t0,0x49534
+ c58:	14628293          	addi	t0,t0,326 # 49534146 <_program_end+0x495334ba>
+ c5c:	00542023          	sw	t0,0(s0) # 10000000 <_program_end+0xffff374>
+ c60:	0de00293          	li	t0,222
+ c64:	00542023          	sw	t0,0(s0)
+ c68:	600d62b7          	lui	t0,0x600d6
+ c6c:	00d28293          	addi	t0,t0,13 # 600d600d <_program_end+0x600d5381>
+ c70:	00542223          	sw	t0,4(s0)
+ c74:	0000006f          	j	c74 <probe_221+0x34>
+
+00000c78 <fail>:
+ c78:	10000437          	lui	s0,0x10000
+ c7c:	dead02b7          	lui	t0,0xdead0
+ c80:	00328293          	addi	t0,t0,3 # dead0003 <_program_end+0xdeacf377>
+ c84:	00542223          	sw	t0,4(s0) # 10000004 <_program_end+0xffff378>
+ c88:	0000006f          	j	c88 <fail+0x10>

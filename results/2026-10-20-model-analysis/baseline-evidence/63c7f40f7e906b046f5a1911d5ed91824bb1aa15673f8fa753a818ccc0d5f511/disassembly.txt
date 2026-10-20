@@ -1,0 +1,240 @@
+
+/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/automatic-crc32-2026-10-20/discovery/attempt-000/marked/firmware.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	00002137          	lui	sp,0x2
+   4:	00000097          	auipc	ra,0x0
+   8:	00c080e7          	jalr	12(ra) # 10 <main>
+   c:	00100073          	ebreak
+
+00000010 <main>:
+  10:	fe010113          	addi	sp,sp,-32 # 1fe0 <_program_end+0x19d0>
+  14:	00112e23          	sw	ra,28(sp)
+  18:	00812c23          	sw	s0,24(sp)
+  1c:	00912a23          	sw	s1,20(sp)
+  20:	01212823          	sw	s2,16(sp)
+  24:	01312623          	sw	s3,12(sp)
+  28:	01412423          	sw	s4,8(sp)
+  2c:	00000097          	auipc	ra,0x0
+  30:	148080e7          	jalr	328(ra) # 174 <initialise_benchmark>
+  34:	00100513          	li	a0,1
+  38:	00000097          	auipc	ra,0x0
+  3c:	140080e7          	jalr	320(ra) # 178 <warm_caches>
+  40:	c02029f3          	rdinstret	s3
+  44:	c0002a73          	rdcycle	s4
+  48:	00000097          	auipc	ra,0x0
+  4c:	138080e7          	jalr	312(ra) # 180 <benchmark>
+  50:	00050913          	mv	s2,a0
+  54:	c00024f3          	rdcycle	s1
+  58:	c0202473          	rdinstret	s0
+  5c:	00000097          	auipc	ra,0x0
+  60:	130080e7          	jalr	304(ra) # 18c <verify_benchmark>
+  64:	49534737          	lui	a4,0x49534
+  68:	100007b7          	lui	a5,0x10000
+  6c:	14670713          	addi	a4,a4,326 # 49534146 <_program_end+0x49533b36>
+  70:	00e7a023          	sw	a4,0(a5) # 10000000 <_program_end+0xffff9f0>
+  74:	0127a023          	sw	s2,0(a5)
+  78:	414484b3          	sub	s1,s1,s4
+  7c:	0097a023          	sw	s1,0(a5)
+  80:	41340433          	sub	s0,s0,s3
+  84:	0087a023          	sw	s0,0(a5)
+  88:	00a7a023          	sw	a0,0(a5)
+  8c:	02050c63          	beqz	a0,c4 <main+0xb4>
+  90:	600d67b7          	lui	a5,0x600d6
+  94:	00d78793          	addi	a5,a5,13 # 600d600d <_program_end+0x600d59fd>
+  98:	01c12083          	lw	ra,28(sp)
+  9c:	01812403          	lw	s0,24(sp)
+  a0:	10000737          	lui	a4,0x10000
+  a4:	00f72223          	sw	a5,4(a4) # 10000004 <_program_end+0xffff9f4>
+  a8:	01412483          	lw	s1,20(sp)
+  ac:	01012903          	lw	s2,16(sp)
+  b0:	00c12983          	lw	s3,12(sp)
+  b4:	00812a03          	lw	s4,8(sp)
+  b8:	00000513          	li	a0,0
+  bc:	02010113          	addi	sp,sp,32
+  c0:	00008067          	ret
+  c4:	dead07b7          	lui	a5,0xdead0
+  c8:	00378793          	addi	a5,a5,3 # dead0003 <_program_end+0xdeacf9f3>
+  cc:	fcdff06f          	j	98 <main+0x88>
+
+000000d0 <benchmark_body>:
+  d0:	fe010113          	addi	sp,sp,-32
+
+000000d4 <__isaforge_begin_1>:
+  d4:	00112e23          	sw	ra,28(sp)
+
+000000d8 <__isaforge_begin_2>:
+  d8:	00812c23          	sw	s0,24(sp)
+
+000000dc <__isaforge_begin_3>:
+  dc:	08a05063          	blez	a0,15c <__isaforge_begin_33>
+
+000000e0 <__isaforge_begin_4>:
+  e0:	01212823          	sw	s2,16(sp)
+
+000000e4 <__isaforge_begin_5>:
+  e4:	00000937          	lui	s2,0x0
+
+000000e8 <__isaforge_begin_6>:
+  e8:	01312623          	sw	s3,12(sp)
+
+000000ec <__isaforge_begin_7>:
+  ec:	01412423          	sw	s4,8(sp)
+
+000000f0 <__isaforge_begin_8>:
+  f0:	00912a23          	sw	s1,20(sp)
+
+000000f4 <__isaforge_begin_9>:
+  f4:	00050993          	mv	s3,a0
+
+000000f8 <__isaforge_begin_10>:
+  f8:	20c90913          	addi	s2,s2,524 # 20c <crc_32_tab>
+
+000000fc <__isaforge_begin_11>:
+  fc:	00000a13          	li	s4,0
+
+00000100 <__isaforge_begin_12>:
+ 100:	00000513          	li	a0,0
+
+00000104 <__isaforge_begin_13>:
+ 104:	00000097          	auipc	ra,0x0
+ 108:	0fc080e7          	jalr	252(ra) # 200 <srand_beebs>
+
+0000010c <__isaforge_begin_14>:
+ 10c:	40000493          	li	s1,1024
+
+00000110 <__isaforge_begin_15>:
+ 110:	fff00413          	li	s0,-1
+
+00000114 <__isaforge_begin_16>:
+ 114:	00000097          	auipc	ra,0x0
+ 118:	08c080e7          	jalr	140(ra) # 1a0 <rand_beebs>
+
+0000011c <__isaforge_begin_17>:
+ 11c:	00a447b3          	xor	a5,s0,a0
+
+00000120 <__isaforge_begin_18>:
+ 120:	0ff7f793          	zext.b	a5,a5
+
+00000124 <__isaforge_begin_19>:
+ 124:	00279793          	slli	a5,a5,0x2
+
+00000128 <__isaforge_begin_20>:
+ 128:	00f907b3          	add	a5,s2,a5
+
+0000012c <__isaforge_begin_21>:
+ 12c:	0007a783          	lw	a5,0(a5)
+
+00000130 <__isaforge_begin_22>:
+ 130:	00845413          	srli	s0,s0,0x8
+
+00000134 <__isaforge_begin_23>:
+ 134:	fff48493          	addi	s1,s1,-1
+
+00000138 <__isaforge_begin_24>:
+ 138:	0087c433          	xor	s0,a5,s0
+
+0000013c <__isaforge_begin_25>:
+ 13c:	fc049ce3          	bnez	s1,114 <__isaforge_begin_16>
+
+00000140 <__isaforge_begin_26>:
+ 140:	001a0a13          	addi	s4,s4,1
+
+00000144 <__isaforge_begin_27>:
+ 144:	fb499ee3          	bne	s3,s4,100 <__isaforge_begin_12>
+
+00000148 <__isaforge_begin_28>:
+ 148:	01412483          	lw	s1,20(sp)
+
+0000014c <__isaforge_begin_29>:
+ 14c:	01012903          	lw	s2,16(sp)
+
+00000150 <__isaforge_begin_30>:
+ 150:	00c12983          	lw	s3,12(sp)
+
+00000154 <__isaforge_begin_31>:
+ 154:	00812a03          	lw	s4,8(sp)
+
+00000158 <__isaforge_begin_32>:
+ 158:	fff44413          	not	s0,s0
+
+0000015c <__isaforge_begin_33>:
+ 15c:	01141413          	slli	s0,s0,0x11
+
+00000160 <__isaforge_begin_34>:
+ 160:	01c12083          	lw	ra,28(sp)
+
+00000164 <__isaforge_begin_35>:
+ 164:	01145513          	srli	a0,s0,0x11
+
+00000168 <__isaforge_begin_36>:
+ 168:	01812403          	lw	s0,24(sp)
+
+0000016c <__isaforge_begin_37>:
+ 16c:	02010113          	addi	sp,sp,32
+
+00000170 <__isaforge_begin_38>:
+ 170:	00008067          	ret
+
+00000174 <initialise_benchmark>:
+ 174:	00008067          	ret
+
+00000178 <warm_caches>:
+ 178:	00000317          	auipc	t1,0x0
+ 17c:	f5830067          	jr	-168(t1) # d0 <benchmark_body>
+
+00000180 <benchmark>:
+ 180:	0aa00513          	li	a0,170
+
+00000184 <__isaforge_begin_68>:
+ 184:	00000317          	auipc	t1,0x0
+ 188:	f4c30067          	jr	-180(t1) # d0 <benchmark_body>
+
+0000018c <verify_benchmark>:
+ 18c:	ffffd7b7          	lui	a5,0xffffd
+
+00000190 <__isaforge_begin_70>:
+ 190:	35778793          	addi	a5,a5,855 # ffffd357 <_program_end+0xffffcd47>
+
+00000194 <__isaforge_begin_71>:
+ 194:	00f50533          	add	a0,a0,a5
+
+00000198 <__isaforge_begin_72>:
+ 198:	00153513          	seqz	a0,a0
+
+0000019c <__isaforge_begin_73>:
+ 19c:	00008067          	ret
+
+000001a0 <rand_beebs>:
+ 1a0:	00000637          	lui	a2,0x0
+ 1a4:	60c62703          	lw	a4,1548(a2) # 60c <seed>
+ 1a8:	000036b7          	lui	a3,0x3
+ 1ac:	03968693          	addi	a3,a3,57 # 3039 <_program_end+0x2a29>
+ 1b0:	00871793          	slli	a5,a4,0x8
+ 1b4:	40e787b3          	sub	a5,a5,a4
+ 1b8:	00379793          	slli	a5,a5,0x3
+ 1bc:	00e787b3          	add	a5,a5,a4
+ 1c0:	00779793          	slli	a5,a5,0x7
+ 1c4:	00e787b3          	add	a5,a5,a4
+ 1c8:	00379793          	slli	a5,a5,0x3
+ 1cc:	40e787b3          	sub	a5,a5,a4
+ 1d0:	00579593          	slli	a1,a5,0x5
+ 1d4:	00b78533          	add	a0,a5,a1
+ 1d8:	00251513          	slli	a0,a0,0x2
+ 1dc:	40e50533          	sub	a0,a0,a4
+ 1e0:	00251513          	slli	a0,a0,0x2
+ 1e4:	00e50533          	add	a0,a0,a4
+ 1e8:	00d50533          	add	a0,a0,a3
+ 1ec:	00151513          	slli	a0,a0,0x1
+ 1f0:	00155513          	srli	a0,a0,0x1
+ 1f4:	60a62623          	sw	a0,1548(a2)
+ 1f8:	01055513          	srli	a0,a0,0x10
+ 1fc:	00008067          	ret
+
+00000200 <srand_beebs>:
+ 200:	000007b7          	lui	a5,0x0
+ 204:	60a7a623          	sw	a0,1548(a5) # 60c <seed>
+ 208:	00008067          	ret

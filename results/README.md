@@ -1,5 +1,9 @@
 # Research result archives
 
+[Speedup-model diagnosis](2026-10-20-model-analysis/README.md) and [independent PicoRV32 latency calibration](2026-10-20-latency-calibration/README.md): 222 operation checks, public runtime features, and 60 new heuristic replay outcomes. All twelve consumed automatic cycle labels are explained exactly by calibrated latency merit; no learned-model improvement or generalization claim.
+
+[Current validation](2026-10-20-model-analysis-validation/README.md): 49 targeted tests and all research replays pass. Both full-suite runs have 2,550 passing tests, 179 passing subtests, and one unresolved failure in an unchanged legacy process-cleanup test. Logs and raw failure journals are preserved.
+
 [October 20 ranking development pilot](2026-10-20-ranking-pilot/README.md): fixed XGBoost pairwise ranking versus regression, mean/UCB adaptation, frequency, merit and random; 420 outcomes on two consumed workloads. No selection advantage over merit; poor ensemble coverage.
 
 [Automatic RV32I CRC32](2026-10-20-automatic-crc32/README.md): six automatically lowered candidates, seven processor designs, 21 routes and corrected feature provenance. The historical source-adapter experiment is preserved separately.
@@ -12,7 +16,7 @@ The [project contract](../README.md) governs new work. Historical priorities ins
 
 [Measured CRC32 selection loop](2026-10-19-codesign/README.md): six executable candidates, seven complete processor measurements including baseline, 120 equal-budget policy outcomes, portable raw-evidence replay, and all failures. Merit wins; no learned-selection advantage or cross-workload claim.
 
-[Current validation](2026-10-20-research-validation/README.md): 2,524 tests and 179 subtests; historical models, original processor checkpoints, new automatic CRC32, ranking comparison and failed-probe replay.
+[Earlier October 20 validation](2026-10-20-research-validation/README.md): 2,524 tests and 179 subtests; historical models, original processor checkpoints, new automatic CRC32, ranking comparison and failed-probe replay.
 
 [Previous validation](2026-10-19-research-contract-validation/README.md): the prior contract checkpoint and its tests/replays.
 

@@ -1,0 +1,70 @@
+{
+  "scope": "Consumed-data diagnostic; calibrated heuristic, not an improved learned model or an untouched test.",
+  "source_bindings": {
+    "scripts/analyze_speedup_model.py": "c31c7ab6a8dda7c4e4225a9eee568b3a1fd18f7a15ad94816cc217f2cb6ee2f6",
+    "isaforge/latency_features.py": "c0cd549e0fc7baa8317a552ba4350e86b0342af2e4c7a8737afd02e520161b92",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/selection_pilot.py": "176abd1a4cfe56df2319a7904051fe7782805b4956995488de4b8c46ef6272aa",
+    "isaforge/assembly_lowering.py": "e656f5591ce1fa70f8621f94349c7a1c1f90837fb572a8d42fe9a3ce88dc4554",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "scripts/calibrate_picorv32_latency.py": "beb6f27e7c4535b82787f6b38af10ddc1983018fcf5880e1b2761bb75e299553",
+    "hardware/latency_sim.cpp": "f56a301675c21a0f05f467d183ecee53a3357ae3adef0445e5f597e2c378fa68",
+    "src/tracing.py": "b3010ece9ef1bbc261a9efa801981a55a640468c8c6a87ed29386ccf89f49724",
+    "src/candidates.py": "44f83fb2f0c421fd1bae5d89c90787a4dd997f4df1a2c433680c696f6b9486eb",
+    "src/verify_candidate_fusions.py": "0bff84bb4f787ef6fee7ce3935369964242286b714a2fd162ae490ef0ec3cc03"
+  },
+  "baseline_bindings": {
+    "baseline-evidence/1bd107eac10ff77bff15d8903da582a8f03b4db1a1294df085c3fc02642df997/plan.json": "3f474de7ce04de0c4d2b0a30ae1cae76a8ee961de7fb2fd554fbe650d78e6a12",
+    "baseline-evidence/1bd107eac10ff77bff15d8903da582a8f03b4db1a1294df085c3fc02642df997/discovery.json": "7974b4b0e7c059eb6fcc674e187c2904077f2cfbbdbb274a42bb39119a4a76a4",
+    "baseline-evidence/1bd107eac10ff77bff15d8903da582a8f03b4db1a1294df085c3fc02642df997/disassembly.txt": "35416841a0776bb7d9e97524d2bf44b3487b43fd847e1a2cc025e35f8f5cd35d",
+    "baseline-evidence/63c7f40f7e906b046f5a1911d5ed91824bb1aa15673f8fa753a818ccc0d5f511/plan.json": "c256bb9ce97d9c455a1851b708cad48f27c7040a0c0bc3c32f6eb781430bd62a",
+    "baseline-evidence/63c7f40f7e906b046f5a1911d5ed91824bb1aa15673f8fa753a818ccc0d5f511/discovery.json": "2823905dec21234c231259768c51d54c9a87b5a6602ed858b12d7c3b40dda423",
+    "baseline-evidence/63c7f40f7e906b046f5a1911d5ed91824bb1aa15673f8fa753a818ccc0d5f511/disassembly.txt": "f3cb665d2a449f43e4af057ed9bdcd26a606abe66e140532babf922184503d6e"
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "xgboost": "3.4.1",
+    "scikit-learn": "1.9.1"
+  },
+  "pilot_public_sha256": "b1ee919d4be1b08c8cc1591e58521d4e2bd49bb162ecba784c2b096d5d1f5f21",
+  "calibration_id": "4a1a4de005fda8472c58cbe60174a194a856180658e8ab4fe3cdf8bc795c1014",
+  "pilot_artifacts": {
+    "protocol.json": "35b3ec6f4ad794f13f95d341c7fecc60f6c374b2adeb9ad81a2eba2c53b4295f",
+    "corpus.json": "e8052e407019436d6e8322346e1cc3de808def20ae9da17d0e2fb0960121ae15",
+    "report.json": "5240d7f29b5d0586d480190c1440d295d7ed2bfa369391e7fda8d384038f8809"
+  },
+  "calibration_sha256": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+  "predictions_sha256": "c093dad94388f97563886ebdb37b1a9129a3cbfd738a3f3d8359a2f36130b265",
+  "baseline_inputs_sha256": "cc4c8c71e35e2f6d8e4f8ef6f74c1d57cbae0bc2f8d4e674b33452618d03e810",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "budgets": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "hypothesis": "Missing execution exposure and operand-dependent shift costs explain ranking collapse; calibrate a strong baseline before considering residual learning.",
+  "target_labels_used_by_latency_predictor": 0,
+  "trained_model_variants_added": 0,
+  "calibration_cost": 5.095776124944678,
+  "calibration_native_commands": 8,
+  "limitations": [
+    "Feature choice is informed by already consumed development results.",
+    "All twelve candidates are positive and feasible; no constraint-learning or slowdown evidence.",
+    "Top-six merit shortlists and only two programs limit every conclusion.",
+    "Operation latencies assume unchanged surrounding instruction costs; final whole-program measurement remains mandatory.",
+    "Latency merit does not predict area or routed timing, or compose instruction sets.",
+    "Historical timings are replayed; these are not fresh end-to-end policy wall times."
+  ]
+}
