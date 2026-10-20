@@ -8,6 +8,7 @@ import subprocess
 # plus (for the oracle) the estimate it was chosen on. Writes experiments.csv/.json and prints a
 # table with per-program speedups under both rules, the geometric means, LUTs, Fmax, and how many
 # hardware builds each method needed.
+BASE_PERIOD = 1000 / 61.48
 PROGRAMS = ["aha-mont64", "crc32", "edn", "huffbench", "matmult-int", "nettle-aes", "nettle-sha256", "wikisort"]
 R = "hw/engine/results"
 
@@ -40,7 +41,13 @@ def summarize(name, method, request, result, buildsNeeded, estimate=None):
     rows = {r["benchmark"]: r for r in result["rows"]}
     ruled = {p: rows[p]["speedup"] for p in PROGRAMS}
     cyc = {p: rows[p]["speedup_cycles_only"] for p in PROGRAMS}
+    def ruleGeomean(fmax):
+        period = max(BASE_PERIOD, 1000 / fmax)
+        return geomean([(result["programs"][p]["baseline_cycles"] * BASE_PERIOD) / (result["programs"][p]["cycles"] * period)
+                        for p in PROGRAMS])
     out = {"experiment": name, "method": method, "build": result["id"], "formulas": result["priority"],
+           "geomean_max_rule_at_fmax_min": round(ruleGeomean(result["fmax_mhz"]["min"]), 4),
+           "geomean_max_rule_at_fmax_max": round(ruleGeomean(result["fmax_mhz"]["max"]), 4),
            "luts_delta": result["luts"]["delta"], "fmax_median": result["fmax_mhz"]["median"],
            "fmax_min": result["fmax_mhz"]["min"], "fmax_max": result["fmax_mhz"]["max"],
            "unit_on_arc_seeds": len(result["critical_path"]["unit_on_arc_seeds"]),
@@ -70,7 +77,7 @@ def main():
     experiments.append(summarize("C1 frequency (placeable saved)", "frequency-placeable",
                                  f"{R}/frequency-placeable-top3.request.json", res, 1))
     seen = {}
-    for budget in (100, 250, 500):
+    for budget in (100, 250, 500, 750):
         est = json.load(open(f"{R}/oracle-lut{budget}.estimates.json"))
         for i, e in enumerate(est["top"], 1):
             request = f"{R}/oracle-lut{budget}-set{i}.request.json"
@@ -82,8 +89,27 @@ def main():
     for x in experiments:
         if x["method"] == "oracle":
             x["hardware_builds_needed"] = args.single_candidate_builds + len(seen)
+    # set-to-set differences under the period rule, against each set's own Fmax noise interval:
+    # a difference is above noise only when the two [geomean at Fmax min, geomean at Fmax max]
+    # intervals don't overlap
+    distinct = {}
+    for x in experiments:
+        if x["method"] == "oracle":
+            distinct.setdefault(x["build"], x)
+    sets = list(distinct.values())
+    pairs = []
+    for i in range(len(sets)):
+        for j in range(i + 1, len(sets)):
+            a, b = sets[i], sets[j]
+            lo_a, hi_a = a["geomean_max_rule_at_fmax_min"], a["geomean_max_rule_at_fmax_max"]
+            lo_b, hi_b = b["geomean_max_rule_at_fmax_min"], b["geomean_max_rule_at_fmax_max"]
+            pairs.append({"a": a["experiment"], "b": b["experiment"],
+                          "difference": round(abs(a["geomean_max_rule"] - b["geomean_max_rule"]), 4),
+                          "above_noise": lo_a > hi_b or lo_b > hi_a})
+    above = sum(p["above_noise"] for p in pairs)
+    noise = {"distinct_oracle_sets": len(sets), "pairs": len(pairs), "pairs_above_noise": above, "detail": pairs}
     with open(args.out + ".json", "w") as f:
-        json.dump({"experiments": experiments, "distinct_oracle_cores": seen}, f, indent=1)
+        json.dump({"experiments": experiments, "distinct_oracle_cores": seen, "fmax_noise": noise}, f, indent=1)
     fields = [k for k in experiments[-1] if k != "est_cycles_saved"]
     with open(args.out + ".csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
@@ -94,6 +120,11 @@ def main():
         print(f"{x['experiment']:30} {x['luts_delta']:>+5} {x['fmax_median']:>6} {x['unit_on_arc_seeds']:>3} "
               f"{x['geomean_max_rule']:>7} {x['geomean_cycles_only']:>7} {x.get('est_geomean_cycles_only', ''):>7} "
               f"{x['hardware_builds_needed']:>6}  {', '.join(x['formulas'])}")
+    print(f"period-rule geomean differences between the {len(sets)} distinct oracle sets: {above} of {len(pairs)} pairs "
+          f"exceed the 10-seed Fmax noise (non-overlapping [gm at Fmax min, gm at Fmax max] intervals)")
+    for x in sets:
+        print(f"  {x['experiment']:24} gm {x['geomean_max_rule']:.4f}  interval [{x['geomean_max_rule_at_fmax_min']:.4f}, "
+              f"{x['geomean_max_rule_at_fmax_max']:.4f}]  Fmax {x['fmax_min']}-{x['fmax_max']}")
 
 
 if __name__ == "__main__":

@@ -165,7 +165,7 @@ Three ways to pick up to 3 formulas for one core, scored by the geometric mean o
 
 - **E, frequency by finder `saved`** (above): one build.
 - **C1, frequency by placeable saved:** the same rule with the pre-check's placeable saved instead of the finder's. Picks `add(in0,slli(in1,2))`, `add(srli(in0,31),slli(in1,1))`, `mul(in0,addi(lui(1103515648),-403))`. One build.
-- **C2, oracle under a LUT budget:** from the 60 single-candidate cores, every non-conflicting set of up to 3 within the budget, assuming cycles and LUTs add and the clock is the slowest member's; the top 3 sets by estimated cycles-only geomean were built. +500 chose the same sets as +250, because the only candidate that could use the room (the constant multiplier, +624) doesn't fit. 60 + 6 builds.
+- **C2, oracle under a LUT budget:** from the 60 single-candidate cores, every non-conflicting set of up to 3 within the budget, assuming cycles and LUTs add and the clock is the slowest member's; the top 3 sets by estimated cycles-only geomean were built, for budgets +100, +250, +500 and +750. +500 chose the same sets as +250, because the only candidate that could use the room (the constant multiplier, +624) doesn't fit; +750 is the first budget that admits it, and its best set is the C1 core. 60 + 9 builds.
 
 | experiment | formulas | LUT Δ (est.) | Fmax | on arc | geomean, period rule | geomean, cycles only (est.) |
 |---|---|---:|---:|---:|---:|---:|
@@ -177,14 +177,18 @@ Three ways to pick up to 3 formulas for one core, scored by the geometric mean o
 | C2 +250 / +500, set 1 | `add(in0,slli(in1,2))`, `add(srli(in0,31),slli(in1,1))`, `or(srli(in0,31),slli(in1,1))` | +107 (+175) | 60.26 | 0 | 1.039 | 1.060 (1.060) |
 | C2 +250 / +500, set 2 | `add(in0,slli(in1,2))`, `add(srli(in0,31),slli(in1,1))`, `or(srli(in0,31),in1)` | +139 (+164) | 62.83 | 0 | **1.054** | 1.054 (1.054) |
 | C2 +250 / +500, set 3 | `add(in0,slli(in1,2))`, `add(srli(in0,31),in1)`, `or(srli(in0,31),slli(in1,1))` | +175 (+208) | 58.28 | 0 | 0.998 | 1.052 (1.052) |
+| C2 +750, set 1 (= C1) | `add(in0,slli(in1,2))`, `add(srli(in0,31),slli(in1,1))`, `mul(in0,addi(lui(1103515648),-403))` | +725 (+749) | 57.63 | 2/10 | 1.028 | **1.097** (1.097) |
+| C2 +750, set 2 | `add(in0,slli(in1,2))`, `mul(in0,addi(lui(1103515648),-403))`, `or(srli(in0,31),slli(in1,1))` | +736 (+750) | 57.97 | 4/10 | 1.029 | 1.091 (1.091) |
+| C2 +750, set 3 | `add(in0,slli(andi(in1,255),2))`, `add(srli(in0,31),slli(in1,1))`, `mul(in0,addi(lui(1103515648),-403))` | +725 (+749) | 58.11 | 0 | 1.030 | 1.090 (1.090) |
 
 Per-program speedups for every row are in `experiments.csv`. What the comparison shows:
 
 - **Cycles add exactly.** In every oracle set, the measured cycles saved equals the sum of the members' single-candidate savings for every program. There were no interaction effects in cycles, because the picks don't share sites.
 - **LUTs are sub-additive.** Every set cost less than the sum of its members (+107 measured against +175 estimated for the best 3-set), because the units share one PCPI decoder and result register and synthesis merges logic between them.
 - **The clock is the part no estimate caught.** The pessimistic clock guess (slowest member) was too pessimistic every time, and routed Fmax decides the ranking under the period rule: the +250 set that is best cycles-only (1.060) routes at 60.26 MHz and lands at 1.039, while set 2 routes at 62.83 MHz and wins at 1.054. The two sets are identical in cycles for 6 of 8 programs.
-- **Placement awareness fixes the frequency baseline:** C1 beats E on both scores (1.028 vs 0.968; 1.097 vs 1.042) by swapping the unplaceable `mul` chain for the placeable constant multiplier, which alone gives crc32 1.439. It is still a 725-LUT core at 57.6 MHz, so under the period rule it loses to a 139-LUT oracle set.
-- **Cost:** frequency ranking needs 1 hardware build; the oracle needed 66 (60 single-candidate cores plus the 6 distinct sets built here).
+- **Placement awareness fixes the frequency baseline:** C1 beats E on both scores (1.028 vs 0.968; 1.097 vs 1.042) by swapping the unplaceable `mul` chain for the placeable constant multiplier, which alone gives crc32 1.439. It is still a 725-LUT core at 57.6 MHz, so under the period rule it loses to a 139-LUT oracle set. At +750 the oracle picks that same core: the constant multiplier is the best use of a large budget, cycles-only (1.097 against 1.060 at +250), but under the period rule the three +750 sets are within 0.003 of each other and within 0.01 of the +100 sets, which cost a tenth of the LUTs.
+- **Most set-to-set differences under the period rule are inside the Fmax noise.** Recomputing each set's geomean at its own 10-seed Fmax min and max gives an interval; of the 36 pairs among the 9 distinct oracle sets, only 2 have non-overlapping intervals (+250 set 2 against the two weaker +100 sets, differences of 0.023 and 0.026). The best set's lead over its runner-up (1.054 vs 1.039) is within noise. `experiments.json` has every pair.
+- **Cost:** frequency ranking needs 1 hardware build; the oracle needed 69 (60 single-candidate cores plus the 9 distinct sets built here).
 
 ### Dry run (2026-10-20)
 
