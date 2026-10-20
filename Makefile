@@ -71,6 +71,10 @@ reproduce-speedup:
 	$(PYTHON) scripts/reproduce_codesign.py replay
 	$(PYTHON) scripts/reproduce_workload.py replay
 
+.PHONY: reproduce-selection-research
+reproduce-selection-research:
+	$(PYTHON) scripts/reproduce_selection_research.py
+
 reproduce-v4:
 	$(PYTHON) scripts/evaluate_v4.py --manifest results/2026-10-13-v4/freeze.json --release results/2026-10-13-v4/label-release.json --output generated/reproduction/v4/evaluation.json
 	$(PYTHON) scripts/report_v4.py --evaluation generated/reproduction/v4/evaluation.json --development results/2026-10-13-v4/development-evaluation.json --historical results/2026-10-13-v3/probe-evaluation.json --runtime-cost results/2026-10-13-v4/runtime-cost.json --output generated/reproduction/v4/report

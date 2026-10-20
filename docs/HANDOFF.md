@@ -1,37 +1,39 @@
-# Current handoff — October 19, 2026
+# Current handoff — October 20, 2026
 
-Read [README](../README.md), [AGENTS](../AGENTS.md), and [the method review](research-foundation.md) first. This handoff replaces the [historical cost-model priorities](HANDOFF-history-2026-10-19.md). The working branch is `ai-guided-ml`.
+Read [README](../README.md), [AGENTS](../AGENTS.md), [the original method review](research-foundation.md), and [the expanded review](selection-methods-review.md). Branch: `ai-guided-ml`. The [previous research handoff](HANDOFF-research-history-2026-10-19.md) is preserved as history.
 
-## Completed and preserved
+## Completed
 
-- **CRC32:** six executable source-adapter candidates, actual whole-benchmark cycles, correctness controls, integrated resources, three routing seeds, a live bounded selector, and 120 policy replays. Best 1.050833×, 4.8374% fewer cycles, +31 LUT4. Merit wins the budget-three comparison. The slowdown from `mask_offset` remains in the evidence.
-- **aha-mont64:** automatic RV32I profiling, established dataflow extraction, assembly lowering, six executable candidates, full correctness controls, integrated synthesis/routing, and 120 policy replays. Best 1.094120×, 8.6024% fewer cycles, +42 LUT4. Merit finds the optimum with one measurement in all five seeds. Learned acquisition shows no advantage and loses to random at budget four. [All measurements and commands](automatic-workloads.md).
-- **Corpus:** 12 actual single-instruction outcomes, two workload groups, one pinned processor context. Features and labels have explicit provenance. Cross-workload readiness is false; do not present contract tests as measured generalization.
-- **Contract and cleanup:** the README/AGENTS now define measured performance selection, historical-label costs, strong baselines, hidden target outcomes, and joint-set validation. The unused RTL-search module and its tests are retained as non-importable text in `archive/`. Historical model results and negative outcomes are preserved.
-- **Literature:** actual methods reviewed for Atasu, CIDRE, LACE, Gardner, and Sun's separate 2002 conference paper, plus relevant regression/cost-aware/ranking sources. The exact Sun 2004 and Hussein 2026 full methods remain inaccessible; no detailed reproduction/novelty claim may rely on them.
+- The original six-candidate CRC32 source-adapter and automatic aha-mont64 experiments remain untouched, including negative outcomes.
+- **Automatic CRC32 is complete:** actual RV32I features, legal extraction, assembly lowering, six candidates, seven integrated designs, 21 routes, 119 native commands and 272.778 command-seconds. Best 1.050833×, +31 LUT4; some formulas differ from their older adapter performance because the modified software differs. [Measurements](../results/2026-10-20-automatic-crc32/README.md).
+- **Uniform corpus:** twelve automatically measured candidates across two workloads. The six older CRC32 adapter rows remain separate historical evidence. Do not count another CRC32 build as an independent workload.
+- **Fixed ranking experiment:** one XGBoost pairwise ranker, original regression ensemble, seven policies, 420 consumed-data budget/seed outcomes. Whole-workload exclusion plus related operation-tree exclusion leaves five fitting rows per direction. Ranking does not improve verified selection over regression; merit reaches both pool optima in one query in all five seeds. [Full comparison](selection-pilot-results.md).
+- **Uncertainty diagnostic:** the central 90% ensemble range covers only 26.67% of aha outcomes and 83.33% of CRC outcomes, averaged over model seeds. This is not calibrated confidence or 30 independent tests. Preserve the negative result.
+- **Literature:** primary methods read for AutoTVM, SMAC, RGPE (2018 v1), Ithemal, covariate-shift conformal prediction, and arbitration delay/area modeling. These extend the prior Atasu/CIDRE/LACE/Gardner and Sun 2002 review. Exact Sun 2004 and Hussein 2026 methods remain inaccessible. No novelty claim is supported.
 
-## Next smallest data experiment
+## Next blocker: an independent workload that fits
 
-Preserve both checkpoints. Run CRC32 through the automatic RV32I extraction path in a **new** context to harmonize feature provenance, then try an independent proposal workload such as `edn` through the same baseline/fit gates. Do not reuse consumed CRC32 or aha outcomes as an untouched final test. Freeze the new pool, feature definitions, policies, seeds, clocks/caps, and cost accounting before its labels. Existing SHA-256 and matrix probes failed linker/memory requirements; those failures remain in the CRC archive.
+Nine failed workload/build contexts are archived. EDN needs 6,356 program/data bytes with `-Os`; huffbench/AES/wikisort exceed memory and some need missing runtime functions. SLRE now has tested C-locale character/string support, but the `-Os` build occupies 4,164 bytes, 68 beyond the unchanged 4,096-byte guard. A recorded `-Oz` benchmark-function fallback also fails. No third measured workload exists.
 
-The minimum group gate is three, but three small groups are not evidence of broad transfer. Keep collecting diverse manageable pools before the primary held-out-workload study. Avoid shortlisting every future pool exclusively by merit: freeze a broader legal pool when affordable, report exclusions, and charge its oracle construction separately.
+Stop compiler-flag trial proliferation. The next smallest engineering experiment should establish stack usage and a checked program/stack partition for SLRE, or explicitly prepare a separate memory context. Preserve the 8 KiB SoC and 4 KiB reservation in all existing evidence. Any new partition needs overflow detection, baseline self-checks, and exact tool/input binding before candidate collection; never silently remove the guard. Runtime helper component tests do not establish workload correctness.
 
-## Selection experiment after the data connection
+`compact_workload` and `additional_workload` are serial preparation adapters around the frozen evaluator, not broad workload support. The SLRE preparation scripts are preserved failed protocols. Use their recorded entry points; do not run a compact context through the original `-O2` compiler entry point. Native collection still uses one evaluation at a time and two build workers.
 
-Use fixed XGBoost regression and pairwise ranking trained only on other workload/source groups. Report zero-shot predictions before any paid target observations, then a separate limited-budget adaptation curve. Add a PicoRV32 latency/timing-aware merit baseline with separately charged microbenchmark calibration, and a constrained-EI comparator. Cost-aware acquisition must use observed/predicted durations rather than hidden target durations. Use existing model recipes before introducing new variants; modify one only to address a measured selection failure.
+## Next research comparison
 
-The endpoint is best verified feasible whole-program performance versus evaluations and actual evaluation time, with oracle regret. Include training-label counts/time, profiling/baseline setup, failed attempts, inference, and shared-cost amortization. Preserve heuristic wins. Report uncertainty calibration on untouched workload groups; bootstrap spread alone is not confidence.
+Freeze a new legal pool and fixed existing regression/ranking settings before its labels. Hold out the whole new workload, exclude related candidate families, and save zero-shot predictions before scoring. Then allow paid adaptation. Add a charged PicoRV32 latency/timing-aware heuristic and constrained-EI comparator; all current tiny pools pass constraints, so they cannot establish feasibility-learning value.
 
-Only then connect an LLM **instruction-selection** agent with isolated access to list/predict/measure/choose tools and the same budget/information as non-agent policies. `LiveSelectionTools` is not an OS sandbox. Automatic multi-instruction selection needs a conflict/encoding contract and **joint** lowering, simulation, correctness, synthesis, and routing for one to three instructions; never add individual speedups or area deltas.
+The explicit two-workload pilot is development only and does not relax the primary three-group gate. Three small groups would still be insufficient for broad generalization or reliable calibration. Avoid another model variant, isolated area predictor, GNN, or RTL agent. The next data should test the current models, not be used to tune them immediately.
 
-## Reproduce and validate
+After these connections work, implement the LLM instruction-selection agent with isolated bounded tools, equal public information, evaluation budgets and historical/inference costs. The current Python interface is not an OS sandbox. Final one-to-three-instruction sets require joint lowering, correctness, execution, and synthesis; do not add individual speedups or area deltas.
+
+## Reproduce
 
 ```sh
 make test
 make reproduce
 make reproduce-speedup
+make reproduce-selection-research
 ```
 
-Use the README's Python extras and initialized Embench submodule. `make reproduce` checks historical cost-model scores; `make reproduce-speedup` authenticates and replays both current processor snapshots without native jobs. [Automatic-workload instructions](automatic-workloads.md) distinguish portable evidence replay from native recollection with pinned tools.
-
-Do not edit frozen hash-bound measurement sources to make an old audit pass. Extend with new modules/contexts and preserve source snapshots. Do not delete local raw evidence merely because a snapshot exists. The [alignment review](scope-review.md) records the remaining gaps and what the cleanup changed.
+Use Python 3.12, the [pinned replay requirements](../requirements-speedup.txt), and the initialized Embench submodule. The last command authenticates automatic CRC32, all 420 development outcomes and nine failed fit contexts without native jobs. Source hashes and negative evidence must remain intact.

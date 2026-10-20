@@ -2,6 +2,8 @@
 
 Reviewed October 19, 2026. The [scope contract](../README.md) and [original proposal](original-project-proposal.txt) govern the project. This review informs implementation; it does not establish novelty or validate the proposal's expected ML advantage.
 
+Updated method coverage: the [October 20 extension](selection-methods-review.md) reads AutoTVM, SMAC, RGPE, Ithemal, covariate-shift conformal inference, and integrated arbitration-cost methods. The resulting [fixed ranking development comparison](selection-pilot-results.md) shows no advantage over regression or merit and exposes poor ensemble coverage. Earlier access gaps below remain unresolved.
+
 **Contribution being tested:** measurement-efficient, uncertainty-aware RISC-V custom-instruction selection using learned predictions and an AI agent, validated against actual processor performance and hardware constraints.
 
 ## Primary sources and access record

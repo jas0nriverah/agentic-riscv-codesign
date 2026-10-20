@@ -1,0 +1,113 @@
+{
+  "scope": "Consumed-data development pilot; not an untouched test or generalization claim.",
+  "hypothesis": "Fixed within-context pairwise ranking may improve verified selection relative to speedup regression; no tuning.",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "budgets": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "policies": [
+    "frequency",
+    "merit",
+    "random",
+    "regression_zero_shot",
+    "ranking_zero_shot",
+    "regression_adapt",
+    "ucb_adapt"
+  ],
+  "ranker_parameters": {
+    "objective": "rank:pairwise",
+    "n_estimators": 80,
+    "max_depth": 2,
+    "learning_rate": 0.05,
+    "min_child_weight": 1,
+    "reg_lambda": 1.0,
+    "subsample": 1.0,
+    "colsample_bytree": 1.0,
+    "tree_method": "hist",
+    "n_jobs": 1,
+    "verbosity": 0,
+    "lambdarank_pair_method": "mean",
+    "lambdarank_num_pair_per_sample": 8
+  },
+  "regressor": "Unchanged SpeedupPredictor: 20 bootstrap, 80 trees, depth 2, learning rate .05.",
+  "split": "Entire workload held out, with all shared operation-tree families removed from training.",
+  "acquisition": "UCB uses 95th ensemble percentile, then mean, then seeded order; mean and rank policies use seeded order for ties.",
+  "features": [
+    "size",
+    "runs",
+    "places",
+    "saved",
+    "saved_percent",
+    "depth",
+    "tree_op_count",
+    "input_count",
+    "constant_count",
+    "unique_constant_count",
+    "max_abs_constant",
+    "op_add",
+    "op_sub",
+    "op_and",
+    "op_or",
+    "op_xor",
+    "op_sll",
+    "op_srl",
+    "op_sra",
+    "op_slt",
+    "op_sltu",
+    "op_addi",
+    "op_andi",
+    "op_ori",
+    "op_xori",
+    "op_slli",
+    "op_srli",
+    "op_srai",
+    "op_slti",
+    "op_sltiu",
+    "op_lui",
+    "op_mul",
+    "op_mulh",
+    "op_mulhu",
+    "op_mulhsu"
+  ],
+  "corpus_sha256": "6923ff0277c5f8be3808145b65e2887b16fd160d6a495227f34b0aa88b5f8b15",
+  "public_sha256": "f9b7b305fb980c8e105b29190d6e32cd4053305e1ea111fb261b30ea70d37528",
+  "sources": {
+    "isaforge/selection_pilot.py": "176abd1a4cfe56df2319a7904051fe7782805b4956995488de4b8c46ef6272aa",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "isaforge/selection.py": "cf76a3f37f86a35b60454beb2be9e69a03944cac287d7485b1a6f20a6fdd5c7e",
+    "isaforge/workload_audit.py": "250d3c175232b67e16983256d2267e5451c4de854ae010fe0751a0f2f1403fe7"
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "xgboost": "3.4.1",
+    "scikit-learn": "1.9.1"
+  },
+  "measurement_contexts": [
+    "1bd107eac10ff77bff15d8903da582a8f03b4db1a1294df085c3fc02642df997",
+    "63c7f40f7e906b046f5a1911d5ed91824bb1aa15673f8fa753a818ccc0d5f511"
+  ],
+  "cost_accounting": "All policies have the same paid historical dataset available. Show target-only and shared-history-plus-target costs; inference is charged separately. Excluded historical rows still cost collection time.",
+  "limitations": [
+    "Only consumed workload groups; protocol is frozen before this comparison, after data collection.",
+    "Top-six merit shortlist creates selection bias; oracle covers only that pool.",
+    "No architecture-calibrated merit, constrained EI, cost-aware acquisition or LLM agent in this pilot.",
+    "Empirical ensemble coverage is diagnostic, not a conformal or calibrated guarantee.",
+    "Offline costs reuse recorded durations; no fresh policy wall-clock experiment.",
+    "Single-instruction results; sets require joint evaluation."
+  ]
+}

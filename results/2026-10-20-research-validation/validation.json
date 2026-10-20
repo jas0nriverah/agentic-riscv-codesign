@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-20",
+  "base_commit": "7431a543f9c36c538f9733870884cfb88c90f61c",
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.4.1",
+    "pytest": "9.1.1"
+  },
+  "full_tests": 2524,
+  "subtests": 179,
+  "test_seconds": 145.16,
+  "new_automatic_designs": 7,
+  "new_route_results": 21,
+  "pilot_policy_seed_budget_outcomes": 420,
+  "preserved_failed_build_contexts": 9,
+  "new_baseline_probe_commands": 11,
+  "new_source_sha256": {
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/selection_pilot.py": "176abd1a4cfe56df2319a7904051fe7782805b4956995488de4b8c46ef6272aa",
+    "isaforge/compact_workload.py": "636a86462f1ae2d2fb245aaacaa5e0b2d25ffb37b58e44af9a1c3348e8d7eaa5",
+    "isaforge/additional_workload.py": "c2ea5fc33b207ae4691627b816a5fc72b4ce28d4eff5142bd07a11850e2eeeaa",
+    "hardware/embench_strings.c": "0be43ea5c7888e3a29acb0d440799d02d5d0897b57bc70a367e57cbc8c7dbb25",
+    "scripts/prepare_slre_runtime.py": "b87e9e4b02db893bdb9368134ede743c17d2dd918cd3257ca20e0f97ae8828b4",
+    "scripts/prepare_slre_small.py": "38ab5a2566325df61cb1fc1a14f3205e11898f01575124dd2e96897bb8d4cfff",
+    "scripts/reproduce_selection_research.py": "087a1fb9f64b25696b1154e65b5ad8a631a44d4623beb97181bed170e4249f40",
+    "tests/test_ranking_pilot.py": "7682e23e910e04a4123e34f005b8e97fbd24538d310171255271aba835d7d9a4",
+    "tests/test_workload_adapters.py": "0d7e094f2eed000bc3588a512baa9ba4c18683e506bfae81a7278cadf5e1cd16",
+    "tests/test_embench_strings.py": "5dedc4024584d81da013609b2180753362b5ef448c3efc7efe83280213036396"
+  },
+  "logs": {
+    "tests.log": "20f43c808aae853c1dec432c66ea19c67ba4b2683b38d113e3cb047832ccc64d",
+    "historical-replay.log": "11efa27e84a1643407f18ea6539c11dea71f5142e76a07eca1a51cd631127fb5",
+    "processor-replay.log": "f9c9d09765b6c6e09162c9d0861d9951927c0c674b45ef6ca083f63755452f65",
+    "selection-research-replay.log": "9a9c9d45f2e1f1b4d8dcde84d6fe6ded89a4758f16fcffd7e27f96338338123d"
+  },
+  "checks": [
+    "make test",
+    "make reproduce",
+    "make reproduce-speedup",
+    "make reproduce-selection-research",
+    "changed Markdown link check",
+    "git diff --check"
+  ],
+  "warning": "Expected duplicate-ZIP-member warning from a corruption-rejection test."
+}
