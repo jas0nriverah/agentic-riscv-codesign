@@ -6,6 +6,8 @@
 
 **Current priority: improve the ML model and measured dataset.** The [new source-held-out experiment](docs/ml-factorized-selection.md) separates learned hardware feasibility from calibrated cycle benefit. Its complete models and predictions were pushed before six new candidate measurements. Twelve policies share the same source/family-excluded fitting cohort, public information and measurement budgets. This remains a performance-selection experiment; measured speedup regressors and ranking stay separate controls. Live LLM and demo development are paused.
 
+**Next blind campaign:** [three new sources with twelve candidates each](docs/blind-source-campaign.md). Bit compression, DES and MD5 qualified under one common checked RV32I/8 KiB context; RC4's insufficient-pool rejection is preserved. All twelve existing selectors are frozen together before any of the 36 candidate attempts. This checkpoint adds source diversity and larger pools without changing model settings; it does not yet add verified candidate labels or establish a learned win.
+
 ```sh
 # Python 3.12; install the pinned replay environment first.
 python -m pip install -r requirements-speedup.txt

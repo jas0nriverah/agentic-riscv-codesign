@@ -1,0 +1,40 @@
+{
+  "schema": "isaforge-blind-qualification-v1",
+  "created_at_utc": "2026-10-21T21:27:41.618443+00:00",
+  "order": [
+    "aha-compress",
+    "ndes",
+    "nettle-arcfour",
+    "nettle-md5",
+    "levenshtein"
+  ],
+  "stop_after_successful_sources": 3,
+  "pool_size": 12,
+  "memory_partition": {
+    "ram_bytes": 8192,
+    "program_limit": 6400,
+    "stack_floor": 6528,
+    "stack_bytes": 1664,
+    "minimum_guard_bytes": 128
+  },
+  "selection_rule": "First three sources passing unchanged baseline, guards, verifier and twelve legal calibrated formulas. No candidate labels or per-source input/partition tuning.",
+  "source_bindings": {
+    "scripts/qualify_blind_campaign.py": "d7e94d2a889740a4b6ab32da559a82a0edd88ef4dcbb54f378861bc1bd3c845e",
+    "isaforge/blind_workload.py": "9f29ddd1cebbcc1c8199814343c555b35438d7669643c8749bbb96aa916a5307",
+    "benchmarks/beebs/aha-compress/compress_test.c": "1e9e7929e0466968e1bc069f406597aa7bb1c7e1eeaeb7f4bc593be4510d4af8",
+    "benchmarks/beebs/ndes/libndes.c": "78d92b71cc0edd3a26ef1a49e2904ac7d6b6dc5ab33d172ab17cb68fdb92d071",
+    "benchmarks/beebs/nettle-arcfour/arcfour.c": "1efb711913921a574cb6092a4e2f996f8514cd1d2fade3c19c9aef6d5787cff7",
+    "benchmarks/beebs/nettle-md5/md5.c": "7b8b50fc6ffe75a6e6fa9067a79f502d8cf4a3e5701bfc0ed94de1347b830b2f",
+    "benchmarks/beebs/levenshtein/liblevenshtein.c": "fd1ee0e23bab6db0182b32618bc3622a3ce0399714b662076d053d98fb7193f6"
+  },
+  "native_parent": "generated/blind-cohort-2026-10-21",
+  "reference_root": "generated/codesign-crc32-2026-10-19-r1",
+  "phases": [
+    "prepare",
+    "discover",
+    "baseline",
+    "public",
+    "freeze"
+  ],
+  "interpretation": "Baseline measurements and legal/profile-derived features only; zero candidate attempts throughout qualification."
+}

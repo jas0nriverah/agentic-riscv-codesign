@@ -1,5 +1,7 @@
 # Documentation
 
+[Blind source-transfer campaign](blind-source-campaign.md): three jointly frozen new sources, twelve candidates per source, unchanged twelve policies and complete measurement costs. The seven-source checkpoint below remains preserved.
+
 Current work: [factorized model and fresh BEEBS workload](ml-factorized-selection.md), [all twelve policy results](../results/2026-10-21-jfdctint-report/results.md), and the [45-label seven-source corpus](../results/2026-10-21-seven-source-corpus/README.md). The model ties the strongest heuristics at the primary cap, misses at the tighter cap, and remains uncalibrated. ML/data improvement takes priority over demo or live LLM development.
 
 [Project scope contract](../README.md) · [Agent instructions](../AGENTS.md) · [Current handoff](HANDOFF.md)

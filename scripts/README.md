@@ -1,5 +1,7 @@
 # Research entry points
 
+Current model/data work: [blind source-transfer campaign](../docs/blind-source-campaign.md). `qualify_blind_campaign.py` qualifies original sources; `blind_campaign.py` freezes/releases/packs/replays all twelve existing policies together; `collect_blind_campaign.py` executes each released candidate once and records complete subprocess costs. `report_blind_campaign.py` and `export_blind_corpus.py` derive results without native jobs or fitting. Demo and live LLM development remain paused.
+
 Current shareable demo: `make showcase`; bounded four-tool controls: `make selector-controls`. See [the selector guide](../docs/bounded-selection.md). `scripts/run_bounded_selector.py --provider responses` requires an explicit API model and OPENAI_API_KEY; no live trial is claimed. `scripts/ablate_hardware_descriptors.py` preserves the one negative development ablation, not a promoted model.
 
 Current processor replays: `python scripts/reproduce_codesign.py replay` and `python scripts/reproduce_workload.py replay`. New native collection uses `python -m isaforge.workload_experiment`; see [automatic workloads](../docs/automatic-workloads.md). The older commands below are historical cost-model entry points.

@@ -203,3 +203,18 @@ export-seven-source-corpus:
 
 diagnose-factorized-selection:
 	$(PYTHON) scripts/diagnose_factorized_selection.py --replay results/2026-10-21-factorized-development --output "$(FACTORIZED_DIAGNOSIS_OUTPUT)"
+
+# Larger pools, three independently held-out sources, unchanged twelve policies.
+# Each derived output must be fresh; override these variables on subsequent runs.
+BLIND_REPLAY_OUTPUT ?= generated/reproduction/blind-campaign
+BLIND_REPORT_OUTPUT ?= generated/reproduction/blind-report
+BLIND_CORPUS_OUTPUT ?= generated/reproduction/blind-corpus
+.PHONY: reproduce-blind-campaign blind-report export-blind-corpus
+reproduce-blind-campaign:
+	$(PYTHON) scripts/blind_campaign.py replay --campaign results/2026-10-21-blind-campaign --preregistration results/2026-10-21-blind-preregistration --output "$(BLIND_REPLAY_OUTPUT)"
+
+blind-report:
+	$(PYTHON) scripts/report_blind_campaign.py --output "$(BLIND_REPORT_OUTPUT)"
+
+export-blind-corpus:
+	$(PYTHON) scripts/export_blind_corpus.py --output "$(BLIND_CORPUS_OUTPUT)"

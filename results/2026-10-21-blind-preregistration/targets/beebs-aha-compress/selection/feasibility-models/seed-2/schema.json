@@ -1,0 +1,231 @@
+{
+  "schema": "isaforge-feasibility-selection-xgb-v1",
+  "seed": 2,
+  "settings": {
+    "ensemble_size": 20,
+    "n_estimators": 80,
+    "max_depth": 2,
+    "learning_rate": 0.05,
+    "min_child_weight": 1,
+    "reg_lambda": 1.0,
+    "subsample": 1.0,
+    "colsample_bytree": 1.0,
+    "tree_method": "hist",
+    "n_jobs": 1,
+    "objective": "binary:logistic",
+    "bootstrap": "n measured candidates with replacement; every draw expands all caps",
+    "cap_replica_sample_weight": 0.3333333333333333,
+    "single_class": "per-member constant 0 or 1; consume model-seed RNG draw regardless"
+  },
+  "area_caps": [
+    32,
+    64,
+    128
+  ],
+  "clock_mhz": 12.0,
+  "columns": [
+    "size",
+    "depth",
+    "tree_op_count",
+    "input_count",
+    "constant_count",
+    "unique_constant_count",
+    "max_abs_constant",
+    "op_add",
+    "op_sub",
+    "op_and",
+    "op_or",
+    "op_xor",
+    "op_sll",
+    "op_srl",
+    "op_sra",
+    "op_slt",
+    "op_sltu",
+    "op_addi",
+    "op_andi",
+    "op_ori",
+    "op_xori",
+    "op_slli",
+    "op_srli",
+    "op_srai",
+    "op_slti",
+    "op_sltiu",
+    "op_lui",
+    "op_mul",
+    "op_mulh",
+    "op_mulhu",
+    "op_mulhsu"
+  ],
+  "budget_feature": "area_cap / (training_median_lut4_per_tree_op * tree_op_count)",
+  "target": "verified device fit and integrated area <= cap and routed minimum Fmax >= 12 MHz",
+  "decision_rule": "mean uncalibrated feasibility score * max(0, public estimated_saved_cycles / baseline_cycles)",
+  "area_per_op": 22.5,
+  "training_ids": [
+    "24881c0f2a3aa96a7b5c2747c870c120bed84db7195d6c80971114f48a3ba7c6",
+    "c09187ecb0123f76ca9d1d8810dc1982067ad0d32aba72a92c1f0d25f079af70",
+    "bc49c40051833fe88c3dd5798b92d819d552944ec703f522ed5dcd9f62798630",
+    "7665f0c5bd95687177d5a576714a918209c40a9aaffbc16436f6b84bb2f78743",
+    "cbea4ded5042507e02c4bf44691bf1202509d0f53c78708ef614c229b46404a4",
+    "11340f94671ba5c5239c7ce099184f21f3574e5bd681f8fcd26e40098cc1a3e2",
+    "08e8643b6db880fbbd6cf344074419f3bbd8474750a70472f3d6ebda95971f61",
+    "205371c610d463d8bbf6958f72bf8435f118e53d43a50cf4301e141a93453c32",
+    "77710d04576085d7031f398c3890958b640ec7efef05e1adbe6c9cf15c9f4cab",
+    "fe63db5e21cd55e04d0f28884d57fb6c3a7b5054e81569fa94e8c22097bf4cbb",
+    "1dc0b30ea7fa3e635207c3c71af0a9d672134b1a3fdda39d25b5aa7fecfa44a3",
+    "10893a739e76abb7724187d7bfb8af59870ec518dc688972e9d516ed7e65581a",
+    "378bdc72a91e1d3a56593d242db9d6f0d6dea993a3e2055b115142eec9cd1b70",
+    "65c892775153956c607fec8e56bd9868d4d0b27f335cd4545487e5668a73336f",
+    "74ec99cf35b3c324fb75171bcbab6f8aec0a60b822ef8d22cf37137c259ac63c",
+    "98cdd67cbcfd7bc4fa446757f0a76f17cece59f56f9941227b0350f4a45f32a1",
+    "e8a398c9d149afed6e789df3a8d75acf9dea6d4d646c695870d9e1c387b4ff6f",
+    "00fa9abbfa0f8ae7ccbf7ddd0de60d3e769a7902cbc8f41f272ab57cdeb00fd8",
+    "e1656b90485b535c071e377afa6f86881c0db7eecb4d8ec9f408957071f45db0",
+    "79ad2e04c888da3ddeeff88d8c9fc4bfe48f447b13a469763948dc06a66102c1",
+    "b20bd1c56bee309d268de8312649dcba6c656cb5aec387d12839dc7a82b90a76",
+    "4eb003580949d574b1e2a28bd432abb2f05e727b3d9cf66c79aa740539f16d8d",
+    "e806ac1ee74f31e9e9519ef2dab4ff49e4242fc4d77224f8a5b4280b873014c0",
+    "2afc4cab76d7a457bb8c2659ade4592360e32f298f94b728e3ad5b4584eeb368",
+    "52c86015b3e12f3fe81d948f2eda052ad3f8220f1a702d05f3ab01f999288210",
+    "04c80235b2ae981a2ef931aef7f8d17f22e038e04d02719edc9159bac919b08b",
+    "bcd0ec956735a53f06729244ac30a20902eef7816465a1feda965b76e802811d",
+    "2ab157c8ddd172c2411b35dec8d97b40004ec9d8b3147f4e01e104800b8c5815",
+    "6fc88a473c484e02a5a3b8a85d639fbc64d60a05b0558fc796404a6884ff9f5e",
+    "48ce16918e32cf703da747c15b4f568e97dec446afe42ba7f327c781ba8209e6",
+    "b40e2a5eef79a24c09609a571d2fb8c48938ca808141a14f3aaa89cf5babd698",
+    "8bbcecfc4d171b58448099f4149396b4a912c3c1171af912be21ec0583787a85",
+    "ffbf88a0b5459b2df95931924d9148933b9766fdd7af485f8682b7429f25f1d7",
+    "8efc75ee0fdc17d3c173566aa2fbd41cdbe0c5781eb16d42907681a9233a8a26",
+    "3bc442cec098887e93e63da50c3f7046d1233020b689c374e1defb9921eca6c7",
+    "8236aba6452ae8ce11330352ebc46873185218dee871fd97b98e2ccd81e0c7b6",
+    "498893e0a8d9cf5191029a76470d997ba60e5640e6831ed2242280618c939b3f",
+    "193e6c919f044181e7643a748c57137a8de2d31cc2f6d8fa0f5a66ce52e6b80d",
+    "4e8e6e131af5d7303cca5f0186d7b8dbb3c02146b535081712010e0dc102e9d6",
+    "4bcbf2e213376acdd817071984a1fcd25347d507ef01e5bae1c7d9b0cf0f901e",
+    "cd85282f2bc5eb52fd8e4caeb9689f1a422a30a95d38b2eea42e44bab407e2c0",
+    "cb24749e0960f92e44f6e60d20de20c9a47a680564aa1c5ec45533da2967a105",
+    "f9cea80f3982d370f93c18dd2cea900e0078e616326948d240f33eb0dfa77efd",
+    "af63784a01db1c87e6163457a9534616337f8183c786aa7c65b1cb486af23eee"
+  ],
+  "members": [
+    {
+      "model_seed": 1487045235,
+      "artifact": "member-00.json"
+    },
+    {
+      "model_seed": 1487171363,
+      "artifact": "member-01.json"
+    },
+    {
+      "model_seed": 597361651,
+      "artifact": "member-02.json"
+    },
+    {
+      "model_seed": 123384056,
+      "artifact": "member-03.json"
+    },
+    {
+      "model_seed": 186081083,
+      "artifact": "member-04.json"
+    },
+    {
+      "model_seed": 1895568037,
+      "artifact": "member-05.json"
+    },
+    {
+      "model_seed": 1816146825,
+      "artifact": "member-06.json"
+    },
+    {
+      "model_seed": 1962249955,
+      "artifact": "member-07.json"
+    },
+    {
+      "model_seed": 2134616410,
+      "artifact": "member-08.json"
+    },
+    {
+      "model_seed": 2121397819,
+      "artifact": "member-09.json"
+    },
+    {
+      "model_seed": 1755571546,
+      "artifact": "member-10.json"
+    },
+    {
+      "model_seed": 466510976,
+      "artifact": "member-11.json"
+    },
+    {
+      "model_seed": 741159152,
+      "artifact": "member-12.json"
+    },
+    {
+      "model_seed": 1045981941,
+      "artifact": "member-13.json"
+    },
+    {
+      "model_seed": 394788069,
+      "artifact": "member-14.json"
+    },
+    {
+      "model_seed": 668983403,
+      "artifact": "member-15.json"
+    },
+    {
+      "model_seed": 347536439,
+      "artifact": "member-16.json"
+    },
+    {
+      "model_seed": 1152745191,
+      "artifact": "member-17.json"
+    },
+    {
+      "model_seed": 2065300324,
+      "artifact": "member-18.json"
+    },
+    {
+      "model_seed": 1714024694,
+      "artifact": "member-19.json"
+    }
+  ],
+  "model_artifacts": {
+    "member-00.json": "daf17386ebe666492a676fb008f5585f49e8c80933feca0c055ce591776b3fd4",
+    "member-01.json": "6b3b11c4a1040f702174008c09c55d2f8c5fcd51dd79b74fdc02f41a2aa07b90",
+    "member-02.json": "fbac27aba93a00441acee6e6e385e7e7d2f6bad7f7182566a261258165d3afb9",
+    "member-03.json": "71e8da32c15d1efb0883c3f76ea1905b44411d0246771e43acad932745462eda",
+    "member-04.json": "b172151ed145d04cec46a2e620d4f4e0b2942a86901547abc28ed954b1a99257",
+    "member-05.json": "2c902b90d342c46b995d71cf06526551b4b67cad4d1f7a05d9455274734a3053",
+    "member-06.json": "d7283af48fec3560de653a52c182d07194c070ab0ee0711125a9345977fff031",
+    "member-07.json": "c8e0fa9d8c2c112b0bc5273125c524118ce75fe3f9c469884de436d1b79f3f80",
+    "member-08.json": "14142c1cd88dced9ddd890e49460bdf7f5cecdca4e16f6e18038efba7d773610",
+    "member-09.json": "017ece854bdf1e3eebd3e2d1572f652faa0d9f231031570797c1c20883d0cab8",
+    "member-10.json": "a22ee5ecc56e455de9dfabac68d14772a9a79694e6047583123c84faefe11caf",
+    "member-11.json": "1b3c5d44e20f0a76e30137e0c75524ac01da4ba9eaa3e6c6f0eb3ba5171b49d4",
+    "member-12.json": "037e312ca8e29db83f6c1f1e000bf65e0b7b446a5e00a871c4378413ddc8a91b",
+    "member-13.json": "a2f33638e95b5d511ad5e587d093f50a9d6cfd33d0e92d2bdb973c35ceb61167",
+    "member-14.json": "aee40ad873cc868abd45db0e3e3dafd0924b78e14f7de18b8a839da95b63a5ac",
+    "member-15.json": "3ff4de3e822df7299ea76290a8ffe963ac35ac494d53f61223182afdcd769720",
+    "member-16.json": "bc59abf484d5c8fd26ce9277f8d05efebe85897f3bd946d48b92ee47cf5a5b88",
+    "member-17.json": "70509c55549be4d7670cefe7320ae9098e19896518ddc608fe1a649707f197e0",
+    "member-18.json": "d6030a993e63076fbd935168e77d208d619d791b8a1d21f4e026fc95a5fcbc82",
+    "member-19.json": "864840602cf85969575ef49fa420497a7736573e216ab810c61cf405e42d04c8"
+  },
+  "source_bindings": {
+    "isaforge/feasibility_selection.py": "1268bd50a167a5182a75f5fe6729c7cf5bccd7edf93a476e3a3448a4eaeaca22",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3"
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "xgboost": "3.4.1",
+    "scikit-learn": "1.9.1"
+  },
+  "uncertainty_kind": "bootstrap estimator disagreement",
+  "calibrated": false
+}
