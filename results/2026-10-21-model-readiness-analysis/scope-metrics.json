@@ -1,0 +1,642 @@
+{
+  "schema": "isaforge-scope-review-metrics-v1",
+  "source": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-21-six-workload-corpus/corpus.json",
+  "source_sha256": "428724863b021f2783ebe3cedf17bd6d671129846cf734e9baf0f41f74d8b2c3",
+  "scope": "Consumed fixed-input source workloads; descriptive metrics only, no model fit or new jobs.",
+  "definitions": {
+    "operation_type_presence_rows": "Nonzero op_* feature means this expression contains that operation type; counts rows, not dynamic executed source operations.",
+    "expression_tree_operation_node_count": "tree_op_count counts expression-tree operator nodes; duplicated expressions need not equal distinct original DAG/source instructions.",
+    "distinct_removed_instruction_count_size": "size retains the extractor distinct original removed-instruction count, restricted to two through four.",
+    "distinct_input_count": "input_count counts unique register input names, not tree nodes or operation types; architectural maximum is two.",
+    "successful_feasible_under_cap": "Verified successful rows with deltaLUT <= cap, device fit, and every preserved route seed satisfying the 12 MHz rule; failures are not silently labeled infeasible.",
+    "constant_features": "Exact equality across these 33 successful rows only; not an assertion about every legal candidate or workload.",
+    "improvement": "Cycle improvement at the common feasible clock, not physical-board speedup."
+  },
+  "overall": {
+    "successful_labels": 33,
+    "clock_feasible_12mhz": 33,
+    "device_fits": 33,
+    "positive_cycle_improvement": 33,
+    "area_delta_lut4": {
+      "min": 10,
+      "max": 101
+    },
+    "min_routed_fmax_mhz": {
+      "min": 59.30846405029297,
+      "max": 73.41065979003906
+    },
+    "speedup_ratio": {
+      "min": 1.0000009002448487,
+      "max": 1.0941201044760522
+    },
+    "cycle_reduction_percent": {
+      "min": 9.002440382044341e-05,
+      "max": 8.602355819165219
+    },
+    "successful_feasible_under_cap": {
+      "32": 5,
+      "64": 16,
+      "128": 33
+    },
+    "distinct_removed_instruction_count_size": {
+      "2": 23,
+      "3": 8,
+      "4": 2
+    },
+    "expression_tree_operation_node_count": {
+      "2": 23,
+      "3": 8,
+      "4": 2
+    },
+    "distinct_input_count": {
+      "0": 1,
+      "1": 6,
+      "2": 26
+    },
+    "operation_type_presence_rows": {
+      "add": 18,
+      "sub": 2,
+      "and": 0,
+      "or": 4,
+      "xor": 5,
+      "sll": 0,
+      "srl": 0,
+      "sra": 0,
+      "slt": 0,
+      "sltu": 0,
+      "addi": 8,
+      "andi": 4,
+      "ori": 0,
+      "xori": 0,
+      "slli": 23,
+      "srli": 7,
+      "srai": 2,
+      "slti": 0,
+      "sltiu": 1,
+      "lui": 1,
+      "mul": 0,
+      "mulh": 0,
+      "mulhu": 0,
+      "mulhsu": 0
+    }
+  },
+  "source_workload_groups": [
+    "embench-aha-mont64",
+    "embench-crc32",
+    "embench-edn",
+    "embench-nettle-sha256",
+    "embench-slre",
+    "embench-ud"
+  ],
+  "independent_source_groups": 6,
+  "failed_attempts_preserved": 3,
+  "feature_columns": [
+    "size",
+    "runs",
+    "places",
+    "saved",
+    "saved_percent",
+    "depth",
+    "tree_op_count",
+    "input_count",
+    "constant_count",
+    "unique_constant_count",
+    "max_abs_constant",
+    "op_add",
+    "op_sub",
+    "op_and",
+    "op_or",
+    "op_xor",
+    "op_sll",
+    "op_srl",
+    "op_sra",
+    "op_slt",
+    "op_sltu",
+    "op_addi",
+    "op_andi",
+    "op_ori",
+    "op_xori",
+    "op_slli",
+    "op_srli",
+    "op_srai",
+    "op_slti",
+    "op_sltiu",
+    "op_lui",
+    "op_mul",
+    "op_mulh",
+    "op_mulhu",
+    "op_mulhsu"
+  ],
+  "structural_columns": [
+    "size",
+    "depth",
+    "tree_op_count",
+    "input_count",
+    "constant_count",
+    "unique_constant_count",
+    "max_abs_constant",
+    "op_add",
+    "op_sub",
+    "op_and",
+    "op_or",
+    "op_xor",
+    "op_sll",
+    "op_srl",
+    "op_sra",
+    "op_slt",
+    "op_sltu",
+    "op_addi",
+    "op_andi",
+    "op_ori",
+    "op_xori",
+    "op_slli",
+    "op_srli",
+    "op_srai",
+    "op_slti",
+    "op_sltiu",
+    "op_lui",
+    "op_mul",
+    "op_mulh",
+    "op_mulhu",
+    "op_mulhsu"
+  ],
+  "constant_all_feature_columns": {
+    "op_and": 0,
+    "op_sll": 0,
+    "op_srl": 0,
+    "op_sra": 0,
+    "op_slt": 0,
+    "op_sltu": 0,
+    "op_ori": 0,
+    "op_xori": 0,
+    "op_slti": 0,
+    "op_mul": 0,
+    "op_mulh": 0,
+    "op_mulhu": 0,
+    "op_mulhsu": 0
+  },
+  "constant_structural_columns": {
+    "op_and": 0,
+    "op_sll": 0,
+    "op_srl": 0,
+    "op_sra": 0,
+    "op_slt": 0,
+    "op_sltu": 0,
+    "op_ori": 0,
+    "op_xori": 0,
+    "op_slti": 0,
+    "op_mul": 0,
+    "op_mulh": 0,
+    "op_mulhu": 0,
+    "op_mulhsu": 0
+  },
+  "nonzero_operation_type_count": 11,
+  "possible_operation_feature_types": 24,
+  "unique_structural_vectors": 31,
+  "by_source_group": {
+    "embench-aha-mont64": {
+      "successful_labels": 6,
+      "clock_feasible_12mhz": 6,
+      "device_fits": 6,
+      "positive_cycle_improvement": 6,
+      "area_delta_lut4": {
+        "min": 40,
+        "max": 80
+      },
+      "min_routed_fmax_mhz": {
+        "min": 59.30846405029297,
+        "max": 73.41065979003906
+      },
+      "speedup_ratio": {
+        "min": 1.01053696795977,
+        "max": 1.0941201044760522
+      },
+      "cycle_reduction_percent": {
+        "min": 1.042709796262442,
+        "max": 8.602355819165219
+      },
+      "successful_feasible_under_cap": {
+        "32": 0,
+        "64": 3,
+        "128": 6
+      },
+      "distinct_removed_instruction_count_size": {
+        "2": 4,
+        "3": 2
+      },
+      "expression_tree_operation_node_count": {
+        "2": 4,
+        "3": 2
+      },
+      "distinct_input_count": {
+        "2": 6
+      },
+      "operation_type_presence_rows": {
+        "add": 3,
+        "sub": 0,
+        "and": 0,
+        "or": 3,
+        "xor": 0,
+        "sll": 0,
+        "srl": 0,
+        "sra": 0,
+        "slt": 0,
+        "sltu": 0,
+        "addi": 0,
+        "andi": 0,
+        "ori": 0,
+        "xori": 0,
+        "slli": 4,
+        "srli": 4,
+        "srai": 0,
+        "slti": 0,
+        "sltiu": 0,
+        "lui": 0,
+        "mul": 0,
+        "mulh": 0,
+        "mulhu": 0,
+        "mulhsu": 0
+      }
+    },
+    "embench-crc32": {
+      "successful_labels": 6,
+      "clock_feasible_12mhz": 6,
+      "device_fits": 6,
+      "positive_cycle_improvement": 6,
+      "area_delta_lut4": {
+        "min": 31,
+        "max": 70
+      },
+      "min_routed_fmax_mhz": {
+        "min": 60.70539855957031,
+        "max": 72.59528350830078
+      },
+      "speedup_ratio": {
+        "min": 1.0163890686569041,
+        "max": 1.050833431157319
+      },
+      "cycle_reduction_percent": {
+        "min": 1.6124798231607618,
+        "max": 4.837439469482286
+      },
+      "successful_feasible_under_cap": {
+        "32": 1,
+        "64": 3,
+        "128": 6
+      },
+      "distinct_removed_instruction_count_size": {
+        "2": 4,
+        "3": 2
+      },
+      "expression_tree_operation_node_count": {
+        "2": 4,
+        "3": 2
+      },
+      "distinct_input_count": {
+        "1": 1,
+        "2": 5
+      },
+      "operation_type_presence_rows": {
+        "add": 2,
+        "sub": 0,
+        "and": 0,
+        "or": 0,
+        "xor": 3,
+        "sll": 0,
+        "srl": 0,
+        "sra": 0,
+        "slt": 0,
+        "sltu": 0,
+        "addi": 0,
+        "andi": 4,
+        "ori": 0,
+        "xori": 0,
+        "slli": 4,
+        "srli": 1,
+        "srai": 0,
+        "slti": 0,
+        "sltiu": 0,
+        "lui": 0,
+        "mul": 0,
+        "mulh": 0,
+        "mulhu": 0,
+        "mulhsu": 0
+      }
+    },
+    "embench-edn": {
+      "successful_labels": 5,
+      "clock_feasible_12mhz": 5,
+      "device_fits": 5,
+      "positive_cycle_improvement": 5,
+      "area_delta_lut4": {
+        "min": 30,
+        "max": 70
+      },
+      "min_routed_fmax_mhz": {
+        "min": 61.85439682006836,
+        "max": 71.11869812011719
+      },
+      "speedup_ratio": {
+        "min": 1.0000009002448487,
+        "max": 1.0004323039443317
+      },
+      "cycle_reduction_percent": {
+        "min": 9.002440382044341e-05,
+        "max": 0.043211713838831045
+      },
+      "successful_feasible_under_cap": {
+        "32": 2,
+        "64": 3,
+        "128": 5
+      },
+      "distinct_removed_instruction_count_size": {
+        "2": 4,
+        "3": 1
+      },
+      "expression_tree_operation_node_count": {
+        "2": 4,
+        "3": 1
+      },
+      "distinct_input_count": {
+        "1": 2,
+        "2": 3
+      },
+      "operation_type_presence_rows": {
+        "add": 3,
+        "sub": 0,
+        "and": 0,
+        "or": 0,
+        "xor": 0,
+        "sll": 0,
+        "srl": 0,
+        "sra": 0,
+        "slt": 0,
+        "sltu": 0,
+        "addi": 2,
+        "andi": 0,
+        "ori": 0,
+        "xori": 0,
+        "slli": 4,
+        "srli": 0,
+        "srai": 2,
+        "slti": 0,
+        "sltiu": 0,
+        "lui": 0,
+        "mul": 0,
+        "mulh": 0,
+        "mulhu": 0,
+        "mulhsu": 0
+      }
+    },
+    "embench-nettle-sha256": {
+      "successful_labels": 6,
+      "clock_feasible_12mhz": 6,
+      "device_fits": 6,
+      "positive_cycle_improvement": 6,
+      "area_delta_lut4": {
+        "min": 47,
+        "max": 101
+      },
+      "min_routed_fmax_mhz": {
+        "min": 65.9935302734375,
+        "max": 68.58710479736328
+      },
+      "speedup_ratio": {
+        "min": 1.000054526242524,
+        "max": 1.0539397686025866
+      },
+      "cycle_reduction_percent": {
+        "min": 0.005452326957500198,
+        "max": 5.117917570764519
+      },
+      "successful_feasible_under_cap": {
+        "32": 0,
+        "64": 3,
+        "128": 6
+      },
+      "distinct_removed_instruction_count_size": {
+        "2": 4,
+        "4": 2
+      },
+      "expression_tree_operation_node_count": {
+        "2": 4,
+        "4": 2
+      },
+      "distinct_input_count": {
+        "1": 1,
+        "2": 5
+      },
+      "operation_type_presence_rows": {
+        "add": 4,
+        "sub": 1,
+        "and": 0,
+        "or": 1,
+        "xor": 2,
+        "sll": 0,
+        "srl": 0,
+        "sra": 0,
+        "slt": 0,
+        "sltu": 0,
+        "addi": 1,
+        "andi": 0,
+        "ori": 0,
+        "xori": 0,
+        "slli": 5,
+        "srli": 2,
+        "srai": 0,
+        "slti": 0,
+        "sltiu": 0,
+        "lui": 0,
+        "mul": 0,
+        "mulh": 0,
+        "mulhu": 0,
+        "mulhsu": 0
+      }
+    },
+    "embench-slre": {
+      "successful_labels": 6,
+      "clock_feasible_12mhz": 6,
+      "device_fits": 6,
+      "positive_cycle_improvement": 6,
+      "area_delta_lut4": {
+        "min": 10,
+        "max": 95
+      },
+      "min_routed_fmax_mhz": {
+        "min": 64.69561004638672,
+        "max": 71.26567840576172
+      },
+      "speedup_ratio": {
+        "min": 1.0000202043677924,
+        "max": 1.00689637656349
+      },
+      "cycle_reduction_percent": {
+        "min": 0.0020203959584130793,
+        "max": 0.6849142299058752
+      },
+      "successful_feasible_under_cap": {
+        "32": 2,
+        "64": 4,
+        "128": 6
+      },
+      "distinct_removed_instruction_count_size": {
+        "2": 5,
+        "3": 1
+      },
+      "expression_tree_operation_node_count": {
+        "2": 5,
+        "3": 1
+      },
+      "distinct_input_count": {
+        "0": 1,
+        "1": 2,
+        "2": 3
+      },
+      "operation_type_presence_rows": {
+        "add": 2,
+        "sub": 1,
+        "and": 0,
+        "or": 0,
+        "xor": 0,
+        "sll": 0,
+        "srl": 0,
+        "sra": 0,
+        "slt": 0,
+        "sltu": 0,
+        "addi": 5,
+        "andi": 0,
+        "ori": 0,
+        "xori": 0,
+        "slli": 2,
+        "srli": 0,
+        "srai": 0,
+        "slti": 0,
+        "sltiu": 1,
+        "lui": 1,
+        "mul": 0,
+        "mulh": 0,
+        "mulhu": 0,
+        "mulhsu": 0
+      }
+    },
+    "embench-ud": {
+      "successful_labels": 4,
+      "clock_feasible_12mhz": 4,
+      "device_fits": 4,
+      "positive_cycle_improvement": 4,
+      "area_delta_lut4": {
+        "min": 65,
+        "max": 72
+      },
+      "min_routed_fmax_mhz": {
+        "min": 66.48936462402344,
+        "max": 70.40766143798828
+      },
+      "speedup_ratio": {
+        "min": 1.000781671630167,
+        "max": 1.0041174546727778
+      },
+      "cycle_reduction_percent": {
+        "min": 0.07810610968661535,
+        "max": 0.4100570758546973
+      },
+      "successful_feasible_under_cap": {
+        "32": 0,
+        "64": 0,
+        "128": 4
+      },
+      "distinct_removed_instruction_count_size": {
+        "2": 2,
+        "3": 2
+      },
+      "expression_tree_operation_node_count": {
+        "2": 2,
+        "3": 2
+      },
+      "distinct_input_count": {
+        "2": 4
+      },
+      "operation_type_presence_rows": {
+        "add": 4,
+        "sub": 0,
+        "and": 0,
+        "or": 0,
+        "xor": 0,
+        "sll": 0,
+        "srl": 0,
+        "sra": 0,
+        "slt": 0,
+        "sltu": 0,
+        "addi": 0,
+        "andi": 0,
+        "ori": 0,
+        "xori": 0,
+        "slli": 4,
+        "srli": 0,
+        "srai": 0,
+        "slti": 0,
+        "sltiu": 0,
+        "lui": 0,
+        "mul": 0,
+        "mulh": 0,
+        "mulhu": 0,
+        "mulhsu": 0
+      }
+    }
+  },
+  "proposal_acceptance": [
+    {
+      "commitment": "Programs to automatically extracted/lowered measured candidates",
+      "status": "completed for six supported fixed-input workloads"
+    },
+    {
+      "commitment": "Eight originally named Embench programs",
+      "status": "partial: CRC32, aha-mont64, EDN and SHA256 measured; SLRE/UD add source diversity; remaining original programs conditional on current support scope"
+    },
+    {
+      "commitment": "Approximately 30 candidates/program and 240 total",
+      "status": "original planning estimate, not a current hard requirement; 33 verified automatic labels and 36 attempts; decision diversity and independent groups matter more than matching this number"
+    },
+    {
+      "commitment": "Approximately 25 candidates checked in full processor",
+      "status": "exceeded numerically by 33 verified automatic candidates; RTL simulation and integrated FPGA synthesis/routing, no physical-board claim"
+    },
+    {
+      "commitment": "Predictor with confidence estimates",
+      "status": "implemented; accurate confidence/calibration unresolved"
+    },
+    {
+      "commitment": "Seven-train/one-test across eight programs",
+      "status": "not completed as originally planned; smaller prospective source-held-out studies exist and all six groups are now consumed"
+    },
+    {
+      "commitment": "Merit, frequency, random, active-learning and measured-pool reference comparison",
+      "status": "completed for bounded single-instruction pools, with UD reference censored and no strongest-heuristic ML win"
+    },
+    {
+      "commitment": "LLM selection agent with four bounded tools and repeated equal-budget trials",
+      "status": "missing; next integration milestone requires paid-label isolation before trials"
+    },
+    {
+      "commitment": "At least two individual instructions implemented in hardware with measured speedup/area",
+      "status": "completed"
+    },
+    {
+      "commitment": "Selected compatible two/three-instruction final set",
+      "status": "missing in guarded current context; reuse separately reviewed teammate components and jointly measure"
+    },
+    {
+      "commitment": "Spike/VexRiscv/RV32IM implementation choices",
+      "status": "superseded by accepted current PicoRV32/RV32I/PCPI scope; not additional required integrations"
+    },
+    {
+      "commitment": "Favorable learned/agent headline",
+      "status": "not required; proposal explicitly permits strong heuristic or non-agent wins"
+    }
+  ],
+  "priority": "Keep whole-program speedup as objective. Develop one targeted integrated-feasibility/duration/acquisition feature experiment alongside minimal bounded selector, not another speedup-model version sequence.",
+  "original_document_sha256": {
+    "docs/methodology.md": "f84cff7f1d756d05e523530533e835985ad9ee5961beed01ee97f1a73a662103",
+    "docs/research-foundation.md": "f80244cb3f53bfc333c8b92b6eb5d93fa88e7c92a95cd882b7396ebabc23dfbf"
+  }
+}

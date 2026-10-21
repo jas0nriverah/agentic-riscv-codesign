@@ -1,0 +1,101 @@
+"""Read only the committed consumed corpus; no model fits or native jobs.
+Run: python3 ../work/scope-review/compute_metrics.py
+"""
+import collections
+import hashlib
+import json
+from pathlib import Path
+
+repo = Path(__file__).resolve().parents[2] / 'agentic-riscv-codesign'
+out = Path(__file__).resolve().parent
+source = repo / 'results/2026-10-21-six-workload-corpus/corpus.json'
+corpus = json.loads(source.read_text())
+rows = corpus['rows']
+feature_columns = ('size','runs','places','saved','saved_percent','depth','tree_op_count',
+                   'input_count','constant_count','unique_constant_count','max_abs_constant') + tuple(
+    'op_'+op for op in ('add','sub','and','or','xor','sll','srl','sra','slt','sltu',
+        'addi','andi','ori','xori','slli','srli','srai','slti','sltiu','lui',
+        'mul','mulh','mulhu','mulhsu'))
+structural_columns = tuple(k for k in feature_columns if k not in ('runs','places','saved','saved_percent'))
+operation_columns = [k for k in feature_columns if k.startswith('op_')]
+
+def hist(values):
+    return dict(sorted(collections.Counter(str(v) for v in values).items()))
+
+def extent(values):
+    values = list(values)
+    return {'min':min(values), 'max':max(values)}
+
+def summarize(rs):
+    return {
+        'successful_labels':len(rs),
+        'clock_feasible_12mhz':sum(r['routed_fmax_min_mhz'] >= 12 for r in rs),
+        'device_fits':sum(r['device_fits'] for r in rs),
+        'positive_cycle_improvement':sum(r['speedup'] > 1 for r in rs),
+        'area_delta_lut4':extent(r['area_delta_lut4'] for r in rs),
+        'min_routed_fmax_mhz':extent(r['routed_fmax_min_mhz'] for r in rs),
+        'speedup_ratio':extent(r['speedup'] for r in rs),
+        'cycle_reduction_percent':extent(100*(1-1/r['speedup']) for r in rs),
+        'successful_feasible_under_cap':{
+            str(cap):sum(r['area_delta_lut4'] <= cap and r['device_fits'] and
+                         r['routed_fmax_min_mhz'] >= 12 for r in rs)
+            for cap in (32,64,128)},
+        'distinct_removed_instruction_count_size':hist(r['size'] for r in rs),
+        'expression_tree_operation_node_count':hist(r['tree_op_count'] for r in rs),
+        'distinct_input_count':hist(r['input_count'] for r in rs),
+        'operation_type_presence_rows':{k[3:]:sum(r[k]>0 for r in rs) for k in operation_columns},
+    }
+
+groups = sorted({r['workload_group'] for r in rows})
+result = {
+    'schema':'isaforge-scope-review-metrics-v1',
+    'source':str(source),
+    'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),
+    'scope':'Consumed fixed-input source workloads; descriptive metrics only, no model fit or new jobs.',
+    'definitions':{
+        'operation_type_presence_rows':'Nonzero op_* feature means this expression contains that operation type; counts rows, not dynamic executed source operations.',
+        'expression_tree_operation_node_count':'tree_op_count counts expression-tree operator nodes; duplicated expressions need not equal distinct original DAG/source instructions.',
+        'distinct_removed_instruction_count_size':'size retains the extractor distinct original removed-instruction count, restricted to two through four.',
+        'distinct_input_count':'input_count counts unique register input names, not tree nodes or operation types; architectural maximum is two.',
+        'successful_feasible_under_cap':'Verified successful rows with deltaLUT <= cap, device fit, and every preserved route seed satisfying the 12 MHz rule; failures are not silently labeled infeasible.',
+        'constant_features':'Exact equality across these 33 successful rows only; not an assertion about every legal candidate or workload.',
+        'improvement':'Cycle improvement at the common feasible clock, not physical-board speedup.',
+    },
+    'overall':summarize(rows),
+    'source_workload_groups':groups,
+    'independent_source_groups':len(groups),
+    'failed_attempts_preserved':len(corpus['failed_attempts']),
+    'feature_columns':list(feature_columns),
+    'structural_columns':list(structural_columns),
+    'constant_all_feature_columns':{k:rows[0][k] for k in feature_columns if len({r[k] for r in rows})==1},
+    'constant_structural_columns':{k:rows[0][k] for k in structural_columns if len({r[k] for r in rows})==1},
+    'nonzero_operation_type_count':sum(any(r[k]>0 for r in rows) for k in operation_columns),
+    'possible_operation_feature_types':len(operation_columns),
+    'unique_structural_vectors':len({tuple(r[k] for k in structural_columns) for r in rows}),
+    'by_source_group':{g:summarize([r for r in rows if r['workload_group']==g]) for g in groups},
+    'proposal_acceptance':[
+        {'commitment':'Programs to automatically extracted/lowered measured candidates', 'status':'completed for six supported fixed-input workloads'},
+        {'commitment':'Eight originally named Embench programs','status':'partial: CRC32, aha-mont64, EDN and SHA256 measured; SLRE/UD add source diversity; remaining original programs conditional on current support scope'},
+        {'commitment':'Approximately 30 candidates/program and 240 total','status':'original planning estimate, not a current hard requirement; 33 verified automatic labels and 36 attempts; decision diversity and independent groups matter more than matching this number'},
+        {'commitment':'Approximately 25 candidates checked in full processor','status':'exceeded numerically by 33 verified automatic candidates; RTL simulation and integrated FPGA synthesis/routing, no physical-board claim'},
+        {'commitment':'Predictor with confidence estimates','status':'implemented; accurate confidence/calibration unresolved'},
+        {'commitment':'Seven-train/one-test across eight programs','status':'not completed as originally planned; smaller prospective source-held-out studies exist and all six groups are now consumed'},
+        {'commitment':'Merit, frequency, random, active-learning and measured-pool reference comparison','status':'completed for bounded single-instruction pools, with UD reference censored and no strongest-heuristic ML win'},
+        {'commitment':'LLM selection agent with four bounded tools and repeated equal-budget trials','status':'missing; next integration milestone requires paid-label isolation before trials'},
+        {'commitment':'At least two individual instructions implemented in hardware with measured speedup/area','status':'completed'},
+        {'commitment':'Selected compatible two/three-instruction final set','status':'missing in guarded current context; reuse separately reviewed teammate components and jointly measure'},
+        {'commitment':'Spike/VexRiscv/RV32IM implementation choices','status':'superseded by accepted current PicoRV32/RV32I/PCPI scope; not additional required integrations'},
+        {'commitment':'Favorable learned/agent headline','status':'not required; proposal explicitly permits strong heuristic or non-agent wins'},
+    ],
+    'priority':'Keep whole-program speedup as objective. Develop one targeted integrated-feasibility/duration/acquisition feature experiment alongside minimal bounded selector, not another speedup-model version sequence.',
+    'original_document_sha256':{},
+}
+for name in ('methodology','research-foundation'):
+    snapshot=repo/'docs'/f'{name}-before-readiness-2026-10-21.md'
+    original=snapshot.read_bytes().split(b'\n\n',1)[1]
+    result['original_document_sha256'][f'docs/{name}.md']=hashlib.sha256(original).hexdigest()
+(out/'metrics.json').write_text(json.dumps(result,indent=2)+'\n')
+print(json.dumps({'output':str(out/'metrics.json'),'successful_labels':len(rows),
+    'source_groups':len(groups),'nonzero_expression_operation_types':result['nonzero_operation_type_count'],
+    'constant_structural_columns':len(result['constant_structural_columns']),
+    'per_group':{g:v['successful_feasible_under_cap'] for g,v in result['by_source_group'].items()}},indent=2))

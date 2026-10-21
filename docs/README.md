@@ -2,6 +2,7 @@
 
 [Project scope contract](../README.md) · [Agent instructions](../AGENTS.md) · [Current handoff](HANDOFF.md)
 
+- [Model-selection and research readiness](model-selection-readiness.md): arithmetic diagnosis of frozen predictions, representation/uncertainty limits, proposal status and the bounded four-tool LLM pilot contract; no new fits or measurements.
 - [Guarded SHA256 campaign](guarded-sha256.md): six workloads and 33 labels in total; safe collection, six new verified instructions and 450 prospective endpoints. The cost-aware heuristic reaches the feasible optimum sooner than ML.
 - [Six-workload measured corpus](../results/2026-10-21-six-workload-corpus/README.md): 33 consistent successful rows, three preserved failures, context/source provenance and separate measurement timers.
 - [Teammate branch review](teammate-branch-review-2026-10-21.md): reusable placement/joint-set components, architecture differences, and why the hardware-track comparison needs different information/budget accounting.

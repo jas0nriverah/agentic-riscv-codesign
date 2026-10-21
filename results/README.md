@@ -1,5 +1,7 @@
 # Research result archives
 
+[Model-readiness analysis](2026-10-21-model-readiness-analysis/README.md): reproducible arithmetic-only factor diagnostics, corpus coverage, recorded GP update failures, primary-method grounding and agent improvement plan. Zero new model fits, LLM calls or native evaluations.
+
 [Prospective guarded SHA256 campaign](2026-10-21-sha256-campaign/README.md): six new verified candidates, a complete declared-pool oracle and 450 fixed-policy endpoints, with prelabel Git proof. The cost-aware heuristic finds the primary feasible optimum in one query versus two for adaptive GP and three for normalized XGBoost/merit.
 
 [Six-workload corpus](2026-10-21-six-workload-corpus/README.md): 33 successful labels, three preserved failures, 36 attempts, 39 measured designs and 117 routes. Contexts and old versus new timing scopes remain explicit.
