@@ -1,8 +1,10 @@
 # Documentation
 
-Current work: [budget-conditioned XGBoost and fresh measured candidates](ml-feasible-benefit.md), [all eleven policy results](../results/2026-10-21-feasible-benefit-report/results.md), and the [39-label measured corpus](../results/2026-10-21-model-training-corpus/README.md). ML/data improvement takes priority over demo or live LLM development.
+Current work: [factorized model and fresh BEEBS workload](ml-factorized-selection.md), [all twelve policy results](../results/2026-10-21-jfdctint-report/results.md), and the [45-label seven-source corpus](../results/2026-10-21-seven-source-corpus/README.md). The model ties the strongest heuristics at the primary cap, misses at the tighter cap, and remains uncalibrated. ML/data improvement takes priority over demo or live LLM development.
 
 [Project scope contract](../README.md) · [Agent instructions](../AGENTS.md) · [Current handoff](HANDOFF.md)
+
+- [Preserved SHA utility model](ml-feasible-benefit.md): two-query improvement versus the earlier model, heuristic win, poor utility coverage and all495 endpoints.
 
 - [Working bounded selector and demo](bounded-selection.md): four enforced tools, isolated remote provider, exact matched controls, interactive six-workload evidence, SQLite/CSV exports and missing live-model validation.
 

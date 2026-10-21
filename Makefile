@@ -55,7 +55,8 @@ candidates: $(PROGRAMS:%=generated/candidates/%.json)
 # Research entry points. Activate .venv first, or set PYTHON=.venv/bin/python.
 .PHONY: help test reproduce reproduce-v4 reproduce-v5 reproduce-external-v5 reproduce-v6 reproduce-v8 reproduce-v9-coverage reproduce-v10d-hardware reproduce-v10d-timing reproduce-v10d-selection reproduce-v12 diagram
 help:
-	@echo 'Current ML experiment: make reproduce-feasible-benefit | make feasible-benefit-report (no native hardware jobs)'
+	@echo 'Current ML experiment: make reproduce-jfdctint | make jfdctint-report | make export-seven-source-corpus (no native jobs)'
+	@echo 'Preserved SHA model experiment: make reproduce-feasible-benefit | make feasible-benefit-report'
 	@echo 'Interactive six-workload demo: make showcase | Four-tool matched controls: make selector-controls'
 	@echo 'Current prospective comparison: make sha256-report | make reproduce-sha256 (no native hardware jobs)'
 	@echo 'Preserved evidence: make reproduce-budget-campaign | make demo | make reproduce-prospective | make reproduce-speedup'
@@ -185,3 +186,20 @@ feasible-benefit-report:
 
 export-model-corpus:
 	$(PYTHON) scripts/export_feasible_pool_corpus.py --output "$(BENEFIT_CORPUS_OUTPUT)"
+
+# One fresh BEEBS source, a fixed factorized model, and eleven unchanged controls.
+JFDCTINT_REPORT_OUTPUT ?= generated/reproduction/jfdctint-report
+SEVEN_SOURCE_CORPUS_OUTPUT ?= generated/reproduction/seven-source-corpus
+FACTORIZED_DIAGNOSIS_OUTPUT ?= generated/reproduction/factorized-source-diagnosis
+.PHONY: reproduce-jfdctint jfdctint-report export-seven-source-corpus diagnose-factorized-selection
+reproduce-jfdctint:
+	$(PYTHON) scripts/reproduce_jfdctint.py
+
+jfdctint-report:
+	$(PYTHON) scripts/report_jfdctint.py --output "$(JFDCTINT_REPORT_OUTPUT)"
+
+export-seven-source-corpus:
+	$(PYTHON) scripts/export_jfdctint_corpus.py --output "$(SEVEN_SOURCE_CORPUS_OUTPUT)"
+
+diagnose-factorized-selection:
+	$(PYTHON) scripts/diagnose_factorized_selection.py --replay results/2026-10-21-factorized-development --output "$(FACTORIZED_DIAGNOSIS_OUTPUT)"

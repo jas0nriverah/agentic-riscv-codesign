@@ -25,6 +25,7 @@ Write a new result snapshot with a short README, commands, input/source hashes, 
 - Run `make reproduce-speedup` for changes affecting processor evidence or selection reports.
 - Run `make reproduce-budget-campaign campaign-report` for the EDN/UD experiment. The original scorer is frozen; the derived report distinguishes correctness failures from infrastructure-censored outcomes and qualifies its best-verified reference.
 - Run `make reproduce-sha256` for the guarded sixth workload and `make sha256-report` for its tables. Keep the prelabel Git proof, one-attempt ledger and consumed-corpus context/timer fields intact. Inspect [teammate compatibility](docs/teammate-branch-review-2026-10-21.md) before bringing in another hardware context.
+- Run `make reproduce-jfdctint` for the new seventh source and fixed factorized model. `make jfdctint-report`, `make export-seven-source-corpus` and `make diagnose-factorized-selection` require fresh derived outputs. Preserve source holdouts, release chronology, all twelve controls/policies, distinct duration scopes, the tighter-cap miss and uncalibrated-score flags.
 - Regenerate and visually inspect diagrams and figures after layout edits. Preserve vector exports and the numerical evidence behind research plots.
 - Check relative documentation links and make sure quick-start commands work from the repository root.
 
