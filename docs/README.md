@@ -2,7 +2,9 @@
 
 [Project scope contract](../README.md) · [Agent instructions](../AGENTS.md) · [Current handoff](HANDOFF.md)
 
-- [Prospective SLRE transfer and offline demo](prospective-slre.md): third real workload, 18 automatic outcomes in total, frozen predictions, exact replay, SQL evidence ledger, and negative learned-selection result.
+- [Prospective EDN/UD campaign](budget-campaign.md): five workloads and 27 labels in total, normalized XGBoost, constrained GP acquisition, ten policies and 900 budget endpoints; no gain over the strongest heuristics.
+- [Expanded measured corpus](../results/2026-10-21-expanded-corpus/README.md): 27 consistent successful rows, three separate failed attempts, five contexts, costs and provenance.
+- [Prospective SLRE transfer and offline demo](prospective-slre.md): earlier three-workload checkpoint, frozen predictions, exact replay, SQL evidence ledger, and negative learned-selection result.
 - [Runnable SQL analysis](experiment-queries.sql): best verified feasible designs, separate cost scopes, and preserved failures.
 - [October 20 methods review](selection-methods-review.md): six additional primary methods and their precise adaptation limits.
 - [Full speedup-model diagnosis](model-analysis.md): measured failure mechanisms, independent latency calibration, stronger baseline, new public features, and a prospective improvement plan.

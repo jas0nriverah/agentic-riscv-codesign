@@ -135,6 +135,13 @@ reproduce-model-analysis:
 reproduce-prospective:
 	$(PYTHON) scripts/reproduce_prospective.py replay
 
+.PHONY: reproduce-budget-campaign campaign-report
+reproduce-budget-campaign:
+	$(PYTHON) scripts/reproduce_budget_campaign.py replay
+
+campaign-report:
+	$(PYTHON) scripts/report_budget_campaign.py
+
 demo:
 	$(PYTHON) scripts/reproduce_prospective.py demo
 	$(PYTHON) scripts/style_research_demo.py generated/reproduction/prospective-slre/index.html

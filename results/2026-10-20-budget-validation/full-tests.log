@@ -1,0 +1,376 @@
+/Users/jasonrivera/Documents/Codex/2026-10-19/clo/work/audit-venv/bin/python -m pytest -q
+........................................................................ [  2%]
+........................................................................ [  5%]
+........................................................................ [  7%]
+........................................................................ [ 10%]
+............................................................ [ 12%]
+...................................................... [ 14%]
+............................................................................................................................ [ 19%]
+........................................................................ [ 22%]
+........................................................................ [ 24%]
+........................................................................ [ 27%]
+.........F.............................................................. [ 30%]
+......................................................... [ 32%]
+........................................................................ [ 34%]
+........................................................................ [ 37%]
+........................................................................ [ 40%]
+..........................................FF................. [ 42%]
+................................................... [ 44%]
+........................................................................ [ 46%]
+........................................................................ [ 49%]
+........................................................................ [ 52%]
+.......................................................... [ 54%]
+.................................................................... [ 56%]
+........................................................................ [ 59%]
+.................................................................. [ 62%]
+........................................................................ [ 64%]
+..................................................... [ 66%]
+........................................................................ [ 69%]
+........................................................... [ 71%]
+.............................................. [ 73%]
+........................................................................ [ 75%]
+........................................................................ [ 78%]
+........................................................................ [ 81%]
+........................................................................ [ 83%]
+........................................................................ [ 86%]
+........................................................................ [ 89%]
+........................................................................ [ 91%]
+........................................................................ [ 94%]
+........................................................................ [ 97%]
+........................................................................ [ 99%]
+......                                                                   [100%]
+=================================== FAILURES ===================================
+____ test_tiny_transport_failures_retained_and_owned_children_reaped[bytes] ____
+
+tmp_path = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_tiny_transport_failures_r4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1170736e0>
+failure = 'bytes'
+
+    @pytest.mark.parametrize('failure',['producer','compressor','deadline','disk','bytes','interrupt'])
+    def test_tiny_transport_failures_retained_and_owned_children_reaped(tmp_path,monkeypatch,failure):
+        compressor=shutil.which('gzip')
+        if compressor is None:pytest.skip('Native gzip unavailable for tiny transport fixture')
+        monkeypatch.setattr(m,'ROOT',tmp_path);monkeypatch.setattr(m,'free_bytes',lambda p:64*m.GIB)
+        monkeypatch.setitem(m.POLICY,'poll_seconds',0.01)
+        attempt=tmp_path/'generated/v11-spooled-recovery/fixture';attempt.mkdir(parents=True);folder=attempt/'transport'
+        factory=lambda fd:[sys.executable,'-c',f'import os;os.write({fd},{fixture_text().encode()!r})']
+        if failure=='producer':factory=lambda fd:[sys.executable,'-c','raise SystemExit(9)']
+        elif failure=='compressor':
+            compressor=tmp_path/'bad-compressor';compressor.write_text('#!'+sys.executable+'\nraise SystemExit(7)\n');compressor.chmod(0o700)
+        elif failure=='deadline':
+            monkeypatch.setitem(m.POLICY,'capture_seconds',0.03);factory=lambda fd:[sys.executable,'-c','import time;time.sleep(1)']
+        elif failure=='disk':
+            counts=[0]
+            def free(p):counts[0]+=1;return 64*m.GIB if counts[0]==1 else 0
+            monkeypatch.setattr(m,'free_bytes',free)
+        elif failure=='bytes':monkeypatch.setitem(m.POLICY,'raw_gzip_bytes_per_program',0)
+        else:
+            def factory(fd):raise KeyboardInterrupt('synthetic interruption')
+        with pytest.raises((RuntimeError,TimeoutError,ValueError,KeyboardInterrupt)):
+            m.capture_raw(factory,folder,attempt,compressor=compressor,compressor_sha256=m.sha(compressor),environment={'PATH':'/usr/bin:/bin'})
+        record=json.loads((folder/'capture.json').read_text())
+>       assert record['status']=='failure-retained' and record['primary_error'] and record['remaining_owned_children']==[]
+E       assert ('failure-retained' == 'failure-retained'
+E         
+E           failure-retained and "ValueError('Stage/file byte budget reached: /private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonr...pytest-431/test_tiny_transport_failures_r4/generated/v11-spooled-recovery/fixture/transport/raw-spike.log.gz.partial')" and [{'process': ...ocess-group'}] == []
+E         
+E         Left contains one more item: {'process': 'compressor', 'pid': 40149, 'scope': 'owned-process-group'}
+E         Use -v to get more diff)
+
+tests/test_capture_v11_spooled.py:102: AssertionError
+__________________ test_commit_pipe_does_not_mix_htif_output ___________________
+
+spike = '/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_commit_pipe_does_not_mix_0/fake-spike'
+elf = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_commit_pipe_does_not_mix_0/input.elf')
+trace = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_commit_pipe_does_not_mix_0/trace.jsonl.gz')
+log = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_commit_pipe_does_not_mix_0/trace.log')
+timeout = 2
+
+    def collect_trace_external(spike, elf, trace, log, timeout):
+        """Separate commit stream from HTIF stdout; retain incomplete streams on failure.
+    
+        Spike handles SIGTERM interactively, so a deadline kills only this collector's
+        process group with SIGKILL. This leaves completed prior evidence untouched.
+        """
+        read_fd, write_fd = os.pipe()
+        program_output = log.with_suffix('.stdout.log')
+        partial = trace.with_suffix(trace.suffix+'.partial')
+        started = time.monotonic()
+        args = [spike,'--isa=rv32im_zicntr','-m16','--log-commits',
+                f'--log=/dev/fd/{write_fd}',str(elf)]
+        process = None
+        timer = None
+        try:
+            with os.fdopen(read_fd,'r') as commits, program_output.open('w') as stdout, log.open('w') as stderr:
+                process = subprocess.Popen(args,cwd=ROOT,stdout=stdout,stderr=stderr,
+                                           pass_fds=(write_fd,),start_new_session=True)
+                os.close(write_fd)
+                write_fd = None
+                def terminate():
+                    try:
+                        os.killpg(process.pid,signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+                timer = threading.Timer(timeout,terminate)
+                timer.start()
+                with gzip.open(partial,'wt',compresslevel=1) as output:
+                    sink = CountedTrace(output)
+>                   summary = parse_trace(commits,sink)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/collect_external_v5.py:308: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+lines = <_io.TextIOWrapper name=11 mode='r' encoding='UTF-8'>
+output = <run_holdout_benchmarks.CountedTrace object at 0x11639f380>
+
+    def parse_trace(lines, output):
+        """Stream commits from exactly one start/stop instret measurement window."""
+        readings = []
+        count = unknown = 0
+        for seq, line in enumerate(lines):
+            match = COMMIT.match(line)
+            if not match:
+                if line.startswith("core"):
+                    raise ValueError(f"Malformed Spike commit at line {seq + 1}")
+                continue
+            pc, raw, writes = match.groups()
+            word = int(raw, 16)
+            # CSRRS rd, instret, zero (the benchmark hooks read this counter).
+            if word & 0xFFFFF07F == 0xC0202073:
+                rd = bits(word, 11, 7)
+                values = {int(reg): int(value, 16) for reg, value in REGISTER_VALUE.findall(writes)}
+                if rd not in values:
+                    raise ValueError("instret marker has no destination register value")
+                readings.append(values[rd])
+                if len(readings) > 2:
+                    raise ValueError("Expected exactly two instret markers")
+            elif len(readings) == 1:
+                op, rd, rs1, rs2, imm = decode(word)
+                record = {"pc": pc, "raw": f"0x{word:08x}", "op": op,
+                          "rd": rd, "rs1": rs1, "rs2": rs2, "imm": imm, "seq": seq}
+                output.write(json.dumps(record, separators=(",", ":")) + "\n")
+                count += 1
+                unknown += op == "unknown"
+        if len(readings) != 2:
+>           raise ValueError(f"Expected two instret markers, found {len(readings)}")
+E           ValueError: Expected two instret markers, found 0
+
+src/tracing.py:113: ValueError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_commit_pipe_does_not_mix_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1180262a0>
+
+    def test_commit_pipe_does_not_mix_htif_output(tmp_path, monkeypatch):
+        monkeypatch.setattr(collector,'ROOT',tmp_path)
+        trace=tmp_path/'trace.jsonl.gz'
+>       summary,runs,starts=collector.collect_trace_external(fake_spike(tmp_path),tmp_path/'input.elf',trace,tmp_path/'trace.log',2)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_external_v5.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+spike = '/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_commit_pipe_does_not_mix_0/fake-spike'
+elf = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_commit_pipe_does_not_mix_0/input.elf')
+trace = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_commit_pipe_does_not_mix_0/trace.jsonl.gz')
+log = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_commit_pipe_does_not_mix_0/trace.log')
+timeout = 2
+
+    def collect_trace_external(spike, elf, trace, log, timeout):
+        """Separate commit stream from HTIF stdout; retain incomplete streams on failure.
+    
+        Spike handles SIGTERM interactively, so a deadline kills only this collector's
+        process group with SIGKILL. This leaves completed prior evidence untouched.
+        """
+        read_fd, write_fd = os.pipe()
+        program_output = log.with_suffix('.stdout.log')
+        partial = trace.with_suffix(trace.suffix+'.partial')
+        started = time.monotonic()
+        args = [spike,'--isa=rv32im_zicntr','-m16','--log-commits',
+                f'--log=/dev/fd/{write_fd}',str(elf)]
+        process = None
+        timer = None
+        try:
+            with os.fdopen(read_fd,'r') as commits, program_output.open('w') as stdout, log.open('w') as stderr:
+                process = subprocess.Popen(args,cwd=ROOT,stdout=stdout,stderr=stderr,
+                                           pass_fds=(write_fd,),start_new_session=True)
+                os.close(write_fd)
+                write_fd = None
+                def terminate():
+                    try:
+                        os.killpg(process.pid,signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+                timer = threading.Timer(timeout,terminate)
+                timer.start()
+                with gzip.open(partial,'wt',compresslevel=1) as output:
+                    sink = CountedTrace(output)
+                    summary = parse_trace(commits,sink)
+                    sink.finish()
+                code = process.wait(timeout=30)
+                if code:
+                    raise RuntimeError(f'Spike trace exit{code}; see{log}')
+            partial.replace(trace)
+        except BaseException:
+            if process is not None:
+                try:
+>                   os.killpg(process.pid,signal.SIGKILL)
+E                   PermissionError: [Errno 1] Operation not permitted
+
+scripts/collect_external_v5.py:317: PermissionError
+_____ test_trace_deadline_retains_partial_evidence_and_stops_owned_process _____
+
+spike = '/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_trace_deadline_retains_pa0/fake-spike'
+elf = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_trace_deadline_retains_pa0/input.elf')
+trace = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_trace_deadline_retains_pa0/trace.jsonl.gz')
+log = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_trace_deadline_retains_pa0/trace.log')
+timeout = 0.2
+
+    def collect_trace_external(spike, elf, trace, log, timeout):
+        """Separate commit stream from HTIF stdout; retain incomplete streams on failure.
+    
+        Spike handles SIGTERM interactively, so a deadline kills only this collector's
+        process group with SIGKILL. This leaves completed prior evidence untouched.
+        """
+        read_fd, write_fd = os.pipe()
+        program_output = log.with_suffix('.stdout.log')
+        partial = trace.with_suffix(trace.suffix+'.partial')
+        started = time.monotonic()
+        args = [spike,'--isa=rv32im_zicntr','-m16','--log-commits',
+                f'--log=/dev/fd/{write_fd}',str(elf)]
+        process = None
+        timer = None
+        try:
+            with os.fdopen(read_fd,'r') as commits, program_output.open('w') as stdout, log.open('w') as stderr:
+                process = subprocess.Popen(args,cwd=ROOT,stdout=stdout,stderr=stderr,
+                                           pass_fds=(write_fd,),start_new_session=True)
+                os.close(write_fd)
+                write_fd = None
+                def terminate():
+                    try:
+                        os.killpg(process.pid,signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+                timer = threading.Timer(timeout,terminate)
+                timer.start()
+                with gzip.open(partial,'wt',compresslevel=1) as output:
+                    sink = CountedTrace(output)
+>                   summary = parse_trace(commits,sink)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts/collect_external_v5.py:308: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+lines = <_io.TextIOWrapper name=11 mode='r' encoding='UTF-8'>
+output = <run_holdout_benchmarks.CountedTrace object at 0x11802b440>
+
+    def parse_trace(lines, output):
+        """Stream commits from exactly one start/stop instret measurement window."""
+        readings = []
+        count = unknown = 0
+        for seq, line in enumerate(lines):
+            match = COMMIT.match(line)
+            if not match:
+                if line.startswith("core"):
+                    raise ValueError(f"Malformed Spike commit at line {seq + 1}")
+                continue
+            pc, raw, writes = match.groups()
+            word = int(raw, 16)
+            # CSRRS rd, instret, zero (the benchmark hooks read this counter).
+            if word & 0xFFFFF07F == 0xC0202073:
+                rd = bits(word, 11, 7)
+                values = {int(reg): int(value, 16) for reg, value in REGISTER_VALUE.findall(writes)}
+                if rd not in values:
+                    raise ValueError("instret marker has no destination register value")
+                readings.append(values[rd])
+                if len(readings) > 2:
+                    raise ValueError("Expected exactly two instret markers")
+            elif len(readings) == 1:
+                op, rd, rs1, rs2, imm = decode(word)
+                record = {"pc": pc, "raw": f"0x{word:08x}", "op": op,
+                          "rd": rd, "rs1": rs1, "rs2": rs2, "imm": imm, "seq": seq}
+                output.write(json.dumps(record, separators=(",", ":")) + "\n")
+                count += 1
+                unknown += op == "unknown"
+        if len(readings) != 2:
+>           raise ValueError(f"Expected two instret markers, found {len(readings)}")
+E           ValueError: Expected two instret markers, found 0
+
+src/tracing.py:113: ValueError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_trace_deadline_retains_pa0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x11802a090>
+
+    def test_trace_deadline_retains_partial_evidence_and_stops_owned_process(tmp_path, monkeypatch):
+        monkeypatch.setattr(collector,'ROOT',tmp_path)
+        trace=tmp_path/'trace.jsonl.gz'
+        with pytest.raises(RuntimeError,match='Spike trace exit'):
+>           collector.collect_trace_external(fake_spike(tmp_path,'hang'),tmp_path/'input.elf',trace,tmp_path/'trace.log',0.2)
+
+tests/test_external_v5.py:112: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+spike = '/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_trace_deadline_retains_pa0/fake-spike'
+elf = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_trace_deadline_retains_pa0/input.elf')
+trace = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_trace_deadline_retains_pa0/trace.jsonl.gz')
+log = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_trace_deadline_retains_pa0/trace.log')
+timeout = 0.2
+
+    def collect_trace_external(spike, elf, trace, log, timeout):
+        """Separate commit stream from HTIF stdout; retain incomplete streams on failure.
+    
+        Spike handles SIGTERM interactively, so a deadline kills only this collector's
+        process group with SIGKILL. This leaves completed prior evidence untouched.
+        """
+        read_fd, write_fd = os.pipe()
+        program_output = log.with_suffix('.stdout.log')
+        partial = trace.with_suffix(trace.suffix+'.partial')
+        started = time.monotonic()
+        args = [spike,'--isa=rv32im_zicntr','-m16','--log-commits',
+                f'--log=/dev/fd/{write_fd}',str(elf)]
+        process = None
+        timer = None
+        try:
+            with os.fdopen(read_fd,'r') as commits, program_output.open('w') as stdout, log.open('w') as stderr:
+                process = subprocess.Popen(args,cwd=ROOT,stdout=stdout,stderr=stderr,
+                                           pass_fds=(write_fd,),start_new_session=True)
+                os.close(write_fd)
+                write_fd = None
+                def terminate():
+                    try:
+                        os.killpg(process.pid,signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+                timer = threading.Timer(timeout,terminate)
+                timer.start()
+                with gzip.open(partial,'wt',compresslevel=1) as output:
+                    sink = CountedTrace(output)
+                    summary = parse_trace(commits,sink)
+                    sink.finish()
+                code = process.wait(timeout=30)
+                if code:
+                    raise RuntimeError(f'Spike trace exit{code}; see{log}')
+            partial.replace(trace)
+        except BaseException:
+            if process is not None:
+                try:
+>                   os.killpg(process.pid,signal.SIGKILL)
+E                   PermissionError: [Errno 1] Operation not permitted
+
+scripts/collect_external_v5.py:317: PermissionError
+=============================== warnings summary ===============================
+tests/test_audit_v11d_feature_packaging.py::test_zip_closure_poison_rejected[duplicatemember]
+  /Users/jasonrivera/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/zipfile/__init__.py:1625: UserWarning: Duplicate name: 'cache/0/extract.ys'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_capture_v11_spooled.py::test_tiny_transport_failures_retained_and_owned_children_reaped[bytes]
+FAILED tests/test_external_v5.py::test_commit_pipe_does_not_mix_htif_output
+FAILED tests/test_external_v5.py::test_trace_deadline_retains_partial_evidence_and_stops_owned_process
+3 failed, 2704 passed, 1 warning, 179 subtests passed in 202.46s (0:03:22)
+make: *** [test] Error 1

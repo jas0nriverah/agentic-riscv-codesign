@@ -1,0 +1,43 @@
+{
+  "command": "make test PYTHON=/Users/jasonrivera/Documents/Codex/2026-10-19/clo/work/audit-venv/bin/python",
+  "passed": 2704,
+  "failed": 3,
+  "subtests_passed": 179,
+  "elapsed_seconds": 202.46,
+  "exit_code": 2,
+  "full_tests_log_sha256": "c1231ffd4fd90a1710aa0e701628111bf727dd52c35fc592c528659094394dd7",
+  "source_checks": {
+    "scripts/capture_v11_spooled.py": {
+      "sha256": "4c4a2a1ea7d61dd6758024ae7a59bd1657d5547fa18746fe97288495f80f7bd6",
+      "unchanged_from_HEAD": true
+    },
+    "scripts/collect_external_v5.py": {
+      "sha256": "2f56db0648f09e44dd7caf384e7f050f763a4556ca6f98af3815b00593b34307",
+      "unchanged_from_HEAD": true
+    },
+    "tests/test_capture_v11_spooled.py": {
+      "sha256": "3d7ffe6cf5753f3e2f9fbdfb4937b991113f8d7996b05af8a4c98e03aedad94f",
+      "unchanged_from_HEAD": true
+    },
+    "tests/test_external_v5.py": {
+      "sha256": "24e181e07dc12b935a4af3b6b91f96cea2dc7473cc4aa34f65d5c4b8fe487455",
+      "unchanged_from_HEAD": true
+    }
+  },
+  "retained_files": {
+    "test-failures/capture-byte-budget/generated/v11-spooled-recovery/fixture/transport/capture.json": "4b007e0a2fd67ad2b204b9ea1953bf36fe6391a38e817219353b5b5fc37899dd",
+    "test-failures/capture-byte-budget/generated/v11-spooled-recovery/fixture/transport/compressor.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test-failures/capture-byte-budget/generated/v11-spooled-recovery/fixture/transport/htif.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test-failures/capture-byte-budget/generated/v11-spooled-recovery/fixture/transport/raw-spike.log.gz.partial": "ae24a502112ec51254ebc48fbb618b01143ddc5960a5429ea52b0ff9fc640b44",
+    "test-failures/capture-byte-budget/generated/v11-spooled-recovery/fixture/transport/spike.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test-failures/external-commit-pipe/fake-spike": "0dab40069216cf5ead65b29fb7e95ea9bd2adc500365f9a70a7faca5e8ede071",
+    "test-failures/external-commit-pipe/trace.jsonl.gz.partial": "d05e5e29488f080df711a0b86874a368a85b94b3f3223a0ab6a0dad6b0429372",
+    "test-failures/external-commit-pipe/trace.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test-failures/external-commit-pipe/trace.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test-failures/external-trace-deadline/fake-spike": "8f03a0d5cbef4e87d60cc4853893d0cd73535b924e9c296893a3e29af67cf3e6",
+    "test-failures/external-trace-deadline/trace.jsonl.gz.partial": "9d082379f6efd23c1a78f6a0ceed6bdc2a6ef3a82dc68dbf461356629c4dc3c5",
+    "test-failures/external-trace-deadline/trace.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test-failures/external-trace-deadline/trace.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "note": "All failures concern unchanged legacy subprocess capture/cleanup. EPERM killpg appears in all three; root cause unresolved. No retry or repair is claimed."
+}

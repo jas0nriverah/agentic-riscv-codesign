@@ -1,0 +1,371 @@
+{
+  "source_sha256": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+  "results": [
+    {
+      "schema": "isaforge-relocation-source-guard-v1",
+      "context_id": "1bd107eac10ff77bff15d8903da582a8f03b4db1a1294df085c3fc02642df997",
+      "workload": "aha-mont64",
+      "executable_count": 21,
+      "rejected_executable_count": 0,
+      "retained_executable_count": 21,
+      "frozen_pool_count": 6,
+      "flagged_frozen_pool_count": 0,
+      "frozen_pool": [
+        {
+          "name": "candidate_00",
+          "formula": "add(srli(in0,31),slli(in1,1))",
+          "safe": true,
+          "checked_sites": 33,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_01",
+          "formula": "or(srli(in0,31),slli(in1,1))",
+          "safe": true,
+          "checked_sites": 18,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_02",
+          "formula": "add(srli(in0,31),in1)",
+          "safe": true,
+          "checked_sites": 22,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_03",
+          "formula": "add(in0,slli(in1,1))",
+          "safe": true,
+          "checked_sites": 20,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_04",
+          "formula": "or(in0,slli(in1,1))",
+          "safe": true,
+          "checked_sites": 12,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_05",
+          "formula": "or(srli(in0,31),in1)",
+          "safe": true,
+          "checked_sites": 12,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        }
+      ],
+      "scope": "Label-free source-provenance diagnosis of existing pools; all frozen pools/results remain unchanged."
+    },
+    {
+      "schema": "isaforge-relocation-source-guard-v1",
+      "context_id": "63c7f40f7e906b046f5a1911d5ed91824bb1aa15673f8fa753a818ccc0d5f511",
+      "workload": "crc32",
+      "executable_count": 8,
+      "rejected_executable_count": 1,
+      "retained_executable_count": 7,
+      "frozen_pool_count": 6,
+      "flagged_frozen_pool_count": 0,
+      "frozen_pool": [
+        {
+          "name": "candidate_00",
+          "formula": "add(in0,slli(andi(in1,255),2))",
+          "safe": true,
+          "checked_sites": 3,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_01",
+          "formula": "slli(andi(xor(in0,in1),255),2)",
+          "safe": true,
+          "checked_sites": 3,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_02",
+          "formula": "add(in0,slli(in1,2))",
+          "safe": true,
+          "checked_sites": 2,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_03",
+          "formula": "andi(xor(in0,in1),255)",
+          "safe": true,
+          "checked_sites": 2,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_04",
+          "formula": "slli(andi(in0,255),2)",
+          "safe": true,
+          "checked_sites": 2,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_05",
+          "formula": "xor(in0,srli(in1,8))",
+          "safe": true,
+          "checked_sites": 2,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        }
+      ],
+      "scope": "Label-free source-provenance diagnosis of existing pools; all frozen pools/results remain unchanged."
+    },
+    {
+      "schema": "isaforge-relocation-source-guard-v1",
+      "context_id": "a19fb0306623215e50eed26a0ea8ff85b9238ebccb6e453724f5570ef1decb24",
+      "workload": "slre",
+      "executable_count": 16,
+      "rejected_executable_count": 2,
+      "retained_executable_count": 14,
+      "frozen_pool_count": 6,
+      "flagged_frozen_pool_count": 1,
+      "frozen_pool": [
+        {
+          "name": "candidate_00",
+          "formula": "add(in0,addi(in1,1))",
+          "safe": true,
+          "checked_sites": 6,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_03",
+          "formula": "add(in0,slli(addi(in1,1),4))",
+          "safe": true,
+          "checked_sites": 3,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_06",
+          "formula": "slli(addi(in0,1),4)",
+          "safe": true,
+          "checked_sites": 2,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_09",
+          "formula": "addi(addi(in0,2047),385)",
+          "safe": true,
+          "checked_sites": 2,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_12",
+          "formula": "addi(lui(4096),-319)",
+          "safe": false,
+          "checked_sites": 2,
+          "unsafe_sites": [
+            {
+              "site": 587,
+              "assembly": "\tlui\ts3,%hi(_ctype_+1)",
+              "reason": "relocation_modifier",
+              "function": "slre_match",
+              "source_line": 712
+            },
+            {
+              "site": 597,
+              "assembly": "\taddi\ts3,s3,%lo(_ctype_+1)",
+              "reason": "relocation_modifier",
+              "function": "slre_match",
+              "source_line": 722
+            }
+          ],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_15",
+          "formula": "sltiu(sub(in0,in1),1)",
+          "safe": true,
+          "checked_sites": 2,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        }
+      ],
+      "scope": "Label-free source-provenance diagnosis of existing pools; all frozen pools/results remain unchanged."
+    },
+    {
+      "schema": "isaforge-relocation-source-guard-v1",
+      "context_id": "3f53183b901bbd833b93bb6b1d88c74eef9fc851e99847a4c58e9ac1d1b54567",
+      "workload": "edn",
+      "executable_count": 18,
+      "rejected_executable_count": 4,
+      "retained_executable_count": 14,
+      "frozen_pool_count": 6,
+      "flagged_frozen_pool_count": 1,
+      "frozen_pool": [
+        {
+          "name": "candidate_00",
+          "formula": "srai(slli(add(in0,in1),16),16)",
+          "safe": true,
+          "checked_sites": 24,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_03",
+          "formula": "srai(slli(in0,16),16)",
+          "safe": true,
+          "checked_sites": 18,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_08",
+          "formula": "add(in0,slli(in1,2))",
+          "safe": true,
+          "checked_sites": 2,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_11",
+          "formula": "addi(add(in0,in1),-128)",
+          "safe": true,
+          "checked_sites": 2,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_14",
+          "formula": "addi(slli(in0,1),-2)",
+          "safe": true,
+          "checked_sites": 2,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_17",
+          "formula": "addi(lui(4096),1860)",
+          "safe": false,
+          "checked_sites": 2,
+          "unsafe_sites": [
+            {
+              "site": 533,
+              "assembly": "\tlui\ts0,%hi(a)",
+              "reason": "relocation_modifier",
+              "function": "benchmark_body.isra.0",
+              "source_line": 606
+            },
+            {
+              "site": 544,
+              "assembly": "\taddi\ts0,s0,%lo(a)",
+              "reason": "relocation_modifier",
+              "function": "benchmark_body.isra.0",
+              "source_line": 617
+            }
+          ],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        }
+      ],
+      "scope": "Label-free source-provenance diagnosis of existing pools; all frozen pools/results remain unchanged."
+    },
+    {
+      "schema": "isaforge-relocation-source-guard-v1",
+      "context_id": "dff930b3f62af548560facf4403cb3bbd411bda014b383a8383a127dd21b4d29",
+      "workload": "ud",
+      "executable_count": 11,
+      "rejected_executable_count": 3,
+      "retained_executable_count": 8,
+      "frozen_pool_count": 6,
+      "flagged_frozen_pool_count": 2,
+      "frozen_pool": [
+        {
+          "name": "candidate_00",
+          "formula": "add(slli(in0,2),in1)",
+          "safe": true,
+          "checked_sites": 6,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_02",
+          "formula": "add(slli(add(in0,in1),2),in1)",
+          "safe": true,
+          "checked_sites": 6,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_04",
+          "formula": "slli(add(slli(in0,2),in1),2)",
+          "safe": true,
+          "checked_sites": 6,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_06",
+          "formula": "add(slli(in0,4),in1)",
+          "safe": true,
+          "checked_sites": 2,
+          "unsafe_sites": [],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_08",
+          "formula": "addi(lui(4096),1216)",
+          "safe": false,
+          "checked_sites": 2,
+          "unsafe_sites": [
+            {
+              "site": 57,
+              "assembly": "\tlui\ts3,%hi(x)",
+              "reason": "relocation_modifier",
+              "function": "ludcmp",
+              "source_line": 83
+            },
+            {
+              "site": 59,
+              "assembly": "\taddi\ts3,s3,%lo(x)",
+              "reason": "relocation_modifier",
+              "function": "ludcmp",
+              "source_line": 85
+            }
+          ],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        },
+        {
+          "name": "candidate_10",
+          "formula": "addi(lui(4096),1376)",
+          "safe": false,
+          "checked_sites": 2,
+          "unsafe_sites": [
+            {
+              "site": 28,
+              "assembly": "\tlui\ts1,%hi(a)",
+              "reason": "relocation_modifier",
+              "function": "ludcmp",
+              "source_line": 52
+            },
+            {
+              "site": 29,
+              "assembly": "\taddi\ts1,s1,%lo(a)",
+              "reason": "relocation_modifier",
+              "function": "ludcmp",
+              "source_line": 53
+            }
+          ],
+          "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+        }
+      ],
+      "scope": "Label-free source-provenance diagnosis of existing pools; all frozen pools/results remain unchanged."
+    }
+  ],
+  "scope": "Post-campaign source-only diagnosis; existing identities, labels and frozen pools are unchanged. A flagged source is a risk, not proof that its recorded successful execution was incorrect."
+}

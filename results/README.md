@@ -1,8 +1,14 @@
 # Research result archives
 
+[Prospective EDN/UD campaign](2026-10-20-budget-campaign/README.md): nine new verified labels, 12 charged attempts, two new source workloads, ten policies and 900 endpoints. Predictions were frozen at `993d5d9` before candidate collection. Improved ML ties the strongest heuristics; UD's infrastructure-censored candidate makes its oracle incomplete.
+
+[Expanded consumed corpus](2026-10-21-expanded-corpus/README.md): 27 verified speedup/hardware labels across five workloads, three separate failed attempts, and source/provenance bindings. These labels are development data for subsequent protocols.
+
+[Final campaign validation](2026-10-21-budget-final-validation/README.md): 2,780 tests and 179 subtests pass, all 900 campaign endpoints and exact prediction refits replay, and one unchanged legacy process-cleanup test fails. [Earlier campaign validation](2026-10-20-budget-validation/README.md) and every raw failure artifact remain preserved.
+
 [Prospective SLRE transfer](2026-10-20-slre-transfer/README.md): third real workload, six executable candidates, seven measured designs, 21 routes, and 105 replay endpoints. Predictions were [committed before candidate labels](2026-10-20-slre-preregistration/README.md). Frequency/merit/calibrated latency win; a 21.14% MAE improvement does not improve selection.
 
-[Latest validation](2026-10-20-slre-validation/README.md): 2,639 tests and 179 subtests pass, plus historical and prospective replays, exact prediction refits, SQLite queries, and the offline demo. The earlier legacy cleanup failure did not recur; no fix is claimed.
+[Earlier SLRE validation](2026-10-20-slre-validation/README.md): 2,639 tests and 179 subtests pass, plus historical and prospective replays, exact prediction refits, SQLite queries, and the offline demo. The earlier legacy cleanup failure did not recur then; no fix was claimed.
 
 [Speedup-model diagnosis](2026-10-20-model-analysis/README.md) and [independent PicoRV32 latency calibration](2026-10-20-latency-calibration/README.md): 222 operation checks, public runtime features, and 60 new heuristic replay outcomes. All twelve consumed automatic cycle labels are explained exactly by calibrated latency merit; no learned-model improvement or generalization claim.
 

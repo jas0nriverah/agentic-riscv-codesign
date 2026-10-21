@@ -1,0 +1,10 @@
+#!/Users/jasonrivera/Documents/Codex/2026-10-19/clo/work/audit-venv/bin/python
+import json,os,sys,time
+path=next(arg.split('=',1)[1] for arg in sys.argv if arg.startswith('--log='))
+with open(path,'w') as log:
+    log.write('core   0: 3 0x80000100 (0xc02027f3) x15 0x00000064\n')
+    log.write('core   0: 3 0x80000104 (0x00150513) x10 0x00000001\n')
+    log.write('core   0: 3 0x80000108 (0xc02027f3) x15 0x00000066\n')
+print(json.dumps({'kind':'external-output','values':[1],'upstream_status':0}),flush=True)
+if 'hang'=='hang':
+    while True: time.sleep(1)

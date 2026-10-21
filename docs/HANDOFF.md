@@ -1,41 +1,43 @@
-# Current handoff — October 20, 2026
+# Current handoff — October 21, 2026
 
-Read [README](../README.md), [AGENTS](../AGENTS.md), [the primary-method review](research-foundation.md), [the expanded review](selection-methods-review.md), and [the new prospective results](prospective-slre.md). Branch: `ai-guided-ml`. The [pre-SLRE handoff](HANDOFF-before-slre-2026-10-20.md) preserves earlier findings and the resolved workload-fit priority.
+Read [README](../README.md), [AGENTS](../AGENTS.md), [the method review](research-foundation.md), and [the completed EDN/UD campaign](budget-campaign.md). Branch: `ai-guided-ml`. The [pre-campaign handoff](HANDOFF-before-budget-campaign-2026-10-21.md) preserves the previous SLRE checkpoint.
 
 ## Verified now
 
-- Original six-candidate CRC32 source-adapter evidence and both historical automatic CRC32/aha-mont64 pools remain unchanged, including negative results. The automatic historical contexts supply 12 training labels across two workloads.
-- **SLRE is complete:** six automatically extracted and executable candidates from 16 eligible formulas, seven processor designs, 21 routes, full fixed-input correctness controls, and no observed partition overflow. The new context is explicit: `-Os`, 4,224-byte program limit, 3,840-byte stack; the same synthesized 8 KiB RAM/core/PCPI. Recorded maximum stack use is 3,072 bytes with 768 bytes headroom. All original `-O2`/4 KiB reservation contexts remain unchanged.
-- **Prospective transfer:** predictions pushed at `1c812e1c6c09070ae45931241c37163d53ee05ee` before target candidate labels. Seven policies, budgets 1–3, five dependent seeds, 105 replay endpoints. Models fit all 12 historical rows after family exclusion. Compiler/partition/workload shift is explicit, not a uniform-context generalization claim.
-- **Measured outcome:** 16,333,432 → 16,221,562 cycles, 1.006896× speedup, +77 LUT4. All six candidates meet the predeclared 1,781-LUT4 / 12 MHz limits. Frequency, merit, and calibrated latency find the optimum on query one. All three learned policies rank it fifth and miss it through query three.
-- **ML diagnosis:** execution features lower MAE 21.14% but do not improve selection. Both nominal 90% ensembles have zero SLRE coverage in every seed. The independently calibrated heuristic predicts all six new cycle deltas exactly. No model is promoted and no residual model is justified by these outcomes.
-- **Reproducibility and demo:** typed, transactional SQLite imports, a locally rendered HTML report, exact refit of all 90 frozen prediction rows, receipt-prefix chronology, raw extraction/lowering/processor audit, and all policy outcomes replay. `make demo` rebuilds them without native hardware jobs. SQL is analysis-only and must remain outside selector access.
-- Automatic totals: **18 candidates / 21 designs / 63 routes / three real workloads**. The older adapter experiment is excluded from those counts. The oracle remains limited to each six-candidate pool.
-- New native work: 133 successful-context commands plus 16 in the preserved failed initial partition attempt, 288.697 command-seconds total. Target candidate wall time is 260.120 seconds; do not add overlapping timer scopes. Historical ML labels cost 533.807 candidate wall-seconds plus separately recorded setup/baseline work.
+- Five real Embench workloads supply **27 verified automatic speedup labels**, plus three failed attempts. There are **32 fully measured processor designs and 96 routes**, including five baselines. Original CRC32 source-adapter evidence is separate and unchanged.
+- EDN/UD pools and predictions were committed and pushed at `993d5d95ad7edb2539782f49151419f479836969` before either target's candidate labels. Both use the same 18 historical outcomes, with 15 fitting rows each after family exclusion. Ten policies, three budgets, three area caps and five dependent seeds produce 900 endpoints. Two workloads are the independent test units.
+- EDN: five successes and one memory-contract failure. Best 386,561,849 → 386,394,809 cycles, **1.000432304×**, +32 LUT4. Merit, calibrated latency and all five learned policies find it on query one.
+- UD: four successes, one self-check failure, one infrastructure-censored attempt. Best completed candidate: 37,845,951 → 37,690,761 cycles, **1.004117455×**, +70 LUT4. All four successful candidates cost +65 to +72 LUT4, so every policy retains baseline under the primary +64 limit. At predeclared +128, normalized XGBoost fixes the original regressor's miss but only ties merit. **No ML superiority is established.**
+- UD candidate 10 stopped during firmware preparation at a low-free-disk preflight. No simulation/netlist/routes exist. Its 31.322582 seconds and query stay charged; no retry occurred. Correctness, performance and feasibility remain unknown. Frozen `oracle`/`regret` fields mean the best verified reference, with qualified interpretation in the derived report. UD's full-pool oracle remains unknown.
+- All nine new successful cycle reductions exactly match calibrated latency, extending the exact match to all 27 labels. Normalized speedup MAE improves 98.43% on EDN and 91.00% on UD, but 90% interval coverage is only 36%/65%; UD coverage worsens. No cycle residual model is warranted yet.
+- The fixed hybrid GP predicts integrated area, minimum routed Fmax and log evaluation duration, using analytic latency as its objective. Paid target adaptation is implemented; it shows no selection gain over the strongest heuristic here. Cost/timing uncertainty remains uncalibrated.
+- The [expanded corpus](../results/2026-10-21-expanded-corpus/README.md) contains 27 consistent rows and three failed attempts with source/context/cost provenance. All five workloads are now consumed data. The old SQLite/HTML demo deliberately retains its frozen three-workload snapshot.
 
-## Validation and immutable evidence
+## Runtime contexts and failures
 
-The [latest validation](../results/2026-10-20-slre-validation/README.md) records **2,639 passing tests and 179 passing subtests**, all required research replays, and the real demo build. The previous unchanged legacy process-cleanup failure did not recur in this run; it is not claimed fixed. Preserve its earlier logs.
+The unchanged 8 KiB PicoRV32/PCPI target uses RV32I with software arithmetic helpers. CRC32/aha use `-O2`; SLRE/EDN/UD use `-Os`. EDN reserves 1,408 stack bytes and observes a 1,040-byte maximum; UD reserves 896 and observes 592. Both retain a 128-byte declared guard and an 800-million-cycle simulation ceiling. UD's upstream software double helpers remain intact, but candidate extraction targets only marked benchmark assembly. Fixed-input checks do not prove arbitrary-input safety.
 
-Do not edit the source files bound into `results/2026-10-20-slre-transfer`, its raw archives, or the prelabel checkpoint. New wrappers must preserve the source that produced evidence. `style_research_demo.py` adds presentation-only CSS after the frozen demo renderer, keeping measurement text unchanged. One initial SLRE image-packing failure and nine earlier build failures remain archived.
+Seven failed qualification roots and three exact-flag linker diagnostics are archived. New target candidate attempts cost 904.226627 wall-seconds; all historical automatic candidate attempts cost 793.926327, totaling 1,698.152954 candidate wall-seconds. New baselines cost 127.215140 wall-seconds; other setup, calibration and inference costs are separate. Failed qualification command time is 64.979547 seconds, diagnostic command time 0.768713. Do not add overlapping command/evaluation timers or treat these scopes as total lifetime project cost.
+
+EDN candidate 17 removes symbolic `%hi(a)`/`%lo(a)` references, letting linker garbage collection discard a 400-byte array while a literal old address survives. UD candidate 08 fails the recorded upstream self-check; UD 10's source also has relocation risk but has no measured outcome. The new `relocation_guard.py` checks original marked assembly and rejects symbolic/unsupported operands. It retains 14 EDN and eight UD full executable formulas before calibration filtering. Its source-only diagnosis also flags one successful historical SLRE candidate; preserve that observed success and disclose the risk rather than silently relabeling it.
 
 ## Next smallest useful experiment
 
-The immediate fit blocker is resolved. The remaining blocker is independent data that tests meaningful decisions. All current small pools improve cycles and satisfy area/timing limits; calibrated latency exactly explains their cycle deltas. More model versions on these consumed pools will not answer the research question.
+**Wire the tested relocation guard before the existing pool stratifier in a fresh, source-bound evaluation context.** `filter_executable_candidates` returns the safe full list and removes old shortlist metadata. Keep all frozen modules/pools unchanged; the historical collection CLIs do not automatically apply this new guard. Verify the binding and original-source checks before additional native measurements.
 
-Keep models fixed. Extend checked runtime support to another workload/input pool and freeze extraction rules, constraints, predictions, and measurement budget before labels. Seek an experiment in which timing/area or measured slowdowns can change the best feasible choice. Do not tighten SLRE's budgets after viewing outcomes and call that a prospective win. Use further independent data to test uncertainty-guided adaptation and constrained/cost-aware acquisition. Learn cost or latency residuals only after a measured selection failure demonstrates the need.
+Then freeze a new independent workload/input pool with explicit area/timing constraints and fixed models. Prefer candidate sets where feasible choices differ: calibrated latency currently explains all successful cycle benefits, and every learned tie on EDN/UD remains a tie. Do not tune more models on these targets and present them as held-out wins. A repeated EDN/UD input is within-workload adaptation, not a new source-family holdout. Any separately authorized retry of UD10 belongs to a new charged context and cannot repair the original campaign's chronology.
 
-The original two-workload pilot remains development-only; three tiny workloads do not establish broad generalization or calibration. SLRE is now consumed data. Preserve its negative result. No new GNN, RTL-rewriting agent, isolated LUT study, or arbitrary-workload support claim.
+The bounded LLM selection agent and joint instruction sets remain later integration milestones. Python paid-label replay is cooperative, not an OS sandbox. Isolate target labels before giving an agent tools; supply the same public information and budget as non-agent policies. Lower, execute and synthesize compatible sets together; individual speedups and hardware increments cannot be summed. No RTL-rewriting agent, GNN or isolated LUT-study detour.
 
-The later LLM agent must use isolated bounded tools, the same public information and measurement budgets, and disclosed historical/inference costs. Current Python paid-label replay is cooperative, not an OS sandbox. Final one-to-three-instruction sets need joint lowering, execution, correctness, and synthesis; individual benefits and area increments cannot be summed.
-
-## Commands
+## Reproduce and validate
 
 ```sh
 make test PYTHON=python
 make reproduce reproduce-speedup reproduce-selection-research reproduce-model-analysis reproduce-prospective PYTHON=python
+make reproduce-budget-campaign campaign-report PYTHON=python
 make demo PYTHON=python
-python -m isaforge.experiment_ledger summary --db generated/reproduction/prospective-slre/experiments.sqlite
 ```
 
-Use Python 3.12 and [pinned packages](../requirements-speedup.txt). The [SLRE guide](prospective-slre.md) records actual collection commands, six candidate measurements, all seven policies, costs, and limitations. Native collection remains serial with two build workers. Replay uses no native measurement tools.
+Use Python 3.12 and pinned `requirements-speedup.txt`. The campaign replay restores raw archives, authenticates all attempts and failures, verifies the prelabel commit, refits frozen predictions exactly and starts zero native jobs. Its CSV/Markdown/figure outputs are analysis artifacts, never selector inputs. The expanded-corpus README gives its portable export command.
+
+The [final validation](../results/2026-10-21-budget-final-validation/README.md) records 2,780 passing tests, 179 passing subtests and one unchanged legacy capture-cleanup EPERM failure. All new guard/report tests and affected research replays pass. Preserve [all pre-report validation](../results/2026-10-20-budget-validation/README.md) as well; never overwrite an earlier failed run or claim the intermittent legacy failures are fixed.

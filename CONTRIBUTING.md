@@ -23,6 +23,7 @@ Write a new result snapshot with a short README, commands, input/source hashes, 
 - Run `make test` for code changes. Hardware tests run when their required tools are installed; CI includes a hardware-tool job.
 - Run `make reproduce` when changing evaluation, reporting, or its entry points. The replay checks exact agreement with the committed six-model scores.
 - Run `make reproduce-speedup` for changes affecting processor evidence or selection reports.
+- Run `make reproduce-budget-campaign campaign-report` for the EDN/UD experiment. The original scorer is frozen; the derived report distinguishes correctness failures from infrastructure-censored outcomes and qualifies its best-verified reference.
 - Regenerate and visually inspect diagrams and figures after layout edits. Preserve vector exports and the numerical evidence behind research plots.
 - Check relative documentation links and make sure quick-start commands work from the repository root.
 

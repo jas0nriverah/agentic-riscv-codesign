@@ -1,0 +1,84 @@
+/Users/jasonrivera/Documents/Codex/2026-10-19/clo/work/audit-venv/bin/python -m pytest -q
+........................................................................ [  2%]
+........................................................................ [  5%]
+........................................................................ [  7%]
+........................................................................ [ 10%]
+............................................................ [ 12%]
+...................................................... [ 14%]
+............................................................................................................................ [ 18%]
+........................................................................ [ 21%]
+........................................................................ [ 24%]
+........................................................................ [ 26%]
+.........................F.............................................. [ 29%]
+......................................................... [ 31%]
+........................................................................ [ 33%]
+........................................................................ [ 36%]
+........................................................................ [ 39%]
+................................................................................................................... [ 43%]
+..................................................................... [ 45%]
+........................................................................ [ 48%]
+........................................................................ [ 50%]
+............................................................... [ 53%]
+............................................................... [ 55%]
+........................................................................ [ 58%]
+.................................................................. [ 60%]
+........................................................................ [ 62%]
+..................................................... [ 64%]
+........................................................................ [ 67%]
+......................................................................................................... [ 71%]
+........................................................................ [ 73%]
+........................................................................ [ 76%]
+........................................................................ [ 79%]
+........................................................................ [ 81%]
+........................................................................ [ 84%]
+........................................................................ [ 86%]
+........................................................................ [ 89%]
+........................................................................ [ 91%]
+........................................................................ [ 94%]
+........................................................................ [ 97%]
+........................................................................ [ 99%]
+........                                                                 [100%]
+=================================== FAILURES ===================================
+______ test_exited_producer_descendant_holding_commit_pipe_is_terminated _______
+
+tmp_path = PosixPath('/private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-438/test_exited_producer_descendan0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x115c96780>
+
+    def test_exited_producer_descendant_holding_commit_pipe_is_terminated(tmp_path,monkeypatch):
+        """Leader exits0; descendant remains in its owned session with commit FD."""
+        import os
+        import time
+        compressor=shutil.which('gzip')
+        if compressor is None:pytest.skip('Native gzip unavailable for tiny transport fixture')
+        monkeypatch.setattr(m,'ROOT',tmp_path);monkeypatch.setattr(m,'free_bytes',lambda p:64*m.GIB)
+        monkeypatch.setitem(m.POLICY,'poll_seconds',0.01);monkeypatch.setitem(m.POLICY,'compressor_drain_seconds',0.03)
+        attempt=tmp_path/'generated/v11-spooled-recovery/fixture';attempt.mkdir(parents=True);folder=attempt/'transport';pidfile=attempt/'descendant.pid'
+        child='import os,time;open('+repr(str(pidfile))+',"w").write(str(os.getpid()));time.sleep(30)'
+        def factory(fd):
+            code=('import subprocess,sys,time,pathlib;'
+                  'subprocess.Popen([sys.executable,"-c",'+repr(child)+'],pass_fds=('+str(fd)+',));'
+                  'p=pathlib.Path('+repr(str(pidfile))+');'
+                  '\nwhile not p.exists():time.sleep(.005)\n')
+            return [sys.executable,'-c',code]
+        try:
+            with pytest.raises(TimeoutError,match='drain'):
+                m.capture_raw(factory,folder,attempt,compressor=compressor,compressor_sha256=m.sha(compressor),environment={'PATH':'/usr/bin:/bin'})
+            record=json.loads((folder/'capture.json').read_text());pid=int(pidfile.read_text())
+            assert record['producer_returncode']==0 and record['status']=='failure-retained'
+>           assert record['cleanup_errors']==[]
+E           assert [{'process': ...permitted')"}] == []
+E             
+E             Left contains one more item: {'process': 'producer', 'operation': 'group-probe', 'error': "PermissionError(1, 'Operation not permitted')"}
+E             Use -v to get more diff
+
+tests/test_capture_v11_spooled.py:148: AssertionError
+=============================== warnings summary ===============================
+tests/test_audit_v11d_feature_packaging.py::test_zip_closure_poison_rejected[duplicatemember]
+  /Users/jasonrivera/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/zipfile/__init__.py:1625: UserWarning: Duplicate name: 'cache/0/extract.ys'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_capture_v11_spooled.py::test_exited_producer_descendant_holding_commit_pipe_is_terminated
+1 failed, 2780 passed, 1 warning, 179 subtests passed in 147.90s (0:02:27)
+make: *** [test] Error 1

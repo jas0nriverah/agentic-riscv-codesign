@@ -1,0 +1,41 @@
+{
+  "schema": "isaforge-v11-spooled-capture-v1",
+  "status": "failure-retained",
+  "producer_command": [
+    "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/work/audit-venv/bin/python",
+    "-c",
+    "import os;os.write(12,b'startup noncommit\\ncore 0: 3 0x80000000 (0xc0202573) x10 0xfffffffe\\ncore 0: 3 0x80000004 (0x00150513) x10 0x00000001\\ncore 0: 3 0x80000010 (0x00150513) x10 0x00000002\\ncore 0: 3 0x80000014 (0xc0202573) x10 0x00000001\\npoststop noncommit\\n')"
+  ],
+  "compressor_command": [
+    "/usr/bin/gzip",
+    "-1",
+    "-n",
+    "-c"
+  ],
+  "compressor_sha256": "c78f313867a6978148f989c8e758fb7a9ba7ff324f0b359b2053f5172f970be5",
+  "environment": {
+    "PATH": "/usr/bin:/bin"
+  },
+  "capture_and_drain_wall_seconds": 0.04084391699871048,
+  "producer_returncode": 0,
+  "compressor_returncode": 0,
+  "primary_error": "ValueError('Stage/file byte budget reached: /private/var/folders/vs/z338_ctd01gccf69v1tm3dh80000gn/T/pytest-of-jasonrivera/pytest-431/test_tiny_transport_failures_r4/generated/v11-spooled-recovery/fixture/transport/raw-spike.log.gz.partial')",
+  "cleanup_errors": [
+    {
+      "process": "compressor",
+      "operation": "killpg",
+      "error": "PermissionError(1, 'Operation not permitted')"
+    }
+  ],
+  "remaining_owned_children": [
+    {
+      "process": "compressor",
+      "pid": 40149,
+      "scope": "owned-process-group"
+    }
+  ],
+  "raw_path": "raw-spike.log.gz.partial",
+  "raw_sha256": "ae24a502112ec51254ebc48fbb618b01143ddc5960a5429ea52b0ff9fc640b44",
+  "raw_bytes": 119,
+  "scope": "Byte capture only; no marker/CRC/ROI/output validation, extraction, model prediction or target label."
+}
