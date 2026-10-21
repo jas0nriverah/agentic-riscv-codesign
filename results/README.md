@@ -1,5 +1,9 @@
 # Research result archives
 
+[Fresh-candidate ML comparison](2026-10-21-feasible-benefit-report/results.md): new budget-conditioned XGBoost reaches the +64-LUT4 optimum after two measurements versus the previous normalized model’s three. The strongest heuristic still needs one. Complete prelabel models/predictions and [raw native evidence](2026-10-21-disjoint-sha256-campaign/README.md) authenticate all 495 new endpoints; no unseen-workload claim.
+
+[Expanded measured corpus](2026-10-21-model-training-corpus/README.md):39 successful labels, three failures,42 attempts, six sources and seven contexts. [Development study](2026-10-21-feasible-benefit-development/README.md) preserves the SHA improvement and EDN first-query regression. [Qualification diagnostics](2026-10-21-model-data-qualification/README.md) retain three memory rejections. [Validation](2026-10-21-model-improvement-validation/README.md) retains 54 new passes,3,014 full-suite passes and the unchanged intermittent legacy cleanup failure.
+
 [Bounded-selector controls](2026-10-21-bounded-selector-controls/README.md): all ten policies reproduce 450 trajectories / 1,350 endpoints through the enforced four-tool interface, with no live LLM calls or native measurements.
 
 [Ordered-descriptor development ablation](2026-10-21-structure-feasibility-development/README.md): one fixed feature bundle worsens SHA's two-query frontier; retained as a negative result, not promoted.
@@ -78,7 +82,7 @@ was known at that stage; later development can reuse its labels.
 
 | Archive | Evidence and evaluation status | Entry point |
 | --- | --- | --- |
-| `2026-10-15-v8-application-transfer/` | Six point predictors frozen before146 original circuit measurements; four primary application families plus related-source secondary; complete errors and budgeted decisions | [V8 results and replay](../docs/v8-application-results.md) |
+| `2026-10-15-v8-application-transfer/` | Six point predictors frozen before 146 original circuit measurements; four primary application families plus related-source secondary; complete errors and budgeted decisions | [V8 results and replay](../docs/v8-application-results.md) |
 | `2026-10-14-development-semantics-v7/` | Six fixed feature views, 90 fits and 29,970 OOF predictions; proved transformations, independent metric replay and explicit cross-fold limitations; development only | [V7 results](../docs/v7-development-results.md), [portable evidence](2026-10-14-development-semantics-v7/evidence/REPRODUCE.md) |
 | `2026-10-14-v6/` | Eight frozen predictors on 192 test circuits / 96 structural components after separate 192-circuit calibration; all original RTL and failures retained | [V6 evidence](2026-10-14-v6/README.md), [results](../docs/v6-results.md) |
 | `2026-10-13/` | Original eight-program pilot: 339 program/formula rows, 301 distinct synthesized circuits; grouped model development and offline selection replay | [Pilot summary](2026-10-13/README.md) |

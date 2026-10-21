@@ -1,0 +1,23 @@
+{
+  "source": "benchmarks/embench/src/qrduino/qrtest.c",
+  "source_sha256": "6b09aa24d48344494f75187cb3854b891dcbd537a3cbede182d85457a62acabc",
+  "matching_lines": [
+    [
+      27,
+      "#define HEAP_SIZE 8192"
+    ],
+    [
+      28,
+      "static char heap[HEAP_SIZE];"
+    ],
+    [
+      61,
+      "      init_heap_beebs ((void *) heap, HEAP_SIZE);"
+    ]
+  ],
+  "stage": "source inspection",
+  "native_candidate_attempts": 0,
+  "new_speedup_labels": 0,
+  "input_changes": false,
+  "conclusion": "The declared 8192-byte heap alone consumes the whole 8KiB RAM before code and stack; unmodified source cannot satisfy the checked partition. Not a compiler/simulation outcome."
+}

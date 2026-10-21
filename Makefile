@@ -55,6 +55,7 @@ candidates: $(PROGRAMS:%=generated/candidates/%.json)
 # Research entry points. Activate .venv first, or set PYTHON=.venv/bin/python.
 .PHONY: help test reproduce reproduce-v4 reproduce-v5 reproduce-external-v5 reproduce-v6 reproduce-v8 reproduce-v9-coverage reproduce-v10d-hardware reproduce-v10d-timing reproduce-v10d-selection reproduce-v12 diagram
 help:
+	@echo 'Current ML experiment: make reproduce-feasible-benefit | make feasible-benefit-report (no native hardware jobs)'
 	@echo 'Interactive six-workload demo: make showcase | Four-tool matched controls: make selector-controls'
 	@echo 'Current prospective comparison: make sha256-report | make reproduce-sha256 (no native hardware jobs)'
 	@echo 'Preserved evidence: make reproduce-budget-campaign | make demo | make reproduce-prospective | make reproduce-speedup'
@@ -170,3 +171,17 @@ reproduce-sha256:
 
 sha256-report: reproduce-sha256
 	$(PYTHON) scripts/report_guarded_selection.py
+
+# Fixed budget-conditioned XGBoost and genuinely new candidate measurements on
+# consumed SHA256 source/input. Exact refits are not a new source holdout.
+BENEFIT_REPORT_OUTPUT ?= generated/reproduction/feasible-benefit-report
+BENEFIT_CORPUS_OUTPUT ?= generated/reproduction/expanded-model-corpus
+.PHONY: reproduce-feasible-benefit feasible-benefit-report export-model-corpus
+reproduce-feasible-benefit:
+	$(PYTHON) scripts/reproduce_disjoint_sha256.py replay
+
+feasible-benefit-report:
+	$(PYTHON) scripts/report_feasible_benefit.py --output "$(BENEFIT_REPORT_OUTPUT)"
+
+export-model-corpus:
+	$(PYTHON) scripts/export_feasible_pool_corpus.py --output "$(BENEFIT_CORPUS_OUTPUT)"

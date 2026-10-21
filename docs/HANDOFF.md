@@ -1,72 +1,48 @@
 # Current handoff — October 21, 2026
 
-Read [README](../README.md), [AGENTS](../AGENTS.md), [research methods](research-foundation.md), [SHA256 results](guarded-sha256.md), and [the teammate branch review](teammate-branch-review-2026-10-21.md). Branch: `ai-guided-ml`. The [previous handoff](HANDOFF-before-guarded-sha256-2026-10-21.md) preserves the five-workload checkpoint and all earlier failure details.
+Read [README](../README.md), [AGENTS](../AGENTS.md), [the current ML experiment](ml-feasible-benefit.md), and [the established-method review](research-foundation.md). Branch: `ai-guided-ml`. The owner wants continued **ML model and dataset improvement**. Demo, presentation and live LLM development are paused. The [previous handoff](HANDOFF-history-2026-10-21-bounded-selector.md) preserves completed agent/demo work and superseded priorities.
 
-## New working connection
+## Working model and measured outcome
 
-The [bounded selector and shareable demo](bounded-selection.md) are implemented. `isaforge/bounded_selector.py` enforces list/predict/measure/finalize, persists charges before lookups, rejects unpaid/infeasible final choices, retains failures and prevents silent retries. `selection_provider.py` sends only public JSON and four strict functions to a remote API. There are no filesystem, shell, MCP, web, raw report or oracle tools. Local callbacks remain trusted cooperative tests.
+One fixed budget-conditioned XGBoost model predicts signed feasible decision utility, reusing the existing 31 structural features and 20-member, 80-tree, depth-2 ensemble with one cap-relative historical area feature. Candidate-level bootstrap weights keep cap replicas dependent. Infeasible zero utility is not zero speedup; failed attempts have unknown utility. Original speedup regressors and the pairwise ranker remain unchanged.
 
-All ten policies reproduce their original EDN/UD/SHA decisions through this channel: **450 trajectories / 1,350 endpoints**, including failure charges and recorded costs. Failed/zero-query/early-stop episodes remain in allocated-budget summaries. Numeric models are unchanged. No live LLM trial was run: OPENAI_API_KEY is absent. Native guarded dispatch and jointly validated instruction sets remain missing.
+Six new automatically extracted SHA256 formulas pass lowering, full-program execution/correctness, processor controls, integrated synthesis and all three routes. Source/input, RV32I/PicoRV32, 8 KiB RAM and checked memory partition are unchanged. Every native attempt was serial and limited to one; none was retried. [All candidate/policy tables](../results/2026-10-21-feasible-benefit-report/results.md).
 
-`make showcase` builds current six-workload interactive HTML, SQLite/SQL, CSVs and provenance. `make selector-controls` reruns the control comparison. Use fresh output directories. Tests: **88 new passes**; final full suite **2,961 passes and 179 subtests**. An earlier full run had 2,945 passes and the unchanged intermittent legacy process-cleanup failure; both records are retained and no legacy fix is claimed. `make reproduce` passes.
+At +64 LUT4/12 MHz, candidate 23 is the complete declared-pool optimum: **26,135,630 → 25,466,830 cycles, 1.026262×, +43 LUT4**, minimum Fmax 62.992 MHz. New XGBoost reaches it in **two queries/131.808 recorded target seconds**, versus normalized XGBoost's **three/201.231**, for all five dependent seeds. Adaptive GP ties the new model; the cost heuristic wins in **one/63.840**. Fixed three-query runs spend all three attempts. Earlier oracle attainment is not demonstrated automatic stopping. At +32, baseline is known at query0; at +128, candidate 01 is best. All eleven policies and 495 endpoints replay exactly.
 
-The one fixed ordered-descriptor ablation is complete and negative: SHA adaptive +64 optimum moves from query two to query three. It is preserved and not promoted. Do not repeat that sweep or add more model versions to chase consumed labels. [Preserved prior handoff](HANDOFF-before-bounded-selector-2026-10-21.md).
+The full 157-file baseline/model/prediction preregistration was pushed at **25322573b86b933253f36a8316a18f7b1a058e67** before any new candidate attempt. All old SHA rows are excluded from fitting:27 non-SHA labels available,21 fitted rows across five groups after related-family exclusions. The new freeze checks at least two groups after exclusions. Native zero-attempt state was checked before/after fitting and again before release. Portable JSON ensembles exactly reproduce predictions and refit weights.
 
-## Verified now
+The original generated protocol path was ignored by Git; its exact copy was committed under preregistration/baseline. The native-pack original-path Git precheck was rejected without a hardware attempt or archive write; diagnostic retained. The **outer** campaign authenticates the entire committed preregistration, original protocol-copy bytes and release receipt. Internal native provenance asserts receipt/source integrity only. Do not invent a retroactive checkpoint or remove the outer checks.
 
-- **33 verified automatic labels across six workloads**, three historical failures, 36 candidate attempts, 39 measured processor designs and 117 routes. Original source-adapter CRC32 evidence remains separate and unchanged.
-- SHA256 adds six successful automatically extracted/lowered candidates, seven integrated designs and 21 routes. Original input/full digest verification, RV32I software compatibility and every processor control pass. Baseline: 26,135,630 cycles, 1,653 LUT4, minimum routed Fmax 68.493149 MHz.
-- At +64 LUT4 and 12 MHz, candidate 22 is best: 25,588,430 cycles, **1.021384665×**, +50 LUT4, minimum Fmax 65.993530 MHz. The fastest unconstrained candidate is 1.053939769× at +68 LUT4. At +32 the baseline is retained.
-- Source guarding rejects three symbolic-address formulas before six candidates are stratified from 56 legal/calibrated formulas. The explicit 7,488-byte program limit, 128-byte guard and 576-byte stack fit the unchanged 8 KiB SoC; observed stack use is 384 bytes.
-- Native `guarded_workload` binds source/inputs, rejects legacy entrypoints, rederives cached discovery and uses one-attempt ledgers. Terminal failures stay charged and collection can continue; interruptions cannot become implicit retries. `guarded_evidence` authenticates raw controls, cycles, netlists, routes, receipts and failed/unknown attempts before archive/replay.
+## Limits and preserved negatives
 
-## Model result and experiment integrity
-
-All SHA256 predictions, pool, baseline and source bindings were committed/pushed at **ab3789f106eab46df26ebcce56a6909e8d34c45b** before candidate measurements. Historical data: 27 labels/30 attempts from five other workloads; 21 fitting rows after related-family exclusion. Existing models, features, hyperparameters and policies were unchanged. Ten policies × three budgets × three caps × five dependent seeds yield **450 endpoints**, all exactly replayed. One new source workload is the independent unit.
-
-**ML still does not beat the strongest heuristic.** At +64, the cost-aware heuristic finds the optimum in one query (67.471 charged seconds), adaptive GP in two (134.518), and merit/calibrated latency/normalized XGBoost in three (200.552). Frequency also reaches it by two queries. Raw regression and ranking miss it in some seeds. Adaptation helps versus merit at two queries but does not beat the strongest comparator.
-
-All 33 successful cycle deltas equal calibrated latency exactly. Normalized SHA speedup MAE is 0.006941309 versus raw 0.016548112; nominal 90% interval coverage is only 43.3% versus 16.7%. Hardware-feasibility confidence and acquisition remain uncalibrated. Do not add cycle residual models while no measured residual exists. Do not relabel these now-consumed six workloads as new held-out tests.
-
-SHA candidate ledger wall time totals 402.461094 seconds, versus 251.904063 seconds inside the narrower measurement records. Historical candidate attempts cost 1,698.152954 seconds, giving 2,100.614048 recorded attempt seconds across 36 attempts. The SHA baseline ledger costs 35.443627 seconds; all 133 native commands total 277.326737 seconds. Timers overlap. Repeated public discovery checks outside the ledger and other setup/calibration/inference are separate; none of these is a complete collection/lifetime timer. Instrument that outer scope before claiming end-to-end search latency.
-
-The [new JSON/CSV corpus](../results/2026-10-21-six-workload-corpus/README.md) preserves contexts and the three earlier failure classifications. UD candidate 10 remains infrastructure-censored, never a negative performance label; its old full-pool oracle is unresolved. SHA's six-candidate reference is complete. Earlier EDN/UD's 900 endpoints and negative SLRE results remain unchanged.
-
-## Teammate work to reuse
-
-Fetched `hw/dev@d38135c` and `hw/agent-experiments@44a5bd3` contain useful placement diagnostics and ordered three-slot PCPI/joint assembly rewriting. Reuse their small components and microtest cases for the future jointly measured instruction-set adapter. Their reported 70-row/60-core sweep is RV32IM, zero-wait external-memory, core-only synthesis with another clock objective: keep it separate from the 33-label corpus. Committed summaries lack our raw/source/time provenance and do not establish equal-query-budget comparison. C3 uses the entire sweep's measured costs, while oracle selection chooses among three measured sets. Account for that history and information before adapting those baselines.
-
-`main` and `codex/isaforge-ml-foundation` are already ancestors. `latest` is a curated older isolated-area snapshot, not newer pipeline work; do not merge its mass deletion or README replacement. No teammate branch was merged or modified. The full review records pinned commits and exact reusable files.
-
-## Current model-readiness findings
-
-The [readiness analysis](model-selection-readiness.md) independently audits the 33-row corpus and frozen factor rankings without fitting models. Initial duration/timing factor removals do not alter rankings on EDN/UD/SHA. SHA's wrong first query is a hardware-feasibility issue; its benefit-only XGBoost order is actually correct for unconstrained speedup. Keep model, acquisition and input effects separate. Thirteen of 31 structural columns are constant; all successful designs speed up and clear timing, limiting decision diversity. Duration targets mix record/ledger scopes. No confidence calibration or new policy advantage is established.
-
-The bounded four-tool host/provider and the one structure-feature ablation are now implemented; the ablation is negative. The next integration milestone is the controlled live-model development comparison, then native/joint-set integration. Keep current numeric models fixed in agent-only comparisons, prove paid-label isolation before LLM calls, and use the same information and budgets as the strongest heuristic/non-agent loop. Start with consumed replay for engineering, then freeze before fresh research validation. SHA query-one heuristic optimality leaves no query-count headroom there. The historical analysis proposed the pilot. The subsequent adapter/control replay is implemented, but no live LLM episode has been run and no revised model is promoted.
-
-Reproduce the arithmetic diagnosis with `python scripts/analyze_model_readiness.py --output generated/reproduction/model-readiness` using a fresh output directory. Metrics, source/input hashes, primary methods and a confidence plot are preserved in [the analysis archive](../results/2026-10-21-model-readiness-analysis/README.md). The prior [handoff](HANDOFF-before-model-readiness-2026-10-21.md), [methodology](methodology-before-readiness-2026-10-21.md), and [method review](research-foundation-before-readiness-2026-10-21.md) are historical snapshots; active versions now reflect completed work.
-
-## Next smallest useful work
-
-1. Reuse the implemented four-tool host and Responses provider. With an available API key/model, run the fixed five-trajectory consumed development comparison; preserve failures, early stops and inference costs. Keep current predictors and equal public information. Add a stop-enabled non-agent control before interpreting early-stopping savings.
-2. Do not promote or retune the completed negative descriptor bundle. Harmonize native duration scopes and instrumentation, qualify fresh workload/input evidence, and preserve measured negative results and all historical costs. A new model change still requires a demonstrated selection problem and a frozen fresh evaluation.
-3. For joint sets, adapt the teammate slot/overlap components into the checked RV32I SoC, rather than creating another RTL framework. Include baseline fallback, executable-site conflicts, measured combined area/timing and full-program correctness. Do not sum individual outcomes.
-4. Validate prospective agent/ML decisions on genuinely fresh source/input evidence after development. Use the isolated remote JSON provider; local Python/CLI agents with filesystem access are not an isolation substitute. Keep the final optimized implementation/report as the endpoint. No RTL-rewriting agent, GNN, model-version sequence or unsupported novelty/ML win.
-
-A rare crash after sealing a measurement record but before its ledger becomes terminal currently stops strict audit. Preserve such a context for explicit recovery; do not promote its result or silently retry it. This did not occur in SHA256.
+- All six fresh candidates belong to four already consumed SHA families; none repeats an old SHA structural feature vector exactly. This is new-candidate evidence on consumed source/input, **not unseen-source/family generalization**. All six historical workloads informed development.
+- Primary-cap coverage of the new model's 90% bootstrap utility range is only 16.7%, averaged over dependent seeds. It does not repair uncertainty or the first over-budget query. Utility is not speedup, calibrated feasibility or confidence.
+- The development EDN +32/query1 regression in one of five seeds and the prior negative ordered-descriptor study remain preserved. Do not retune on these now-consumed outcomes.
+- All 39 successful cycle deltas equal calibrated latency. A new speedup residual model remains unjustified. Single-instruction speedup, integrated area and timing cannot be summed for selected sets.
+- Dataset: **39 successful labels, three earlier failures,42 attempts, six sources and seven contexts**. Twelve SHA rows span two contexts; future source holdouts must exclude both together. There are46 processor evaluations including seven baseline evaluations, and 138 routes. Older source-adapter CRC32 evidence stays separate.
+- New candidate ledger time396.754094s; baseline 39.346900s;133 native commands275.054454s. These overlap. Previous 36 consumed development attempts cost 2100.614048s, cumulative recorded attempt time2497.368142s. Available non-SHA training history costs 1698.152954s including three failures. Fitting/inference, setup/calibration and outer authentication timers remain separate; no end-to-end latency win.
+- UD's historical infrastructure failure is still unknown, not infeasible or a zero-speedup label. The new SHA pool oracle is complete; the old UD full-pool oracle is not.
 
 ## Reproduce and validate
 
+Use Python 3.12 and pinned `requirements-speedup.txt`:
+
 ```sh
+make reproduce-feasible-benefit PYTHON=python
+make feasible-benefit-report PYTHON=python
+make export-model-corpus PYTHON=python
 make test PYTHON=python
 make reproduce PYTHON=python
-make sha256-report PYTHON=python
-python scripts/export_guarded_corpus.py --output generated/reproduction/six-workload-corpus
-# Older campaigns remain reproducible:
-make reproduce-budget-campaign campaign-report PYTHON=python
-make reproduce-prospective PYTHON=python
 ```
 
-Use Python 3.12 and pinned `requirements-speedup.txt`; export requires a fresh directory. SHA replay authenticates raw evidence, original source hashes, exact prelabel Git bytes, historical prediction refits and all 450 endpoints, with no new native jobs. Reports and consumed corpus exports must remain outside selector access.
+[Inference command and model semantics](ml-feasible-benefit.md). Derived outputs require fresh paths. Protect frozen results and hash-bound model/runtime sources.
 
-Historical guarded-only [validation](../results/2026-10-21-guarded-validation/README.md): all **83 then-new tests pass**. Initial full suite: 2,836 tests and 179 subtests passed. Final full suite after adding the report/export/replay tests: **2,863 pass, 179 subtests pass, one unchanged intermittent legacy process-cleanup test fails**. Its residual-process assertion and prior failures are preserved; no fix to legacy capture code is claimed. `make reproduce`, SHA raw/policy replay, export verification and actual legacy-entrypoint rejection pass.
+All **54 new tests pass**. Full suite: **3,014 passed,179 subtests passed, one unchanged intermittent legacy process-cleanup failure** in `test_blocked_pipe_or_compressor_drain_has_finite_cleanup[pipe]`. Its reported producer PID was absent in the post-test check; no legacy fix is claimed. [Validation logs](../results/2026-10-21-model-improvement-validation/README.md) preserve the assertion. Exact native audit, all five control prediction packages, all five utility model weights,495 endpoints, dataset export and historical `make reproduce` pass. Prediction CLI reads zero target labels.
+
+## Next smallest useful work
+
+1. Qualify one genuinely fresh small integer source in a declared compatible context. Preserve [sglib/qrduino/minver memory diagnostics](../results/2026-10-21-model-data-qualification/README.md). Do not silently shrink inputs, enlarge RAM or mix teammate RV32IM/external-memory labels into this corpus.
+2. Freeze a bounded automatically extracted candidate pool and model predictions before measuring it. Hold out the whole source and related families, retaining all strong heuristics and historical/failed-attempt costs. Collect diverse measured feasibility outcomes before another model change or confidence claim.
+3. Assess uncertainty on independent held-out sources. Capture complete outer evaluation wall time alongside current scopes in the next native protocol. No descriptor/model sweep on the now-consumed39 labels.
+4. Later, integrate jointly selected sets using the reviewed teammate slot/overlap components inside the checked SoC. Measure combined performance/area/timing. Keep the LLM comparison for later. No RTL-rewriting agent, new enumerator, GNN or unrelated framework.
