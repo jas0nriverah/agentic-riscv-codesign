@@ -1,0 +1,64 @@
+{
+  "schema": "isaforge-feasible-benefit-preregistration-v1",
+  "scope": "Fresh disjoint candidates on consumed original SHA256 source/input; no unseen-source claim.",
+  "target_workload": "embench-nettle-sha256",
+  "context_id": "c2fd4e9288ddc21105edee92508d71353a62d98723b609bfaa6434205a2e22b6",
+  "target_candidate_attempts_before_and_after_fit": 0,
+  "target_candidate_labels_observed": 0,
+  "baseline_files": [
+    "plan.json",
+    "discovery/discovery.json",
+    "measurements/baseline/measurement.json",
+    "commands.json",
+    "evaluation-protocol.json",
+    "attempt-ledger/baseline.json",
+    "public.json",
+    "context.json",
+    "before.json"
+  ],
+  "source_history": "results/2026-10-21-six-workload-corpus/corpus.json",
+  "selection_protocol_sha256": "45f695e4bd1a1a6885cdf82e1138423fc04ba1bbda17530ce3d6f6fbad139443",
+  "source_bindings": {
+    "scripts/freeze_disjoint_sha256.py": "b83c52442ecbd3e73607a29987efaa4d9379b3159451a0f716fb13d87557703c",
+    "isaforge/training_workload.py": "47365695dc5f76a7773e84db04cdfc690939f81d4f74a7a31b4c47ba574404f2",
+    "isaforge/feasible_benefit_experiment.py": "6acce0664a6e3ac6d97bb690d729981f3860ad36834b57dfdb9b33085eecae48",
+    "isaforge/feasible_benefit.py": "4a07e2c0e9ace6d1808254cef6071f99babbee8f173f4e8b3fc1d4dcf2efbfb9",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3"
+  },
+  "native_candidate_budget": 6,
+  "per_policy_attempt_budgets": [
+    1,
+    2,
+    3
+  ],
+  "area_caps": [
+    32,
+    64,
+    128
+  ],
+  "clock_mhz": 12,
+  "native_order": [
+    "candidate_01",
+    "candidate_12",
+    "candidate_23",
+    "candidate_32",
+    "candidate_43",
+    "candidate_56"
+  ],
+  "candidate_rule": "Exclude the six declared historical SHA256 literal formulas before guarding, calibration and rank stratification; Reject symbolic/unsupported removed source operands before calibration filtering; Evenly spaced rank indices round(i*(N-1)/(K-1)) across all executable calibrated formulas sorted by instruction savings then formula; K fixed before discovery, no candidate performance labels.",
+  "selection_policy_count": 11,
+  "limitations": [
+    "Fresh candidates share formula families and source/input with earlier SHA measurements.",
+    "All six historical workloads informed development; all old SHA labels are excluded from fitting.",
+    "No retuning after this freeze.",
+    "Utility and bootstrap spread are not speedup or calibrated confidence.",
+    "All six outcomes are measured for an oracle and cooperative budgeted replay; not a live adaptive hardware search.",
+    "Single-instruction decisions only; selected sets require joint measurements."
+  ]
+}
