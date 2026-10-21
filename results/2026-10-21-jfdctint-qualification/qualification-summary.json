@@ -1,0 +1,90 @@
+{
+  "schema": "isaforge-jfdctint-qualification-v1",
+  "group": "beebs-jfdctint",
+  "upstream_commit": "049ded9f3aeb5591f553879d3a0376b8614e9422",
+  "source": "benchmarks/beebs/jfdctint/libjfdctint.c",
+  "source_sha256": "2fb8b63b4e0da2012da6d63617e99b4f7ef263899ad01f0426d1277466a79c5e",
+  "source_bytes": 13463,
+  "context_id": "9a2098d3c3dbeefdada16733113567bfd5c04ad2073bd423e2ded9db663c717f",
+  "partition": {
+    "ram_bytes": 8192,
+    "program_limit": 3072,
+    "stack_floor": 3200,
+    "stack_bytes": 4992,
+    "minimum_guard_bytes": 128
+  },
+  "source_arithmetic_or_input_changes": false,
+  "warmup": "Declared no-op ABI adapter outside upstream benchmark; full original initialization and 64-coefficient verifier retained.",
+  "static_link_program_end": 2380,
+  "static_link_seconds": 0.49494304099971487,
+  "failed_fixture_outer_seconds": 3.9388672080003744,
+  "r2_outer_operations": [
+    {
+      "schema": "isaforge-wrapper-outer-time-v1",
+      "command": "prepare",
+      "candidate": null,
+      "started_at_utc": "2026-10-21T20:49:24.012052+00:00",
+      "status": "success",
+      "elapsed_seconds": 0.2064245840010699,
+      "scope": "Complete CLI operation through lock close and JSON formatting; excludes final timing record write. Overlaps inner ledger/native scopes."
+    },
+    {
+      "schema": "isaforge-wrapper-outer-time-v1",
+      "command": "discover",
+      "candidate": null,
+      "started_at_utc": "2026-10-21T20:49:24.260512+00:00",
+      "status": "success",
+      "elapsed_seconds": 13.930105040999479,
+      "scope": "Complete CLI operation through lock close and JSON formatting; excludes final timing record write. Overlaps inner ledger/native scopes."
+    },
+    {
+      "schema": "isaforge-wrapper-outer-time-v1",
+      "command": "baseline",
+      "candidate": null,
+      "started_at_utc": "2026-10-21T20:49:41.765431+00:00",
+      "status": "success",
+      "elapsed_seconds": 28.488317416999053,
+      "scope": "Complete CLI operation through lock close and JSON formatting; excludes final timing record write. Overlaps inner ledger/native scopes."
+    },
+    {
+      "schema": "isaforge-wrapper-outer-time-v1",
+      "command": "public",
+      "candidate": null,
+      "started_at_utc": "2026-10-21T20:50:18.465544+00:00",
+      "status": "success",
+      "elapsed_seconds": 0.3498595410001144,
+      "scope": "Complete CLI operation through lock close and JSON formatting; excludes final timing record write. Overlaps inner ledger/native scopes."
+    },
+    {
+      "schema": "isaforge-wrapper-outer-time-v1",
+      "command": "freeze",
+      "candidate": null,
+      "started_at_utc": "2026-10-21T20:50:18.857279+00:00",
+      "status": "success",
+      "elapsed_seconds": 1.8175269999992452,
+      "scope": "Complete CLI operation through lock close and JSON formatting; excludes final timing record write. Overlaps inner ledger/native scopes."
+    }
+  ],
+  "r2_outer_seconds": 44.79223358299896,
+  "baseline_cycles": 117522,
+  "baseline_instructions": 23428,
+  "baseline_lut4": 1653,
+  "baseline_min_fmax_mhz": 68.49314880371094,
+  "eligible_formulas": 29,
+  "pool_names": [
+    "candidate_00",
+    "candidate_06",
+    "candidate_11",
+    "candidate_17",
+    "candidate_22",
+    "candidate_28"
+  ],
+  "candidate_attempts": 0,
+  "baseline_wall_seconds": 27.569973707999452,
+  "baseline_record_seconds": 27.113970333000907,
+  "native_command_count": 31,
+  "native_command_seconds": 36.71879512800115,
+  "timer_note": "Distinct r2 CLI scopes may be added to each other. They overlap native command, ledger and record scopes; do not add those scopes. Static and first-fixture diagnostic scopes are separate. No complete lifetime or gap-inclusive wall time is claimed.",
+  "failed_fixture_note": "li sp,4220 expands to intermediate4096, continuously detected below4224floor before intended4220; firstviolations do not match fixture expectation. Original failed context and original bound wrapper snapshot preserved, no retry.",
+  "r2_raw_archive": "Not duplicated here; forthcoming candidate campaign will preserve complete r2 native evidence."
+}

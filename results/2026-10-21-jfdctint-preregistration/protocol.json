@@ -1,0 +1,81 @@
+{
+  "schema": "isaforge-jfdctint-preregistration-v1",
+  "scope": "prospective source holdout",
+  "target_workload": "beebs-jfdctint",
+  "context_id": "9a2098d3c3dbeefdada16733113567bfd5c04ad2073bd423e2ded9db663c717f",
+  "target_candidate_attempts_before_and_after_fit": 0,
+  "target_candidate_labels_observed": 0,
+  "baseline_files": [
+    "plan.json",
+    "discovery/discovery.json",
+    "measurements/baseline/measurement.json",
+    "commands.json",
+    "evaluation-protocol.json",
+    "attempt-ledger/baseline.json",
+    "public.json",
+    "context.json",
+    "before.json"
+  ],
+  "baseline_outer_files": {
+    "000-prepare.json": "768e1a3ce06f740cf41f3b19543f8311064b472c2d7d6ea59de898992dadce12",
+    "000-prepare.json.sha256": "774e4e3ef4ea13be9eac59661cef18f8ebd1737f61adedba682f7f953f182e08",
+    "001-discover.json": "b45b83eee667cde862c88811d6ab8db84cc2393e826e5dd454e1283e583256e2",
+    "001-discover.json.sha256": "eb907ca5d1883a86a5908128ef5b6dbcc7c8be9395866bcdb75bed65bb0257b4",
+    "002-baseline.json": "0e227761a1ee241fdebc8cab5e3c8596ff48ede2fae20b64f4fd71011190e69c",
+    "002-baseline.json.sha256": "fc1470018947e0973e9d9e13fb0a1c11afe0c5d4bf66bcd92c1bd6e7bf5eea81",
+    "003-public.json": "5069cd5ebe38ccd076bf2eee6452a140278e263fd2b5957f83885b2a934830b6",
+    "003-public.json.sha256": "f4f31c9c6c32e06b102f55b06b56d72f9ee1b4d924d88ecf1a6fd1f5062a18a6",
+    "004-freeze.json": "618cb14b94341cb5604d5816ae1157737fffcf1dcf26911d7b643d1bdf6a52ee",
+    "004-freeze.json.sha256": "8b53d2400915060da987b4f54b7c508ccdd8049fbe47563bdbeace869583d582"
+  },
+  "source_history": "results/2026-10-21-model-training-corpus/corpus.json",
+  "selection_policy_count": 12,
+  "selection_protocol_sha256": "74f19adc88b36af9460d23946a9ccb89e2900b2dc9e1ba491c7f5c778f6739b5",
+  "source_bindings": {
+    "scripts/freeze_jfdctint.py": "d9b5297f03c5352286c190576ea7048a5150c08e7abae893079b9927dd851dc6",
+    "isaforge/beebs_workload.py": "ee583a6b2b00d4f984654f833685e9f5d9649d6d4b07b91b8e9df5f997888a33",
+    "isaforge/factorized_selection_experiment.py": "545b7abb61a08a41fb6c1680b3e9ec109d73f29ed99edaf95870661818bc43da",
+    "isaforge/feasibility_selection.py": "1268bd50a167a5182a75f5fe6729c7cf5bccd7edf93a476e3a3448a4eaeaca22",
+    "isaforge/feasible_benefit_experiment.py": "6acce0664a6e3ac6d97bb690d729981f3860ad36834b57dfdb9b33085eecae48",
+    "isaforge/feasible_benefit.py": "4a07e2c0e9ace6d1808254cef6071f99babbee8f173f4e8b3fc1d4dcf2efbfb9",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3"
+  },
+  "native_order": [
+    "candidate_00",
+    "candidate_06",
+    "candidate_11",
+    "candidate_17",
+    "candidate_22",
+    "candidate_28"
+  ],
+  "native_candidate_budget": 6,
+  "per_policy_attempt_budgets": [
+    1,
+    2,
+    3
+  ],
+  "area_caps": [
+    32,
+    64,
+    128
+  ],
+  "clock_mhz": 12,
+  "freeze_outer_operation_seconds": 3.3185714169994753,
+  "limitations": [
+    "One new held-out source is not broad generalization evidence.",
+    "Historical measurements, failed attempts and consumed development costs are not free.",
+    "Logistic scores and candidate-bootstrap disagreement are not calibrated confidence.",
+    "Hardware feasibility is conditional on successful verified execution; unknown failures are not negative labels.",
+    "Analytic cycle benefit is a public calibrated estimate, not a new measured speedup label.",
+    "This is static zero-shot selection; the unchanged GP control performs paid adaptation.",
+    "Five bootstrap/tie seeds are dependent repetitions.",
+    "Full-pool serial collection permits cooperative paid replay, not live adaptive native search.",
+    "Single instructions only; combinations require joint execution and hardware measurement."
+  ]
+}

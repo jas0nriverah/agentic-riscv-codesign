@@ -1,0 +1,27 @@
+{
+  "scope": "Source inspection only; no compiler or native jobs launched",
+  "source": "benchmarks/embench/src/matmult-int/matmult-int.c",
+  "source_sha256": "d070416c56a5fe1c66ae8f16ca10f59e7c0002a6dbd62ff1db633914220f959d",
+  "dimensions": [
+    20,
+    20
+  ],
+  "matrix_count": 5,
+  "matrix_names": [
+    "ArrayA_ref",
+    "ArrayA",
+    "ArrayB_ref",
+    "ArrayB",
+    "ResultArray"
+  ],
+  "rv32_ilp32_long_bytes": 4,
+  "matrix_bytes": 8000,
+  "ram_bytes": 8192,
+  "minimum_guard_bytes": 128,
+  "minimum_stack_bytes": 512,
+  "maximum_program_bytes": 7552,
+  "decision": "Cannot fit unchanged source: live matrix storage alone exceeds maximum program region, before Seed, code, constants or other state.",
+  "prior_failure_reference": "docs/codesign-loop.md:70",
+  "new_native_jobs": 0,
+  "new_candidate_labels": 0
+}
