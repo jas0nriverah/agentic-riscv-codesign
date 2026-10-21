@@ -1,5 +1,7 @@
 # Research entry points
 
+Current shareable demo: `make showcase`; bounded four-tool controls: `make selector-controls`. See [the selector guide](../docs/bounded-selection.md). `scripts/run_bounded_selector.py --provider responses` requires an explicit API model and OPENAI_API_KEY; no live trial is claimed. `scripts/ablate_hardware_descriptors.py` preserves the one negative development ablation, not a promoted model.
+
 Current processor replays: `python scripts/reproduce_codesign.py replay` and `python scripts/reproduce_workload.py replay`. New native collection uses `python -m isaforge.workload_experiment`; see [automatic workloads](../docs/automatic-workloads.md). The older commands below are historical cost-model entry points.
 
 Run these scripts from the repository root with the Python environment activated.

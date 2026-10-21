@@ -1,0 +1,65 @@
+{
+  "schema": "isaforge-bounded-selector-validation-v1",
+  "focused_tests": {
+    "passed": 88,
+    "command": "python -m pytest tests/test_bounded_selector.py tests/test_selection_provider.py tests/test_run_bounded_selector.py tests/test_selection_showcase.py tests/test_ordered_hardware_descriptors.py tests/test_ablation_input_integrity.py -q"
+  },
+  "full_suite_final": {
+    "command": "make test PYTHON=<pinned Python 3.12>",
+    "passed": 2961,
+    "subtests_passed": 179,
+    "elapsed_seconds": 148.82,
+    "exit_code": 0,
+    "log": "full-suite-final.log"
+  },
+  "full_suite_earlier": {
+    "passed": 2945,
+    "failed": 1,
+    "subtests_passed": 179,
+    "elapsed_seconds": 144.04,
+    "test": "tests/test_capture_v11_spooled.py::test_blocked_pipe_or_compressor_drain_has_finite_cleanup[pipe]",
+    "assertion": "failure-retained but remaining_owned_children contained producer PID 6742",
+    "residual_pid": 6742,
+    "residual_process_absent_at_followup": true,
+    "note": "Known unchanged intermittent legacy failure; no fix claimed."
+  },
+  "frozen_six_model_replay": {
+    "command": "make reproduce PYTHON=<pinned Python 3.12>",
+    "passed": true,
+    "all_six_metrics_match": true
+  },
+  "matched_controls": {
+    "trajectories": 450,
+    "endpoints": 1350,
+    "all_original_choices_speedups_and_durations_match": true,
+    "llm_calls": 0,
+    "new_native_jobs": 0,
+    "command": "make selector-controls PYTHON=<pinned Python 3.12> SELECTOR_OUTPUT=generated/bounded-selector-make-verification-2026-10-21"
+  },
+  "structure_ablation": {
+    "endpoints": 810,
+    "additional_integrity_tests": 15,
+    "existing_curves_match": true,
+    "original_negative_result_unchanged": true,
+    "promoted": false,
+    "new_native_jobs": 0
+  },
+  "showcase": {
+    "command": "make showcase PYTHON=<pinned Python 3.12> SHOWCASE_OUTPUT=../outputs/isaforge-application-demo/showcase",
+    "verified_labels": 33,
+    "workloads": 6,
+    "failures": 3,
+    "sqlite": true,
+    "csv": true,
+    "live_browser_render_checked": true,
+    "one_query_sha_control_checked": true
+  },
+  "openai_api_key_present": false,
+  "live_llm_trials": 0,
+  "research_limits": [
+    "No new native measurements or prospective workload evidence.",
+    "No demonstrated ML/LLM selection superiority; descriptor change rejected.",
+    "Remote provider is implemented but no live API trial was possible without a key.",
+    "Native dispatch and joint instruction sets remain missing."
+  ]
+}

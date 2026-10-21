@@ -1,5 +1,9 @@
 # Research result archives
 
+[Bounded-selector controls](2026-10-21-bounded-selector-controls/README.md): all ten policies reproduce 450 trajectories / 1,350 endpoints through the enforced four-tool interface, with no live LLM calls or native measurements.
+
+[Ordered-descriptor development ablation](2026-10-21-structure-feasibility-development/README.md): one fixed feature bundle worsens SHA's two-query frontier; retained as a negative result, not promoted.
+
 [Model-readiness analysis](2026-10-21-model-readiness-analysis/README.md): reproducible arithmetic-only factor diagnostics, corpus coverage, recorded GP update failures, primary-method grounding and agent improvement plan. Zero new model fits, LLM calls or native evaluations.
 
 [Prospective guarded SHA256 campaign](2026-10-21-sha256-campaign/README.md): six new verified candidates, a complete declared-pool oracle and 450 fixed-policy endpoints, with prelabel Git proof. The cost-aware heuristic finds the primary feasible optimum in one query versus two for adaptive GP and three for normalized XGBoost/merit.

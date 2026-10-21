@@ -4,6 +4,8 @@
 
 **Working research prototype:** six executed Embench workloads, **33 verified candidate speedup labels**, **39 fully measured processor designs**, and **117 routing results**. All 36 automatic candidate attempts are preserved, including three earlier failures. The new SHA256 experiment adds six successful automatically extracted instructions and 450 prospective policy/budget/cap/seed endpoints. Original CRC32 and all earlier experiments remain intact.
 
+**Try the demo:** `make showcase PYTHON=python` builds an interactive offline page, SQLite database and CSV exports for all six workloads. `make selector-controls PYTHON=python` runs all ten policies through the new bounded four-tool interface and exactly reproduces 450 trajectories / 1,350 endpoints. See [commands, interface and live-model limits](docs/bounded-selection.md). These replays create no new hardware measurements.
+
 ```sh
 # Python 3.12; install the pinned replay environment first.
 python -m pip install -r requirements-speedup.txt
@@ -15,7 +17,7 @@ This verifies raw processor evidence and the pre-measurement Git checkpoint, exa
 
 **ML has not beaten the strongest heuristic.** Under the primary +64-LUT4 cap, SHA256 improves from 26,135,630 to 25,588,430 cycles (**1.021385×**, +50 LUT4). The cost-aware heuristic finds that design in one query, adaptive GP in two, and merit/normalized XGBoost in three. The faster 1.053940× design costs +68 LUT4 and exceeds that cap. This is a useful negative comparison, not a model promotion.
 
-[The model and research-readiness analysis](docs/model-selection-readiness.md) identifies hardware-feasibility representation, uncalibrated confidence and mixed duration timers as concrete weaknesses. The next integration milestone is a bounded four-tool LLM selector, using current predictors and matched non-agent controls, alongside one focused feature experiment. The agent and jointly verified final instruction sets remain unfinished; adding an LLM is an experiment, not an established performance improvement.
+[The model and research-readiness analysis](docs/model-selection-readiness.md) identifies hardware-feasibility representation, uncalibrated confidence and mixed duration timers as concrete weaknesses. The four-tool host and isolated Responses provider are implemented and tested with unchanged predictors and matched controls. Live LLM trials remain unrun because this environment has no API key; jointly verified final instruction sets are also unfinished. The [one ordered-descriptor ablation](results/2026-10-21-structure-feasibility-development/README.md) worsens SHA's two-query selection and is not promoted. No agent or model advantage is claimed.
 
 The source-relocation guard now runs before shortlisting, with one-attempt accounting and replayable evidence. The [analysis](docs/improvement-analysis-2026-10-21.md) explains the demonstrated collection and ML weaknesses. All 33 verified cycle deltas match calibrated latency; hardware feasibility, uncertainty and measurement cost are the remaining decision problems. [Validation](results/2026-10-21-guarded-validation/README.md) records 2,863 passing tests and 179 subtests, with the unchanged intermittent legacy process-cleanup failure preserved. All new tests and affected research replays pass.
 
@@ -54,7 +56,7 @@ Supported workload and inputs
   → optimized software/hardware and a baseline-versus-optimized report
 ```
 
-The LLM agent is an **instruction-selection agent**. Its bounded interface should let it list candidates, query predictions and uncertainty, request measurements, and choose a feasible set. It does not rewrite or optimize RTL. Deterministic RTL generation, verification, synthesis, and routing implement and measure the selected instructions.
+The LLM agent is an **instruction-selection agent**. Its implemented interface lists candidates, queries predictions and uncertainty, charges bounded replay measurements, and validates one feasible instruction. Native guarded dispatch and joint-set selection remain future integration work. It does not rewrite or optimize RTL. Deterministic RTL generation, verification, synthesis, and routing implement and measure the selected instructions.
 
 ## Current engineering scope
 
@@ -82,7 +84,7 @@ PicoRV32/RV32I is the current feasible implementation of the proposal's objectiv
 | Execution-aware features and baseline | A separate 222-case processor calibration exactly explains all 33 successful automatic cycle deltas. No latency residual model is justified yet. Normalized XGBoost lowers mean speedup MAE by 98.43% on EDN and 91.00% on UD versus the original regression; uncertainty coverage remains below its nominal level and worsens on UD. The earlier SLRE regression failures remain preserved. |
 | Data and reproducibility | The latest consumed JSON/CSV corpus contains 33 measured rows, three separate failed attempts and six contexts, linked to authenticated raw archives. New comparison tables reproduce with `make sha256-report`; the old `make campaign-report` remains unchanged. The frozen three-workload SQLite demo remains available with `make demo`. Analysis artifacts stay outside selector access. |
 | Additional workload eligibility | All earlier failures remain preserved. Seven more qualification failures and three static linker diagnostics explain the EDN/UD partition choices, the former SHA256 partition limitation, and statemate's one-formula pool. SHA256 now qualifies with an explicit checked partition and the original full input. The guard is integrated before new pools are frozen. |
-| LLM selection agent | Required later milestone; not implemented or evaluated yet. It must share candidate information and measurement budgets with non-agent methods. |
+| LLM selection agent | Four-tool host and isolated remote provider implemented; 450 matched control trajectories reproduce exactly. Live LLM trials are unrun (missing API key); native dispatch and joint sets remain missing. [Guide](docs/bounded-selection.md). |
 | Joint final instruction set | Fixed historical CRC32 pair experiments exist. Automatic selection, lowering, and measurement of compatible sets of one to three instructions remain to be connected. |
 
 The small CRC32 study and historical LUT-prediction studies are not the finished project. [Current handoff](docs/HANDOFF.md) tracks the next blocker. [Historical checkpoints](README-research-history.md) retain earlier results without defining current priorities.
@@ -90,8 +92,8 @@ The small CRC32 study and historical LUT-prediction studies are not the finished
 ## Priority order and milestone acceptance
 
 1. **Preserve the six-workload milestone.** Keep original CRC32, every prelabel checkpoint, raw outcome and failure, and every heuristic win or tie. All six workloads, including SHA256, are now consumed data. An infrastructure-censored attempt must never become an invented speedup label or a claim of hardware infeasibility.
-2. **Connect the bounded LLM selection agent.** Build a thin list/predict/measure/finalize interface over the existing evaluator, with hidden-label isolation, hard budgets, verified acceptance and recorded costs. Validate on consumed replay first; freeze one prompt/model protocol before any research trials. Compare with unchanged predictors and identical public information.
-3. **Improve demonstrated selection weaknesses.** Test one compact ordered-structure/immediate feature bundle with the current hardware GP/acquisition on consumed workload/family-held-out diagnostics. Keep calibrated latency and the cost-aware heuristic. Correct duration target scopes and measure full search time before time-efficiency claims; more cycle-model versions are not justified by the exact analytic baseline.
+2. **Run the bounded LLM development comparison.** Reuse the implemented four-tool host and remote provider. Specify one available API model, retain the fixed prompt and predictors, and compare five trajectories with matched information/budgets. No live key is configured in this environment. Preserve failed and early-stopping episodes; stopping comparisons also need a non-agent stop-enabled control.
+3. **Collect evidence that can change selection decisions.** The single ordered-descriptor ablation is complete and negative; keep existing models and strong heuristics. Do not tune another bundle on these consumed cases. Harmonize duration scopes, retain full selector/measurement timing, and qualify fresh workload/input and joint-set experiments before another justified model change.
 4. **Validate generalization and decision value.** Freeze any justified change before fresh source/input evidence, distinguish source holdout from input/context adaptation, and charge historical and target costs. Compare agent/non-agent stopping, uncertainty and feasible-performance frontiers; preserve heuristic wins and negative results.
 5. **Validate the final implementation.** Implement compatible selected sets together. Report baseline/optimized execution, correctness, integrated area, timing, evaluation count/cost, and regret against the fully measured manageable-pool oracle.
 

@@ -1,0 +1,157 @@
+{
+  "schema": "isaforge-bounded-selector-development-v1",
+  "scope": "Consumed-data engineering replay; not prospective source generalization.",
+  "provider": "controls",
+  "model": null,
+  "policies": [
+    "frequency",
+    "merit",
+    "calibrated_latency",
+    "latency_cost_heuristic",
+    "random",
+    "raw_regression",
+    "ranking",
+    "normalized_xgb",
+    "hybrid_gp_zero_shot",
+    "hybrid_gp_adapt"
+  ],
+  "targets": [
+    "edn",
+    "ud",
+    "sha256"
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "area_caps": [
+    32,
+    64,
+    128
+  ],
+  "budget": 3,
+  "clock_mhz": 12,
+  "max_model_calls": 12,
+  "max_tool_calls": 20,
+  "max_output_tokens_per_call": null,
+  "prompt": "Select one RISC-V custom instruction, or the unchanged baseline. Maximize VERIFIED FEASIBLE whole-program speedup within the measurement-attempt budget. Predictions are uncalibrated, not measurements. Consider all provided heuristics, structure, uncertainty, area, timing and measurement cost. Use only list_candidates, predict, measure and finalize. Every submitted measure request, including an invalid ID or repeat, consumes an attempt; failed measurements also count. No unqueried outcome is available. Only a paid, correct, device-fitting, area/timing-feasible improving candidate can be finalized. You may stop early. Provide a short decision summary, not private chain of thought. Single instructions only; individual speedups and area cannot be added. This is consumed-data replay, not fresh hardware measurement or an unseen-workload experiment.",
+  "prompt_sha256": "92b0e161813255c51457f4d025666cd4e103d6f57fa5aea740119ce904dcc541",
+  "tools": [
+    {
+      "type": "function",
+      "name": "list_candidates",
+      "description": "List public candidates and selection constraints.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "predict",
+      "description": "Query fixed predictors for candidate IDs.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "candidate_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "measure",
+      "description": "Pay for one candidate measurement, including failures.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "finalize",
+      "description": "Choose one verified feasible candidate or baseline (null).",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "summary": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_id",
+          "summary"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "source_bindings": {
+    "scripts/run_bounded_selector.py": "ca75818e897d93ed734ce5246538ee433a78cecb56fff99da78d0dd1c25bb866",
+    "isaforge/bounded_selector.py": "d130f56fb428e1cd9b6b15d33906e40b7facb1649b1265827c10d958a2adae64",
+    "isaforge/selection_provider.py": "80ebca234fc48ecf58627e72647a0967eafb42ce6306b50325938af641ddf974",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3"
+  },
+  "input_bindings": {
+    "edn": {
+      "protocol.json": "be5df47fb0562c1d264b69d5f463732cfe9819420c5d3c4654b8babc59e95cb4",
+      "public.json": "82f4f390b67dec29d89b506cd8eb7b5e168f37fc82fa0d2006443c970e339018",
+      "history.json": "2d7f480a740928433cc24dc0dfd9e8c5189011c37aefa8b2508ce009aaea869d",
+      "predictions.json": "10886f465e007694e91742b97423ffe23dbe65c63b4c4a856681b237520da304",
+      "report.json": "219ce4a07ed8606fabd2b5f7897319397a2b6d5e417b9b9730b352885ac194bf"
+    },
+    "ud": {
+      "protocol.json": "42c1b24fd8d7b891e0f99efe223db5a27f8c25f3429ff776c460e632286231ef",
+      "public.json": "a06593911abcb603b5542ceb2c6ff2d9b0889f61b96f088d2dd4cbad9f68a8eb",
+      "history.json": "2d7f480a740928433cc24dc0dfd9e8c5189011c37aefa8b2508ce009aaea869d",
+      "predictions.json": "79d500e24923092b9c923078f8ac237eb0b602d24db74f33c4de9dcbc7841b08",
+      "report.json": "39ab9fc3f9590330a35effc9526fd37a305291f749009a2ef4689dd47310cdf7"
+    },
+    "sha256": {
+      "protocol.json": "814a8d4bec37ac39f77bdd94ebe4c9dd2013686716f06bcd5ddf31f021a8eff6",
+      "public.json": "fe2ccfae4013d5f16c4bddb21c8f52ca9691d6d8d9bef546edb2e996ff7dd51d",
+      "history.json": "da31398cc363b701e777f0e25875345ad93628b4cb7b016adccb9f859e976c48",
+      "predictions.json": "51dac6c7f6fce08d1a0031281a627b3f54c02de93d442a33f4051743434f4025",
+      "report.json": "689dc290c4d2df1f8ade8acc00d4d24a9395b17f5390bf68292e5c4c50c182ed"
+    }
+  },
+  "fallback": "best paid verified feasible improvement, else baseline",
+  "invalid_measurements": "Every submitted measure, including invalid IDs/repeats, charges before lookup while budget remains.",
+  "historical_cost_note": "All historical available attempts are charged, including failed/excluded rows. Setup/calibration separate.",
+  "timer_note": "Target durations are archived record/ledger durations, not live search time; these scopes differ and overlap with command timing.",
+  "isolation": "External Responses model has only serialized allowlisted JSON and four strict functions; no shell, files, MCP, retrieval or oracle.",
+  "uncertainty_calibrated": false,
+  "joint_sets_supported": false,
+  "new_native_jobs": 0
+}

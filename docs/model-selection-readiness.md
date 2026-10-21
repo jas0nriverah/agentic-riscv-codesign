@@ -1,5 +1,7 @@
 # Model improvement and research readiness — October 21, 2026
 
+Implementation update: the proposed [four-tool host, remote provider and shareable demo](bounded-selection.md) now work with matched deterministic controls. Live LLM trials still need an API key. The [single descriptor ablation](../results/2026-10-21-structure-feasibility-development/README.md) is negative and is not promoted. Original arithmetic diagnostics below remain unchanged.
+
 **ISAForge is aligned with the proposal, but the central agent and final instruction-set comparison are unfinished.** The next integration milestone should be a small bounded LLM selector, alongside one focused experiment on the demonstrated hardware-feasibility error. Keep whole-program performance under hardware and evaluation budgets as the endpoint. A new model architecture or another isolated area study would not resolve the current evidence gaps.
 
 This review uses the preserved 33-label corpus and frozen EDN/UD/SHA256 predictions and paid-update logs. Its arithmetic factor ablations start no model fits, LLM calls or native measurements. All six workloads are consumed development data. This report does not replace the original prospective results or promote a new policy.

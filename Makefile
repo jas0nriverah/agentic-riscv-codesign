@@ -55,6 +55,7 @@ candidates: $(PROGRAMS:%=generated/candidates/%.json)
 # Research entry points. Activate .venv first, or set PYTHON=.venv/bin/python.
 .PHONY: help test reproduce reproduce-v4 reproduce-v5 reproduce-external-v5 reproduce-v6 reproduce-v8 reproduce-v9-coverage reproduce-v10d-hardware reproduce-v10d-timing reproduce-v10d-selection reproduce-v12 diagram
 help:
+	@echo 'Interactive six-workload demo: make showcase | Four-tool matched controls: make selector-controls'
 	@echo 'Current prospective comparison: make sha256-report | make reproduce-sha256 (no native hardware jobs)'
 	@echo 'Preserved evidence: make reproduce-budget-campaign | make demo | make reproduce-prospective | make reproduce-speedup'
 	@echo 'Research: make test | make reproduce | make reproduce-v4 | make reproduce-v5 | make reproduce-external-v5 | make reproduce-v6 | make reproduce-v8 | make reproduce-v9-coverage | make reproduce-v10d-hardware | make reproduce-v10d-timing | make reproduce-v10d-selection | make reproduce-v12 | make diagram'
@@ -64,6 +65,15 @@ help:
 
 test:
 	$(PYTHON) -m pytest -q
+
+SHOWCASE_OUTPUT ?= generated/reproduction/selection-showcase
+SELECTOR_OUTPUT ?= generated/reproduction/bounded-selector-controls
+.PHONY: showcase selector-controls
+showcase:
+	$(PYTHON) scripts/build_selection_showcase.py --output "$(SHOWCASE_OUTPUT)"
+
+selector-controls:
+	$(PYTHON) scripts/run_bounded_selector.py --output "$(SELECTOR_OUTPUT)"
 
 reproduce:
 	$(PYTHON) scripts/reproduce_matched.py
