@@ -1,0 +1,11 @@
+# Fresh SHA256 experiment — prelabel checkpoint
+
+The unmodified Embench nettle-sha256 workload qualifies in the unchanged 8 KiB PicoRV32/PCPI processor at RV32I/-Os. Its baseline takes 26,135,630 timed cycles, passes the full upstream digest check, and observes 384 stack bytes in a declared 576-byte partition, with a 128-byte guard. This is a new source-workload holdout; the five older workload groups supply all available 27 verified training labels and three failed attempts. Related formula families are excluded by the unchanged model protocol. Historical candidate attempt cost is 1,698.152954 seconds, including failures.
+
+The relocation guard runs before calibration and stratification. Six candidates are frozen before any candidate evaluation. Each receives at most one charged attempt; failures are preserved and never implicitly retried. Native limits are 240 commands, 2,400 aggregate command-seconds, 180 seconds per command, one evaluation worker and two build workers. Complete collection supplies a separate measured reference, not free policy observations.
+
+The primary endpoint is best verified feasible whole-program speedup after three queries, at 12 MHz and +64 LUT4. Predeclared controls use +32/+128 LUT4 and one/two queries. All ten existing policies, five seeds, models, hyperparameters and acquisition rules remain unchanged. No SHA candidate label is used to fit or choose models. Predictions are frozen in selection/. The seeds are dependent repetitions; SHA256 is one independent workload. Each replay policy sees target outcomes only after its charged query. This Python boundary is cooperative, not an LLM sandbox.
+
+The protocol, all predictions, baseline evidence and source hashes are committed and pushed before candidate execution. The original generated-root evaluation-protocol.json is also committed for the raw auditor’s Git proof. The later campaign provenance will record that commit. No superiority claim is preregistered. Any failure remains charged and unknown outcomes censor the full-pool reference.
+
+Before collection: 2,836 tests and 179 subtests pass. The earlier intermittent legacy process-cleanup failure did not recur in this run; no fix to that frozen legacy code is claimed. This checkpoint contains no custom-candidate outcome.

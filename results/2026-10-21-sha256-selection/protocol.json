@@ -1,0 +1,217 @@
+{
+  "schema": "isaforge-guarded-selection-v1",
+  "scope": "prospective",
+  "target_workload": "embench-nettle-sha256",
+  "target_labels_read": 0,
+  "historical_costs": {
+    "successful_labels": 27,
+    "failed_attempts": 3,
+    "total_candidate_attempts": 30,
+    "verified_candidate_wall_seconds": 1647.9562972941203,
+    "failed_candidate_wall_seconds": 50.196657040010905,
+    "total_candidate_wall_seconds": 1698.1529543341312,
+    "prior_history_costs": {
+      "contexts": [
+        {
+          "workload": "embench-aha-mont64",
+          "context_id": "1bd107eac10ff77bff15d8903da582a8f03b4db1a1294df085c3fc02642df997",
+          "candidate_labels": 6,
+          "candidate_wall_seconds": 280.24387375003425,
+          "native_command_seconds": 301.54153757786844,
+          "native_command_count": 119,
+          "baseline_wall_seconds": 28.05179358299938,
+          "setup_command_seconds": 7.123722039948916
+        },
+        {
+          "workload": "embench-crc32",
+          "context_id": "63c7f40f7e906b046f5a1911d5ed91824bb1aa15673f8fa753a818ccc0d5f511",
+          "candidate_labels": 6,
+          "candidate_wall_seconds": 253.56272849900415,
+          "native_command_seconds": 272.7776287130255,
+          "native_command_count": 119,
+          "baseline_wall_seconds": 26.83464212497347,
+          "setup_command_seconds": 5.603812336019473
+        },
+        {
+          "workload": "embench-slre",
+          "context_id": "a19fb0306623215e50eed26a0ea8ff85b9238ebccb6e453724f5570ef1decb24",
+          "candidate_labels": 6,
+          "candidate_wall_seconds": 260.11972479405813,
+          "native_command_seconds": 283.40151175588835,
+          "native_command_count": 133,
+          "baseline_wall_seconds": 29.62814345798688,
+          "setup_command_seconds": 8.47726499903365
+        }
+      ],
+      "candidate_labels": 18,
+      "candidate_wall_seconds": 793.9263270430965,
+      "note": "Native command and evaluation wall scopes overlap; do not add them. All available historical labels are charged, including excluded families."
+    },
+    "prior_campaign_audits": {
+      "embench-edn": {
+        "raw_audit": {
+          "scope": "Frozen authenticated baseline and per-success raw audit; failed attempts cannot enter feasible selection.",
+          "failures": [
+            {
+              "candidate_id": "90e3c4ea30d1f727a19bcdc9441f70dcf43809a3652ac74a3f7de54e7992e912",
+              "source": "measurements/candidate_17/attempt-000/failure.json",
+              "sha256": "d8b2b3e63a8f8b6d76fb65b46c15854ecffe33833209aec2e25156d46a6efa3c",
+              "elapsed_seconds": 11.14687316599884,
+              "error": "ValueError('Command exited 10; see /Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/extended-edn-2026-10-20/measurements/candidate_17/attempt-000/simulation/simulation.json')"
+            }
+          ]
+        },
+        "failed_attempts": [
+          {
+            "candidate_id": "90e3c4ea30d1f727a19bcdc9441f70dcf43809a3652ac74a3f7de54e7992e912",
+            "source": "measurements/candidate_17/attempt-000/failure.json",
+            "sha256": "d8b2b3e63a8f8b6d76fb65b46c15854ecffe33833209aec2e25156d46a6efa3c",
+            "elapsed_seconds": 11.14687316599884,
+            "error": "ValueError('Command exited 10; see /Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/extended-edn-2026-10-20/measurements/candidate_17/attempt-000/simulation/simulation.json')"
+          }
+        ],
+        "analytic_cycle_residuals": [
+          {
+            "candidate_id": "00fa9abbfa0f8ae7ccbf7ddd0de60d3e769a7902cbc8f41f272ab57cdeb00fd8",
+            "estimated_saved_cycles": 167040,
+            "measured_saved_cycles": 167040,
+            "saved_cycle_residual": 0
+          },
+          {
+            "candidate_id": "e1656b90485b535c071e377afa6f86881c0db7eecb4d8ec9f408957071f45db0",
+            "estimated_saved_cycles": 137808,
+            "measured_saved_cycles": 137808,
+            "saved_cycle_residual": 0
+          },
+          {
+            "candidate_id": "79ad2e04c888da3ddeeff88d8c9fc4bfe48f447b13a469763948dc06a66102c1",
+            "estimated_saved_cycles": 21750,
+            "measured_saved_cycles": 21750,
+            "saved_cycle_residual": 0
+          },
+          {
+            "candidate_id": "b20bd1c56bee309d268de8312649dcba6c656cb5aec387d12839dc7a82b90a76",
+            "estimated_saved_cycles": 522,
+            "measured_saved_cycles": 522,
+            "saved_cycle_residual": 0
+          },
+          {
+            "candidate_id": "4eb003580949d574b1e2a28bd432abb2f05e727b3d9cf66c79aa740539f16d8d",
+            "estimated_saved_cycles": 348,
+            "measured_saved_cycles": 348,
+            "saved_cycle_residual": 0
+          }
+        ],
+        "analytic_cycles_match_all_successes": true,
+        "native_command_count": 124,
+        "native_command_seconds": 812.7138479971327,
+        "target_candidate_wall_seconds": 673.4313290830178,
+        "baseline_wall_seconds": 93.0402693329961,
+        "cache_hits": 0,
+        "new_native_jobs": 0
+      },
+      "embench-ud": {
+        "raw_audit": {
+          "scope": "Frozen authenticated baseline and per-success raw audit; failed attempts cannot enter feasible selection.",
+          "failures": [
+            {
+              "candidate_id": "a3cef9a275b8535ec6911ddcb175fff5a5c6ce2f79eefcc905b767044d19f596",
+              "source": "measurements/candidate_08/attempt-000/failure.json",
+              "sha256": "2878607f9fa006321316b81f9662643f5c2dd2b725269d1eab70b07cc30b02b7",
+              "elapsed_seconds": 7.7272019580123015,
+              "error": "ValueError('Command exited 7; see /Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/qualified-ud-2026-10-20/measurements/candidate_08/attempt-000/simulation/simulation.json')"
+            },
+            {
+              "candidate_id": "1c08f924ae41330ab5f5b2ca3ef817accdbac230c106d6b7b44c9bf24b8cc1f5",
+              "source": "measurements/candidate_10/attempt-000/failure.json",
+              "sha256": "25a21a737fc2886feb13aa35fd9d0aa61b87c4543521353e933bc8f02954740f",
+              "elapsed_seconds": 31.322581915999763,
+              "error": "ValueError('Less than 2 GiB free')"
+            }
+          ]
+        },
+        "failed_attempts": [
+          {
+            "candidate_id": "a3cef9a275b8535ec6911ddcb175fff5a5c6ce2f79eefcc905b767044d19f596",
+            "source": "measurements/candidate_08/attempt-000/failure.json",
+            "sha256": "2878607f9fa006321316b81f9662643f5c2dd2b725269d1eab70b07cc30b02b7",
+            "elapsed_seconds": 7.7272019580123015,
+            "error": "ValueError('Command exited 7; see /Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/qualified-ud-2026-10-20/measurements/candidate_08/attempt-000/simulation/simulation.json')"
+          },
+          {
+            "candidate_id": "1c08f924ae41330ab5f5b2ca3ef817accdbac230c106d6b7b44c9bf24b8cc1f5",
+            "source": "measurements/candidate_10/attempt-000/failure.json",
+            "sha256": "25a21a737fc2886feb13aa35fd9d0aa61b87c4543521353e933bc8f02954740f",
+            "elapsed_seconds": 31.322581915999763,
+            "error": "ValueError('Less than 2 GiB free')"
+          }
+        ],
+        "analytic_cycle_residuals": [
+          {
+            "candidate_id": "e806ac1ee74f31e9e9519ef2dab4ff49e4242fc4d77224f8a5b4280b873014c0",
+            "estimated_saved_cycles": 155190,
+            "measured_saved_cycles": 155190,
+            "saved_cycle_residual": 0
+          },
+          {
+            "candidate_id": "2afc4cab76d7a457bb8c2659ade4592360e32f298f94b728e3ad5b4584eeb368",
+            "estimated_saved_cycles": 79812,
+            "measured_saved_cycles": 79812,
+            "saved_cycle_residual": 0
+          },
+          {
+            "candidate_id": "52c86015b3e12f3fe81d948f2eda052ad3f8220f1a702d05f3ab01f999288210",
+            "estimated_saved_cycles": 97548,
+            "measured_saved_cycles": 97548,
+            "saved_cycle_residual": 0
+          },
+          {
+            "candidate_id": "04c80235b2ae981a2ef931aef7f8d17f22e038e04d02719edc9159bac919b08b",
+            "estimated_saved_cycles": 29560,
+            "measured_saved_cycles": 29560,
+            "saved_cycle_residual": 0
+          }
+        ],
+        "analytic_cycles_match_all_successes": true,
+        "native_command_count": 110,
+        "native_command_seconds": 263.10314578397083,
+        "target_candidate_wall_seconds": 230.7952982080169,
+        "baseline_wall_seconds": 34.17487041599816,
+        "cache_hits": 0,
+        "new_native_jobs": 0
+      }
+    },
+    "note": "Frozen model historical_candidate_wall_seconds sums successful labels only; add failed_candidate_wall_seconds once for full historical attempt cost. Baseline/setup/command/inference scopes remain separate."
+  },
+  "whole_target_excluded_ids": [],
+  "evaluation_protocol_sha256": "9eec668220fd38ee1952fbb2294131480232be9cab60e519c9c17247baab6c01",
+  "source_bindings": {
+    "isaforge/guarded_selection.py": "207d3eb788e2b896f9b9b90d39713c11f78e902df0c1b949b7dc6647e9900c1d",
+    "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+    "isaforge/guarded_evidence.py": "ea5730c8cb72e6e0b079b8f0c10bafb822ffd7f666bfc59651cfbf3b1f72a50e",
+    "isaforge/guarded_attempts.py": "a382bb5061cfb9e0b0a61591870735195a7f98fb5f10c4f760d8acef398d454d",
+    "isaforge/relocation_guard.py": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f"
+  },
+  "corpus_sha256": "26df5e2d5c7be37d9d5826bb8d5607fd0b2ab1cf7c47ba39521a2f3958b946fb",
+  "historical_raw_root": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/reproduction/budget-campaign",
+  "artifacts": {
+    "historical-corpus.json.sha256": "1d22409de48e2e55989c5ec49f712bc9c1bbfe722058c3088b90043301b2c807",
+    "baseline.json": "2cd3d0cf597395a963ec30881c4aa2b5eced2c6abdccbb266a7d7923a5a6c601",
+    "historical-corpus.json": "26df5e2d5c7be37d9d5826bb8d5607fd0b2ab1cf7c47ba39521a2f3958b946fb",
+    "baseline.json.sha256": "02f64777818b8e5a2399dccd39c7cad3fb70b5cfb2c60d9c2a9c18c04c37ff17",
+    "model/protocol.json.sha256": "77e30f062c28b939e66f644a03e8f91608e36e6a3f780f7443b1f96d618d4995",
+    "model/history.json.sha256": "f0df9cce34fc8dcf3837ef80410942d7f66584fa6b408e795d483db48ee696e7",
+    "model/history.json": "da31398cc363b701e777f0e25875345ad93628b4cb7b016adccb9f859e976c48",
+    "model/public.json": "fe2ccfae4013d5f16c4bddb21c8f52ca9691d6d8d9bef546edb2e996ff7dd51d",
+    "model/protocol.json": "814a8d4bec37ac39f77bdd94ebe4c9dd2013686716f06bcd5ddf31f021a8eff6",
+    "model/predictions.json": "51dac6c7f6fce08d1a0031281a627b3f54c02de93d442a33f4051743434f4025",
+    "model/predictions.json.sha256": "b21e68d087cc97d4a30fa8b40eb90ea43ec3012d8d83d9b807b0725e0222e9c9",
+    "model/public.json.sha256": "06c4d44f7258b7ea5fe01bb12e7733d54c383fd033131ac519057c894af5efd1"
+  },
+  "limitations": [
+    "Engineering validation of a consumed workload is not held-out source-family ML evidence.",
+    "Historical failure time is charged separately from the successful-label training sum.",
+    "Unknown outcomes remain censored; reference gaps cannot establish full-pool regret.",
+    "Paid-label replay is cooperative, not an external-agent sandbox."
+  ]
+}
