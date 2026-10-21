@@ -2,8 +2,12 @@
 
 [Project scope contract](../README.md) · [Agent instructions](../AGENTS.md) · [Current handoff](HANDOFF.md)
 
-- [Prospective EDN/UD campaign](budget-campaign.md): five workloads and 27 labels in total, normalized XGBoost, constrained GP acquisition, ten policies and 900 budget endpoints; no gain over the strongest heuristics.
-- [Expanded measured corpus](../results/2026-10-21-expanded-corpus/README.md): 27 consistent successful rows, three separate failed attempts, five contexts, costs and provenance.
+- [Guarded SHA256 campaign](guarded-sha256.md): six workloads and 33 labels in total; safe collection, six new verified instructions and 450 prospective endpoints. The cost-aware heuristic reaches the feasible optimum sooner than ML.
+- [Six-workload measured corpus](../results/2026-10-21-six-workload-corpus/README.md): 33 consistent successful rows, three preserved failures, context/source provenance and separate measurement timers.
+- [Teammate branch review](teammate-branch-review-2026-10-21.md): reusable placement/joint-set components, architecture differences, and why the hardware-track comparison needs different information/budget accounting.
+- [Pre-SHA256 improvement analysis](improvement-analysis-2026-10-21.md): demonstrated source/collection weaknesses, hardware-confidence failures and focused next experiments.
+- [Earlier prospective EDN/UD campaign](budget-campaign.md): five-workload checkpoint, normalized XGBoost, constrained GP acquisition, ten policies and 900 endpoints; no gain over the strongest heuristics.
+- [Earlier five-workload corpus](../results/2026-10-21-expanded-corpus/README.md): 27 successful rows, three failed attempts, five contexts, costs and provenance.
 - [Prospective SLRE transfer and offline demo](prospective-slre.md): earlier three-workload checkpoint, frozen predictions, exact replay, SQL evidence ledger, and negative learned-selection result.
 - [Runnable SQL analysis](experiment-queries.sql): best verified feasible designs, separate cost scopes, and preserved failures.
 - [October 20 methods review](selection-methods-review.md): six additional primary methods and their precise adaptation limits.

@@ -1,5 +1,11 @@
 # Research result archives
 
+[Prospective guarded SHA256 campaign](2026-10-21-sha256-campaign/README.md): six new verified candidates, a complete declared-pool oracle and 450 fixed-policy endpoints, with prelabel Git proof. The cost-aware heuristic finds the primary feasible optimum in one query versus two for adaptive GP and three for normalized XGBoost/merit.
+
+[Six-workload corpus](2026-10-21-six-workload-corpus/README.md): 33 successful labels, three preserved failures, 36 attempts, 39 measured designs and 117 routes. Contexts and old versus new timing scopes remain explicit.
+
+[Guarded validation](2026-10-21-guarded-validation/README.md): 83 new tests and all affected replays pass; final full suite has 2,863 passes, 179 subtests and the preserved intermittent legacy cleanup failure. [Teammate branch inventory](2026-10-21-branch-review/README.md) records separate reported measurements and reusable code; no rows were silently imported.
+
 [Prospective EDN/UD campaign](2026-10-20-budget-campaign/README.md): nine new verified labels, 12 charged attempts, two new source workloads, ten policies and 900 endpoints. Predictions were frozen at `993d5d9` before candidate collection. Improved ML ties the strongest heuristics; UD's infrastructure-censored candidate makes its oracle incomplete.
 
 [Expanded consumed corpus](2026-10-21-expanded-corpus/README.md): 27 verified speedup/hardware labels across five workloads, three separate failed attempts, and source/provenance bindings. These labels are development data for subsequent protocols.

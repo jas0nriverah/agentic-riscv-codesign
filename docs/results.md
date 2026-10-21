@@ -1,6 +1,8 @@
 # Results
 
-Current processor evidence includes [prospective SLRE transfer](prospective-slre.md), [automatic CRC32](selection-pilot-results.md), [automatic aha-mont64](automatic-workloads.md), and the [preserved original CRC32 study](codesign-loop.md). The three automatic pools total 18 candidate outcomes; original adapter outcomes remain separate. On the new SLRE workload, heuristic selectors find the best 1.006896× design in one evaluation, while fixed learned policies miss it through three. Execution features lower MAE 21.14% without improving selection. The offline demo and SQLite ledger are available through `make demo`.
+Current processor evidence covers **33 verified automatic labels across six workloads**, with three preserved failures. [SHA256](guarded-sha256.md) adds six passing candidates and 450 prospective endpoints: its +64-LUT4 optimum is 1.021385×, found by the cost-aware heuristic in one query, adaptive GP in two, and merit/normalized XGBoost in three. No learned policy beats the strongest heuristic. [The earlier EDN/UD campaign](budget-campaign.md) retains its 900 endpoints and infrastructure-censored UD outcome.
+
+Earlier checkpoints include [prospective SLRE transfer](prospective-slre.md), [automatic CRC32](selection-pilot-results.md), [automatic aha-mont64](automatic-workloads.md), and the [preserved original CRC32 study](codesign-loop.md). Those first three automatic pools total 18 outcomes; original adapter outcomes remain separate. On SLRE, heuristic selectors find the best 1.006896× design in one evaluation, while fixed learned policies miss it through three. Execution features lower MAE 21.14% without improving selection. The original three-workload offline demo and SQLite ledger remain available through `make demo`.
 
 The following versioned cost-model results are historical. They do not establish the primary whole-program selection endpoint. See the [current contract](../README.md) for active priorities.
 

@@ -1,5 +1,6 @@
-# Legacy RV32IM/Spike extraction flow below. Current integrated RV32I processor
-# experiments use isaforge.workload_experiment; see docs/automatic-workloads.md.
+# Legacy RV32IM/Spike extraction flow below. New integrated RV32I processor
+# contexts use isaforge.guarded_workload; see docs/guarded-sha256.md.
+# Frozen older entrypoints remain available for their historical experiments.
 # Command-line overrides support toolchains such as xPack's riscv-none-elf.
 CC          = riscv64-unknown-elf-gcc
 OBJDUMP     = riscv64-unknown-elf-objdump
@@ -54,11 +55,11 @@ candidates: $(PROGRAMS:%=generated/candidates/%.json)
 # Research entry points. Activate .venv first, or set PYTHON=.venv/bin/python.
 .PHONY: help test reproduce reproduce-v4 reproduce-v5 reproduce-external-v5 reproduce-v6 reproduce-v8 reproduce-v9-coverage reproduce-v10d-hardware reproduce-v10d-timing reproduce-v10d-selection reproduce-v12 diagram
 help:
-	@echo 'Current prospective transfer: make demo | make reproduce-prospective (no native hardware jobs)'
-	@echo 'Current processor evidence: make reproduce-speedup (CRC32 and automatic aha-mont64)'
+	@echo 'Current prospective comparison: make sha256-report | make reproduce-sha256 (no native hardware jobs)'
+	@echo 'Preserved evidence: make reproduce-budget-campaign | make demo | make reproduce-prospective | make reproduce-speedup'
 	@echo 'Research: make test | make reproduce | make reproduce-v4 | make reproduce-v5 | make reproduce-external-v5 | make reproduce-v6 | make reproduce-v8 | make reproduce-v9-coverage | make reproduce-v10d-hardware | make reproduce-v10d-timing | make reproduce-v10d-selection | make reproduce-v12 | make diagram'
 	@echo 'make reproduce replays frozen scores/audit/figures; no training or synthesis.'
-	@echo 'Hardware collection: make all | make run | make trace | make candidates'
+	@echo 'Legacy RV32IM/Spike extraction: make all | make run | make trace | make candidates'
 	@echo 'See docs/README.md for methodology, results, and pinned toolchains.'
 
 test:
@@ -150,3 +151,12 @@ demo:
 .PHONY: reproduce-v14
 reproduce-v14:
 	$(PYTHON) scripts/audit_v14_routing.py --output generated/reproduction/v14/independent-routing-audit.json
+
+# Fresh guarded SHA256 workload; authenticates prelabel Git chronology and
+# raw processor evidence before exact fixed-model/policy replay. No native jobs.
+.PHONY: reproduce-sha256 sha256-report
+reproduce-sha256:
+	$(PYTHON) scripts/reproduce_guarded_sha256.py replay
+
+sha256-report: reproduce-sha256
+	$(PYTHON) scripts/report_guarded_selection.py
