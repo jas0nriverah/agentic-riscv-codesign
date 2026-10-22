@@ -1,0 +1,11 @@
+# Live native GP and model-data validation
+
+All130 focused new tests pass, including the completed native-campaign presenter/export integration and18 narrow replay-adapter tests. The post-collection full suite has3360 passes,179 passing subtests and the unchanged intermittent legacy pipe-cleanup failure. This full run precedes the narrow replay adapter; that adapter is covered by focused tests and the actual complete raw/model/policy replay. No legacy fix is claimed. Earlier validation/failure logs remain preserved in the prelabel checkpoint.
+
+`make reproduce-live-gp` passes540 endpoints,15 grouped prediction/model refit checks, exact actual-live GP decision recreation and the paired paid-prefix/oracle boundary, without native measurements. The original strict runtime remains byte-identical to the pushed prelabel commit. Its final host inference equality failure is preserved separately. Only six nondeterministic host mean-inference timer fields vary; all other endpoint fields, paid processor costs, clocks, predictions and choices match exactly. Both endpoint arrays and timing comparison are retained here.
+
+`make reproduce-expanded-history` recreates4320 old/expanded development endpoints and portable model bytes; old archived controls reproduce their original decisions. All twelve policies and regressions remain visible. `make live-gp-report`, `make export-live-gp-corpus` and historical `make reproduce` pass. Every output directory must be fresh.
+
+The final dataset has87 successes, three preserved failures,90 attempts, eleven sources and twelve contexts. The new scientific test unit is one previously untouched expint source and one native GP seed0/+64 trajectory. Best result31832 vs31843cycles,+17LUT4; GP needs two queries while merit/calibrated/normalized need one. No model or agent advantage is established. Model settings are unchanged; all eleven sources are now consumed data.
+
+Native one-attempt and raw correctness/resource/routing audits pass all six candidates and18 routes. Current totals include99 completed integrated designs and297 routes. UTC and monotonic endpoints remain separate; clock-disagreement flags are preserved without correction and uninterrupted elapsed wall time is not established.

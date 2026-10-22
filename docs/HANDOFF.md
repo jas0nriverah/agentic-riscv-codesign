@@ -1,51 +1,61 @@
-# Current handoff — completed three-source blind campaign
+# Current handoff — expanded training data and live native GP selection
 
-Read [README](../README.md), [AGENTS](../AGENTS.md), [campaign contract](blind-source-campaign.md), [primary methods](research-foundation.md) and [teammate compatibility](teammate-branch-review-2026-10-21.md). Branch: `ai-guided-ml`. GPT-6.1 Sol subagents independently reviewed native evidence, accounting and policy arithmetic. Model/data work remains the priority; demo, live LLM and RTL rewriting are paused. The [previous factorized checkpoint](HANDOFF-history-2026-10-21-factorized.md) and every historical experiment remain intact.
+Read [README](../README.md), [AGENTS](../AGENTS.md), [experiment guide](ml-live-adaptation.md), [primary methods](research-foundation.md) and [teammate compatibility](teammate-branch-review-2026-10-21.md). Branch: `ai-guided-ml`. GPT-6.1 Sol subagents independently checked models, information boundaries, integer-cycle arithmetic and native evidence. The [complete previous handoff](HANDOFF-history-2026-10-21-blind.md) and every historical experiment remain intact. The user canceled service/GCP deployment and asked to continue improving ML; cloud/API/demo/LLM work remains paused.
 
-## Completed evidence
+## Completed engineering and data
 
-**81 verified labels, three preserved failures, 84 attempts, ten source workloads and eleven contexts; 92 completed integrated designs and 276 routes including baselines.** The new independent test is three sources, each with twelve candidates, not ten untouched holdouts. All ten sources are now consumed data.
+**87 verified labels, three preserved failures, 90 attempts, eleven sources and twelve contexts; 99 completed integrated processor designs and 297 routes including baselines.** Six sources are Embench; five are pinned BEEBS. All eleven are now consumed data. This increment contributes one fresh source and one actual live adaptive trajectory, not eleven untouched holdouts or five independent test seeds.
 
-The complete three-source model/prediction/baseline/qualification package was pushed at **`0b0884e112fbb3635487f7ae93d5d0f1616dbcb2`** before any target candidate attempt. The zero-attempt [release](../results/2026-10-21-blind-release.json) authenticates every source. All twelve existing selectors, five dependent seeds, caps32/64/128 and budgets1/2/3 stayed fixed. Targets never trained one another. Historical 45 successes/seven sources were shared; identical related-family exclusions left44/33/29 fitting rows, respectively. The three old failures remain charged, not fabricated training labels.
+Expint qualifies with six automatically extracted candidates from eight eligible formulas. Its original input n=50/x=1, expected result3883, RV32I/ILP32 `-Os`, PicoRV32/PCPI interface, integrated8KiB RAM and6400/6528 partition are unchanged. Bubblesort is unrun because the declared first-success qualification stops at expint. Both Levenshtein rejections are preserved: missing `strlen`, then too few legal formulas after a separately declared external ABI fix. No source/input was reduced and neither rejected context was retried at a smaller gate.
 
-| BEEBS source | Baseline cycles | Declared / eligible | +64 oracle cycles | Speedup | Added LUT4 |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| aha-compress | 70,797 | 12 / 26 | 69,177 | 1.023418× | 61 |
-| ndes | 234,519 | 12 / 43 | 232,855 | 1.007146× | 28 |
-| nettle-md5 | 6,192 | 12 / 297 | 6,080 | 1.018421× | 55 |
+| Candidate | Cycles | Added LUT4 | Minimum Fmax MHz |
+| --- | ---: | ---: | ---: |
+| Baseline | 31,843 | 0 | 68.493149 |
+| 00 | 31,832 | 17 | 66.476097 |
+| 01 | 31,836 | 33 | 67.976341 |
+| 03 | 31,837 | 71 | 65.210304 |
+| 04 | 31,840 | 35 | 65.733253 |
+| 06 | 31,840 | 41 | 64.846642 |
+| 07 | 31,840 | 101 | 67.608681 |
 
-All 36 new candidates pass correctness, counters, stock/custom processor controls, integrated synthesis and all 108 routes. Every successful candidate still clears12MHz and fits the device. The new MD5 source measures its original single64-byte compression block, not complete message hashing. RC4's insufficient-legal-pool qualification rejection remains preserved; Levenshtein was not run. Sources and inputs were not reduced. All three targets share RV32I/ILP32 `-Os`, original8KiB integrated RAM,6400-byte program region,128-byte guard,1664-byte stack and two build workers with serial evaluation.
+All six pass the original verifier, 228-vector instruction checks, exact custom execution/handshake counts, stock/custom processor controls, continuous memory checks, integrated netlist recount and all18 routes. Baseline LUT4=1653; every design retains20 BRAM blocks. All87 cycle deltas exactly match independently calibrated latency. Do not fit a benefit-residual model without new residual evidence. These are native simulated-processor and synthesis/routing outcomes, not physical-board measurements.
 
-[All 36 measurements and all twelve selectors](../results/2026-10-21-blind-report/results.md), [raw packed evidence](../results/2026-10-21-blind-campaign/provenance.json), [prelabel cohort](../results/2026-10-21-blind-preregistration/cohort.json), [expanded corpus](../results/2026-10-21-ten-source-corpus/README.md) and [curves](../results/2026-10-21-blind-figures/blind-primary-curves.png) are committed deliverables. Generated native roots are optional local build state; use the raw archives for replay.
+## Frozen models and actual live search
 
-## Selection result and interpretation
+Full models/runtime/baseline/qualification were pushed at **`3b6f676cd5b68166f529c5be0020de0ddf540930`** before release or any candidate attempt. Historical81 successes and three failures remain charged; identical source/family exclusions leave67 fitting rows from ten sources for every learned policy. No expint source or related family trains its own model. Existing features/settings remain fixed; no new predictor version was introduced.
 
-Primary endpoint: mean verified feasible cycle reduction across the three sources after three attempts at+64LUT4/12MHz. Both preserved GP controls attain all three measured pool optima: **1.602185%** versus **1.144539%** for merit/calibrated latency, **1.449636%** for normalized XGBoost and **0.719365%** for the newer factorized classifier. The classifier loses to merit on two sources and ties on one; do not promote it. Its outputs remain uncalibrated. Adaptive GP reaches compression's oracle on query two; zero-shot GP needs three. Both tie at the primary endpoint. Every three-query trajectory still spends three attempts.
+The declared GP seed0/+64LUT4/12MHz/three-query run dispatches **03→00→01**, authenticating each partial paid audit before the next model update. Query03 is correct but infeasible at+71. Query00 reaches the pool optimum at query2: **1.000345564×**, or **0.034544484%** fewer cycles, at+17LUT4. The complete trace is sealed before oracle-reference queries04/06/07. All six outcomes now form consumed data.
 
-The GP result is promising three-source evidence for existing constrained acquisition, not field superiority or a new method. The shared 48 historical attempts must be counted; a lower total hardware cost after training is not established. Five seeds are dependent repetitions. Oracles cover the declared twelve-candidate subsets, not all formulas or instruction sets. The new+32 compression pool has no feasible improving instruction, so its oracle gain fraction is undefined.
+Merit, calibrated latency and normalized XGBoost find that optimum on query1 in all five dependent replay seeds. Both GP controls need two. Several learned policies tie merit at query3; frequency/random and the cost heuristic remain worse. This source provides no ML superiority or adaptation-specific win. The small input executes each candidate once; its11-cycle public ceiling limits practical value. Do not broaden the pool or revise its input after collection.
 
-All 81 cycle deltas exactly match calibrated latency. The factorized model learns hardware feasibility combined with known calibrated benefit; speedup regression/ranking remain separate real-label-trained controls. No performance residual learner is justified. Future model changes must address an observed decision failure and be assessed on untouched sources, rather than sweeping against these consumed pools.
+Other policies use matched-budget cooperative replay; only one GP trajectory dispatches actual live native queries. No LLM, OS isolation, automatic stopping or joint-set advantage exists. All three fixed-budget queries are spent even when the optimum is reached earlier.
 
-## Replay and validation
+## Expanded-history model result
 
-Use Python3.12 and `requirements-speedup.txt`. All commands below have been run successfully; report/export/plot outputs must be fresh:
+The fixed development comparison uses four consumed source holdouts and all twelve policies, with4320 endpoints. Original fitting cohorts44/33/29/38 expand to68/55/50/71 after the same family exclusions. Every expanded prediction is sealed before scoring; original model artifacts are reused and their original numerical query decisions checked.
+
+At +64LUT4/three queries, raw XGBoost source-macro cycle reduction improves0.766274→1.602185%; normalized XGBoost1.449636→1.602185%; merit remains1.144539%. However ranking falls1.149319→0.652616%, fixed GP1.602185→1.144539%, and adaptive GP1.602185→0.839441%. DCT+32 remains a failure case. Preserve these regressions; no policy is promoted from this consumed-data study. All81 labels, three failures and84 historical attempts are charged once globally.
+
+## Evidence and commands
+
+[Expint outcomes and all twelve policies](../results/2026-10-22-live-gp-report/results.md), [live raw campaign](../results/2026-10-22-live-gp-campaign/provenance.json), [prelabel cohort](../results/2026-10-22-live-gp-preregistration/cohort.json), [87-label corpus](../results/2026-10-22-eleven-source-corpus/README.md), [development comparison](../results/2026-10-22-expanded-history-verified/report.json) and [prelabel validation](../results/2026-10-22-live-gp-prelabel-validation/README.md) are preserved.
+
+Use Python3.12 and `requirements-speedup.txt`; outputs must be fresh:
 
 ```sh
-make reproduce-blind-campaign PYTHON=python
-make blind-report PYTHON=python
-make export-blind-corpus PYTHON=python
-make blind-figures PYTHON=python
+make reproduce-expanded-history PYTHON=python
+make reproduce-live-gp PYTHON=python
+make live-gp-report PYTHON=python
+make export-live-gp-corpus PYTHON=python
 make reproduce PYTHON=python
 ```
 
-Override `BLIND_REPLAY_OUTPUT`, `BLIND_REPORT_OUTPUT`, `BLIND_CORPUS_OUTPUT` and `BLIND_FIGURE_OUTPUT` for another run. Replay checks raw hardware evidence, exact Git prelabel artifacts, release-before-start chronology,45 grouped model/refit checks and all 1,620 endpoints, with zero new native jobs. Independent integer-cycle arithmetic also reproduces all 1,620 points,324 source summaries and108 macro summaries. Source hashes of report/export match their sealed provenance. The research figure was visually inspected.
+The live reproducer must authenticate native evidence, exact Git prelabel/release chronology, all15 grouped model refits, the actual paid decision trace and540 endpoints without new native measurements. The original strict replay's final comparison incorrectly includes nondeterministic host mean inference time; its failure and frozen source are preserved. The explicit post-collection replay adapter requires every other endpoint field exactly and retains both old/new host timings. Never change the frozen runtime, edit a timer or exclude any native duration/prediction/decision from exact checks.
 
-All 132 focused tests pass, including the completed real-campaign integration. The final full suite has3244 passes,179 passing subtests, one integration skip subsequently covered by the focused run, and one intentional ZIP-fixture warning. Earlier prelabel/post-collection full runs retain the unchanged intermittent legacy process-cleanup failure; no legacy fix is claimed. [Validation logs](../results/2026-10-21-blind-validation/README.md) retain every run.
+Prelabel `make test` has3352 passes/179 passing subtests and the unchanged intermittent legacy pipe-cleanup failure. The post-collection full run has3360 passes/179 passing subtests and the same failure. All130 focused new tests pass, including completed presenter/export integration and18 replay-adapter checks. Qualified replay passes all540 endpoints and15 grouped refits; only six host mean-inference fields vary, with both raw arrays retained. Report/export commands, expanded replay and historical reproduction pass. [Complete validation](../results/2026-10-22-live-gp-validation/README.md) preserves both full-suite failures; no legacy fix is claimed.
 
-## Clock qualification and next blocker
+## Costs and next work
 
-The frozen `scripts/blind_campaign.py pack` fails mixed-clock enclosure for four MD5 candidates. Do not edit it or its bound sources. `scripts/reproduce_blind_campaign.py` is an explicit post-collection accounting amendment, now bound into final provenance. It retains the original failure and every UTC/monotonic value. Authenticated blocking collection, exact order, one-attempt ledgers, contiguous scoped receipts and nested durations establish separate serial accounting. Reconstructed UTC ends are diagnostic; suspension versus clock adjustment is unresolved. Actual uninterrupted calendar wall time remains unknown.
+Historical84 attempts cost4853.804293 recorded seconds. The new six-candidate ledger records245.028173 seconds; the live prefix118.611717 and separate reference remainder126.416456. The complete parent collection records paired UTC256.191790 and monotonic256.192980334 seconds. Qualification records43.134382 monotonic seconds; earlier failed qualification/setup costs remain separate. These scopes overlap and are not summed into an elapsed-wall-time claim. Both raw clocks/disagreement flags and the earlier MD5 accounting amendment remain unchanged.
 
-Recorded new subprocess elapsed is2759.079 monotonic seconds; ledger2105.664; qualification226.105. Historical 48 attempts have2748.141 recorded ledger seconds. These scopes overlap and must not be summed into elapsed wall time. No live adaptive-search or equal-wall-time advantage is established. Future runs need paired clock endpoints declared before collection. Never retry the completed pool or rewrite clock records.
-
-Next: retain every fixed policy and investigate the specific area-feasibility misses before proposing one targeted model change; validate it on another untouched source under the same public information and budgets. Add constraint diversity rather than another isolated LUT study. Timing-boundary outcomes, calibrated uncertainty and jointly executed one-to-three-instruction sets remain missing. Reuse the reviewed teammate slot/overlap components only in a separately checked compatible context; do not sum individual gains/area or import RV32IM/external-RAM labels silently. LLM/demo and unrelated frameworks remain paused.
+Next address demonstrated representation/decision failures and collect independent, constraint-diverse sources with meaningful dynamic opportunities. New expint data contrasts a four-operation17-LUT4 best design with two-operation71/101-LUT4 designs: operation count alone is inadequate. This supports diagnosis, not an isolated area model or a sweep on now-consumed labels. Keep the negative ordered-descriptor study intact. Broader fresh-source transfer, calibrated uncertainty, timing/device-fit boundary evidence and jointly executed one-to-three-instruction sets remain missing. Use the existing pipeline and reviewed compatible teammate slot/overlap code for the later joint stage; never add individual gains or area increments.

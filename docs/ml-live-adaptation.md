@@ -56,7 +56,47 @@ Expint qualifies: eight eligible calibrated formulas, six selected by the existi
 
 For each query, the controller seals its chosen identity and paid prefix before dispatch, executes one native evaluation, authenticates the partial raw audit, and gives only paid outcomes to the existing learner. Failures consume queries; interrupted or incomplete dispatch stops without retry. The completed three-query trace is sealed before any remaining candidate is measured. The rest is then collected in declared pool order for a separate oracle. Exact replay checks the live predictions, choices and verified curve; the other policies use matched-budget cooperative replay, not newly measured live runtimes.
 
-The executable stages are `freeze`, `release`, `collect`, `pack` and `replay`; the completed checkpoint will record their exact paths and pushed prelabel commit. Paired raw UTC and monotonic endpoints replace reconstructed mixed-clock end instants for new subprocess observations. Keep each timer scope distinct; clock disagreement is recorded without correction or a tolerance.
+The complete package was pushed at `3b6f676cd5b68166f529c5be0020de0ddf540930` before release or any candidate attempt. After source/family exclusions, every learned policy uses the same67 historical rows across ten sources. The actual live order is03→00→01; only afterward do04/06/07 become measured oracle-reference outcomes. All six pass correctness, integrated hardware and three routes.
+
+The [full result](../results/2026-10-22-live-gp-report/results.md) shows candidate00 runs31,832 versus31,843 cycles, adds17LUT4, and routes at minimum66.476097MHz. This is the optimum at all three area caps. The live GP reaches it at query2; merit, calibrated latency and normalized XGBoost need one. Both GP controls tie merit by query3, so no adaptation-specific or general ML advantage follows. The restricted input executes each formula once and its best cycle reduction is only0.034544484%.
+
+The export has87 verified labels, three preserved failures,90 charged attempts, eleven sources and twelve contexts. The six new labels exactly match independently calibrated cycle predictions; the87-label corpus still provides no nonzero residual for a performance-residual learner. Every source is now consumed data.
+
+The executed native stages were:
+
+```sh
+python scripts/live_gp_campaign.py freeze \
+  --native-root generated/live-gp-integer-six-2026-10-22/expint \
+  --qualification results/2026-10-22-integer-six-qualification \
+  --output results/2026-10-22-live-gp-preregistration
+# Complete package committed and pushed before this release:
+python scripts/live_gp_campaign.py release \
+  --preregistration results/2026-10-22-live-gp-preregistration \
+  --native-root generated/live-gp-integer-six-2026-10-22/expint \
+  --commit 3b6f676cd5b68166f529c5be0020de0ddf540930 \
+  --output results/2026-10-22-live-gp-release.json
+python scripts/live_gp_campaign.py collect \
+  --preregistration results/2026-10-22-live-gp-preregistration \
+  --native-root generated/live-gp-integer-six-2026-10-22/expint \
+  --release results/2026-10-22-live-gp-release.json \
+  --output results/2026-10-22-live-gp-collection
+python scripts/live_gp_campaign.py pack \
+  --preregistration results/2026-10-22-live-gp-preregistration \
+  --native-root generated/live-gp-integer-six-2026-10-22/expint \
+  --release results/2026-10-22-live-gp-release.json \
+  --collection results/2026-10-22-live-gp-collection \
+  --output results/2026-10-22-live-gp-campaign
+```
+
+These directories are frozen; do not rerun their native jobs. For hardware-free replay and fresh reports:
+
+```sh
+make reproduce-live-gp PYTHON=python
+make live-gp-report PYTHON=python
+make export-live-gp-corpus PYTHON=python
+```
+
+Paired raw UTC and monotonic endpoints replace reconstructed mixed-clock end instants for new subprocess observations. Keep each timer scope distinct; clock disagreement is recorded without correction or a tolerance. The original strict replay fails its final endpoint comparison because it includes changing host mean inference time. Its failure and runtime are preserved. An explicit post-collection adapter requires all other fields exactly, repeats native/model/live-trace checks, and retains both host timings. No processor cost, prediction or decision is excluded from exact comparison.
 
 ## Acceptance and limits
 

@@ -225,10 +225,22 @@ blind-figures:
 	$(PYTHON) scripts/plot_blind_campaign.py --report "$(BLIND_REPORT_OUTPUT)" --output "$(BLIND_FIGURE_OUTPUT)"
 
 EXPANDED_HISTORY_REPLAY_OUTPUT ?= generated/reproduction/expanded-history
-LIVE_GP_REPLAY_OUTPUT ?= generated/reproduction/live-gp
-.PHONY: reproduce-expanded-history reproduce-live-gp
+LIVE_GP_REPLAY_OUTPUT ?= generated/reproduction/live-gp-qualified
+LIVE_GP_STRICT_OUTPUT ?= generated/reproduction/live-gp-strict
+LIVE_GP_REPORT_OUTPUT ?= generated/reproduction/live-gp-report
+LIVE_GP_CORPUS_OUTPUT ?= generated/reproduction/live-gp-corpus
+.PHONY: reproduce-expanded-history reproduce-live-gp reproduce-live-gp-strict live-gp-report export-live-gp-corpus
 reproduce-expanded-history:
 	$(PYTHON) scripts/evaluate_expanded_history.py replay --root results/2026-10-22-expanded-history-verified --output "$(EXPANDED_HISTORY_REPLAY_OUTPUT)"
 
 reproduce-live-gp:
-	$(PYTHON) scripts/live_gp_campaign.py replay --campaign results/2026-10-22-live-gp-campaign --output "$(LIVE_GP_REPLAY_OUTPUT)"
+	$(PYTHON) scripts/reproduce_live_gp.py replay --campaign results/2026-10-22-live-gp-campaign --output "$(LIVE_GP_REPLAY_OUTPUT)"
+
+reproduce-live-gp-strict:
+	$(PYTHON) scripts/live_gp_campaign.py replay --campaign results/2026-10-22-live-gp-campaign --output "$(LIVE_GP_STRICT_OUTPUT)"
+
+live-gp-report:
+	$(PYTHON) scripts/report_live_gp_campaign.py --output "$(LIVE_GP_REPORT_OUTPUT)"
+
+export-live-gp-corpus:
+	$(PYTHON) scripts/export_live_gp_corpus.py --output "$(LIVE_GP_CORPUS_OUTPUT)"
