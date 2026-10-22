@@ -1,5 +1,7 @@
 # Documentation
 
+[Expanded training history and live measured GP adaptation](ml-live-adaptation.md): twelve unchanged policies, a fixed consumed-data comparison with positive and negative results, and a fresh six-candidate expint protocol connecting paid model updates to native hardware evaluation. Earlier source/candidate failures remain preserved.
+
 [Completed blind source-transfer campaign](blind-source-campaign.md): three jointly frozen new sources,36 verified labels and1,620 endpoints from twelve unchanged policies. Existing GP controls reach all three primary pool optima; the newer classifier loses to merit on two sources. [Results](../results/2026-10-21-blind-report/results.md), [81-label ten-source corpus](../results/2026-10-21-ten-source-corpus/README.md) and [clock qualification/validation](../results/2026-10-21-blind-validation/README.md). No field-superiority or uninterrupted elapsed-wall-time claim. The seven-source checkpoint below remains preserved.
 
 Earlier checkpoint: [factorized model and fresh BEEBS workload](ml-factorized-selection.md), [all twelve policy results](../results/2026-10-21-jfdctint-report/results.md), and the [45-label seven-source corpus](../results/2026-10-21-seven-source-corpus/README.md). The model ties the strongest heuristics at the primary cap, misses at the tighter cap, and remains uncalibrated. ML/data improvement takes priority over demo or live LLM development.

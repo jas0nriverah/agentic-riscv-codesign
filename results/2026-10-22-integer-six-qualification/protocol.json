@@ -1,0 +1,159 @@
+{
+  "schema": "isaforge-integer-six-qualification-v1",
+  "created_at_utc": "2026-10-22T15:51:16.355190+00:00",
+  "order": [
+    "expint",
+    "bubblesort"
+  ],
+  "stop_after_successful_sources": 1,
+  "phases": [
+    "prepare",
+    "discover",
+    "baseline",
+    "public",
+    "freeze"
+  ],
+  "pool_size": 6,
+  "memory_partition": {
+    "ram_bytes": 8192,
+    "program_limit": 6400,
+    "stack_floor": 6528,
+    "stack_bytes": 1664,
+    "minimum_guard_bytes": 128
+  },
+  "reference_root": "generated/codesign-crc32-2026-10-19-r1",
+  "reference_plan_sha256": "796167e07bdc413f348c829ca93e60eda87162ca02143d3f57269ff2059197b9",
+  "native_parent": "generated/live-gp-integer-six-2026-10-22",
+  "target_candidate_attempts": 0,
+  "upstream": {
+    "suite": "BEEBS",
+    "commit": "049ded9f3aeb5591f553879d3a0376b8614e9422"
+  },
+  "original_inputs": {
+    "expint": {
+      "n": 50,
+      "x": 1,
+      "expected_return": 3883
+    },
+    "bubblesort": {
+      "elements": 100,
+      "initial": "0,-1,...,-99; original 101-element storage",
+      "verifier": "All original 100 output elements checked against -99,...,0"
+    }
+  },
+  "selection_rule": "First declared source passing original input/verifier, checked baseline and exactly six legal calibrated formulas. No source/partition changes, no retry and no candidate outcomes.",
+  "pool_justification": "New six-candidate source protocol declared before either source discovery, following the earlier DCT-six precedent. Both twelve-candidate Levenshtein contexts and RC4 rejection remain preserved; none is retried.",
+  "preserved_qualification_manifests": {
+    "results/2026-10-21-blind-qualification": "affb08dfc43abc669826dce3c64afa80107093e0dc0e35b0ed2682b0b3ea459a",
+    "results/2026-10-22-levenshtein-qualification": "bb968ec8195fbe58047bcfb3c0ae52e85573fa29bc59915c7dbbe93a5be25b42",
+    "results/2026-10-22-levenshtein-strlen-qualification": "f408d240c11867b55ea7b50dfb677b61265c0fd0ec594e1f0f06fcf8f772c51c"
+  },
+  "source_bindings": {
+    "scripts/qualify_integer_workload.py": "9d84fb020d0d0533790c1b5dfd05da80f04592ebdb673cdbceb22bb28ad9633a",
+    "isaforge/integer_workload.py": "053285b250837235272f166f44a6e68a9b47a4154fefd58224517919ba5c5248",
+    "isaforge/blind_workload.py": "9f29ddd1cebbcc1c8199814343c555b35438d7669643c8749bbb96aa916a5307",
+    "isaforge/observed_command.py": "f56bf235b31205c842ea04ab5a493ee7f7e6731844e05b6d8991f21d9f3be41e",
+    "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+    "benchmarks/beebs/COPYING": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "benchmarks/beebs/expint/libexpint.c": "4dff051261026af2ac420ca3e8eb76b01855bec7784ac456896361513b8d3571",
+    "benchmarks/beebs/bubblesort/libbubblesort.c": "d4a9c32096ebe287ac83d50c69d4ec7cab1c253c6a7e383415b7db521e1b6f9a"
+  },
+  "workers": 1,
+  "build_workers": 2,
+  "phase_timeout_seconds": 3600,
+  "clock_contract": "Separate paired UTC and monotonic endpoints; no mixed-clock inferred end or uninterrupted wall-time claim.",
+  "phase_commands": {
+    "expint": {
+      "prepare": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.integer_workload",
+        "prepare",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-integer-six-2026-10-22/expint",
+        "--workload",
+        "expint",
+        "--reference-root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+      ],
+      "discover": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.integer_workload",
+        "discover",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-integer-six-2026-10-22/expint"
+      ],
+      "baseline": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.integer_workload",
+        "baseline",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-integer-six-2026-10-22/expint"
+      ],
+      "public": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.integer_workload",
+        "public",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-integer-six-2026-10-22/expint"
+      ],
+      "freeze": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.integer_workload",
+        "freeze",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-integer-six-2026-10-22/expint"
+      ]
+    },
+    "bubblesort": {
+      "prepare": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.integer_workload",
+        "prepare",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-integer-six-2026-10-22/bubblesort",
+        "--workload",
+        "bubblesort",
+        "--reference-root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+      ],
+      "discover": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.integer_workload",
+        "discover",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-integer-six-2026-10-22/bubblesort"
+      ],
+      "baseline": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.integer_workload",
+        "baseline",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-integer-six-2026-10-22/bubblesort"
+      ],
+      "public": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.integer_workload",
+        "public",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-integer-six-2026-10-22/bubblesort"
+      ],
+      "freeze": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.integer_workload",
+        "freeze",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-integer-six-2026-10-22/bubblesort"
+      ]
+    }
+  }
+}

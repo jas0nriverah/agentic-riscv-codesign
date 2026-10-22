@@ -1,0 +1,336 @@
+"""One predeclared consumed-data update, preserving all twelve existing policies.
+
+``prepare`` saves the protocol without fitting. ``run`` requires that prepared
+protocol, freezes every expanded-history prediction before target scoring, and
+reuses the original prelabel models/predictions for the old-history comparison.
+No model setting, feature, acquisition rule or native measurement is changed.
+"""
+from __future__ import annotations
+
+import argparse
+import copy
+import importlib.metadata
+import math
+from pathlib import Path
+import shutil
+import statistics
+import sys
+import time
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from isaforge import codesign as c, factorized_selection_experiment as e
+from isaforge.prospective_selection import PUBLIC_KEYS
+from scripts.diagnose_factorized_selection import folds
+from scripts.export_guarded_corpus import _csv
+from scripts.report_blind_campaign import endpoints_for_source, source_macro, POLICY_LABELS
+from scripts.reproduce_guarded_sha256 import _manifest, _hashes
+
+CORPUS = ROOT/'results/2026-10-21-ten-source-corpus/corpus.json'
+BLIND_PREREG = ROOT/'results/2026-10-21-blind-preregistration'
+BLIND = ROOT/'results/2026-10-21-blind-campaign'
+DCT_PREREG = ROOT/'results/2026-10-21-jfdctint-preregistration'
+DCT = ROOT/'results/2026-10-21-jfdctint-campaign'
+DCT_SELECTION = ROOT/'results/2026-10-21-jfdctint-selection'
+TARGETS = ('beebs-aha-compress', 'beebs-ndes', 'beebs-nettle-md5', 'beebs-jfdctint')
+SOURCE = 'scripts/evaluate_expanded_history.py'
+SOURCES = tuple(dict.fromkeys((SOURCE, 'scripts/diagnose_factorized_selection.py',
+    'scripts/report_blind_campaign.py', 'scripts/export_guarded_corpus.py',
+    'scripts/reproduce_guarded_sha256.py', *e.SOURCES)))
+PACKAGES = ('numpy', 'scipy', 'xgboost', 'scikit-learn')
+SCHEMA = 'isaforge-expanded-history-development-v1'
+LIMITATIONS = [
+    'All four sources and all81 successful labels are consumed development data, not a new prospective test.',
+    'Only historical data changes; every feature, model setting, policy, cap, seed and query budget remains fixed.',
+    'Entire source workloads and all their contexts are excluded before related-formula-family filtering.',
+    'Five seeds are dependent repetitions; independent units are source workloads.',
+    'Unknown failures never become negative hardware/performance labels; all84 recorded attempts remain charged once globally.',
+    'The full81-label collection cost is a shared data cost, not a per-policy or per-fold charge.',
+    'Recorded durations retain mixed scopes and the clock qualification; uninterrupted calendar wall time and adaptive-time wins are not established.',
+    'No policy or variant is selected or promoted from this bounded development comparison.']
+
+
+def stable(value):
+    """Exclude host timing only, retaining all paid measurements and decisions."""
+    if isinstance(value, list): return [stable(item) for item in value]
+    if isinstance(value, dict):
+        return {key: stable(item) for key, item in value.items() if key not in
+                ('inference_seconds', 'mean_inference_seconds', 'replay_search_host_seconds')}
+    return value
+
+
+def _inventory(root):
+    return {path.relative_to(root).as_posix(): c.sha(path)
+            for path in sorted(Path(root).rglob('*')) if path.is_file()}
+
+
+def _seal_manifest(root):
+    entries = {name: digest for name, digest in _inventory(root).items()
+               if name not in ('manifest.json', 'manifest.json.sha256')}
+    c.seal(Path(root)/'manifest.json', entries)
+
+
+def _case_paths(group):
+    if group == 'beebs-jfdctint':
+        return dict(prereg=DCT_PREREG, old_selection=DCT_PREREG/'selection',
+                    archive=DCT, audit=DCT/'audit.json', outer=DCT/'outer-times.json',
+                    original_report=DCT_SELECTION/'report.json')
+    return dict(prereg=BLIND_PREREG, old_selection=BLIND_PREREG/'targets'/group/'selection',
+                archive=BLIND, audit=BLIND/'targets'/group/'audit.json',
+                outer=BLIND/'targets'/group/'outer-times.json',
+                original_report=BLIND/'targets'/group/'selection/report.json')
+
+
+def load_inputs(corpus_path):
+    """Authenticate consumed evidence and construct strictly target-excluded inputs."""
+    corpus_path = Path(corpus_path).resolve()
+    _manifest(corpus_path.parent)
+    corpus = c.unseal(corpus_path)
+    c.require(corpus['successful_labels'] == len(corpus['rows']) == 81 and
+              len(corpus['failed_attempts']) == 3 and corpus['total_candidate_attempts'] == 84 and
+              len(corpus['independent_workload_groups']) == 10 and len(corpus['contexts']) == 11,
+              'Complete81-label/84-attempt ten-source corpus required')
+    all_rows = corpus['rows']+corpus['failed_attempts']
+    c.require(math.isclose(sum(row['measurement_seconds'] for row in all_rows),
+                          corpus['total_candidate_attempt_wall_seconds'], abs_tol=1e-8),
+              'Unique recorded attempt costs differ')
+    by_source = {fold['source']: fold for fold in folds(corpus)}
+    cases, authenticated = {}, set()
+    bindings = {str(corpus_path): c.sha(corpus_path), str(corpus_path.parent/'manifest.json'): c.sha(corpus_path.parent/'manifest.json')}
+    for group in TARGETS:
+        paths = _case_paths(group)
+        for root in (paths['prereg'], paths['archive']):
+            if root not in authenticated:
+                _manifest(root); authenticated.add(root)
+            bindings[str(root/'manifest.json')] = c.sha(root/'manifest.json')
+        audit = c.unseal(paths['audit']); public = audit['public']
+        outer = c.unseal(paths['outer'])
+        e.checked_outcomes(public, audit['outcomes'], audit)
+        c.require(set(outer) == {row['candidate_id'] for row in public} and
+                  all(outer[row['candidate_id']] >= row['measurement_seconds'] for row in audit['outcomes']),
+                  'Complete recorded outer-operation durations required')
+        fold = by_source[group]
+        corpus_public = {row['candidate_id']: {key: row[key] for key in PUBLIC_KEYS} for row in fold['target']}
+        corpus_outcomes = {row['candidate_id']: row for row in fold['target']}
+        c.require(len(public) == len(fold['target']) and
+                  all(row == corpus_public[row['candidate_id']] for row in public), 'Corpus/native source pool differs')
+        for row in audit['outcomes']:
+            recorded = corpus_outcomes[row['candidate_id']]
+            c.require(all(recorded[key] == row[key] for key in (*PUBLIC_KEYS, 'measurement_seconds',
+                      'speedup', 'candidate_cycles', 'baseline_cycles', 'area_delta_lut4', 'routed_fmax_min_mhz')),
+                      'Corpus/native successful outcome differs')
+        old_protocol = c.unseal(paths['old_selection']/'protocol.json')
+        _hashes(paths['old_selection'], old_protocol['artifacts'])
+        old_public = c.unseal(paths['old_selection']/'controls11/model/public.json')
+        old_history = c.unseal(paths['old_selection']/'controls11/model/history.json')
+        c.require(old_public == public and old_protocol['target_workload'] == group and
+                  old_protocol['policies'] == list(POLICY_LABELS), 'Original twelve-policy source protocol differs')
+        c.require([row['candidate_id'] for row in old_history] == old_protocol['historical_training_ids'] and
+                  all(row['workload_group'] != group for row in old_history), 'Original held-out cohort differs')
+        available = [row for row in corpus['rows'] if row['workload_group'] != group]
+        cases[group] = dict(paths=paths, fold=fold, public=public, available=available,
+                            old_protocol=old_protocol, old_history=old_history)
+        for name in ('audit', 'outer', 'original_report'):
+            bindings[str(paths[name])] = c.sha(paths[name])
+    return corpus, cases, bindings
+
+
+def planned_protocol(corpus_path):
+    corpus, cases, bindings = load_inputs(corpus_path)
+    cohorts = {}
+    for group, case in cases.items():
+        fold = case['fold']; old = case['old_protocol']
+        cohorts[group] = dict(target_contexts=fold['target_contexts'], target_ids=[row['candidate_id'] for row in case['public']],
+            target_public_digest=c.digest(case['public']),
+            old_available_successes=old['historical_available_rows'], old_fitting_ids=old['historical_training_ids'],
+            old_excluded_related_ids=old['excluded_related_ids'], old_fitting_groups=old['historical_postfilter_groups'],
+            old_selection=str(case['paths']['old_selection']), old_protocol_sha256=c.sha(case['paths']['old_selection']/'protocol.json'),
+            expanded_available_successes=len(case['available']), expanded_fitting_ids=fold['fitting_ids'],
+            expanded_excluded_related_ids=fold['excluded_related_ids'], expanded_fitting_groups=fold['fitting_groups'])
+    costs = dict(unique_successful_labels=81, unique_failed_attempts=3, unique_charged_attempts=84,
+        unique_recorded_attempt_seconds=corpus['total_candidate_attempt_wall_seconds'],
+        failed_recorded_attempt_seconds=sum(row['measurement_seconds'] for row in corpus['failed_attempts']),
+        preserved_failed_candidate_ids=[row['candidate_id'] for row in corpus['failed_attempts']],
+        unknown_censored_candidate_ids=[row['candidate_id'] for row in corpus['failed_attempts'] if row['reference_censored']],
+        timer_note=corpus['timer_note'], actual_calendar_wall_seconds=None,
+        source_clock_accounting_sha256=c.digest(corpus['clock_accounting']))
+    return dict(schema=SCHEMA, scope='consumed-data development', change='expanded historical data only',
+        targets=list(TARGETS), corpus_path=str(Path(corpus_path).resolve()), input_bindings=bindings,
+        source_bindings={name: c.sha(ROOT/name) for name in SOURCES},
+        packages={name: importlib.metadata.version(name) for name in PACKAGES},
+        policies=list(POLICY_LABELS), seeds=list(e.SEEDS), area_caps=list(e.AREA_CAPS), budgets=list(e.BUDGETS), clock_mhz=12,
+        fixed_model_settings=e.MODEL_SETTINGS, fixed_utility_settings=e.controls.MODEL_SETTINGS,
+        fixed_gp_settings=e.b.GP_SETTINGS,
+        primary=dict(sources=list(TARGETS[:3]), cap=64, budget=3, metric='source-macro verified fractional cycle reduction and regret'),
+        secondary=[dict(sources=list(TARGETS[:3]), cap=64, budget=2), dict(source='beebs-jfdctint', cap=32, budgets=[1,2,3])],
+        cohort_policy='Hold all contexts of each entire source out; exclude target-related families in other sources; never fit failed attempts.',
+        prediction_policy='Seal all four expanded prediction packages and original reused prediction hashes before any target policy scoring.',
+        old_prediction_policy='Reuse exact original preregistered predictions/models; verify reproduced old policy endpoints against completed original report.',
+        cohorts=cohorts, costs=costs, tuning=False, new_native_jobs=0, limitations=LIMITATIONS)
+
+
+def prepare(output, *, corpus_path=CORPUS):
+    output = Path(output).resolve()
+    c.require(not output.exists(), 'Fresh prepared experiment directory required')
+    protocol = planned_protocol(corpus_path)
+    c.require(not output.is_relative_to(Path(corpus_path).resolve().parent), 'Output must be outside frozen corpus')
+    output.mkdir(parents=True)
+    c.seal(output/'protocol.json', protocol)
+    c.seal(output/'prepared.json', dict(protocol_sha256=c.sha(output/'protocol.json'), new_model_fits=0, new_native_jobs=0,
+        status='Protocol saved; explicit run required before fitting.'))
+    return protocol
+
+
+def authenticate(root):
+    root = Path(root).resolve()
+    protocol = c.unseal(root/'protocol.json')
+    c.require(protocol.get('schema') == SCHEMA and c.unseal(root/'prepared.json')['protocol_sha256'] == c.sha(root/'protocol.json'),
+              'Prepared fixed experiment protocol required')
+    c.require(protocol == planned_protocol(protocol['corpus_path']), 'Prepared inputs, sources, packages or fixed cohorts changed')
+    return protocol
+
+
+def run(root):
+    root = Path(root).resolve(); protocol = authenticate(root)
+    c.require(not (root/'experiments').exists() and not (root/'report.json').exists(),
+              'Fresh prepared experiment required; preserve interrupted fits and scoring')
+    corpus, cases, _ = load_inputs(protocol['corpus_path'])
+    runtimes = []; began = time.monotonic()
+    for group, case in cases.items():
+        old = root/'experiments/old'/group; expanded = root/'experiments/expanded'/group
+        shutil.copytree(case['paths']['old_selection'], old)
+        started = time.monotonic()
+        new = e.freeze(case['available'], case['public'], corpus['contexts'], expanded,
+            target_workload=group, target_labels_observed=0, calibration_cost_seconds=0,
+            cost_provenance=dict(shared_unique_corpus_costs=protocol['costs'],
+                historical_available_successes=len(case['available']),
+                fitting_label_seconds=case['fold']['fitting_label_seconds'],
+                note='Data cost charged once globally. Existing public calibration reused, not rerun.'),
+            input_bindings=protocol['input_bindings'], scope='consumed-data development')
+        c.require(new['historical_training_ids'] == protocol['cohorts'][group]['expanded_fitting_ids'],
+                  'Expanded fitting cohort differs from saved protocol')
+        runtimes.append(dict(source=group, expanded_freeze_monotonic_seconds=time.monotonic()-started,
+            classifier_fit_prediction=c.unseal(expanded/'feasibility-costs.json'),
+            utility_fit_prediction=c.unseal(expanded/'controls11/utility-inference-costs.json'),
+            control_fit_prediction=[dict(seed=row['seed'], recorded_fit_prediction_seconds=row['inference_seconds'])
+                for row in c.unseal(expanded/'controls11/model/predictions.json')],
+            old_zero_shot_artifact_models_refitted=False, old_predictions_reused=True,
+            note='Paid GP updates during later policy replay are computed and timed separately.'))
+    release = dict(protocol_sha256=c.sha(root/'protocol.json'), targets=list(TARGETS), target_scoring_started=False,
+        frozen_prediction_packages={str(path.relative_to(root)): c.sha(path)
+            for path in sorted((root/'experiments').rglob('*')) if path.is_file()},
+        note='Consumed local replay: label exclusion is enforced by function inputs, not an OS sandbox.')
+    c.seal(root/'prediction-release.json', release)
+    all_endpoints, comparisons, run_reports = [], [], {}
+    for cohort in ('old', 'expanded'):
+        for group, case in cases.items():
+            audit = c.unseal(case['paths']['audit']); outer = c.unseal(case['paths']['outer'])
+            started = time.monotonic()
+            result = e.evaluate(root/'experiments'/cohort/group, audit['outcomes'], native_audit=audit, outer_times=outer)
+            if cohort == 'old':
+                original = c.unseal(case['paths']['original_report'])
+                keys = ('runs', 'summary', 'feasibility_diagnostics', 'candidate_outer_operation_seconds',
+                        'reference_censored', 'trajectories', 'endpoints')
+                c.require(stable({key: result[key] for key in keys}) == stable({key: original[key] for key in keys}),
+                          'Reused original predictions do not reproduce old policy results')
+            rows = endpoints_for_source(group, result, audit['outcomes'])
+            all_endpoints += [dict(cohort=cohort, **row) for row in rows]
+            run_reports[cohort, group] = result
+            runtimes.append(dict(source=group, cohort=cohort, policy_replay_monotonic_seconds=time.monotonic()-started))
+    macro = [dict(cohort=cohort, **row) for cohort in ('old', 'expanded')
+             for row in source_macro([row for row in all_endpoints if row['cohort'] == cohort])]
+    primary_macro = [dict(cohort=cohort, **row) for cohort in ('old', 'expanded')
+                     for row in source_macro([row for row in all_endpoints if row['cohort'] == cohort and
+                                              row['workload_group'] in protocol['primary']['sources']])]
+    for row in [value for value in all_endpoints if value['cohort'] == 'expanded']:
+        old = next(value for value in all_endpoints if value['cohort'] == 'old' and
+                   all(value[key] == row[key] for key in ('workload_group', 'policy', 'cap', 'budget')))
+        comparisons.append(dict(workload_group=row['workload_group'], policy=row['policy'], cap=row['cap'], budget=row['budget'],
+            old_verified_cycle_reduction=old['mean_verified_cycle_reduction'], expanded_verified_cycle_reduction=row['mean_verified_cycle_reduction'],
+            cycle_reduction_change=row['mean_verified_cycle_reduction']-old['mean_verified_cycle_reduction'],
+            old_regret=old['mean_cycle_reduction_regret'], expanded_regret=row['mean_cycle_reduction_regret'],
+            old_oracle_fraction=old['mean_oracle_cycle_reduction_fraction'], expanded_oracle_fraction=row['mean_oracle_cycle_reduction_fraction'],
+            significance_established=False))
+    result = dict(schema=SCHEMA, scope=protocol['scope'], protocol_sha256=c.sha(root/'protocol.json'),
+        prediction_release_sha256=c.sha(root/'prediction-release.json'), endpoints=all_endpoints, source_macro=macro,
+        comparisons=comparisons, costs=protocol['costs'],
+        primary_source_macro=primary_macro,
+        primary=[row for row in primary_macro if row['cap'] == 64 and row['budget'] == 3],
+        secondary_query2=[row for row in primary_macro if row['cap'] == 64 and row['budget'] == 2],
+        dct_tight_cap=[row for row in all_endpoints if row['workload_group'] == 'beebs-jfdctint' and row['cap'] == 32],
+        targets=len(TARGETS), trajectories=sum(value['trajectories'] for value in run_reports.values()),
+        seed_endpoints=sum(value['endpoints'] for value in run_reports.values()), tuning=False,
+        superiority_established=False, calibration_established=False, new_native_jobs=0, limitations=LIMITATIONS)
+    c.seal(root/'report.json', result)
+    c.seal(root/'runtime-costs.json', dict(records=runtimes, total_run_monotonic_seconds=time.monotonic()-began,
+        scope='Host fitting/prediction and cooperative replay; scopes overlap; old model artifacts are reused; no native jobs.'))
+    _csv(root/'endpoints.csv', all_endpoints); _csv(root/'source-macro.csv', macro); _csv(root/'comparisons.csv', comparisons)
+    _csv(root/'primary-source-macro.csv', primary_macro)
+    (root/'README.md').write_text('# Fixed expanded-history development experiment\n\n'
+        'Four predeclared consumed sources, twelve unchanged policies, five dependent seeds, three caps and three budgets. '
+        'Only fitting data changes; original predictions are reused and their original paid replay is checked exactly. '
+        'All expanded prediction packages were sealed before target scoring. All81 successful labels and three earlier failures '
+        'remain84 uniquely charged measurements, counted once globally. Target sources and related families never train their own fold. '
+        'This is retrospective development, not prospective evidence, calibrated confidence or a promoted model. '
+        'Numeric changes and regressions are retained in comparisons.csv; duration values remain recorded monotonic elapsed, '
+        'not uninterrupted calendar wall time. The primary macro averages AHA/NDES/MD5 sources; DCT remains a separate '
+        'predeclared regression case, with the four-source macro also retained. No native jobs or model/settings sweep is performed.\n')
+    _seal_manifest(root)
+    return result
+
+
+def replay(reference, output):
+    reference, output = Path(reference).resolve(), Path(output).resolve()
+    _manifest(reference)
+    protocol = authenticate(reference)
+    original_release = c.unseal(reference/'prediction-release.json')
+    original_report = c.unseal(reference/'report.json')
+    c.require(original_release['protocol_sha256'] == original_report['protocol_sha256'] == c.sha(reference/'protocol.json') and
+              original_report['prediction_release_sha256'] == c.sha(reference/'prediction-release.json') and
+              original_release['target_scoring_started'] is False and original_release['targets'] == list(TARGETS),
+              'Complete pre-scoring prediction release bindings required')
+    _hashes(reference, original_release['frozen_prediction_packages'])
+    prepare(output, corpus_path=protocol['corpus_path'])
+    result = run(output)
+    recreated_release = c.unseal(output/'prediction-release.json')
+    # Timing metadata inside freeze protocols differs. Compare numerical
+    # predictions directly; their enclosing protocols/manifests remain sealed.
+    names = ('feasibility-predictions.json', 'controls11/utility-predictions.json', 'controls11/model/predictions.json')
+    for cohort in ('old', 'expanded'):
+        for group in TARGETS:
+            for name in names:
+                left = c.unseal(reference/'experiments'/cohort/group/name)
+                right = c.unseal(output/'experiments'/cohort/group/name)
+                c.require(stable(left) == stable(right), 'Fixed expanded-history predictions differ')
+    def scoring(value):
+        value = stable(copy.deepcopy(value))
+        value.pop('prediction_release_sha256', None)
+        return value
+    c.require(original_release['targets'] == recreated_release['targets'] == list(TARGETS) and
+              scoring(result) == scoring(original_report), 'Expanded-history deterministic policy replay differs')
+    return result
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('command', choices=('prepare', 'run', 'replay'))
+    parser.add_argument('--output', type=Path)
+    parser.add_argument('--root', type=Path)
+    parser.add_argument('--corpus', type=Path, default=CORPUS)
+    args = parser.parse_args(argv)
+    if args.command == 'prepare':
+        c.require(args.output is not None, 'Fresh prepare --output required')
+        result = prepare(args.output, corpus_path=args.corpus)
+        print(dict(targets=len(result['targets']), new_model_fits=0, new_native_jobs=0))
+    elif args.command == 'run':
+        c.require(args.root is not None, 'Prepared --root required')
+        result = run(args.root)
+        print({key: result[key] for key in ('targets', 'trajectories', 'seed_endpoints', 'new_native_jobs')})
+    else:
+        c.require(args.root is not None and args.output is not None, 'Reference --root and fresh --output required')
+        result = replay(args.root, args.output)
+        print({key: result[key] for key in ('targets', 'trajectories', 'seed_endpoints', 'new_native_jobs')})
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,37 @@
+{
+  "schema": "isaforge-expanded-history-orchestration-failure-v1",
+  "failed_run": "results/2026-10-22-expanded-history",
+  "stage": "Old AHA policy comparison after every expanded prediction package was sealed",
+  "error": "ValueError: Reused original predictions do not reproduce old policy results",
+  "cause": "In-memory acquisition scores are tuples; original sealed JSON stores lists. The wrapper stable() failed to canonicalize tuples.",
+  "preserved_input_sha256": {
+    "results/2026-10-22-expanded-history/protocol.json": "69eabce967738b1aa7272dfa3b83444b6e65738cf68e28010baebc3eeddcd465",
+    "results/2026-10-22-expanded-history/prepared.json": "fa03203b6fb6b510c8e206c6e06d762e0aab0ddba4d393c760adb34c8b065d67",
+    "results/2026-10-22-expanded-history/prediction-release.json": "efddb8c8e77089981843c001ccbf3331360293d3a37bea2804d3039a08f595ae",
+    "results/2026-10-22-expanded-history/experiments/old/beebs-aha-compress/report.json": "fd8552fba4734a7ecb433685484b6377f0f3007b3a8cd9ca81d8d8c0f9826d18"
+  },
+  "preserved_prediction_package_files": 1952,
+  "preserved_original_wrapper_sha256": "aff08964e839eca7fa6207330030e1e7534135645b37d770265d291d24b7648f",
+  "original_source_recovery": "Exact original bytes reconstructed from the narrow wrapper changes and accepted only after matching the failed protocol source SHA256; this is not a new or retroactive preregistration.",
+  "current_fixed_wrapper_sha256": "d7d556569876d1025bdaecb4d4b3ac5d58dfa80da035053383c4f3729be4dd70",
+  "comparison_proof": {
+    "aha_trajectories": 180,
+    "aha_seed_endpoints": 540,
+    "aha_source_endpoint_summaries": 108,
+    "changed_numeric_or_query_decisions": 0,
+    "serialized_tuple_scores": 450,
+    "variable_inference_timer_fields": 30,
+    "variable_search_host_timer_fields": 30
+  },
+  "correction": "Canonicalize list and tuple sequences identically; retain every numeric score and paid observation. No additional timer exclusions.",
+  "additional_replay_integrity": "Require exact complete prediction-package inventories and internal model authentication before fits; compare deterministic portable model/schema exports and per-seed policy traces against recreated packages.",
+  "focused_tests": {
+    "command": "python -m pytest -q tests/test_expanded_history.py",
+    "passed": 10
+  },
+  "failed_run_was_rerun": false,
+  "failed_protocol_edited": false,
+  "new_model_fits_by_diagnosis": 0,
+  "new_native_jobs": 0,
+  "completion_status": "Interrupted development run, not a complete expanded-history result. A fresh prepared directory is required."
+}

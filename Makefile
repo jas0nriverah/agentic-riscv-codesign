@@ -55,7 +55,8 @@ candidates: $(PROGRAMS:%=generated/candidates/%.json)
 # Research entry points. Activate .venv first, or set PYTHON=.venv/bin/python.
 .PHONY: help test reproduce reproduce-v4 reproduce-v5 reproduce-external-v5 reproduce-v6 reproduce-v8 reproduce-v9-coverage reproduce-v10d-hardware reproduce-v10d-timing reproduce-v10d-selection reproduce-v12 diagram
 help:
-	@echo 'Current ML experiment: make reproduce-jfdctint | make jfdctint-report | make export-seven-source-corpus (no native jobs)'
+	@echo 'Current ML work: make reproduce-expanded-history | make reproduce-live-gp (no native jobs; fresh output directories)'
+	@echo 'Preserved blind campaign: make reproduce-blind-campaign | make blind-report | make export-blind-corpus'
 	@echo 'Preserved SHA model experiment: make reproduce-feasible-benefit | make feasible-benefit-report'
 	@echo 'Interactive six-workload demo: make showcase | Four-tool matched controls: make selector-controls'
 	@echo 'Current prospective comparison: make sha256-report | make reproduce-sha256 (no native hardware jobs)'
@@ -222,3 +223,12 @@ export-blind-corpus:
 
 blind-figures:
 	$(PYTHON) scripts/plot_blind_campaign.py --report "$(BLIND_REPORT_OUTPUT)" --output "$(BLIND_FIGURE_OUTPUT)"
+
+EXPANDED_HISTORY_REPLAY_OUTPUT ?= generated/reproduction/expanded-history
+LIVE_GP_REPLAY_OUTPUT ?= generated/reproduction/live-gp
+.PHONY: reproduce-expanded-history reproduce-live-gp
+reproduce-expanded-history:
+	$(PYTHON) scripts/evaluate_expanded_history.py replay --root results/2026-10-22-expanded-history-verified --output "$(EXPANDED_HISTORY_REPLAY_OUTPUT)"
+
+reproduce-live-gp:
+	$(PYTHON) scripts/live_gp_campaign.py replay --campaign results/2026-10-22-live-gp-campaign --output "$(LIVE_GP_REPLAY_OUTPUT)"

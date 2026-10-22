@@ -1,0 +1,141 @@
+{
+  "schema": "isaforge-levenshtein-qualification-v1",
+  "created_at_utc": "2026-10-22T15:39:28.867210+00:00",
+  "order": [
+    "levenshtein"
+  ],
+  "phases": [
+    "prepare",
+    "discover",
+    "baseline",
+    "public",
+    "freeze"
+  ],
+  "pool_size": 12,
+  "memory_partition": {
+    "ram_bytes": 8192,
+    "program_limit": 6400,
+    "stack_floor": 6528,
+    "stack_bytes": 1664,
+    "minimum_guard_bytes": 128
+  },
+  "upstream": {
+    "suite": "BEEBS",
+    "commit": "049ded9f3aeb5591f553879d3a0376b8614e9422",
+    "source": "benchmarks/beebs/levenshtein/liblevenshtein.c",
+    "source_sha256": "fd1ee0e23bab6db0182b32618bc3622a3ce0399714b662076d053d98fb7193f6"
+  },
+  "original_strings": [
+    "srrjngre",
+    "asfcjnsdkj",
+    "string",
+    "msd",
+    "strings"
+  ],
+  "independently_computed_distances": [
+    [
+      0,
+      7,
+      4,
+      8,
+      4
+    ],
+    [
+      7,
+      0,
+      8,
+      8,
+      8
+    ],
+    [
+      4,
+      8,
+      0,
+      6,
+      1
+    ],
+    [
+      8,
+      8,
+      6,
+      0,
+      7
+    ],
+    [
+      4,
+      8,
+      1,
+      7,
+      0
+    ]
+  ],
+  "verifier": {
+    "original_aggregate_sum": 122,
+    "unchanged": true,
+    "limitation": "Upstream checks the aggregate sum, not each pair; offsetting errors can cancel. Independent pair references are static checks only."
+  },
+  "selection_rule": "Accept this sole source only after unchanged baseline/verifier, checked memory and twelve legal calibrated formulas; otherwise preserve failure and stop. No fallback, input change, partition change or candidate attempt.",
+  "native_root": "generated/live-gp-levenshtein-2026-10-22",
+  "reference_root": "generated/codesign-crc32-2026-10-19-r1",
+  "reference_plan_sha256": "796167e07bdc413f348c829ca93e60eda87162ca02143d3f57269ff2059197b9",
+  "source_bindings": {
+    "scripts/qualify_levenshtein.py": "b355ee24aab837213758deee30b688cbd43b67ddbfc2dabfa38b00c0a047df5b",
+    "isaforge/blind_workload.py": "9f29ddd1cebbcc1c8199814343c555b35438d7669643c8749bbb96aa916a5307",
+    "benchmarks/beebs/levenshtein/liblevenshtein.c": "fd1ee0e23bab6db0182b32618bc3622a3ce0399714b662076d053d98fb7193f6",
+    "benchmarks/beebs/COPYING": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "hardware/embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+    "isaforge/observed_command.py": "f56bf235b31205c842ea04ab5a493ee7f7e6731844e05b6d8991f21d9f3be41e",
+    "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee"
+  },
+  "observation": "Each blocking CLI phase has raw paired UTC/monotonic endpoints and stdout/stderr; clock domains remain distinct. No inferred mixed-clock end instants.",
+  "phase_timeout_seconds": 3600,
+  "workers": 1,
+  "build_workers": 2,
+  "target_candidate_attempts": 0,
+  "phase_commands": {
+    "prepare": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.blind_workload",
+      "prepare",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-levenshtein-2026-10-22",
+      "--workload",
+      "levenshtein",
+      "--reference-root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+    ],
+    "discover": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.blind_workload",
+      "discover",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-levenshtein-2026-10-22"
+    ],
+    "baseline": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.blind_workload",
+      "baseline",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-levenshtein-2026-10-22"
+    ],
+    "public": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.blind_workload",
+      "public",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-levenshtein-2026-10-22"
+    ],
+    "freeze": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.blind_workload",
+      "freeze",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-levenshtein-2026-10-22"
+    ]
+  }
+}

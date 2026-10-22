@@ -1,0 +1,225 @@
+{
+  "schema": "isaforge-feasibility-selection-xgb-v1",
+  "seed": 1,
+  "settings": {
+    "ensemble_size": 20,
+    "n_estimators": 80,
+    "max_depth": 2,
+    "learning_rate": 0.05,
+    "min_child_weight": 1,
+    "reg_lambda": 1.0,
+    "subsample": 1.0,
+    "colsample_bytree": 1.0,
+    "tree_method": "hist",
+    "n_jobs": 1,
+    "objective": "binary:logistic",
+    "bootstrap": "n measured candidates with replacement; every draw expands all caps",
+    "cap_replica_sample_weight": 0.3333333333333333,
+    "single_class": "per-member constant 0 or 1; consume model-seed RNG draw regardless"
+  },
+  "area_caps": [
+    32,
+    64,
+    128
+  ],
+  "clock_mhz": 12.0,
+  "columns": [
+    "size",
+    "depth",
+    "tree_op_count",
+    "input_count",
+    "constant_count",
+    "unique_constant_count",
+    "max_abs_constant",
+    "op_add",
+    "op_sub",
+    "op_and",
+    "op_or",
+    "op_xor",
+    "op_sll",
+    "op_srl",
+    "op_sra",
+    "op_slt",
+    "op_sltu",
+    "op_addi",
+    "op_andi",
+    "op_ori",
+    "op_xori",
+    "op_slli",
+    "op_srli",
+    "op_srai",
+    "op_slti",
+    "op_sltiu",
+    "op_lui",
+    "op_mul",
+    "op_mulh",
+    "op_mulhu",
+    "op_mulhsu"
+  ],
+  "budget_feature": "area_cap / (training_median_lut4_per_tree_op * tree_op_count)",
+  "target": "verified device fit and integrated area <= cap and routed minimum Fmax >= 12 MHz",
+  "decision_rule": "mean uncalibrated feasibility score * max(0, public estimated_saved_cycles / baseline_cycles)",
+  "area_per_op": 26.5,
+  "training_ids": [
+    "24881c0f2a3aa96a7b5c2747c870c120bed84db7195d6c80971114f48a3ba7c6",
+    "c09187ecb0123f76ca9d1d8810dc1982067ad0d32aba72a92c1f0d25f079af70",
+    "bc49c40051833fe88c3dd5798b92d819d552944ec703f522ed5dcd9f62798630",
+    "7665f0c5bd95687177d5a576714a918209c40a9aaffbc16436f6b84bb2f78743",
+    "cbea4ded5042507e02c4bf44691bf1202509d0f53c78708ef614c229b46404a4",
+    "11340f94671ba5c5239c7ce099184f21f3574e5bd681f8fcd26e40098cc1a3e2",
+    "08e8643b6db880fbbd6cf344074419f3bbd8474750a70472f3d6ebda95971f61",
+    "205371c610d463d8bbf6958f72bf8435f118e53d43a50cf4301e141a93453c32",
+    "77710d04576085d7031f398c3890958b640ec7efef05e1adbe6c9cf15c9f4cab",
+    "fe63db5e21cd55e04d0f28884d57fb6c3a7b5054e81569fa94e8c22097bf4cbb",
+    "1dc0b30ea7fa3e635207c3c71af0a9d672134b1a3fdda39d25b5aa7fecfa44a3",
+    "aea1d642ffe2f2bd4a12195fa0530aa8cfc3c2aaeb00f7a3b66a99dd37c2ddac",
+    "10893a739e76abb7724187d7bfb8af59870ec518dc688972e9d516ed7e65581a",
+    "378bdc72a91e1d3a56593d242db9d6f0d6dea993a3e2055b115142eec9cd1b70",
+    "65c892775153956c607fec8e56bd9868d4d0b27f335cd4545487e5668a73336f",
+    "74ec99cf35b3c324fb75171bcbab6f8aec0a60b822ef8d22cf37137c259ac63c",
+    "e8a398c9d149afed6e789df3a8d75acf9dea6d4d646c695870d9e1c387b4ff6f",
+    "00fa9abbfa0f8ae7ccbf7ddd0de60d3e769a7902cbc8f41f272ab57cdeb00fd8",
+    "e1656b90485b535c071e377afa6f86881c0db7eecb4d8ec9f408957071f45db0",
+    "79ad2e04c888da3ddeeff88d8c9fc4bfe48f447b13a469763948dc06a66102c1",
+    "b20bd1c56bee309d268de8312649dcba6c656cb5aec387d12839dc7a82b90a76",
+    "4eb003580949d574b1e2a28bd432abb2f05e727b3d9cf66c79aa740539f16d8d",
+    "e806ac1ee74f31e9e9519ef2dab4ff49e4242fc4d77224f8a5b4280b873014c0",
+    "2afc4cab76d7a457bb8c2659ade4592360e32f298f94b728e3ad5b4584eeb368",
+    "52c86015b3e12f3fe81d948f2eda052ad3f8220f1a702d05f3ab01f999288210",
+    "04c80235b2ae981a2ef931aef7f8d17f22e038e04d02719edc9159bac919b08b",
+    "bcd0ec956735a53f06729244ac30a20902eef7816465a1feda965b76e802811d",
+    "2ab157c8ddd172c2411b35dec8d97b40004ec9d8b3147f4e01e104800b8c5815",
+    "6fc88a473c484e02a5a3b8a85d639fbc64d60a05b0558fc796404a6884ff9f5e",
+    "48ce16918e32cf703da747c15b4f568e97dec446afe42ba7f327c781ba8209e6",
+    "b40e2a5eef79a24c09609a571d2fb8c48938ca808141a14f3aaa89cf5babd698",
+    "8bbcecfc4d171b58448099f4149396b4a912c3c1171af912be21ec0583787a85",
+    "ffbf88a0b5459b2df95931924d9148933b9766fdd7af485f8682b7429f25f1d7",
+    "8efc75ee0fdc17d3c173566aa2fbd41cdbe0c5781eb16d42907681a9233a8a26",
+    "3bc442cec098887e93e63da50c3f7046d1233020b689c374e1defb9921eca6c7",
+    "8236aba6452ae8ce11330352ebc46873185218dee871fd97b98e2ccd81e0c7b6",
+    "498893e0a8d9cf5191029a76470d997ba60e5640e6831ed2242280618c939b3f",
+    "193e6c919f044181e7643a748c57137a8de2d31cc2f6d8fa0f5a66ce52e6b80d"
+  ],
+  "members": [
+    {
+      "model_seed": 1078591221,
+      "artifact": "member-00.json"
+    },
+    {
+      "model_seed": 986416296,
+      "artifact": "member-01.json"
+    },
+    {
+      "model_seed": 1803912902,
+      "artifact": "member-02.json"
+    },
+    {
+      "model_seed": 1973727780,
+      "artifact": "member-03.json"
+    },
+    {
+      "model_seed": 781986532,
+      "artifact": "member-04.json"
+    },
+    {
+      "model_seed": 807966029,
+      "artifact": "member-05.json"
+    },
+    {
+      "model_seed": 1530715806,
+      "artifact": "member-06.json"
+    },
+    {
+      "model_seed": 1575373518,
+      "artifact": "member-07.json"
+    },
+    {
+      "model_seed": 1532920728,
+      "artifact": "member-08.json"
+    },
+    {
+      "model_seed": 56875135,
+      "artifact": "member-09.json"
+    },
+    {
+      "model_seed": 149671269,
+      "artifact": "member-10.json"
+    },
+    {
+      "model_seed": 2055773998,
+      "artifact": "member-11.json"
+    },
+    {
+      "model_seed": 1549668104,
+      "artifact": "member-12.json"
+    },
+    {
+      "model_seed": 728415485,
+      "artifact": "member-13.json"
+    },
+    {
+      "model_seed": 987363757,
+      "artifact": "member-14.json"
+    },
+    {
+      "model_seed": 1203656946,
+      "artifact": "member-15.json"
+    },
+    {
+      "model_seed": 1785329355,
+      "artifact": "member-16.json"
+    },
+    {
+      "model_seed": 596674920,
+      "artifact": "member-17.json"
+    },
+    {
+      "model_seed": 2047641613,
+      "artifact": "member-18.json"
+    },
+    {
+      "model_seed": 215762598,
+      "artifact": "member-19.json"
+    }
+  ],
+  "model_artifacts": {
+    "member-00.json": "965b63d3dbd6da059491d007b0d902e6df69d25dd17d38a7f16cfbb46eb9872d",
+    "member-01.json": "94278099d8a975fb6943f1143a1a6fa950016a67eb89c34d9ef1cd1f9f48045f",
+    "member-02.json": "b23752ffe64b0a3fa6baa71fd157762a3ce5aad0506b1b86028d88c0a30112a9",
+    "member-03.json": "12e60798ddecf1527a6d3acb358dcf0e1b316fd40fd01eba86ed3a1e08f6ad2c",
+    "member-04.json": "7719ed8b1d0de752d2b9a9649e1fc183e12570fb83b0184f7c1568084b669356",
+    "member-05.json": "dc598074259c7c73fc9daa282d28bb6c4e41da2a667ad8b19d37698525e25cc5",
+    "member-06.json": "7fe7ea5465f39c0b739cd04d6362eb1f7e0b4830a038a32e20688136d00cca12",
+    "member-07.json": "daad829eee27ba1181011dc1b6ea23110d9d8f02094e02dbeb75119ac0be8563",
+    "member-08.json": "7320bb2d7740702203cd14c4856b1d461b9955d0fb8829e3e42467dfdbcc69d9",
+    "member-09.json": "73cef4bc50581f03e26667365a63ef420fbf8b2144aaa9c3abdc41ba8ea94543",
+    "member-10.json": "f38743f213a3fb47136b1e83808104c4926e3326f1fa96f291baba41d29480be",
+    "member-11.json": "5077fef6edc66ad25e6106c917778772a0e4713d60559826f6b626a9af2870c4",
+    "member-12.json": "d2bd5a66eda41fb63f0a69eb1bd54c8cbc8bde1909d6445cbbe7424d759c7bc4",
+    "member-13.json": "a124cfc1e420ffc2a32e1778a4e91773bf7c95703d5edff3259b3992d55c4b70",
+    "member-14.json": "2dec0dbbba6c8ba830b76980c1a2527168668eeeac719e1cfeaabc2a70ab1261",
+    "member-15.json": "95ba9e9b1eb942f95bb9396d825d792abc4cccecbe5e0385dfcce62785c6932c",
+    "member-16.json": "a051d5c3a5f6b1c2c258f5319979d7ff822920de9791eec6465c8b32304e5fe5",
+    "member-17.json": "97290545d63b428979170e7c6ccc949ed01298bc68c4a4ae7058042677099c42",
+    "member-18.json": "39c1df30d6e4e0ab11f533d6925030be4f1b66634ee7be74d4b25cb92cbc9d47",
+    "member-19.json": "7ae8c80e259e6e0fe811da01cf9d643552754b126fe6d377568216c6ba4954c5"
+  },
+  "source_bindings": {
+    "isaforge/feasibility_selection.py": "1268bd50a167a5182a75f5fe6729c7cf5bccd7edf93a476e3a3448a4eaeaca22",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3"
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "xgboost": "3.4.1",
+    "scikit-learn": "1.9.1"
+  },
+  "uncertainty_kind": "bootstrap estimator disagreement",
+  "calibrated": false
+}

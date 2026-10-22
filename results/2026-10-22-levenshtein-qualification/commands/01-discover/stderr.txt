@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/blind_workload.py", line 295, in <module>
+    main()
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/blind_workload.py", line 274, in main
+    result = getattr(evaluator, args.command)()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/blind_workload.py", line 181, in discover
+    return super().discover()
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/guarded_workload.py", line 247, in discover
+    result=super().discover()
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/qualified_workload.py", line 161, in discover
+    return super().discover()
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/bounded_workload.py", line 174, in discover
+    return super().discover()
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/partitioned_workload.py", line 245, in discover
+    original = self.compile_program(folder / 'original', self.inputs / 'program.c')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/qualified_workload.py", line 153, in compile_program
+    return super().compile_program(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/bounded_workload.py", line 116, in compile_program
+    self.runner.run([self.tools['gcc'], *self.plan['compiler_flags'], '-I', self.inputs,
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/codesign.py", line 224, in run
+    require(process.returncode == expected, f'Command exited {process.returncode}; see {log}')
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/codesign.py", line 59, in require
+    raise ValueError(message)
+ValueError: Command exited 1; see /Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/live-gp-levenshtein-2026-10-22/discovery/attempt-000/original/compile.log
