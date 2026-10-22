@@ -1,0 +1,345 @@
+{"name": "candidate_22", "speedup": 1.0005807313343271, "added_lut4": 24, "timing_feasible": true, "elapsed_seconds": 77.56970091599942}
+{
+  "evaluation_id": "c80af562e0efbd781afe19a492dc97a5826fd830d752c7e5eb0b088df4f079c4",
+  "context_id": "00139fca615b68f2cb43c6bcfede407ddd621737e4ae687b127b3b8bd03fe682",
+  "workload": "bitcount",
+  "name": "candidate_22",
+  "formula": "addi(lui(252645376),-241)",
+  "candidate_id": "f5c65fdbef148eb623d823a078e0461b9d3197521007d491384b937e4bd5f1a0",
+  "features": {
+    "size": 2,
+    "runs": 10,
+    "places": 1,
+    "saved": 10,
+    "saved_percent": 0.09691800736576855,
+    "depth": 2,
+    "tree_op_count": 2,
+    "input_count": 0,
+    "constant_count": 2,
+    "unique_constant_count": 2,
+    "max_abs_constant": 252645376,
+    "op_add": 0,
+    "op_sub": 0,
+    "op_and": 0,
+    "op_or": 0,
+    "op_xor": 0,
+    "op_sll": 0,
+    "op_srl": 0,
+    "op_sra": 0,
+    "op_slt": 0,
+    "op_sltu": 0,
+    "op_addi": 1,
+    "op_andi": 0,
+    "op_ori": 0,
+    "op_xori": 0,
+    "op_slli": 0,
+    "op_srli": 0,
+    "op_srai": 0,
+    "op_slti": 0,
+    "op_sltiu": 0,
+    "op_lui": 1,
+    "op_mul": 0,
+    "op_mulh": 0,
+    "op_mulhu": 0,
+    "op_mulhsu": 0
+  },
+  "performance": {
+    "cycles": 51659,
+    "instructions": 10309,
+    "benchmark_result_u32": 0,
+    "upstream_self_check": true,
+    "custom_instructions": 10,
+    "region_custom_instructions": 10
+  },
+  "resources": {
+    "cell_types": {
+      "$scopeinfo": 3,
+      "SB_CARRY": 297,
+      "SB_DFF": 126,
+      "SB_DFFE": 268,
+      "SB_DFFESR": 166,
+      "SB_DFFESS": 9,
+      "SB_DFFSR": 110,
+      "SB_DFFSS": 1,
+      "SB_LUT4": 1677,
+      "SB_RAM40_4K": 20
+    },
+    "lut4_count": 1677,
+    "carry_count": 297,
+    "memory_blocks": 20,
+    "flip_flop_count": 680,
+    "top_ports": {
+      "clk": {
+        "direction": "input",
+        "width": 1
+      },
+      "done": {
+        "direction": "output",
+        "width": 1
+      },
+      "fault": {
+        "direction": "output",
+        "width": 1
+      },
+      "passed": {
+        "direction": "output",
+        "width": 1
+      },
+      "report_bit": {
+        "direction": "output",
+        "width": 1
+      },
+      "report_strobe": {
+        "direction": "output",
+        "width": 1
+      },
+      "resetn": {
+        "direction": "input",
+        "width": 1
+      },
+      "trap": {
+        "direction": "output",
+        "width": 1
+      }
+    },
+    "program_data_memory_blocks": 16,
+    "all_bram_clocks_use_top_clock": true,
+    "fits_hx8k_resource_counts": true
+  },
+  "routes": [
+    {
+      "seed": 1,
+      "clocks": {
+        "clk$SB_IO_IN_$glb_clk": {
+          "achieved_mhz": 72.08245849609375,
+          "constraint_mhz": 12,
+          "internal_timing_pass": true
+        }
+      },
+      "limiting_internal_fmax_mhz": 72.08245849609375,
+      "internal_timing_pass": true,
+      "device_fits": true,
+      "utilization": {
+        "ICESTORM_LC": {
+          "available": 7680,
+          "used": 1935
+        },
+        "ICESTORM_PLL": {
+          "available": 2,
+          "used": 0
+        },
+        "ICESTORM_RAM": {
+          "available": 32,
+          "used": 20
+        },
+        "SB_GB": {
+          "available": 8,
+          "used": 4
+        },
+        "SB_IO": {
+          "available": 206,
+          "used": 8
+        },
+        "SB_WARMBOOT": {
+          "available": 1,
+          "used": 0
+        }
+      },
+      "critical_path_summaries": [
+        {
+          "from": "posedge clk$SB_IO_IN_$glb_clk",
+          "to": "posedge clk$SB_IO_IN_$glb_clk",
+          "delay_ns": 13.87299994379282
+        },
+        {
+          "from": "<async>",
+          "to": "posedge clk$SB_IO_IN_$glb_clk",
+          "delay_ns": 11.86400005966425
+        },
+        {
+          "from": "posedge clk$SB_IO_IN_$glb_clk",
+          "to": "<async>",
+          "delay_ns": 5.0500001311302185
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "clocks": {
+        "clk$SB_IO_IN_$glb_clk": {
+          "achieved_mhz": 67.09607696533203,
+          "constraint_mhz": 12,
+          "internal_timing_pass": true
+        }
+      },
+      "limiting_internal_fmax_mhz": 67.09607696533203,
+      "internal_timing_pass": true,
+      "device_fits": true,
+      "utilization": {
+        "ICESTORM_LC": {
+          "available": 7680,
+          "used": 1935
+        },
+        "ICESTORM_PLL": {
+          "available": 2,
+          "used": 0
+        },
+        "ICESTORM_RAM": {
+          "available": 32,
+          "used": 20
+        },
+        "SB_GB": {
+          "available": 8,
+          "used": 4
+        },
+        "SB_IO": {
+          "available": 206,
+          "used": 8
+        },
+        "SB_WARMBOOT": {
+          "available": 1,
+          "used": 0
+        }
+      },
+      "critical_path_summaries": [
+        {
+          "from": "posedge clk$SB_IO_IN_$glb_clk",
+          "to": "posedge clk$SB_IO_IN_$glb_clk",
+          "delay_ns": 14.904000133275986
+        },
+        {
+          "from": "<async>",
+          "to": "posedge clk$SB_IO_IN_$glb_clk",
+          "delay_ns": 11.357000030577183
+        },
+        {
+          "from": "posedge clk$SB_IO_IN_$glb_clk",
+          "to": "<async>",
+          "delay_ns": 4.446000039577484
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "clocks": {
+        "clk$SB_IO_IN_$glb_clk": {
+          "achieved_mhz": 67.60868072509766,
+          "constraint_mhz": 12,
+          "internal_timing_pass": true
+        }
+      },
+      "limiting_internal_fmax_mhz": 67.60868072509766,
+      "internal_timing_pass": true,
+      "device_fits": true,
+      "utilization": {
+        "ICESTORM_LC": {
+          "available": 7680,
+          "used": 1935
+        },
+        "ICESTORM_PLL": {
+          "available": 2,
+          "used": 0
+        },
+        "ICESTORM_RAM": {
+          "available": 32,
+          "used": 20
+        },
+        "SB_GB": {
+          "available": 8,
+          "used": 4
+        },
+        "SB_IO": {
+          "available": 206,
+          "used": 8
+        },
+        "SB_WARMBOOT": {
+          "available": 1,
+          "used": 0
+        }
+      },
+      "critical_path_summaries": [
+        {
+          "from": "posedge clk$SB_IO_IN_$glb_clk",
+          "to": "posedge clk$SB_IO_IN_$glb_clk",
+          "delay_ns": 14.791000038385391
+        },
+        {
+          "from": "<async>",
+          "to": "posedge clk$SB_IO_IN_$glb_clk",
+          "delay_ns": 10.527000099420547
+        },
+        {
+          "from": "posedge clk$SB_IO_IN_$glb_clk",
+          "to": "<async>",
+          "delay_ns": 4.446000039577484
+        }
+      ]
+    }
+  ],
+  "unit_resources": {
+    "cell_types": {},
+    "lut4_count": 0,
+    "carry_count": 0,
+    "flip_flop_count": 0,
+    "scope": "Isolated combinational datapath; integrated delta also includes PCPI registers, decode and synthesis interactions."
+  },
+  "firmware_image": "measurements/candidate_22/attempt-000/firmware/firmware.hex",
+  "firmware_sha256": "c970d912134ed905fb2e0031032db1fec864d05cf525ac3ae9a84d09ad3a0974",
+  "integer_oracle": {
+    "oracle": "Independent Python RV32 integer semantics",
+    "vectors": 228,
+    "seed": 20261019
+  },
+  "controls": {
+    "stock_on_extension_identical": true,
+    "custom_on_baseline_traps": true,
+    "instruction_reduction_matches_profile": true
+  },
+  "correctness": "Upstream full-program self-check, sampled independent integer and block semantics, exact dynamic execution counts, stock/custom processor controls.",
+  "speedup": 1.0005807313343271,
+  "added_lut4": 24,
+  "timing_feasible": true,
+  "frequency_mhz": 12.0,
+  "elapsed_seconds": 77.56970091599942,
+  "artifacts": {
+    "attempt-000/candidate.v": "e0014dc87abc44226af99f371858c56c9197008bf8d016f6e3610534641afa12",
+    "attempt-000/firmware/compile.log": "2f303b3bde805902ee337b329d42890ec9d3904689cd996d376ea6be4bd90fcb",
+    "attempt-000/firmware/disassembly.txt": "da16b7f502df21aa30fe40b50cb67640cebd33189504fd1922e52946d4c9ae1f",
+    "attempt-000/firmware/firmware.bin": "f473ad9d524a52380ca65f5fc7a357a09687f529d517b13158331d0d997b47b1",
+    "attempt-000/firmware/firmware.elf": "98590d924acbb9704e51084a06488090628e480f412a91c3feedce67582ccc56",
+    "attempt-000/firmware/firmware.hex": "c970d912134ed905fb2e0031032db1fec864d05cf525ac3ae9a84d09ad3a0974",
+    "attempt-000/firmware/objcopy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "attempt-000/firmware/symbols.txt": "5946b5de6758e9ead402bad0a91f3122b5b58715beb78f9cf829fcbdc8eabd66",
+    "attempt-000/firmware/validation.json": "46fa8a0baa477f1c2f35667bee46f5e8f45f7400f94f4f67c2199ad7bca22147",
+    "attempt-000/illegal-on-baseline/build.log": "56305a57e41c4fa9995f59fd3bda881b467dbcaed5b984d94a3aa65ac2d224f6",
+    "attempt-000/illegal-on-baseline/observer_core.v": "609b31d116bccc4cd4f218d2dcddaef056519a7117a48b99b0f7c7d99ae6ee87",
+    "attempt-000/illegal-on-baseline/observer_top.v": "dca25df6844f4acc7682fd39bae1e69af3ce2b36f5bc62b60e9e82cee3dbf7f1",
+    "attempt-000/illegal-on-baseline/simulation.json": "d494752263da42077e7e796afd3b999e9972182f2748407611dcd8d66982913c",
+    "attempt-000/illegal-on-baseline/soc_top.v": "38ef062bc6419501c09719dfc7165ed5d091faa35886a893e64c2705e34ee5dc",
+    "attempt-000/integer-oracle/build.log": "4388ca3f8aa82d88ee0fbe9159d9c2a83e1cf8c0a02cb1dac615507bc920c3c8",
+    "attempt-000/integer-oracle/vectors.txt": "eb061ddd73bbddc65bd82d687c7e743b3fb6ea4566937b63b46c6afa03e57b6c",
+    "attempt-000/integer-oracle/verification.log": "803ca15a5ed8bb54a8c34b1e9562cd25fc2843dab372605ec33b2e329f58ff99",
+    "attempt-000/simulation/build.log": "2970199c0d2d7df845dfc3f70fef3f9a1c11ae5bf8898019f7d665a54f211f45",
+    "attempt-000/simulation/observer_core.v": "609b31d116bccc4cd4f218d2dcddaef056519a7117a48b99b0f7c7d99ae6ee87",
+    "attempt-000/simulation/observer_top.v": "dca25df6844f4acc7682fd39bae1e69af3ce2b36f5bc62b60e9e82cee3dbf7f1",
+    "attempt-000/simulation/simulation.json": "a2a03329c9fd827ed1527893e947e0502f4bd9ec03842dffe62064a64ac51212",
+    "attempt-000/simulation/soc_top.v": "38ef062bc6419501c09719dfc7165ed5d091faa35886a893e64c2705e34ee5dc",
+    "attempt-000/stock-on-extension/build.log": "a31851a21fdf989e9820b4098bd937c7a3a9b706667ac049705d2d9c4a3a3cc6",
+    "attempt-000/stock-on-extension/observer_core.v": "609b31d116bccc4cd4f218d2dcddaef056519a7117a48b99b0f7c7d99ae6ee87",
+    "attempt-000/stock-on-extension/observer_top.v": "23d04701bd2137882c40c185220e74ea3ceb4d10b52cca91c62d0939da42db16",
+    "attempt-000/stock-on-extension/simulation.json": "2991821427d968e05d1cddaf89d313dd6812f458bf4a9e6ab3e8ba2d4aff4d5d",
+    "attempt-000/stock-on-extension/soc_top.v": "e6599f7f93a0ca6fbc57390e44baebdc1e9e1d98ac999c8e3ba2b36856488fc9",
+    "attempt-000/synthesis/ice40-netlist.json": "e5b60cf029c215e16deee0fa96927e3706c3da4b0fb0fb32201b26cc36ce8802",
+    "attempt-000/synthesis/ice40.ys": "4919319ca6deeccf4683c7c65941667383dec3343f65adea86a05aef494a1b1f",
+    "attempt-000/synthesis/route-1.json": "afdabf8c00e36cc84f0322a7655acdc1b37a1d60d0ce9a04a92b0f5ea548096c",
+    "attempt-000/synthesis/route-1.log": "55e61aaa6939c5d77dfbf368dcd1250b9e71003138a31b089dec82002ecccbf5",
+    "attempt-000/synthesis/route-2.json": "2cb5617570fc3ae158b4c70f4e912a747083619c14b20f676e612d0311d35ca0",
+    "attempt-000/synthesis/route-2.log": "dcf79c083f4a70ceca9fbe427ad08108b84518e7a29bb4c9c417a7b8b05ee497",
+    "attempt-000/synthesis/route-3.json": "80130031d3045bdad78170f37699b6a8ec24f054f26f3eb6fbb1c10a9faefeb8",
+    "attempt-000/synthesis/route-3.log": "6a294213119614e304f944752cabd0aeab56fd41cf8be71885dcda4e12584334",
+    "attempt-000/synthesis/synthesis.log": "eb5079d2f91b6d8d55b8482bf805edfddad39856dcaa556c4f2d6783d36000e5",
+    "attempt-000/unit/synthesis.log": "50fe3fd6014d74e437345394582c6298fff30b6d977f3ad8e7f1235ff9976c9f",
+    "attempt-000/unit/unit.json": "b6b9d318e67b2a20e1dbcf7b5189b98d9b622223fcc0313694b8fd594ed8f844",
+    "attempt-000/unit/unit.ys": "543d7ed1d7d59273acfb3dd20705b957b368eaefb163304440a5048f149d623c"
+  }
+}

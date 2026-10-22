@@ -1,0 +1,108 @@
+{
+  "schema": "isaforge-bitcount-postlabel-validation-v1",
+  "created_at_utc": "2026-10-22T20:41:37.932339+00:00",
+  "prelabel_commit": "7bbe3f7070e3b31ee4de9fe973c536cccf3aca03",
+  "target_attempts": 12,
+  "successful_labels": 12,
+  "corpus_successful_labels": 99,
+  "corpus_failed_attempts": 3,
+  "corpus_candidate_attempts": 102,
+  "source_count": 12,
+  "context_count": 13,
+  "integrated_designs_including_baselines": 112,
+  "routes": 336,
+  "source_hashes_unchanged_since_prelabel": true,
+  "code_bindings": {
+    "isaforge/tacle_workload.py": "2c0bd85266b164ff599154911a981566c8cc8353cb0ac7ccbd61c0948250ea4f",
+    "scripts/qualify_tacle_bitcount.py": "a56f72772ce718abf43662743b3bea8a398ac7c2b6fd65eb9564728f71ada597",
+    "scripts/tacle_selection_campaign.py": "1b27b2046edf0ce1f8f8decd075a383b4ac3492714fd3b35f2fab37a22a68db4",
+    "scripts/reproduce_tacle_selection.py": "7c5e8deed977944fb847cbca9fbcf510558e794a9a91b178359c1d4e6405c468",
+    "scripts/report_tacle_selection.py": "9fd9b125bba1d21c585257d9c5333137ad115ab3ca9d586d9dbc3b7aabde3478",
+    "tests/test_tacle_workload.py": "625902265913e5a3f3929c9823bf57f2fcd4b713f8d1e4557a6c10d77ceeb64f",
+    "tests/test_tacle_selection_campaign.py": "76d51531239a1758725b7dc8bd5f5246415787b9fcb70855aa0e7786af569085",
+    "tests/test_reproduce_tacle_selection.py": "dfd08962142f5829c02e317cb6f55c9dfb5a5e8ccbcad7c24ab547fb2ae94125",
+    "tests/test_report_tacle_selection.py": "f83aba3c517437dc14a1d1cc9e546a1264acd893e12f78ab77da7d7ec1a096e5"
+  },
+  "prelabel_validation": {
+    "path": "results/2026-10-22-bitcount-prelabel-validation",
+    "manifest_sha256": "f3769a6a109577523d168c71f30ad7f0966a24317fad3b9808b8871171f7ea55"
+  },
+  "focused_postlabel": {
+    "passed": 50,
+    "failed": 0,
+    "command": "../work/audit-venv/bin/python -m pytest -q tests/test_reproduce_tacle_selection.py tests/test_tacle_selection_campaign.py tests/test_tacle_workload.py tests/test_report_tacle_selection.py"
+  },
+  "preserved_full_test": {
+    "passed": 3484,
+    "passing_subtests": 179,
+    "failed": 1,
+    "failure": "tests/test_capture_v11_spooled.py::test_blocked_pipe_or_compressor_drain_has_finite_cleanup[pipe]",
+    "known_legacy_failure": true,
+    "cleanup_fix_claimed": false
+  },
+  "new_full_suite_rerun": false,
+  "commands": [
+    {
+      "command": "make reproduce-bitcount PYTHON=../work/audit-venv/bin/python BITCOUNT_REPLAY_OUTPUT=generated/bitcount-postlabel-validation/replay",
+      "returncode": 0,
+      "log": "replay.log"
+    },
+    {
+      "command": "make bitcount-report PYTHON=../work/audit-venv/bin/python BITCOUNT_REPORT_OUTPUT=results/2026-10-22-bitcount-report",
+      "returncode": 0,
+      "log": "report.log"
+    },
+    {
+      "command": "make export-bitcount-corpus PYTHON=../work/audit-venv/bin/python BITCOUNT_CORPUS_OUTPUT=results/2026-10-22-twelve-source-corpus",
+      "returncode": 0,
+      "log": "export.log"
+    }
+  ],
+  "exact_reproduction": {
+    "charged_candidate_attempts": 12,
+    "trajectories": 210,
+    "endpoints": 630,
+    "endpoint_summaries": 126,
+    "original_control_prediction_refits": 5,
+    "utility_prediction_and_model_refits": 5,
+    "feasibility_prediction_and_model_refits": 5,
+    "new_native_jobs": 0,
+    "live_trace_exact": true,
+    "scientific_and_paid_cost_fields_exact": true,
+    "excluded_host_timer_fields": [
+      "cached_initial_inference_seconds",
+      "inference_seconds",
+      "mean_inference_seconds",
+      "paid_update_host_seconds",
+      "replay_search_host_seconds"
+    ],
+    "initial_semantic_model_refit_exact": true,
+    "paired_collection_clocks_exact": true
+  },
+  "collection_observer_durations": {
+    "utc_elapsed_ns": 1064988605000,
+    "monotonic_elapsed_ns": 1064975519125,
+    "utc_elapsed_seconds": 1064.988605,
+    "monotonic_elapsed_seconds": 1064.975519125,
+    "monotonic_elapsed_bracket_ns": [
+      1064975513667,
+      1064975520791
+    ],
+    "monotonic_endpoints_ordered": true,
+    "utc_minus_monotonic_elapsed_ns": 13085875,
+    "clock_disagreement_detected": true,
+    "disagreement_rule": "UTC delta outside the observed monotonic capture bracket; no tolerance or clock correction.",
+    "uninterrupted_calendar_wall_time_established": false,
+    "cause": "Unresolved; endpoint observations do not distinguish clock adjustment, suspension or other clock behavior."
+  },
+  "result_manifest_bindings": {
+    "results/2026-10-22-bitcount-campaign": "183954b6346b8be1a484202d98e531ce2bdf3c5b95a4abc81a2899e7590bc07b",
+    "results/2026-10-22-bitcount-collection": "377c74f6e23e434ff78bb9d9530dd536f91ab6c8c4c622f08e8f1b03aabb20bf",
+    "results/2026-10-22-bitcount-report": "070bbb6e9c651ee40031ba75b0b1bded871ecf38ea323c430530bd1c6ad50069",
+    "results/2026-10-22-twelve-source-corpus": "4ccb5e4d0f02de3ad0d92221bb8d41f9aa3848bca614679994496645272e3f9a"
+  },
+  "time_note": "Command ledgers, CLI/subprocess/native scopes overlap. Paired observer clock disagreement remains unresolved. Host-only timer exclusions preserve both raw endpoint arrays. No uninterrupted wall-time or total-cost saving is claimed.",
+  "source_generalization_established": false,
+  "model_superiority_established": false,
+  "calibrated_uncertainty_established": false
+}

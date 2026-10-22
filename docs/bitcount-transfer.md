@@ -1,4 +1,4 @@
-# TACLeBench bitcount: useful fresh-source selection experiment
+# TACLeBench bitcount: completed fresh-source selection experiment
 
 The unchanged guarded pipeline now accepts a new multi-file integer workload.
 TACLeBench bitcount executes eight population-count algorithms, ten inputs per
@@ -18,7 +18,7 @@ The full original input passes the native self-check at **51,689 cycles and
 10,319 instructions**. Automatic discovery yields forty raw formulas and37
 executable formulas before the calibrated guarded shortlist. One selected
 formula executes150 times, with a public predicted450-cycle/0.870591% reduction.
-This is a calibrated estimate, not a measured optimized-program label. The
+This was a public calibrated estimate at qualification. Subsequent native execution independently measures the same 450-cycle reduction; its +65 LUT4 cost exceeds the primary +64 cap. The
 baseline passes integrated synthesis, all three route seeds, unobserved versus
 observed execution, and deliberate memory-guard controls. The recorded maximum
 stack use is336 bytes, leaving1,328 bytes above the declared floor.
@@ -69,54 +69,40 @@ direct Python equality fails although the canonical JSON digest is identical.
 The separate packing/replay adapter normalizes only that two-number proof field
 at the comparison boundary. Every score, prediction, model state, decision,
 paid outcome and native duration must still match exactly; no numeric tolerance
-is added. The complete amendment is pushed before any candidate measurements.
+is added. Both complete packages were pushed at `7bbe3f7070e3b31ee4de9fe973c536cccf3aca03` before any candidate measurements. The release gate authenticated the actual remote head before native queries.
 
-## Commands
+## Measured outcomes
 
-Use Python3.12 and `requirements-speedup.txt`. Native commands require the pinned
-tool paths recorded by the original processor reference. Do not repeat native
-qualification/collection on existing roots.
+All twelve candidates pass correctness, execution/processor controls, memory checks, integrated synthesis/device capacity and all three routes. Baseline resources are 1,653 LUT4, 655 flip-flops, 295 carry cells and 20 BRAM blocks, with minimum Fmax 68.493 MHz. Candidate cycle deltas all equal calibrated estimates. These are simulated processor cycles and routed estimates on the declared fixed input, not board results or general correctness proofs.
+
+| Area cap | Complete-pool best | Cycles | Speedup | Added LUT4 | Minimum MHz |
+| --- | --- | ---: | ---: | ---: | ---: |
+| +32 | candidate 18 | 51,641 | 1.000929× | 26 | 68.719 |
+| **+64 (primary)** | **candidate 31** | **51,599** | **1.001744×** | **39** | **67.783** |
+| +128 | candidate 00 | 51,239 | 1.008782× | 65 | 61.824 |
+
+The actual live semantic GP chooses **00→14→11**, with +65/+77/+73 LUT4, and retains baseline after all three paid attempts. The trace is sealed before the nine reference candidates. At +64 / three queries, the cost heuristic reaches the pool optimum in all five dependent seeds. Mean verified cycle reduction is 0.174118% for that heuristic, 0.094024% for random, 0.092863% for frequency and 0.055718% for ranking. Merit, calibrated latency and the other learned policies retain baseline. This source does not support learned superiority; no policy is promoted.
+
+[The full report](../results/2026-10-22-bitcount-report/results.md) contains all twelve measured cycles, correctness, resource counts and minimum timing; its CSV retains every route seed and all fourteen policies/caps/budgets. [The campaign](../results/2026-10-22-bitcount-campaign/provenance.json) preserves raw native evidence, acquisition proofs and the prelabel Git binding. [The expanded corpus](../results/2026-10-22-twelve-source-corpus/README.md) contains **99 verified labels / three failures / 102 attempts / twelve sources / thirteen contexts**. It preserves the earlier 87 labels and failures exactly. This increment adds thirteen integrated designs and 39 routes, bringing completed automatic designs/routes to 112/336 including baselines.
+
+The new candidate ledger records 921.081198 seconds. All native commands total 860.892178 seconds; baseline ledger 28.101971 seconds; the full collection observer records 1064.975519 monotonic seconds. Historical 90 attempts retain 5098.832466 ledger seconds. Scopes overlap and must not be added. Replayed policy cost sums are not independent measured live search lifetimes.
+
+## Working commands
+
+Use Python 3.12 and `requirements-speedup.txt`. Native qualification, freeze, release, three-query collection, nine-query oracle completion and packaging are **finished**. Preserve those original roots; do not repeat native commands on them.
 
 ```sh
-# Already completed qualification and model freeze; original roots are preserved.
-python scripts/qualify_tacle_bitcount.py
-python scripts/tacle_selection_campaign.py freeze \
-  --native-root generated/tacle-bitcount-2026-10-22 \
-  --qualification results/2026-10-22-bitcount-qualification \
-  --output results/2026-10-22-bitcount-preregistration
-python scripts/reproduce_tacle_selection.py prepare \
-  --preregistration results/2026-10-22-bitcount-preregistration \
-  --output results/2026-10-22-bitcount-proof-amendment
-
-# After pushing the entire preregistration, release once with its exact commit.
-python scripts/tacle_selection_campaign.py release \
-  --preregistration results/2026-10-22-bitcount-preregistration \
-  --native-root generated/tacle-bitcount-2026-10-22 \
-  --commit PRELABEL_COMMIT --output results/2026-10-22-bitcount-release.json
-python scripts/tacle_selection_campaign.py collect \
-  --preregistration results/2026-10-22-bitcount-preregistration \
-  --native-root generated/tacle-bitcount-2026-10-22 \
-  --release results/2026-10-22-bitcount-release.json \
-  --output results/2026-10-22-bitcount-collection
-python scripts/reproduce_tacle_selection.py pack \
-  --preregistration results/2026-10-22-bitcount-preregistration \
-  --native-root generated/tacle-bitcount-2026-10-22 \
-  --release results/2026-10-22-bitcount-release.json \
-  --collection results/2026-10-22-bitcount-collection \
-  --output results/2026-10-22-bitcount-campaign
-
-# Hardware-free reproduction/report/export after completed collection.
+# Authenticate raw evidence, exact model refits and all policy decisions; no native jobs.
 make reproduce-bitcount PYTHON=python
+# Produce all-candidate and all-policy Markdown/CSV; no fits, predictions or native jobs.
 make bitcount-report PYTHON=python
+# Preserve old rows exactly and append twelve native labels.
 make export-bitcount-corpus PYTHON=python
 ```
 
-The reproduction requires exact raw processor evidence, prelabel Git bindings,
-fifteen historical model refits, the initial semantic refit, live acquisition
-proofs and all210 trajectories/630 endpoint points. Only explicitly named host
-timers are excluded from exact equality; their archived and newly observed
-endpoint values are both preserved. Native paid durations never use tolerances
-or exclusions. Every derived output root must be fresh.
+Each derived output root must be fresh. Override `BITCOUNT_REPLAY_OUTPUT`, `BITCOUNT_REPORT_OUTPUT` or `BITCOUNT_CORPUS_OUTPUT` for another replay. Recorded outputs in `results/` are sealed evidence and must not be overwritten.
+
+The completed reproduction checks exact raw processor evidence, prelabel Git bindings, fifteen historical model refits, the initial semantic refit, live acquisition proofs and **210 trajectories / 630 endpoint points / 126 summaries**. Only explicitly named host timers are excluded from exact equality; archived and newly observed endpoint values are both preserved. Native paid durations never use tolerances or exclusions.
 
 ## Limits and next blocker
 
@@ -126,10 +112,7 @@ same earlier legacy pipe-cleanup failure recurs and is preserved; no cleanup
 fix or completely green full suite is claimed. Historical model/processor
 replays and both fixed count/semantic replays pass.
 
-At this checkpoint only qualification/model preparation is complete: optimized
-cycles and hardware outcomes are not yet measured. The twelve-candidate
-comparison is one fresh source, not twelve independent tasks or five independent
-test repetitions. A tie or loss to merit remains a valid outcome. Uncertainty
+[Post-collection validation](../results/2026-10-22-bitcount-validation/README.md) passes complete raw/model/live/policy replay, reporting and corpus export. Scientific source hashes remain identical to the prelabel checkpoint. The twelve-candidate comparison is one fresh source, not twelve independent tasks or five independent test repetitions. All outcomes are now consumed development data, including this negative comparison. Uncertainty
 is uncalibrated; aggregate correctness is fixed-input evidence, and constrained
 sets of one to three instructions still need joint validation. This experiment
 tests existing model transfer and connects useful fresh data; it adds no isolated
@@ -140,3 +123,8 @@ single initial semantic-fit receipt does not count total model/verification work
 Paired UTC/monotonic clocks, ledgers, native commands and CLI durations remain
 separate overlapping scopes; no uninterrupted calendar-wall or total-cost win
 is established by a count-budget result.
+
+
+The next bounded research experiment should address the observed decision failure, not add another isolated area predictor. The chosen GP candidates have broad area uncertainty (standard deviation about 22 LUT4), yet all three queries pursue related risky adders. One fixed finite-pool two-step constrained-lookahead acquisition can test terminal verified benefit using the existing model and joint candidate covariance. Freeze its integration/draw/tie settings before consumed-data development scoring, retain all fourteen controls and host-cost accounting, then test on an untouched source. This is a proposed adaptation of established methods, not implemented lookahead, calibrated confidence or a promised improvement. [Current handoff and next-source qualification limits](HANDOFF.md) define the next task.
+
+The collection observer records UTC 1064.988605 seconds versus monotonic 1064.975519 seconds, outside its paired capture bracket. Both raw observations and the unresolved clock-disagreement flag are retained; no timestamps are corrected and uninterrupted calendar wall time is not established.
