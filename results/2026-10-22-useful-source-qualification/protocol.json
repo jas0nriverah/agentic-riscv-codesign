@@ -1,0 +1,517 @@
+{
+  "schema": "isaforge-useful-source-qualification-v1",
+  "order": [
+    "cnt",
+    "bubblesort",
+    "prime",
+    "insertsort",
+    "tarai",
+    "recursion",
+    "janne_complex",
+    "cover"
+  ],
+  "source_families": {
+    "cnt": "cnt",
+    "bubblesort": "sorting",
+    "prime": "prime",
+    "insertsort": "sorting",
+    "tarai": "tarai",
+    "recursion": "recursion",
+    "janne_complex": "janne_complex",
+    "cover": "cover"
+  },
+  "stop_after_successful_families": 3,
+  "pool_size": 12,
+  "minimum_calibrated_cycle_reduction": 0.005,
+  "minimum_timed_replacements": 10,
+  "joint_gate": "At least one selected formula satisfies both numeric minima.",
+  "unchanged_input": true,
+  "unchanged_verifier": true,
+  "unchanged_partition": true,
+  "created_at_utc": "2026-10-22T17:01:41.792102+00:00",
+  "phases": [
+    "prepare",
+    "discover",
+    "opportunity",
+    "baseline",
+    "public",
+    "freeze"
+  ],
+  "memory_partition": {
+    "ram_bytes": 8192,
+    "program_limit": 6400,
+    "stack_floor": 6528,
+    "stack_bytes": 1664,
+    "minimum_guard_bytes": 128
+  },
+  "reference_root": "generated/codesign-crc32-2026-10-19-r1",
+  "reference_plan_sha256": "796167e07bdc413f348c829ca93e60eda87162ca02143d3f57269ff2059197b9",
+  "historical_corpus_sha256": "862aea0cd6086bb738471454846c5234ac478cb73e029a13f5aab395e111b297",
+  "native_parent": "generated/useful-opportunity-2026-10-22",
+  "target_candidate_attempts": 0,
+  "source_bindings": {
+    "scripts/qualify_opportunity_sources.py": "389e34ba724f2dcc3766752e404e46006b6aa7fced4f2e21508127ac08e8ffe1",
+    "isaforge/opportunity_workload.py": "c228176160496bc71139e5b0b765ab059cdd8a2064f068a08948a0f69d554b01",
+    "isaforge/blind_workload.py": "9f29ddd1cebbcc1c8199814343c555b35438d7669643c8749bbb96aa916a5307",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "isaforge/latency_features.py": "c0cd549e0fc7baa8317a552ba4350e86b0342af2e4c7a8737afd02e520161b92",
+    "isaforge/observed_command.py": "f56bf235b31205c842ea04ab5a493ee7f7e6731844e05b6d8991f21d9f3be41e",
+    "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+    "benchmarks/beebs/COPYING": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "benchmarks/beebs/cnt/cnt.c": "0c6b201ccb8f25a7ee7741206422c237580e053d9e7cc71a989753413887fe04",
+    "benchmarks/beebs/bubblesort/libbubblesort.c": "d4a9c32096ebe287ac83d50c69d4ec7cab1c253c6a7e383415b7db521e1b6f9a",
+    "benchmarks/beebs/prime/libprime.c": "2515479b9d94630e01aa294a5e1870a0fcb68020b34da93f1240616babf49735",
+    "benchmarks/beebs/insertsort/libinsertsort.c": "d25e603246fd509ae4dc972770e98fed8d20d386979870596af8cfc9b1ae0d0e",
+    "benchmarks/beebs/tarai/libtarai.c": "ff5dcf69f4adca26a61c14f1f725c2523d9c12deb45b77627126b169dab8d7fc",
+    "benchmarks/beebs/recursion/librecursion.c": "bc0572c7bab5ec43c1afb645f836d8fd4f86ffb83763800f10f2cd8ea8d9d98a",
+    "benchmarks/beebs/janne_complex/libjanne_complex.c": "dfb9adb3959064de1541f4a469ea0389558c85d1a350cc371207646554c1483c",
+    "benchmarks/beebs/cover/libcover.c": "80ac586a7aec55ae9ce1ad3266b94f530ce06c09108531544f2183da21e2f1d9"
+  },
+  "static_rejections": {
+    "janne_complex": "The kernel unconditionally returns1 and the verifier only checks that return; no meaningful kernel-output check is available in this unchanged-source protocol."
+  },
+  "qualification_rule": "Fixed source order; first three distinct accepted families. Skip a later family member only after that family qualifies. Never lower gates or retry rejected contexts.",
+  "workers": 1,
+  "build_workers": 2,
+  "phase_timeout_seconds": 3600,
+  "phase_commands": {
+    "cnt": {
+      "prepare": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "prepare",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/cnt",
+        "--workload",
+        "cnt",
+        "--reference-root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+      ],
+      "discover": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "discover",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/cnt"
+      ],
+      "opportunity": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "opportunity",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/cnt"
+      ],
+      "baseline": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "baseline",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/cnt"
+      ],
+      "public": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "public",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/cnt"
+      ],
+      "freeze": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "freeze",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/cnt"
+      ]
+    },
+    "bubblesort": {
+      "prepare": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "prepare",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/bubblesort",
+        "--workload",
+        "bubblesort",
+        "--reference-root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+      ],
+      "discover": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "discover",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/bubblesort"
+      ],
+      "opportunity": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "opportunity",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/bubblesort"
+      ],
+      "baseline": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "baseline",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/bubblesort"
+      ],
+      "public": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "public",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/bubblesort"
+      ],
+      "freeze": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "freeze",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/bubblesort"
+      ]
+    },
+    "prime": {
+      "prepare": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "prepare",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/prime",
+        "--workload",
+        "prime",
+        "--reference-root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+      ],
+      "discover": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "discover",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/prime"
+      ],
+      "opportunity": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "opportunity",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/prime"
+      ],
+      "baseline": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "baseline",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/prime"
+      ],
+      "public": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "public",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/prime"
+      ],
+      "freeze": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "freeze",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/prime"
+      ]
+    },
+    "insertsort": {
+      "prepare": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "prepare",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/insertsort",
+        "--workload",
+        "insertsort",
+        "--reference-root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+      ],
+      "discover": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "discover",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/insertsort"
+      ],
+      "opportunity": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "opportunity",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/insertsort"
+      ],
+      "baseline": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "baseline",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/insertsort"
+      ],
+      "public": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "public",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/insertsort"
+      ],
+      "freeze": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "freeze",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/insertsort"
+      ]
+    },
+    "tarai": {
+      "prepare": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "prepare",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/tarai",
+        "--workload",
+        "tarai",
+        "--reference-root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+      ],
+      "discover": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "discover",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/tarai"
+      ],
+      "opportunity": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "opportunity",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/tarai"
+      ],
+      "baseline": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "baseline",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/tarai"
+      ],
+      "public": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "public",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/tarai"
+      ],
+      "freeze": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "freeze",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/tarai"
+      ]
+    },
+    "recursion": {
+      "prepare": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "prepare",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/recursion",
+        "--workload",
+        "recursion",
+        "--reference-root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+      ],
+      "discover": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "discover",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/recursion"
+      ],
+      "opportunity": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "opportunity",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/recursion"
+      ],
+      "baseline": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "baseline",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/recursion"
+      ],
+      "public": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "public",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/recursion"
+      ],
+      "freeze": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "freeze",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/recursion"
+      ]
+    },
+    "janne_complex": {
+      "prepare": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "prepare",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/janne_complex",
+        "--workload",
+        "janne_complex",
+        "--reference-root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+      ],
+      "discover": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "discover",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/janne_complex"
+      ],
+      "opportunity": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "opportunity",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/janne_complex"
+      ],
+      "baseline": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "baseline",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/janne_complex"
+      ],
+      "public": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "public",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/janne_complex"
+      ],
+      "freeze": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "freeze",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/janne_complex"
+      ]
+    },
+    "cover": {
+      "prepare": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "prepare",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/cover",
+        "--workload",
+        "cover",
+        "--reference-root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+      ],
+      "discover": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "discover",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/cover"
+      ],
+      "opportunity": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "opportunity",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/cover"
+      ],
+      "baseline": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "baseline",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/cover"
+      ],
+      "public": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "public",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/cover"
+      ],
+      "freeze": [
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+        "-m",
+        "isaforge.opportunity_workload",
+        "freeze",
+        "--root",
+        "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/useful-opportunity-2026-10-22/cover"
+      ]
+    }
+  }
+}

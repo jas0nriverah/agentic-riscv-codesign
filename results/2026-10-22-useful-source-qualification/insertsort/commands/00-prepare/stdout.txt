@@ -1,0 +1,273 @@
+{
+  "schema": "isaforge-automatic-workload-v1",
+  "workload": "insertsort",
+  "reference_context": "cf16df2e04d6c845c4d990e9355bfe2060a79d71e5a92cc22afc4dedb5373fb2",
+  "core_commit": "ef203c2b0a3fb793280f5114941416c425c5b461",
+  "embench_commit": "0466a18e4f6b47e19598d7c6ba72916d54b68f65",
+  "tools": {
+    "gcc": {
+      "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "sha256": "d21f58713e7f2f9a9ef9de8762b2c2d1995cd4cdeda724d5fe4834f3af4737b2",
+      "version": "riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC arm64) 15.2.0"
+    },
+    "objcopy": {
+      "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy",
+      "sha256": "96d0c832bf77a27380eb6a638bfec2ee5df6a732d1fb7141234698472f66aec7",
+      "version": "GNU objcopy (xPack GNU RISC-V Embedded GCC arm64) 2.45"
+    },
+    "objdump": {
+      "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objdump",
+      "sha256": "87a57cf5bdabdf2ca91ebca54fe568bd6c3524f2558782520547b1b8f29b925b",
+      "version": "GNU objdump (xPack GNU RISC-V Embedded GCC arm64) 2.45"
+    },
+    "nm": {
+      "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-nm",
+      "sha256": "45c2086551a3decd7e4fd24a4d25a9710bc7bc665a4ca4dc7e669e5d70b8309f",
+      "version": "GNU nm (xPack GNU RISC-V Embedded GCC arm64) 2.45"
+    },
+    "verilator": {
+      "path": "/opt/homebrew/Cellar/verilator/5.050/bin/verilator",
+      "sha256": "fb2cc573b1055cf096c90e1efc9966fe56bdb4b265c83590cf2a49f7a0defcdf",
+      "version": "Verilator 5.050 2026-07-01 rev vUNKNOWN-built20260701"
+    },
+    "yosys": {
+      "path": "/opt/homebrew/Cellar/yosys/0.69_1/bin/yosys",
+      "sha256": "1222a95c90c84f66238b0a5ecb8b228bf787318cf1c412b41363e26ace5544cf",
+      "version": "Yosys 0.69+post (git sha1 143eb14f9cc55d6f8927e68523b0c9d2166ed02c, Release, AppleClang clang++ 21.0.0.21000334)"
+    },
+    "nextpnr": {
+      "path": "/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/bin/nextpnr-ice40",
+      "sha256": "c3df2ed2fb9be697db09e3bb5332ce2474b5437bde79e8edf9397c213048722e",
+      "version": "\"nextpnr-ice40\" -- Next Generation Place and Route (Version )"
+    }
+  },
+  "source_bindings": {
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/selection.py": "cf76a3f37f86a35b60454beb2be9e69a03944cac287d7485b1a6f20a6fdd5c7e",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/dataset.py": "bb568ef7ca5f6ad79fd6a9ffef9ff18c510b29ffb9f4b6a7e3bfd5cb4cae3cbc",
+    "isaforge/rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+    "isaforge/core_experiment.py": "3e300f3054224050cd600eea0a3a76db496b67951323115cdb5d349bb2f8acc8",
+    "isaforge/soc_experiment.py": "af8691054b626f687a8962b149bf3431ee7e34951d0aee0fd8692b0e334e3c1a",
+    "isaforge/core_routing.py": "dfe14bb5e7236630fe376a5131f4d492309933ae98c0a1e3ea9e798b28a36058",
+    "results/2026-10-13/candidates/crc32.json": "cd400959026c08dc2eb49e0ed9975f006ef50dd69b53881cf437e9e5987e22c0",
+    "hardware/pcpi_single.v": "1382dac78eed053726c34a127bb8355c3b2c2894e4995f9c61471f8bf18623ca",
+    "hardware/soc_top.v": "912829da3e0754ff2522754b57368b11a9d38b8fb2494ca73ff8abaf38f2cb98",
+    "hardware/soc_sim.cpp": "def529598ca2113b2b44891dbad268c3d2d5999a3d5650989c0686cab2c544cf",
+    "hardware/soc_start.S": "5f80f0e780ab4f8eb2bd18846dbeb5ab4406ca1efaa3221fb4c1e305bb4b0447",
+    "hardware/soc_link.ld": "03a68ad454871b9d0092972107a7900c24c56fb5f6cbf5bec21d055e040a80dc",
+    "hardware/core_crc_firmware.c": "e327ab1768dc8dc8d140cde0aff20f9d93d1cca8cd6d4b165e3e83aa9d5be041",
+    "hardware/candidate_sim.cpp": "e03f8ee324c1fd039e10621a8779b438070405ba6f4547b0cc612fe5b6e61a34",
+    "isaforge/workload_experiment.py": "2aaf44ead779ae43dabf2da4d85a62bb463632da68ee89ae2115c236e7f54fa8",
+    "isaforge/assembly_lowering.py": "e656f5591ce1fa70f8621f94349c7a1c1f90837fb572a8d42fe9a3ce88dc4554",
+    "isaforge/workload_probe.py": "b5779445c1f242acc7c2c5137dc971bcd21b6be31b8df1f805e3201dec7776c0",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "src/candidates.py": "44f83fb2f0c421fd1bae5d89c90787a4dd997f4df1a2c433680c696f6b9486eb",
+    "src/tracing.py": "b3010ece9ef1bbc261a9efa801981a55a640468c8c6a87ed29386ccf89f49724",
+    "src/verify_candidate_fusions.py": "0bff84bb4f787ef6fee7ce3935369964242286b714a2fd162ae490ef0ec3cc03",
+    "hardware/profile_sim.cpp": "76770bcff03f67a82bfdb410c7687f24f733326b2a221d615f11c8116da43b45",
+    "hardware/embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+    "hardware/embench_memory.c": "343b26ae849f9bfab8ed197636449c4a91c5d78f26fe7f6ff4f960901520b847",
+    "benchmarks/beebs/insertsort/libinsertsort.c": "d25e603246fd509ae4dc972770e98fed8d20d386979870596af8cfc9b1ae0d0e",
+    "isaforge/compact_workload.py": "636a86462f1ae2d2fb245aaacaa5e0b2d25ffb37b58e44af9a1c3348e8d7eaa5",
+    "isaforge/workload_campaign.py": "16366c2d1bbdfb710365a79248f8d7d9186a5bae3094f4b472cfe865ab6669d3",
+    "isaforge/partitioned_workload.py": "55ea4e3a98bed427d08c92b56fdbe431bd177054931c84128413f176e79a85e3",
+    "hardware/checked_sim.cpp": "477635f316551bf85bd7ac1addc11bb9fa2c252969202621e75692ea5cfd9f07",
+    "hardware/stack_monitor.hpp": "387f968d6960846d3f45aba87f8031d599616cc9fa48eab941e7a033a23d2f08",
+    "isaforge/latency_features.py": "c0cd549e0fc7baa8317a552ba4350e86b0342af2e4c7a8737afd02e520161b92",
+    "isaforge/workload_audit.py": "250d3c175232b67e16983256d2267e5451c4de854ae010fe0751a0f2f1403fe7",
+    "isaforge/bounded_workload.py": "b488bedc0a2bc6b3ab84c3a113383e2567a992a3407ecfe89b83a6b2c5fde9ac",
+    "isaforge/qualified_workload.py": "322278e840af5f2d352036758fd236df580948e2cb02bc46b34b0ca6b41913b6",
+    "isaforge/extended_workload.py": "ff2531e158ba6185a054b7dcb604c633c48d35ea431838d295304333a5da756f",
+    "isaforge/opportunity_workload.py": "c228176160496bc71139e5b0b765ab059cdd8a2064f068a08948a0f69d554b01",
+    "isaforge/relocation_guard.py": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+    "isaforge/guarded_attempts.py": "a382bb5061cfb9e0b0a61591870735195a7f98fb5f10c4f760d8acef398d454d",
+    "isaforge/guarded_evidence.py": "ea5730c8cb72e6e0b079b8f0c10bafb822ffd7f666bfc59651cfbf3b1f72a50e",
+    "isaforge/campaign_evidence.py": "96e4a96379dc336e1c04fc8a3bbfb9971cf65281d14cfe140f4eecaec51a748e",
+    "isaforge/prospective_inputs.py": "90abbebb74ad967d498c126134b30401e195da7e12ceef405661e5742ef5f446",
+    "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+    "benchmarks/beebs/COPYING": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "isaforge/blind_workload.py": "9f29ddd1cebbcc1c8199814343c555b35438d7669643c8749bbb96aa916a5307",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247"
+  },
+  "inputs": {
+    "soc_sim.cpp": "450c71eb16cebab41577dd0ab309945c1447a632d7ab085493751ed92f61669d",
+    "embench_memory.c": "143f04d4a6ef0b753370797222cd0d9229d6e36fd277f1ee1d0ed8a66fdef784",
+    "embench_firmware.c": "706851b5e00695547f4f79b2d5412c5547938171b36f90acac11dd8a7be7b85d",
+    "program.c": "d25e603246fd509ae4dc972770e98fed8d20d386979870596af8cfc9b1ae0d0e",
+    "latency-calibration.json": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+    "soc_top.v": "912829da3e0754ff2522754b57368b11a9d38b8fb2494ca73ff8abaf38f2cb98",
+    "stack_monitor.hpp": "01c093bc88d281f8b940182215d94b991e1aa4f9122c45161571213338d6aa69",
+    "core_crc_firmware.c": "e327ab1768dc8dc8d140cde0aff20f9d93d1cca8cd6d4b165e3e83aa9d5be041",
+    "beebsc.c": "4fa588eefa678fa89b16f2b898970cfed162845bd494fa47e619fa636ff5d1e1",
+    "crc32.c": "8180991358e28507a14426207840ec5c340e2491beac8e72658b3832621efb9c",
+    "COPYING": "041ebc727233e5bf096dd41260cbb81014d3d29ca007a15f3b1807d4e9ff288e",
+    "checked_sim.cpp": "1a61a9f7406ce88f35285af814d2b47e26d8802ff79b31c12d3860d35546d437",
+    "common.pcf": "90f30f5e0ab7657903b7e0ef8e094c5217eaffcb56697c3d4887deb30b04f010",
+    "soc_start.S": "5f80f0e780ab4f8eb2bd18846dbeb5ab4406ca1efaa3221fb4c1e305bb4b0447",
+    "candidate_sim.cpp": "e03f8ee324c1fd039e10621a8779b438070405ba6f4547b0cc612fe5b6e61a34",
+    "picorv32.v": "0836050971b3c6cdd28ac3b1e5719a67fb645161912bef1e472e63995ceb0622",
+    "pcpi_single.v": "1382dac78eed053726c34a127bb8355c3b2c2894e4995f9c61471f8bf18623ca",
+    "profile_sim.cpp": "76770bcff03f67a82bfdb410c7687f24f733326b2a221d615f11c8116da43b45",
+    "soc_link.ld": "7cd389e654197908ab8a8e06a6981b86a94b2fd5cb4d5214616cc9a1f251dd28",
+    "beebsc.h": "9a9fdef180978ec3caa6531d3c2dc6823bc5387731b568402c6c65442a2d7c6c",
+    "support.h": "3c0862b8279c8d01951b2c8a180f04bd996431c2fb63ffb91773e38895f25e53"
+  },
+  "compiler_flags": [
+    "-march=rv32i_zicsr",
+    "-mabi=ilp32",
+    "-Os",
+    "-std=gnu17",
+    "-nostdlib",
+    "-nostartfiles",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-msmall-data-limit=0",
+    "-mno-relax",
+    "-DCPU_MHZ=1"
+  ],
+  "pool_size": 12,
+  "maximum_candidate_operations": 4,
+  "pool_rule": "Reject symbolic/unsupported removed source operands before calibration filtering; Evenly spaced rank indices round(i*(N-1)/(K-1)) across all executable calibrated formulas sorted by instruction savings then formula; K fixed before discovery, no candidate performance labels.",
+  "configuration": {
+    "workload": "insertsort",
+    "isa": "rv32i_zicsr",
+    "repetitions": 170,
+    "updates_per_repetition": 1024,
+    "ram_bytes": 8192,
+    "pcpi_response_wait_cycles": 1,
+    "frequency_mhz": 12.0,
+    "route_seeds": [
+      1,
+      2,
+      3
+    ],
+    "max_added_lut4": 128,
+    "native_workers": 1,
+    "build_workers": 2,
+    "command_seconds": 180,
+    "total_native_seconds": 2400,
+    "max_native_commands": 240,
+    "live_seed": 0,
+    "live_budget": 3,
+    "bootstrap": 2,
+    "comparison_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "comparison_budgets": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "stack_bytes": 1664
+  },
+  "profile": "Actual pinned PicoRV32 counter increments and PC, between rdinstret markers; baseline binary and counters independently checked.",
+  "measurement": "Full benchmark invocation including software helper routines; startup, warmup and verification excluded; fixed common 12 MHz.",
+  "selection_scope": "Exhaustive oracle over this restricted, predeclared single-instruction pool; no claim about all possible instructions.",
+  "native_limits": {
+    "commands": 480,
+    "seconds": 3600,
+    "command_seconds": 180,
+    "workers": 1,
+    "build_workers": 2,
+    "candidate_attempts": 1
+  },
+  "build_variant": {
+    "optimization": "-Os",
+    "required_entrypoint": "isaforge/opportunity_workload.py",
+    "reason": "Predeclared memory-fit fallback; no performance labels used to choose compiler settings."
+  },
+  "memory_partition": {
+    "ram_bytes": 8192,
+    "program_limit": 6400,
+    "stack_floor": 6528,
+    "stack_bytes": 1664,
+    "minimum_guard_bytes": 128
+  },
+  "qualification_order": [
+    "cnt",
+    "bubblesort",
+    "prime",
+    "insertsort",
+    "tarai",
+    "recursion",
+    "janne_complex",
+    "cover"
+  ],
+  "qualification_rule": "First three independent declared source families passing the original input/verifier, twelve legal calibrated formulas and a baseline-only joint0.5%-gain/ten-replacement gate; no hidden candidate outcomes.",
+  "runtime_support": "Unchanged full BEEBS program and input; exact generic harness plus declared no-op warm_caches ABI adapter.",
+  "output_check": "Unmodified upstream full benchmark verifier.",
+  "guard_controls": [
+    "SP below stack floor must fail with exit10",
+    "RAM write in guard must fail with exit10"
+  ],
+  "calibration_compatibility": {
+    "context_id": "4a1a4de005fda8472c58cbe60174a194a856180658e8ab4fe3cdf8bc795c1014",
+    "report_sha256": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+    "scope": "Identical core, synchronous 8 KiB RAM and one-wait PCPI; explicit -Os and checked partition. Analytic transfer is tested by measured labels."
+  },
+  "partition_amendment": "Common declared 6400-byte program, 128-byte guard and 1664-byte stack on original 8 KiB SoC; unchanged benchmark arithmetic/input.",
+  "monitor_derivation": "Exact replacement of the frozen monitor configuration predicate only; observation logic unchanged.",
+  "simulation_cycle_limit": 800000000,
+  "driver_derivation": "Exact cycle<200000000 to cycle<800000000 replacement only in both frozen simulation drivers.",
+  "relocation_guard": {
+    "schema": "isaforge-relocation-source-guard-v1",
+    "stage": "before_calibration_and_stratification",
+    "required": true
+  },
+  "upstream": {
+    "suite": "BEEBS",
+    "commit": "049ded9f3aeb5591f553879d3a0376b8614e9422",
+    "source": "benchmarks/beebs/insertsort/libinsertsort.c",
+    "source_sha256": "d25e603246fd509ae4dc972770e98fed8d20d386979870596af8cfc9b1ae0d0e"
+  },
+  "workload_group": "beebs-insertsort",
+  "harness_derivation": "Exact hardware/embench_firmware.c plus WARMUP; ARCFOUR additionally applies the bound ARCFOUR_CHECK outside counters.",
+  "selection_evidence_scope": "Independent held-out BEEBS source; all candidate labels hidden until paid replay queries.",
+  "outer_timer_scope": "Complete CLI operation through lock close; excludes Python startup and final timing record write; overlaps inner scopes.",
+  "opportunity_source_protocol": {
+    "schema": "isaforge-useful-opportunity-v1",
+    "order": [
+      "cnt",
+      "bubblesort",
+      "prime",
+      "insertsort",
+      "tarai",
+      "recursion",
+      "janne_complex",
+      "cover"
+    ],
+    "source_families": {
+      "cnt": "cnt",
+      "bubblesort": "sorting",
+      "prime": "prime",
+      "insertsort": "sorting",
+      "tarai": "tarai",
+      "recursion": "recursion",
+      "janne_complex": "janne_complex",
+      "cover": "cover"
+    },
+    "stop_after_successful_families": 3,
+    "pool_size": 12,
+    "minimum_calibrated_cycle_reduction": 0.005,
+    "minimum_timed_replacements": 10,
+    "joint_gate": "At least one selected formula satisfies both numeric minima.",
+    "unchanged_input": true,
+    "unchanged_verifier": true,
+    "unchanged_partition": true
+  },
+  "context_amendment": "New source qualification protocol; original RV32I/ILP32-Os, PCPI, integrated8KiB and6400/6528 partition retained.",
+  "context_id": "42615d09c9ee9606878037b88954faf998e0c6fe204e12dfa20c9f835a976bc4"
+}

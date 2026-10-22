@@ -55,7 +55,8 @@ candidates: $(PROGRAMS:%=generated/candidates/%.json)
 # Research entry points. Activate .venv first, or set PYTHON=.venv/bin/python.
 .PHONY: help test reproduce reproduce-v4 reproduce-v5 reproduce-external-v5 reproduce-v6 reproduce-v8 reproduce-v9-coverage reproduce-v10d-hardware reproduce-v10d-timing reproduce-v10d-selection reproduce-v12 diagram
 help:
-	@echo 'Current ML work: make reproduce-expanded-history | make reproduce-live-gp (no native jobs; fresh output directories)'
+	@echo 'Current selection work: make reproduce-count-selection | make reproduce-semantic-selection | make diagnose-workload-support'
+	@echo 'Preserved ML/data work: make reproduce-expanded-history | make reproduce-live-gp (no native jobs; fresh output directories)'
 	@echo 'Preserved blind campaign: make reproduce-blind-campaign | make blind-report | make export-blind-corpus'
 	@echo 'Preserved SHA model experiment: make reproduce-feasible-benefit | make feasible-benefit-report'
 	@echo 'Interactive six-workload demo: make showcase | Four-tool matched controls: make selector-controls'
@@ -244,3 +245,16 @@ live-gp-report:
 
 export-live-gp-corpus:
 	$(PYTHON) scripts/export_live_gp_corpus.py --output "$(LIVE_GP_CORPUS_OUTPUT)"
+
+COUNT_SELECTION_REPLAY_OUTPUT ?= generated/reproduction/selection-improvement-count
+SEMANTIC_SELECTION_REPLAY_OUTPUT ?= generated/reproduction/selection-improvement-semantic
+WORKLOAD_SUPPORT_OUTPUT ?= generated/reproduction/workload-support
+.PHONY: reproduce-count-selection reproduce-semantic-selection diagnose-workload-support
+reproduce-count-selection:
+	$(PYTHON) scripts/evaluate_count_acquisition.py replay --root results/2026-10-22-count-acquisition-development --output "$(COUNT_SELECTION_REPLAY_OUTPUT)"
+
+reproduce-semantic-selection:
+	$(PYTHON) scripts/evaluate_semantic_selection.py replay --root results/2026-10-22-semantic-selection-development --output "$(SEMANTIC_SELECTION_REPLAY_OUTPUT)"
+
+diagnose-workload-support:
+	$(PYTHON) scripts/diagnose_workload_support.py --output "$(WORKLOAD_SUPPORT_OUTPUT)"

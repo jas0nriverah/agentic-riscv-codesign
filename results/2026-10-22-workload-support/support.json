@@ -1,0 +1,731 @@
+{
+  "schema": "isaforge-archive-workload-support-v1",
+  "qualification": "results/2026-10-22-useful-source-qualification",
+  "protocol_sha256": "a5a87427c3dd9d9b2e0ae2cfaaf5dae54c1552883466941ebf2163267aa0f388",
+  "qualification_sha256": "886186cf18d2d94b77690fbabd6eeaf88928b7d5bcf24bd8d20275c50865c099",
+  "manifest_sha256": "5af3535644ffa548f95502bee0b630ba1d6e01265d89a08dfb9ff4074643e058",
+  "source_bindings": {
+    "benchmarks/beebs/COPYING": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "benchmarks/beebs/bubblesort/libbubblesort.c": "d4a9c32096ebe287ac83d50c69d4ec7cab1c253c6a7e383415b7db521e1b6f9a",
+    "benchmarks/beebs/cnt/cnt.c": "0c6b201ccb8f25a7ee7741206422c237580e053d9e7cc71a989753413887fe04",
+    "benchmarks/beebs/cover/libcover.c": "80ac586a7aec55ae9ce1ad3266b94f530ce06c09108531544f2183da21e2f1d9",
+    "benchmarks/beebs/insertsort/libinsertsort.c": "d25e603246fd509ae4dc972770e98fed8d20d386979870596af8cfc9b1ae0d0e",
+    "benchmarks/beebs/janne_complex/libjanne_complex.c": "dfb9adb3959064de1541f4a469ea0389558c85d1a350cc371207646554c1483c",
+    "benchmarks/beebs/prime/libprime.c": "2515479b9d94630e01aa294a5e1870a0fcb68020b34da93f1240616babf49735",
+    "benchmarks/beebs/recursion/librecursion.c": "bc0572c7bab5ec43c1afb645f836d8fd4f86ffb83763800f10f2cd8ea8d9d98a",
+    "benchmarks/beebs/tarai/libtarai.c": "ff5dcf69f4adca26a61c14f1f725c2523d9c12deb45b77627126b169dab8d7fc",
+    "hardware/candidate_sim.cpp": "e03f8ee324c1fd039e10621a8779b438070405ba6f4547b0cc612fe5b6e61a34",
+    "hardware/checked_sim.cpp": "477635f316551bf85bd7ac1addc11bb9fa2c252969202621e75692ea5cfd9f07",
+    "hardware/core_crc_firmware.c": "e327ab1768dc8dc8d140cde0aff20f9d93d1cca8cd6d4b165e3e83aa9d5be041",
+    "hardware/embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+    "hardware/embench_memory.c": "343b26ae849f9bfab8ed197636449c4a91c5d78f26fe7f6ff4f960901520b847",
+    "hardware/pcpi_single.v": "1382dac78eed053726c34a127bb8355c3b2c2894e4995f9c61471f8bf18623ca",
+    "hardware/profile_sim.cpp": "76770bcff03f67a82bfdb410c7687f24f733326b2a221d615f11c8116da43b45",
+    "hardware/soc_link.ld": "03a68ad454871b9d0092972107a7900c24c56fb5f6cbf5bec21d055e040a80dc",
+    "hardware/soc_sim.cpp": "def529598ca2113b2b44891dbad268c3d2d5999a3d5650989c0686cab2c544cf",
+    "hardware/soc_start.S": "5f80f0e780ab4f8eb2bd18846dbeb5ab4406ca1efaa3221fb4c1e305bb4b0447",
+    "hardware/soc_top.v": "912829da3e0754ff2522754b57368b11a9d38b8fb2494ca73ff8abaf38f2cb98",
+    "hardware/stack_monitor.hpp": "387f968d6960846d3f45aba87f8031d599616cc9fa48eab941e7a033a23d2f08",
+    "isaforge/assembly_lowering.py": "e656f5591ce1fa70f8621f94349c7a1c1f90837fb572a8d42fe9a3ce88dc4554",
+    "isaforge/blind_workload.py": "9f29ddd1cebbcc1c8199814343c555b35438d7669643c8749bbb96aa916a5307",
+    "isaforge/bounded_workload.py": "b488bedc0a2bc6b3ab84c3a113383e2567a992a3407ecfe89b83a6b2c5fde9ac",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/campaign_evidence.py": "96e4a96379dc336e1c04fc8a3bbfb9971cf65281d14cfe140f4eecaec51a748e",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "isaforge/compact_workload.py": "636a86462f1ae2d2fb245aaacaa5e0b2d25ffb37b58e44af9a1c3348e8d7eaa5",
+    "isaforge/core_experiment.py": "3e300f3054224050cd600eea0a3a76db496b67951323115cdb5d349bb2f8acc8",
+    "isaforge/core_routing.py": "dfe14bb5e7236630fe376a5131f4d492309933ae98c0a1e3ea9e798b28a36058",
+    "isaforge/dataset.py": "bb568ef7ca5f6ad79fd6a9ffef9ff18c510b29ffb9f4b6a7e3bfd5cb4cae3cbc",
+    "isaforge/extended_workload.py": "ff2531e158ba6185a054b7dcb604c633c48d35ea431838d295304333a5da756f",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/guarded_attempts.py": "a382bb5061cfb9e0b0a61591870735195a7f98fb5f10c4f760d8acef398d454d",
+    "isaforge/guarded_evidence.py": "ea5730c8cb72e6e0b079b8f0c10bafb822ffd7f666bfc59651cfbf3b1f72a50e",
+    "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+    "isaforge/latency_features.py": "c0cd549e0fc7baa8317a552ba4350e86b0342af2e4c7a8737afd02e520161b92",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/observed_command.py": "f56bf235b31205c842ea04ab5a493ee7f7e6731844e05b6d8991f21d9f3be41e",
+    "isaforge/opportunity_workload.py": "c228176160496bc71139e5b0b765ab059cdd8a2064f068a08948a0f69d554b01",
+    "isaforge/partitioned_workload.py": "55ea4e3a98bed427d08c92b56fdbe431bd177054931c84128413f176e79a85e3",
+    "isaforge/prospective_inputs.py": "90abbebb74ad967d498c126134b30401e195da7e12ceef405661e5742ef5f446",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+    "isaforge/qualified_workload.py": "322278e840af5f2d352036758fd236df580948e2cb02bc46b34b0ca6b41913b6",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/relocation_guard.py": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+    "isaforge/rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+    "isaforge/selection.py": "cf76a3f37f86a35b60454beb2be9e69a03944cac287d7485b1a6f20a6fdd5c7e",
+    "isaforge/soc_experiment.py": "af8691054b626f687a8962b149bf3431ee7e34951d0aee0fd8692b0e334e3c1a",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/workload_audit.py": "250d3c175232b67e16983256d2267e5451c4de854ae010fe0751a0f2f1403fe7",
+    "isaforge/workload_campaign.py": "16366c2d1bbdfb710365a79248f8d7d9186a5bae3094f4b472cfe865ab6669d3",
+    "isaforge/workload_experiment.py": "2aaf44ead779ae43dabf2da4d85a62bb463632da68ee89ae2115c236e7f54fa8",
+    "isaforge/workload_probe.py": "b5779445c1f242acc7c2c5137dc971bcd21b6be31b8df1f805e3201dec7776c0",
+    "results/2026-10-13/candidates/crc32.json": "cd400959026c08dc2eb49e0ed9975f006ef50dd69b53881cf437e9e5987e22c0",
+    "scripts/diagnose_workload_support.py": "1120af5587ffe45b0708d14dc708f7261bf432c31581b325873b2765c43abc93",
+    "scripts/qualify_opportunity_sources.py": "389e34ba724f2dcc3766752e404e46006b6aa7fced4f2e21508127ac08e8ffe1",
+    "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+    "src/candidates.py": "44f83fb2f0c421fd1bae5d89c90787a4dd997f4df1a2c433680c696f6b9486eb",
+    "src/tracing.py": "b3010ece9ef1bbc261a9efa801981a55a640468c8c6a87ed29386ccf89f49724",
+    "src/verify_candidate_fusions.py": "0bff84bb4f787ef6fee7ce3935369964242286b714a2fd162ae490ef0ec3cc03"
+  },
+  "target_candidate_attempts": 0,
+  "original_profiles_replayed": 7,
+  "static_rejections": 1,
+  "native_jobs_run": 0,
+  "candidate_lowerings_run": 0,
+  "models_fitted": 0,
+  "scope": "Baseline-only archive replay; calibrated estimates are not candidate measurements. All qualification failures and gates remain unchanged.",
+  "workloads": [
+    {
+      "workload": "cnt",
+      "context_id": "3adf83dce092733e67ea7cb0ad3a2f6b1d12bbf58f24dd5387d06ec51487310e",
+      "status": "discovery_rejected",
+      "upstream": {
+        "suite": "BEEBS",
+        "commit": "049ded9f3aeb5591f553879d3a0376b8614e9422",
+        "source": "benchmarks/beebs/cnt/cnt.c",
+        "source_sha256": "0c6b201ccb8f25a7ee7741206422c237580e053d9e7cc71a989753413887fe04"
+      },
+      "inputs_digest": "ce25fcf009112570fbf1c10b6677828f77193a7c4c2dba3f1d855a9df3f1cea5",
+      "source_bindings_digest": "726732d3671043b87b495205f4ee62e13b78988c8e21fb7ec6c5c4da39b184da",
+      "artifact_sha256": {
+        "plan.json": "a6cd9e677971549b35f37ccd61ff0bd4a26070d399a9aee31eeebe9d0ebf17e4",
+        "inputs/program.c": "0c6b201ccb8f25a7ee7741206422c237580e053d9e7cc71a989753413887fe04",
+        "inputs/embench_firmware.c": "706851b5e00695547f4f79b2d5412c5547938171b36f90acac11dd8a7be7b85d",
+        "inputs/latency-calibration.json": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+        "discovery/attempt-000/program.s": "80157afd35fe1449f6959c489e45daa61f8198f62154b6f09ecf46cf0b30f8d3",
+        "discovery/attempt-000/marked.S": "31e83ed1b4f94ca0b5254cd5baac992f9c09de8ff912ebde49ddd816247c6914",
+        "discovery/attempt-000/marked/symbols.txt": "3a16e7488bf71c80da0684054859c9c948ca1fd4b73309dd3dd308ba777f3e5a",
+        "discovery/attempt-000/marked/disassembly.txt": "5b68377026918225de8e13606ad9df75d20ee9c828e40f640d4deed5cbf46c3b",
+        "discovery/attempt-000/original/firmware.hex": "9b60f44481f9b57be4b26fd78f8dfbf8fc562270581698f4b7d0161e6abd2b9d",
+        "discovery/attempt-000/marked/firmware.hex": "9b60f44481f9b57be4b26fd78f8dfbf8fc562270581698f4b7d0161e6abd2b9d",
+        "discovery/attempt-000/profile/simulation.json": "12e2cc53dbbd4154b2d87402f1e04a33007586e2de0b72dfcd54e3155931e8e8"
+      },
+      "raw_formula_count": 1,
+      "mapped_executable_count": 1,
+      "rejected_occurrences": {},
+      "relocation_guard": {
+        "schema": "isaforge-relocation-source-guard-v1",
+        "source_sha256": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+        "input_executable_count": 1,
+        "rejected_count": 1,
+        "rejections": [
+          {
+            "name": "candidate_00",
+            "formula": "addi(lui(0),720)",
+            "safe": false,
+            "checked_sites": 2,
+            "unsafe_sites": [
+              {
+                "site": 32,
+                "assembly": "\tlui\ta0,%hi(Array)",
+                "reason": "relocation_modifier",
+                "function": "benchmark",
+                "source_line": 66
+              },
+              {
+                "site": 33,
+                "assembly": "\taddi\ta0,a0,%lo(Array)",
+                "reason": "relocation_modifier",
+                "function": "benchmark",
+                "source_line": 67
+              }
+            ],
+            "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+          }
+        ]
+      },
+      "uncalibrated": [],
+      "calibrated_eligible_count": 0,
+      "eligible": [],
+      "twelve_formula_gate_passed": false,
+      "both_numeric_minima_formulas": [],
+      "maximum_cycle_reduction": null,
+      "maximum_timed_replacements": 0,
+      "baseline_performance": {
+        "cycles": 3930,
+        "instructions": 755,
+        "benchmark_result_u32": 396675,
+        "upstream_self_check": true,
+        "custom_instructions": 0,
+        "region_custom_instructions": 0
+      },
+      "memory_check": {
+        "min_sp": 8128,
+        "max_stack_bytes": 64,
+        "stack_headroom_bytes": 1600,
+        "checked_cycles": 54251
+      },
+      "timed_source_coverage": {
+        "profile_instructions": 754,
+        "counter_instructions": 755,
+        "counter_boundary_difference": 1,
+        "mapped_source_instructions": 747,
+        "outside_mapped_source_instructions": 7,
+        "mapped_fraction": 0.9907161803713528,
+        "outside_symbols": {
+          "__isaforge_begin_34": 2,
+          "main": 5
+        },
+        "scope": "Single-word marked program-source statements only; outside sites include pseudo-op expansions and linked runtime/helper code. Outside execution is not proven safely rewritable."
+      },
+      "archive": {
+        "path": "cnt/raw.tar.gz",
+        "sha256": "04c075234ddcb80f48913e6c32b2c5196f615b67dc73a8104bfd01ef27bc2420",
+        "inventory_sha256": "16085b8e0daa1e05eeb42e618397afe1725e63091c4a5f7d0a76c232065168a5"
+      }
+    },
+    {
+      "workload": "bubblesort",
+      "context_id": "da40314a2fb5c070de175c0a6395b08954293764b7378e6dfc2f3850f19febc9",
+      "status": "discovery_rejected",
+      "upstream": {
+        "suite": "BEEBS",
+        "commit": "049ded9f3aeb5591f553879d3a0376b8614e9422",
+        "source": "benchmarks/beebs/bubblesort/libbubblesort.c",
+        "source_sha256": "d4a9c32096ebe287ac83d50c69d4ec7cab1c253c6a7e383415b7db521e1b6f9a"
+      },
+      "inputs_digest": "4c4ad0fbb6e3ba00cd902f6fbdb4d4f04a0d5bdcf0cca9263948ff8b7caf9961",
+      "source_bindings_digest": "6c3369f06751daa0644aa5da660baf02805ae9d0ad501a5c013044819697b604",
+      "artifact_sha256": {
+        "plan.json": "54108610dbdb0a622c48b10cb34bfc6a7506e025b6e7f9d291864f381f4d556b",
+        "inputs/program.c": "d4a9c32096ebe287ac83d50c69d4ec7cab1c253c6a7e383415b7db521e1b6f9a",
+        "inputs/embench_firmware.c": "706851b5e00695547f4f79b2d5412c5547938171b36f90acac11dd8a7be7b85d",
+        "inputs/latency-calibration.json": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+        "discovery/attempt-000/program.s": "d417da6eb252b4d77017c5656760224b38dfedb4031f359691dad189d087711c",
+        "discovery/attempt-000/marked.S": "79b3d6edf15fe8ea04a12441267cb95807b26441bff96856c0350148f95c1402",
+        "discovery/attempt-000/marked/symbols.txt": "27104e7e709cb418db100fb099cc838833bd3baf2f24d1072f8eef9a6473deba",
+        "discovery/attempt-000/marked/disassembly.txt": "73f11a01c97487a63f1b190b32d1b6cbed05b693128870208cbe40ba3354cc4d",
+        "discovery/attempt-000/original/firmware.hex": "92b62ec4bba737c292697326bc82f4cc01b1a79bdab2626378632595287593a1",
+        "discovery/attempt-000/marked/firmware.hex": "92b62ec4bba737c292697326bc82f4cc01b1a79bdab2626378632595287593a1",
+        "discovery/attempt-000/profile/simulation.json": "72089cf7f7ed60c8a39e6f7c64bfa7ad820dde4ceeaa4e2ab0d62fd1683bd8a4"
+      },
+      "raw_formula_count": 1,
+      "mapped_executable_count": 1,
+      "rejected_occurrences": {},
+      "relocation_guard": {
+        "schema": "isaforge-relocation-source-guard-v1",
+        "source_sha256": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+        "input_executable_count": 1,
+        "rejected_count": 1,
+        "rejections": [
+          {
+            "name": "candidate_00",
+            "formula": "addi(lui(0),908)",
+            "safe": false,
+            "checked_sites": 2,
+            "unsafe_sites": [
+              {
+                "site": 32,
+                "assembly": "\tlui\ta0,%hi(Array)",
+                "reason": "relocation_modifier",
+                "function": "benchmark",
+                "source_line": 62
+              },
+              {
+                "site": 34,
+                "assembly": "\taddi\ta0,a0,%lo(Array)",
+                "reason": "relocation_modifier",
+                "function": "benchmark",
+                "source_line": 64
+              }
+            ],
+            "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+          }
+        ]
+      },
+      "uncalibrated": [],
+      "calibrated_eligible_count": 0,
+      "eligible": [],
+      "twelve_formula_gate_passed": false,
+      "both_numeric_minima_formulas": [],
+      "maximum_cycle_reduction": null,
+      "maximum_timed_replacements": 0,
+      "baseline_performance": {
+        "cycles": 279017,
+        "instructions": 50815,
+        "benchmark_result_u32": 0,
+        "upstream_self_check": true,
+        "custom_instructions": 0,
+        "region_custom_instructions": 0
+      },
+      "memory_check": {
+        "min_sp": 7744,
+        "max_stack_bytes": 448,
+        "stack_headroom_bytes": 1216,
+        "checked_cycles": 300130
+      },
+      "timed_source_coverage": {
+        "profile_instructions": 50814,
+        "counter_instructions": 50815,
+        "counter_boundary_difference": 1,
+        "mapped_source_instructions": 50807,
+        "outside_mapped_source_instructions": 7,
+        "mapped_fraction": 0.9998622426890227,
+        "outside_symbols": {
+          "__isaforge_begin_36": 2,
+          "main": 5
+        },
+        "scope": "Single-word marked program-source statements only; outside sites include pseudo-op expansions and linked runtime/helper code. Outside execution is not proven safely rewritable."
+      },
+      "archive": {
+        "path": "bubblesort/raw.tar.gz",
+        "sha256": "96de05000eb28997c5dba64f4e277fd81cdcb1e6fb7cc50c3ffeed3442f72585",
+        "inventory_sha256": "371092cdbfc1ff6e04731cbeb6af25e4ba86f3b74faf4fa67a795b43418cf3a6"
+      }
+    },
+    {
+      "workload": "prime",
+      "context_id": "3cb3329d5e11c4f7aa0a625f7b03b8062d66596c11e7b3324a5386f7ccf94c9a",
+      "status": "discovery_rejected",
+      "upstream": {
+        "suite": "BEEBS",
+        "commit": "049ded9f3aeb5591f553879d3a0376b8614e9422",
+        "source": "benchmarks/beebs/prime/libprime.c",
+        "source_sha256": "2515479b9d94630e01aa294a5e1870a0fcb68020b34da93f1240616babf49735"
+      },
+      "inputs_digest": "bc0e5b9b119c7abd1aab50e96a44d9dcd24d763c7746f5783b74ed056992a49c",
+      "source_bindings_digest": "6c7478e0a5ba65eee4be2f2687b232c69076312df670e2e9a681e01cc5e4e7e5",
+      "artifact_sha256": {
+        "plan.json": "e9d9b25cb64d52f6d8573fdfa702b9cecd03c9333c3938a35d1a735c662b9b61",
+        "inputs/program.c": "2515479b9d94630e01aa294a5e1870a0fcb68020b34da93f1240616babf49735",
+        "inputs/embench_firmware.c": "706851b5e00695547f4f79b2d5412c5547938171b36f90acac11dd8a7be7b85d",
+        "inputs/latency-calibration.json": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+        "discovery/attempt-000/program.s": "1112c9470e59c99f56e3e099b8a7fa484b7c11a8c9e9bd422153adbf8517a5e6",
+        "discovery/attempt-000/marked.S": "b9ac281ae5b2f198971c85c5fdfe4b62bb2ec804b3e133ac5838519ef1e71a32",
+        "discovery/attempt-000/marked/symbols.txt": "cca00880578762963dd6b51c9a0e1fd9e8de009e06c036fd7585c4b4088fe133",
+        "discovery/attempt-000/marked/disassembly.txt": "0ea3606c683d7f550d5a4db8209c8d9d04f906f0839235c07bb39be76d0ee136",
+        "discovery/attempt-000/original/firmware.hex": "32504fe112d8ccdeb0d23e2fd81f83db4b09d79aff456979ef2e53908841e7b9",
+        "discovery/attempt-000/marked/firmware.hex": "32504fe112d8ccdeb0d23e2fd81f83db4b09d79aff456979ef2e53908841e7b9",
+        "discovery/attempt-000/profile/simulation.json": "d4c8fe62ecc56b572b7135ff5c9e5bac80d57b85319b7d790bd3355560f1c1fe"
+      },
+      "raw_formula_count": 1,
+      "mapped_executable_count": 1,
+      "rejected_occurrences": {},
+      "relocation_guard": {
+        "schema": "isaforge-relocation-source-guard-v1",
+        "source_sha256": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+        "input_executable_count": 1,
+        "rejected_count": 0,
+        "rejections": []
+      },
+      "uncalibrated": [],
+      "calibrated_eligible_count": 1,
+      "eligible": [
+        {
+          "formula": "andi(xori(in0,1),255)",
+          "timed_replacements": 1,
+          "latency_features": {
+            "baseline_cycles": 386055,
+            "baseline_instructions": 75683,
+            "baseline_cpi": 5.100947372593581,
+            "replacement_execution_fraction": 1.3213006883976586e-05,
+            "occurrence_size_min": 2,
+            "occurrence_size_max": 2,
+            "dynamic_software_cycles": 8,
+            "dynamic_custom_cycles": 5,
+            "dynamic_shift_extra_cycles": 0,
+            "estimated_saved_cycles": 3,
+            "estimated_cycle_reduction": 7.770913470878501e-06,
+            "estimated_speedup": 1.0000077709738584
+          }
+        }
+      ],
+      "twelve_formula_gate_passed": false,
+      "both_numeric_minima_formulas": [],
+      "maximum_cycle_reduction": 7.770913470878501e-06,
+      "maximum_timed_replacements": 1,
+      "baseline_performance": {
+        "cycles": 386055,
+        "instructions": 75683,
+        "benchmark_result_u32": 0,
+        "upstream_self_check": true,
+        "custom_instructions": 0,
+        "region_custom_instructions": 0
+      },
+      "memory_check": {
+        "min_sp": 8128,
+        "max_stack_bytes": 64,
+        "stack_headroom_bytes": 1600,
+        "checked_cycles": 386408
+      },
+      "timed_source_coverage": {
+        "profile_instructions": 75682,
+        "counter_instructions": 75683,
+        "counter_boundary_difference": 1,
+        "mapped_source_instructions": 3071,
+        "outside_mapped_source_instructions": 72611,
+        "mapped_fraction": 0.040577680293861156,
+        "outside_symbols": {
+          "__hidden___udivsi3": 48006,
+          "__isaforge_begin_31": 860,
+          "__isaforge_begin_36": 864,
+          "__isaforge_begin_55": 2,
+          "__isaforge_begin_59": 2,
+          "__mulsi3": 21152,
+          "__umodsi3": 1720,
+          "main": 5
+        },
+        "scope": "Single-word marked program-source statements only; outside sites include pseudo-op expansions and linked runtime/helper code. Outside execution is not proven safely rewritable."
+      },
+      "archive": {
+        "path": "prime/raw.tar.gz",
+        "sha256": "d564604ce5a20709238c0ad5b79231e36e6e8058db3b5633570c9114cba49189",
+        "inventory_sha256": "34f33a59c777b3f0cf63e91d0b8f973c6263a077495c7d17a27e7ffabc00152a"
+      }
+    },
+    {
+      "workload": "insertsort",
+      "context_id": "42615d09c9ee9606878037b88954faf998e0c6fe204e12dfa20c9f835a976bc4",
+      "status": "discovery_rejected",
+      "upstream": {
+        "suite": "BEEBS",
+        "commit": "049ded9f3aeb5591f553879d3a0376b8614e9422",
+        "source": "benchmarks/beebs/insertsort/libinsertsort.c",
+        "source_sha256": "d25e603246fd509ae4dc972770e98fed8d20d386979870596af8cfc9b1ae0d0e"
+      },
+      "inputs_digest": "5edd6aab272608bfa111468be689b98504d2b21d767946436fa1bab890ffcc5d",
+      "source_bindings_digest": "c221eb64ce04c2ac629fdfaad529eafa9564bbc0856c330eea7a6b6b16cfcdb7",
+      "artifact_sha256": {
+        "plan.json": "713c251acf25c11ae730e6701fd072b18f6e0df30ee52b6c1e20546d459e4029",
+        "inputs/program.c": "d25e603246fd509ae4dc972770e98fed8d20d386979870596af8cfc9b1ae0d0e",
+        "inputs/embench_firmware.c": "706851b5e00695547f4f79b2d5412c5547938171b36f90acac11dd8a7be7b85d",
+        "inputs/latency-calibration.json": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+        "discovery/attempt-000/program.s": "00d0d48ab5070abfbcc0616eb095830730708c2ca66478bd672b607304d2ba6e",
+        "discovery/attempt-000/marked.S": "7d368aed60ebc95012d6e18e32f1099d17a27ff7dbcc5c9c0aaff18f7d147026",
+        "discovery/attempt-000/marked/symbols.txt": "82ea30ae2803dd82b3a478222575d7c5299a8f6f886191d7616cdb05d7beea18",
+        "discovery/attempt-000/marked/disassembly.txt": "b12e84723f8f89afffe715b9b58ffbdef692e63cb9242e2d2912c9419675e533",
+        "discovery/attempt-000/original/firmware.hex": "72719748a87fdf1b97340842bf8439a33ac450cff01027c37a8b764654ccb478",
+        "discovery/attempt-000/marked/firmware.hex": "72719748a87fdf1b97340842bf8439a33ac450cff01027c37a8b764654ccb478",
+        "discovery/attempt-000/profile/simulation.json": "ede58fa751ef92949179ee735aadbfe075887bf0a58ecce3d8055d7c383d12a7"
+      },
+      "raw_formula_count": 2,
+      "mapped_executable_count": 2,
+      "rejected_occurrences": {},
+      "relocation_guard": {
+        "schema": "isaforge-relocation-source-guard-v1",
+        "source_sha256": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+        "input_executable_count": 2,
+        "rejected_count": 1,
+        "rejections": [
+          {
+            "name": "candidate_01",
+            "formula": "addi(lui(0),544)",
+            "safe": false,
+            "checked_sites": 2,
+            "unsafe_sites": [
+              {
+                "site": 0,
+                "assembly": "\tlui\ta3,%hi(a)",
+                "reason": "relocation_modifier",
+                "function": "benchmark",
+                "source_line": 12
+              },
+              {
+                "site": 2,
+                "assembly": "\taddi\ta3,a3,%lo(a)",
+                "reason": "relocation_modifier",
+                "function": "benchmark",
+                "source_line": 14
+              }
+            ],
+            "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+          }
+        ]
+      },
+      "uncalibrated": [],
+      "calibrated_eligible_count": 1,
+      "eligible": [
+        {
+          "formula": "add(slli(in0,2),in1)",
+          "timed_replacements": 9,
+          "latency_features": {
+            "baseline_cycles": 2221,
+            "baseline_instructions": 363,
+            "baseline_cpi": 6.118457300275482,
+            "replacement_execution_fraction": 0.024793388429752067,
+            "occurrence_size_min": 2,
+            "occurrence_size_max": 2,
+            "dynamic_software_cycles": 90,
+            "dynamic_custom_cycles": 45,
+            "dynamic_shift_extra_cycles": 18,
+            "estimated_saved_cycles": 45,
+            "estimated_cycle_reduction": 0.020261143628995948,
+            "estimated_speedup": 1.0206801470588236
+          }
+        }
+      ],
+      "twelve_formula_gate_passed": false,
+      "both_numeric_minima_formulas": [],
+      "maximum_cycle_reduction": 0.020261143628995948,
+      "maximum_timed_replacements": 9,
+      "baseline_performance": {
+        "cycles": 2221,
+        "instructions": 363,
+        "benchmark_result_u32": 0,
+        "upstream_self_check": true,
+        "custom_instructions": 0,
+        "region_custom_instructions": 0
+      },
+      "memory_check": {
+        "min_sp": 8096,
+        "max_stack_bytes": 96,
+        "stack_headroom_bytes": 1568,
+        "checked_cycles": 4766
+      },
+      "timed_source_coverage": {
+        "profile_instructions": 362,
+        "counter_instructions": 363,
+        "counter_boundary_difference": 1,
+        "mapped_source_instructions": 357,
+        "outside_mapped_source_instructions": 5,
+        "mapped_fraction": 0.9861878453038674,
+        "outside_symbols": {
+          "main": 5
+        },
+        "scope": "Single-word marked program-source statements only; outside sites include pseudo-op expansions and linked runtime/helper code. Outside execution is not proven safely rewritable."
+      },
+      "archive": {
+        "path": "insertsort/raw.tar.gz",
+        "sha256": "64f9a2b3d6ae0279dc695fae3c4a9351a0aee3281224e38f4fdd2668e0222555",
+        "inventory_sha256": "14eeaec5be05566c696ca91c9176f894e8efffeced49fabfa5c364601ca6d465"
+      }
+    },
+    {
+      "workload": "tarai",
+      "context_id": "6c59170a78bac461963316a2f75ce7b5003a6f8858f48628479bbc265a383f94",
+      "status": "discovery_rejected",
+      "upstream": {
+        "suite": "BEEBS",
+        "commit": "049ded9f3aeb5591f553879d3a0376b8614e9422",
+        "source": "benchmarks/beebs/tarai/libtarai.c",
+        "source_sha256": "ff5dcf69f4adca26a61c14f1f725c2523d9c12deb45b77627126b169dab8d7fc"
+      },
+      "inputs_digest": "7836545d852749c1da154240d4b21bbeef92834726b24e6c39a0e7233d1d3870",
+      "source_bindings_digest": "ace5dc5172a5cafface4f18e06af4240ebb7a79d187aa3ff9f072d60bdd7cc87",
+      "artifact_sha256": {
+        "plan.json": "9d5ed0927bbcc8659c1c82c2f2970417f49884561d6d322cb4764bcb3a75623a",
+        "inputs/program.c": "ff5dcf69f4adca26a61c14f1f725c2523d9c12deb45b77627126b169dab8d7fc",
+        "inputs/embench_firmware.c": "706851b5e00695547f4f79b2d5412c5547938171b36f90acac11dd8a7be7b85d",
+        "inputs/latency-calibration.json": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+        "discovery/attempt-000/program.s": "7ff13c3e301cb39d4427f8469ecd4174d4418a981a3aa659889823ffaea58eaa",
+        "discovery/attempt-000/marked.S": "0b21a294cd613f753409974cbdb3d219630c8cb2e0024c87b713eb7bd8c4f256",
+        "discovery/attempt-000/marked/symbols.txt": "f57f23160071da35a0e9289b48e3aaf66638a0eab505225ca6cb1da6a737e408",
+        "discovery/attempt-000/marked/disassembly.txt": "509a1f09b1127db3fa15ef440ceba58eb0f01b9dec4184f8563e15dd5a5306d8",
+        "discovery/attempt-000/original/firmware.hex": "4f66a573bf17810db6891f24866e09b3c8b0bd2c370dc8ca0eab38f3f6716ba9",
+        "discovery/attempt-000/marked/firmware.hex": "4f66a573bf17810db6891f24866e09b3c8b0bd2c370dc8ca0eab38f3f6716ba9",
+        "discovery/attempt-000/profile/simulation.json": "24cddfc9c393534264b7fd7eb61276ebf97010fc0a988e95069db426b6338ca2"
+      },
+      "raw_formula_count": 0,
+      "mapped_executable_count": 0,
+      "rejected_occurrences": {},
+      "relocation_guard": {
+        "schema": "isaforge-relocation-source-guard-v1",
+        "source_sha256": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+        "input_executable_count": 0,
+        "rejected_count": 0,
+        "rejections": []
+      },
+      "uncalibrated": [],
+      "calibrated_eligible_count": 0,
+      "eligible": [],
+      "twelve_formula_gate_passed": false,
+      "both_numeric_minima_formulas": [],
+      "maximum_cycle_reduction": null,
+      "maximum_timed_replacements": 0,
+      "baseline_performance": {
+        "cycles": 2990,
+        "instructions": 529,
+        "benchmark_result_u32": 9,
+        "upstream_self_check": true,
+        "custom_instructions": 0,
+        "region_custom_instructions": 0
+      },
+      "memory_check": {
+        "min_sp": 7936,
+        "max_stack_bytes": 256,
+        "stack_headroom_bytes": 1408,
+        "checked_cycles": 3343
+      },
+      "timed_source_coverage": {
+        "profile_instructions": 528,
+        "counter_instructions": 529,
+        "counter_boundary_difference": 1,
+        "mapped_source_instructions": 485,
+        "outside_mapped_source_instructions": 43,
+        "mapped_fraction": 0.9185606060606061,
+        "outside_symbols": {
+          "__isaforge_begin_24": 18,
+          "__isaforge_begin_29": 18,
+          "__isaforge_begin_49": 2,
+          "main": 5
+        },
+        "scope": "Single-word marked program-source statements only; outside sites include pseudo-op expansions and linked runtime/helper code. Outside execution is not proven safely rewritable."
+      },
+      "archive": {
+        "path": "tarai/raw.tar.gz",
+        "sha256": "1d70b62dc688919c010eec4d14dba0cc56549143881d141ba3893e90aa4f349e",
+        "inventory_sha256": "5a221f5b78a7d3b4f995098f7a3476438d2de431b97c2f179e435aabc992a736"
+      }
+    },
+    {
+      "workload": "recursion",
+      "context_id": "61d78f73e7f15e1703ca4714dda543dd4cc464e5c0413c00bd889ed5643ff038",
+      "status": "discovery_rejected",
+      "upstream": {
+        "suite": "BEEBS",
+        "commit": "049ded9f3aeb5591f553879d3a0376b8614e9422",
+        "source": "benchmarks/beebs/recursion/librecursion.c",
+        "source_sha256": "bc0572c7bab5ec43c1afb645f836d8fd4f86ffb83763800f10f2cd8ea8d9d98a"
+      },
+      "inputs_digest": "b9af63b65eba9d9e562e0d64b3438d08b93acc56e360cc727b3b31159a74a20f",
+      "source_bindings_digest": "f6f6e63a73968cf77762089c67f0835dd5cf028c43514525b3029f5da21e81f6",
+      "artifact_sha256": {
+        "plan.json": "c429e54fe2bf18fd42325fb2591f0eca2a3605b7ea194707d95082b4ea78c9dd",
+        "inputs/program.c": "bc0572c7bab5ec43c1afb645f836d8fd4f86ffb83763800f10f2cd8ea8d9d98a",
+        "inputs/embench_firmware.c": "706851b5e00695547f4f79b2d5412c5547938171b36f90acac11dd8a7be7b85d",
+        "inputs/latency-calibration.json": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+        "discovery/attempt-000/program.s": "08cb09343c21bf13cfe8e2d73f4287fba5d5c8b9f3995b2dadaf8e199271e0bc",
+        "discovery/attempt-000/marked.S": "41a60fb3749ea3f673d12ee052ab17ac116a2f806e8b97b37be2dccee6958bc1",
+        "discovery/attempt-000/marked/symbols.txt": "6852640b687e77477bfa12ebecc22b784f397148b3010ef755642385b1c2836e",
+        "discovery/attempt-000/marked/disassembly.txt": "e0ee127a8faf10882543087700cb23c145155e7d26aec474fdb33262b1f670f3",
+        "discovery/attempt-000/original/firmware.hex": "400ba2ad30da66c53c556c3e7c9e2d599c9bf97d437a0fd31964a45964a53541",
+        "discovery/attempt-000/marked/firmware.hex": "400ba2ad30da66c53c556c3e7c9e2d599c9bf97d437a0fd31964a45964a53541",
+        "discovery/attempt-000/profile/simulation.json": "2d3cfe7fad4f892cf1cb1b9e00a5c08e569083ed41cfc1a9cfd96ebe31e6d3f6"
+      },
+      "raw_formula_count": 0,
+      "mapped_executable_count": 0,
+      "rejected_occurrences": {},
+      "relocation_guard": {
+        "schema": "isaforge-relocation-source-guard-v1",
+        "source_sha256": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+        "input_executable_count": 0,
+        "rejected_count": 0,
+        "rejections": []
+      },
+      "uncalibrated": [],
+      "calibrated_eligible_count": 0,
+      "eligible": [],
+      "twelve_formula_gate_passed": false,
+      "both_numeric_minima_formulas": [],
+      "maximum_cycle_reduction": null,
+      "maximum_timed_replacements": 0,
+      "baseline_performance": {
+        "cycles": 11182,
+        "instructions": 2058,
+        "benchmark_result_u32": 89,
+        "upstream_self_check": true,
+        "custom_instructions": 0,
+        "region_custom_instructions": 0
+      },
+      "memory_check": {
+        "min_sp": 7984,
+        "max_stack_bytes": 208,
+        "stack_headroom_bytes": 1456,
+        "checked_cycles": 11505
+      },
+      "timed_source_coverage": {
+        "profile_instructions": 2057,
+        "counter_instructions": 2058,
+        "counter_boundary_difference": 1,
+        "mapped_source_instructions": 1874,
+        "outside_mapped_source_instructions": 183,
+        "mapped_fraction": 0.9110354885755956,
+        "outside_symbols": {
+          "__isaforge_begin_10": 176,
+          "__isaforge_begin_35": 2,
+          "main": 5
+        },
+        "scope": "Single-word marked program-source statements only; outside sites include pseudo-op expansions and linked runtime/helper code. Outside execution is not proven safely rewritable."
+      },
+      "archive": {
+        "path": "recursion/raw.tar.gz",
+        "sha256": "5f38509c18a79c7fd066bd8ad3cf2b35def886b43859354c9ea64c8723495794",
+        "inventory_sha256": "bceb9ffc98d138c7bf01b612333a64ac919c8384ba0436ac108a9e86f993c3ed"
+      }
+    },
+    {
+      "workload": "janne_complex",
+      "status": "static_rejection",
+      "reason": "The kernel unconditionally returns1 and the verifier only checks that return; no meaningful kernel-output check is available in this unchanged-source protocol.",
+      "upstream_source": "benchmarks/beebs/janne_complex/libjanne_complex.c",
+      "source_sha256": "dfb9adb3959064de1541f4a469ea0389558c85d1a350cc371207646554c1483c"
+    },
+    {
+      "workload": "cover",
+      "context_id": "28d735f11dab639d29ec6fc15e630e3ed3a3f769b0450757c45b212a28d1d6ce",
+      "status": "discovery_rejected",
+      "upstream": {
+        "suite": "BEEBS",
+        "commit": "049ded9f3aeb5591f553879d3a0376b8614e9422",
+        "source": "benchmarks/beebs/cover/libcover.c",
+        "source_sha256": "80ac586a7aec55ae9ce1ad3266b94f530ce06c09108531544f2183da21e2f1d9"
+      },
+      "inputs_digest": "1ca11bbcb447954d63e73f968f36d432af915897afc96862ca233187e5848108",
+      "source_bindings_digest": "13379c2d80fb82f7027281ed17733e8692c19e95c3a32167ad42327738a6c635",
+      "artifact_sha256": {
+        "plan.json": "cb5f16184c11e59c1e5355dc6b8a36584a959a97e4477b812cde83dbff28aca5",
+        "inputs/program.c": "80ac586a7aec55ae9ce1ad3266b94f530ce06c09108531544f2183da21e2f1d9",
+        "inputs/embench_firmware.c": "706851b5e00695547f4f79b2d5412c5547938171b36f90acac11dd8a7be7b85d",
+        "inputs/latency-calibration.json": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+        "discovery/attempt-000/program.s": "9590e3a5153216bc9260c9b64dc135fdb47c417bee042d7ed0bbdc85f0a85bf3",
+        "discovery/attempt-000/marked.S": "96d8a89cb40639ad80f3cdeae5287b1a72edc06f10eb226316f5d8de639dcac1",
+        "discovery/attempt-000/marked/symbols.txt": "d5987b37acd251c26902a5a9b2131befc6014404abc53aee7a1163d761941465",
+        "discovery/attempt-000/marked/disassembly.txt": "a746bd96148a880d88251c30bbace56b143fd5adfd454906f5c6bd38a0be57a2",
+        "discovery/attempt-000/original/firmware.hex": "b53371c3d9fb1fe119d30ef9fd454992ac0416cd05f38df42ba5314ec91a5438",
+        "discovery/attempt-000/marked/firmware.hex": "b53371c3d9fb1fe119d30ef9fd454992ac0416cd05f38df42ba5314ec91a5438",
+        "discovery/attempt-000/profile/simulation.json": "e4738bdd70283ef422c07fda47145c4f89d2d748af1c4668c7d02bcba53c4c31"
+      },
+      "raw_formula_count": 0,
+      "mapped_executable_count": 0,
+      "rejected_occurrences": {},
+      "relocation_guard": {
+        "schema": "isaforge-relocation-source-guard-v1",
+        "source_sha256": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+        "input_executable_count": 0,
+        "rejected_count": 0,
+        "rejections": []
+      },
+      "uncalibrated": [],
+      "calibrated_eligible_count": 0,
+      "eligible": [],
+      "twelve_formula_gate_passed": false,
+      "both_numeric_minima_formulas": [],
+      "maximum_cycle_reduction": null,
+      "maximum_timed_replacements": 0,
+      "baseline_performance": {
+        "cycles": 170,
+        "instructions": 31,
+        "benchmark_result_u32": 180,
+        "upstream_self_check": true,
+        "custom_instructions": 0,
+        "region_custom_instructions": 0
+      },
+      "memory_check": {
+        "min_sp": 8128,
+        "max_stack_bytes": 64,
+        "stack_headroom_bytes": 1600,
+        "checked_cycles": 478
+      },
+      "timed_source_coverage": {
+        "profile_instructions": 30,
+        "counter_instructions": 31,
+        "counter_boundary_difference": 1,
+        "mapped_source_instructions": 19,
+        "outside_mapped_source_instructions": 11,
+        "mapped_fraction": 0.6333333333333333,
+        "outside_symbols": {
+          "__isaforge_begin_11": 2,
+          "__isaforge_begin_14": 2,
+          "__isaforge_begin_17": 2,
+          "main": 5
+        },
+        "scope": "Single-word marked program-source statements only; outside sites include pseudo-op expansions and linked runtime/helper code. Outside execution is not proven safely rewritable."
+      },
+      "archive": {
+        "path": "cover/raw.tar.gz",
+        "sha256": "9a24dfa3792fbde75770f867306ca521cf8554783612fc7caf6edecba058af15",
+        "inventory_sha256": "57c6cc5967aa8a9e7998b72a6c57b06ebe37f191d86367f31fdd36e321dadb1c"
+      }
+    }
+  ]
+}

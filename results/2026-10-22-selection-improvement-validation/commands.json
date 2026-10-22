@@ -1,0 +1,52 @@
+{
+  "schema": "isaforge-selection-improvement-validation-commands-v1",
+  "commands": [
+    {
+      "command": "make test PYTHON=../work/audit-venv/bin/python",
+      "returncode": 2,
+      "log": "full-suite.log",
+      "passed": 3441,
+      "failed": 1,
+      "passing_subtests": 179,
+      "qualification": "Recurring unchanged legacy pipe-cleanup failure; final diagnostic output guards covered by subsequent focused run."
+    },
+    {
+      "command": "../work/audit-venv/bin/python -m pytest -q tests/test_count_selection.py tests/test_semantic_selection.py tests/test_semantic_selection_experiment.py tests/test_opportunity_workload.py tests/test_workload_support.py",
+      "returncode": 0,
+      "log": "focused-final.log",
+      "passed": 60,
+      "scope": "Final implementation including diagnostic output guards."
+    },
+    {
+      "command": "make reproduce PYTHON=../work/audit-venv/bin/python",
+      "returncode": 0,
+      "log": "historical-reproduction.log"
+    },
+    {
+      "command": "make reproduce-speedup PYTHON=../work/audit-venv/bin/python",
+      "returncode": 0,
+      "log": "processor-reproduction.log"
+    },
+    {
+      "command": "make reproduce-count-selection PYTHON=../work/audit-venv/bin/python",
+      "returncode": 0,
+      "log": "count-replay.log"
+    },
+    {
+      "command": "make reproduce-semantic-selection PYTHON=../work/audit-venv/bin/python",
+      "returncode": 0,
+      "log": "semantic-replay.log"
+    },
+    {
+      "command": "make diagnose-workload-support PYTHON=../work/audit-venv/bin/python WORKLOAD_SUPPORT_OUTPUT=generated/reproduction/workload-support-final",
+      "returncode": 0,
+      "log": "support-final-replay.log"
+    },
+    {
+      "command": "../work/audit-venv/bin/python scripts/qualify_opportunity_sources.py",
+      "returncode": 1,
+      "log": "qualification-console.txt",
+      "scope": "Expected unsuccessful qualification: zero sources accepted; seven original program profiles; zero custom-candidate attempts."
+    }
+  ]
+}
