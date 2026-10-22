@@ -1,0 +1,3735 @@
+{
+  "raw_formula_count": 32,
+  "executable_formula_count": 29,
+  "rejected_occurrences": {},
+  "block_starts": [
+    12,
+    16,
+    52,
+    56,
+    60,
+    68,
+    72,
+    76,
+    80,
+    232,
+    308,
+    464,
+    500,
+    540,
+    564,
+    588,
+    612,
+    636,
+    660,
+    700,
+    740,
+    824,
+    988,
+    1024,
+    1064,
+    1088,
+    1112,
+    1136,
+    1160,
+    1184,
+    1224,
+    1264,
+    1392,
+    1408,
+    1636,
+    1644,
+    1656
+  ],
+  "executable_candidates": [
+    {
+      "formula": "srai(addi(add(in0,in1),1024),11)",
+      "occurrences": [
+        {
+          "blockStart": "0x000001d0",
+          "pcs": [
+            "0x000001d0",
+            "0x000001d4",
+            "0x000001d8"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            57,
+            58,
+            59
+          ],
+          "inputs": [
+            10,
+            9
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000001f4",
+          "pcs": [
+            "0x000001f4",
+            "0x000001f8",
+            "0x00000200"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            65,
+            66,
+            68
+          ],
+          "inputs": [
+            10,
+            9
+          ],
+          "output": 10
+        },
+        {
+          "blockStart": "0x00000294",
+          "pcs": [
+            "0x00000298",
+            "0x0000029c",
+            "0x000002a0"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            100,
+            101,
+            102
+          ],
+          "inputs": [
+            15,
+            19
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000002bc",
+          "pcs": [
+            "0x000002c0",
+            "0x000002c4",
+            "0x000002c8"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            109,
+            110,
+            111
+          ],
+          "inputs": [
+            15,
+            9
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000002e4",
+          "pcs": [
+            "0x000002e8",
+            "0x000002ec",
+            "0x000002f0"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            118,
+            119,
+            120
+          ],
+          "inputs": [
+            15,
+            19
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000002e4",
+          "pcs": [
+            "0x00000314",
+            "0x00000318",
+            "0x0000031c"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            129,
+            130,
+            131
+          ],
+          "inputs": [
+            15,
+            9
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 48,
+        "places": 6,
+        "saved": 96,
+        "saved_percent": 0.40978358304520424,
+        "depth": 3,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 1024,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 1,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 96,
+      "region_custom_instructions": 48,
+      "total_custom_instructions": 48,
+      "name": "candidate_00",
+      "candidate_id": "4e8e6e131af5d7303cca5f0186d7b8dbb3c02146b535081712010e0dc102e9d6",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 5,
+        "comparisons": 320,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_00.S",
+      "assembly_sha256": "0dec16e989e11b052e3936a3258226fb30d2092b2805768c00eb0642657ffa38"
+    },
+    {
+      "formula": "addi(add(in0,in1),1024)",
+      "occurrences": [
+        {
+          "blockStart": "0x000001d0",
+          "pcs": [
+            "0x000001d0",
+            "0x000001d4"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            57,
+            58
+          ],
+          "inputs": [
+            10,
+            9
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000001f4",
+          "pcs": [
+            "0x000001f4",
+            "0x000001f8"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            65,
+            66
+          ],
+          "inputs": [
+            10,
+            9
+          ],
+          "output": 10
+        },
+        {
+          "blockStart": "0x00000294",
+          "pcs": [
+            "0x00000298",
+            "0x0000029c"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            100,
+            101
+          ],
+          "inputs": [
+            15,
+            19
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000002bc",
+          "pcs": [
+            "0x000002c0",
+            "0x000002c4"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            109,
+            110
+          ],
+          "inputs": [
+            15,
+            9
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000002e4",
+          "pcs": [
+            "0x000002e8",
+            "0x000002ec"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            118,
+            119
+          ],
+          "inputs": [
+            15,
+            19
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000002e4",
+          "pcs": [
+            "0x00000314",
+            "0x00000318"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            129,
+            130
+          ],
+          "inputs": [
+            15,
+            9
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 48,
+        "places": 6,
+        "saved": 48,
+        "saved_percent": 0.20489179152260212,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 1024,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 48,
+      "region_custom_instructions": 48,
+      "total_custom_instructions": 48,
+      "name": "candidate_01"
+    },
+    {
+      "formula": "srai(add(in0,in1),15)",
+      "occurrences": [
+        {
+          "blockStart": "0x000003dc",
+          "pcs": [
+            "0x000003e0",
+            "0x000003e4"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            179,
+            180
+          ],
+          "inputs": [
+            15,
+            9
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x00000400",
+          "pcs": [
+            "0x00000404",
+            "0x0000040c"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            187,
+            189
+          ],
+          "inputs": [
+            10,
+            9
+          ],
+          "output": 10
+        },
+        {
+          "blockStart": "0x000004a0",
+          "pcs": [
+            "0x000004a8",
+            "0x000004ac"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            222,
+            223
+          ],
+          "inputs": [
+            15,
+            9
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000004c8",
+          "pcs": [
+            "0x000004d0",
+            "0x000004d4"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            231,
+            232
+          ],
+          "inputs": [
+            15,
+            9
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000004f0",
+          "pcs": [
+            "0x000004f8",
+            "0x000004fc"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            240,
+            241
+          ],
+          "inputs": [
+            15,
+            9
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000004f0",
+          "pcs": [
+            "0x00000524",
+            "0x00000528"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            251,
+            252
+          ],
+          "inputs": [
+            15,
+            9
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 48,
+        "places": 6,
+        "saved": 48,
+        "saved_percent": 0.20489179152260212,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 15,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 1,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 48,
+      "region_custom_instructions": 48,
+      "total_custom_instructions": 48,
+      "name": "candidate_02"
+    },
+    {
+      "formula": "srai(addi(in0,1024),11)",
+      "occurrences": [
+        {
+          "blockStart": "0x000001d0",
+          "pcs": [
+            "0x000001d4",
+            "0x000001d8"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            58,
+            59
+          ],
+          "inputs": [
+            15
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000001f4",
+          "pcs": [
+            "0x000001f8",
+            "0x00000200"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            66,
+            68
+          ],
+          "inputs": [
+            10
+          ],
+          "output": 10
+        },
+        {
+          "blockStart": "0x00000294",
+          "pcs": [
+            "0x0000029c",
+            "0x000002a0"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            101,
+            102
+          ],
+          "inputs": [
+            15
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000002bc",
+          "pcs": [
+            "0x000002c4",
+            "0x000002c8"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            110,
+            111
+          ],
+          "inputs": [
+            15
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000002e4",
+          "pcs": [
+            "0x000002ec",
+            "0x000002f0"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            119,
+            120
+          ],
+          "inputs": [
+            15
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000002e4",
+          "pcs": [
+            "0x00000318",
+            "0x0000031c"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            130,
+            131
+          ],
+          "inputs": [
+            15
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 48,
+        "places": 6,
+        "saved": 48,
+        "saved_percent": 0.20489179152260212,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 1,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 1024,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 1,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 48,
+      "region_custom_instructions": 48,
+      "total_custom_instructions": 48,
+      "name": "candidate_03"
+    },
+    {
+      "formula": "sub(slli(add(slli(in0,3),in0),4),in0)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000134",
+          "pcs": [
+            "0x000001b0",
+            "0x000001b4",
+            "0x000001b8",
+            "0x000001bc"
+          ],
+          "blockRuns": 8,
+          "size": 4,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            50,
+            51,
+            52,
+            53
+          ],
+          "inputs": [
+            14
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x000003bc",
+            "0x000003c0",
+            "0x000003c4",
+            "0x000003c8"
+          ],
+          "blockRuns": 8,
+          "size": 4,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            171,
+            172,
+            173,
+            174
+          ],
+          "inputs": [
+            14
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 4,
+        "runs": 16,
+        "places": 2,
+        "saved": 48,
+        "saved_percent": 0.20489179152260212,
+        "depth": 4,
+        "tree_op_count": 4,
+        "input_count": 1,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 4,
+        "op_add": 1,
+        "op_sub": 1,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 2,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 48,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_04"
+    },
+    {
+      "formula": "slli(add(slli(in0,3),in0),4)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000134",
+          "pcs": [
+            "0x000001b0",
+            "0x000001b4",
+            "0x000001b8"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            50,
+            51,
+            52
+          ],
+          "inputs": [
+            14
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x000003bc",
+            "0x000003c0",
+            "0x000003c4"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            171,
+            172,
+            173
+          ],
+          "inputs": [
+            14
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 16,
+        "places": 2,
+        "saved": 32,
+        "saved_percent": 0.13659452768173475,
+        "depth": 3,
+        "tree_op_count": 3,
+        "input_count": 1,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 4,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 2,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 32,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_05"
+    },
+    {
+      "formula": "sub(slli(add(in0,in1),4),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000134",
+          "pcs": [
+            "0x000001b4",
+            "0x000001b8",
+            "0x000001bc"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            51,
+            52,
+            53
+          ],
+          "inputs": [
+            15,
+            14
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x000003c0",
+            "0x000003c4",
+            "0x000003c8"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            172,
+            173,
+            174
+          ],
+          "inputs": [
+            15,
+            14
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 16,
+        "places": 2,
+        "saved": 32,
+        "saved_percent": 0.13659452768173475,
+        "depth": 3,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 4,
+        "op_add": 1,
+        "op_sub": 1,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 32,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_06",
+      "candidate_id": "4bcbf2e213376acdd817071984a1fcd25347d507ef01e5bae1c7d9b0cf0f901e",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 2,
+        "comparisons": 128,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_06.S",
+      "assembly_sha256": "0a25a61f1b0b4ad1a8a8c8cf5e9d93346781c34a01d2c5c9a46c0c093e7c32c2"
+    },
+    {
+      "formula": "slli(add(in0,in1),2)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000134",
+          "pcs": [
+            "0x00000194",
+            "0x00000198"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            43,
+            44
+          ],
+          "inputs": [
+            15,
+            13
+          ],
+          "output": 14
+        },
+        {
+          "blockStart": "0x000002e4",
+          "pcs": [
+            "0x00000304",
+            "0x00000308"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            125,
+            126
+          ],
+          "inputs": [
+            15,
+            14
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000004f0",
+          "pcs": [
+            "0x00000510",
+            "0x00000514"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            246,
+            247
+          ],
+          "inputs": [
+            15,
+            14
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 24,
+        "places": 3,
+        "saved": 24,
+        "saved_percent": 0.10244589576130106,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 2,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 24,
+      "region_custom_instructions": 24,
+      "total_custom_instructions": 24,
+      "name": "candidate_07"
+    },
+    {
+      "formula": "add(slli(in0,1),in0)",
+      "occurrences": [
+        {
+          "blockStart": "0x000002e4",
+          "pcs": [
+            "0x000002f8",
+            "0x000002fc"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            122,
+            123
+          ],
+          "inputs": [
+            24
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000004f0",
+          "pcs": [
+            "0x00000504",
+            "0x00000508"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            243,
+            244
+          ],
+          "inputs": [
+            24
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 1,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 1,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_08"
+    },
+    {
+      "formula": "add(slli(in0,3),in0)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000134",
+          "pcs": [
+            "0x000001b0",
+            "0x000001b4"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            50,
+            51
+          ],
+          "inputs": [
+            14
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x000003bc",
+            "0x000003c0"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            171,
+            172
+          ],
+          "inputs": [
+            14
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 1,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 3,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_09"
+    },
+    {
+      "formula": "addi(lui(-16384),1247)",
+      "occurrences": [
+        {
+          "blockStart": "0x000001d0",
+          "pcs": [
+            "0x000001dc",
+            "0x000001e4"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            60,
+            62
+          ],
+          "inputs": [],
+          "output": 11
+        },
+        {
+          "blockStart": "0x000003dc",
+          "pcs": [
+            "0x000003e8",
+            "0x000003f0"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            181,
+            183
+          ],
+          "inputs": [],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 16384,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_10"
+    },
+    {
+      "formula": "addi(lui(-16384),315)",
+      "occurrences": [
+        {
+          "blockStart": "0x0000024c",
+          "pcs": [
+            "0x0000024c",
+            "0x00000254"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            84,
+            86
+          ],
+          "inputs": [],
+          "output": 11
+        },
+        {
+          "blockStart": "0x00000458",
+          "pcs": [
+            "0x00000458",
+            "0x00000460"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            205,
+            207
+          ],
+          "inputs": [],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 16384,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_11",
+      "candidate_id": "cd85282f2bc5eb52fd8e4caeb9689f1a422a30a95d38b2eea42e44bab407e2c0",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 2,
+        "comparisons": 128,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_11.S",
+      "assembly_sha256": "8185b9711400475317a17e6b0d4153adaaacbfa679fbcaed3ad9a850c59541e5"
+    },
+    {
+      "formula": "addi(lui(-20480),-515)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000234",
+          "pcs": [
+            "0x00000234",
+            "0x0000023c"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            79,
+            81
+          ],
+          "inputs": [],
+          "output": 11
+        },
+        {
+          "blockStart": "0x00000440",
+          "pcs": [
+            "0x00000440",
+            "0x00000448"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            200,
+            202
+          ],
+          "inputs": [],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 20480,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_12"
+    },
+    {
+      "formula": "addi(lui(-4096),900)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000264",
+          "pcs": [
+            "0x00000264",
+            "0x0000026c"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            89,
+            91
+          ],
+          "inputs": [],
+          "output": 11
+        },
+        {
+          "blockStart": "0x00000470",
+          "pcs": [
+            "0x00000470",
+            "0x00000478"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            210,
+            212
+          ],
+          "inputs": [],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 4096,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_13"
+    },
+    {
+      "formula": "addi(lui(-8192),819)",
+      "occurrences": [
+        {
+          "blockStart": "0x0000021c",
+          "pcs": [
+            "0x0000021c",
+            "0x00000224"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            74,
+            76
+          ],
+          "inputs": [],
+          "output": 11
+        },
+        {
+          "blockStart": "0x00000428",
+          "pcs": [
+            "0x00000428",
+            "0x00000430"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            195,
+            197
+          ],
+          "inputs": [],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 8192,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_14"
+    },
+    {
+      "formula": "addi(lui(16384),435)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000294",
+          "pcs": [
+            "0x000002a4",
+            "0x000002ac"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            103,
+            105
+          ],
+          "inputs": [],
+          "output": 11
+        },
+        {
+          "blockStart": "0x000004a0",
+          "pcs": [
+            "0x000004b0",
+            "0x000004b8"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            224,
+            226
+          ],
+          "inputs": [],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 16384,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_15"
+    },
+    {
+      "formula": "addi(lui(24576),596)",
+      "occurrences": [
+        {
+          "blockStart": "0x000002bc",
+          "pcs": [
+            "0x000002cc",
+            "0x000002d4"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            112,
+            114
+          ],
+          "inputs": [],
+          "output": 11
+        },
+        {
+          "blockStart": "0x000004c8",
+          "pcs": [
+            "0x000004d8",
+            "0x000004e0"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            233,
+            235
+          ],
+          "inputs": [],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 24576,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_16"
+    },
+    {
+      "formula": "addi(lui(4096),-1650)",
+      "occurrences": [
+        {
+          "blockStart": "0x0000027c",
+          "pcs": [
+            "0x0000027c",
+            "0x00000284"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            94,
+            96
+          ],
+          "inputs": [],
+          "output": 11
+        },
+        {
+          "blockStart": "0x00000488",
+          "pcs": [
+            "0x00000488",
+            "0x00000490"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            215,
+            217
+          ],
+          "inputs": [],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 4096,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_17",
+      "candidate_id": "cb24749e0960f92e44f6e60d20de20c9a47a680564aa1c5ec45533da2967a105",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 2,
+        "comparisons": 128,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_17.S",
+      "assembly_sha256": "88ba55cf05f50a6627db6fd99f351785af3e6295a7382c0eb8ee89b433609b42"
+    },
+    {
+      "formula": "addi(lui(8192),-1922)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000134",
+          "pcs": [
+            "0x00000154",
+            "0x00000164"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            27,
+            31
+          ],
+          "inputs": [],
+          "output": 11
+        },
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x00000358",
+            "0x00000368"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            146,
+            150
+          ],
+          "inputs": [],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 8192,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_18"
+    },
+    {
+      "formula": "addi(lui(8192),1441)",
+      "occurrences": [
+        {
+          "blockStart": "0x000001f4",
+          "pcs": [
+            "0x00000204",
+            "0x0000020c"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            69,
+            71
+          ],
+          "inputs": [],
+          "output": 11
+        },
+        {
+          "blockStart": "0x00000400",
+          "pcs": [
+            "0x00000410",
+            "0x00000418"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            190,
+            192
+          ],
+          "inputs": [],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 8192,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_19"
+    },
+    {
+      "formula": "slli(add(in0,in1),4)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000134",
+          "pcs": [
+            "0x000001b4",
+            "0x000001b8"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            51,
+            52
+          ],
+          "inputs": [
+            15,
+            14
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x000003c0",
+            "0x000003c4"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            172,
+            173
+          ],
+          "inputs": [
+            15,
+            14
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 4,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_20"
+    },
+    {
+      "formula": "srai(addi(in0,2),2)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x0000039c",
+            "0x000003a4"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            163,
+            165
+          ],
+          "inputs": [
+            14
+          ],
+          "output": 14
+        },
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x000003a8",
+            "0x000003b0"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            166,
+            168
+          ],
+          "inputs": [
+            15
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 1,
+        "constant_count": 2,
+        "unique_constant_count": 1,
+        "max_abs_constant": 2,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 1,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_21"
+    },
+    {
+      "formula": "srai(addi(sub(in0,in1),2),2)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x000003a0",
+            "0x000003a8",
+            "0x000003b0"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            164,
+            166,
+            168
+          ],
+          "inputs": [
+            15,
+            13
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 8,
+        "places": 1,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 3,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 1,
+        "max_abs_constant": 2,
+        "op_add": 0,
+        "op_sub": 1,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 1,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 8,
+      "total_custom_instructions": 8,
+      "name": "candidate_22",
+      "candidate_id": "f9cea80f3982d370f93c18dd2cea900e0078e616326948d240f33eb0dfa77efd",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_22.S",
+      "assembly_sha256": "b6631ddef4cc6e414503e27a7cdf0a0862839906c2d4f44ef62f1694949cd201"
+    },
+    {
+      "formula": "sub(slli(in0,2),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000002e4",
+          "pcs": [
+            "0x00000308",
+            "0x0000030c"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            126,
+            127
+          ],
+          "inputs": [
+            15,
+            24
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000004f0",
+          "pcs": [
+            "0x00000514",
+            "0x00000518"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            247,
+            248
+          ],
+          "inputs": [
+            15,
+            24
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 2,
+        "op_add": 0,
+        "op_sub": 1,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_23"
+    },
+    {
+      "formula": "sub(slli(in0,4),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000134",
+          "pcs": [
+            "0x000001b8",
+            "0x000001bc"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            52,
+            53
+          ],
+          "inputs": [
+            15,
+            14
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x000003c4",
+            "0x000003c8"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            173,
+            174
+          ],
+          "inputs": [
+            15,
+            14
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 4,
+        "op_add": 0,
+        "op_sub": 1,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_24"
+    },
+    {
+      "formula": "sub(slli(in0,5),in0)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000134",
+          "pcs": [
+            "0x000001c0",
+            "0x000001c4"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            54,
+            55
+          ],
+          "inputs": [
+            15
+          ],
+          "output": 9
+        },
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x000003cc",
+            "0x000003d0"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            175,
+            176
+          ],
+          "inputs": [
+            15
+          ],
+          "output": 18
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 1,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 5,
+        "op_add": 0,
+        "op_sub": 1,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_25"
+    },
+    {
+      "formula": "addi(add(in0,in1),2)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x00000398",
+            "0x0000039c"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            162,
+            163
+          ],
+          "inputs": [
+            15,
+            13
+          ],
+          "output": 14
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 8,
+        "places": 1,
+        "saved": 8,
+        "saved_percent": 0.034148631920433686,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 2,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 8,
+      "region_custom_instructions": 8,
+      "total_custom_instructions": 8,
+      "name": "candidate_26"
+    },
+    {
+      "formula": "addi(sub(in0,in1),2)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x000003a0",
+            "0x000003a8"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            164,
+            166
+          ],
+          "inputs": [
+            15,
+            13
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 8,
+        "places": 1,
+        "saved": 8,
+        "saved_percent": 0.034148631920433686,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 2,
+        "op_add": 0,
+        "op_sub": 1,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 8,
+      "region_custom_instructions": 8,
+      "total_custom_instructions": 8,
+      "name": "candidate_27"
+    },
+    {
+      "formula": "slli(sub(in0,in1),2)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000134",
+          "pcs": [
+            "0x0000019c",
+            "0x000001a4"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            45,
+            47
+          ],
+          "inputs": [
+            15,
+            13
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 8,
+        "places": 1,
+        "saved": 8,
+        "saved_percent": 0.034148631920433686,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 2,
+        "op_add": 0,
+        "op_sub": 1,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 8,
+      "region_custom_instructions": 8,
+      "total_custom_instructions": 8,
+      "name": "candidate_28",
+      "candidate_id": "af63784a01db1c87e6163457a9534616337f8183c786aa7c65b1cb486af23eee",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_28.S",
+      "assembly_sha256": "c5c5099b7c8a98b7910e07d61ff2801b50569a00d8b7533e3d376d30d2a53b12"
+    }
+  ],
+  "relocation_guard": {
+    "schema": "isaforge-relocation-source-guard-v1",
+    "source_sha256": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+    "input_executable_count": 32,
+    "rejected_count": 3,
+    "rejections": [
+      {
+        "name": "candidate_29",
+        "formula": "addi(lui(4096),-1732)",
+        "safe": false,
+        "checked_sites": 2,
+        "unsafe_sites": [
+          {
+            "site": 5,
+            "assembly": "\tlui\ts4,%hi(data+256)",
+            "reason": "relocation_modifier",
+            "function": "jpeg_fdct_islow",
+            "source_line": 17
+          },
+          {
+            "site": 18,
+            "assembly": "\taddi\ts4,s4,%lo(data+256)",
+            "reason": "relocation_modifier",
+            "function": "jpeg_fdct_islow",
+            "source_line": 30
+          }
+        ],
+        "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+      },
+      {
+        "name": "candidate_30",
+        "formula": "addi(lui(4096),-1956)",
+        "safe": false,
+        "checked_sites": 2,
+        "unsafe_sites": [
+          {
+            "site": 134,
+            "assembly": "\tlui\ts5,%hi(data+32)",
+            "reason": "relocation_modifier",
+            "function": "jpeg_fdct_islow",
+            "source_line": 147
+          },
+          {
+            "site": 137,
+            "assembly": "\taddi\ts5,s5,%lo(data+32)",
+            "reason": "relocation_modifier",
+            "function": "jpeg_fdct_islow",
+            "source_line": 150
+          }
+        ],
+        "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+      },
+      {
+        "name": "candidate_31",
+        "formula": "addi(lui(4096),-1988)",
+        "safe": false,
+        "checked_sites": 2,
+        "unsafe_sites": [
+          {
+            "site": 2,
+            "assembly": "\tlui\ts0,%hi(data)",
+            "reason": "relocation_modifier",
+            "function": "jpeg_fdct_islow",
+            "source_line": 14
+          },
+          {
+            "site": 4,
+            "assembly": "\taddi\ts0,s0,%lo(data)",
+            "reason": "relocation_modifier",
+            "function": "jpeg_fdct_islow",
+            "source_line": 16
+          }
+        ],
+        "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+      }
+    ]
+  },
+  "pool": [
+    {
+      "formula": "srai(addi(add(in0,in1),1024),11)",
+      "occurrences": [
+        {
+          "blockStart": "0x000001d0",
+          "pcs": [
+            "0x000001d0",
+            "0x000001d4",
+            "0x000001d8"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            57,
+            58,
+            59
+          ],
+          "inputs": [
+            10,
+            9
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000001f4",
+          "pcs": [
+            "0x000001f4",
+            "0x000001f8",
+            "0x00000200"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            65,
+            66,
+            68
+          ],
+          "inputs": [
+            10,
+            9
+          ],
+          "output": 10
+        },
+        {
+          "blockStart": "0x00000294",
+          "pcs": [
+            "0x00000298",
+            "0x0000029c",
+            "0x000002a0"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            100,
+            101,
+            102
+          ],
+          "inputs": [
+            15,
+            19
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000002bc",
+          "pcs": [
+            "0x000002c0",
+            "0x000002c4",
+            "0x000002c8"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            109,
+            110,
+            111
+          ],
+          "inputs": [
+            15,
+            9
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000002e4",
+          "pcs": [
+            "0x000002e8",
+            "0x000002ec",
+            "0x000002f0"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            118,
+            119,
+            120
+          ],
+          "inputs": [
+            15,
+            19
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000002e4",
+          "pcs": [
+            "0x00000314",
+            "0x00000318",
+            "0x0000031c"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            129,
+            130,
+            131
+          ],
+          "inputs": [
+            15,
+            9
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 48,
+        "places": 6,
+        "saved": 96,
+        "saved_percent": 0.40978358304520424,
+        "depth": 3,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 1024,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 1,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 96,
+      "region_custom_instructions": 48,
+      "total_custom_instructions": 48,
+      "name": "candidate_00",
+      "candidate_id": "4e8e6e131af5d7303cca5f0186d7b8dbb3c02146b535081712010e0dc102e9d6",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 5,
+        "comparisons": 320,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_00.S",
+      "assembly_sha256": "0dec16e989e11b052e3936a3258226fb30d2092b2805768c00eb0642657ffa38"
+    },
+    {
+      "formula": "sub(slli(add(in0,in1),4),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000134",
+          "pcs": [
+            "0x000001b4",
+            "0x000001b8",
+            "0x000001bc"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            51,
+            52,
+            53
+          ],
+          "inputs": [
+            15,
+            14
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x000003c0",
+            "0x000003c4",
+            "0x000003c8"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            172,
+            173,
+            174
+          ],
+          "inputs": [
+            15,
+            14
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 16,
+        "places": 2,
+        "saved": 32,
+        "saved_percent": 0.13659452768173475,
+        "depth": 3,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 4,
+        "op_add": 1,
+        "op_sub": 1,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 32,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_06",
+      "candidate_id": "4bcbf2e213376acdd817071984a1fcd25347d507ef01e5bae1c7d9b0cf0f901e",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 2,
+        "comparisons": 128,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_06.S",
+      "assembly_sha256": "0a25a61f1b0b4ad1a8a8c8cf5e9d93346781c34a01d2c5c9a46c0c093e7c32c2"
+    },
+    {
+      "formula": "addi(lui(-16384),315)",
+      "occurrences": [
+        {
+          "blockStart": "0x0000024c",
+          "pcs": [
+            "0x0000024c",
+            "0x00000254"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            84,
+            86
+          ],
+          "inputs": [],
+          "output": 11
+        },
+        {
+          "blockStart": "0x00000458",
+          "pcs": [
+            "0x00000458",
+            "0x00000460"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            205,
+            207
+          ],
+          "inputs": [],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 16384,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_11",
+      "candidate_id": "cd85282f2bc5eb52fd8e4caeb9689f1a422a30a95d38b2eea42e44bab407e2c0",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 2,
+        "comparisons": 128,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_11.S",
+      "assembly_sha256": "8185b9711400475317a17e6b0d4153adaaacbfa679fbcaed3ad9a850c59541e5"
+    },
+    {
+      "formula": "addi(lui(4096),-1650)",
+      "occurrences": [
+        {
+          "blockStart": "0x0000027c",
+          "pcs": [
+            "0x0000027c",
+            "0x00000284"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            94,
+            96
+          ],
+          "inputs": [],
+          "output": 11
+        },
+        {
+          "blockStart": "0x00000488",
+          "pcs": [
+            "0x00000488",
+            "0x00000490"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            215,
+            217
+          ],
+          "inputs": [],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 16,
+        "places": 2,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 4096,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 16,
+      "total_custom_instructions": 16,
+      "name": "candidate_17",
+      "candidate_id": "cb24749e0960f92e44f6e60d20de20c9a47a680564aa1c5ec45533da2967a105",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 2,
+        "comparisons": 128,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_17.S",
+      "assembly_sha256": "88ba55cf05f50a6627db6fd99f351785af3e6295a7382c0eb8ee89b433609b42"
+    },
+    {
+      "formula": "srai(addi(sub(in0,in1),2),2)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000338",
+          "pcs": [
+            "0x000003a0",
+            "0x000003a8",
+            "0x000003b0"
+          ],
+          "blockRuns": 8,
+          "size": 3,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            164,
+            166,
+            168
+          ],
+          "inputs": [
+            15,
+            13
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 8,
+        "places": 1,
+        "saved": 16,
+        "saved_percent": 0.06829726384086737,
+        "depth": 3,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 1,
+        "max_abs_constant": 2,
+        "op_add": 0,
+        "op_sub": 1,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 1,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 16,
+      "region_custom_instructions": 8,
+      "total_custom_instructions": 8,
+      "name": "candidate_22",
+      "candidate_id": "f9cea80f3982d370f93c18dd2cea900e0078e616326948d240f33eb0dfa77efd",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_22.S",
+      "assembly_sha256": "b6631ddef4cc6e414503e27a7cdf0a0862839906c2d4f44ef62f1694949cd201"
+    },
+    {
+      "formula": "slli(sub(in0,in1),2)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000134",
+          "pcs": [
+            "0x0000019c",
+            "0x000001a4"
+          ],
+          "blockRuns": 8,
+          "size": 2,
+          "symbols": [
+            "jpeg_fdct_islow"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            45,
+            47
+          ],
+          "inputs": [
+            15,
+            13
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 8,
+        "places": 1,
+        "saved": 8,
+        "saved_percent": 0.034148631920433686,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 2,
+        "op_add": 0,
+        "op_sub": 1,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 8,
+      "region_custom_instructions": 8,
+      "total_custom_instructions": 8,
+      "name": "candidate_28",
+      "candidate_id": "af63784a01db1c87e6163457a9534616337f8183c786aa7c65b1cb486af23eee",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_28.S",
+      "assembly_sha256": "c5c5099b7c8a98b7910e07d61ff2801b50569a00d8b7533e3d376d30d2a53b12"
+    }
+  ],
+  "pool_rule": "Reject symbolic/unsupported removed source operands before calibration filtering; Evenly spaced rank indices round(i*(N-1)/(K-1)) across all executable calibrated formulas sorted by instruction savings then formula; K fixed before discovery, no candidate performance labels.",
+  "eligible_formula_count": 29,
+  "excluded_uncalibrated_formulas": [],
+  "selected_rank_indices": [
+    0,
+    6,
+    11,
+    17,
+    22,
+    28
+  ],
+  "context_id": "9a2098d3c3dbeefdada16733113567bfd5c04ad2073bd423e2ded9db663c717f",
+  "workload": "jfdctint",
+  "baseline_performance": {
+    "cycles": 117522,
+    "instructions": 23428,
+    "benchmark_result_u32": 0,
+    "upstream_self_check": true,
+    "custom_instructions": 0,
+    "region_custom_instructions": 0
+  },
+  "baseline_image": "discovery/attempt-000/marked/firmware.hex",
+  "baseline_binary_identical": true,
+  "mapped_statements": 305,
+  "memory_check": {
+    "min_sp": 7888,
+    "max_stack_bytes": 304,
+    "stack_headroom_bytes": 4688,
+    "checked_cycles": 156684
+  },
+  "profile": "discovery/attempt-000/profile/simulation.json",
+  "artifacts": {
+    "attempt-000/assembly.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "attempt-000/candidate.v": "b8d826d8899911549e3db787ea47aff9eb34e462aabba5aa5c03683c0d045866",
+    "attempt-000/candidate_00.S": "0dec16e989e11b052e3936a3258226fb30d2092b2805768c00eb0642657ffa38",
+    "attempt-000/candidate_06.S": "0a25a61f1b0b4ad1a8a8c8cf5e9d93346781c34a01d2c5c9a46c0c093e7c32c2",
+    "attempt-000/candidate_11.S": "8185b9711400475317a17e6b0d4153adaaacbfa679fbcaed3ad9a850c59541e5",
+    "attempt-000/candidate_17.S": "88ba55cf05f50a6627db6fd99f351785af3e6295a7382c0eb8ee89b433609b42",
+    "attempt-000/candidate_22.S": "b6631ddef4cc6e414503e27a7cdf0a0862839906c2d4f44ef62f1694949cd201",
+    "attempt-000/candidate_28.S": "c5c5099b7c8a98b7910e07d61ff2801b50569a00d8b7533e3d376d30d2a53b12",
+    "attempt-000/marked/compile.log": "d0d7fd9ecf36759d0eb3bb1c9ae1acdbeb0252c92929e9da3df25fa8e515a112",
+    "attempt-000/marked/disassembly.txt": "86c7d75749d6be64c3277ac85078d4c44f7aa3b545870182572151371101ad8d",
+    "attempt-000/marked/firmware.bin": "5b1c19e951ef92983519fbc3eeb69583d45ba53c16630465ae8d35ccda664a84",
+    "attempt-000/marked/firmware.elf": "9e84fc73c578e60b8ef0da9b9b145f327bfc404353e7b9ccd3700d8d1a0ad215",
+    "attempt-000/marked/firmware.hex": "50fa0234a6d9aa54cfa3dc6f2dbb0bd08a56c41150c1e484096f5f5bf6f90e23",
+    "attempt-000/marked/objcopy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "attempt-000/marked/symbols.txt": "a2dd49eb613ac1b3124fbcc2ee08321263d606b4ec5902d1b9bf24e1af7d5d1b",
+    "attempt-000/marked/validation.json": "ce04c64c3afd24880876bfdee6b7a06cd0de0f86ea2d047042eebf3398e4522f",
+    "attempt-000/marked.S": "54fca1ebdce14c107e92bce7c0355c06666b7bef1bc597b5ed22cc8a1354d648",
+    "attempt-000/original/compile.log": "95f12e34c9218e303783e0afa62b68e1c9d9ead206d91e79838368885d293915",
+    "attempt-000/original/disassembly.txt": "7e28a3d176e6f841d7203a7af26ba294071598026e7df7b2b467d7cbb2173bca",
+    "attempt-000/original/firmware.bin": "5b1c19e951ef92983519fbc3eeb69583d45ba53c16630465ae8d35ccda664a84",
+    "attempt-000/original/firmware.elf": "c94499c2e0c1b4855ff35b8effb9df55838c7fd98f1922f220f1de4996b45bc3",
+    "attempt-000/original/firmware.hex": "50fa0234a6d9aa54cfa3dc6f2dbb0bd08a56c41150c1e484096f5f5bf6f90e23",
+    "attempt-000/original/objcopy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "attempt-000/original/symbols.txt": "39e411b02733a619062e748c9d97fcf7bdc42b47ffc77717043ec0099e9c4ccf",
+    "attempt-000/original/validation.json": "ce04c64c3afd24880876bfdee6b7a06cd0de0f86ea2d047042eebf3398e4522f",
+    "attempt-000/profile/build.log": "f4c3a8dcd73671e46177c08e2dbf05f25c386c3ea656e8b15820b670a4f806d4",
+    "attempt-000/profile/observer_core.v": "609b31d116bccc4cd4f218d2dcddaef056519a7117a48b99b0f7c7d99ae6ee87",
+    "attempt-000/profile/observer_top.v": "b1bc4f4e98e992871cfacb74079c6563009446ad37b74886103f40bdfa4f35fa",
+    "attempt-000/profile/simulation.json": "eec8ccecbb460123c19c8906606146329dd0cf547c550cafbb587ed1aeef44dd",
+    "attempt-000/profile/soc_top.v": "620d3c244bbd0989d1bc2061a42a8ac290d92af7f38b1f8aa8b2490ecfdd65c3",
+    "attempt-000/program.s": "d5f8ed8a8f5dd180b66d13fc2653e434f4ce893507140f2f23027f8f20f68715"
+  }
+}

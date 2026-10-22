@@ -2,6 +2,12 @@
 
 Read [README](../README.md), [AGENTS](../AGENTS.md), [experiment guide](ml-live-adaptation.md), [primary methods](research-foundation.md) and [teammate compatibility](teammate-branch-review-2026-10-21.md). Branch: `ai-guided-ml`. GPT-6.1 Sol subagents independently checked models, information boundaries, integer-cycle arithmetic and native evidence. The [complete previous handoff](HANDOFF-history-2026-10-21-blind.md) and every historical experiment remain intact. The user canceled service/GCP deployment and asked to continue improving ML; cloud/API/demo/LLM work remains paused.
 
+## Subsequent diagnosis and next bounded change
+
+The [October22 analysis](model-research-analysis-2026-10-22.md) adds primary hardware, constrained-search and reliability methods plus an [archive-backed numerical diagnosis](../results/2026-10-22-model-research-diagnosis/README.md). It fits no models and makes no native measurements. All270 cached first choices reproduce. Duration removal alone improves five dependent Expint+64 first choices, worsens none and ties130; the full variant trajectory is not yet evaluated. Hardware features exactly alias two differently ordered NDES formulas costing70/40LUT4. Constant scaling makes fresh Expint03 nearly identical to the cheaper history vector despite its71-LUT outcome and narrow predicted40-LUT posterior. Existing semantic descriptors separate that pair but retain the DCT counterexample and earlier negative ablation.
+
+Next implement one isolated acquisition ablation using unchanged models, benefit units, cohorts, paid updates and all twelve controls. Replay only as consumed-data development, then freeze untouched useful-opportunity source tests. Do not combine representation, scaling, kernel and acquisition changes or claim that more labels automatically fix transfer. All87 successes pass timing/device capacity, so no such failure boundary has been learned. [Validation](../results/2026-10-22-model-research-validation/README.md) retains the unchanged legacy pipe failure. The completed experiments below remain authoritative measurements.
+
 ## Completed engineering and data
 
 **87 verified labels, three preserved failures, 90 attempts, eleven sources and twelve contexts; 99 completed integrated processor designs and 297 routes including baselines.** Six sources are Embench; five are pinned BEEBS. All eleven are now consumed data. This increment contributes one fresh source and one actual live adaptive trajectory, not eleven untouched holdouts or five independent test seeds.
