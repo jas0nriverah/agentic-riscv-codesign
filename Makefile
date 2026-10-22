@@ -55,6 +55,7 @@ candidates: $(PROGRAMS:%=generated/candidates/%.json)
 # Research entry points. Activate .venv first, or set PYTHON=.venv/bin/python.
 .PHONY: help test reproduce reproduce-v4 reproduce-v5 reproduce-external-v5 reproduce-v6 reproduce-v8 reproduce-v9-coverage reproduce-v10d-hardware reproduce-v10d-timing reproduce-v10d-selection reproduce-v12 diagram
 help:
+	@echo 'Fresh TACLeBench source: make reproduce-bitcount | make bitcount-report | make export-bitcount-corpus (after collection; no native jobs)'
 	@echo 'Current selection work: make reproduce-count-selection | make reproduce-semantic-selection | make diagnose-workload-support'
 	@echo 'Preserved ML/data work: make reproduce-expanded-history | make reproduce-live-gp (no native jobs; fresh output directories)'
 	@echo 'Preserved blind campaign: make reproduce-blind-campaign | make blind-report | make export-blind-corpus'
@@ -69,6 +70,20 @@ help:
 
 test:
 	$(PYTHON) -m pytest -q
+
+BITCOUNT_CAMPAIGN ?= results/2026-10-22-bitcount-campaign
+BITCOUNT_REPLAY_OUTPUT ?= generated/reproduction/bitcount
+BITCOUNT_REPORT_OUTPUT ?= generated/reproduction/bitcount-report
+BITCOUNT_CORPUS_OUTPUT ?= generated/reproduction/twelve-source-corpus
+.PHONY: reproduce-bitcount bitcount-report export-bitcount-corpus
+reproduce-bitcount:
+	$(PYTHON) scripts/reproduce_tacle_selection.py replay --campaign "$(BITCOUNT_CAMPAIGN)" --output "$(BITCOUNT_REPLAY_OUTPUT)"
+
+bitcount-report:
+	$(PYTHON) scripts/tacle_selection_campaign.py report --campaign "$(BITCOUNT_CAMPAIGN)" --output "$(BITCOUNT_REPORT_OUTPUT)"
+
+export-bitcount-corpus:
+	$(PYTHON) scripts/tacle_selection_campaign.py export --campaign "$(BITCOUNT_CAMPAIGN)" --output "$(BITCOUNT_CORPUS_OUTPUT)"
 
 SHOWCASE_OUTPUT ?= generated/reproduction/selection-showcase
 SELECTOR_OUTPUT ?= generated/reproduction/bounded-selector-controls

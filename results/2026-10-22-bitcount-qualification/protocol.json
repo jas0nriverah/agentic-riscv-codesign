@@ -1,0 +1,123 @@
+{
+  "schema": "isaforge-tacle-bitcount-v1-qualification",
+  "workload_group": "tacle-bitcount",
+  "pool_size": 12,
+  "minimum_calibrated_cycle_reduction": 0.005,
+  "minimum_timed_replacements": 10,
+  "joint_gate": "At least one selected formula satisfies both numeric minima.",
+  "unchanged_input": true,
+  "unchanged_upstream_source": true,
+  "unchanged_verifier": true,
+  "build_context": "Declared single translation unit; rename original main and the two private arrays only.",
+  "correctness": "Original bitcount_return requires aggregate1095; every candidate must pass it.",
+  "no_native_candidate_before_pushed_model_release": true,
+  "created_at_utc": "2026-10-22T19:56:38.251328+00:00",
+  "phases": [
+    "prepare",
+    "discover",
+    "opportunity",
+    "baseline",
+    "public",
+    "freeze"
+  ],
+  "memory_partition": {
+    "ram_bytes": 8192,
+    "program_limit": 6400,
+    "stack_floor": 6528,
+    "stack_bytes": 1664,
+    "minimum_guard_bytes": 128
+  },
+  "reference_root": "generated/codesign-crc32-2026-10-19-r1",
+  "reference_plan_sha256": "796167e07bdc413f348c829ca93e60eda87162ca02143d3f57269ff2059197b9",
+  "historical_corpus_sha256": "862aea0cd6086bb738471454846c5234ac478cb73e029a13f5aab395e111b297",
+  "native_root": "generated/tacle-bitcount-2026-10-22",
+  "target_candidate_attempts": 0,
+  "source_bindings": {
+    "scripts/qualify_tacle_bitcount.py": "a56f72772ce718abf43662743b3bea8a398ac7c2b6fd65eb9564728f71ada597",
+    "scripts/qualify_opportunity_sources.py": "389e34ba724f2dcc3766752e404e46006b6aa7fced4f2e21508127ac08e8ffe1",
+    "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+    "isaforge/observed_command.py": "f56bf235b31205c842ea04ab5a493ee7f7e6731844e05b6d8991f21d9f3be41e",
+    "isaforge/tacle_workload.py": "2c0bd85266b164ff599154911a981566c8cc8353cb0ac7ccbd61c0948250ea4f",
+    "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+    "scripts/blind_campaign.py": "ce8c0d85947ae76dd68aa1a2d9d0c2914018a1377cb60ba9260e33bd830fcf43",
+    "isaforge/semantic_selection.py": "f1779def0ae538ff92f6f148f7a76a8d022082f5db940e5fd67825c40397ffc8",
+    "isaforge/structural_features_v3.py": "b0a4c8233c2a39b675767151f21698d6418c5b3b7bb357741815986033396fb0",
+    "isaforge/area_model_v2.py": "389f6592d6a3fb801638dcc5237cac65f8ab504caac10efef1a43e5d49cf6cf1",
+    "isaforge/area_model.py": "ade5dcc32ef66d0ea03ea9ec4937687564dff36c4483afc76ac59f9dc4a69447",
+    "isaforge/rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "isaforge/latency_features.py": "c0cd549e0fc7baa8317a552ba4350e86b0342af2e4c7a8737afd02e520161b92",
+    "benchmarks/tacle/bitcount/isaforge_adapter.c": "2fb8d519155dc6bb5846f46e95d42c6f5fd5e65f509d8b7fd6acc86d71b2f56c",
+    "benchmarks/tacle/SOURCES.json": "8cf7be780d15abf4f45c1c2f17b339f8bd3bdf35c8fa7bdc78e6afa156a155ce",
+    "benchmarks/tacle/bitcount/bitcount.c": "7b0a5eccbf18e81cae1bcc948f0f0f47143cd177cf46de10b2d676e5b0d8d2fa",
+    "benchmarks/tacle/bitcount/bitcnt_1.c": "8e22f9e70f40539484151d17b18fd31002fcb0106ef4fb0b70ed239b2ff9228c",
+    "benchmarks/tacle/bitcount/bitcnt_2.c": "853c233e8d51db3f26b4e7e12491b4c4ef8633b49beda32f542c97dd2e240f33",
+    "benchmarks/tacle/bitcount/bitcnt_3.c": "9f9735c11c5f0f88a6a8206359a4d771bf5cd0f53e52229dfb44b74b3ac02a9f",
+    "benchmarks/tacle/bitcount/bitcnt_4.c": "11b07b004c24843b44d203c7be2dc5e6cae930909f5b49752c5e592ec18582c4",
+    "benchmarks/tacle/bitcount/bitops.h": "8877c5de289c0e1f4fe17836db60fe0468b999f0ddefbfbf7f0e610d6d927f6c",
+    "benchmarks/tacle/bitcount/LICENSE": "d5433a2f12b96fb7dd1ec0e09f8268ce220a93859fa2c6441ac11724169dad95",
+    "benchmarks/tacle/bitcount/ChangeLog.txt": "350b8e0b014bf5768693527e4aa003315d043113e634763b4fe4ba4fa1b57ee6"
+  },
+  "workers": 1,
+  "build_workers": 2,
+  "phase_timeout_seconds": 3600,
+  "phase_commands": {
+    "prepare": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.tacle_workload",
+      "prepare",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-bitcount-2026-10-22",
+      "--reference-root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+    ],
+    "discover": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.tacle_workload",
+      "discover",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-bitcount-2026-10-22"
+    ],
+    "opportunity": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.tacle_workload",
+      "opportunity",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-bitcount-2026-10-22"
+    ],
+    "baseline": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.tacle_workload",
+      "baseline",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-bitcount-2026-10-22"
+    ],
+    "public": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.tacle_workload",
+      "public",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-bitcount-2026-10-22"
+    ],
+    "freeze": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.tacle_workload",
+      "freeze",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-bitcount-2026-10-22"
+    ]
+  },
+  "qualification_rule": "Single declared new source, twelve legal calibrated formulas and unchanged joint0.5%/ten-replacement gate; no retries, smaller inputs, gate changes or candidate labels."
+}
