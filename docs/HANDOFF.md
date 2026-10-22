@@ -1,48 +1,51 @@
-# Current handoff — October 21, 2026
+# Current handoff — completed three-source blind campaign
 
-Read [README](../README.md), [AGENTS](../AGENTS.md), [the current ML experiment](ml-factorized-selection.md), [primary methods](research-foundation.md) and [teammate compatibility](teammate-branch-review-2026-10-21.md). Branch: `ai-guided-ml`. The owner wants continued **ML model and measured-dataset improvement**. Demo, presentation and live LLM work remain paused. The [previous SHA handoff](HANDOFF-history-2026-10-21-feasible-benefit.md) preserves the preceding milestone and every negative outcome.
+Read [README](../README.md), [AGENTS](../AGENTS.md), [campaign contract](blind-source-campaign.md), [primary methods](research-foundation.md) and [teammate compatibility](teammate-branch-review-2026-10-21.md). Branch: `ai-guided-ml`. GPT-6.1 Sol subagents independently reviewed native evidence, accounting and policy arithmetic. Model/data work remains the priority; demo, live LLM and RTL rewriting are paused. The [previous factorized checkpoint](HANDOFF-history-2026-10-21-factorized.md) and every historical experiment remain intact.
 
-## Completed increment
+## Completed evidence
 
-One genuinely fresh source, **BEEBS integer JPEG DCT**, now runs through the existing guarded RV32I/PicoRV32 extractor, lowering, verifier, integrated synthesis and three-route evaluator. Exact pinned source, input and all 64 golden coefficient checks remain unchanged. Only an external no-op warmup supplies the absent harness ABI. It is BEEBS, not Embench.
+**81 verified labels, three preserved failures, 84 attempts, ten source workloads and eleven contexts; 92 completed integrated designs and 276 routes including baselines.** The new independent test is three sources, each with twelve candidates, not ten untouched holdouts. All ten sources are now consumed data.
 
-All six candidates from 29 eligible formulas pass, with one serial attempt each. Baseline: **117,522 cycles / 1,653 LUT4**. Best at +64: **116,946 cycles, 1.004925×, +61 LUT4, minimum routed Fmax 70.912 MHz**. The original 8 KiB RAM/12 MHz target, RV32I/ILP32, two-input/one-output PCPI and routing seeds 1/2/3 remain fixed. The explicit checked partition is 3,072-byte program, 128-byte guard, 4,992-byte stack; observed baseline stack use is 304 bytes for the recorded input.
+The complete three-source model/prediction/baseline/qualification package was pushed at **`0b0884e112fbb3635487f7ae93d5d0f1616dbcb2`** before any target candidate attempt. The zero-attempt [release](../results/2026-10-21-blind-release.json) authenticates every source. All twelve existing selectors, five dependent seeds, caps32/64/128 and budgets1/2/3 stayed fixed. Targets never trained one another. Historical 45 successes/seven sources were shared; identical related-family exclusions left44/33/29 fitting rows, respectively. The three old failures remain charged, not fabricated training labels.
 
-One fixed factorized XGBoost model learns successful-execution conditional hardware feasibility and multiplies it by nonnegative public calibrated cycle savings / baseline cycles. Same structural/cap features and fixed 20-member/80-tree/depth-2 settings; binary logistic objective, candidate bootstraps with three dependent cap replicas and per-member single-class fallbacks. It predicts neither correctness nor calibrated confidence. Existing speedup regressors, ranker, utility model and GPs remain separate unchanged controls.
+| BEEBS source | Baseline cycles | Declared / eligible | +64 oracle cycles | Speedup | Added LUT4 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| aha-compress | 70,797 | 12 / 26 | 69,177 | 1.023418× | 61 |
+| ndes | 234,519 | 12 / 43 | 232,855 | 1.007146× | 28 |
+| nettle-md5 | 6,192 | 12 / 297 | 6,080 | 1.018421× | 55 |
 
-The complete prelabel package was pushed at **a2004f9540a2355c7b2fec31cacfa8fe8f153bb4** before any candidate attempt. Every learned policy fits exactly 38 historical candidates across six source groups after the same family exclusions; all twelve policies share public information and budgets. Baseline/public state was authenticated before/after fitting and at release. The campaign checks the committed manifest, exact native protocol copy, zero-attempt release and release-before-attempt timestamps. Inner archive provenance asserts receipt/source integrity only; outer proof supplies Git chronology.
+All 36 new candidates pass correctness, counters, stock/custom processor controls, integrated synthesis and all 108 routes. Every successful candidate still clears12MHz and fits the device. The new MD5 source measures its original single64-byte compression block, not complete message hashing. RC4's insufficient-legal-pool qualification rejection remains preserved; Levenshtein was not run. Sources and inputs were not reduced. All three targets share RV32I/ILP32 `-Os`, original8KiB integrated RAM,6400-byte program region,128-byte guard,1664-byte stack and two build workers with serial evaluation.
 
-## Measured result and limitations
+[All 36 measurements and all twelve selectors](../results/2026-10-21-blind-report/results.md), [raw packed evidence](../results/2026-10-21-blind-campaign/provenance.json), [prelabel cohort](../results/2026-10-21-blind-preregistration/cohort.json), [expanded corpus](../results/2026-10-21-ten-source-corpus/README.md) and [curves](../results/2026-10-21-blind-figures/blind-primary-curves.png) are committed deliverables. Generated native roots are optional local build state; use the raw archives for replay.
 
-- **Primary +64:** new model reaches the optimum on query one in all five dependent seeds, tying frequency, merit and earlier learned models. Cost heuristic misses through query three. No new-model or broad ML advantage over the strongest comparator.
-- **+32 control:** only candidate17 is feasible, 1.000409× at +15 LUT4. New model misses through query three in every seed; frequency finds it in four. Preserve this failure; no post-label reranking or threshold change.
-- All twelve policies, three caps, budgets 1/2/3 and five dependent seeds yield **180 trajectories / 540 endpoints**, with exact refits. Full-pool serial collection plus paid cooperative replay is not live adaptive hardware search. Three-query policies spend all three attempts even after finding the optimum.
-- Fixed retrospective diagnosis holds whole sources out, both SHA contexts together, and removes all target families. At +64, Brier: XGBoost 0.310182, existing GP 0.319040, simple prior 0.261751. Prior also wins at the other caps. Better selection against the cost heuristic alone does not prove an advantage over frequency/merit. Fresh DCT +64 Brier is 0.213194 vs GP 0.211783. Uncertainty remains unresolved.
-- Dataset: **45 successes, three earlier failures, 48 attempts, seven sources, eight contexts**. Six sources are Embench; one is BEEBS. All seven are now consumed data. Both SHA contexts must stay in one source fold. Two historical failures are recorded invalid executions; one UD infrastructure failure remains unknown and censors its full-pool reference.
-- All **45** successful measured cycle deltas equal calibrated latency. No speedup residual learner is justified. Successful designs all fit and clear the 12 MHz clock, so timing-boundary/device-fit generalization is untested. Single-instruction speedup and integrated area cannot be summed for sets.
-- Historical 42 attempts: 2,497.368142 recorded candidate seconds. New six: 250.772492 ledger / 262.986905 CLI-operation seconds; complete subprocess walls also archived. Baseline ledger 27.569974 s; 133 native commands 266.639223 s across setup/baseline/candidates. Scopes overlap; fitting/prediction and failed qualification costs remain separate. No end-to-end time win.
+## Selection result and interpretation
 
-## Commands and evidence
+Primary endpoint: mean verified feasible cycle reduction across the three sources after three attempts at+64LUT4/12MHz. Both preserved GP controls attain all three measured pool optima: **1.602185%** versus **1.144539%** for merit/calibrated latency, **1.449636%** for normalized XGBoost and **0.719365%** for the newer factorized classifier. The classifier loses to merit on two sources and ties on one; do not promote it. Its outputs remain uncalibrated. Adaptive GP reaches compression's oracle on query two; zero-shot GP needs three. Both tie at the primary endpoint. Every three-query trajectory still spends three attempts.
 
-Use Python 3.12 and pinned `requirements-speedup.txt`:
+The GP result is promising three-source evidence for existing constrained acquisition, not field superiority or a new method. The shared 48 historical attempts must be counted; a lower total hardware cost after training is not established. Five seeds are dependent repetitions. Oracles cover the declared twelve-candidate subsets, not all formulas or instruction sets. The new+32 compression pool has no feasible improving instruction, so its oracle gain fraction is undefined.
+
+All 81 cycle deltas exactly match calibrated latency. The factorized model learns hardware feasibility combined with known calibrated benefit; speedup regression/ranking remain separate real-label-trained controls. No performance residual learner is justified. Future model changes must address an observed decision failure and be assessed on untouched sources, rather than sweeping against these consumed pools.
+
+## Replay and validation
+
+Use Python3.12 and `requirements-speedup.txt`. All commands below have been run successfully; report/export/plot outputs must be fresh:
 
 ```sh
-make reproduce-jfdctint PYTHON=python
-make jfdctint-report PYTHON=python
-make export-seven-source-corpus PYTHON=python
-make diagnose-factorized-selection PYTHON=python
-make test PYTHON=python
+make reproduce-blind-campaign PYTHON=python
+make blind-report PYTHON=python
+make export-blind-corpus PYTHON=python
+make blind-figures PYTHON=python
 make reproduce PYTHON=python
 ```
 
-Derived directories must be fresh; override Makefile output variables for repeat runs. [Full candidate/policy tables](../results/2026-10-21-jfdctint-report/results.md), [raw evidence](../results/2026-10-21-jfdctint-campaign/README.md), [45-label corpus](../results/2026-10-21-seven-source-corpus/README.md), [qualification failures](../results/2026-10-21-jfdctint-qualification/README.md) and [validation](../results/2026-10-21-factorized-validation/README.md). The classifier, experiment, adapter, freeze/replay and retrospective diagnosis sources are now hash-bound. Preserve them and all older sources/results.
+Override `BLIND_REPLAY_OUTPUT`, `BLIND_REPORT_OUTPUT`, `BLIND_CORPUS_OUTPUT` and `BLIND_FIGURE_OUTPUT` for another run. Replay checks raw hardware evidence, exact Git prelabel artifacts, release-before-start chronology,45 grouped model/refit checks and all 1,620 endpoints, with zero new native jobs. Independent integer-cycle arithmetic also reproduces all 1,620 points,324 source summaries and108 macro summaries. Source hashes of report/export match their sealed provenance. The research figure was visually inspected.
 
-Full suite: **3,117 passed, 179 subtests passed, 102 new tests included**. Exact new native/model/policy replay, dataset export and historical `make reproduce` pass. The earlier intermittent legacy cleanup failure remains preserved; it passed this run without a fix, and no legacy fix is claimed.
+All 132 focused tests pass, including the completed real-campaign integration. The final full suite has3244 passes,179 passing subtests, one integration skip subsequently covered by the focused run, and one intentional ZIP-fixture warning. Earlier prelabel/post-collection full runs retain the unchanged intermittent legacy process-cleanup failure; no legacy fix is claimed. [Validation logs](../results/2026-10-21-blind-validation/README.md) retain every run.
 
-## Next smallest useful work
+## Clock qualification and next blocker
 
-Collect another independent small integer source under an explicit compatible context. Keep the fixed models and every strong heuristic; freeze pools/predictions before labels and assess actual verified performance under identical count/time budgets. Prioritize constraint-diverse measured outcomes and enough independent sources for calibration over another model or parameter sweep. The +32 miss is evidence to preserve, not permission to tune on this test.
+The frozen `scripts/blind_campaign.py pack` fails mixed-clock enclosure for four MD5 candidates. Do not edit it or its bound sources. `scripts/reproduce_blind_campaign.py` is an explicit post-collection accounting amendment, now bound into final provenance. It retains the original failure and every UTC/monotonic value. Authenticated blocking collection, exact order, one-attempt ledgers, contiguous scoped receipts and nested durations establish separate serial accounting. Reconstructed UTC ends are diagnostic; suspension versus clock adjustment is unresolved. Actual uninterrupted calendar wall time remains unknown.
 
-Do not repeat known matmult failure: its five 20×20 ILP32 arrays alone occupy 8,000 bytes before code. The initial DCT guard-fixture failure is archived; the accepted partition changes no source arithmetic or monitor. Do not shrink inputs, enlarge RAM or mix teammate RV32IM/external-memory results into this context silently.
+Recorded new subprocess elapsed is2759.079 monotonic seconds; ledger2105.664; qualification226.105. Historical 48 attempts have2748.141 recorded ledger seconds. These scopes overlap and must not be summed into elapsed wall time. No live adaptive-search or equal-wall-time advantage is established. Future runs need paired clock endpoints declared before collection. Never retry the completed pool or rewrite clock records.
 
-Later connect compatible one-to-three-instruction sets using reviewed overlap/slot components, and measure combined execution/area/timing. The bounded LLM comparison remains later work. No RTL-rewriting agent, GNN, new enumerator or unrelated framework.
+Next: retain every fixed policy and investigate the specific area-feasibility misses before proposing one targeted model change; validate it on another untouched source under the same public information and budgets. Add constraint diversity rather than another isolated LUT study. Timing-boundary outcomes, calibrated uncertainty and jointly executed one-to-three-instruction sets remain missing. Reuse the reviewed teammate slot/overlap components only in a separately checked compatible context; do not sum individual gains/area or import RV32IM/external-RAM labels silently. LLM/demo and unrelated frameworks remain paused.

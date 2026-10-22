@@ -209,12 +209,16 @@ diagnose-factorized-selection:
 BLIND_REPLAY_OUTPUT ?= generated/reproduction/blind-campaign
 BLIND_REPORT_OUTPUT ?= generated/reproduction/blind-report
 BLIND_CORPUS_OUTPUT ?= generated/reproduction/blind-corpus
-.PHONY: reproduce-blind-campaign blind-report export-blind-corpus
+BLIND_FIGURE_OUTPUT ?= generated/reproduction/blind-figures
+.PHONY: reproduce-blind-campaign blind-report export-blind-corpus blind-figures
 reproduce-blind-campaign:
-	$(PYTHON) scripts/blind_campaign.py replay --campaign results/2026-10-21-blind-campaign --preregistration results/2026-10-21-blind-preregistration --output "$(BLIND_REPLAY_OUTPUT)"
+	$(PYTHON) scripts/reproduce_blind_campaign.py replay --campaign results/2026-10-21-blind-campaign --preregistration results/2026-10-21-blind-preregistration --collection results/2026-10-21-blind-collection --output "$(BLIND_REPLAY_OUTPUT)"
 
 blind-report:
 	$(PYTHON) scripts/report_blind_campaign.py --output "$(BLIND_REPORT_OUTPUT)"
 
 export-blind-corpus:
 	$(PYTHON) scripts/export_blind_corpus.py --output "$(BLIND_CORPUS_OUTPUT)"
+
+blind-figures:
+	$(PYTHON) scripts/plot_blind_campaign.py --report "$(BLIND_REPORT_OUTPUT)" --output "$(BLIND_FIGURE_OUTPUT)"

@@ -1,0 +1,1431 @@
+{
+  "scope": "Independent post-collection integer-cycle recomputation; no fitting or native measurements",
+  "points_checked": 1620,
+  "endpoints_checked": 324,
+  "macro_endpoints_checked": 108,
+  "primary": [
+    {
+      "policy": "frequency",
+      "macro_cycle_reduction_percent": 1.0103633076064635,
+      "macro_regret_percentage_points": 0.5918218508939641
+    },
+    {
+      "policy": "merit",
+      "macro_cycle_reduction_percent": 1.1445386480550694,
+      "macro_regret_percentage_points": 0.45764651044535787
+    },
+    {
+      "policy": "calibrated_latency",
+      "macro_cycle_reduction_percent": 1.1445386480550694,
+      "macro_regret_percentage_points": 0.45764651044535787
+    },
+    {
+      "policy": "latency_cost_heuristic",
+      "macro_cycle_reduction_percent": 0.7052656339762249,
+      "macro_regret_percentage_points": 0.8969195245242025
+    },
+    {
+      "policy": "random",
+      "macro_cycle_reduction_percent": 0.5954051340231166,
+      "macro_regret_percentage_points": 1.006780024477311
+    },
+    {
+      "policy": "raw_regression",
+      "macro_cycle_reduction_percent": 0.7662736263779409,
+      "macro_regret_percentage_points": 0.8359115321224866
+    },
+    {
+      "policy": "ranking",
+      "macro_cycle_reduction_percent": 1.1493190342447583,
+      "macro_regret_percentage_points": 0.45286612425566897
+    },
+    {
+      "policy": "normalized_xgb",
+      "macro_cycle_reduction_percent": 1.4496363216853083,
+      "macro_regret_percentage_points": 0.1525488368151193
+    },
+    {
+      "policy": "hybrid_gp_zero_shot",
+      "macro_cycle_reduction_percent": 1.6021851585004274,
+      "macro_regret_percentage_points": 0.0
+    },
+    {
+      "policy": "hybrid_gp_adapt",
+      "macro_cycle_reduction_percent": 1.6021851585004274,
+      "macro_regret_percentage_points": 0.0
+    },
+    {
+      "policy": "feasible_benefit_xgb",
+      "macro_cycle_reduction_percent": 0.602928509905254,
+      "macro_regret_percentage_points": 0.9992566485951735
+    },
+    {
+      "policy": "factorized_feasibility_xgb",
+      "macro_cycle_reduction_percent": 0.7193654155148919,
+      "macro_regret_percentage_points": 0.8828197429855356
+    }
+  ],
+  "references": [
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 32,
+      "baseline_cycles": 70797,
+      "oracle_cycles": 70797,
+      "oracle_cycle_reduction": 0.0
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 64,
+      "baseline_cycles": 70797,
+      "oracle_cycles": 69177,
+      "oracle_cycle_reduction": 0.022882325522267894
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 128,
+      "baseline_cycles": 70797,
+      "oracle_cycles": 68277,
+      "oracle_cycle_reduction": 0.0355947285901945
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 32,
+      "baseline_cycles": 234519,
+      "oracle_cycles": 232855,
+      "oracle_cycle_reduction": 0.0070953739355873085
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 64,
+      "baseline_cycles": 234519,
+      "oracle_cycles": 232855,
+      "oracle_cycle_reduction": 0.0070953739355873085
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 128,
+      "baseline_cycles": 234519,
+      "oracle_cycles": 229399,
+      "oracle_cycle_reduction": 0.0218319198018071
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 32,
+      "baseline_cycles": 6192,
+      "oracle_cycles": 6189,
+      "oracle_cycle_reduction": 0.00048449612403100775
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 64,
+      "baseline_cycles": 6192,
+      "oracle_cycles": 6080,
+      "oracle_cycle_reduction": 0.01808785529715762
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 128,
+      "baseline_cycles": 6192,
+      "oracle_cycles": 6080,
+      "oracle_cycle_reduction": 0.01808785529715762
+    }
+  ],
+  "first_oracle": [
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 32,
+      "policy": "merit",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 32,
+      "policy": "ranking",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 32,
+      "policy": "hybrid_gp_adapt",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 32,
+      "policy": "calibrated_latency",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 32,
+      "policy": "frequency",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 32,
+      "policy": "hybrid_gp_zero_shot",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 32,
+      "policy": "latency_cost_heuristic",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 32,
+      "policy": "normalized_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 32,
+      "policy": "raw_regression",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 32,
+      "policy": "factorized_feasibility_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 32,
+      "policy": "random",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 32,
+      "policy": "feasible_benefit_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 64,
+      "policy": "merit",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": 3,
+        "2": 3,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 64,
+      "policy": "ranking",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 64,
+      "policy": "hybrid_gp_adapt",
+      "first_positive_oracle_query_by_seed": {
+        "0": 2,
+        "1": 2,
+        "2": 2,
+        "3": 2,
+        "4": 2
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 64,
+      "policy": "calibrated_latency",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": 3,
+        "2": 3,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 64,
+      "policy": "frequency",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": 3,
+        "2": 1,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 64,
+      "policy": "hybrid_gp_zero_shot",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 64,
+      "policy": "latency_cost_heuristic",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 64,
+      "policy": "normalized_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 64,
+      "policy": "raw_regression",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 64,
+      "policy": "factorized_feasibility_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 64,
+      "policy": "random",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": 3,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 64,
+      "policy": "feasible_benefit_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 128,
+      "policy": "merit",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 128,
+      "policy": "ranking",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 128,
+      "policy": "hybrid_gp_adapt",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 128,
+      "policy": "calibrated_latency",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 128,
+      "policy": "frequency",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": null,
+        "3": 1,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 128,
+      "policy": "hybrid_gp_zero_shot",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 128,
+      "policy": "latency_cost_heuristic",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 128,
+      "policy": "normalized_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 128,
+      "policy": "raw_regression",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 3,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 128,
+      "policy": "factorized_feasibility_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 128,
+      "policy": "random",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 3,
+        "2": null,
+        "3": 1,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-aha-compress",
+      "cap": 128,
+      "policy": "feasible_benefit_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": 3,
+        "3": null,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 32,
+      "policy": "merit",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 32,
+      "policy": "ranking",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 32,
+      "policy": "hybrid_gp_adapt",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 32,
+      "policy": "calibrated_latency",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 32,
+      "policy": "frequency",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 32,
+      "policy": "hybrid_gp_zero_shot",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 32,
+      "policy": "latency_cost_heuristic",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 32,
+      "policy": "normalized_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 32,
+      "policy": "raw_regression",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": null,
+        "3": 3,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 32,
+      "policy": "factorized_feasibility_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 32,
+      "policy": "random",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": 2
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 32,
+      "policy": "feasible_benefit_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 2,
+        "2": null,
+        "3": null,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 64,
+      "policy": "merit",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 64,
+      "policy": "ranking",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 64,
+      "policy": "hybrid_gp_adapt",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 64,
+      "policy": "calibrated_latency",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 64,
+      "policy": "frequency",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 64,
+      "policy": "hybrid_gp_zero_shot",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 64,
+      "policy": "latency_cost_heuristic",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 64,
+      "policy": "normalized_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 64,
+      "policy": "raw_regression",
+      "first_positive_oracle_query_by_seed": {
+        "0": 3,
+        "1": 3,
+        "2": null,
+        "3": 3,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 64,
+      "policy": "factorized_feasibility_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 64,
+      "policy": "random",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": 2
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 64,
+      "policy": "feasible_benefit_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 128,
+      "policy": "merit",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 128,
+      "policy": "ranking",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 128,
+      "policy": "hybrid_gp_adapt",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 128,
+      "policy": "calibrated_latency",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 128,
+      "policy": "frequency",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 128,
+      "policy": "hybrid_gp_zero_shot",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 128,
+      "policy": "latency_cost_heuristic",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 128,
+      "policy": "normalized_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 128,
+      "policy": "raw_regression",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": 3,
+        "3": null,
+        "4": 3
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 128,
+      "policy": "factorized_feasibility_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 128,
+      "policy": "random",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": 3,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "cap": 128,
+      "policy": "feasible_benefit_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 32,
+      "policy": "merit",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 32,
+      "policy": "ranking",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 32,
+      "policy": "hybrid_gp_adapt",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 32,
+      "policy": "calibrated_latency",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 32,
+      "policy": "frequency",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 32,
+      "policy": "hybrid_gp_zero_shot",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 32,
+      "policy": "latency_cost_heuristic",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 32,
+      "policy": "normalized_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 32,
+      "policy": "raw_regression",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 32,
+      "policy": "factorized_feasibility_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 32,
+      "policy": "random",
+      "first_positive_oracle_query_by_seed": {
+        "0": 2,
+        "1": 2,
+        "2": 1,
+        "3": 3,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 32,
+      "policy": "feasible_benefit_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 64,
+      "policy": "merit",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 64,
+      "policy": "ranking",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 64,
+      "policy": "hybrid_gp_adapt",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 64,
+      "policy": "calibrated_latency",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 64,
+      "policy": "frequency",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 64,
+      "policy": "hybrid_gp_zero_shot",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 64,
+      "policy": "latency_cost_heuristic",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 64,
+      "policy": "normalized_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 64,
+      "policy": "raw_regression",
+      "first_positive_oracle_query_by_seed": {
+        "0": 2,
+        "1": 2,
+        "2": 2,
+        "3": 2,
+        "4": 2
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 64,
+      "policy": "factorized_feasibility_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 64,
+      "policy": "random",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": 3,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 64,
+      "policy": "feasible_benefit_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 128,
+      "policy": "merit",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 128,
+      "policy": "ranking",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 128,
+      "policy": "hybrid_gp_adapt",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 128,
+      "policy": "calibrated_latency",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 128,
+      "policy": "frequency",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 128,
+      "policy": "hybrid_gp_zero_shot",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 128,
+      "policy": "latency_cost_heuristic",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 128,
+      "policy": "normalized_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 128,
+      "policy": "raw_regression",
+      "first_positive_oracle_query_by_seed": {
+        "0": 2,
+        "1": 2,
+        "2": 2,
+        "3": 2,
+        "4": 2
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 128,
+      "policy": "factorized_feasibility_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 128,
+      "policy": "random",
+      "first_positive_oracle_query_by_seed": {
+        "0": null,
+        "1": 3,
+        "2": null,
+        "3": null,
+        "4": null
+      }
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "cap": 128,
+      "policy": "feasible_benefit_xgb",
+      "first_positive_oracle_query_by_seed": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      }
+    }
+  ]
+}

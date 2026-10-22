@@ -114,7 +114,8 @@ def test_export_preserves_old45_and_three_failures_charges_unknown_without_label
     old = c.unseal(corpus.PREVIOUS/'corpus.json')
     target = fake_target()
     monkeypatch.setattr(corpus, 'load_targets', lambda *_: [target])
-    monkeypatch.setattr(corpus, 'collection_costs', lambda *_: dict(manifest_sha256='fixture-only'))
+    monkeypatch.setattr(corpus, 'collection_costs', lambda *_: dict(manifest_sha256='fixture-only',
+        clock_accounting=dict(contract='fixture-only', frozen_strict_failed_sources=[])))
     # The loader is replaced only for this schema/accounting fixture.
     campaign, prereg = tmp_path/'campaign', tmp_path/'prereg'
     campaign.mkdir(); prereg.mkdir()
@@ -179,7 +180,8 @@ def test_presenter_consumes_real_packed_dct_schema_without_fit_or_native_jobs(tm
     monkeypatch.setattr(report, 'load_targets', lambda *_: [target, second])
     monkeypatch.setattr(report, 'collection_costs', lambda *_: dict(
         complete_subprocess_seconds=2*sum(target['outer_times'].values())+10,
-        successful=12, failed=0, manifest_sha256='fixture-only'))
+        successful=12, failed=0, manifest_sha256='fixture-only',
+        clock_accounting=dict(contract='fixture-only', frozen_strict_failed_sources=[])))
     prereg = tmp_path/'prereg'; prereg.mkdir()
     c.seal(prereg/'cohort.json', dict(qualification=dict(setup_subprocess_seconds=20), freeze_outer_operation_seconds=5))
     c.seal(prereg/'manifest.json', {})
@@ -248,6 +250,51 @@ def test_complete_subprocess_costs_bind_failed_attempt_and_enclose_ledger(tmp_pa
     c.seal(collection/'commands.json', commands); seal_manifest()
     with pytest.raises(ValueError, match='Collection status/timer'):
         report.collection_costs(collection, campaign, prereg, [target])
+
+
+def test_qualified_clock_accounting_retains_strict_failure_and_unknown_calendar_time(tmp_path, monkeypatch):
+    from scripts import reproduce_blind_campaign as adapter
+    target = fake_target()
+    target['audit'].update(pool_names=['candidate_00', 'candidate_01'], context_id='fixture-context')
+    campaign, collection = tmp_path/'campaign', tmp_path/'collection'
+    campaign.mkdir(); collection.mkdir()
+    binding = dict(manifest_sha256='fixture-manifest')
+    monkeypatch.setattr(adapter, 'collection_binding', lambda *_, **__: binding)
+    commands = [dict(workload_group=target['workload'], candidate=name,
+        elapsed_seconds=target['outer_times'][row['candidate_id']]+1)
+        for name, row in zip(target['audit']['pool_names'], target['outcomes'])]
+    c.seal(collection/'commands.json', commands)
+    keys = ('cli_encloses_ledger_derived_end', 'cli_derived_serial_order',
+            'collector_encloses_cli_derived_end', 'collector_derived_serial_order')
+    rows = [dict(candidate=name, candidate_id=row['candidate_id'],
+        collector_monotonic_elapsed_seconds=command['elapsed_seconds'],
+        cli_monotonic_elapsed_seconds=target['outer_times'][row['candidate_id']],
+        ledger_monotonic_elapsed_seconds=row['measurement_seconds'],
+        mixed_clock_diagnostics={key: not (index == 1 and key == keys[0]) for key in keys})
+        for index, (name, row, command) in enumerate(zip(target['audit']['pool_names'], target['outcomes'], commands))]
+    clock = dict(schema=adapter.CONTRACT, phase='post-collection accounting amendment',
+        context_id='fixture-context', collection=binding, actual_calendar_wall_seconds=None,
+        limitations=adapter.LIMITATIONS, outer_times=target['outer_times'], rows=rows,
+        frozen_strict_checker=dict(passed=False, error_type='ValueError', error='Outer timestamps must enclose attempt ledger'),
+        independent_proof={key: True for key in ('one_attempt_per_candidate', 'contiguous_scoped_native_receipts',
+            'source_bound_blocking_collector', 'recorded_utc_starts_globally_ordered', 'monotonic_duration_scopes_ordered')},
+        mixed_clock_violation_counts={key: sum(not row['mixed_clock_diagnostics'][key] for row in rows) for key in keys})
+    path = campaign/'targets'/target['workload']/'clock-audit.json'
+    c.seal(path, clock)
+    provenance = dict(accounting_contract=adapter.CONTRACT, accounting_phase=clock['phase'],
+        adapter_source_bindings={adapter.SOURCE: c.sha(report.ROOT/adapter.SOURCE)}, collection=binding,
+        actual_calendar_wall_seconds=None, accounting_limitations=adapter.LIMITATIONS,
+        clock_audits={target['workload']: c.sha(path)})
+    c.seal(campaign/'provenance.json', provenance)
+    result = report.clock_accounting(campaign, collection, [target])
+    assert result['frozen_strict_failed_sources'] == [target['workload']]
+    assert result['source_audits'][target['workload']]['frozen_strict_checker']['passed'] is False
+    assert result['actual_calendar_wall_seconds'] is None and result['adaptive_time_advantage_established'] is False
+    clock['frozen_strict_checker'] = dict(passed=True, error_type=None, error=None)
+    c.seal(path, clock); provenance['clock_audits'][target['workload']] = c.sha(path)
+    c.seal(campaign/'provenance.json', provenance)
+    with pytest.raises(ValueError, match='strict-clock outcome'):
+        report.clock_accounting(campaign, collection, [target])
 
 
 def test_completed_campaign_report_and_export_when_available(tmp_path):

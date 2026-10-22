@@ -143,8 +143,76 @@ def primary_comparisons(endpoints):
     return result, counts
 
 
+def clock_accounting(campaign, collection, targets):
+    """Require the explicit amendment and preserve every failed strict-clock check."""
+    from scripts import reproduce_blind_campaign as adapter
+    campaign = Path(campaign)
+    provenance = c.unseal(campaign/'provenance.json')
+    binding = adapter.collection_binding(collection)
+    groups = {target['workload'] for target in targets}
+    c.require(provenance.get('accounting_contract') == adapter.CONTRACT and
+              provenance.get('accounting_phase') == 'post-collection accounting amendment' and
+              provenance.get('adapter_source_bindings') == {adapter.SOURCE: c.sha(ROOT/adapter.SOURCE)} and
+              provenance.get('collection') == binding and provenance['actual_calendar_wall_seconds'] is None and
+              provenance.get('accounting_limitations') == adapter.LIMITATIONS and
+              set(provenance.get('clock_audits', {})) == groups,
+              'Explicit source-bound qualified clock accounting required')
+    sources = {}
+    commands = {(row['workload_group'], row['candidate']): row for row in c.unseal(Path(collection)/'commands.json')}
+    proof_keys = {'one_attempt_per_candidate', 'contiguous_scoped_native_receipts',
+                  'source_bound_blocking_collector', 'recorded_utc_starts_globally_ordered',
+                  'monotonic_duration_scopes_ordered'}
+    diagnostic_keys = {'cli_encloses_ledger_derived_end', 'cli_derived_serial_order',
+                       'collector_encloses_cli_derived_end', 'collector_derived_serial_order'}
+    for target in targets:
+        group = target['workload']
+        path = campaign/'targets'/group/'clock-audit.json'
+        c.require(c.sha(path) == provenance['clock_audits'][group], 'Qualified clock-audit checksum differs')
+        audit = c.unseal(path)
+        c.require(audit.get('schema') == adapter.CONTRACT and audit.get('phase') == provenance['accounting_phase'] and
+                  audit['context_id'] == target['audit']['context_id'] and audit['collection'] == binding and
+                  audit['actual_calendar_wall_seconds'] is None and audit['limitations'] == adapter.LIMITATIONS and
+                  audit['outer_times'] == target['outer_times'] and
+                  set(audit['independent_proof']) == proof_keys and
+                  all(value is True for value in audit['independent_proof'].values()),
+                  'Complete qualified clock proof and unknown calendar duration required')
+        names = target['audit']['pool_names']
+        public = target['public']
+        labels = {row['candidate_id']: row for row in target['outcomes']}
+        c.require([(row['candidate'], row['candidate_id']) for row in audit['rows']] ==
+                  [(name, row['candidate_id']) for name, row in zip(names, public)],
+                  'Clock-audit complete candidate identities differ')
+        for row in audit['rows']:
+            command = commands[group, row['candidate']]
+            c.require(row['collector_monotonic_elapsed_seconds'] == command['elapsed_seconds'] and
+                      row['cli_monotonic_elapsed_seconds'] == target['outer_times'][row['candidate_id']] and
+                      row['ledger_monotonic_elapsed_seconds'] == labels[row['candidate_id']]['measurement_seconds'] and
+                      set(row['mixed_clock_diagnostics']) == diagnostic_keys and
+                      all(type(value) is bool for value in row['mixed_clock_diagnostics'].values()),
+                      'Qualified clock durations/diagnostics differ from charged collection')
+        counts = {key: sum(not row['mixed_clock_diagnostics'][key] for row in audit['rows']) for key in diagnostic_keys}
+        c.require(audit['mixed_clock_violation_counts'] == counts,
+                  'Preserved mixed-clock violation counts differ')
+        strict = audit['frozen_strict_checker']
+        strict_checks_passed = all(row['mixed_clock_diagnostics']['cli_encloses_ledger_derived_end'] and
+                                   row['mixed_clock_diagnostics']['cli_derived_serial_order'] for row in audit['rows'])
+        c.require(type(strict.get('passed')) is bool and
+                  strict['passed'] == strict_checks_passed and
+                  ((strict['passed'] and strict['error_type'] is None and strict['error'] is None) or
+                   (not strict['passed'] and strict['error_type'] == 'ValueError' and any(counts.values()) and
+                    strict['error'] in ('Outer timestamps must enclose attempt ledger', 'Serial candidate timer order differs'))),
+                  'Original strict-clock outcome must remain explicit')
+        sources[group] = audit
+    return dict(contract=adapter.CONTRACT, phase=provenance['accounting_phase'],
+        timer_basis='recorded monotonic elapsed', actual_calendar_wall_seconds=None,
+        collection=binding, adapter_source_bindings=provenance['adapter_source_bindings'],
+        source_audits=sources, frozen_strict_failed_sources=sorted(
+            group for group, audit in sources.items() if not audit['frozen_strict_checker']['passed']),
+        limitations=adapter.LIMITATIONS, adaptive_time_advantage_established=False)
+
+
 def collection_costs(collection, campaign, prereg, targets):
-    """Bind complete subprocess wall to every charged campaign identity and ledger."""
+    """Bind recorded monotonic subprocess durations to charged identities/ledgers."""
     collection, campaign, prereg = map(Path, (collection, campaign, prereg))
     _manifest(collection)
     protocol = c.unseal(collection/'protocol.json')
@@ -190,8 +258,11 @@ def collection_costs(collection, campaign, prereg, targets):
         ledger_seconds=sum(row['ledger_seconds'] for row in costs), historical_costs=cohort['historical_costs'])
     c.require(all(summary[key] == value for key, value in expected_summary.items()),
               'Collection summary differs from actual candidate charges')
+    qualified = clock_accounting(campaign, collection, targets) if provenance.get('schema') == 'isaforge-blind-cohort-v1-campaign' else None
     return dict(**expected_summary, candidates=costs, manifest_sha256=c.sha(collection/'manifest.json'),
-                scope='Complete subprocess wall includes startup and overlaps CLI-operation and ledger timers.')
+                clock_accounting=qualified,
+                scope='Recorded monotonic subprocess elapsed includes startup and overlaps CLI-operation and ledger timers; uninterrupted wall time is not established.',
+                timer_basis='recorded monotonic elapsed', uninterrupted_wall_time_established=False)
 
 
 def _record_resources(record):
@@ -244,6 +315,10 @@ def load_targets(campaign, prereg):
               provenance['release_sha256'] == c.sha(campaign/'release.json') and
               provenance['source_bindings'] == cohort['source_bindings'] and
               set(provenance['targets']) == set(cohort['targets']), 'Campaign/preregistration bindings differ')
+    c.require(provenance.get('accounting_contract') == 'isaforge-blind-monotonic-accounting-v1' and
+              provenance.get('accounting_phase') == 'post-collection accounting amendment' and
+              set(provenance.get('clock_audits', {})) == set(cohort['targets']),
+              'Explicit qualified-clock campaign amendment required')
     _hashes(ROOT, cohort['source_bindings'])
     targets = []
     for native in sorted((campaign/'targets').glob('*/native')):
@@ -293,6 +368,8 @@ def build(campaign, prereg, output, *, collection=COLLECTION):
     collection = Path(collection).resolve()
     c.require(not output.is_relative_to(collection), 'Fresh report outside collection evidence required')
     collected = collection_costs(collection, campaign, prereg, targets)
+    clock = collected['clock_accounting']
+    c.require(isinstance(clock, dict), 'Qualified clock accounting must be retained in the report')
     endpoints, candidates, baselines, reliability, costs, predictions = [], [], [], [], [], []
     for target in targets:
         workload, audit, outcomes, report = (target[key] for key in ('workload', 'audit', 'outcomes', 'report'))
@@ -311,7 +388,8 @@ def build(campaign, prereg, output, *, collection=COLLECTION):
                           'Raw and derived hardware resources differ')
                 c.require(records[row['candidate']]['performance']['cycles'] == row['cycles'], 'Archived candidate cycles differ')
             candidates.append(dict(workload_group=workload, baseline_cycles=baseline['cycles'],
-                **{**row, **resource}, outer_operation_seconds=target['outer_times'][row['candidate_id']]))
+                **{**row, **resource}, outer_operation_seconds=target['outer_times'][row['candidate_id']],
+                timer_basis='recorded monotonic elapsed'))
         predictions += [dict(workload_group=workload, seed=seed['seed'], cap=cap, **row)
                         for seed in c.unseal(target['selection']/'feasibility-predictions.json')
                         for cap in e.AREA_CAPS for row in seed['by_cap'][str(cap)]]
@@ -348,6 +426,7 @@ def build(campaign, prereg, output, *, collection=COLLECTION):
         total_candidate_attempt_wall_seconds=historical['total_candidate_wall_seconds']+sum(row['candidate_wall_seconds'] for row in costs),
         qualification=cohort['qualification'], freeze_outer_operation_seconds=cohort['freeze_outer_operation_seconds'],
         collection=collected,
+        clock_accounting=clock, timer_basis='recorded monotonic elapsed', actual_calendar_wall_seconds=None,
         per_source=costs, timer_scopes_overlap=True, new_model_fits=0, new_native_jobs=0)
     fmt = lambda value: '' if value is None else f'{value:.9f}'
     text = ['# Blind independent-source campaign',
@@ -356,7 +435,7 @@ def build(campaign, prereg, output, *, collection=COLLECTION):
         'Original inputs and recorded-input verifiers are retained. All hardware costs cover the integrated processor/PCPI/RAM; '
         'Fmax is the minimum of three routing seeds. No frequency increase is credited.',
         '## Whole-source primary comparison',
-        table([['Policy', 'Cycle reduction', 'Cycle-reduction regret', 'Oracle gain fraction', 'Sources with positive reference', 'Mean ledger s'], ['---']*6]+
+        table([['Policy', 'Cycle reduction', 'Cycle-reduction regret', 'Oracle gain fraction', 'Sources with positive reference', 'Mean ledger monotonic s'], ['---']*6]+
             [[POLICY_LABELS[row['policy']], fmt(row['mean_verified_cycle_reduction']), fmt(row['mean_cycle_reduction_regret']),
               fmt(row['mean_oracle_cycle_reduction_fraction']), row['oracle_gain_fraction_source_count'],
               fmt(row['mean_target_measurement_seconds'])] for row in primary]),
@@ -377,7 +456,7 @@ def build(campaign, prereg, output, *, collection=COLLECTION):
         '## Actual processor evidence',
         table([['Source', 'Baseline cycles', 'LUT4', 'Minimum Fmax MHz'], ['---']*4]+
               [[row['workload_group'], row['baseline_cycles'], row['total_lut4'], fmt(row['min_fmax_mhz'])] for row in baselines]),
-        table([['Source', 'Candidate', 'Cycles', 'Speedup', 'LUT4 / added', 'Minimum Fmax MHz', 'Correctness', 'Charged s'], ['---']*8]+
+        table([['Source', 'Candidate', 'Cycles', 'Speedup', 'LUT4 / added', 'Minimum Fmax MHz', 'Correctness', 'Charged monotonic s'], ['---']*8]+
             [[row['workload_group'], row['candidate'], row['cycles'], fmt(row['speedup']) if row['speedup'] != '' else '',
               f"{row['total_lut4']} / {row['added_lut4']}", fmt(row['min_fmax_mhz']) if row['min_fmax_mhz'] != '' else '',
               row['correctness'], fmt(row['charged_wall_seconds'])] for row in candidates]),
@@ -385,39 +464,50 @@ def build(campaign, prereg, output, *, collection=COLLECTION):
         'Unknown correctness/performance/hardware outcomes remain blank and charged; infrastructure failures do not become negative labels. '
         'References cover the declared recorded-input pools, not all legal formulas or arbitrary inputs.',
         '## Costs and reliability',
+        'Clock-accounting status: **post-collection accounting amendment**. '
+        'The unchanged frozen strict checker failed for '+(', '.join(clock['frozen_strict_failed_sources']) or 'no source')+'. '
+        'Every original strict-check outcome and mixed-clock diagnostic is preserved in clock-accounting.json. '
+        'Adding a monotonic duration to a UTC start cannot establish UTC end-time enclosure in this collection. '
+        'The records do not distinguish suspend from clock adjustment. Uninterrupted calendar wall time remains unknown. '
+        'Source-bound blocking collector calls, unique charged attempts and contiguous native receipt spans provide the separate serial-order evidence. '
+        'This accounting amendment changes no model, candidate, policy, label or native measurement.',
         f"New collection: {sum(row['charged_candidate_attempts'] for row in costs)} charged attempts / "
-        f"{sum(row['candidate_wall_seconds'] for row in costs):.3f}ledger seconds, including failures. "
-        f"Enclosing candidate operations: {sum(row['candidate_outer_operation_seconds'] for row in costs):.3f}s. "
-        f"Complete candidate subprocess wall, including startup: {collected['complete_subprocess_seconds']:.3f}s "
+        f"{sum(row['candidate_wall_seconds'] for row in costs):.3f}ledger monotonic seconds, including failures. "
+        f"Candidate operation monotonic elapsed: {sum(row['candidate_outer_operation_seconds'] for row in costs):.3f}s. "
+        f"Complete candidate subprocess monotonic elapsed, including startup: {collected['complete_subprocess_seconds']:.3f}s "
         f"across {collected['successful']} successful and {collected['failed']} failed commands. "
-        f"Baseline ledger: {sum(row['baseline_wall_seconds'] for row in costs):.3f}s. "
-        f"Native commands: {sum(row['native_command_count'] for row in costs)} / "
+        f"Baseline ledger monotonic elapsed: {sum(row['baseline_wall_seconds'] for row in costs):.3f}s. "
+        f"Native commands (recorded monotonic elapsed): {sum(row['native_command_count'] for row in costs)} / "
         f"{sum(row['native_command_seconds'] for row in costs):.3f}s. These scopes overlap and must not be added. "
         f"Historical cost:45 successful labels plus3 failed attempts =48 attempts / {historical['total_candidate_wall_seconds']:.3f}s. "
         f"History plus new candidate attempts: {accounting['total_candidate_attempts']} / {accounting['total_candidate_attempt_wall_seconds']:.3f}s. "
-        f"Qualification/setup subprocess wall: {accounting['qualification']['setup_subprocess_seconds']:.3f}s, including rejected sources. "
+        f"Qualification/setup subprocess monotonic elapsed: {accounting['qualification']['setup_subprocess_seconds']:.3f}s, including rejected sources. "
         'This overlaps accepted-source baseline/CLI/native timers and is not added to them. '
         'Shared historical training costs, setup/calibration and per-seed fitting/prediction timers are retained in costs.json. '
         'The shared history is counted once. '
-        'Full collection subprocess wall is retained in the packed driver evidence. Policy paid wall sums are not an observed end-to-end acquisition runtime.',
+        'Recorded durations do not establish uninterrupted wall time. Legacy JSON/CSV fields containing wall retain their original names and now carry this explicit qualification. '
+        'Policy sums of recorded monotonic durations are not an observed end-to-end acquisition runtime, and no adaptive-time advantage is established.',
         'Feasibility Brier error uses successfully verified candidates only; unknown hardware outcomes are excluded and charged. '
         'Bootstrap score spread is uncalibrated estimator disagreement. Broad model superiority, calibrated confidence and joint-set performance are not established. '
         'Preserve heuristic wins, ties and regressions. Target labels are now consumed data.',
-        'This presenter performs zero model fits and zero native measurements. Full chronology, raw-evidence and exact policy verification belong to blind_campaign replay.']
+        'This presenter performs zero model fits and zero native measurements. Qualified clock accounting, raw-evidence and exact policy verification belong to reproduce_blind_campaign replay.']
     output.mkdir(parents=True)
     for name, rows in (('baselines.csv', baselines), ('candidates.csv', candidates), ('endpoints.csv', endpoints),
                        ('source-macro.csv', macro), ('primary.csv', primary), ('primary-comparisons.csv', comparisons),
                        ('feasibility.csv', reliability), ('predictions.csv', predictions)):
         _csv(output/name, rows)
     c.seal(output/'costs.json', accounting)
+    c.seal(output/'clock-accounting.json', clock)
     c.seal(output/'summary.json', dict(primary=primary, macro=macro, independent_source_count=len(targets),
         candidate_attempts=len(candidates), feasibility=reliability, superiority_established=False,
         primary_comparisons=comparisons, primary_comparison_counts=comparison_counts,
+        clock_accounting=clock,
         new_model_fits=0, new_native_jobs=0))
     (output/'results.md').write_text('\n\n'.join(text)+'\n')
     c.seal(output/'provenance.json', dict(source_sha256=c.sha(Path(__file__)),
         campaign_manifest_sha256=c.sha(campaign/'manifest.json'), prereg_manifest_sha256=c.sha(prereg/'manifest.json'),
         collection_manifest_sha256=collected['manifest_sha256'],
+        clock_accounting_sha256=c.sha(output/'clock-accounting.json'), accounting_contract=clock['contract'],
         new_model_fits=0, new_native_jobs=0))
     c.seal(output/'manifest.json', {path.name: c.sha(path) for path in sorted(output.iterdir()) if path.is_file()})
     return dict(sources=len(targets), candidates=len(candidates), policies=len(primary),

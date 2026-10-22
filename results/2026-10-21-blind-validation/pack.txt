@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/scripts/blind_campaign.py", line 549, in <module>
+    main()
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/scripts/blind_campaign.py", line 541, in main
+    result = pack(args.preregistration,targets,args.output,commit=args.commit,release_path=args.release)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/scripts/blind_campaign.py", line 463, in pack
+    times[group] = candidate_outer_times(raw,audits[group],cohort['targets'][group]['baseline_outer_files'])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/scripts/blind_campaign.py", line 414, in candidate_outer_times
+    c.require(duration >= elapsed and start <= attempt and start+timedelta(seconds=duration) >= attempt+timedelta(seconds=elapsed),
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/codesign.py", line 59, in require
+    raise ValueError(message)
+ValueError: Outer timestamps must enclose attempt ledger

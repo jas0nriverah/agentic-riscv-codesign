@@ -1,0 +1,73 @@
+{
+  "schema": "isaforge-blind-cohort-v1-campaign",
+  "prelabel_commit": "0b0884e112fbb3635487f7ae93d5d0f1616dbcb2",
+  "prereg_manifest_sha256": "12857bda0df209aa0b9587ef652bfa575cc8a7a4d555938bf14304637e3a5fa9",
+  "release_sha256": "cced934c2a760a373dec72fa8eda7b7a70dab7110791d3d31aa1005c54e21fbe",
+  "source_bindings": {
+    "scripts/blind_campaign.py": "ce8c0d85947ae76dd68aa1a2d9d0c2914018a1377cb60ba9260e33bd830fcf43",
+    "scripts/collect_blind_campaign.py": "a5912cd2a7fb1ac0e3b1b681020edd2c3486c15e5511089544d74f5029042416",
+    "isaforge/blind_workload.py": "9f29ddd1cebbcc1c8199814343c555b35438d7669643c8749bbb96aa916a5307",
+    "scripts/reproduce_jfdctint.py": "e889d2d6e89eb6ee08029966e8ba7b931af145ce116be914a30e3c3f3d5cf9ec",
+    "scripts/reproduce_guarded_sha256.py": "26e883815bffd7f4bf2bc5688d6c3112d3c517b8aa3363e6c7ecc81899d69fcb",
+    "scripts/reproduce_budget_campaign.py": "4e205653fa07428ec7ed19de897e1bce5a20dd3b82918a720e418b4327bf6b01",
+    "scripts/reproduce_prospective.py": "cc88f1f264a11fdc4397b9645dae225a2201ab01aacbd9849dba54c3cf5ba905",
+    "isaforge/factorized_selection_experiment.py": "545b7abb61a08a41fb6c1680b3e9ec109d73f29ed99edaf95870661818bc43da",
+    "isaforge/feasibility_selection.py": "1268bd50a167a5182a75f5fe6729c7cf5bccd7edf93a476e3a3448a4eaeaca22",
+    "isaforge/feasible_benefit_experiment.py": "6acce0664a6e3ac6d97bb690d729981f3860ad36834b57dfdb9b33085eecae48",
+    "isaforge/feasible_benefit.py": "4a07e2c0e9ace6d1808254cef6071f99babbee8f173f4e8b3fc1d4dcf2efbfb9",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3"
+  },
+  "targets": {
+    "beebs-aha-compress": {
+      "charged_candidate_attempts": 12,
+      "candidate_wall_seconds": 497.83498458399845,
+      "trajectories": 180,
+      "endpoints": 540
+    },
+    "beebs-ndes": {
+      "charged_candidate_attempts": 12,
+      "candidate_wall_seconds": 528.9775076660007,
+      "trajectories": 180,
+      "endpoints": 540
+    },
+    "beebs-nettle-md5": {
+      "charged_candidate_attempts": 12,
+      "candidate_wall_seconds": 1078.8511666670001,
+      "trajectories": 180,
+      "endpoints": 540
+    }
+  },
+  "new_native_jobs": 0,
+  "accounting_contract": "isaforge-blind-monotonic-accounting-v1",
+  "accounting_phase": "post-collection accounting amendment",
+  "adapter_source_bindings": {
+    "scripts/reproduce_blind_campaign.py": "5f2955df49053ade7e879c26dca0f89cc8ca25d2701c16855814931b17f8d67a"
+  },
+  "collection": {
+    "path": "results/2026-10-21-blind-collection",
+    "manifest_sha256": "ced85b9f94053d93af23bf5b5e39f80eae75a7f95be406034efe194fd0329098",
+    "protocol_sha256": "fe2d7b4e10f38db3924d8d12e919a868da2dc064e991f7585248a55953437688",
+    "commands_sha256": "cae62b99dde7114c180fc94d4c4d2196389a198e638a513f76e5dc2f934f82c7",
+    "summary_sha256": "d65ecf889ee25093bb240095d9f984976ad7c17b66cd59ac2ad4b815c96e9ba7"
+  },
+  "clock_audits": {
+    "beebs-aha-compress": "b8b7cf4a9ad1a16b24b69fdbcc51b36f3d2ee7008c97a4c0d8c7176724345753",
+    "beebs-ndes": "fb8bd1c83ae1201a560cbfe1df4bfa72feb76d583ce45babfdde02c5735f8e9e",
+    "beebs-nettle-md5": "e9a00353df7ac182e4afd38c08def66436887b5dd334de49de528141f7841860"
+  },
+  "actual_calendar_wall_seconds": null,
+  "accounting_limitations": [
+    "Recorded monotonic elapsed durations are not established uninterrupted calendar wall times.",
+    "UTC starts and monotonic durations use different clocks; adding them does not prove end-time enclosure.",
+    "The cause of clock disagreement is unproven; suspend and clock adjustment cannot be distinguished from these records.",
+    "Blocking source-bound subprocess calls, unique attempts and contiguous native receipt spans support serial collection.",
+    "No UTC timestamps or elapsed durations were edited, corrected or given a tolerance.",
+    "This is a post-collection accounting amendment, outside the prelabel freeze; it changes no frozen model, candidate, policy, label or measurement."
+  ]
+}
