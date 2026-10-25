@@ -1,0 +1,120 @@
+{
+  "schema": "isaforge-tacle-g723-enc-v1-qualification",
+  "workload_group": "tacle-g723-enc",
+  "pool_size": 12,
+  "minimum_calibrated_cycle_reduction": 0.005,
+  "minimum_timed_replacements": 10,
+  "joint_gate": "At least one selected formula satisfies both numeric minima.",
+  "unchanged_input": true,
+  "unchanged_upstream_source": true,
+  "unchanged_verifier": true,
+  "build_context": "Single unchanged upstream translation unit; rename original main only; ILP32 asserted.",
+  "correctness": "Original g723_enc_return requires checksum24284 over original256 A-law samples.",
+  "target_candidate_attempts": 0,
+  "candidate_dispatch": "Disabled in qualification-only adapter.",
+  "created_at_utc": "2026-10-25T16:58:44.111903+00:00",
+  "phases": [
+    "prepare",
+    "discover",
+    "opportunity",
+    "baseline",
+    "public",
+    "freeze"
+  ],
+  "memory_partition": {
+    "ram_bytes": 8192,
+    "program_limit": 6400,
+    "stack_floor": 6528,
+    "stack_bytes": 1664,
+    "minimum_guard_bytes": 128
+  },
+  "reference_root": "generated/codesign-crc32-2026-10-19-r1",
+  "reference_plan_sha256": "796167e07bdc413f348c829ca93e60eda87162ca02143d3f57269ff2059197b9",
+  "historical_corpus_sha256": "4b2a2619908b1ef5f618748896152a335353d15ef0779a932e0178078af34b48",
+  "native_root": "generated/tacle-g723-2026-10-25",
+  "source_bindings": {
+    "scripts/qualify_next_tacle.py": "f331d125bebd2f6c87a40efd54f9fe5cb71082aa4535ccb2c106e97b2a54b7b3",
+    "scripts/qualify_opportunity_sources.py": "389e34ba724f2dcc3766752e404e46006b6aa7fced4f2e21508127ac08e8ffe1",
+    "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+    "isaforge/observed_command.py": "f56bf235b31205c842ea04ab5a493ee7f7e6731844e05b6d8991f21d9f3be41e",
+    "isaforge/next_tacle_workload.py": "9c5543ba7f7ad8af21797fde93777499814df0101e1bb071b113a4ef5c32a7a3",
+    "isaforge/tacle_workload.py": "2c0bd85266b164ff599154911a981566c8cc8353cb0ac7ccbd61c0948250ea4f",
+    "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+    "scripts/blind_campaign.py": "ce8c0d85947ae76dd68aa1a2d9d0c2914018a1377cb60ba9260e33bd830fcf43",
+    "isaforge/semantic_selection.py": "f1779def0ae538ff92f6f148f7a76a8d022082f5db940e5fd67825c40397ffc8",
+    "isaforge/structural_features_v3.py": "b0a4c8233c2a39b675767151f21698d6418c5b3b7bb357741815986033396fb0",
+    "isaforge/area_model_v2.py": "389f6592d6a3fb801638dcc5237cac65f8ab504caac10efef1a43e5d49cf6cf1",
+    "isaforge/area_model.py": "ade5dcc32ef66d0ea03ea9ec4937687564dff36c4483afc76ac59f9dc4a69447",
+    "isaforge/rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "isaforge/latency_features.py": "c0cd549e0fc7baa8317a552ba4350e86b0342af2e4c7a8737afd02e520161b92",
+    "benchmarks/tacle/g723_enc/isaforge_adapter.c": "d73e1ae7a561e92ff40f2a6a66e556e4d59efb2f84b7d53b8e66557c512b70da",
+    "benchmarks/tacle/G723_SOURCES.json": "d587caab1bf248927d4106f7ac152587a0ef89ae024cd90a26448ef9afa44280",
+    "benchmarks/tacle/g723_enc/g723_enc.c": "081a4b6edda600e80f4a78dbff27e4e07bb7d7c0e4373912586d1aa96a8be445",
+    "benchmarks/tacle/g723_enc/license.txt": "da9251e188e5adc6b54e6d8906daec0420a4718732195edd9534fea2565712f6",
+    "benchmarks/tacle/g723_enc/ChangeLog.txt": "8e75c6db30a46c0b6b2d7758361d335076e9563cc056f8b3751323056bd7bfe3"
+  },
+  "workers": 1,
+  "build_workers": 2,
+  "phase_timeout_seconds": 3600,
+  "phase_commands": {
+    "prepare": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.next_tacle_workload",
+      "prepare",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-g723-2026-10-25",
+      "--reference-root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+    ],
+    "discover": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.next_tacle_workload",
+      "discover",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-g723-2026-10-25"
+    ],
+    "opportunity": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.next_tacle_workload",
+      "opportunity",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-g723-2026-10-25"
+    ],
+    "baseline": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.next_tacle_workload",
+      "baseline",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-g723-2026-10-25"
+    ],
+    "public": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.next_tacle_workload",
+      "public",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-g723-2026-10-25"
+    ],
+    "freeze": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.next_tacle_workload",
+      "freeze",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-g723-2026-10-25"
+    ]
+  },
+  "qualification_rule": "Single declared original-input g723_enc, twelve legal executable calibrated formulas and unchanged joint0.5%/ten-replacement gate; no retries, smaller inputs, gate changes, memory/context changes or candidate labels.",
+  "rejection_rule": "Preserve first rejection and archive; no automatic fallback. Original-input isqrt requires a separate declaration if g723_enc fails."
+}
