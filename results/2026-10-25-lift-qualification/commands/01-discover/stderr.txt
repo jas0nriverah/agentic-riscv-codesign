@@ -1,0 +1,34 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/lift_workload.py", line 177, in <module>
+    main()
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/lift_workload.py", line 173, in main
+    return _ORIGINAL['main'](argv)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/next_tacle_workload.py", line 234, in main
+    result = evaluator.discover()
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/lift_workload.py", line 155, in discover
+    return super().discover()
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/next_tacle_workload.py", line 184, in discover
+    return super().discover()
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/guarded_workload.py", line 247, in discover
+    result=super().discover()
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/qualified_workload.py", line 161, in discover
+    return super().discover()
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/bounded_workload.py", line 174, in discover
+    return super().discover()
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/partitioned_workload.py", line 260, in discover
+    result = extract_pool(program, raw, site_map, self.plan['pool_size'], c.read(self.inputs / 'latency-calibration.json'))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/partitioned_workload.py", line 151, in extract_pool
+    c.require(len(eligible) >= pool_size, 'Too few calibrated executable candidates')
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/codesign.py", line 59, in require
+    raise ValueError(message)
+ValueError: Too few calibrated executable candidates
