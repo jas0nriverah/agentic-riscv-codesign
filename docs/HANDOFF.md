@@ -16,12 +16,23 @@ At +64 LUT4 / B3, the old three-source macro stays 1.602185159%; the expanded ma
 
 [Original Lift qualification](../results/2026-10-25-lift-qualification/qualification.json) is rejected during discovery: eleven formulas remain after relocation filtering, below twelve. It adds zero candidate attempts and no synthesized baseline. Preserve that context's first rejection and archive. Original 1,001 zero-input iterations / checksum 4005888 remain unchanged. Phase observer: 12.802695 seconds; outer observer: 13.606164 seconds, overlapping. Static review identifies dead Boolean temporaries falsely counted as outputs in two loops.
 
-## Continue here
+## Stopping point and resume
 
-1. `next_workload` owns new `isaforge/cfg_liveness.py` and its tests: complete static CFG fixed point, conservative barriers, reused dataflow rules, authenticated certificate and explicit projected equivalence. `selection_protocol` reviews soundness. Unsupported indirect entries must reject extraction globally. Canonical returns require an explicit, authenticated compiler-ABI assumption; the default is closed. No frozen sources change.
-2. `joint_posterior` owns new `isaforge/cfg_lift_workload.py`, `scripts/qualify_cfg_lift.py` and adapter tests. Use a distinct context, actual saved-input rederivation and scoped hooks restored after nesting/errors. Old entrypoints must reject new plans. Candidate dispatch stays disabled. Default fresh roots: `generated/tacle-lift-cfg-2026-10-25` and `results/2026-10-25-lift-cfg-qualification`.
-3. Root reviews/tests archived and synthetic coverage, pushes complete sources/contract, then may run one separate qualification. Preserve original hardware, input, flags, partition, twelve-formula and .5%/ten-execution gates. Preserve rejection. Lift informed this engineering work and cannot count as untouched model confirmation; acceptance alone adds no labels.
-4. A later candidate campaign needs a new complete pushed model/policy/controller release before labels, matched information/budgets and actual correctness, whole-program and integrated hardware results. Do not bypass G.723's context guards. Six independent eligible confirmatory families remain unestablished. Joint sets of one to three instructions remain required later; never sum individual performance or integrated area. No further model sweep or benefit-residual learner while all 110 cycle labels match calibration.
+The owner requested a tested commit/push and a stop before more experiments. The research goal is paused and unachieved. No agent or native campaign remains active after validation. Resume only when requested.
+
+The new `isaforge/cfg_liveness.py`, `isaforge/cfg_lift_workload.py` and `scripts/qualify_cfg_lift.py` are implemented and reviewed. Root's 269 focused tests pass. Final full regression has 3,824 passing tests / 179 passing subtests and the recurring unchanged external_v5 cleanup failure; no fix is claimed. [Final validation](../results/2026-10-25-cfg-validation/README.md) records the full regression result, source hashes, historical reproduction and unchanged sealed-package checks. Both explicit ABI-return and firmware-trap options default to false in the general analyzer; the separate Lift context validates exact source/input bindings before opting in. Unknown entries reject extraction globally. Original extraction/verifier sources remain unchanged.
+
+**The new coverage qualification has NOT RUN**, and no native acceptance, candidate label or model improvement is established by these fixtures. The next planned command, only after resumption, is:
+
+```sh
+../work/audit-venv/bin/python scripts/qualify_cfg_lift.py \
+  --output results/2026-10-25-lift-cfg-qualification \
+  --native-root generated/tacle-lift-cfg-2026-10-25
+```
+
+Use one serialized native job and fresh roots; preserve any rejection. Keep original hardware, inputs, flags, partition, twelve-formula and .5%/ten-execution gates. Lift informed development and cannot count as untouched model confirmation; qualification acceptance alone adds no labels.
+
+A later candidate campaign needs a new complete pushed model/policy/controller release before labels, matched information/budgets and actual correctness, whole-program and integrated hardware results. Do not bypass G.723's context guards. Six independent eligible confirmatory families remain unestablished. Joint sets of one to three instructions remain required later; never sum individual performance or integrated area. No further model sweep or benefit-residual learner while all 110 cycle labels match calibration.
 
 ## Methods and commands
 
