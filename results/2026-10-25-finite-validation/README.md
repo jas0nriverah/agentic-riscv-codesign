@@ -1,0 +1,12 @@
+# Fixed-joint and G.723 prelabel validation
+
+Pinned environment: `../work/audit-venv/bin/python` (Python 3.12 and `requirements-speedup.txt`). All logs and command observers are preserved. Native candidate measurements have not started at this checkpoint.
+
+- `make test PYTHON=../work/audit-venv/bin/python`: **3,617 passed, 179 subtests passed, one failed** in 262.86 seconds. The unchanged `tests/test_external_v5.py::test_trace_deadline_retains_partial_evidence_and_stops_owned_process` raises `PermissionError` in `os.killpg`; [full raw log](full-suite.log). This run collected the controller before its final eleven hardening tests; no entirely green or final-current-byte full-suite claim is made.
+- [Final focused tests](focused-final.log): **157 passed in 33.54 seconds**, including all 43 final G.723 controller fixtures, qualified/frozen TACLe guards, joint Gaussian updates, explicit fantasy branches and ten-case prepare/run/replay. These synthetic checks are not native research measurements.
+- [Historical `make reproduce`](historical-reproduce.log): passes unchanged six-model scores.
+- [Development run](development-run/record.json): 1,350 trajectories / 2,700 curve points, fourteen exact archived controls / 1,260 endpoint rows. [Pushed checkpoint before scoring](development-pre-score-checkpoint.json). All targets were already consumed development data.
+- [Exact development replay](development-replay/record.json) passes; [verification with both raw runtime records](development-replay-verification.json) retains the explicitly excluded host timers. Scientific states, choices, paid costs and acquisition proofs remain exact. Zero native jobs.
+- [G.723 complete freeze](g723-freeze/record.json) passes: seventeen policies, source/family-excluded shared history, all initial joint states and five normal tables, with zero candidate outcomes. Its complete pushed Git release is still required before candidate dispatch.
+
+The first full suite's failure is preserved; no legacy cleanup change is claimed. The frozen development runner and joint sources were pushed at `25e2c27` before scoring. Native qualification adds one original-input G.723 baseline / three routing seeds separately from the 99-label historical corpus. Native, baseline, historical, CLI, paired-observer and model timers have distinct overlapping scopes; do not add them into an unsupported total or uninterrupted wall-time saving.
