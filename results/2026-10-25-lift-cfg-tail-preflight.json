@@ -1,0 +1,234 @@
+{
+  "schema": "isaforge-lift-tail-coverage-preflight-v1",
+  "interpretation": "Consumed engineering coverage replay from the preserved rejected v1 Lift binary; not an untouched confirmatory workload, native qualification, candidate label, or model result.",
+  "native_activity": {
+    "compiler": false,
+    "simulator": false,
+    "synthesis": false,
+    "routing": false,
+    "candidate_evaluations": 0,
+    "candidate_labels": 0
+  },
+  "preserved_v1_rejection": {
+    "original_lift": {
+      "path": "results/2026-10-25-lift-qualification",
+      "status": "rejected",
+      "target_candidate_attempts": 0,
+      "manifest_sha256": "8cf7c1fe7aee498703deccd3e2f0dabf1747aa96cdfd19651b2256c98fe5f591",
+      "protocol_sha256": "d31fcf4ae4f429d2b5bbe1c4a540231b41f8070127fa6ab8d6106e503d78ebc1",
+      "qualification_sha256": "3f1153f6079c75509968ad8942222f215e49461c91551a635ac1a148cf92a1da",
+      "original_rejection_remains_final": true
+    },
+    "v1_cfg": {
+      "path": "results/2026-10-25-lift-cfg-qualification",
+      "status": "rejected",
+      "target_candidate_attempts": 0,
+      "manifest_sha256": "3c61986828be197b99bc79d2dfdcd72fb60d950c594f26e2a277af5f0b143477",
+      "protocol_sha256": "a365b21cdf5bc4714628d92950abf72dc354f78e94898a87457f544b0d87f998",
+      "qualification_sha256": "58678c8210a86f682909a0b5a81ec044b8c67a428142f39e00e33b7d8e800409",
+      "prior_cfg_rejection_remains_final": true,
+      "archive_manifest_sha256": "981bf2c6b6d139900d73d5db23bc7871fda77db0f5d16dc10873f6f6770ca717",
+      "raw_archive_sha256": "95d97efea2406258138391022524db1080a9c02de0fba4864df065fb7c49ce4e",
+      "native_archive_members": 150
+    }
+  },
+  "native_root": "generated/tacle-lift-cfg-2026-10-25",
+  "consumed_artifacts": {
+    "generated/tacle-lift-cfg-2026-10-25/discovery/attempt-000/program.s": "c5c8b19f3565e138aa28c7d3fe4d9e1037d14c17e975dab6f3119556e400b620",
+    "generated/tacle-lift-cfg-2026-10-25/discovery/attempt-000/marked.S": "33e7e8899eee2e4b8d4b3b5fc52b414d4df0bdd25c8f9ff4e73ac8e67123dfd9",
+    "generated/tacle-lift-cfg-2026-10-25/discovery/attempt-000/marked/symbols.txt": "718dc4cdeebad939f375e60829a1ae8221ec99b7718108d55c70ebdf2052baaa",
+    "generated/tacle-lift-cfg-2026-10-25/discovery/attempt-000/marked/disassembly.txt": "675ee3952237ac902568974f4ca76086efe26bddfadbf5ec9078cac0cf393fd9",
+    "generated/tacle-lift-cfg-2026-10-25/discovery/attempt-000/marked/firmware.hex": "efa4b7efd758eb4775ad3d5a2a66c627c75f72f9a977836aed9a8c15f4da97b1",
+    "generated/tacle-lift-cfg-2026-10-25/discovery/attempt-000/original/firmware.hex": "efa4b7efd758eb4775ad3d5a2a66c627c75f72f9a977836aed9a8c15f4da97b1",
+    "generated/tacle-lift-cfg-2026-10-25/discovery/attempt-000/profile/simulation.json": "4df5665c5705a8bcf3d128bcc89e11baadcf38857c14e5cf4f2d6484a89c1896",
+    "generated/tacle-lift-cfg-2026-10-25/inputs/latency-calibration.json": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+    "results/2026-10-25-lift-cfg-qualification/protocol.json": "a365b21cdf5bc4714628d92950abf72dc354f78e94898a87457f544b0d87f998",
+    "results/2026-10-25-lift-cfg-qualification/qualification.json": "58678c8210a86f682909a0b5a81ec044b8c67a428142f39e00e33b7d8e800409",
+    "results/2026-10-25-lift-cfg-qualification/manifest.json": "3c61986828be197b99bc79d2dfdcd72fb60d950c594f26e2a277af5f0b143477",
+    "results/2026-10-25-lift-cfg-qualification/archive-manifest.json": "981bf2c6b6d139900d73d5db23bc7871fda77db0f5d16dc10873f6f6770ca717",
+    "results/2026-10-25-lift-cfg-qualification/raw.tar.gz": "95d97efea2406258138391022524db1080a9c02de0fba4864df065fb7c49ce4e"
+  },
+  "current_native_discovery_inputs": {
+    "program_sha256": "89edd46a1aa9f788578454642260331db0ed1fb38b8d02b972a3e44beb08e683",
+    "profile_sha256": "7242d3a5f320c9eb0fc473e27e063484d4112f7e39679f2b9e6e28f76ab6fc29",
+    "source_map_sha256": "86cee0e470d019c7026222dc9bf9ba81c63a74f27b4bd7a0acfef753f6b88fda",
+    "calibration_sha256": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e"
+  },
+  "source_bindings": {
+    "scripts/preflight_cfg_lift_tail.py": "9e7134f71ac3f3387d285678c2cbbcccc1a62b285526f37973527380f33cc658",
+    "scripts/analyze_speedup_model.py": "c31c7ab6a8dda7c4e4225a9eee568b3a1fd18f7a15ad94816cc217f2cb6ee2f6",
+    "scripts/blind_campaign.py": "ce8c0d85947ae76dd68aa1a2d9d0c2914018a1377cb60ba9260e33bd830fcf43",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "isaforge/assembly_lowering.py": "e656f5591ce1fa70f8621f94349c7a1c1f90837fb572a8d42fe9a3ce88dc4554",
+    "isaforge/cfg_liveness_tail.py": "b9201e559e7ee0d9ab59e6049a857b10383f158930415c2743eec6942a77bc4d",
+    "isaforge/cfg_lift_workload_tail.py": "a8f1174eb343f4b14a524b3da514209811c9220c5645829c204d2a28518d010e",
+    "isaforge/latency_features.py": "c0cd549e0fc7baa8317a552ba4350e86b0342af2e4c7a8737afd02e520161b92",
+    "isaforge/relocation_guard.py": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+    "scripts/qualify_cfg_lift_tail.py": "b2afa0d7fa00f47033c733485d98c4954061a7b961ee75a61c1a00874e14794e",
+    "docs/cfg-liveness-tail-transfer.md": "6f3a705484b3857d488e1567f54a1d0be49f11988be5c0a907aee0aa09a6d587",
+    "scripts/qualify_tacle_lift.py": "7147089d929e8fb0ba03ffd0fcb0a79e5fd2487acdc2f9def4ad2de4a2b4a44f",
+    "hardware/soc_start.S": "5f80f0e780ab4f8eb2bd18846dbeb5ab4406ca1efaa3221fb4c1e305bb4b0447",
+    "hardware/soc_top.v": "912829da3e0754ff2522754b57368b11a9d38b8fb2494ca73ff8abaf38f2cb98",
+    "hardware/profile_sim.cpp": "76770bcff03f67a82bfdb410c7687f24f733326b2a221d615f11c8116da43b45",
+    "hardware/checked_sim.cpp": "477635f316551bf85bd7ac1addc11bb9fa2c252969202621e75692ea5cfd9f07",
+    "results/2026-10-25-lift-cfg-qualification/protocol.json": "a365b21cdf5bc4714628d92950abf72dc354f78e94898a87457f544b0d87f998",
+    "results/2026-10-25-lift-cfg-qualification/qualification.json": "58678c8210a86f682909a0b5a81ec044b8c67a428142f39e00e33b7d8e800409",
+    "results/2026-10-25-lift-cfg-qualification/manifest.json": "3c61986828be197b99bc79d2dfdcd72fb60d950c594f26e2a277af5f0b143477",
+    "isaforge/cfg_liveness.py": "267f738d09b40d9eb82d2326cd4b04321aad402ce7dec00716a9bc9d1756f2b4",
+    "src/candidates.py": "44f83fb2f0c421fd1bae5d89c90787a4dd997f4df1a2c433680c696f6b9486eb",
+    "src/tracing.py": "b3010ece9ef1bbc261a9efa801981a55a640468c8c6a87ed29386ccf89f49724",
+    "src/verify_candidate_fusions.py": "0bff84bb4f787ef6fee7ce3935369964242286b714a2fd162ae490ef0ec3cc03",
+    "isaforge/rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/lift_workload.py": "050ba90100800a254a3449e577b8c1dd9b3c1dd8331eea0f33f4c4d2b02e4e9d",
+    "isaforge/next_tacle_workload.py": "9c5543ba7f7ad8af21797fde93777499814df0101e1bb071b113a4ef5c32a7a3",
+    "isaforge/tacle_workload.py": "2c0bd85266b164ff599154911a981566c8cc8353cb0ac7ccbd61c0948250ea4f",
+    "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+    "isaforge/semantic_selection.py": "f1779def0ae538ff92f6f148f7a76a8d022082f5db940e5fd67825c40397ffc8",
+    "isaforge/structural_features_v3.py": "b0a4c8233c2a39b675767151f21698d6418c5b3b7bb357741815986033396fb0",
+    "isaforge/area_model_v2.py": "389f6592d6a3fb801638dcc5237cac65f8ab504caac10efef1a43e5d49cf6cf1",
+    "isaforge/area_model.py": "ade5dcc32ef66d0ea03ea9ec4937687564dff36c4483afc76ac59f9dc4a69447",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "benchmarks/tacle/lift/isaforge_adapter.c": "f65930086b0001530c76f97f395c51f3df5ef9206f1d5b097256189a04bc2780",
+    "benchmarks/tacle/LIFT_SOURCES.json": "e2b2a058143facf641f6e5d1e02e34a63984b3d8825f3ee2d172599b76eabaa2",
+    "benchmarks/tacle/lift/lift.c": "37cdaa52e7aafea8f9bd116a73366955d9215400c6ad402f62f35ab624d0a1ea",
+    "benchmarks/tacle/lift/liftlibcontrol.c": "370cd4369e41925c942b41eea4751ad2897d3db0985dfc8efcd6d13436f4bd19",
+    "benchmarks/tacle/lift/liftlibio.c": "050b104d594142bb0d0067e6a2f1c1fed095029e99c2d64d0d7b1a677cf44ae6",
+    "benchmarks/tacle/lift/liftlibcontrol.h": "327e6cc4b14fddb5e5f5f58ce4262f63af7f80e9e7399eb6290d410278c343ec",
+    "benchmarks/tacle/lift/liftlibio.h": "eebf92aa26e4689da2b6863de1ca3d7854b3bf40316a3116459441bc5e26014c",
+    "benchmarks/tacle/lift/README": "81c27f9f20b6202bd981ac98d5799319436305a0ed6475eafa806e63cfdaa976",
+    "benchmarks/tacle/lift/changeLog.txt": "01b1131cdf90cfdec2e1265d3b1cf3daa6b8ac64783bc50d0c321f352abc9dff"
+  },
+  "resolved_direct_tail_transfers": [
+    {
+      "auipc_pc": 940,
+      "jalr_pc": 944,
+      "target": 500,
+      "auipc_raw": 791,
+      "jalr_raw": 3833790567
+    },
+    {
+      "auipc_pc": 1968,
+      "jalr_pc": 1972,
+      "target": 1496,
+      "auipc_raw": 791,
+      "jalr_raw": 3800236135
+    },
+    {
+      "auipc_pc": 2212,
+      "jalr_pc": 2216,
+      "target": 228,
+      "auipc_raw": 791,
+      "jalr_raw": 2214789223
+    },
+    {
+      "auipc_pc": 2332,
+      "jalr_pc": 2336,
+      "target": 760,
+      "auipc_raw": 791,
+      "jalr_raw": 2646802535
+    }
+  ],
+  "counts": {
+    "raw_formulas": 17,
+    "executable_before_relocation": 17,
+    "relocation_rejected": 4,
+    "executable_after_relocation": 13,
+    "calibration_excluded": 0,
+    "calibrated_after_relocation": 13,
+    "frozen_pool_size": 12,
+    "selected_rank_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "calibration_excluded_formulas": [],
+  "selected_pool": [
+    {
+      "rank": 0,
+      "candidate_name": "candidate_00",
+      "formula": "or(sltu(0,in0),slli(in1,1))",
+      "expected_instruction_reduction": 36036
+    },
+    {
+      "rank": 1,
+      "candidate_name": "candidate_01",
+      "formula": "add(andi(in0,1),andi(in1,1))",
+      "expected_instruction_reduction": 20020
+    },
+    {
+      "rank": 2,
+      "candidate_name": "candidate_02",
+      "formula": "sltiu(slti(add(in0,in1),2),1)",
+      "expected_instruction_reduction": 20020
+    },
+    {
+      "rank": 3,
+      "candidate_name": "candidate_03",
+      "formula": "or(in0,slli(in1,1))",
+      "expected_instruction_reduction": 18018
+    },
+    {
+      "rank": 4,
+      "candidate_name": "candidate_04",
+      "formula": "or(sltu(0,in0),in1)",
+      "expected_instruction_reduction": 18018
+    },
+    {
+      "rank": 5,
+      "candidate_name": "candidate_05",
+      "formula": "sltiu(sub(in0,in1),1)",
+      "expected_instruction_reduction": 14014
+    },
+    {
+      "rank": 6,
+      "candidate_name": "candidate_07",
+      "formula": "add(in0,andi(in1,1))",
+      "expected_instruction_reduction": 10010
+    },
+    {
+      "rank": 7,
+      "candidate_name": "candidate_08",
+      "formula": "slti(add(in0,in1),2)",
+      "expected_instruction_reduction": 10010
+    },
+    {
+      "rank": 8,
+      "candidate_name": "candidate_09",
+      "formula": "sltiu(slti(in0,2),1)",
+      "expected_instruction_reduction": 10010
+    },
+    {
+      "rank": 9,
+      "candidate_name": "candidate_12",
+      "formula": "srli(slli(in0,16),16)",
+      "expected_instruction_reduction": 2002
+    },
+    {
+      "rank": 10,
+      "candidate_name": "candidate_15",
+      "formula": "andi(srli(in0,7),1)",
+      "expected_instruction_reduction": 1001
+    },
+    {
+      "rank": 11,
+      "candidate_name": "candidate_16",
+      "formula": "sltu(0,add(in0,in1))",
+      "expected_instruction_reduction": 1
+    }
+  ]
+}
