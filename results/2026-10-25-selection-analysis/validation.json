@@ -1,0 +1,58 @@
+{
+  "schema": "isaforge-oct25-selection-analysis-validation-v1",
+  "created_at_utc": "2026-10-25T16:44:18.247699+00:00",
+  "input_commit": "c4bca4b0ecc7314067e49b490995997e4c4b987b",
+  "commands": [
+    {
+      "command": "make test PYTHON=../work/audit-venv/bin/python",
+      "returncode": 2,
+      "passed": 3493,
+      "failed": 1,
+      "passing_subtests": 179,
+      "failure": "tests/test_external_v5.py::test_trace_deadline_retains_partial_evidence_and_stops_owned_process",
+      "exception": "PermissionError from unchanged trace cleanup os.killpg",
+      "log": "full-test.log"
+    },
+    {
+      "command": "../work/audit-venv/bin/python -m pytest -q tests/test_external_v5.py::test_trace_deadline_retains_partial_evidence_and_stops_owned_process",
+      "returncode": 0,
+      "passed": 1,
+      "log": "isolated-cleanup-test.log"
+    },
+    {
+      "command": "make reproduce PYTHON=../work/audit-venv/bin/python",
+      "returncode": 0,
+      "log": "historical-replay.log"
+    },
+    {
+      "command": "../work/audit-venv/bin/python -B results/2026-10-25-selection-analysis/reproduce.py --output generated/oct25-selection-analysis",
+      "returncode": 0,
+      "log": "reproduce.log"
+    },
+    {
+      "command": "../work/audit-venv/bin/python -B results/2026-10-25-selection-analysis/reproduce.py --output generated/oct25-selection-analysis-confirm",
+      "returncode": 0,
+      "log": "reproduce-confirm.log"
+    }
+  ],
+  "exact_derived_json_and_transcript_repeated": true,
+  "output_guard_checks": 2,
+  "all_bound_inputs_and_frozen_runtime_sources_unchanged": true,
+  "legacy_cleanup_sources_unchanged": {
+    "scripts/collect_external_v5.py": "2f56db0648f09e44dd7caf384e7f050f763a4556ca6f98af3815b00593b34307",
+    "tests/test_external_v5.py": "24e181e07dc12b935a4af3b6b91f96cea2dc7473cc4aa34f65d5c4b8fe487455"
+  },
+  "cleanup_fix_claimed": false,
+  "fully_green_suite_claimed": false,
+  "reconstruction_mean_max_abs_lut": 4.263256414560601e-14,
+  "independent_reviews": [
+    "GPT-6.1 Sol model/covariance/update review",
+    "GPT-6.1 Sol source/cap/policy/cost review",
+    "GPT-6.1 Sol primary-method/assumption review"
+  ],
+  "no_new_research_candidate_measurements": true,
+  "no_new_selector_trajectories": true,
+  "no_new_estimator_fit_calls_in_analysis": true,
+  "costs_note": "Analysis arithmetic and full-suite fixtures are host validation work, separate from existing research candidate ledgers. No new cost-saving claim; full-suite fixtures are not new dataset candidates.",
+  "scientific_scope": "Consumed-data numerical diagnosis only. All twelve sources remain consumed; no new model or acquisition result is claimed."
+}
