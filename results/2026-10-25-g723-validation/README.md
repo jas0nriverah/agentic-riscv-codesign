@@ -1,0 +1,16 @@
+# G.723 native/model/policy validation
+
+The complete seventeen-policy source/model package was pushed at `d8a5c9103cbc8032a62301e5a21a319fdd6f2a26` before candidate evaluation. Every query rechecks the actual remote head and complete Git blobs. The three live acquisition proofs precede dispatch; their trace is sealed before nine reference queries. All twelve attempts are terminal and none is retried.
+
+- [Release](release/record.json), [collection](collect/record.json), [packing](pack/record.json), [raw/model/live-policy replay](replay/record.json), [report](report/record.json) and [corpus export](export/record.json) all pass. Observers retain stdout/stderr, paired clock endpoints and actual command hashes.
+- [Replay receipt](reproduction.json): 345 trajectories / 900 curve points / 180 summaries, all initial refits and actual live paid-prefix proofs authenticated, zero native jobs. Both [archived](archived-endpoints.json) and [replayed endpoints](replayed-endpoints.json) retain raw excluded host timers. Scientific states, choices and paid durations remain exact.
+- [Prelabel validation](../2026-10-25-finite-validation/README.md): 157 focused tests pass; full regression preserves 3,617 passes, 179 subtests and the unchanged legacy external_v5 killpg PermissionError. That full run preceded the controller's last eleven hardening tests. No entirely green current-byte full-suite or cleanup-fix claim is made; later validation must be recorded separately.
+- Independent read-only result review checks every recorded curve/summary against native outcomes and costs without new fitting or selection. All endpoint JSON/CSV censorship flags and lower-bound regret arithmetic are correct. The [qualified guide](../../docs/g723-transfer.md) explains the original Markdown table's insufficiently prominent censorship caveat without modifying frozen report bytes.
+
+There are eleven verified candidate labels and one unknown routing timeout. Candidate 57's third route seed reaches the declared 180-second timeout; its full 219.421167-second charged attempt and two partial route results remain archived. Do not retry or label it infeasible. The full-pool oracle is unresolved; zero reported reference gap is not proof of full-pool optimality. Every successful saved-cycle residual is zero.
+
+The selector finds the best verified design at live query two: 3,783,237→3,623,462 cycles, +30 LUT4, 67.549 MHz. Heuristics and fixed-joint myopic reach it at query one. Lookahead is not promoted. Five seeds and B3-prefix/horizon-terminal variants are dependent; no field-superiority or calibrated-confidence claim.
+
+The outer complete collection CLI observer records 831.293530 monotonic seconds, including startup/initial checks; its nested collection timer records 827.713312 seconds after those initial checks. Candidate CLI, per-query observer and ledger totals are separate overlapping scopes. All paired UTC/monotonic observations and disagreement flags are retained; no uninterrupted calendar wall-time saving is established.
+
+[Observer setup rejection](collect-observer-setup-rejection.json) preserves the initial 7200-second outer-timeout request rejected before any child or candidate started. It was corrected to the existing 3600-second observer maximum. No charged candidate attempt was retried and the native per-query protocol was unchanged.

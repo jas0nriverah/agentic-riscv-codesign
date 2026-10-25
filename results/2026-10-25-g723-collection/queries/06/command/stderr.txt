@@ -1,0 +1,31 @@
+Traceback (most recent call last):
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/scripts/g723_selection_campaign.py", line 1060, in <module>
+    main()
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/scripts/g723_selection_campaign.py", line 1044, in main
+    result = measure(args.root,args.candidate)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/scripts/g723_selection_campaign.py", line 1013, in measure
+    result = evaluator.measure(candidate)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/scripts/g723_selection_campaign.py", line 647, in measure
+    return super().measure(name)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/guarded_workload.py", line 254, in measure
+    return super().measure(name)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/guarded_attempts.py", line 137, in measure
+    result = super().measure(name)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/workload_experiment.py", line 230, in measure
+    resources, routes = self.synthesize(folder / 'synthesis', rtl, bool(candidate))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/codesign.py", line 323, in synthesize
+    self.runner.run([self.tools['nextpnr'], '--hx8k', '--package', 'ct256', '--json', netlist,
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/codesign.py", line 223, in run
+    process.wait(timeout=min(remaining, timeout or CONFIG['command_seconds']))
+  File "/Users/jasonrivera/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 2045, in _wait
+    raise TimeoutExpired(self.args, timeout)
+subprocess.TimeoutExpired: Command '['/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/bin/nextpnr-ice40', '--hx8k', '--package', 'ct256', '--json', '/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-g723-2026-10-25/measurements/candidate_57/attempt-000/synthesis/ice40-netlist.json', '--pcf', '/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-g723-2026-10-25/inputs/common.pcf', '--freq', '12', '--seed', '3', '--threads', '1', '--report', '/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-g723-2026-10-25/measurements/candidate_57/attempt-000/synthesis/route-3.json', '--timing-allow-fail']' timed out after 180 seconds
