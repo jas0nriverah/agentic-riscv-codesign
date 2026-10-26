@@ -1,0 +1,90 @@
+{
+  "schema": "isaforge-tacle-lift-cfg-tail-v2-gate",
+  "protocol": {
+    "schema": "isaforge-tacle-lift-cfg-tail-v2",
+    "workload_group": "tacle-lift",
+    "pool_size": 12,
+    "minimum_calibrated_cycle_reduction": 0.005,
+    "minimum_timed_replacements": 10,
+    "joint_gate": "At least one selected formula satisfies both numeric minima.",
+    "unchanged_input": true,
+    "unchanged_upstream_source": true,
+    "unchanged_verifier": false,
+    "original_input": {
+      "controller_iterations": 1001,
+      "digital_stimulus": 0,
+      "adc1": 0,
+      "adc2": 0,
+      "adc3": 0
+    },
+    "build_context": {
+      "data_model": "ILP32, eight-bit bytes",
+      "source_order": [
+        "lift.c",
+        "liftlibio.c",
+        "liftlibcontrol.c"
+      ],
+      "namespace": "Only main renamed to isaforge_tacle_lift_original_main; original lift_* symbols and separate storage preserved.",
+      "layout_assertions": "sizeof(int),sizeof(long),sizeof(void*)=4;sizeof(short)=2;__CHAR_BIT__=8; original five array sizes asserted.",
+      "compilation": "Single translation unit with three unchanged C files and unchanged headers; not separate-object binary identity."
+    },
+    "correctness": "Original lift_return requires checksum4005888 after original1001 zero-input controller iterations.",
+    "target_candidate_attempts": 0,
+    "candidate_dispatch": "Disabled in qualification-only adapter.",
+    "unchanged_context_rule": "Distinct v2 static-CFG tail-transfer coverage context; both earlier Lift rejections remain final. Original input, hardware, flags, partition, pool and numeric gate remain unchanged.",
+    "rejection_rule": "Preserve both earlier rejections and this context first rejection; no retry, relabeling, gate changes or automatic source fallback.",
+    "coverage_context": {
+      "schema": "isaforge-lift-static-cfg-tail-transfer-context-v2",
+      "certificate_schema": "isaforge-rv32-static-cfg-liveness-tail-v2",
+      "extraction_schema": "isaforge-rv32-liveness-tail-extraction-v2",
+      "verification_schema": "isaforge-rv32-liveness-tail-projected-equivalence-v2",
+      "compiler_abi_returns": true,
+      "firmware_trap_exit": true,
+      "firmware_trap_source_bindings": {
+        "hardware/soc_start.S": "5f80f0e780ab4f8eb2bd18846dbeb5ab4406ca1efaa3221fb4c1e305bb4b0447",
+        "hardware/soc_top.v": "912829da3e0754ff2522754b57368b11a9d38b8fb2494ca73ff8abaf38f2cb98",
+        "hardware/profile_sim.cpp": "76770bcff03f67a82bfdb410c7687f24f733326b2a221d615f11c8116da43b45",
+        "hardware/checked_sim.cpp": "477635f316551bf85bd7ac1addc11bb9fa2c252969202621e75692ea5cfd9f07"
+      },
+      "trap_assumption": "Exact raw EBREAK is an all-live terminal exit only in the pinned startup, IRQ-disabled SoC and profile/checked simulators that terminate on trap; no generic exception handler.",
+      "return_assumption": "Only canonical raw jalr x0,x1,0 is an ordinary compiled-C ABI return; not arbitrary binary control flow.",
+      "resolved_direct_calls": "Only exact adjacent raw AUIPC/JALR pairs with a shared nonzero base resolve: x1/x1 link calls or x0/base non-linking direct tail transfers. Targets must be aligned and in-program; every second word is protected against all static entries; transfers remain all-live barriers.",
+      "readonly_counters": "Only exact CSRRS rd,{cycle,cycleh,instret,instreth},x0 encodings; opaque all-live isolated barriers, never fusion members.",
+      "unsupported_entries": "Every other unknown effect or unsupported indirect entry makes extraction fail closed; both static branch edges, resolved call targets and continuations remain protected.",
+      "extraction": "Scoped guarded ORIGINAL_EXTRACT; existing relocation guard, calibration filter and rank stratification unchanged.",
+      "verification": "Reconstruct saved original assembly, linked static program, complete baseline profile and source-PC map for every callback; never trust candidate-supplied proof.",
+      "contract": "docs/cfg-liveness-tail-transfer.md"
+    },
+    "lowering_verification": "isaforge-rv32-liveness-tail-projected-equivalence-v2",
+    "unchanged_upstream_correctness_verifier": true,
+    "unchanged_full_register_lowering_verifier": false,
+    "preserved_original_rejection": {
+      "path": "results/2026-10-25-lift-qualification",
+      "final": true,
+      "target_candidate_attempts": 0
+    },
+    "preserved_prior_cfg_rejection": {
+      "path": "results/2026-10-25-lift-cfg-qualification",
+      "final": true,
+      "target_candidate_attempts": 0
+    }
+  },
+  "passed": true,
+  "qualifying_candidate_ids": [
+    "a629a45d3c9836ca9f5855dfe7fb1e43d3a2a54cb6c1a3e1b695aced7bcdcbf0",
+    "4d205f7cd78ba7a2d8139c3f1a0fb3ff62c14126f588b21cfc59ce07c31862e6",
+    "af2a534eaaf1b9f7a1bae0c6ec0df924fb35d715dd4495904fa0cba990ebdee1",
+    "a5a18b2ff8e4a94504e3e2d643c6baf6eaf2fb81f37cbcd37007ac061c7c18ea",
+    "fc8975bb1916ca405d79987e9671e1fc7d1225396be77a2282cd4d5d2fdc78bc",
+    "1b61bc72ed247bc5fe4e7401be8bcc77c8d5e03a58a2f5f6204463db1e1ccd0e",
+    "5be30ca5d30a6032dc7870431c56e42a0f0d9f735e7e2a28c9302edba590241e",
+    "b27ddba446eb8903a9b4a2ff6c1d90cf1ca56c912b7a418686c955349c585ae6",
+    "144569a09daff56b58bc2af567491ca8ed8a1fe8bed6e749ac33d212ecc9b621",
+    "5be7ff21b4d8233baefd4014355199cf5a1302a563396c3e9c1a4007e02265cb"
+  ],
+  "public_digest": "74e71a6d1535c909df339099bd55c920ce82b9cb68c6ccf99e69b09e4e7e5372",
+  "maximum_public_cycle_reduction": 0.06497614962761684,
+  "maximum_timed_replacements": 18018,
+  "target_candidate_attempts": 0,
+  "measured_candidate_labels_used": false
+}
