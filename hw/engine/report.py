@@ -133,7 +133,7 @@ def main():
         problems.append(f"critical-path table covers {[r['seed'] for r in crit]}")
     basePeriod = 1000 / float(base["crc32"]["fmax_mhz"])
     routedPeriod = 1000 / fmax
-    # PROVISIONAL rule (root README.md, "Measurement protocol"): never credit a faster clock, always take a slower one
+    # PROVISIONAL rule (hw/README.md, "Measurement protocol"): never credit a faster clock, always take a slower one
     period = max(basePeriod, routedPeriod)
 
     programs, rows = {}, []

@@ -1,6 +1,6 @@
 # Measurement engine (PROVISIONAL)
 
-> **Every choice here is provisional and is not a team decision.** That covers PCPI as the interface; custom-0 with funct7=2 and funct3 = slot; up to 3 units per core with a registered 1-cycle handshake; assembly-level rewriting; PicoRV32's sequential multiplier; the clock-period rule (root [README](../../README.md#measurement-protocol)); and the proposed `candidate_id`.
+> **Every choice here is provisional and is not a team decision.** That covers PCPI as the interface; custom-0 with funct7=2 and funct3 = slot; up to 3 units per core with a registered 1-cycle handshake; assembly-level rewriting; PicoRV32's sequential multiplier; the clock-period rule ([hw/README.md](../README.md#measurement-protocol)); and the proposed `candidate_id`.
 
 ```
 make hw-measure CANDIDATES=<json> [ALLOW_MUL=1]   # one core, all 8 programs -> generated/hw/engine/<id>/results.json
@@ -168,7 +168,7 @@ A build takes about 50 s at `-j8` after `make hw-baseline`. The clean sweep (21 
 
 ### Later results (2026-10-20)
 
-The placeability pre-check (`make hw-placeability`), the top-10 placeable sweep (`make hw-sweep10`), the multiplier probe (`make hw-fastmul-probe`) and the selection experiments (`make hw-experiments`: placement-aware frequency pick and the LUT-budget oracle) are summarized in the root README's Results section; the files are listed in [results/README.md](results/README.md).
+The placeability pre-check (`make hw-placeability`), the top-10 placeable sweep (`make hw-sweep10`), the multiplier probe (`make hw-fastmul-probe`) and the selection experiments (`make hw-experiments`: placement-aware frequency pick and the LUT-budget oracle) are summarized in [hw/README.md](../README.md#results); the files are listed in [results/README.md](results/README.md).
 
 ## Known limits
 

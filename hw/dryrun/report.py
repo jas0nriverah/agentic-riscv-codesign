@@ -133,7 +133,7 @@ def main():
     fmax = statistics.median(perSeed.values())
     baseFmax = float(base["crc32"]["fmax_mhz"])
 
-    # PROVISIONAL rule (root README.md, "Measurement protocol"): T_fused = max(T_base, T_fused_measured), never crediting a
+    # PROVISIONAL rule (hw/README.md, "Measurement protocol"): T_fused = max(T_base, T_fused_measured), never crediting a
     # faster clock and always taking a slower one; the critical-path table is kept as a diagnostic
     with open("hw/dryrun/critical_paths.csv") as f:
         arcs = {r["seed"]: r["unit_on_arc"] == "True" for r in csv.DictReader(f) if r["core"] == "fused"}

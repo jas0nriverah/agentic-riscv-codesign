@@ -1,6 +1,6 @@
 # Dry run: one crc32 candidate end to end (PROVISIONAL)
 
-> **Every choice here is provisional and is not a team decision.** That covers the PCPI interface, the encoding (custom-0, funct7=2, funct3=0), assembly-level rewriting, the 1-cycle PCPI handshake, the clock-period rule (root [README](../../README.md#measurement-protocol)), and the proposed `candidate_id`. The point is to show that the whole path, from candidate to RTL, rewritten binary and measurement, works on one real candidate under the baseline's protocol.
+> **Every choice here is provisional and is not a team decision.** That covers the PCPI interface, the encoding (custom-0, funct7=2, funct3=0), assembly-level rewriting, the 1-cycle PCPI handshake, the clock-period rule ([hw/README.md](../README.md#measurement-protocol)), and the proposed `candidate_id`. The point is to show that the whole path, from candidate to RTL, rewritten binary and measurement, works on one real candidate under the baseline's protocol.
 
 ```
 make hw-dryrun          # everything below; writes hw/dryrun/results.json (about 80 s after hw-baseline)
@@ -30,7 +30,7 @@ make hw-critpath        # critical path per seed, stock and fused cores -> hw/dr
 - **Stock flow with `FUSED=0`:** reproduces `hw/results/baseline.csv` byte for byte, and gives the same per-seed Fmax and the same Yosys stats.
 - **All checks in `report.py` pass** (`"problems": []`).
 
-**Fmax.** In short, the faster routed clock (61.48 → 65.04 MHz) is placement noise and isn't credited. The provisional rule in the root [README](../../README.md#measurement-protocol) is T_fused = max(T_base, T_fused_measured): a faster clock is never credited and a slower one is always charged. Here the routed clock is faster, so the fused core keeps the baseline's period, and the speedup equals the cycles-only figure, 1.0574. The critical-path analysis below shows why the faster clock isn't real: the unit isn't on the critical path in any seed.
+**Fmax.** In short, the faster routed clock (61.48 → 65.04 MHz) is placement noise and isn't credited. The provisional rule in the [hw/README.md](../README.md#measurement-protocol) is T_fused = max(T_base, T_fused_measured): a faster clock is never credited and a slower one is always charged. Here the routed clock is faster, so the fused core keeps the baseline's period, and the speedup equals the cycles-only figure, 1.0574. The critical-path analysis below shows why the faster clock isn't real: the unit isn't on the critical path in any seed.
 
 In detail, `make hw-critpath` classifies every seed's post-route clk→clk path on the Yosys netlist (`critical_paths.csv`, table below):
 - **Fused core:** all 10 paths are PicoRV32's branch decision. They run from `reg_op2` through the ALU compare (a carry chain in 9 seeds, the equality XOR/NOR tree in seed 7) to the `mem_do_rinst` clock enable.
@@ -101,7 +101,7 @@ The filter was size ≥ 2, `in1` present, and no `mul*`. Three candidates tie at
 - **PCPI wrapper:** `hw/rtl/pcpi_fused.v`, adapted from the ML branch's `hardware/pcpi_single.v`. It matches `(insn & 0xfe00707f) == 0x0400000b`. It latches the result on the first `pcpi_valid` edge and raises `ready`/`wr` the next cycle. `wait` goes high combinationally on decode, so the core's PCPI timeout never fires for this encoding.
 - **Wiring:** `core_top` has a new `parameter FUSED = 0`. When it's 0, `ENABLE_PCPI` is 0 and the PCPI inputs are tied off exactly as before. When it's 1, `ENABLE_PCPI` is 1 and `pcpi_fused` is instantiated. The ports are unchanged, so the frozen `core_top.pcf` still applies. PicoRV32's `WITH_PCPI` is already 1 in the stock build because MUL/DIV use the PCPI path, so `ENABLE_PCPI=1` only ORs the external unit into `pcpi_int_wait`/`pcpi_int_ready`.
 - **Unsupported encodings** still trap through PicoRV32's PCPI timeout plus `CATCH_ILLINSN`.
-- **Encoding clash avoided:** the ML branch's `pcpi_candidates.v` used funct7=1/funct3=0 for this same formula. That slot was deliberately not reused (see the allocation table in the root [README](../../README.md#custom-instruction-encoding)).
+- **Encoding clash avoided:** the ML branch's `pcpi_candidates.v` used funct7=1/funct3=0 for this same formula. That slot was deliberately not reused (see the allocation table in the [hw/README.md](../README.md#custom-instruction-encoding)).
 
 ### 3. Directed microtest
 
