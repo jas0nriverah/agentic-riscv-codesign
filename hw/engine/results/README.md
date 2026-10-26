@@ -1,6 +1,6 @@
 PRELIMINARY: baseline multiplier choice pending team confirmation; numbers may change.
 
-Committed results of the PROVISIONAL measurement engine. Every row was produced by `make hw-measure` / `make hw-sweep*` under the protocol in the root README (frozen PCF, seeds 1–10, every check passing).
+Committed results of the PROVISIONAL measurement engine. Every row was produced by `make hw-measure` / `make hw-sweep*` under the protocol in [hw/README.md](../../README.md#measurement-protocol) (frozen PCF, seeds 1–10, every check passing).
 
 | File | What it is |
 |---|---|
@@ -18,7 +18,7 @@ Committed results of the PROVISIONAL measurement engine. Every row was produced 
 
 ## Columns
 
-Speedups follow the root README's protocol: `speedup` uses T_fused = max(T_base, T_measured) with T_base = 1000 / 61.48 MHz; `speedup_cycles_only` is `base_cycles / fused_cycles`. Deltas are fused − baseline for the row's program unless named otherwise.
+Speedups follow the protocol in [hw/README.md](../../README.md#measurement-protocol): `speedup` uses T_fused = max(T_base, T_measured) with T_base = 1000 / 61.48 MHz; `speedup_cycles_only` is `base_cycles / fused_cycles`. Deltas are fused − baseline for the row's program unless named otherwise.
 
 **`sweep-top3.csv`, `sweep-top10-placeable.csv`** (one row per program × candidate, measured alone)
 
