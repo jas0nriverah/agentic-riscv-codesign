@@ -1,0 +1,900 @@
+{
+ "provisional": true,
+ "id": "4cf14d0469cc",
+ "slots": [
+  {
+   "slot": 0,
+   "funct7": 2,
+   "funct3": 0,
+   "formula": "slli(add(in0,in1),1)",
+   "module": "cx_s0",
+   "size": 2,
+   "inputs": [
+    "in0",
+    "in1"
+   ],
+   "has_mul": false,
+   "source": "crc32"
+  }
+ ],
+ "priority": [
+  "slli(add(in0,in1),1)"
+ ],
+ "microtest": {
+  "checks": 1185,
+  "runs": {
+   "micro-check": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-stock-s0": {
+    "expect": "trap",
+    "core": "stock",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "micro-xor-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-xor-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-f3-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-2": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-4": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-5": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-6": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-7": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-custom1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   }
+  },
+  "cycles_per_insn": {
+   "slli(add(in0,in1),1)": 5.0
+  },
+  "cycles_per_xor": 3.0
+ },
+ "luts": {
+  "baseline": 2439,
+  "engine": 2480,
+  "delta": 41
+ },
+ "fmax_mhz": {
+  "per_seed": {
+   "1": 62.42,
+   "2": 62.3,
+   "3": 61.38,
+   "4": 61.14,
+   "5": 61.6,
+   "6": 63.9,
+   "7": 64.19,
+   "8": 63.05,
+   "9": 64.98,
+   "10": 63.22
+  },
+  "median": 62.74,
+  "min": 61.14,
+  "max": 64.98
+ },
+ "critical_path": {
+  "unit_on_arc_seeds": [],
+  "rows": [
+   {
+    "core": "engine",
+    "seed": "1",
+    "fmax_mhz": "62.42",
+    "path_ns": "16.02",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "2",
+    "fmax_mhz": "62.3",
+    "path_ns": "16.05",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "3",
+    "fmax_mhz": "61.38",
+    "path_ns": "16.29",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "4",
+    "fmax_mhz": "61.14",
+    "path_ns": "16.36",
+    "logic_stages": "39",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "5",
+    "fmax_mhz": "61.6",
+    "path_ns": "16.23",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "6",
+    "fmax_mhz": "63.9",
+    "path_ns": "15.65",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "7",
+    "fmax_mhz": "64.19",
+    "path_ns": "15.58",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "8",
+    "fmax_mhz": "63.05",
+    "path_ns": "15.86",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "9",
+    "fmax_mhz": "64.98",
+    "path_ns": "15.39",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "10",
+    "fmax_mhz": "63.22",
+    "path_ns": "15.82",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   }
+  ]
+ },
+ "period_rule": {
+  "rule": "T_fused = max(T_base, T_fused_measured)",
+  "candidate_period_ns": 16.2655,
+  "routed_period_ns": 15.9396,
+  "used": "baseline (the routed clock is not slower)"
+ },
+ "programs": {
+  "aha-mont64": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 25631371,
+   "cycles": 25631371,
+   "cycles_saved": 0,
+   "baseline_instret": 4475851,
+   "instret": 4475851,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(in0,in1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000dc",
+      "0x800000e0"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "crc32": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 22461391,
+   "cycles": 21939151,
+   "cycles_saved": 522240,
+   "baseline_instret": 3831152,
+   "instret": 3657072,
+   "instret_saved": 174080,
+   "instret_saved_predicted": 174080,
+   "per_formula": {
+    "slli(add(in0,in1),1)": {
+     "finder_saved": 174080,
+     "predicted_saved": 174080,
+     "fused_sites": 1,
+     "fused_sites_executed": 1,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000e8",
+      "0x800000ec"
+     ],
+     "runs": 174080
+    }
+   ]
+  },
+  "edn": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 34849402,
+   "cycles": 34849402,
+   "cycles_saved": 0,
+   "baseline_instret": 3466139,
+   "instret": 3466139,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(in0,in1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000e8",
+      "0x800000ec"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "huffbench": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 8638203,
+   "cycles": 8638203,
+   "cycles_saved": 0,
+   "baseline_instret": 2131016,
+   "instret": 2131016,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(in0,in1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000e8",
+      "0x800000ec"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "matmult-int": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 26300272,
+   "cycles": 26300272,
+   "cycles_saved": 0,
+   "baseline_instret": 3179290,
+   "instret": 3179290,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(in0,in1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000e8",
+      "0x800000ec"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "nettle-aes": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 18773912,
+   "cycles": 18773678,
+   "cycles_saved": 234,
+   "baseline_instret": 4083360,
+   "instret": 4083282,
+   "instret_saved": 78,
+   "instret_saved_predicted": 78,
+   "per_formula": {
+    "slli(add(in0,in1),1)": {
+     "finder_saved": 78,
+     "predicted_saved": 78,
+     "fused_sites": 2,
+     "fused_sites_executed": 1,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000dc",
+      "0x800000e0"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "nettle_aes_1",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),1)",
+     "function": "_nettle_aes_invert",
+     "lines": [
+      893,
+      894
+     ],
+     "root_line": 894,
+     "original": [
+      "add\ta6,a1,a6",
+      "slli\ta6,a6,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a6, a1, a6",
+     "placed_at": "first member",
+     "placed_line": 893,
+     "labels": [
+      "hws_nettle_aes_1_0",
+      "hws_nettle_aes_1_1"
+     ],
+     "pcs": [
+      "0x80000f34",
+      "0x80000f38"
+     ],
+     "runs": 78
+    }
+   ]
+  },
+  "nettle-sha256": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 20276586,
+   "cycles": 20276586,
+   "cycles_saved": 0,
+   "baseline_instret": 3854209,
+   "instret": 3854209,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(in0,in1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000dc",
+      "0x800000e0"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "wikisort": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 6916129,
+   "cycles": 6910129,
+   "cycles_saved": 6000,
+   "baseline_instret": 1182160,
+   "instret": 1180160,
+   "instret_saved": 2000,
+   "instret_saved_predicted": 2000,
+   "per_formula": {
+    "slli(add(in0,in1),1)": {
+     "finder_saved": 2000,
+     "predicted_saved": 2000,
+     "fused_sites": 1,
+     "fused_sites_executed": 1,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19
+     ],
+     "root_line": 19,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000dc",
+      "0x800000e0"
+     ],
+     "runs": 2000
+    }
+   ]
+  }
+ },
+ "rows": [
+  {
+   "candidate_id": "8bd9d82c6e8fb1f5fbdd6b9609237d251aefc681873fdcc8fc628466680a7256",
+   "benchmark": "aha-mont64",
+   "formula": "slli(add(in0,in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 25631371,
+   "candidate_cycles": 25631371,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2480,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "61257d900b1674c142bb6e0bff88c8ac0f594b7f585a8c79a43f4bb832746d5c",
+   "benchmark": "crc32",
+   "formula": "slli(add(in0,in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 22461391,
+   "candidate_cycles": 21939151,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2480,
+   "speedup": 1.0238,
+   "speedup_cycles_only": 1.0238
+  },
+  {
+   "candidate_id": "6a96ddc9eb25960c057fcc6f9bb43e8ab8eb2e2158593815358d68d07b24f783",
+   "benchmark": "edn",
+   "formula": "slli(add(in0,in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 34849402,
+   "candidate_cycles": 34849402,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2480,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "2f52a0f1162cd450a010b71eb9dae25389b335bacb11287552872d0a686ee81a",
+   "benchmark": "huffbench",
+   "formula": "slli(add(in0,in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 8638203,
+   "candidate_cycles": 8638203,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2480,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "5d0452f3b1f74b21f169deb1e133c4fdb6ffa29ef3b3b3001ce9e1c3c84205a8",
+   "benchmark": "matmult-int",
+   "formula": "slli(add(in0,in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 26300272,
+   "candidate_cycles": 26300272,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2480,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "7a12cd18ae70a31ca376c03c112250fe2d30d46035d47a16550ac6c1a2876026",
+   "benchmark": "nettle-aes",
+   "formula": "slli(add(in0,in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 18773912,
+   "candidate_cycles": 18773678,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2480,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "4b495b75a18450002032f8fd054df1a8c5d6526a5c6eedd218acfed75265762a",
+   "benchmark": "nettle-sha256",
+   "formula": "slli(add(in0,in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 20276586,
+   "candidate_cycles": 20276586,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2480,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "54e8c321dc2024994089adbcbaadc9917838b3575616499a8b7461e6f61ee772",
+   "benchmark": "wikisort",
+   "formula": "slli(add(in0,in1),1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 6916129,
+   "candidate_cycles": 6910129,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2480,
+   "speedup": 1.0009,
+   "speedup_cycles_only": 1.0009
+  }
+ ],
+ "problems": []
+}

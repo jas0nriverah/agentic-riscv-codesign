@@ -10,7 +10,8 @@ PORT = r"(?!pcpi_(valid|insn|rs1|rs2)$)"
 GROUPS = {
     "unit": UNIT_REGISTER,
     "handshake": re.compile(r"cpu\.pcpi_(valid|timeout|timeout_counter)"),
-    "mul": re.compile(r"cpu\.genblk\d+\.genblk\d+\.pcpi_mul\." + PORT + r"\w+"),
+    # the sequential multiplier sits two generate levels deep, the fast one (FAST_MUL=1) one
+    "mul": re.compile(r"cpu\.genblk\d+(\.genblk\d+)?\.pcpi_mul\." + PORT + r"\w+"),
     "div": re.compile(r"cpu\.genblk\d+\.pcpi_div\." + PORT + r"\w+"),
 }
 

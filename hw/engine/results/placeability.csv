@@ -1,0 +1,349 @@
+program,rank,formula,size,has_mul,finder_saved,finder_sites,placeable_sites,placeable_sites_executed,placeable_saved,gap,gap_reasons
+aha-mont64,1,"add(srli(in0,31),slli(in1,1))",3,False,433152,8,10,8,433152,0,
+aha-mont64,2,"or(srli(in0,31),slli(in1,1))",3,False,324864,6,6,6,324864,0,
+aha-mont64,3,"add(srli(in0,31),in1)",2,False,216576,8,10,8,216576,0,
+aha-mont64,4,"or(srli(in0,31),in1)",2,False,162432,6,6,6,162432,0,
+aha-mont64,5,"add(in0,slli(in1,1))",2,False,162432,6,7,6,162432,0,
+aha-mont64,6,"or(in0,slli(in1,1))",2,False,162432,6,1,0,0,162432,"6 sites/162432: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+aha-mont64,7,"add(slli(in0,31),srli(in1,1))",3,False,108288,2,4,2,108288,0,
+aha-mont64,8,"add(slli(in0,31),in1)",2,False,54144,2,4,2,54144,0,
+aha-mont64,9,"add(in0,srli(in1,1))",2,False,54144,2,5,2,54144,0,
+aha-mont64,10,"srli(xor(in0,in1),1)",2,False,27072,1,2,1,27072,0,
+aha-mont64,11,"addi(srli(in0,1),0)",2,False,27072,1,2,1,27072,0,
+aha-mont64,12,"and(srai(in0,31),in1)",2,False,2538,2,2,2,2538,0,
+aha-mont64,13,"sltiu(or(in0,in1),1)",2,False,1269,1,1,1,1269,0,
+aha-mont64,14,"add(in0,mulhu(in1,in1))",2,True,423,1,0,0,0,423,"1 sites/423: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+aha-mont64,15,"sltu(0,addi(and(in0,in1),1))",3,False,2,1,1,1,2,0,
+aha-mont64,16,"or(sltu(0,addi(in0,1)),in1)",3,False,2,1,1,1,2,0,
+aha-mont64,17,"sltu(0,addi(in0,1))",2,False,1,1,1,1,1,0,
+aha-mont64,18,"sltu(0,or(in0,in1))",2,False,1,1,1,1,1,0,
+aha-mont64,19,"addi(and(in0,in1),1)",2,False,1,1,1,1,1,0,
+aha-mont64,20,"or(sltu(0,in0),in1)",2,False,1,1,1,1,1,0,
+crc32,1,"slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",5,True,696320,1,0,0,0,696320,"1 sites/696320: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+crc32,2,"add(mul(in0,addi(lui(1103515648),-403)),in1)",4,True,522240,1,0,0,0,522240,"1 sites/522240: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+crc32,3,"srli(slli(add(in0,in1),1),1)",3,False,348160,1,1,1,348160,0,
+crc32,4,"mul(in0,addi(lui(1103515648),-403))",3,True,348160,1,1,1,348160,0,
+crc32,5,"slli(andi(xor(in0,in1),255),2)",3,False,348160,1,2,1,348160,0,
+crc32,6,"add(in0,slli(andi(in1,255),2))",3,False,348160,1,2,1,348160,0,
+crc32,7,"mul(in0,addi(in1,-403))",2,True,174080,1,1,1,174080,0,
+crc32,8,"addi(lui(12288),57)",2,False,174080,1,1,1,174080,0,
+crc32,9,"srli(slli(in0,1),1)",2,False,174080,1,1,1,174080,0,
+crc32,10,"slli(add(in0,in1),1)",2,False,174080,1,1,1,174080,0,
+crc32,11,"addi(lui(1103515648),-403)",2,False,174080,1,1,1,174080,0,
+crc32,12,"add(in0,slli(in1,2))",2,False,174080,1,2,1,174080,0,
+crc32,13,"slli(andi(in0,255),2)",2,False,174080,1,2,1,174080,0,
+crc32,14,"andi(xor(in0,in1),255)",2,False,174080,1,2,1,174080,0,
+crc32,15,"xor(in0,srli(in1,8))",2,False,174080,1,2,1,174080,0,
+crc32,16,"addi(lui(-2147483648),1080)",2,False,1,1,0,0,0,1,1 sites/1: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+crc32,17,"srli(slli(in0,17),17)",2,False,1,1,1,1,1,0,
+edn,1,"add(srai(add(slli(in0,1),in0),15),in1)",4,False,39150,1,1,1,39150,0,
+edn,2,"srai(add(slli(in0,1),in0),15)",3,False,26100,1,1,1,26100,0,
+edn,3,"srai(add(in0,in1),15)",2,False,21750,3,3,3,21750,0,
+edn,4,"add(srai(in0,15),in1)",2,False,17400,2,3,2,17400,0,
+edn,5,"srai(slli(add(in0,in1),16),16)",3,False,16704,6,6,6,16704,0,
+edn,6,"add(slli(in0,1),in0)",2,False,13050,1,1,1,13050,0,
+edn,7,"srai(slli(in0,16),16)",2,False,12528,9,9,9,12528,0,
+edn,8,"sra(srai(slli(in0,16),16),in1)",3,False,11136,4,4,4,11136,0,
+edn,9,"slli(add(in0,in1),16)",2,False,9744,7,7,7,9744,0,
+edn,10,"add(srai(in0,16),in1)",2,False,8613,1,2,1,8613,0,
+edn,11,"srai(mul(in0,in1),16)",2,True,8613,1,2,1,8613,0,
+edn,12,"sra(srai(in0,16),in1)",2,False,5568,4,4,4,5568,0,
+edn,13,"mul(srai(slli(in0,16),16),in1)",3,True,5568,2,0,0,0,5568,"2 sites/5568: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+edn,14,"mul(srai(in0,16),in1)",2,True,2784,2,0,0,0,2784,"2 sites/2784: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+edn,15,"srli(slli(addi(in0,-1),16),16)",3,False,2784,1,1,1,2784,0,
+edn,16,"mul(in0,srai(slli(in1,16),16))",3,True,2784,1,0,0,0,2784,"1 sites/2784: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+edn,17,"addi(lui(-2147479552),-256)",2,False,2175,1,0,0,0,2175,1 sites/2175: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+edn,18,"slli(addi(in0,-1),16)",2,False,1392,1,1,1,1392,0,
+edn,19,"mul(in0,srai(in1,16))",2,True,1392,1,0,0,0,1392,"1 sites/1392: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+edn,20,"srli(slli(in0,16),16)",2,False,1392,1,1,1,1392,0,
+edn,21,"addi(add(in0,in1),-128)",2,False,174,1,1,1,174,0,
+edn,22,"addi(lui(-2147479552),-1056)",2,False,1,1,0,0,0,1,1 sites/1: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+edn,23,"addi(lui(-2147479552),-656)",2,False,1,1,0,0,0,1,1 sites/1: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+edn,24,"addi(lui(45056),-1366)",2,False,1,1,1,1,1,0,
+huffbench,1,"add(in0,slli(in1,2))",2,False,46684,10,10,10,46684,0,
+huffbench,2,"slli(addi(in0,1),1)",2,False,14674,1,1,1,14674,0,
+huffbench,3,"addi(slli(in0,1),1)",2,False,14542,2,2,2,14542,0,
+huffbench,4,"add(in0,slli(in1,3))",2,False,2299,1,1,1,2299,0,
+huffbench,5,"srai(add(srli(in0,31),in0),1)",3,False,2068,1,1,1,2068,0,
+huffbench,6,"add(srli(in0,31),in0)",2,False,1034,1,1,1,1034,0,
+huffbench,7,"srai(add(in0,in1),1)",2,False,1034,1,1,1,1034,0,
+huffbench,8,"sll(in0,addi(in1,-1))",2,False,352,1,1,1,352,0,
+huffbench,9,"addi(lui(4096),1552)",2,False,22,2,2,2,22,0,
+huffbench,10,"add(slli(in0,2),in1)",2,False,22,2,0,0,0,22,2 sites/22: in memset: library code the rewriter does not see
+huffbench,11,"addi(lui(-4096),-1632)",2,False,11,1,1,1,11,0,
+huffbench,12,"addi(lui(4096),-2048)",2,False,11,1,1,1,11,0,
+huffbench,13,"addi(add(in0,in1),-2048)",2,False,11,1,1,1,11,0,
+huffbench,14,"add(addi(in0,1020),in1)",2,False,11,1,1,1,11,0,
+huffbench,15,"sub(addi(0,7),in0)",2,False,11,1,1,1,11,0,
+huffbench,16,"addi(addi(in0,2047),529)",2,False,11,1,1,1,11,0,
+huffbench,17,"addi(lui(4096),1632)",2,False,11,1,2,1,11,0,
+huffbench,18,"slli(sub(in0,in1),2)",2,False,11,1,0,0,0,11,1 sites/11: in memset: library code the rewriter does not see
+huffbench,19,"addi(lui(-2147479552),468)",2,False,1,1,0,0,0,1,1 sites/1: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+huffbench,20,"addi(lui(-2147479552),-652)",2,False,1,1,0,0,0,1,1 sites/1: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+matmult-int,1,"addi(lui(-2147475456),32)",2,False,1,1,0,0,0,1,1 sites/1: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+nettle-aes,1,"add(in0,slli(in1,2))",2,False,527436,35,35,35,527436,0,
+nettle-aes,2,"add(in0,slli(andi(in1,255),2))",3,False,292032,9,9,9,292032,0,
+nettle-aes,3,"add(in0,slli(addi(andi(srli(in1,16),255),576),2))",5,False,259584,4,4,4,259584,0,
+nettle-aes,4,"add(in0,slli(addi(in1,832),2))",3,False,259584,8,8,8,259584,0,
+nettle-aes,5,"add(in0,slli(addi(andi(in1,255),576),2))",4,False,243360,5,5,5,243360,0,
+nettle-aes,6,"add(in0,slli(addi(in1,576),2))",3,False,194688,6,6,6,194688,0,
+nettle-aes,7,"slli(addi(andi(srli(in0,16),255),576),2)",4,False,194688,4,4,4,194688,0,
+nettle-aes,8,"slli(addi(andi(in0,255),576),2)",3,False,162240,5,5,5,162240,0,
+nettle-aes,9,"addi(andi(srli(in0,16),255),576)",3,False,162240,5,4,4,129792,32448,"1 sites/32448: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+nettle-aes,10,"slli(andi(in0,255),2)",2,False,146016,9,9,9,146016,0,
+nettle-aes,11,"slli(addi(in0,832),2)",2,False,129792,8,8,8,129792,0,
+nettle-aes,12,"andi(srli(in0,16),255)",2,False,121836,14,13,13,105612,16224,"1 sites/16224: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+nettle-aes,13,"slli(addi(in0,576),2)",2,False,97344,6,6,6,97344,0,
+nettle-aes,14,"addi(andi(in0,255),576)",2,False,97344,6,5,5,81120,16224,"1 sites/16224: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+nettle-aes,15,"slli(addi(srli(in0,24),832),2)",3,False,97344,3,3,3,97344,0,
+nettle-aes,16,"add(in0,slli(addi(srli(in1,24),832),2))",4,False,97344,2,2,2,97344,0,
+nettle-aes,17,"addi(srli(in0,24),832)",2,False,81120,5,5,5,81120,0,
+nettle-aes,18,"add(in0,andi(in1,255))",2,False,33696,28,28,28,33696,0,
+nettle-aes,19,"addi(andi(srli(in0,8),255),0)",3,False,32448,1,1,1,32448,0,
+nettle-aes,20,"andi(srli(in0,8),255)",2,False,28236,11,11,11,28236,0,
+nettle-aes,21,"or(slli(in0,24),in1)",2,False,23244,19,13,13,15756,7488,"6 sites/7488: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+nettle-aes,22,"add(in0,andi(srli(in1,8),255))",3,False,21840,9,9,9,21840,0,
+nettle-aes,23,"addi(andi(in0,255),0)",2,False,16224,1,1,1,16224,0,
+nettle-aes,24,"add(in0,srli(in1,24))",2,False,12012,10,10,10,12012,0,
+nettle-aes,25,"add(in0,andi(srli(in1,16),255))",3,False,11544,5,5,5,11544,0,
+nettle-aes,26,"or(slli(in0,8),in1)",2,False,9984,8,8,8,9984,0,
+nettle-aes,27,"or(in0,slli(in1,8))",2,False,8424,7,7,7,8424,0,
+nettle-aes,28,"or(in0,slli(in1,16))",2,False,8424,7,3,3,3432,4992,"4 sites/4992: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+nettle-aes,29,"add(srli(in0,24),slli(in0,8))",3,False,8112,1,1,1,8112,0,
+nettle-aes,30,"add(in0,andi(in1,1020))",2,False,8112,2,2,2,8112,0,
+nettle-aes,31,"add(in0,slli(srli(in1,24),2))",3,False,8112,1,1,1,8112,0,
+nettle-aes,32,"add(in0,andi(srli(in1,14),1020))",3,False,8112,1,1,1,8112,0,
+nettle-aes,33,"or(slli(in0,16),in1)",2,False,4992,4,4,4,4992,0,
+nettle-aes,34,"add(in0,slli(in1,8))",2,False,4056,1,1,1,4056,0,
+nettle-aes,35,"slli(srli(in0,24),2)",2,False,4056,1,1,1,4056,0,
+nettle-aes,36,"andi(srli(in0,14),1020)",2,False,4056,1,1,1,4056,0,
+nettle-aes,37,"andi(srli(in0,6),1020)",2,False,4056,1,1,1,4056,0,
+nettle-aes,38,"add(slli(in0,24),srli(in0,8))",3,False,2184,1,1,1,2184,0,
+nettle-aes,39,"addi(lui(-2147463168),-1780)",2,False,1093,3,0,0,0,1093,3 sites/1093: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+nettle-aes,40,"add(slli(in0,24),in1)",2,False,1092,1,1,1,1092,0,
+nettle-aes,41,"addi(lui(-2147471360),1024)",2,False,234,2,0,0,0,234,2 sites/234: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+nettle-aes,42,"addi(slli(add(in0,slli(in1,3)),1),16)",4,False,234,1,1,1,234,0,
+nettle-aes,43,"slli(addi(in0,1),2)",2,False,156,1,1,1,156,0,
+nettle-aes,44,"xori(sltiu(in0,7),1)",2,False,156,1,1,1,156,0,
+nettle-aes,45,"slli(add(in0,slli(in1,3)),1)",3,False,156,1,1,1,156,0,
+nettle-aes,46,"addi(slli(add(in0,in1),1),16)",3,False,156,1,1,1,156,0,
+nettle-aes,47,"addi(slli(in0,1),16)",2,False,78,1,1,1,78,0,
+nettle-aes,48,"slli(add(in0,in1),1)",2,False,78,1,2,1,78,0,
+nettle-aes,49,"add(in0,slli(in1,3))",2,False,78,1,1,1,78,0,
+nettle-aes,50,"addi(lui(-2147459072),-1400)",2,False,1,1,0,0,0,1,1 sites/1: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+nettle-aes,51,"addi(lui(-2147467264),-2036)",2,False,1,1,0,0,0,1,1 sites/1: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+nettle-aes,52,"addi(lui(-2147459072),-1368)",2,False,1,1,0,0,0,1,1 sites/1: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+nettle-sha256,1,"xor(add(srli(in0,2),slli(in0,30)),in1)",4,False,182400,24,24,24,182400,0,
+nettle-sha256,2,"xor(add(srli(in0,6),slli(in0,26)),in1)",4,False,182400,24,24,24,182400,0,
+nettle-sha256,3,"xor(in0,add(srli(in1,25),slli(in1,7)))",4,False,182400,24,24,24,182400,0,
+nettle-sha256,4,"xor(in0,add(srli(in1,13),slli(in1,19)))",4,False,182400,24,24,24,182400,0,
+nettle-sha256,5,"xor(in0,add(srli(in1,11),slli(in1,21)))",4,False,182400,24,24,24,182400,0,
+nettle-sha256,6,"xor(in0,add(srli(in1,22),slli(in1,10)))",4,False,173850,23,23,23,173850,0,
+nettle-sha256,7,"add(srli(in0,6),slli(in0,26))",3,False,121600,24,24,24,121600,0,
+nettle-sha256,8,"add(srli(in0,11),slli(in0,21))",3,False,121600,24,24,24,121600,0,
+nettle-sha256,9,"add(srli(in0,13),slli(in0,19))",3,False,121600,24,24,24,121600,0,
+nettle-sha256,10,"add(srli(in0,2),slli(in0,30))",3,False,121600,24,24,24,121600,0,
+nettle-sha256,11,"add(srli(in0,25),slli(in0,7))",3,False,121600,24,24,24,121600,0,
+nettle-sha256,12,"add(srli(in0,22),slli(in0,10))",3,False,115900,23,23,23,115900,0,
+nettle-sha256,13,"xor(in0,add(srli(in1,19),slli(in1,13)))",4,False,111150,13,13,13,111150,0,
+nettle-sha256,14,"xor(add(srli(in0,17),slli(in0,15)),in1)",4,False,111150,13,13,13,111150,0,
+nettle-sha256,15,"xor(in0,add(srli(in1,18),slli(in1,14)))",4,False,111150,13,13,13,111150,0,
+nettle-sha256,16,"xor(add(srli(in0,7),slli(in0,25)),in1)",4,False,111150,13,13,13,111150,0,
+nettle-sha256,17,"add(srli(in0,17),slli(in0,15))",3,False,85500,15,15,15,85500,0,
+nettle-sha256,18,"add(srli(in0,19),slli(in0,13))",3,False,74100,13,13,13,74100,0,
+nettle-sha256,19,"add(srli(in0,7),slli(in0,25))",3,False,74100,13,13,13,74100,0,
+nettle-sha256,20,"add(srli(in0,18),slli(in0,14))",3,False,74100,13,13,13,74100,0,
+nettle-sha256,21,"add(in0,slli(in1,10))",2,False,60800,24,24,24,60800,0,
+nettle-sha256,22,"add(srli(in0,25),in1)",2,False,60800,24,24,24,60800,0,
+nettle-sha256,23,"add(in0,slli(in1,7))",2,False,60800,24,24,24,60800,0,
+nettle-sha256,24,"add(in0,slli(in1,26))",2,False,60800,24,24,24,60800,0,
+nettle-sha256,25,"add(in0,slli(in1,19))",2,False,60800,24,24,24,60800,0,
+nettle-sha256,26,"add(srli(in0,2),in1)",2,False,60800,24,24,24,60800,0,
+nettle-sha256,27,"add(in0,slli(in1,30))",2,False,60800,24,24,24,60800,0,
+nettle-sha256,28,"add(srli(in0,6),in1)",2,False,60800,24,24,24,60800,0,
+nettle-sha256,29,"add(srli(in0,13),in1)",2,False,60800,24,24,24,60800,0,
+nettle-sha256,30,"add(in0,slli(in1,21))",2,False,60800,24,24,24,60800,0,
+nettle-sha256,31,"add(srli(in0,11),in1)",2,False,60800,24,24,24,60800,0,
+nettle-sha256,32,"add(srli(in0,22),in1)",2,False,57950,23,23,23,57950,0,
+nettle-sha256,33,"add(in0,slli(in1,13))",2,False,45600,16,14,14,39900,5700,"2 sites/5700: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+nettle-sha256,34,"add(srli(in0,18),in1)",2,False,45600,16,15,15,42750,2850,"1 sites/2850: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+nettle-sha256,35,"xor(in0,srli(in1,3))",2,False,45600,16,16,16,45600,0,
+nettle-sha256,36,"add(srli(in0,19),in1)",2,False,45600,16,15,15,42750,2850,"1 sites/2850: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+nettle-sha256,37,"add(in0,slli(in1,14))",2,False,45600,16,14,14,39900,5700,"2 sites/5700: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+nettle-sha256,38,"add(in0,slli(in1,15))",2,False,45600,16,16,16,45600,0,
+nettle-sha256,39,"xor(in0,srli(in1,10))",2,False,45600,16,16,16,45600,0,
+nettle-sha256,40,"add(in0,slli(in1,25))",2,False,39900,14,13,13,37050,2850,"1 sites/2850: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+nettle-sha256,41,"add(srli(in0,7),in1)",2,False,39900,14,14,14,39900,0,
+nettle-sha256,42,"add(srli(in0,17),in1)",2,False,37050,13,13,13,37050,0,
+nettle-sha256,43,"add(srli(in0,18),slli(in1,14))",3,False,17100,3,3,3,17100,0,
+nettle-sha256,44,"add(srli(in0,19),slli(in1,13))",3,False,17100,3,3,3,17100,0,
+nettle-sha256,45,"or(slli(in0,24),in1)",2,False,15200,1,0,0,0,15200,"1 sites/15200: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+nettle-sha256,46,"add(srli(in0,7),slli(in1,25))",3,False,5700,1,1,1,5700,0,
+nettle-sha256,47,"add(srli(slli(in0,16),24),slli(in0,8))",4,False,1425,1,1,1,1425,0,
+nettle-sha256,48,"or(slli(in0,9),slli(in1,3))",3,False,950,1,1,1,950,0,
+nettle-sha256,49,"add(srli(in0,23),slli(in1,9))",3,False,950,1,1,1,950,0,
+nettle-sha256,50,"add(srli(in0,24),slli(in1,8))",3,False,950,1,1,1,950,0,
+nettle-sha256,51,"add(srli(slli(in0,16),24),in1)",3,False,950,1,1,1,950,0,
+nettle-sha256,52,"add(addi(in0,4),in1)",2,False,950,2,0,0,0,950,2 sites/950: in memcpy: library code the rewriter does not see
+nettle-sha256,53,"andi(sub(addi(in0,-1),in1),-4)",3,False,950,1,0,0,0,950,1 sites/950: in memcpy: library code the rewriter does not see
+nettle-sha256,54,"add(in0,slli(in1,2))",2,False,475,1,1,1,475,0,
+nettle-sha256,55,"or(in0,slli(in1,3))",2,False,475,1,1,1,475,0,
+nettle-sha256,56,"add(srli(in0,23),in1)",2,False,475,1,0,0,0,475,"1 sites/475: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+nettle-sha256,57,"or(slli(in0,9),in1)",2,False,475,1,1,1,475,0,
+nettle-sha256,58,"srli(slli(in0,16),24)",2,False,475,1,1,1,475,0,
+nettle-sha256,59,"add(in0,slli(in1,9))",2,False,475,1,1,1,475,0,
+nettle-sha256,60,"add(in0,slli(in1,8))",2,False,475,1,1,1,475,0,
+nettle-sha256,61,"sub(addi(0,64),in0)",2,False,475,1,2,1,475,0,
+nettle-sha256,62,"add(slli(in0,2),in1)",2,False,475,1,0,0,0,475,1 sites/475: in memset: library code the rewriter does not see
+nettle-sha256,63,"andi(xor(in0,in1),3)",2,False,475,1,0,0,0,475,1 sites/475: in memcpy: library code the rewriter does not see
+nettle-sha256,64,"sub(addi(in0,-1),in1)",2,False,475,1,0,0,0,475,1 sites/475: in memcpy: library code the rewriter does not see
+nettle-sha256,65,"andi(sub(in0,in1),-4)",2,False,475,1,0,0,0,475,1 sites/475: in memcpy: library code the rewriter does not see
+nettle-sha256,66,"addi(lui(-2147467264),8)",2,False,1,1,0,0,0,1,1 sites/1: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+nettle-sha256,67,"addi(lui(-2147467264),456)",2,False,1,1,0,0,0,1,1 sites/1: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+wikisort,1,"addi(addi(in0,-16),16)",2,False,19793,1,3,1,19793,0,
+wikisort,2,"srli(slli(in0,16),16)",2,False,16000,16,0,0,0,16000,8 sites/9600: in __divdf3: library code the rewriter does not see | 8 sites/6400: in __muldf3: library code the rewriter does not see
+wikisort,3,"or(srli(in0,29),slli(in1,3))",3,False,12908,7,0,0,0,12908,1 sites/1636: in __adddf3: library code the rewriter does not see | 2 sites/4800: in __divdf3: library code the rewriter does not see | 2 sites/3200: in __muldf3: library code the rewriter does not see | 2 sites/3272: in __subdf3: library code the rewriter does not see
+wikisort,4,"add(srli(in0,16),in1)",2,False,8400,9,0,0,0,8400,3 sites/3600: in __divdf3: library code the rewriter does not see | 6 sites/4800: in __muldf3: library code the rewriter does not see
+wikisort,5,"slli(add(mul(in0,addi(lui(1103515648),-403)),in1),1)",5,True,8000,1,0,0,0,8000,"1 sites/8000: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+wikisort,6,"andi(srli(in0,20),2047)",2,False,7762,9,0,0,0,7762,2 sites/1636: in __adddf3: library code the rewriter does not see | 2 sites/2400: in __divdf3: library code the rewriter does not see | 1 sites/472: in __ltdf2: library code the rewriter does not see | 2 sites/1600: in __muldf3: library code the rewriter does not see | 1 sites/818: in __subdf3: library code the rewriter does not see | 1 sites/836: in __fixdfsi: library code the rewriter does not see
+wikisort,7,"srli(slli(in0,12),12)",2,False,7653,7,0,0,0,7653,1 sites/818: in __adddf3: library code the rewriter does not see | 2 sites/2400: in __divdf3: library code the rewriter does not see | 2 sites/1600: in __muldf3: library code the rewriter does not see | 1 sites/800: in __subdf3: library code the rewriter does not see | 1 sites/2035: in __floatsidf: library code the rewriter does not see
+wikisort,8,"or(srli(in0,29),in1)",2,False,7272,8,0,0,0,7272,2 sites/1636: in __adddf3: library code the rewriter does not see | 2 sites/2400: in __divdf3: library code the rewriter does not see | 2 sites/1600: in __muldf3: library code the rewriter does not see | 2 sites/1636: in __subdf3: library code the rewriter does not see
+wikisort,9,"add(in0,srli(slli(in1,16),16))",3,False,6400,4,0,0,0,6400,4 sites/6400: in __muldf3: library code the rewriter does not see
+wikisort,10,"srli(slli(sll(in0,addi(in1,-11)),12),12)",4,False,6105,1,0,0,0,6105,1 sites/6105: in __floatsidf: library code the rewriter does not see
+wikisort,11,"add(mul(in0,addi(lui(1103515648),-403)),in1)",4,True,6000,1,0,0,0,6000,"1 sites/6000: no legal position: a member overwrites an input before the root, and the result register is used between the first member and the root"
+wikisort,12,"or(in0,slli(in1,3))",2,False,5636,6,0,0,0,5636,1 sites/818: in __adddf3: library code the rewriter does not see | 2 sites/2400: in __divdf3: library code the rewriter does not see | 2 sites/1600: in __muldf3: library code the rewriter does not see | 1 sites/818: in __subdf3: library code the rewriter does not see
+wikisort,13,"or(slli(in0,20),in1)",2,False,4854,5,0,0,0,4854,1 sites/818: in __adddf3: library code the rewriter does not see | 1 sites/1200: in __divdf3: library code the rewriter does not see | 1 sites/800: in __muldf3: library code the rewriter does not see | 2 sites/2036: in __floatsidf: library code the rewriter does not see
+wikisort,14,"or(srli(in0,16),in1)",2,False,4800,4,0,0,0,4800,4 sites/4800: in __divdf3: library code the rewriter does not see
+wikisort,15,"add(slli(in0,16),srli(slli(in1,16),16))",4,False,4800,2,0,0,0,4800,2 sites/4800: in __muldf3: library code the rewriter does not see
+wikisort,16,"andi(sub(addi(0,1054),in0),2047)",3,False,4070,1,0,0,0,4070,1 sites/4070: in __floatsidf: library code the rewriter does not see
+wikisort,17,"srli(slli(sll(in0,in1),12),12)",3,False,4070,1,0,0,0,4070,1 sites/4070: in __floatsidf: library code the rewriter does not see
+wikisort,18,"slli(sll(in0,addi(in1,-11)),12)",3,False,4070,1,0,0,0,4070,1 sites/4070: in __floatsidf: library code the rewriter does not see
+wikisort,19,"slli(sltiu(sltiu(in0,256),1),3)",3,False,4070,1,0,0,0,4070,1 sites/4070: in __clzsi2: library code the rewriter does not see
+wikisort,20,"srli(slli(add(in0,in1),1),1)",3,False,4000,1,1,1,4000,0,
+wikisort,21,"mul(in0,addi(lui(1103515648),-403))",3,True,4000,1,1,1,4000,0,
+wikisort,22,"or(slli(in0,29),in1)",2,False,3636,5,0,0,0,3636,1 sites/818: in __adddf3: library code the rewriter does not see | 1 sites/1200: in __divdf3: library code the rewriter does not see | 1 sites/800: in __muldf3: library code the rewriter does not see | 2 sites/818: in __subdf3: library code the rewriter does not see
+wikisort,23,"sub(addi(0,32),in0)",2,False,3628,4,0,0,0,3628,1 sites/797: in __adddf3: library code the rewriter does not see | 2 sites/796: in __subdf3: library code the rewriter does not see | 1 sites/2035: in __clzsi2: library code the rewriter does not see
+wikisort,24,"or(slli(andi(in0,2047),20),srli(slli(in1,12),12))",5,False,3272,1,0,0,0,3272,1 sites/3272: in __adddf3: library code the rewriter does not see
+wikisort,25,"or(in0,srli(slli(in1,12),12))",3,False,3236,2,0,0,0,3236,1 sites/1636: in __adddf3: library code the rewriter does not see | 1 sites/1600: in __subdf3: library code the rewriter does not see
+wikisort,26,"or(or(srli(in0,29),slli(in1,3)),lui(8388608))",5,False,3200,1,0,0,0,3200,1 sites/3200: in __muldf3: library code the rewriter does not see
+wikisort,27,"add(slli(in0,16),srli(in1,16))",3,False,3200,2,0,0,0,3200,2 sites/3200: in __muldf3: library code the rewriter does not see
+wikisort,28,"add(in0,srli(in1,16))",2,False,3200,4,0,0,0,3200,4 sites/3200: in __muldf3: library code the rewriter does not see
+wikisort,29,"or(in0,lui(8388608))",2,False,2800,3,0,0,0,2800,1 sites/1200: in __divdf3: library code the rewriter does not see | 2 sites/1600: in __muldf3: library code the rewriter does not see
+wikisort,30,"add(slli(in0,16),in1)",2,False,2800,3,0,0,0,2800,1 sites/1200: in __divdf3: library code the rewriter does not see | 2 sites/1600: in __muldf3: library code the rewriter does not see
+wikisort,31,"slli(and(in0,in1),3)",2,False,2454,3,0,0,0,2454,2 sites/1636: in __adddf3: library code the rewriter does not see | 1 sites/818: in __subdf3: library code the rewriter does not see
+wikisort,32,"or(slli(andi(in0,2047),20),srli(in1,12))",4,False,2454,1,0,0,0,2454,1 sites/2454: in __adddf3: library code the rewriter does not see
+wikisort,33,"or(slli(in0,20),srli(slli(in1,12),12))",4,False,2454,1,0,0,0,2454,1 sites/2454: in __adddf3: library code the rewriter does not see
+wikisort,34,"or(slli(in0,16),in1)",2,False,2400,2,0,0,0,2400,2 sites/2400: in __divdf3: library code the rewriter does not see
+wikisort,35,"or(srli(in0,16),slli(in1,16))",3,False,2400,1,0,0,0,2400,1 sites/2400: in __divdf3: library code the rewriter does not see
+wikisort,36,"or(srli(slli(in0,16),16),in1)",3,False,2400,1,0,0,0,2400,1 sites/2400: in __divdf3: library code the rewriter does not see
+wikisort,37,"or(or(srli(in0,29),in1),lui(8388608))",4,False,2400,1,0,0,0,2400,1 sites/2400: in __muldf3: library code the rewriter does not see
+wikisort,38,"or(or(in0,slli(in1,3)),lui(8388608))",4,False,2400,1,0,0,0,2400,1 sites/2400: in __muldf3: library code the rewriter does not see
+wikisort,39,"addi(lui(1048576),-1)",2,False,2144,4,0,0,0,2144,1 sites/818: in __adddf3: library code the rewriter does not see | 1 sites/472: in __ltdf2: library code the rewriter does not see | 1 sites/818: in __subdf3: library code the rewriter does not see | 1 sites/36: in __unorddf2: library code the rewriter does not see
+wikisort,40,"sub(xor(in0,in1),in0)",2,False,2035,1,0,0,0,2035,1 sites/2035: in __floatsidf: library code the rewriter does not see
+wikisort,41,"sub(addi(0,1054),in0)",2,False,2035,1,0,0,0,2035,1 sites/2035: in __floatsidf: library code the rewriter does not see
+wikisort,42,"andi(sub(in0,in1),2047)",2,False,2035,1,0,0,0,2035,1 sites/2035: in __floatsidf: library code the rewriter does not see
+wikisort,43,"slli(sll(in0,in1),12)",2,False,2035,1,0,0,0,2035,1 sites/2035: in __floatsidf: library code the rewriter does not see
+wikisort,44,"sll(in0,addi(in1,-11))",2,False,2035,1,0,0,0,2035,1 sites/2035: in __floatsidf: library code the rewriter does not see
+wikisort,45,"add(addi(in0,-544),in1)",2,False,2035,1,0,0,0,2035,1 sites/2035: in __clzsi2: library code the rewriter does not see
+wikisort,46,"sltiu(sltiu(in0,256),1)",2,False,2035,1,0,0,0,2035,1 sites/2035: in __clzsi2: library code the rewriter does not see
+wikisort,47,"slli(sltiu(in0,1),3)",2,False,2035,1,0,0,0,2035,1 sites/2035: in __clzsi2: library code the rewriter does not see
+wikisort,48,"mul(in0,addi(in1,-403))",2,True,2000,1,1,1,2000,0,
+wikisort,49,"addi(lui(12288),57)",2,False,2000,1,1,1,2000,0,
+wikisort,50,"srli(slli(in0,1),1)",2,False,2000,1,1,1,2000,0,
+wikisort,51,"slli(add(in0,in1),1)",2,False,2000,1,1,1,2000,0,
+wikisort,52,"addi(lui(1103515648),-403)",2,False,2000,1,1,1,2000,0,
+wikisort,53,"add(srli(in0,31),slli(in1,1))",3,False,1836,2,0,0,0,1836,2 sites/1836: in __ieee754_sqrt: library code the rewriter does not see
+wikisort,54,"or(slli(andi(in0,2047),20),in1)",3,False,1636,1,0,0,0,1636,1 sites/1636: in __adddf3: library code the rewriter does not see
+wikisort,55,"or(slli(in0,20),srli(in1,12))",3,False,1636,1,0,0,0,1636,1 sites/1636: in __adddf3: library code the rewriter does not see
+wikisort,56,"slli(andi(in0,2047),20)",2,False,1618,2,0,0,0,1618,1 sites/818: in __adddf3: library code the rewriter does not see | 1 sites/800: in __subdf3: library code the rewriter does not see
+wikisort,57,"or(in0,srli(in1,12))",2,False,1618,2,0,0,0,1618,1 sites/818: in __adddf3: library code the rewriter does not see | 1 sites/800: in __subdf3: library code the rewriter does not see
+wikisort,58,"or(or(in0,in1),lui(8388608))",3,False,1600,1,0,0,0,1600,1 sites/1600: in __muldf3: library code the rewriter does not see
+wikisort,59,"sltu(0,or(slli(in0,9),in1))",3,False,1600,1,0,0,0,1600,1 sites/1600: in __muldf3: library code the rewriter does not see
+wikisort,60,"addi(sub(andi(add(in0,in1),3),in1),1000)",4,False,1200,1,1,1,1200,0,
+wikisort,61,"sub(in0,addi(in1,-1023))",2,False,1200,1,0,0,0,1200,1 sites/1200: in __divdf3: library code the rewriter does not see
+wikisort,62,"add(slli(in0,2),in1)",2,False,1200,1,0,0,0,1200,1 sites/1200: in __divdf3: library code the rewriter does not see
+wikisort,63,"or(srli(in0,24),in1)",2,False,1200,1,0,0,0,1200,1 sites/1200: in __divdf3: library code the rewriter does not see
+wikisort,64,"or(in0,slli(in1,16))",2,False,1200,1,0,0,0,1200,1 sites/1200: in __divdf3: library code the rewriter does not see
+wikisort,65,"add(srli(in0,31),in1)",2,False,1188,3,0,0,0,1188,3 sites/1188: in __ieee754_sqrt: library code the rewriter does not see
+wikisort,66,"or(in0,slli(in1,31))",2,False,1123,2,0,0,0,1123,2 sites/1123: in __muldf3: library code the rewriter does not see
+wikisort,67,"add(in0,slli(in1,1))",2,False,936,3,0,0,0,936,3 sites/936: in __ieee754_sqrt: library code the rewriter does not see
+wikisort,68,"and(addi(in0,-1),in1)",2,False,836,1,0,0,0,836,1 sites/836: in __fixdfsi: library code the rewriter does not see
+wikisort,69,"or(sltu(0,in0),in1)",2,False,802,2,0,0,0,802,1 sites/2: in __adddf3: library code the rewriter does not see | 1 sites/800: in __muldf3: library code the rewriter does not see
+wikisort,70,"addi(sub(andi(in0,3),in1),1000)",3,False,800,1,1,1,800,0,
+wikisort,71,"sub(andi(add(in0,in1),3),in1)",3,False,800,1,1,1,800,0,
+wikisort,72,"slli(add(in0,in1),9)",2,False,800,1,0,0,0,800,1 sites/800: in __muldf3: library code the rewriter does not see
+wikisort,73,"sltu(0,or(in0,in1))",2,False,800,1,0,0,0,800,1 sites/800: in __muldf3: library code the rewriter does not see
+wikisort,74,"or(in0,slli(in1,9))",2,False,800,1,0,0,0,800,1 sites/800: in __muldf3: library code the rewriter does not see
+wikisort,75,"or(slli(in0,9),in1)",2,False,800,1,0,0,0,800,1 sites/800: in __muldf3: library code the rewriter does not see
+wikisort,76,"srai(add(srli(in0,31),in0),1)",3,False,798,1,2,1,798,0,
+wikisort,77,"add(slli(in0,1),in1)",2,False,792,1,0,0,0,792,1 sites/792: in __ieee754_sqrt: library code the rewriter does not see
+wikisort,78,"or(srli(in0,1),andi(in0,1))",3,False,646,1,0,0,0,646,1 sites/646: in __muldf3: library code the rewriter does not see
+wikisort,79,"srli(and(xori(in0,-1),in1),31)",3,False,540,1,0,0,0,540,1 sites/540: in __ieee754_sqrt: library code the rewriter does not see
+wikisort,80,"and(srli(in0,20),in1)",2,False,472,1,0,0,0,472,1 sites/472: in __ltdf2: library code the rewriter does not see
+wikisort,81,"add(in0,slli(in1,3))",2,False,402,7,46,7,402,0,
+wikisort,82,"sub(andi(in0,3),in1)",2,False,400,1,1,1,400,0,
+wikisort,83,"andi(add(in0,in1),3)",2,False,400,1,1,1,400,0,
+wikisort,84,"addi(sub(in0,in1),1000)",2,False,400,1,1,1,400,0,
+wikisort,85,"srli(srai(in0,31),30)",2,False,400,1,1,1,400,0,
+wikisort,86,"addi(slli(in0,1),-1)",2,False,400,1,0,0,0,400,1 sites/400: in __ltdf2: library code the rewriter does not see
+wikisort,87,"add(srli(in0,31),in0)",2,False,399,1,2,1,399,0,
+wikisort,88,"srai(add(in0,in1),1)",2,False,399,1,2,1,399,0,
+wikisort,89,"or(in0,andi(in1,1))",2,False,323,1,0,0,0,323,1 sites/323: in __muldf3: library code the rewriter does not see
+wikisort,90,"srli(and(in0,in1),31)",2,False,270,1,0,0,0,270,1 sites/270: in __ieee754_sqrt: library code the rewriter does not see
+wikisort,91,"and(xori(in0,-1),in1)",2,False,270,1,0,0,0,270,1 sites/270: in __ieee754_sqrt: library code the rewriter does not see
+wikisort,92,"sltiu(sub(in0,in1),1)",2,False,236,2,1,1,200,36,1 sites/36: in __ltdf2: library code the rewriter does not see
+wikisort,93,"add(addi(in0,4),in1)",2,False,204,2,0,0,0,204,2 sites/204: in memcpy: library code the rewriter does not see
+wikisort,94,"andi(sub(addi(in0,-1),in1),-4)",3,False,204,1,0,0,0,204,1 sites/204: in memcpy: library code the rewriter does not see
+wikisort,95,"and(in0,addi(lui(-8388608),-1))",3,False,168,2,0,0,0,168,2 sites/168: in __subdf3: library code the rewriter does not see
+wikisort,96,"andi(xor(in0,in1),3)",2,False,122,1,0,0,0,122,1 sites/122: in memcpy: library code the rewriter does not see
+wikisort,97,"and(in0,addi(in1,-1))",2,False,120,3,0,0,0,120,1 sites/36: in __ieee754_sqrt: library code the rewriter does not see | 2 sites/84: in __subdf3: library code the rewriter does not see
+wikisort,98,"sub(addi(in0,-1),in1)",2,False,102,1,0,0,0,102,1 sites/102: in memcpy: library code the rewriter does not see
+wikisort,99,"andi(sub(in0,in1),-4)",2,False,102,1,0,0,0,102,1 sites/102: in memcpy: library code the rewriter does not see
+wikisort,100,"addi(lui(-8388608),-1)",2,False,84,2,0,0,0,84,2 sites/84: in __subdf3: library code the rewriter does not see
+wikisort,101,"or(and(in0,addi(in1,-1)),in1)",3,False,72,1,0,0,0,72,1 sites/72: in __ieee754_sqrt: library code the rewriter does not see
+wikisort,102,"srl(in0,addi(in1,0))",2,False,66,1,0,0,0,66,1 sites/66: in __clzsi2: library code the rewriter does not see
+wikisort,103,"add(addi(in0,-588),in1)",2,False,66,1,0,0,0,66,1 sites/66: in __clzsi2: library code the rewriter does not see
+wikisort,104,"srli(slli(in0,9),9)",2,False,44,1,0,0,0,44,1 sites/44: in __subdf3: library code the rewriter does not see
+wikisort,105,"or(or(or(in0,in1),srai(or(in0,in1),2)),srai(or(or(in0,in1),srai(or(in0,in1),2)),4))",5,False,36,1,1,1,36,0,
+wikisort,106,"or(or(or(in0,in1),srai(or(in0,in1),8)),srai(or(or(in0,in1),srai(or(in0,in1),8)),16))",5,False,36,1,1,1,36,0,
+wikisort,107,"sub(or(or(in0,in1),srai(or(in0,in1),16)),srai(or(or(in0,in1),srai(or(in0,in1),16)),1))",5,False,36,1,1,1,36,0,
+wikisort,108,"or(or(or(in0,in1),srai(or(in0,in1),4)),srai(or(or(in0,in1),srai(or(in0,in1),4)),8))",5,False,36,1,1,1,36,0,
+wikisort,109,"add(srai(in0,1),in1)",2,False,36,1,2,0,0,36,1 sites/36: in __ieee754_sqrt: library code the rewriter does not see
+wikisort,110,"or(slli(in0,31),in1)",2,False,36,1,0,0,0,36,1 sites/36: in __ieee754_sqrt: library code the rewriter does not see
+wikisort,111,"or(in0,srli(slli(in1,9),12))",3,False,36,1,0,0,0,36,1 sites/36: in __subdf3: library code the rewriter does not see
+wikisort,112,"xori(srli(in0,20),-1)",2,False,36,1,0,0,0,36,1 sites/36: in __unorddf2: library code the rewriter does not see
+wikisort,113,"and(slt(0,in0),in1)",2,False,31,1,1,1,31,0,
+wikisort,114,"slli(add(in0,in1),3)",2,False,30,1,9,1,30,0,
+wikisort,115,"andi(or(in0,in1),3)",2,False,30,1,0,0,0,30,1 sites/30: in memmove: library code the rewriter does not see
+wikisort,116,"add(in0,slli(in1,4))",2,False,30,1,0,0,0,30,1 sites/30: in memmove: library code the rewriter does not see
+wikisort,117,"addi(add(in0,in1),16)",2,False,30,1,0,0,0,30,1 sites/30: in memmove: library code the rewriter does not see
+wikisort,118,"or(or(in0,srai(in0,2)),srai(or(in0,srai(in0,2)),4))",4,False,27,1,1,1,27,0,
+wikisort,119,"or(or(srai(in0,1),in1),srai(or(srai(in0,1),in1),2))",4,False,27,1,1,1,27,0,
+wikisort,120,"or(or(in0,srai(in0,4)),srai(or(in0,srai(in0,4)),8))",4,False,27,1,1,1,27,0,
+wikisort,121,"sub(or(in0,srai(in0,16)),srai(or(in0,srai(in0,16)),1))",4,False,27,1,1,1,27,0,
+wikisort,122,"or(or(in0,srai(in0,8)),srai(or(in0,srai(in0,8)),16))",4,False,27,1,1,1,27,0,
+wikisort,123,"or(or(in0,in1),srai(or(in0,in1),16))",3,False,18,1,1,1,18,0,
+wikisort,124,"or(or(in0,in1),srai(or(in0,in1),4))",3,False,18,1,1,1,18,0,
+wikisort,125,"or(or(in0,in1),srai(or(in0,in1),2))",3,False,18,1,1,1,18,0,
+wikisort,126,"or(or(in0,in1),srai(or(in0,in1),8))",3,False,18,1,1,1,18,0,
+wikisort,127,"sub(or(in0,in1),srai(or(in0,in1),1))",3,False,18,1,1,1,18,0,
+wikisort,128,"srli(slli(in0,9),12)",2,False,18,1,0,0,0,18,1 sites/18: in __subdf3: library code the rewriter does not see
+wikisort,129,"addi(add(in0,in1),20)",2,False,16,1,0,0,0,16,1 sites/16: in memmove: library code the rewriter does not see
+wikisort,130,"andi(addi(in0,-4),-4)",2,False,16,1,0,0,0,16,1 sites/16: in memmove: library code the rewriter does not see
+wikisort,131,"addi(addi(in0,-2048),-2048)",2,False,9,1,1,1,9,0,
+wikisort,132,"or(in0,srai(in0,4))",2,False,9,1,1,1,9,0,
+wikisort,133,"or(srai(in0,1),in1)",2,False,9,1,1,1,9,0,
+wikisort,134,"or(in0,srai(in0,16))",2,False,9,1,1,1,9,0,
+wikisort,135,"sub(in0,srai(in0,1))",2,False,9,1,2,1,9,0,
+wikisort,136,"or(in0,srai(in0,8))",2,False,9,1,1,1,9,0,
+wikisort,137,"or(in0,srai(in0,2))",2,False,9,1,1,1,9,0,
+wikisort,138,"addi(lui(536870912),-1)",2,False,9,1,1,1,9,0,
+wikisort,139,"andi(addi(in0,1),2046)",2,False,4,1,0,0,0,4,1 sites/4: in __subdf3: library code the rewriter does not see
+wikisort,140,"srl(in0,addi(in1,-32))",2,False,2,1,0,0,0,2,1 sites/2: in __adddf3: library code the rewriter does not see
+wikisort,141,"or(slli(addi(0,0),20),in0)",3,False,2,1,0,0,0,2,1 sites/2: in __floatsidf: library code the rewriter does not see
+wikisort,142,"addi(lui(-2147454976),-264)",2,False,1,1,0,0,0,1,1 sites/1: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+wikisort,143,"addi(lui(-2147483648),532)",2,False,1,1,0,0,0,1,1 sites/1: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+wikisort,144,"addi(lui(-2147450880),768)",2,False,1,1,0,0,0,1,1 sites/1: line N: immediate is filled in by the linker (address constant; it changes when fused code moves); line N: immediate is filled in by the linker (address constant; it changes when fused code moves)
+wikisort,145,"srli(slli(in0,3),3)",2,False,1,1,0,0,0,1,1 sites/1: in __adddf3: library code the rewriter does not see
+wikisort,146,"slli(addi(0,0),31)",2,False,1,1,0,0,0,1,1 sites/1: in __floatsidf: library code the rewriter does not see
+wikisort,147,"slli(addi(0,0),20)",2,False,1,1,0,0,0,1,1 sites/1: in __floatsidf: library code the rewriter does not see

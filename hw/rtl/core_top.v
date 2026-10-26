@@ -2,9 +2,11 @@
 // Adapted from the ML branch's hardware/core_top.v with the CRC32 PCPI unit removed.
 // FUSED=1 adds the PROVISIONAL dry-run PCPI unit (pcpi_fused.v), FUSED=2 the PROVISIONAL
 // engine unit generated per build (pcpi_engine.v, hw/engine); the default FUSED=0 is the
-// stock core. The ports are the same in every case so the frozen PCF applies.
+// stock core. FAST_MUL=1 swaps PicoRV32's sequential multiplier for its single-cycle one
+// (a probe, not the baseline). The ports are the same in every case so the frozen PCF applies.
 module core_top #(
-    parameter FUSED = 0
+    parameter FUSED = 0,
+    parameter FAST_MUL = 0
 ) (
     input clk, resetn,
     output trap, mem_valid, mem_instr,
@@ -22,7 +24,7 @@ module core_top #(
         .TWO_CYCLE_COMPARE(0), .TWO_CYCLE_ALU(0), .COMPRESSED_ISA(0),
         .CATCH_MISALIGN(1), .CATCH_ILLINSN(1),
         // rv32im: the built-in sequential multiplier and divider
-        .ENABLE_PCPI(FUSED != 0), .ENABLE_MUL(1), .ENABLE_FAST_MUL(0), .ENABLE_DIV(1),
+        .ENABLE_PCPI(FUSED != 0), .ENABLE_MUL(1), .ENABLE_FAST_MUL(FAST_MUL), .ENABLE_DIV(1),
         .ENABLE_IRQ(0), .ENABLE_TRACE(0), .REGS_INIT_ZERO(1),
         // same memory map as main's Spike setup: 16 MiB of RAM at 0x80000000
         .PROGADDR_RESET(32'h8000_0000), .STACKADDR(32'h8100_0000)
