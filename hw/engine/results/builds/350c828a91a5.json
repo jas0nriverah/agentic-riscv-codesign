@@ -1,0 +1,891 @@
+{
+ "provisional": true,
+ "id": "350c828a91a5",
+ "slots": [
+  {
+   "slot": 0,
+   "funct7": 2,
+   "funct3": 0,
+   "formula": "slli(add(in0,in1),16)",
+   "module": "cx_s0",
+   "size": 2,
+   "inputs": [
+    "in0",
+    "in1"
+   ],
+   "has_mul": false,
+   "source": "edn"
+  }
+ ],
+ "priority": [
+  "slli(add(in0,in1),16)"
+ ],
+ "microtest": {
+  "checks": 1185,
+  "runs": {
+   "micro-check": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-stock-s0": {
+    "expect": "trap",
+    "core": "stock",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "micro-xor-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-xor-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-f3-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-2": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-4": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-5": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-6": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-7": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-custom1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   }
+  },
+  "cycles_per_insn": {
+   "slli(add(in0,in1),16)": 5.0
+  },
+  "cycles_per_xor": 3.0
+ },
+ "luts": {
+  "baseline": 2439,
+  "engine": 2485,
+  "delta": 46
+ },
+ "fmax_mhz": {
+  "per_seed": {
+   "1": 61.69,
+   "2": 62.45,
+   "3": 62.25,
+   "4": 62.67,
+   "5": 63.76,
+   "6": 62.07,
+   "7": 60.8,
+   "8": 58.99,
+   "9": 65.21,
+   "10": 67.02
+  },
+  "median": 62.35,
+  "min": 58.99,
+  "max": 67.02
+ },
+ "critical_path": {
+  "unit_on_arc_seeds": [],
+  "rows": [
+   {
+    "core": "engine",
+    "seed": "1",
+    "fmax_mhz": "61.69",
+    "path_ns": "16.21",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "2",
+    "fmax_mhz": "62.45",
+    "path_ns": "16.01",
+    "logic_stages": "38",
+    "start": "cpu.reg_op2[2]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "3",
+    "fmax_mhz": "62.25",
+    "path_ns": "16.06",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "4",
+    "fmax_mhz": "62.67",
+    "path_ns": "15.96",
+    "logic_stages": "38",
+    "start": "cpu.reg_op2[2]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "5",
+    "fmax_mhz": "63.76",
+    "path_ns": "15.69",
+    "logic_stages": "38",
+    "start": "cpu.reg_op2[2]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "6",
+    "fmax_mhz": "62.07",
+    "path_ns": "16.11",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "7",
+    "fmax_mhz": "60.8",
+    "path_ns": "16.45",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "8",
+    "fmax_mhz": "58.99",
+    "path_ns": "16.95",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "9",
+    "fmax_mhz": "65.21",
+    "path_ns": "15.33",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "10",
+    "fmax_mhz": "67.02",
+    "path_ns": "14.92",
+    "logic_stages": "38",
+    "start": "cpu.reg_op2[2]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   }
+  ]
+ },
+ "period_rule": {
+  "rule": "T_fused = max(T_base, T_fused_measured)",
+  "candidate_period_ns": 16.2655,
+  "routed_period_ns": 16.038,
+  "used": "baseline (the routed clock is not slower)"
+ },
+ "programs": {
+  "aha-mont64": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 25631371,
+   "cycles": 25631371,
+   "cycles_saved": 0,
+   "baseline_instret": 4475851,
+   "instret": 4475851,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(in0,in1),16)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "crc32": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 22461391,
+   "cycles": 22461391,
+   "cycles_saved": 0,
+   "baseline_instret": 3831152,
+   "instret": 3831152,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(in0,in1),16)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "edn": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 34849402,
+   "cycles": 34790938,
+   "cycles_saved": 58464,
+   "baseline_instret": 3466139,
+   "instret": 3456395,
+   "instret_saved": 9744,
+   "instret_saved_predicted": 9744,
+   "per_formula": {
+    "slli(add(in0,in1),16)": {
+     "finder_saved": 9744,
+     "predicted_saved": 9744,
+     "fused_sites": 7,
+     "fused_sites_executed": 7,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "libedn_0",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),16)",
+     "function": "jpegdct",
+     "lines": [
+      274,
+      275
+     ],
+     "root_line": 275,
+     "original": [
+      "add\ts3,s2,a6",
+      "slli\ts3,s3,16"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, s3, s2, a6",
+     "placed_at": "root",
+     "placed_line": 275,
+     "labels": [
+      "hws_libedn_0_0",
+      "hws_libedn_0_1"
+     ],
+     "pcs": [
+      "0x80000594",
+      "0x80000598"
+     ],
+     "runs": 1392
+    },
+    {
+     "id": "libedn_1",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),16)",
+     "function": "jpegdct",
+     "lines": [
+      281,
+      282
+     ],
+     "root_line": 282,
+     "original": [
+      "add\ts1,t0,t6",
+      "slli\ts1,s1,16"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, s1, t0, t6",
+     "placed_at": "root",
+     "placed_line": 282,
+     "labels": [
+      "hws_libedn_1_0",
+      "hws_libedn_1_1"
+     ],
+     "pcs": [
+      "0x800005b0",
+      "0x800005b4"
+     ],
+     "runs": 1392
+    },
+    {
+     "id": "libedn_2",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),16)",
+     "function": "jpegdct",
+     "lines": [
+      276,
+      283
+     ],
+     "root_line": 283,
+     "original": [
+      "add\tt0,s2,a7",
+      "slli\tt0,t0,16"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "intermediate t0 from line 276 is read by line 282"
+     ],
+     "labels": [
+      "hws_libedn_2_0",
+      "hws_libedn_2_1"
+     ],
+     "pcs": [
+      "0x8000059c",
+      "0x800005b8"
+     ],
+     "runs": 1392
+    },
+    {
+     "id": "libedn_3",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),16)",
+     "function": "jpegdct",
+     "lines": [
+      279,
+      286
+     ],
+     "root_line": 286,
+     "original": [
+      "add\tt6,a6,a5",
+      "slli\tt6,t6,16"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "intermediate t6 from line 279 is read by line 282"
+     ],
+     "labels": [
+      "hws_libedn_3_0",
+      "hws_libedn_3_1"
+     ],
+     "pcs": [
+      "0x800005a8",
+      "0x800005c4"
+     ],
+     "runs": 1392
+    },
+    {
+     "id": "libedn_4",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),16)",
+     "function": "jpegdct",
+     "lines": [
+      293,
+      294
+     ],
+     "root_line": 294,
+     "original": [
+      "add\ts0,a5,a7",
+      "slli\ts0,s0,16"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, s0, a5, a7",
+     "placed_at": "root",
+     "placed_line": 294,
+     "labels": [
+      "hws_libedn_4_0",
+      "hws_libedn_4_1"
+     ],
+     "pcs": [
+      "0x800005e0",
+      "0x800005e4"
+     ],
+     "runs": 1392
+    },
+    {
+     "id": "libedn_5",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),16)",
+     "function": "jpegdct",
+     "lines": [
+      318,
+      319
+     ],
+     "root_line": 319,
+     "original": [
+      "add\ta2,s2,a2",
+      "slli\ta2,a2,16"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a2, s2, a2",
+     "placed_at": "first member",
+     "placed_line": 318,
+     "labels": [
+      "hws_libedn_5_0",
+      "hws_libedn_5_1"
+     ],
+     "pcs": [
+      "0x80000644",
+      "0x80000648"
+     ],
+     "runs": 1392
+    },
+    {
+     "id": "libedn_6",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),16)",
+     "function": "jpegdct",
+     "lines": [
+      333,
+      334
+     ],
+     "root_line": 334,
+     "original": [
+      "add\ta5,t0,a5",
+      "slli\ta5,a5,16"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, t0, a5",
+     "placed_at": "first member",
+     "placed_line": 333,
+     "labels": [
+      "hws_libedn_6_0",
+      "hws_libedn_6_1"
+     ],
+     "pcs": [
+      "0x80000680",
+      "0x80000684"
+     ],
+     "runs": 1392
+    },
+    {
+     "id": "libedn_7",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),16)",
+     "function": "jpegdct",
+     "lines": [
+      341,
+      342
+     ],
+     "root_line": 342,
+     "original": [
+      "add\ts2,s2,s1",
+      "slli\ts2,s2,16"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, s2, s2, s1",
+     "placed_at": "first member",
+     "placed_line": 341,
+     "labels": [
+      "hws_libedn_7_0",
+      "hws_libedn_7_1"
+     ],
+     "pcs": [
+      "0x800006a0",
+      "0x800006a4"
+     ],
+     "runs": 1392
+    },
+    {
+     "id": "libedn_8",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "slli(add(in0,in1),16)",
+     "function": "jpegdct",
+     "lines": [
+      349,
+      350
+     ],
+     "root_line": 350,
+     "original": [
+      "add\tt0,t0,t1",
+      "slli\tt0,t0,16"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, t0, t0, t1",
+     "placed_at": "first member",
+     "placed_line": 349,
+     "labels": [
+      "hws_libedn_8_0",
+      "hws_libedn_8_1"
+     ],
+     "pcs": [
+      "0x800006c0",
+      "0x800006c4"
+     ],
+     "runs": 1392
+    }
+   ]
+  },
+  "huffbench": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 8638203,
+   "cycles": 8638203,
+   "cycles_saved": 0,
+   "baseline_instret": 2131016,
+   "instret": 2131016,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(in0,in1),16)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "matmult-int": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 26300272,
+   "cycles": 26300272,
+   "cycles_saved": 0,
+   "baseline_instret": 3179290,
+   "instret": 3179290,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(in0,in1),16)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "nettle-aes": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 18773912,
+   "cycles": 18773912,
+   "cycles_saved": 0,
+   "baseline_instret": 4083360,
+   "instret": 4083360,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(in0,in1),16)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "nettle-sha256": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 20276586,
+   "cycles": 20276586,
+   "cycles_saved": 0,
+   "baseline_instret": 3854209,
+   "instret": 3854209,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(in0,in1),16)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "wikisort": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 6916129,
+   "cycles": 6916129,
+   "cycles_saved": 0,
+   "baseline_instret": 1182160,
+   "instret": 1182160,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(add(in0,in1),16)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  }
+ },
+ "rows": [
+  {
+   "candidate_id": "dba9f3ff5353f9dc663ff7bce9ae45c0a28e46edb7328712d5cca4bf098053cc",
+   "benchmark": "aha-mont64",
+   "formula": "slli(add(in0,in1),16)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 25631371,
+   "candidate_cycles": 25631371,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2485,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "5aa4ed84725f91cc6e0bf8f99228cf81be46d6d523d75764b2f0945a37a9d797",
+   "benchmark": "crc32",
+   "formula": "slli(add(in0,in1),16)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 22461391,
+   "candidate_cycles": 22461391,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2485,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "07e8250c4eb804536630b11d930223cf08597a2e26ec8bbc643c02367b3061b7",
+   "benchmark": "edn",
+   "formula": "slli(add(in0,in1),16)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 34849402,
+   "candidate_cycles": 34790938,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2485,
+   "speedup": 1.0017,
+   "speedup_cycles_only": 1.0017
+  },
+  {
+   "candidate_id": "d09e63d116f676890cbfa746fd2ad24036c30f2a22138a197bb6957e34007401",
+   "benchmark": "huffbench",
+   "formula": "slli(add(in0,in1),16)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 8638203,
+   "candidate_cycles": 8638203,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2485,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "58d48d0f020ffbf66b959781861656f70f43beb5b2e582d1ba5e03e73f47915c",
+   "benchmark": "matmult-int",
+   "formula": "slli(add(in0,in1),16)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 26300272,
+   "candidate_cycles": 26300272,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2485,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "c1b397ac2889bfdd19f41f14af18e5f62311260e13b388162c0ff2eb30328256",
+   "benchmark": "nettle-aes",
+   "formula": "slli(add(in0,in1),16)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 18773912,
+   "candidate_cycles": 18773912,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2485,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "836f8628f4389a24a988ac40e481b1bb310855d645d1abffa8829fa61cc51a18",
+   "benchmark": "nettle-sha256",
+   "formula": "slli(add(in0,in1),16)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 20276586,
+   "candidate_cycles": 20276586,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2485,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "d60a423f1219bfd1784a64f818a491435e7a71606ba3a123694b6c5f03ca2553",
+   "benchmark": "wikisort",
+   "formula": "slli(add(in0,in1),16)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 6916129,
+   "candidate_cycles": 6916129,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2485,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  }
+ ],
+ "problems": []
+}

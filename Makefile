@@ -1,4 +1,6 @@
-CC          := riscv64-unknown-elf-gcc
+# uses riscv64-unknown-elf- when it is installed and xPack's riscv-none-elf- otherwise
+RISCV_PREFIX ?= $(if $(shell command -v riscv64-unknown-elf-gcc),riscv64-unknown-elf-,riscv-none-elf-)
+CC          := $(RISCV_PREFIX)gcc
 SPIKE       := spike
 
 CFLAGS      := -march=rv32im -mabi=ilp32 -O2 -std=gnu17 -DCPU_MHZ=1 -DWARMUP_HEAT=1
@@ -43,3 +45,5 @@ generated/candidates/%.json: generated/traces/%.jsonl generated/programs/%.elf s
 	python3 src/candidates.py $< generated/programs/$*.elf $@
 
 candidates: $(PROGRAMS:%=generated/candidates/%.json)
+
+include hw/hw.mk

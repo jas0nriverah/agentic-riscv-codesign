@@ -1,0 +1,691 @@
+{
+ "provisional": true,
+ "id": "970b4dd4f3b6",
+ "slots": [
+  {
+   "slot": 0,
+   "funct7": 2,
+   "funct3": 0,
+   "formula": "slli(andi(xor(in0,in1),255),2)",
+   "module": "cx_s0",
+   "size": 3,
+   "inputs": [
+    "in0",
+    "in1"
+   ],
+   "has_mul": false,
+   "source": "crc32"
+  }
+ ],
+ "priority": [
+  "slli(andi(xor(in0,in1),255),2)"
+ ],
+ "microtest": {
+  "checks": 1185,
+  "runs": {
+   "micro-check": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-stock-s0": {
+    "expect": "trap",
+    "core": "stock",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "micro-xor-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-xor-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-f3-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-2": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-4": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-5": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-6": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-7": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-custom1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   }
+  },
+  "cycles_per_insn": {
+   "slli(andi(xor(in0,in1),255),2)": 5.0
+  },
+  "cycles_per_xor": 3.0
+ },
+ "luts": {
+  "baseline": 2439,
+  "engine": 2479,
+  "delta": 40
+ },
+ "fmax_mhz": {
+  "per_seed": {
+   "1": 63.0,
+   "2": 64.1,
+   "3": 66.46,
+   "4": 62.59,
+   "5": 62.74,
+   "6": 65.91,
+   "7": 63.45,
+   "8": 62.56,
+   "9": 65.66,
+   "10": 67.82
+  },
+  "median": 63.78,
+  "min": 62.56,
+  "max": 67.82
+ },
+ "critical_path": {
+  "unit_on_arc_seeds": [],
+  "rows": [
+   {
+    "core": "engine",
+    "seed": "1",
+    "fmax_mhz": "63.0",
+    "path_ns": "15.87",
+    "logic_stages": "10",
+    "start": "cpu.reg_op2[7]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "1",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "2",
+    "fmax_mhz": "64.1",
+    "path_ns": "15.6",
+    "logic_stages": "35",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "3",
+    "fmax_mhz": "66.46",
+    "path_ns": "15.05",
+    "logic_stages": "39",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "4",
+    "fmax_mhz": "62.59",
+    "path_ns": "15.98",
+    "logic_stages": "38",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "5",
+    "fmax_mhz": "62.74",
+    "path_ns": "15.94",
+    "logic_stages": "66",
+    "start": "cpu.genblk2.pcpi_div.dividend[0]",
+    "end": "cpu.genblk2.pcpi_div.quotient[21]",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "66"
+   },
+   {
+    "core": "engine",
+    "seed": "6",
+    "fmax_mhz": "65.91",
+    "path_ns": "15.17",
+    "logic_stages": "35",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "7",
+    "fmax_mhz": "63.45",
+    "path_ns": "15.76",
+    "logic_stages": "8",
+    "start": "cpu.reg_op1[1]",
+    "end": "cpu.reg_out[15]",
+    "end_pin": "I3",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "8",
+    "fmax_mhz": "62.56",
+    "path_ns": "15.98",
+    "logic_stages": "10",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "1",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "9",
+    "fmax_mhz": "65.66",
+    "path_ns": "15.23",
+    "logic_stages": "35",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "10",
+    "fmax_mhz": "67.82",
+    "path_ns": "14.75",
+    "logic_stages": "35",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   }
+  ]
+ },
+ "period_rule": {
+  "rule": "T_fused = max(T_base, T_fused_measured)",
+  "candidate_period_ns": 16.2655,
+  "routed_period_ns": 15.6796,
+  "used": "baseline (the routed clock is not slower)"
+ },
+ "programs": {
+  "aha-mont64": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 25631371,
+   "cycles": 25631371,
+   "cycles_saved": 0,
+   "baseline_instret": 4475851,
+   "instret": 4475851,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(andi(xor(in0,in1),255),2)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "crc32": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 22461391,
+   "cycles": 21242831,
+   "cycles_saved": 1218560,
+   "baseline_instret": 3831152,
+   "instret": 3482992,
+   "instret_saved": 348160,
+   "instret_saved_predicted": 348160,
+   "per_formula": {
+    "slli(andi(xor(in0,in1),255),2)": {
+     "finder_saved": 348160,
+     "predicted_saved": 348160,
+     "fused_sites": 2,
+     "fused_sites_executed": 1,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "crc_32_0",
+     "file": "crc_32.s",
+     "slot": 0,
+     "formula": "slli(andi(xor(in0,in1),255),2)",
+     "function": "benchmark_body",
+     "lines": [
+      29,
+      30,
+      31
+     ],
+     "root_line": 31,
+     "original": [
+      "xor\ta5,s0,a0",
+      "andi\ta5,a5,0xff",
+      "slli\ta5,a5,2"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, s0, a0",
+     "placed_at": "root",
+     "placed_line": 31,
+     "labels": [
+      "hws_crc_32_0_0",
+      "hws_crc_32_0_1",
+      "hws_crc_32_0_2"
+     ],
+     "pcs": [
+      "0x80000278",
+      "0x8000027c",
+      "0x80000280"
+     ],
+     "runs": 174080
+    },
+    {
+     "id": "crc_32_1",
+     "file": "crc_32.s",
+     "slot": 0,
+     "formula": "slli(andi(xor(in0,in1),255),2)",
+     "function": "crc32pseudo",
+     "lines": [
+      68,
+      69,
+      70
+     ],
+     "root_line": 70,
+     "original": [
+      "xor\ta5,s0,a0",
+      "andi\ta5,a5,0xff",
+      "slli\ta5,a5,2"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, s0, a0",
+     "placed_at": "root",
+     "placed_line": 70,
+     "labels": [
+      "hws_crc_32_1_0",
+      "hws_crc_32_1_1",
+      "hws_crc_32_1_2"
+     ],
+     "pcs": [
+      "0x800002f8",
+      "0x800002fc",
+      "0x80000300"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "edn": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 34849402,
+   "cycles": 34849402,
+   "cycles_saved": 0,
+   "baseline_instret": 3466139,
+   "instret": 3466139,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(andi(xor(in0,in1),255),2)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "huffbench": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 8638203,
+   "cycles": 8638203,
+   "cycles_saved": 0,
+   "baseline_instret": 2131016,
+   "instret": 2131016,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(andi(xor(in0,in1),255),2)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "matmult-int": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 26300272,
+   "cycles": 26300272,
+   "cycles_saved": 0,
+   "baseline_instret": 3179290,
+   "instret": 3179290,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(andi(xor(in0,in1),255),2)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "nettle-aes": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 18773912,
+   "cycles": 18773912,
+   "cycles_saved": 0,
+   "baseline_instret": 4083360,
+   "instret": 4083360,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(andi(xor(in0,in1),255),2)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "nettle-sha256": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 20276586,
+   "cycles": 20276586,
+   "cycles_saved": 0,
+   "baseline_instret": 3854209,
+   "instret": 3854209,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(andi(xor(in0,in1),255),2)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "wikisort": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 6916129,
+   "cycles": 6916129,
+   "cycles_saved": 0,
+   "baseline_instret": 1182160,
+   "instret": 1182160,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "slli(andi(xor(in0,in1),255),2)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  }
+ },
+ "rows": [
+  {
+   "candidate_id": "955a64ac3514637ee34986e6cd0ca43a45cec9d25195782f10f919bfe906a785",
+   "benchmark": "aha-mont64",
+   "formula": "slli(andi(xor(in0,in1),255),2)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 25631371,
+   "candidate_cycles": 25631371,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2479,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "2574c9b9f4e7c9c6565d46f81f6ab4d403b1c2b31e713ffaf5774c91aca3b2bc",
+   "benchmark": "crc32",
+   "formula": "slli(andi(xor(in0,in1),255),2)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 22461391,
+   "candidate_cycles": 21242831,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2479,
+   "speedup": 1.0574,
+   "speedup_cycles_only": 1.0574
+  },
+  {
+   "candidate_id": "ffbc51d9bad604be8d51d95f44a81f7711a782fd555c68715ba76322d9ae01b9",
+   "benchmark": "edn",
+   "formula": "slli(andi(xor(in0,in1),255),2)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 34849402,
+   "candidate_cycles": 34849402,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2479,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "40072504b188183cf580a4397741a4ef8607e4a99f0b7109baf792ef1705ce99",
+   "benchmark": "huffbench",
+   "formula": "slli(andi(xor(in0,in1),255),2)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 8638203,
+   "candidate_cycles": 8638203,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2479,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "1a3cf40ddd18ca266b292b0795fd63996e596556253d4212266051e69a20d8d7",
+   "benchmark": "matmult-int",
+   "formula": "slli(andi(xor(in0,in1),255),2)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 26300272,
+   "candidate_cycles": 26300272,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2479,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "4739b9e70de9edf32bce66181d69b688bcb695c9a9c3245a311605b41fc57c10",
+   "benchmark": "nettle-aes",
+   "formula": "slli(andi(xor(in0,in1),255),2)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 18773912,
+   "candidate_cycles": 18773912,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2479,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "a791c0b7dddd87d1258cbb0cdf2a0d09830e0ece8c629508b656c4593b243ed5",
+   "benchmark": "nettle-sha256",
+   "formula": "slli(andi(xor(in0,in1),255),2)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 20276586,
+   "candidate_cycles": 20276586,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2479,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "b680244e6cd6ed9107a0a2f0f1c22ae13c0ebff461c9777c1aa3cc272629bcb8",
+   "benchmark": "wikisort",
+   "formula": "slli(andi(xor(in0,in1),255),2)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 6916129,
+   "candidate_cycles": 6916129,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2479,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  }
+ ],
+ "problems": []
+}

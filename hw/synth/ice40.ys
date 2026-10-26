@@ -1,0 +1,6 @@
+# Same synthesis as the ML branch's whole-core runs: synth_ice40 defaults, no DSP.
+read_verilog hw/rtl/picorv32.v hw/rtl/core_top.v
+synth_ice40 -top core_top
+check -assert
+write_json generated/hw/synth/core_top.json
+tee -o generated/hw/synth/stat.txt stat
