@@ -596,7 +596,11 @@ def _public_candidate(handle: str, binding: dict, public: list[dict], prediction
 def _dynamic_gp(root: Path, state: dict, public: list[dict], prediction_tables: dict,
                 handles: list[dict]) -> tuple[dict, float, float]:
     public_by_id = {row["candidate_id"]: row for row in public}
-    successes = [row for row in state["observations"] if row.get("status") == "success"]
+    # Older sealed sessions can contain successful audit rows without an
+    # explicit status field. Match the controller's success-default semantics
+    # while new sessions persist status explicitly at measurement time.
+    successes = [row for row in state["observations"]
+                 if row.get("status", "success") == "success"]
     successful_ids = [row.get("candidate_id") for row in successes]
     _require(len(set(successful_ids)) == len(successful_ids),
              "Successful paid-prefix identities must be unique")
@@ -761,6 +765,10 @@ def call(root: Path, action: dict, *, release_directory: Path = RELEASE_DEFAULT)
                     outcome_status = measured.get("status", "success")
                     _require(outcome_status in {"success", "failed"},
                              "Guarded audit returned a nonterminal candidate outcome")
+                    # Guarded audit rows omit status for successful outcomes.
+                    # Persist the terminal ledger status so the adaptive refit
+                    # cannot silently drop a paid row.
+                    measured["status"] = outcome_status
                     reservation.update(status=outcome_status, outcome=measured,
                         audit_sha256=c.digest(audit), controller_elapsed_seconds=time.monotonic()-started)
                     state["attempts"][-1].update(status=outcome_status,

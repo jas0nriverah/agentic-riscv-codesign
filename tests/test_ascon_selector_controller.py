@@ -160,10 +160,11 @@ def test_adaptive_gp_refits_exact_verified_success_rows_and_hashes_labels(monkey
     monkeypatch.setattr(controller, "_training", lambda: [{"candidate_id": "history"}])
     monkeypatch.setattr(controller.baseline, "HardwareSurrogate", FakeHardwareSurrogate)
     monkeypatch.setattr(controller.baseline, "validate_outcome",
-        lambda outcome, public: outcome.get("status") == "success" and
+        lambda outcome, public: outcome.get("status", "success") == "success" and
         outcome.get("candidate_id") == public.get("candidate_id"))
 
-    success = {"candidate_id": "id-1", "status": "success", "area_delta_lut4": 14}
+    # Guarded audit success rows may not carry an explicit status field.
+    success = {"candidate_id": "id-1", "area_delta_lut4": 14}
     failure = {"candidate_id": "id-2", "status": "failed", "error": "known failure"}
     state = dict(observations=[success, failure], attempted_ids=["id-1", "id-2"],
         adaptive_gp_cache=None, model_fit_seconds=0., model_inference_seconds=0.)
@@ -237,7 +238,8 @@ def test_measure_persists_reservation_before_fake_evaluator_and_terminal_result(
             assert slot["status"] == "started"
             calls.append(name)
 
-    outcome = dict(status="success", candidate_id="id-1", baseline_cycles=100,
+    # Production audit records omit status for successful attempts.
+    outcome = dict(candidate_id="id-1", baseline_cycles=100,
         candidate_cycles=90, speedup=100 / 90, area_delta_lut4=12,
         routed_fmax_min_mhz=40.0, correctness_verified=True, device_fits=True,
         timing_feasible=True, measurement_seconds=1.2)
@@ -254,8 +256,10 @@ def test_measure_persists_reservation_before_fake_evaluator_and_terminal_result(
     slot = c.unseal(control / "attempt-01.json")
     assert calls == ["candidate_00"]
     assert slot["status"] == "success" and slot["tool_sequence"] == 1
+    assert slot["outcome"]["status"] == "success"
     assert state["charged_attempts"] == 1
     assert state["attempts"][0]["status"] == "success"
+    assert state["observations"][0]["status"] == "success"
     assert meta["events"][0]["status"] == "success"
     assert result["observation"]["candidate_cycles"] == 90
 

@@ -14,8 +14,42 @@ Every terminal attempt remains charged. Correct, measured successes update the c
 
 Consequently, a dynamic-refit lookahead must refit on each hypothetical branch with exactly the frozen estimator recipe, while a fixed-joint lookahead must be reported as its own policy. Mixing the two update rules invalidates paid-prefix comparisons.
 
-## Scope and remaining evidence
+## Ascon paid-prefix audit — October 27, 2026
 
-The October 27 Ascon controller release v2 was stopped after a wrapper bug prevented its baseline cache lookup. Its charged unknown reservation is preserved in [the v2 diagnosis](../results/2026-10-27-ascon-selector-controller-v2-attempt/README.md); it produced no candidate measurement or target label. The corrected wrapper and paid-prefix checks are covered by fake-only unit tests, but this correction has not yet been frozen in a new pushed release or demonstrated on a real paid Ascon prefix.
+The earlier v2 wrapper failure and its charged unknown reservation remain
+preserved in [the v2 diagnosis](../results/2026-10-27-ascon-selector-controller-v2-attempt/README.md).
+The corrected v5 release was committed and pushed at `007d6593` before native
+dispatch. Its three-query current-chat session is archived in
+[`results/2026-10-27-ascon-selector-chat-run-v5/`](../results/2026-10-27-ascon-selector-chat-run-v5/).
+The run measured C01 (`1.019698x`, +73 LUT4, 62.992 MHz), C06 (`1.017027x`,
++41 LUT4, 67.069 MHz), and C02 (`1.023731x`, +42 LUT4, 64.620 MHz); all three
+passed correctness. Under the frozen +64-LUT4 / 12-MHz constraints, C02 is the
+best feasible measured candidate. Nine candidates remain unmeasured, so the
+pool oracle is incomplete and the run does not establish regret or an advantage
+over any heuristic. This is same-domain cryptography-transfer development,
+not independent workload confirmation.
 
-The MD5 disabled bridge remains disabled: it authenticates zero-paid initial models, and its nonempty paid-reconstruction path is synthetic-only. The semantics above do not enable that bridge or establish selection superiority. A future prospective run still needs source-bound controller release, matched policies with the same public information and evaluation budget, complete cost accounting, and an untouched target workload.
+The run exposed a production adaptive-refit defect. The guarded audit omits
+`status` on successful rows. The controller defaulted the terminal slot to
+`success` but appended the status-less row to `observations`; `_dynamic_gp`
+then filtered only explicit `status == "success"` rows. The completed session
+therefore recorded zero adaptive fit time and no paid-prefix cache. The chat
+agent did see each paid outcome, but the adaptive-GP update did not run. Do not
+count this run as validation of paid model adaptation.
+
+The source now persists the terminal status with each observation and accepts
+legacy status-less successful rows as successful paid data. Focused tests pass
+for both the audit-shaped missing-status record and persisted terminal slots;
+a consumed-data diagnostic refits on 90 historical plus three Ascon rows and
+authenticates the ordered paid-prefix hash. That diagnostic is software
+verification on already revealed same-domain labels, not prospective evidence.
+These edits intentionally move the working tree beyond the v5 source binding;
+the old release is archived to its exact commit and must not authorize another
+measurement. A new source-bound release and an untouched eligible target are
+required before prospective adaptive-policy evaluation.
+
+The MD5 disabled bridge remains disabled: its nonempty paid-reconstruction path
+is synthetic-only. Neither the Ascon session nor the update fix establishes
+selection superiority. Matched policies, equal information and budgets,
+complete measurement-cost accounting, and fresh independent workloads remain
+required.

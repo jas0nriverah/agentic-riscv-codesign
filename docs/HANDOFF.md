@@ -190,20 +190,18 @@ generator hash. The current v3 package is reproducibly frozen and authenticated
 at `results/2026-10-27-ascon-selector-prereg-v3/`: it binds 32 inputs including
 the preparation script, and contains twelve public candidates, 90 family-safe
 historical labels across 14 groups, 13 fixed policies, five seeds, budgets one
-through three, and zero target labels or attempts. Controller release v5 is
-frozen with dispatch enabled only behind its exact pushed-source gate. It is
-not yet valid for measurement until the source, package, release, and this
-handoff update are committed and pushed.
-
-The old v2 campaign root contains one charged unknown reservation and remains
-untouched. Use the new v5 root only after `authenticate_release(...,
-require_pushed=True)` passes. This is a same-domain crypto transfer, not an
-independent-family confirmation. Seal the live three-query agent trajectory
-before exposing remaining pool outcomes for oracle/control replay; retain any
-unknown attempt as charged and report a censored-oracle lower bound.
+through three, and zero target labels or attempts at freeze time. Controller
+release v5 passed its exact pushed-source gate at commit `007d6593`; its live
+three-query trajectory is now sealed in the result archive below. Subsequent
+status-normalization changes invalidate v5 for any further dispatch. The old v2
+campaign root still contains one charged unknown reservation and remains
+untouched. The v5 run is same-domain crypto transfer, not independent-family
+confirmation, and its nine unmeasured candidates leave the oracle incomplete.
 
 The [MiBench source scout](mibench-scout-2026-10-27.md) rejected four
 read-only source candidates under the current target contract. It ran no
 benchmark and contributes no labels. Continue searching for an eligible
 independent integer workload; the six-family confirmatory cohort remains
 unestablished.
+
+**Latest October 27 update — Ascon three-query run and paid-update bug:** the v5 release passed its pushed-source gate at `007d6593`, then the operator-relayed chat agent measured three candidates. C01: 1.019698×, +73 LUT4, 62.992 MHz (area-infeasible); C06: 1.017027×, +41 LUT4, 67.069 MHz; C02: 1.023731×, +42 LUT4, 64.620 MHz. All passed correctness; C02 is best among the three measured feasible results. Nine candidates are still censored, so there is no complete-pool oracle or heuristic comparison. The complete generated campaign is preserved as a hash-checked archive in [`results/2026-10-27-ascon-selector-chat-run-v5/`](../results/2026-10-27-ascon-selector-chat-run-v5/). A real paid-prefix audit found `_dynamic_gp` excluded all three successes because audit rows omitted `status`; it recorded zero fit time. The working source now persists success status and includes a regression test. Four focused test modules pass (30 tests), and a post-hoc 90+3-row replay confirms refit execution and the paid-prefix hash, but this is consumed-data software validation. The v5 release remains archived against commit `007d6593` and is no longer valid for further dispatch after these source changes. Treat this run as integration development, not a prospective comparative result. The next blocker is still a fresh independent workload; the disclosed Ascon pool cannot be reused to claim confirmation.
