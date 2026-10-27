@@ -1,25 +1,32 @@
 # Current handoff — model evidence after Lift selection
 
-## October 27 — countnegative source-bound preflight, before target qualification
+## October 27 — countnegative rejected at target discovery
 
 The original TACLeBench `countnegative` integer kernel is now pinned by the
 existing full-suite archive hash and per-file Git/SHA-256 hashes. Its external
 adapter preserves the deterministic 20×20 matrix, original checksum, and
-initialization outside the timed benchmark function. The host smoke test passes.
-The `tacle-countnegative` workload group is absent from the authenticated
-122-label history; this is source identity only, not proof that compiler-derived
-candidate families are independent.
+initialization outside the timed benchmark function. The host smoke test and
+exact baseline-only target self-check pass. Discovery recorded 12,477
+instrumented cycles / 2,510 instructions, 2,472 / 6,400 program+BSS bytes and
+64 / 1,664 observed stack bytes; these are not routed-baseline measurements.
 
-The new qualification reuses the unchanged guarded RV32I/PCPI toolchain, 8 KiB
-RAM partition, relocation guard, twelve-candidate pool, and 0.5% / ten-replacement
-opportunity threshold. Candidate dispatch is disabled throughout. Its code and
-protocol tests pass, but no target phase has run yet. The source must be committed
-and pushed before executing
-`../work/audit-venv/bin/python scripts/qualify_tacle_countnegative.py`. Preserve
-the first target rejection; no fallback source or relaxed gate is authorized.
-If baseline-only qualification succeeds, audit exact operation-tree overlap
-before model fitting and build a complete source-bound model/policy release
-before any candidate measurements.
+The unchanged guarded extractor produced 5 raw / 5 executable formulas, of
+which 4 were relocation-safe and calibrated, against the frozen pool
+requirement of 12. Qualification was rejected at discovery before opportunity
+scoring or routed-baseline measurement. No candidate pool was frozen; there are
+zero candidate attempts, measured labels, candidate area/timing outcomes, or
+model updates. Two formula families are absent from the historical corpus,
+which is not enough to claim independent workload transfer. Preserve the
+rejection and do not retry it or relax any gate. The archive-authenticated
+[offline diagnosis](../results/2026-10-27-countnegative-discovery-diagnosis/README.md)
+reconstructs the counts without another target job; the [qualification
+archive](../results/2026-10-27-countnegative-qualification/) preserves the
+original raw run.
+
+This leaves the same central blocker: find a separate supported workload that
+clears the frozen candidate and opportunity gates before attempting a
+prospective matched-budget policy comparison. The measured corpus remains
+122 verified labels across 14 workload groups; this rejection adds none.
 
 ## October 27 — nested uncertainty-scaling diagnostic: do not promote
 

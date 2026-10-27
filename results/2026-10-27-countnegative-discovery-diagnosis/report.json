@@ -1,0 +1,93 @@
+{
+  "schema": "isaforge-tacle-countnegative-discovery-diagnosis-v1",
+  "qualification_protocol_sha256": "d1ede28199a24bd842843471f45e44139845b111e0986a0d7afc08826be4f6b5",
+  "qualification_manifest_sha256": "e2e49efc3c5f0f4d567860ec9dd242ebddef21093373d5d985e74793d5498ecc",
+  "raw_archive_sha256": "656b06286a3b84f4016e99513ffe146cc0fbff31b652303b12f4e93c12327ce4",
+  "target_context_id": "44d4a7a49c5f756254544a61eea2bdc71d67deec212b72311be06d3e50026bd5",
+  "historical_corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "source_bindings": {
+    "scripts/diagnose_tacle_countnegative_discovery.py": "750adab12b4c31e44eb5d4329dabf135752057b12a3d768968d2c403fc5ad255",
+    "isaforge/tacle_countnegative_workload.py": "9926341deda881a0ab4c01f2644bd193fcc9a49c498a452fe203b82cc57892bf",
+    "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+    "isaforge/partitioned_workload.py": "55ea4e3a98bed427d08c92b56fdbe431bd177054931c84128413f176e79a85e3",
+    "isaforge/assembly_lowering.py": "e656f5591ce1fa70f8621f94349c7a1c1f90837fb572a8d42fe9a3ce88dc4554",
+    "isaforge/relocation_guard.py": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+    "isaforge/latency_features.py": "c0cd549e0fc7baa8317a552ba4350e86b0342af2e4c7a8737afd02e520161b92",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3"
+  },
+  "metrics": {
+    "status": "rejected_at_discovery",
+    "failed_phase": "discover",
+    "original_checksum_passed": true,
+    "instrumented_profile_cycles": 12477,
+    "instrumented_profile_instructions": 2510,
+    "program_and_bss_end": 2472,
+    "program_limit": 6400,
+    "observed_stack_bytes": 64,
+    "stack_limit": 1664,
+    "mapped_source_statements": 100,
+    "raw_formula_count": 5,
+    "executable_formula_count": 5,
+    "relocation_safe_executable_formula_count": 4,
+    "uncalibrated_relocation_safe_formula_count": 0,
+    "calibrated_relocation_safe_formula_count": 4,
+    "required_pool_size": 12,
+    "unique_historical_safe_operation_families": 2,
+    "calibrated_candidates": [
+      {
+        "name": "candidate_00",
+        "formula": "sub(0,sltu(0,add(in0,in1)))",
+        "operation_family": "sub(constant,sltu(constant,add(input,input)))",
+        "overlaps_historical_family": false,
+        "expected_instruction_reduction": 2,
+        "timed_replacements": 2,
+        "dynamic_occurrences": 1
+      },
+      {
+        "name": "candidate_01",
+        "formula": "addi(lui(-1540096),1826)",
+        "operation_family": "addi(lui(constant),constant)",
+        "overlaps_historical_family": true,
+        "expected_instruction_reduction": 1,
+        "timed_replacements": 2,
+        "dynamic_occurrences": 1
+      },
+      {
+        "name": "candidate_03",
+        "formula": "sltu(0,add(in0,in1))",
+        "operation_family": "sltu(constant,add(input,input))",
+        "overlaps_historical_family": true,
+        "expected_instruction_reduction": 1,
+        "timed_replacements": 2,
+        "dynamic_occurrences": 1
+      },
+      {
+        "name": "candidate_04",
+        "formula": "sub(0,sltu(0,in0))",
+        "operation_family": "sub(constant,sltu(constant,input))",
+        "overlaps_historical_family": false,
+        "expected_instruction_reduction": 1,
+        "timed_replacements": 2,
+        "dynamic_occurrences": 1
+      }
+    ],
+    "discovery_error": "Too few calibrated executable candidates",
+    "routed_baseline_measured": false,
+    "candidate_attempts": 0,
+    "candidate_labels": 0,
+    "area_or_timing_results": 0,
+    "observed_command_monotonic_seconds": {
+      "prepare": 0.672098625,
+      "discover": 13.726373291
+    },
+    "clock_disagreement_phase_count": 2
+  },
+  "scope": "Offline reconstruction of the completed baseline-only discovery rejection. No new target job, candidate measurement, model fit, or outcome label was added.",
+  "limitations": [
+    "Profile counters are from the instrumented discovery simulation, not a routed baseline or measured speedup.",
+    "The 12-formula pool and public opportunity gate were never reached; no public pool was frozen.",
+    "Operation-family overlap is a public-feature audit of discovered formulas, not independent workload confirmation.",
+    "Clock disagreement was flagged for both qualification subprocesses; monotonic durations are retained, with no uninterrupted wall-time claim."
+  ]
+}

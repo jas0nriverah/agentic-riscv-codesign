@@ -2,12 +2,13 @@
 
 Prepared October 27, 2026, for the October 28 progress presentation.
 
-**Version note:** the `AgenticRiscPredictor.pdf` supplied separately on October
-27 is a different 15-page report version from the DOCX listed below. That PDF
-has blank AI-methodology/results subsections and unresolved major/email
-placeholders. Reconcile the intended submission file before upload; see the
-[report-to-evidence crosswalk](../../docs/midterm-report-alignment.md). Do not
-assume this bundle replaces or corrects the separately supplied PDF.
+**Version note:** the owner confirmed that the separately supplied 15-page
+`AgenticRiscPredictor.pdf` is the current report. The DOCX listed below is a
+different draft and must not silently replace it. The current PDF still has
+blank AI-methodology and AI-results subsections, unresolved major/email
+placeholders, and older setup/results that need explicit historical labeling.
+Use the [report-to-evidence crosswalk](../../docs/midterm-report-alignment.md)
+to fill those gaps from verified results before submitting.
 
 ## Deliverables
 
@@ -29,4 +30,6 @@ Before Canvas upload, confirm the member names, Git author aliases, actual contr
 - The current Codex chat model completed one bounded EDN selector replay and matched the measured-pool oracle after one valid measurement; a malformed ID charged a second attempt. Frequency, merit, XGBoost, and GP controls also match the oracle at the same two-attempt endpoint. This is not a new native measurement or an LLM win.
 - Dynamic LLM routing and cost-tiered model selection are not implemented. One-to-three-instruction joint selection and validation remains future work.
 
-The report and slides are submission-ready aside from the contribution confirmation above. No Canvas upload was performed.
+The slide and dataset artifacts are included in this bundle; the report still
+needs the AI-section and placeholder corrections above, and the contribution
+matrix needs team confirmation. No Canvas upload was performed.
