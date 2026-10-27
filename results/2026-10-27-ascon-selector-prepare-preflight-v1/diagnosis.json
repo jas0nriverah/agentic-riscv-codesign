@@ -1,0 +1,29 @@
+{
+  "schema": "isaforge-ascon-selector-prepare-preflight-failure-v1",
+  "created_at_utc": "2026-10-27T18:36:00+00:00",
+  "status": "stopped_before_controller_session_and_candidate_dispatch",
+  "error": "Restored target baseline differs from the sealed prelabel pool",
+  "cause": "The original controller compared all baseline_provenance fields byte-for-byte, including the restored root path and hashes of root-local plan/command/discovery/baseline artifacts.",
+  "evidence": {
+    "failed_restored_root": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/ascon-native-selector-2026-10-27",
+    "prelabel_public_candidate_count": 12,
+    "restored_public_candidate_count": 12,
+    "public_pool_equal": true,
+    "context_id_equal": true,
+    "only_differing_top_level_context_field": "baseline_provenance",
+    "root_path_matches_restored_root": true,
+    "restored_provenance_artifacts_match_files": true,
+    "before_artifact_hashes_match_files": true,
+    "controller_session_created": false,
+    "candidate_attempt_ledgers": 0,
+    "candidate_measurement_directories": 0,
+    "baseline_only_qualification_candidate_attempts": 0,
+    "target_candidate_labels_read_after_preregistration": 0,
+    "candidate_jobs_started_by_prepare": 0,
+    "plan_sha256": "d08802d42fc4dc65696e0396333a8d42b62b26e6ffc06fc17cb1a68c957833f8",
+    "public_sha256": "f4c0f94c0de9c515405910a9d38d3f6ada3dcc7228ab352030a749fbe3fcd148",
+    "restored_context_id": "ab9ef4693ad4ad77e1256f85aabe11074dfc424eb25dfe461d1b55e9abe75e13",
+    "prelabel_context_id": "ab9ef4693ad4ad77e1256f85aabe11074dfc424eb25dfe461d1b55e9abe75e13"
+  },
+  "recovery": "Preserved the failed root. Retry uses a distinct fresh root and compares portable context fields while separately verifying every restored root-local artifact hash."
+}

@@ -32,8 +32,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = "isaforge/ascon_selector_controller.py"
 PREREG = ROOT / "results/2026-10-27-ascon-selector-prereg"
 QUALIFICATION = ROOT / "results/2026-10-27-ascon-target-qualification"
-CAMPAIGN_DEFAULT = ROOT / "generated/ascon-native-selector-2026-10-27"
-RELEASE_DEFAULT = ROOT / "results/2026-10-27-ascon-selector-controller-release-v1"
+CAMPAIGN_DEFAULT = ROOT / "generated/ascon-native-selector-2026-10-27-v2"
+RELEASE_DEFAULT = ROOT / "results/2026-10-27-ascon-selector-controller-release-v2"
 MAX_QUERIES = 3
 MAX_TOOL_CALLS = 20
 AREA_CAP = 64
@@ -267,14 +267,44 @@ def _prelabel_from_root(root: Path) -> tuple[list[dict], dict, dict]:
     with ascon.registration():
         public, context, before = ascon.baseline_public(root)
     _require(public == c.unseal(PREREG / "inputs/public.json") and
-             context == c.unseal(PREREG / "inputs/context.json") and
+             _portable_context(context) == _portable_context(
+                 c.unseal(PREREG / "inputs/context.json")) and
              context["context_id"] == prereg["target_context_id"] and
              before["workload"] == ascon.GROUP,
              "Restored target baseline differs from the sealed prelabel pool")
+    _verify_restored_baseline_provenance(root, context, before)
     frozen = factorized.authenticate(PREREG / "selection")
     _require(len(frozen["history"]) == 90 and prereg["target_labels_observed"] == 0,
              "Family-safe frozen model package differs")
     return public, context, before
+
+
+def _portable_context(context: dict) -> dict:
+    """Drop only root-local provenance that necessarily changes on archive restore."""
+    result = copy.deepcopy(context)
+    provenance = result.get("baseline_provenance")
+    _require(isinstance(provenance, dict), "Baseline provenance is required")
+    provenance.pop("root", None)
+    provenance.pop("artifacts", None)
+    return result
+
+
+def _verify_restored_baseline_provenance(root: Path, context: dict, before: dict) -> None:
+    root = Path(root).resolve()
+    provenance = context.get("baseline_provenance")
+    _require(isinstance(provenance, dict) and
+             Path(provenance.get("root", "")).resolve() == root and
+             isinstance(provenance.get("artifacts"), dict) and provenance["artifacts"],
+             "Restored baseline provenance root or artifact map is invalid")
+    _require(isinstance(before.get("artifacts"), dict),
+             "Routed baseline artifact map is missing")
+    for artifact_map in (provenance["artifacts"], before.get("artifacts", {})):
+        for name, expected in artifact_map.items():
+            relative = Path(name)
+            path = (root / relative).resolve()
+            _require(not relative.is_absolute() and path.is_relative_to(root) and
+                     c.sha(path) == expected,
+                     "Restored baseline artifact differs: " + str(name))
 
 
 def prepare_campaign(root: Path = CAMPAIGN_DEFAULT,

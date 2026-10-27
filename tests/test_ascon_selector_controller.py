@@ -57,6 +57,32 @@ def test_release_source_bindings_authenticate_zero_label_inputs():
         controller.ROOT / "tests/test_ascon_selector_controller.py")
 
 
+def test_relocated_context_ignores_only_root_specific_artifact_receipts(tmp_path):
+    root = tmp_path / "restored"
+    root.mkdir()
+    artifact = root / "plan.json"
+    artifact.write_text('{"context":"same"}\n')
+    digest = c.sha(artifact)
+    restored = {"context_id": "same-context", "workload_group": "ascon",
+        "baseline_provenance": {"root": str(root), "artifacts": {"plan.json": digest},
+            "source_bindings": {"model.py": "source-hash"}}}
+    frozen = {"context_id": "same-context", "workload_group": "ascon",
+        "baseline_provenance": {"root": "/old/qualification/root",
+            "artifacts": {"plan.json": "old-root-hash"},
+            "source_bindings": {"model.py": "source-hash"}}}
+    controller._require(controller._portable_context(restored) ==
+                        controller._portable_context(frozen), "portable projection differs")
+    controller._verify_restored_baseline_provenance(root, restored,
+        {"artifacts": {"plan.json": digest}})
+
+    bad_source = {**frozen, "baseline_provenance": {
+        **frozen["baseline_provenance"], "source_bindings": {"model.py": "changed"}}}
+    assert controller._portable_context(restored) != controller._portable_context(bad_source)
+    with pytest.raises(ValueError, match="Restored baseline artifact differs"):
+        controller._verify_restored_baseline_provenance(root, restored,
+            {"artifacts": {"plan.json": "wrong-hash"}})
+
+
 def test_prediction_output_filters_by_stable_handle(monkeypatch, tmp_path):
     handles = [dict(handle="C01", candidate_id="id-1"),
                dict(handle="C02", candidate_id="id-2")]
