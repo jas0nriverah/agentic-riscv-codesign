@@ -1,5 +1,7 @@
 # Research result archives
 
+[MiBench stringsearch target qualification](2026-10-27-mibench-stringsearch-qualification/README.md): pinned source passes 57/57 host cases and target self-check, but discovery finds only ten calibrated formulas and two relocation-safe formulas against the unchanged twelve-candidate gate. Rejected before opportunity/routed-baseline phases; zero candidate attempts or labels. Raw run and offline reconstruction are preserved.
+
 [Ascon selector controller v2 failure](2026-10-27-ascon-selector-controller-v2-attempt/README.md): one unknown controller reservation, zero candidate evaluations and zero target outcomes. The baseline-wrapper bug, sealed attempt evidence, and correction are recorded without retrying the v2 slot.
 
 [October 27 final selection scorecard](2026-10-27-final-selection-scorecard/README.md): five research figures and a hash-bound metrics bundle comparing the measured-performance XGBoost regressor, pairwise ranker, factorized feasibility model, merit, frequency, timing-aware heuristic and random under matched 1/2/3-evaluation budgets. The whole-workload-heldout results are retrospective: pairwise is the best balanced ML challenger, merit wins at B3, and no model is promoted. [CoreMark v1.01 baseline-fit rejection](2026-10-27-coremark-fit-rejection/README.md) records a 6,360-byte fixed-contract linker overflow and zero labels.

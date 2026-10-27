@@ -4,9 +4,10 @@ The initial screen was a read-only source and contract review of the official
 [Embecosm MiBench repository](https://github.com/embecosm/mibench/tree/092483c3f8c1e7efe7bbb54e010cc7ee31ccdc57)
 at commit `092483c3f8c1e7efe7bbb54e010cc7ee31ccdc57` and the original
 [University of Michigan MiBench page](https://vhosts.eecs.umich.edu/mibench/).
-The initial screen compiled no programs and exposed no target pools. A later
-host-only preflight for office `stringsearch` is recorded below; no target
-qualification or candidate measurement has yet been run.
+The initial screen compiled no programs and exposed no target pools. The later
+office `stringsearch` host preflight and baseline-only target qualification are
+recorded below. Its target run was rejected before a legal candidate pool or
+candidate measurement existed.
 
 - **Automotive `qsort`:** `qsort_small.c` allocates `MAXARRAY=60000` records of
   128 bytes in its automatic array, requiring about 7.32 MiB of stack before
@@ -40,7 +41,7 @@ This screen rejects these five paths only; it is not a survey of every MiBench
 program. Do not count it as target compatibility, candidate extraction,
 measured performance, or a workload rejection after execution.
 
-## October 27 follow-up — office `stringsearch`
+## October 27 host preflight — office `stringsearch`
 
 The pinned small Pratt-Boyer-Moore program at the same MiBench commit is a
 candidate for the next workload qualification. Its source has 57 fixed
@@ -53,13 +54,30 @@ verification after the workload call.
 
 The directory notice says to assume GPL while the source says its author put it
 in the public domain. Both notices are preserved; the project treats the
-source conservatively as GPL without claiming a version. The target
-qualification has not run. Automatic formula count, memory fit, target
-correctness, opportunity score, routed baseline and formula-family overlap
-remain unknown. `strstr` shares the broad text domain, although its GNU libc
-implementation is structurally different; this program is not an independent
-confirmatory family until the extracted formula audit establishes that.
-Preserve the unchanged 12-candidate, 0.5%/10-occurrence and memory gates.
-Follow the [adapter contract](mibench-stringsearch-adapter-contract-2026-10-27.md)
-and run `../work/audit-venv/bin/python scripts/qualify_mibench_stringsearch.py`
-only after its source-bound code and protocol are committed and pushed.
+source conservatively as GPL without claiming a version. The unchanged
+12-candidate, 0.5%/10-occurrence and memory gates were retained when the
+source-bound adapter and protocol were committed and pushed.
+
+## October 27 target qualification — rejected at discovery
+
+The target completed its fixed-input correctness check (result 57) and
+discovery profile (**393,191 cycles / 67,989 instructions**). Program and BSS
+ended at byte **5,556 / 6,400**, and observed stack use was **592 / 1,664
+bytes**. These profile figures are not a routed baseline.
+
+Automatic extraction found **10 raw, executable, calibrated formulas**, short
+of the unchanged 12-candidate requirement. Only **two** passed the relocation
+guard; the other eight include symbolic `%hi`/`%lo` address relocations. The
+run stopped at discovery with `Too few calibrated executable candidates`,
+before opportunity scoring or routed baseline measurement. Candidate dispatch
+remained disabled: **zero candidate attempts, zero speedup labels, zero area
+or Fmax results, and no model or policy comparison**. Preserve the raw run and
+offline reconstruction in the [qualification record](../results/2026-10-27-mibench-stringsearch-qualification/README.md).
+
+This is an engineering rejection that documents the report's automatic
+candidate-discovery objective, not a completed performance-selection
+experiment. `strstr` shares the broad text domain, though its GNU libc
+implementation is structurally different. Since no pool was frozen and exact
+candidate families were not audited against historical pools, stringsearch
+cannot count as independent confirmatory evidence. Do not rerun this context,
+relax its gates, or describe its instrumented profile as a measured speedup.

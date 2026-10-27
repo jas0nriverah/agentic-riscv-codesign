@@ -1,0 +1,141 @@
+{
+  "schema": "isaforge-mibench-stringsearch-v1-qualification",
+  "workload_group": "mibench-stringsearch-pbm",
+  "upstream_suite": "MiBench",
+  "pool_size": 12,
+  "minimum_calibrated_cycle_reduction": 0.005,
+  "minimum_timed_replacements": 10,
+  "joint_gate": "At least one same candidate satisfies both public opportunity minima.",
+  "unchanged_search_source": true,
+  "unchanged_fixed_inputs": true,
+  "output_adapter": "Renamed upstream main; printf/putchar map to a bounded offset-capture shim; only benchmark ABI functions are added.",
+  "correctness": "The shim records actual hit/miss and returned pointer offset for all 57 upstream cases; verify_benchmark compares these with independently derived Python str.find offsets after the cycle counter stops.",
+  "correctness_limitation": "Offset checks use a pinned independent oracle over the fixed literal input; this does not establish general-input correctness.",
+  "timing_limitation": "The small output-capture shim runs inside benchmark() and contributes constant bookkeeping overhead to measured cycles.",
+  "library_runtime": "Freestanding bytewise strlen/strncmp implementations are part of the source-bound adapter; no host libc is linked.",
+  "compiler_flags": [
+    "-march=rv32i_zicsr",
+    "-mabi=ilp32",
+    "-Os",
+    "-std=gnu17",
+    "-nostdlib",
+    "-nostartfiles",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-msmall-data-limit=0",
+    "-mno-relax",
+    "-DCPU_MHZ=1"
+  ],
+  "isa": "rv32i_zicsr",
+  "abi": "ilp32",
+  "optimization": "-Os",
+  "clock_mhz": 12,
+  "route_seeds": [
+    1,
+    2,
+    3
+  ],
+  "memory_partition": {
+    "ram_bytes": 8192,
+    "program_limit": 6400,
+    "stack_floor": 6528,
+    "stack_bytes": 1664,
+    "minimum_guard_bytes": 128
+  },
+  "candidate_dispatch_enabled": false,
+  "target_candidate_attempts": 0,
+  "family_status": "Provisional Pratt-Boyer-Moore implementation in text search; exact target formula families must be audited against historical pools before this can count as independent confirmation.",
+  "created_at_utc": "2026-10-27T20:21:21.775757+00:00",
+  "phases": [
+    "prepare",
+    "discover",
+    "opportunity",
+    "baseline",
+    "public",
+    "freeze"
+  ],
+  "reference_root": "generated/codesign-crc32-2026-10-19-r1",
+  "reference_plan_sha256": "796167e07bdc413f348c829ca93e60eda87162ca02143d3f57269ff2059197b9",
+  "historical_corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "native_root": "generated/mibench-stringsearch-qualification-2026-10-27",
+  "source_bindings": {
+    "scripts/qualify_mibench_stringsearch.py": "2c60cddaac95e3ee56268ddf48286d54aa00a22be8f2f54183e6151292566f04",
+    "scripts/qualify_opportunity_sources.py": "389e34ba724f2dcc3766752e404e46006b6aa7fced4f2e21508127ac08e8ffe1",
+    "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+    "isaforge/observed_command.py": "f56bf235b31205c842ea04ab5a493ee7f7e6731844e05b6d8991f21d9f3be41e",
+    "isaforge/mibench_stringsearch_workload.py": "3cbc274d702e56ae758da5a5eb6d23cd78fa78fc01633f68a969138b111e1b2d",
+    "tests/test_mibench_stringsearch_workload.py": "a70319e98ff06b6a6db791eabbba68583c95ce82195f8261cb22844d4315ddc5",
+    "docs/mibench-stringsearch-adapter-contract-2026-10-27.md": "a78c9fd55d401a7a2bc242f23e1a8c9d497fbadcdec4030a6eb3a775ce5d0f26",
+    "benchmarks/mibench/stringsearch/MIBENCH_SOURCE_PIN.json": "0be49f305e47fbc0c7e7e84fbe74a3d43372f33afb840031b3ca260a57eb3ff8",
+    "benchmarks/mibench/stringsearch/adapter.c": "a46c8975a98e355153e5f5a20da023c3838103b37a981ee5a9b6da800d7be8fc",
+    "benchmarks/mibench/stringsearch/pbmsrch_small.c": "e2bd846a0ae52e2a340c3885379dd06582dca26daf2b691aae0ab6f0d45fc4bb",
+    "benchmarks/mibench/stringsearch/LICENSE": "b43faa73aa52be87b3121a49495c833d728f10df7652b30d02a9d8578c56f819",
+    "results/2026-10-26-lift-selection-corpus/corpus.json": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+    "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+    "isaforge/campaign_evidence.py": "96e4a96379dc336e1c04fc8a3bbfb9971cf65281d14cfe140f4eecaec51a748e",
+    "isaforge/prospective_inputs.py": "90abbebb74ad967d498c126134b30401e195da7e12ceef405661e5742ef5f446",
+    "hardware/embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+    "hardware/embench_memory.c": "343b26ae849f9bfab8ed197636449c4a91c5d78f26fe7f6ff4f960901520b847",
+    "hardware/checked_sim.cpp": "477635f316551bf85bd7ac1addc11bb9fa2c252969202621e75692ea5cfd9f07"
+  },
+  "workers": 1,
+  "build_workers": 2,
+  "phase_timeout_seconds": 3600,
+  "phase_commands": {
+    "prepare": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.mibench_stringsearch_workload",
+      "prepare",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/mibench-stringsearch-qualification-2026-10-27",
+      "--reference-root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+    ],
+    "discover": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.mibench_stringsearch_workload",
+      "discover",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/mibench-stringsearch-qualification-2026-10-27"
+    ],
+    "opportunity": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.mibench_stringsearch_workload",
+      "opportunity",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/mibench-stringsearch-qualification-2026-10-27"
+    ],
+    "baseline": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.mibench_stringsearch_workload",
+      "baseline",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/mibench-stringsearch-qualification-2026-10-27"
+    ],
+    "public": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.mibench_stringsearch_workload",
+      "public",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/mibench-stringsearch-qualification-2026-10-27"
+    ],
+    "freeze": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.mibench_stringsearch_workload",
+      "freeze",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/mibench-stringsearch-qualification-2026-10-27"
+    ]
+  },
+  "qualification_rule": "One original-input MiBench small stringsearch attempt under the unchanged 12-formula, memory, correctness and joint 0.5%-plus-10-replacement opportunity gates; no fallback, retries, candidate measurements, model fitting or label exposure.",
+  "rejection_rule": "Preserve the first failed phase and raw archive; do not change source, input, compiler, partition, pool size or thresholds.",
+  "pool_freeze_is_candidate_authorization": false
+}

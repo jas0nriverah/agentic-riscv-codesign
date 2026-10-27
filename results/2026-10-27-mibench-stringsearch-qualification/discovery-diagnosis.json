@@ -1,0 +1,268 @@
+{
+  "schema": "isaforge-mibench-stringsearch-discovery-diagnosis-v1",
+  "context_id": "34aa038ab191332ac3cd3134c617dc08caf8d41442d019347ab5094a8c42d4cf",
+  "qualification_protocol_sha256": "50f1cfd9577e373646cc30510efbb1b636a2c2403afb577ee9c5c743596a1eb9",
+  "native_discovery_source_sha256": "d758069900bb858e4935df002c2edd768087fc8f469acec17895e45e176eff0c",
+  "original_binary_sha256": "6f03fad982e6f9f40123cdf7770766c283078aa9dbff718cff83d9e8b72c0b8d",
+  "marked_binary_sha256": "6f03fad982e6f9f40123cdf7770766c283078aa9dbff718cff83d9e8b72c0b8d",
+  "profile_sha256": "67e11797f87e35c1e2440e58b0934a8453106b822d5d54383b164156efb60922",
+  "metrics": {
+    "profile_cycles": 393191,
+    "profile_instructions": 67989,
+    "result": 57,
+    "target_correctness": true,
+    "program_and_bss_end": 5556,
+    "program_limit": 6400,
+    "observed_stack_bytes": 592,
+    "stack_limit": 1664,
+    "mapped_source_statements": 255,
+    "raw_formula_count": 10,
+    "executable_formula_count": 10,
+    "calibrated_formula_count": 10,
+    "uncalibrated_formula_count": 0,
+    "relocation_safe_calibrated_formula_count": 2,
+    "required_pool_size": 12,
+    "discovery_status": "nonzero_exit",
+    "discovery_error": "Too few calibrated executable candidates",
+    "candidate_attempts": 0,
+    "routed_baseline_measured": false,
+    "candidate_labels": 0
+  },
+  "excluded_uncalibrated_formulas": [],
+  "formulas": [
+    {
+      "formula": "add(in0,slli(in1,2))",
+      "instruction_savings": 581,
+      "dynamic_custom_count": 581,
+      "relocation_safe": true
+    },
+    {
+      "formula": "add(addi(lui(4096),1004),in0)",
+      "instruction_savings": 114,
+      "dynamic_custom_count": 57,
+      "relocation_safe": false
+    },
+    {
+      "formula": "add(addi(lui(4096),1232),in0)",
+      "instruction_savings": 114,
+      "dynamic_custom_count": 57,
+      "relocation_safe": false
+    },
+    {
+      "formula": "add(addi(in0,1004),in1)",
+      "instruction_savings": 57,
+      "dynamic_custom_count": 57,
+      "relocation_safe": false
+    },
+    {
+      "formula": "add(addi(in0,1232),in1)",
+      "instruction_savings": 57,
+      "dynamic_custom_count": 57,
+      "relocation_safe": false
+    },
+    {
+      "formula": "addi(lui(4096),-40)",
+      "instruction_savings": 57,
+      "dynamic_custom_count": 57,
+      "relocation_safe": false
+    },
+    {
+      "formula": "addi(lui(4096),1004)",
+      "instruction_savings": 57,
+      "dynamic_custom_count": 57,
+      "relocation_safe": false
+    },
+    {
+      "formula": "addi(lui(4096),1232)",
+      "instruction_savings": 57,
+      "dynamic_custom_count": 57,
+      "relocation_safe": false
+    },
+    {
+      "formula": "sub(addi(0,1),in0)",
+      "instruction_savings": 57,
+      "dynamic_custom_count": 57,
+      "relocation_safe": true
+    },
+    {
+      "formula": "addi(lui(4096),-508)",
+      "instruction_savings": 1,
+      "dynamic_custom_count": 1,
+      "relocation_safe": false
+    }
+  ],
+  "relocation_rejections": [
+    {
+      "name": "candidate_01",
+      "formula": "add(addi(lui(4096),1004),in0)",
+      "safe": false,
+      "checked_sites": 3,
+      "unsafe_sites": [
+        {
+          "site": 167,
+          "assembly": "\tlui\ta4,%hi(observed_found)",
+          "reason": "relocation_modifier",
+          "function": "isaforge_mibench_stringsearch_main",
+          "source_line": 229
+        },
+        {
+          "site": 169,
+          "assembly": "\taddi\ta4,a4,%lo(observed_found)",
+          "reason": "relocation_modifier",
+          "function": "isaforge_mibench_stringsearch_main",
+          "source_line": 231
+        }
+      ],
+      "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+    },
+    {
+      "name": "candidate_02",
+      "formula": "add(addi(lui(4096),1232),in0)",
+      "safe": false,
+      "checked_sites": 3,
+      "unsafe_sites": [
+        {
+          "site": 172,
+          "assembly": "\tlui\ta4,%hi(observed_offsets)",
+          "reason": "relocation_modifier",
+          "function": "isaforge_mibench_stringsearch_main",
+          "source_line": 234
+        },
+        {
+          "site": 173,
+          "assembly": "\taddi\ta4,a4,%lo(observed_offsets)",
+          "reason": "relocation_modifier",
+          "function": "isaforge_mibench_stringsearch_main",
+          "source_line": 235
+        }
+      ],
+      "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+    },
+    {
+      "name": "candidate_03",
+      "formula": "add(addi(in0,1004),in1)",
+      "safe": false,
+      "checked_sites": 2,
+      "unsafe_sites": [
+        {
+          "site": 169,
+          "assembly": "\taddi\ta4,a4,%lo(observed_found)",
+          "reason": "relocation_modifier",
+          "function": "isaforge_mibench_stringsearch_main",
+          "source_line": 231
+        }
+      ],
+      "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+    },
+    {
+      "name": "candidate_04",
+      "formula": "add(addi(in0,1232),in1)",
+      "safe": false,
+      "checked_sites": 2,
+      "unsafe_sites": [
+        {
+          "site": 173,
+          "assembly": "\taddi\ta4,a4,%lo(observed_offsets)",
+          "reason": "relocation_modifier",
+          "function": "isaforge_mibench_stringsearch_main",
+          "source_line": 235
+        }
+      ],
+      "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+    },
+    {
+      "name": "candidate_05",
+      "formula": "addi(lui(4096),-40)",
+      "safe": false,
+      "checked_sites": 2,
+      "unsafe_sites": [
+        {
+          "site": 27,
+          "assembly": "\tlui\ta5,%hi(table)",
+          "reason": "relocation_modifier",
+          "function": "init_search",
+          "source_line": 56
+        },
+        {
+          "site": 28,
+          "assembly": "\taddi\ta5,a5,%lo(table)",
+          "reason": "relocation_modifier",
+          "function": "init_search",
+          "source_line": 57
+        }
+      ],
+      "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+    },
+    {
+      "name": "candidate_06",
+      "formula": "addi(lui(4096),1004)",
+      "safe": false,
+      "checked_sites": 2,
+      "unsafe_sites": [
+        {
+          "site": 167,
+          "assembly": "\tlui\ta4,%hi(observed_found)",
+          "reason": "relocation_modifier",
+          "function": "isaforge_mibench_stringsearch_main",
+          "source_line": 229
+        },
+        {
+          "site": 169,
+          "assembly": "\taddi\ta4,a4,%lo(observed_found)",
+          "reason": "relocation_modifier",
+          "function": "isaforge_mibench_stringsearch_main",
+          "source_line": 231
+        }
+      ],
+      "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+    },
+    {
+      "name": "candidate_07",
+      "formula": "addi(lui(4096),1232)",
+      "safe": false,
+      "checked_sites": 2,
+      "unsafe_sites": [
+        {
+          "site": 172,
+          "assembly": "\tlui\ta4,%hi(observed_offsets)",
+          "reason": "relocation_modifier",
+          "function": "isaforge_mibench_stringsearch_main",
+          "source_line": 234
+        },
+        {
+          "site": 173,
+          "assembly": "\taddi\ta4,a4,%lo(observed_offsets)",
+          "reason": "relocation_modifier",
+          "function": "isaforge_mibench_stringsearch_main",
+          "source_line": 235
+        }
+      ],
+      "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+    },
+    {
+      "name": "candidate_09",
+      "formula": "addi(lui(4096),-508)",
+      "safe": false,
+      "checked_sites": 2,
+      "unsafe_sites": [
+        {
+          "site": 104,
+          "assembly": "\tlui\ts0,%hi(.LANCHOR0)",
+          "reason": "relocation_modifier",
+          "function": "isaforge_mibench_stringsearch_main",
+          "source_line": 159
+        },
+        {
+          "site": 105,
+          "assembly": "\taddi\ts0,s0,%lo(.LANCHOR0)",
+          "reason": "relocation_modifier",
+          "function": "isaforge_mibench_stringsearch_main",
+          "source_line": 160
+        }
+      ],
+      "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+    }
+  ],
+  "result_scope": "Offline reconstruction of one already-completed baseline-only discovery; no target job, candidate attempt, policy fit, or label is added.",
+  "reproduction_script_sha256": "4e5e9883d91d104dc68236267a04ae5685c92293b02184038916cc3a06cc89a4"
+}

@@ -2,6 +2,13 @@
 
 Prepared October 27, 2026, for the October 28 progress presentation.
 
+**Version note:** the `AgenticRiscPredictor.pdf` supplied separately on October
+27 is a different 15-page report version from the DOCX listed below. That PDF
+has blank AI-methodology/results subsections and unresolved major/email
+placeholders. Reconcile the intended submission file before upload; see the
+[report-to-evidence crosswalk](../../docs/midterm-report-alignment.md). Do not
+assume this bundle replaces or corrects the separately supplied PDF.
+
 ## Deliverables
 
 - `isaforge-midterm-progress-report.docx` — methodology, AI use, measured results, model evaluation, explainability, chat-agent pilot, timeline, and contribution matrix.

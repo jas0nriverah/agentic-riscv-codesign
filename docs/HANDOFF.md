@@ -1,20 +1,24 @@
 # Current handoff — model evidence after Lift selection
 
-## October 27 — MiBench stringsearch target preflight prepared
+## October 27 — MiBench stringsearch rejected at discovery
 
-The pinned MiBench office `stringsearch` small case is a prospective new source,
-not yet a target-qualified workload. Its source-bound adapter and target
-qualification protocol reuse the existing guarded PicoRV32 pipeline and retain
-the 12-candidate, memory, and 0.5%/10-occurrence gates. A host build matches all
-57 fixed cases against an independent Python offset oracle. The source is
-provisionally same-domain text-search transfer until the exact extracted
-formula families are compared with historical pools. No target compilation,
-candidate pool, resource/timing result, target label, or model update exists.
-After its code/protocol commit is pushed, run
-`../work/audit-venv/bin/python scripts/qualify_mibench_stringsearch.py` once.
-The run is baseline-only and dispatch-disabled; preserve any first rejection.
-See the [adapter contract](mibench-stringsearch-adapter-contract-2026-10-27.md)
-and [pinned scout](mibench-scout-2026-10-27.md).
+After its source-bound adapter and protocol were committed and pushed, the
+baseline-only qualification ran once using
+`../work/audit-venv/bin/python scripts/qualify_mibench_stringsearch.py`. The
+pinned program passed its host 57-case offset oracle and target self-check.
+Target discovery reported **393,191 cycles / 67,989 instructions**, with
+program+BSS at **5,556 / 6,400 bytes** and stack use **592 / 1,664 bytes**.
+It found ten calibrated formulas, only two relocation-safe, against the frozen
+12-candidate requirement. Discovery stopped before opportunity scoring or the
+routed baseline; there were zero candidate attempts or labels, zero resource
+or timing results, and no model update. These discovery counters are not a
+routed baseline or speedup labels. Preserve the [qualification archive and
+offline diagnosis](../results/2026-10-27-mibench-stringsearch-qualification/README.md).
+Do not rerun this context or lower any gates. This single text-search source
+has no frozen candidate pool or completed historical formula-family audit and
+cannot establish independent confirmation. See the [adapter
+contract](mibench-stringsearch-adapter-contract-2026-10-27.md) and [source
+scout](mibench-scout-2026-10-27.md).
 
 ## October 27 — Ascon v1.3.0 target baseline-only qualification accepted
 
@@ -214,10 +218,13 @@ campaign root still contains one charged unknown reservation and remains
 untouched. The v5 run is same-domain crypto transfer, not independent-family
 confirmation, and its nine unmeasured candidates leave the oracle incomplete.
 
-The [MiBench source scout](mibench-scout-2026-10-27.md) rejected four
-read-only source candidates under the current target contract. It ran no
-benchmark and contributes no labels. Continue searching for an eligible
-independent integer workload; the six-family confirmatory cohort remains
-unestablished.
+The [MiBench source scout](mibench-scout-2026-10-27.md) records five source-level
+exclusions and the later `stringsearch` target rejection. The latter completed
+its target correctness/profile run, then failed discovery at ten calibrated
+formulas (two relocation-safe) versus the fixed twelve-candidate gate. It
+produced no routed baseline or candidate labels; see its [raw qualification
+and diagnosis](../results/2026-10-27-mibench-stringsearch-qualification/README.md).
+Continue searching for an eligible independent integer workload; the
+six-family confirmatory cohort remains unestablished.
 
 **Latest October 27 update — Ascon three-query run and paid-update bug:** the v5 release passed its pushed-source gate at `007d6593`, then the operator-relayed chat agent measured three candidates. C01: 1.019698×, +73 LUT4, 62.992 MHz (area-infeasible); C06: 1.017027×, +41 LUT4, 67.069 MHz; C02: 1.023731×, +42 LUT4, 64.620 MHz. All passed correctness; C02 is best among the three measured feasible results. Nine candidates are still censored, so there is no complete-pool oracle or heuristic comparison. The complete generated campaign is preserved as a hash-checked archive in [`results/2026-10-27-ascon-selector-chat-run-v5/`](../results/2026-10-27-ascon-selector-chat-run-v5/). A real paid-prefix audit found `_dynamic_gp` excluded all three successes because audit rows omitted `status`; it recorded zero fit time. The working source now persists success status and includes a regression test. Four focused test modules pass (30 tests), and a post-hoc 90+3-row replay confirms refit execution and the paid-prefix hash, but this is consumed-data software validation. The v5 release remains archived against commit `007d6593` and is no longer valid for further dispatch after these source changes. Treat this run as integration development, not a prospective comparative result. The next blocker is still a fresh independent workload; the disclosed Ascon pool cannot be reused to claim confirmation.
