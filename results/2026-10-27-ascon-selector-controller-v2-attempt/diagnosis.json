@@ -1,0 +1,70 @@
+{
+  "baseline_cycles": 247224006,
+  "candidate": {
+    "candidate_id": "f88f866c52a20f41741309877b626293d2d4a15766fb83952fa0babee20f311e",
+    "controller_elapsed_seconds": 4.6029641249988344,
+    "error_type": "ValueError",
+    "formula": "and(xori(in0,-1),in1)",
+    "handle": "C01",
+    "slot_status": "unknown"
+  },
+  "candidate_measurements_completed": 0,
+  "charged_controller_attempts": 1,
+  "context_id": "ab9ef4693ad4ad77e1256f85aabe11074dfc424eb25dfe461d1b55e9abe75e13",
+  "controller_release_sha256": "4aca57467fa1ac3b37ad0142a7071fcaaadbccb209731c8921cf16a05a35a740",
+  "controller_tool_calls": 2,
+  "event_journal_diagnosis": {
+    "corrected_in_working_tree": true,
+    "interpretation": "The read-only candidate-list call completed and returned a durable public result. It consumed one controller tool call but no candidate-measurement query.",
+    "preserved_public_result_status": "ok",
+    "preserved_status": "started",
+    "raw_event_evidence_preserved": true,
+    "root_cause": "The controller called event.setdefault('status', 'complete') while the event already had status='started', so the successful read-only event was never finalized.",
+    "sequence": 1,
+    "tool": "list_candidates"
+  },
+  "events": [
+    {
+      "candidate_handle": null,
+      "error_type": null,
+      "sequence": 1,
+      "status": "started",
+      "tool": "list_candidates"
+    },
+    {
+      "candidate_handle": "C01",
+      "error_type": "ValueError",
+      "sequence": 2,
+      "status": "unknown",
+      "tool": "measure"
+    }
+  ],
+  "native_candidate_jobs": 0,
+  "native_candidate_ledgers": 0,
+  "native_candidate_measurement_directories": [],
+  "prepatch_reproduction": {
+    "error_type": "ValueError",
+    "message": "Candidate handle did not resolve inside the frozen pool",
+    "method": "Cached discovery and guarded protocol were read-only authenticated; invoking the baseline lookup path reproduced the wrapper rejection."
+  },
+  "preserved_evidence_sha256": {
+    "attempt-01.json": "c6e632a061fc53d8874f2cec33c00dccb52eac898e96502fe7120447b5899317",
+    "attempt-01.json.sha256": "0589d86802e8e40913adb6a75bd79ec2893d21793fa8c061e70a87500e57d564",
+    "candidate-handles.json": "2da99b7d6c03b3ea63832f4f6e689bb00745a5f9b03133a3f6fd98cc439690a1",
+    "candidate-handles.json.sha256": "a6e132c32ba3d84be98cf3b72f5f22c22f73679d9426bd986727d4c05a4dc82b",
+    "release-v2.json": "4aca57467fa1ac3b37ad0142a7071fcaaadbccb209731c8921cf16a05a35a740",
+    "release-v2.json.sha256": "eadc127d97c6558d1004e2d79bcf9a47179a587c2f8571efb765deb28ef9023a",
+    "session-events.json": "7fad06f0bc1da8436fd409aec0221b042558da7613797044308863a3ac9f0da8",
+    "session-events.json.sha256": "fa2c84bf7920cabee783acb76683339f5082ebb25cc49906c3a648f3505bbefb",
+    "session.json": "6a374dec992d9776738a8c0a3e7f1d3e3bbf36d4ab821e533a48c563564c0287",
+    "session.json.sha256": "fcc6faf905daef5629c0ac01ae1f51609cab58f7531c52e91324fffe0d916291"
+  },
+  "query_budget": 3,
+  "release_commit": "3191a9efa9bba9b6b956d9fad59441e105f96f3d",
+  "retried": false,
+  "root_cause": "The candidate wrapper checked every name against the candidate pool, including the cached baseline lookup that OneAttemptMixin.measure performs before evaluating a candidate. The nested baseline call raised ValueError before candidate dispatch.",
+  "schema": "isaforge-ascon-selector-controller-run-diagnosis-v1",
+  "status": "stopped_unknown_before_candidate_evaluation",
+  "target": "ascon128v13-kat-v13",
+  "target_outcome_rows": 0
+}

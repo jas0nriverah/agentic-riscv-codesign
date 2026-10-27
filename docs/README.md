@@ -1,5 +1,7 @@
 # Documentation
 
+[Paid-update semantics](paid-update-semantics.md): the adaptive hardware GP refits on its verified paid prefix; fixed joint conditioning is a separate policy with an explicit noise assumption. The Ascon controller v2 wrapper failure and its zero-measurement limit are preserved in the [run diagnosis](../results/2026-10-27-ascon-selector-controller-v2-attempt/README.md).
+
 [New full-text methods update](research-fulltext-update-2026-10-25.md) resolves Sun TCAD 2004 and separately reviews Hussein's 2025 preprint; exact TACO 2026 remains pending.
 
 [Completed G.723 transfer](g723-transfer.md): eleven verified candidates, one routing timeout and 110 total labels across 13 sources. Seventeen policies share 86 prelabel fitting rows; lookahead ties the primary endpoint but heuristics/myopic find the best verified design sooner. The full-pool oracle is unresolved; reported gaps are lower bounds. [Completed area-model test](ard-area-results.md) repairs bitcount but regresses expanded AHA; it is not promoted. Original Lift qualification is rejected with zero labels. [CFG-liveness coverage](cfg-liveness-experiment.md) and its separate baseline-only adapter are implemented/reviewed with 269 focused checks. New native qualification is unrun at the owner's requested stopping point. [Research goal](ACTIVE_GOAL.md) and [handoff](HANDOFF.md) preserve the resume contract and independent-data requirements. No field superiority is established. [Pre-joint handoff](HANDOFF-history-2026-10-25-pre-joint.md) preserves the preceding status.

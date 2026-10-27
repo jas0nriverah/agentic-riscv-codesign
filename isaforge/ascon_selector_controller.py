@@ -32,14 +32,19 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = "isaforge/ascon_selector_controller.py"
 PREREG = ROOT / "results/2026-10-27-ascon-selector-prereg"
 QUALIFICATION = ROOT / "results/2026-10-27-ascon-target-qualification"
-CAMPAIGN_DEFAULT = ROOT / "generated/ascon-native-selector-2026-10-27-v2"
-RELEASE_DEFAULT = ROOT / "results/2026-10-27-ascon-selector-controller-release-v2"
+CAMPAIGN_DEFAULT = ROOT / "generated/ascon-native-selector-2026-10-27-v3"
+RELEASE_DEFAULT = ROOT / "results/2026-10-27-ascon-selector-controller-release-v3"
 MAX_QUERIES = 3
 MAX_TOOL_CALLS = 20
 AREA_CAP = 64
 CLOCK_FLOOR_MHZ = 12.0
 FAILURE_UNKNOWN = {"unknown", "infrastructure_unknown"}
 TERMINAL_ATTEMPT_STATUSES = {"success", "failed", "unknown", "unknown_interrupted"}
+TERMINAL_EVENT_STATUSES = {
+    "complete", "success", "failed", "unknown", "unknown_interrupted",
+    "rejected", "error", "finalized",
+}
+INFLIGHT_EVENT_STATUSES = {"started", "reserved"}
 
 POLICY_UPDATE_SEMANTICS = {
     "xgboost_regression": "Fit once on the frozen family-filtered historical cohort; no target-label refit.",
@@ -58,6 +63,7 @@ ADDED_SOURCES = (
     "scripts/run_ascon_selector_controller.py",
     "docs/ascon-selector-policy-semantics-2026-10-27.md",
     "docs/joint-posterior-update-contract.md",
+    "docs/paid-update-semantics.md",
     "tests/test_ascon_selector_controller.py",
 )
 
@@ -387,6 +393,13 @@ def _load_campaign(root: Path, release_directory: Path = RELEASE_DEFAULT, *,
              len(events) <= state["tool_calls"] <= MAX_TOOL_CALLS and
              (allow_inflight or len(events) == state["tool_calls"]),
              "Controller tool-call journal differs from its event log")
+    event_statuses = [row.get("status") for row in events]
+    _require(all(status in TERMINAL_EVENT_STATUSES | INFLIGHT_EVENT_STATUSES
+                 for status in event_statuses),
+             "Controller event journal contains an invalid status")
+    _require(allow_inflight or all(status not in INFLIGHT_EVENT_STATUSES
+                                   for status in event_statuses),
+             "Controller event journal has an unfinished call; recover before continuing")
     slots = sorted(control.glob("attempt-*.json"))
     slot_records = [_read_seal(path) for path in slots]
     state_attempts = state.get("attempts", [])
@@ -461,12 +474,36 @@ def _load_campaign(root: Path, release_directory: Path = RELEASE_DEFAULT, *,
             for record in slot_records)
         _require(not unknown or state.get("status") != "ready",
                  "Unknown attempt requires recovery and a stopped selector session")
+        _validate_paid_observation_prefix(state, slot_records, public)
     return state, handles, public, dict(release=release, events=events, control=control,
                                         slots=slot_records)
 
 
 def _training() -> list[dict]:
     return c.unseal(PREREG / "selection/controls11/model/history.json")
+
+
+def _validate_paid_observation_prefix(state: dict, slots: list[dict], public: list[dict]) -> None:
+    """Bind model updates to the exact ordered outcomes in charged terminal slots."""
+    public_by_id = {row["candidate_id"]: row for row in public}
+    expected = []
+    for slot in slots:
+        outcome = slot.get("outcome")
+        if slot.get("status") not in {"success", "failed"}:
+            continue
+        _require(isinstance(outcome, dict),
+                 "Terminal measured attempt is missing its authenticated outcome")
+        identity = slot.get("candidate_id")
+        row = public_by_id.get(identity)
+        _require(row is not None and outcome.get("candidate_id") == identity,
+                 "Paid outcome identity differs from its frozen public candidate")
+        valid = baseline.validate_outcome(outcome, row)
+        _require((slot["status"] == "success" and valid) or
+                 (slot["status"] == "failed" and not valid),
+                 "Paid outcome status differs from its terminal attempt slot")
+        expected.append(outcome)
+    _require(c.digest(expected) == c.digest(state.get("observations", [])),
+             "Model observations differ from the ordered terminal paid prefix")
 
 
 def _prediction_tables(public: list[dict]) -> tuple[dict, dict]:
@@ -519,9 +556,10 @@ class _CandidateCapableEvaluator(guarded.Evaluator):
 
     def measure(self, name: str):
         with ascon.registration():
-            discovery = self.discover()
-            _require(name in {row["name"] for row in discovery["pool"]},
-                     "Candidate handle did not resolve inside the frozen pool")
+            if name != "baseline":
+                discovery = self.discover()
+                _require(name in {row["name"] for row in discovery["pool"]},
+                         "Candidate handle did not resolve inside the frozen pool")
             result = super().measure(name)
         _require(result["performance"]["benchmark_result_u32"] == ascon.EXPECTED_RESULT_U32,
                  "Candidate changed the pinned Ascon KAT fingerprint")
@@ -556,8 +594,18 @@ def _public_candidate(handle: str, binding: dict, public: list[dict], prediction
 
 def _dynamic_gp(root: Path, state: dict, public: list[dict], prediction_tables: dict,
                 handles: list[dict]) -> tuple[dict, float, float]:
-    successes = [row for row in state["observations"] if row.get("status", "success") == "success"]
-    key = c.digest([row["candidate_id"] for row in successes])
+    public_by_id = {row["candidate_id"]: row for row in public}
+    successes = [row for row in state["observations"] if row.get("status") == "success"]
+    successful_ids = [row.get("candidate_id") for row in successes]
+    _require(len(set(successful_ids)) == len(successful_ids),
+             "Successful paid-prefix identities must be unique")
+    for outcome in successes:
+        public_row = public_by_id.get(outcome.get("candidate_id"))
+        _require(public_row is not None and baseline.validate_outcome(outcome, public_row),
+                 "Adaptive GP input is not a verified successful paid outcome")
+    # Bind the cache to the full verified result rows. Candidate IDs alone do
+    # not identify the labels used by a refit and could return stale predictions.
+    key = c.digest(successes)
     cache = state.get("adaptive_gp_cache")
     if cache and cache["paid_prefix_sha256"] == key:
         return cache["predictions"], 0.0, 0.0
@@ -791,7 +839,8 @@ def call(root: Path, action: dict, *, release_directory: Path = RELEASE_DEFAULT)
             _write_state(meta["control"], state, events)
             return dict(status="error", error=str(error))
 
-        event.setdefault("status", "complete")
+        if event.get("status") == "started":
+            event["status"] = "complete"
         event["public_result"] = copy.deepcopy(result)
         _write_state(meta["control"], state, events)
         return result
@@ -895,6 +944,31 @@ def recover_interrupted(root: Path, *, release_directory: Path = RELEASE_DEFAULT
                 event["public_result"] = dict(status=status, recovered=True,
                                               outcome=copy.deepcopy(outcome))
 
+        for event in events:
+            if event.get("status") not in INFLIGHT_EVENT_STATUSES:
+                continue
+            has_slot = any(slot.get("tool_sequence") == event.get("sequence")
+                           for slot in meta["slots"])
+            if has_slot:
+                continue
+            result = event.get("public_result")
+            action = event.get("action") or {}
+            tool = action.get("tool") if isinstance(action, dict) else None
+            if (tool in {"list_candidates", "predict"} and isinstance(result, dict) and
+                    result.get("status") == "ok"):
+                # The durable public response proves the read-only action
+                # completed; repair only its event marker during recovery.
+                event.update(status="complete", recovered=True)
+            else:
+                # An interrupted call without a durable result is never
+                # replayed. Stop conservatively while preserving its charge.
+                event.update(status="unknown_interrupted", recovered=True,
+                             reason="event had no durable terminal result")
+                state["status"] = "stopped_unknown_outcome"
+
+        recovered_slots = [_read_seal(meta["control"] / f"attempt-{index:02d}.json")
+                           for index in range(1, len(meta["slots"]) + 1)]
+        _validate_paid_observation_prefix(state, recovered_slots, public)
         if len(events) != state["tool_calls"]:
             # A call may have updated the session counter before the event
             # journal reached disk. Never silently erase that audit gap.

@@ -1,5 +1,7 @@
 # Research result archives
 
+[Ascon selector controller v2 failure](2026-10-27-ascon-selector-controller-v2-attempt/README.md): one unknown controller reservation, zero candidate evaluations and zero target outcomes. The baseline-wrapper bug, sealed attempt evidence, and correction are recorded without retrying the v2 slot.
+
 [CFG coverage implementation checkpoint](2026-10-25-cfg-validation/README.md): 269 focused passes; full suite 3,824 passes / 179 passing subtests plus the unchanged legacy cleanup failure. Historical reproduction and eight frozen-package integrity checks pass. **New native qualification has not run**, no labels or model wins are added, and work stops here at the owner's request. [Resume contract](../docs/HANDOFF.md).
 
 [Completed historical-likelihood area-model experiment](2026-10-25-ard-selection-development/README.md): 450 trajectories / 900 points, 1,800 exact seventeen-control summaries and exact replay. Bitcount repairs to its heuristic optimum, but expanded AHA loses 2.288233 percentage points; no promotion. [Qualified interpretation](../docs/ard-area-results.md) and [validation](2026-10-25-model-validation/README.md) preserve 217 focused passes and 3,689 full-test / 179 subtest passes. [Original Lift qualification](2026-10-25-lift-qualification/qualification.json) is rejected with fewer than twelve executable formulas and zero candidate labels; do not retry that context.
