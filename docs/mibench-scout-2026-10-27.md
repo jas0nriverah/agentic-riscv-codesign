@@ -5,9 +5,8 @@ This was a read-only source and contract screen of the official
 at commit `092483c3f8c1e7efe7bbb54e010cc7ee31ccdc57` and the original
 [University of Michigan MiBench page](https://vhosts.eecs.umich.edu/mibench/).
 No benchmark was compiled or run, no target candidate pool was exposed, and no
-measurement or label was produced. The four screened workloads are not
-qualified for the current 8 KiB PicoRV32 RAM / 4 KiB stack / 6,400-byte
-program-and-data contract.
+measurement or label was produced. None of the five paths is currently
+eligible for a fresh selection experiment under the frozen project gates.
 
 - **Automotive `qsort`:** `qsort_small.c` allocates `MAXARRAY=60000` records of
   128 bytes in its automatic array, requiring about 7.32 MiB of stack before
@@ -25,8 +24,19 @@ program-and-data contract.
   (the script only captures output; the program exits with status 1). Its
   mutation/search path therefore lacks an upstream correctness oracle and
   exceeds the fixed data budget without a change to input scope.
+- **Automotive `bitcount`:** its `bitcnt_1.c` through `bitcnt_4.c` implement the
+  same Snippets.org population-count algorithms already adapted into the
+  measured TACLeBench `bitcount` workload. The TACLeBench source headers state
+  that those algorithms have no major functional changes; the file diffs show
+  the same loop, SWAR, nibble-table, and byte-table implementations with
+  benchmark-specific names, table initialization, and annotations. The
+  MiBench harness calls seven methods over seeded values; TACLeBench calls
+  those same methods in its checked benchmark. This is useful as a harness or
+  adapter compatibility test, but it is not an independent workload for a
+  confirmatory selection result. This was a pinned-source comparison only; no
+  build, trace, extraction, or target run was performed.
 
-This screen rejects these four paths only; it is not a survey of every MiBench
+This screen rejects these five paths only; it is not a survey of every MiBench
 program. Do not count it as target compatibility, candidate extraction,
 measured performance, or a workload rejection after execution. Continue the
 search for a freely distributable, well-checked, memory-fitting integer
