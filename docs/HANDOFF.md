@@ -1,5 +1,21 @@
 # Current handoff — model evidence after Lift selection
 
+## October 27 — MiBench stringsearch target preflight prepared
+
+The pinned MiBench office `stringsearch` small case is a prospective new source,
+not yet a target-qualified workload. Its source-bound adapter and target
+qualification protocol reuse the existing guarded PicoRV32 pipeline and retain
+the 12-candidate, memory, and 0.5%/10-occurrence gates. A host build matches all
+57 fixed cases against an independent Python offset oracle. The source is
+provisionally same-domain text-search transfer until the exact extracted
+formula families are compared with historical pools. No target compilation,
+candidate pool, resource/timing result, target label, or model update exists.
+After its code/protocol commit is pushed, run
+`../work/audit-venv/bin/python scripts/qualify_mibench_stringsearch.py` once.
+The run is baseline-only and dispatch-disabled; preserve any first rejection.
+See the [adapter contract](mibench-stringsearch-adapter-contract-2026-10-27.md)
+and [pinned scout](mibench-scout-2026-10-27.md).
+
 ## October 27 — Ascon v1.3.0 target baseline-only qualification accepted
 
 The exact command `../work/audit-venv/bin/python scripts/qualify_ascon.py` passed
