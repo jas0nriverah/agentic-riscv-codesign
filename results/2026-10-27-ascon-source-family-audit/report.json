@@ -1,0 +1,135 @@
+{
+  "ascon": {
+    "commit": "b7ca60bbf86479785de08b75aab2425dce4e9e8b",
+    "copied_bytes": 288906,
+    "copied_file_count": 13,
+    "copy_manifest_sha256": "e895f69681da185a2ccfe6f629399c695eb5ff434611d56da2674c2e85e842e6",
+    "repository": "https://github.com/ascon/ascon-c",
+    "source_manifest_sha256": "fd178acbcf69e2bfef9c4a7b1307e6a72e3b49b5e9a38f815e6c2cc9d9c77c5e",
+    "tag": "v1.3.0"
+  },
+  "ascon_source_motifs": {
+    "complemented_and": {
+      "operation_shape": "x XOR ((NOT y) AND z); the complemented-AND subtree uses two source values",
+      "related_existing_candidate_families": {
+        "and(input,xori(input,constant))": [
+          "aha_compress"
+        ]
+      },
+      "source": "benchmarks/ascon/upstream/crypto_aead/ascon128v13/ref/round.h:22-26"
+    },
+    "rotate_diffusion": {
+      "operation_shape": "64-bit rotate-right built from shifts and OR, then XOR-combined",
+      "related_existing_candidate_families": {
+        "or(input,slli(input,constant))": [
+          "ndes",
+          "nettle_md5",
+          "nettle_sha256"
+        ],
+        "xor(input,slli(input,constant))": [
+          "aha_compress"
+        ],
+        "xor(input,srli(input,constant))": [
+          "aha_compress"
+        ]
+      },
+      "source": "benchmarks/ascon/upstream/crypto_aead/ascon128v13/ref/round.h:8-9,34-38"
+    }
+  },
+  "audit_script_sha256": "6d02154b02405d77ca939fa41aa7277290c54dc41a7ed7107907f149a5928a8a",
+  "eligibility": {
+    "candidate_dispatch_enabled": false,
+    "exact_ascon_candidate_family_audit": "pending target candidate extraction",
+    "independent_confirmatory_family": false,
+    "model_fits": 0,
+    "same_domain_crypto_transfer_lead": true,
+    "target_jobs": 0,
+    "target_labels": 0
+  },
+  "exact_formula_family_intersections_between_existing_pools": {
+    "ndes__nettle_md5": [
+      "add(input,slli(input,constant))",
+      "or(input,slli(input,constant))"
+    ],
+    "ndes__nettle_sha256": [
+      "add(input,slli(input,constant))",
+      "or(input,slli(input,constant))"
+    ],
+    "nettle_md5__nettle_sha256": [
+      "add(input,slli(input,constant))",
+      "or(input,slli(input,constant))"
+    ]
+  },
+  "interpretation": "Ascon implements a cryptographic permutation with complemented-AND, XOR, and rotate/shift/OR motifs. The complemented-AND subtree and rotation-related primitives have exact family-name matches in existing public crypto candidate pools. This confirms source-level crypto-family overlap, not that an entire Ascon candidate tree is an alias. The compiler-derived Ascon candidate roster does not exist yet, so exact candidate-family exclusion cannot be completed before target lowering/discovery.",
+  "limitations": [
+    "Source motifs are not target-compiler dataflow graphs; RV32I lowering can change expression trees.",
+    "Existing family identities canonicalize operation trees and commutative child order, but do not prove arbitrary bit-vector equivalence.",
+    "This audit reads only hash-pinned public candidate features and no target outcomes."
+  ],
+  "reference_pools": {
+    "aha_compress": {
+      "candidate_count": 12,
+      "formula_families": [
+        "and(input,xori(input,constant))",
+        "slli(xori(input,constant),constant)",
+        "xor(input,slli(input,constant))",
+        "xor(input,srli(input,constant))",
+        "xor(slli(xor(input,input),constant),xor(input,input))",
+        "xor(slli(xor(input,slli(input,constant)),constant),xor(input,slli(input,constant)))",
+        "xor(srli(and(input,input),constant),xor(and(input,input),input))",
+        "xor(srli(input,constant),xor(input,input))"
+      ],
+      "path": "results/2026-10-21-blind-preregistration/targets/beebs-aha-compress/public.json",
+      "sha256": "2501d74d163d3cbca784624d26da024d7c0f61a3f6fd3024b115e895e0f84886",
+      "unique_formula_family_count": 8
+    },
+    "ndes": {
+      "candidate_count": 12,
+      "formula_families": [
+        "add(andi(srai(input,constant),constant),input)",
+        "add(input,slli(input,constant))",
+        "andi(srai(input,constant),constant)",
+        "or(and(input,slli(input,constant)),input)",
+        "or(and(input,slli(srli(input,constant),constant)),srli(input,constant))",
+        "or(andi(input,constant),andi(srai(input,constant),constant))",
+        "or(andi(input,constant),input)",
+        "or(andi(slli(input,constant),constant),input)",
+        "or(input,slli(input,constant))",
+        "slli(add(input,input),constant)",
+        "srli(or(input,input),constant)"
+      ],
+      "path": "results/2026-10-21-blind-preregistration/targets/beebs-ndes/public.json",
+      "sha256": "9d958b0ae3a97bd21ecfa29e33376ac20d34925e7e92ce11d4f77e2bbc107bb1",
+      "unique_formula_family_count": 11
+    },
+    "nettle_md5": {
+      "candidate_count": 12,
+      "formula_families": [
+        "add(add(addi(lui(constant),constant),input),input)",
+        "add(addi(input,constant),input)",
+        "add(addi(lui(constant),constant),input)",
+        "add(input,slli(input,constant))",
+        "add(slli(add(input,input),constant),srli(add(input,input),constant))",
+        "addi(lui(constant),constant)",
+        "or(input,slli(input,constant))"
+      ],
+      "path": "results/2026-10-21-blind-preregistration/targets/beebs-nettle-md5/public.json",
+      "sha256": "30e97ee872225aedd1210597bfaef48ac24ecd4d012747f5bc9d8e907f31c53d",
+      "unique_formula_family_count": 7
+    },
+    "nettle_sha256": {
+      "candidate_count": 6,
+      "formula_families": [
+        "add(input,slli(input,constant))",
+        "or(input,slli(input,constant))",
+        "sub(addi(constant,constant),input)",
+        "xor(add(slli(input,constant),srli(input,constant)),input)"
+      ],
+      "path": "results/2026-10-21-sha256-preregistration/selection/model/public.json",
+      "sha256": "fe2ccfae4013d5f16c4bddb21c8f52ca9691d6d8d9bef546edb2e996ff7dd51d",
+      "unique_formula_family_count": 4
+    }
+  },
+  "schema": "isaforge-ascon-source-family-audit-v1",
+  "status": "source_level_crypto_overlap_confirmed_exact_target_pool_pending"
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "isaforge-ascon-v13-baseline-only-v1-gate",
+  "protocol": {
+    "schema": "isaforge-ascon-v13-baseline-only-v1",
+    "workload_group": "ascon128v13-kat-v13",
+    "pool_size": 12,
+    "minimum_calibrated_cycle_reduction": 0.005,
+    "minimum_timed_replacements": 10,
+    "joint_gate": "At least one same candidate meets both public numeric thresholds.",
+    "unchanged_input": true,
+    "unchanged_algorithm": true,
+    "unchanged_upstream_source": true,
+    "source_change": "Deterministic single-translation-unit composition plus a freestanding KAT stress-loop ABI adapter; upstream crypto implementation body preserved.",
+    "correctness": "All 1,089 ordered length pairs, exact host-loop KAT equality, target encryption/decryption lengths, round-trip plaintext, first-byte tamper rejection, call counts, and KAT-derived 32-bit ciphertext fingerprint.",
+    "target_bytewise_kat_comparison": false,
+    "target_kat_fingerprint_fnv32": "06cf04e8",
+    "original_input": "mlen=0..32 outer and adlen=0..32 inner, inclusive; key/nonce/message/AD bytes initialized to their indices.",
+    "compiler_flags": [
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-Os",
+      "-std=gnu17",
+      "-nostdlib",
+      "-nostartfiles",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-msmall-data-limit=0",
+      "-mno-relax",
+      "-DCPU_MHZ=1"
+    ],
+    "isa": "rv32i_zicsr",
+    "abi": "ilp32",
+    "optimization": "-Os",
+    "clock_mhz": 12,
+    "route_seeds": [
+      1,
+      2,
+      3
+    ],
+    "memory_partition": {
+      "ram_bytes": 8192,
+      "program_limit": 6400,
+      "stack_floor": 6528,
+      "stack_bytes": 1664,
+      "minimum_guard_bytes": 128
+    },
+    "candidate_dispatch_enabled": false,
+    "target_candidate_attempts": 0,
+    "candidate_dispatch": "Disabled for baseline-only qualification.",
+    "model_fit_during_qualification": false,
+    "scientific_scope": "Same-domain cryptography transfer/readiness evidence; not an independent confirmatory family."
+  },
+  "passed": true,
+  "qualifying_candidate_ids": [
+    "f88f866c52a20f41741309877b626293d2d4a15766fb83952fa0babee20f311e",
+    "18a8fabb82ab76433acd7c3a1efbccd748a78b62934a7a7db10dea1a1a8a6bc4",
+    "20f276f37e7f77653ddd5bb4b305fd32aa0da2911507e3fca5d1986b30cf43e8",
+    "30cc8173dfb70fc2bd8a827a7ceff7d6b16690aa9b42b5a54907f10d4a04f997",
+    "e447cdfbccdb7760dc5f406284463e015658381c2816afe92c4fce884aaab006",
+    "5993bed7ab6f28de136c1093667908953d0b710ac8919f490ba68254a5b69e68",
+    "ddba7b789bf442ce4706e024da5bd1c633084e7853844fd9fb24a3775f209a67",
+    "5ecdf4f23797432e138a65141b508bdff8f8611d09a0d6988789c46a7cddc4b1"
+  ],
+  "public_digest": "731fc6a964b0fffcede1df5582455ef93a3cc33dbef8e4db3990d00ae29f5b52",
+  "maximum_public_cycle_reduction": 0.023181049820865697,
+  "maximum_timed_replacements": 1591920,
+  "target_candidate_attempts": 0,
+  "measured_candidate_labels_used": false
+}

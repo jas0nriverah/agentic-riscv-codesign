@@ -1,0 +1,42 @@
+{
+  "status": "prelabel model package frozen; native controller not yet released",
+  "agent_policy": "current Codex chat model, relayed through bounded list/predict/measure/finalize actions",
+  "agent_tools": [
+    "list_candidates",
+    "predict",
+    "measure",
+    "finalize"
+  ],
+  "action_handles": "Use session-local C01..C12 handles bound to complete immutable candidate IDs; reject stale/unknown handles before charging.",
+  "candidate_attempts": 0,
+  "native_dispatch_enabled": false,
+  "max_charged_attempts": 3,
+  "area_delta_lut4_cap": 64,
+  "minimum_routed_fmax_mhz": 12.0,
+  "one_to_three_instruction_combinations": false,
+  "model_is_frozen_during_episode": true,
+  "policies": [
+    "frequency",
+    "merit",
+    "calibrated_latency",
+    "latency_cost_heuristic",
+    "random",
+    "raw_regression",
+    "ranking",
+    "normalized_xgb",
+    "hybrid_gp_zero_shot",
+    "hybrid_gp_adapt",
+    "feasible_benefit_xgb",
+    "factorized_feasibility_xgb",
+    "codex_chat_llm_agent"
+  ],
+  "shared_information": "Same public pool, training rows, fixed model predictions, baseline, area/timing limits, paid outcomes, and three-attempt cap. The oracle remains hidden until all policy decisions are sealed.",
+  "primary_endpoint": "best verified feasible whole-program speedup by query 3; regret to complete measured 12-candidate pool if every reference attempt resolves",
+  "limitations": [
+    "Ascon is related-domain cryptography transfer, not an independent workload-family test.",
+    "The current chat model carries conversation context and is not an isolated provider run.",
+    "The live LLM attempt, operator relay time, model-only latency, and token count are not yet recorded.",
+    "No candidate measurements or outcomes are included in this preregistration.",
+    "This package alone does not authorize native dispatch; the guarded controller and pushed source release must follow."
+  ]
+}

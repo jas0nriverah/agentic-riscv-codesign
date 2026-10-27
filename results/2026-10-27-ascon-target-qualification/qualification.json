@@ -1,0 +1,654 @@
+{
+  "schema": "isaforge-ascon-v13-baseline-only-v1-qualification-result",
+  "protocol_sha256": "e50b6c2bad907316fdfb374f7ff79454dd40d65048bf5d41a964f840adb7532c",
+  "records": [
+    {
+      "workload": "ascon128v13",
+      "family": "ascon128v13-kat-v13",
+      "root": "generated/ascon-target-qualification-2026-10-27",
+      "status": "accepted",
+      "commands": [
+        {
+          "phase": "prepare",
+          "observation": "commands/00-prepare",
+          "record": {
+            "schema": "isaforge-observed-command-v1",
+            "status": "success",
+            "returncode": 0,
+            "argv_sha256": "d03f3fbf7aa7dc9dafe60f39580a9f0925f3f8bead71c7c45060c1f0548b96ca",
+            "argv_count": 8,
+            "cwd": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign",
+            "metadata": {
+              "phase": "prepare",
+              "protocol_sha256": "e50b6c2bad907316fdfb374f7ff79454dd40d65048bf5d41a964f840adb7532c",
+              "workload": "ascon128v13"
+            },
+            "metadata_sha256": "3610b190c0cf78344efbc66bc5d90463c3e88ee11bb876d66c1bed956b67f167",
+            "observer_pid": 61832,
+            "observer_session_id": "b88692a5-026c-4006-a014-c98d4df414b4",
+            "observer_os_session_id": 61832,
+            "child_pid": 61846,
+            "clock_info": {
+              "time": {
+                "implementation": "clock_gettime(CLOCK_REALTIME)",
+                "resolution_seconds": 1.0000000000000002e-06,
+                "adjustable": true,
+                "monotonic": false
+              },
+              "monotonic": {
+                "implementation": "mach_absolute_time()",
+                "resolution_seconds": 4.166666666666667e-08,
+                "adjustable": false,
+                "monotonic": true
+              }
+            },
+            "timeout_seconds": 3600.0,
+            "stdout_file": "stdout.txt",
+            "stderr_file": "stderr.txt",
+            "start": {
+              "utc_ns": 1793118489035256000,
+              "utc_iso": "2026-10-27T16:28:09.035256000+00:00",
+              "monotonic_before_ns": 30943938889958,
+              "monotonic_after_ns": 30943938890625
+            },
+            "end": {
+              "utc_ns": 1793118489434190000,
+              "utc_iso": "2026-10-27T16:28:09.434190000+00:00",
+              "monotonic_before_ns": 30944337823416,
+              "monotonic_after_ns": 30944337824541
+            },
+            "scope": "Started receipt before dispatch through direct-child reap and stream close; excludes terminal receipt serialization.",
+            "cross_process_monotonic_origin_verified": false,
+            "durations": {
+              "utc_elapsed_ns": 398934000,
+              "monotonic_elapsed_ns": 398933916,
+              "utc_elapsed_seconds": 0.398934,
+              "monotonic_elapsed_seconds": 0.398933916,
+              "monotonic_elapsed_bracket_ns": [
+                398932791,
+                398934583
+              ],
+              "monotonic_endpoints_ordered": true,
+              "utc_minus_monotonic_elapsed_ns": 84,
+              "clock_disagreement_detected": false,
+              "disagreement_rule": "UTC delta outside the observed monotonic capture bracket; no tolerance or clock correction.",
+              "uninterrupted_calendar_wall_time_established": false,
+              "cause": "Unresolved; endpoint observations do not distinguish clock adjustment, suspension or other clock behavior."
+            },
+            "stdout_sha256": "d08802d42fc4dc65696e0396333a8d42b62b26e6ffc06fc17cb1a68c957833f8",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "phase": "discover",
+          "observation": "commands/01-discover",
+          "record": {
+            "schema": "isaforge-observed-command-v1",
+            "status": "success",
+            "returncode": 0,
+            "argv_sha256": "f1491258c5b9c2713becf0bb3254cabfb32e2cf14e03708689fad8530fcd8dba",
+            "argv_count": 6,
+            "cwd": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign",
+            "metadata": {
+              "phase": "discover",
+              "protocol_sha256": "e50b6c2bad907316fdfb374f7ff79454dd40d65048bf5d41a964f840adb7532c",
+              "workload": "ascon128v13"
+            },
+            "metadata_sha256": "26f9d0b85600ccf2ec904ce0cb947f25908af1ab4da22b36a6c094bfbbed3d69",
+            "observer_pid": 61832,
+            "observer_session_id": "59eb8bb2-a5b7-4247-b0e2-fb17c21f288d",
+            "observer_os_session_id": 61832,
+            "child_pid": 61849,
+            "clock_info": {
+              "time": {
+                "implementation": "clock_gettime(CLOCK_REALTIME)",
+                "resolution_seconds": 1.0000000000000002e-06,
+                "adjustable": true,
+                "monotonic": false
+              },
+              "monotonic": {
+                "implementation": "mach_absolute_time()",
+                "resolution_seconds": 4.166666666666667e-08,
+                "adjustable": false,
+                "monotonic": true
+              }
+            },
+            "timeout_seconds": 3600.0,
+            "stdout_file": "stdout.txt",
+            "stderr_file": "stderr.txt",
+            "start": {
+              "utc_ns": 1793118489488927000,
+              "utc_iso": "2026-10-27T16:28:09.488927000+00:00",
+              "monotonic_before_ns": 30944392561833,
+              "monotonic_after_ns": 30944392562208
+            },
+            "end": {
+              "utc_ns": 1793118516117575000,
+              "utc_iso": "2026-10-27T16:28:36.117575000+00:00",
+              "monotonic_before_ns": 30971021258291,
+              "monotonic_after_ns": 30971021259583
+            },
+            "scope": "Started receipt before dispatch through direct-child reap and stream close; excludes terminal receipt serialization.",
+            "cross_process_monotonic_origin_verified": false,
+            "durations": {
+              "utc_elapsed_ns": 26628648000,
+              "monotonic_elapsed_ns": 26628697375,
+              "utc_elapsed_seconds": 26.628648,
+              "monotonic_elapsed_seconds": 26.628697375,
+              "monotonic_elapsed_bracket_ns": [
+                26628696083,
+                26628697750
+              ],
+              "monotonic_endpoints_ordered": true,
+              "utc_minus_monotonic_elapsed_ns": -49375,
+              "clock_disagreement_detected": true,
+              "disagreement_rule": "UTC delta outside the observed monotonic capture bracket; no tolerance or clock correction.",
+              "uninterrupted_calendar_wall_time_established": false,
+              "cause": "Unresolved; endpoint observations do not distinguish clock adjustment, suspension or other clock behavior."
+            },
+            "stdout_sha256": "8c1181217600de71c10bd8d43b9c78806e342ffdd9addde1b44891f7beeb3840",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "phase": "opportunity",
+          "observation": "commands/02-opportunity",
+          "record": {
+            "schema": "isaforge-observed-command-v1",
+            "status": "success",
+            "returncode": 0,
+            "argv_sha256": "6f11a67300755bcd7980a3a7c39dc80cfbcf6968e6a0edf8f6e020781acbaba0",
+            "argv_count": 6,
+            "cwd": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign",
+            "metadata": {
+              "phase": "opportunity",
+              "protocol_sha256": "e50b6c2bad907316fdfb374f7ff79454dd40d65048bf5d41a964f840adb7532c",
+              "workload": "ascon128v13"
+            },
+            "metadata_sha256": "2128df76bef6adfa459c807496d1d52dc23b834d142d48ef5d222e30ea7ce4e2",
+            "observer_pid": 61832,
+            "observer_session_id": "d015200e-7a08-481e-b365-0353ac7fc194",
+            "observer_os_session_id": 61832,
+            "child_pid": 62130,
+            "clock_info": {
+              "time": {
+                "implementation": "clock_gettime(CLOCK_REALTIME)",
+                "resolution_seconds": 1.0000000000000002e-06,
+                "adjustable": true,
+                "monotonic": false
+              },
+              "monotonic": {
+                "implementation": "mach_absolute_time()",
+                "resolution_seconds": 4.166666666666667e-08,
+                "adjustable": false,
+                "monotonic": true
+              }
+            },
+            "timeout_seconds": 3600.0,
+            "stdout_file": "stdout.txt",
+            "stderr_file": "stderr.txt",
+            "start": {
+              "utc_ns": 1793118516172692000,
+              "utc_iso": "2026-10-27T16:28:36.172692000+00:00",
+              "monotonic_before_ns": 30971076375666,
+              "monotonic_after_ns": 30971076375958
+            },
+            "end": {
+              "utc_ns": 1793118517884373000,
+              "utc_iso": "2026-10-27T16:28:37.884373000+00:00",
+              "monotonic_before_ns": 30972788059750,
+              "monotonic_after_ns": 30972788060666
+            },
+            "scope": "Started receipt before dispatch through direct-child reap and stream close; excludes terminal receipt serialization.",
+            "cross_process_monotonic_origin_verified": false,
+            "durations": {
+              "utc_elapsed_ns": 1711681000,
+              "monotonic_elapsed_ns": 1711684708,
+              "utc_elapsed_seconds": 1.711681,
+              "monotonic_elapsed_seconds": 1.711684708,
+              "monotonic_elapsed_bracket_ns": [
+                1711683792,
+                1711685000
+              ],
+              "monotonic_endpoints_ordered": true,
+              "utc_minus_monotonic_elapsed_ns": -3708,
+              "clock_disagreement_detected": true,
+              "disagreement_rule": "UTC delta outside the observed monotonic capture bracket; no tolerance or clock correction.",
+              "uninterrupted_calendar_wall_time_established": false,
+              "cause": "Unresolved; endpoint observations do not distinguish clock adjustment, suspension or other clock behavior."
+            },
+            "stdout_sha256": "f3334c7a9299f93e9a69c47bab6e00bb3fa353b3973adef9f8c9ccc1ad9df579",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "phase": "baseline",
+          "observation": "commands/03-baseline",
+          "record": {
+            "schema": "isaforge-observed-command-v1",
+            "status": "success",
+            "returncode": 0,
+            "argv_sha256": "c6e8c5b577821e297cf6ff8a42bd62f10175f14fcc3d382befbb7128280bfbee",
+            "argv_count": 6,
+            "cwd": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign",
+            "metadata": {
+              "phase": "baseline",
+              "protocol_sha256": "e50b6c2bad907316fdfb374f7ff79454dd40d65048bf5d41a964f840adb7532c",
+              "workload": "ascon128v13"
+            },
+            "metadata_sha256": "8af5564784370b0aa0379ebf22469683295186173a1a158585497cb36d55857e",
+            "observer_pid": 61832,
+            "observer_session_id": "a4aa6792-de8a-4e6e-9d05-c6eefdc3699f",
+            "observer_os_session_id": 61832,
+            "child_pid": 62136,
+            "clock_info": {
+              "time": {
+                "implementation": "clock_gettime(CLOCK_REALTIME)",
+                "resolution_seconds": 1.0000000000000002e-06,
+                "adjustable": true,
+                "monotonic": false
+              },
+              "monotonic": {
+                "implementation": "mach_absolute_time()",
+                "resolution_seconds": 4.166666666666667e-08,
+                "adjustable": false,
+                "monotonic": true
+              }
+            },
+            "timeout_seconds": 3600.0,
+            "stdout_file": "stdout.txt",
+            "stderr_file": "stderr.txt",
+            "start": {
+              "utc_ns": 1793118517935120000,
+              "utc_iso": "2026-10-27T16:28:37.935120000+00:00",
+              "monotonic_before_ns": 30972838806791,
+              "monotonic_after_ns": 30972838807041
+            },
+            "end": {
+              "utc_ns": 1793118577255033000,
+              "utc_iso": "2026-10-27T16:29:37.255033000+00:00",
+              "monotonic_before_ns": 31032158829041,
+              "monotonic_after_ns": 31032158831000
+            },
+            "scope": "Started receipt before dispatch through direct-child reap and stream close; excludes terminal receipt serialization.",
+            "cross_process_monotonic_origin_verified": false,
+            "durations": {
+              "utc_elapsed_ns": 59319913000,
+              "monotonic_elapsed_ns": 59320023959,
+              "utc_elapsed_seconds": 59.319913,
+              "monotonic_elapsed_seconds": 59.320023959,
+              "monotonic_elapsed_bracket_ns": [
+                59320022000,
+                59320024209
+              ],
+              "monotonic_endpoints_ordered": true,
+              "utc_minus_monotonic_elapsed_ns": -110959,
+              "clock_disagreement_detected": true,
+              "disagreement_rule": "UTC delta outside the observed monotonic capture bracket; no tolerance or clock correction.",
+              "uninterrupted_calendar_wall_time_established": false,
+              "cause": "Unresolved; endpoint observations do not distinguish clock adjustment, suspension or other clock behavior."
+            },
+            "stdout_sha256": "370e71b443dbdb0e06f215cde185d2d7a049b4f487c0c2a7e6520e18dd0e31ab",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "phase": "public",
+          "observation": "commands/04-public",
+          "record": {
+            "schema": "isaforge-observed-command-v1",
+            "status": "success",
+            "returncode": 0,
+            "argv_sha256": "13d248712cc89d34821a54057a4c8832ce0f93d631c4e6ce5177c485fb0d1c8e",
+            "argv_count": 6,
+            "cwd": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign",
+            "metadata": {
+              "phase": "public",
+              "protocol_sha256": "e50b6c2bad907316fdfb374f7ff79454dd40d65048bf5d41a964f840adb7532c",
+              "workload": "ascon128v13"
+            },
+            "metadata_sha256": "ba98f06dfc6b3f145096037297111c3e1c841deb353bd435d41851711e86cd5a",
+            "observer_pid": 61832,
+            "observer_session_id": "03224bf3-ffe8-45c7-9fbe-e354c980430d",
+            "observer_os_session_id": 61832,
+            "child_pid": 62332,
+            "clock_info": {
+              "time": {
+                "implementation": "clock_gettime(CLOCK_REALTIME)",
+                "resolution_seconds": 1.0000000000000002e-06,
+                "adjustable": true,
+                "monotonic": false
+              },
+              "monotonic": {
+                "implementation": "mach_absolute_time()",
+                "resolution_seconds": 4.166666666666667e-08,
+                "adjustable": false,
+                "monotonic": true
+              }
+            },
+            "timeout_seconds": 3600.0,
+            "stdout_file": "stdout.txt",
+            "stderr_file": "stderr.txt",
+            "start": {
+              "utc_ns": 1793118577331909000,
+              "utc_iso": "2026-10-27T16:29:37.331909000+00:00",
+              "monotonic_before_ns": 31032235705916,
+              "monotonic_after_ns": 31032235706166
+            },
+            "end": {
+              "utc_ns": 1793118580865118000,
+              "utc_iso": "2026-10-27T16:29:40.865118000+00:00",
+              "monotonic_before_ns": 31035768920375,
+              "monotonic_after_ns": 31035768921875
+            },
+            "scope": "Started receipt before dispatch through direct-child reap and stream close; excludes terminal receipt serialization.",
+            "cross_process_monotonic_origin_verified": false,
+            "durations": {
+              "utc_elapsed_ns": 3533209000,
+              "monotonic_elapsed_ns": 3533215709,
+              "utc_elapsed_seconds": 3.533209,
+              "monotonic_elapsed_seconds": 3.533215709,
+              "monotonic_elapsed_bracket_ns": [
+                3533214209,
+                3533215959
+              ],
+              "monotonic_endpoints_ordered": true,
+              "utc_minus_monotonic_elapsed_ns": -6709,
+              "clock_disagreement_detected": true,
+              "disagreement_rule": "UTC delta outside the observed monotonic capture bracket; no tolerance or clock correction.",
+              "uninterrupted_calendar_wall_time_established": false,
+              "cause": "Unresolved; endpoint observations do not distinguish clock adjustment, suspension or other clock behavior."
+            },
+            "stdout_sha256": "dd91ee8befca3589b6324b64a6620d25689f078f292c921241b666a2ab71f4ba",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "phase": "freeze",
+          "observation": "commands/05-freeze",
+          "record": {
+            "schema": "isaforge-observed-command-v1",
+            "status": "success",
+            "returncode": 0,
+            "argv_sha256": "23a0ad2cc1fcc862f6d72187ce0c16c68dfe43575b0c69ce2661b77160af3694",
+            "argv_count": 6,
+            "cwd": "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign",
+            "metadata": {
+              "phase": "freeze",
+              "protocol_sha256": "e50b6c2bad907316fdfb374f7ff79454dd40d65048bf5d41a964f840adb7532c",
+              "workload": "ascon128v13"
+            },
+            "metadata_sha256": "92b8a82c60fdfb9f96448454921c84f5a9d714017f83bf61db0770de439a068d",
+            "observer_pid": 61832,
+            "observer_session_id": "07b4707e-221e-4230-82cb-ba4035d020d5",
+            "observer_os_session_id": 61832,
+            "child_pid": 62333,
+            "clock_info": {
+              "time": {
+                "implementation": "clock_gettime(CLOCK_REALTIME)",
+                "resolution_seconds": 1.0000000000000002e-06,
+                "adjustable": true,
+                "monotonic": false
+              },
+              "monotonic": {
+                "implementation": "mach_absolute_time()",
+                "resolution_seconds": 4.166666666666667e-08,
+                "adjustable": false,
+                "monotonic": true
+              }
+            },
+            "timeout_seconds": 3600.0,
+            "stdout_file": "stdout.txt",
+            "stderr_file": "stderr.txt",
+            "start": {
+              "utc_ns": 1793118580917422000,
+              "utc_iso": "2026-10-27T16:29:40.917422000+00:00",
+              "monotonic_before_ns": 31035821226166,
+              "monotonic_after_ns": 31035821226291
+            },
+            "end": {
+              "utc_ns": 1793118590525049000,
+              "utc_iso": "2026-10-27T16:29:50.525049000+00:00",
+              "monotonic_before_ns": 31045428870333,
+              "monotonic_after_ns": 31045428871250
+            },
+            "scope": "Started receipt before dispatch through direct-child reap and stream close; excludes terminal receipt serialization.",
+            "cross_process_monotonic_origin_verified": false,
+            "durations": {
+              "utc_elapsed_ns": 9607627000,
+              "monotonic_elapsed_ns": 9607644959,
+              "utc_elapsed_seconds": 9.607627,
+              "monotonic_elapsed_seconds": 9.607644959,
+              "monotonic_elapsed_bracket_ns": [
+                9607644042,
+                9607645084
+              ],
+              "monotonic_endpoints_ordered": true,
+              "utc_minus_monotonic_elapsed_ns": -17959,
+              "clock_disagreement_detected": true,
+              "disagreement_rule": "UTC delta outside the observed monotonic capture bracket; no tolerance or clock correction.",
+              "uninterrupted_calendar_wall_time_established": false,
+              "cause": "Unresolved; endpoint observations do not distinguish clock adjustment, suspension or other clock behavior."
+            },
+            "stdout_sha256": "116c9c1257aa63bbb2926b637449603c90ac711fa7e50448c9b0d2ce485eb06e",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      ],
+      "prepared_plan_sha256": "d08802d42fc4dc65696e0396333a8d42b62b26e6ffc06fc17cb1a68c957833f8",
+      "context_id": "ab9ef4693ad4ad77e1256f85aabe11074dfc424eb25dfe461d1b55e9abe75e13",
+      "gate": {
+        "schema": "isaforge-ascon-v13-baseline-only-v1-gate",
+        "protocol": {
+          "schema": "isaforge-ascon-v13-baseline-only-v1",
+          "workload_group": "ascon128v13-kat-v13",
+          "pool_size": 12,
+          "minimum_calibrated_cycle_reduction": 0.005,
+          "minimum_timed_replacements": 10,
+          "joint_gate": "At least one same candidate meets both public numeric thresholds.",
+          "unchanged_input": true,
+          "unchanged_algorithm": true,
+          "unchanged_upstream_source": true,
+          "source_change": "Deterministic single-translation-unit composition plus a freestanding KAT stress-loop ABI adapter; upstream crypto implementation body preserved.",
+          "correctness": "All 1,089 ordered length pairs, exact host-loop KAT equality, target encryption/decryption lengths, round-trip plaintext, first-byte tamper rejection, call counts, and KAT-derived 32-bit ciphertext fingerprint.",
+          "target_bytewise_kat_comparison": false,
+          "target_kat_fingerprint_fnv32": "06cf04e8",
+          "original_input": "mlen=0..32 outer and adlen=0..32 inner, inclusive; key/nonce/message/AD bytes initialized to their indices.",
+          "compiler_flags": [
+            "-march=rv32i_zicsr",
+            "-mabi=ilp32",
+            "-Os",
+            "-std=gnu17",
+            "-nostdlib",
+            "-nostartfiles",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-msmall-data-limit=0",
+            "-mno-relax",
+            "-DCPU_MHZ=1"
+          ],
+          "isa": "rv32i_zicsr",
+          "abi": "ilp32",
+          "optimization": "-Os",
+          "clock_mhz": 12,
+          "route_seeds": [
+            1,
+            2,
+            3
+          ],
+          "memory_partition": {
+            "ram_bytes": 8192,
+            "program_limit": 6400,
+            "stack_floor": 6528,
+            "stack_bytes": 1664,
+            "minimum_guard_bytes": 128
+          },
+          "candidate_dispatch_enabled": false,
+          "target_candidate_attempts": 0,
+          "candidate_dispatch": "Disabled for baseline-only qualification.",
+          "model_fit_during_qualification": false,
+          "scientific_scope": "Same-domain cryptography transfer/readiness evidence; not an independent confirmatory family."
+        },
+        "passed": true,
+        "qualifying_candidate_ids": [
+          "f88f866c52a20f41741309877b626293d2d4a15766fb83952fa0babee20f311e",
+          "18a8fabb82ab76433acd7c3a1efbccd748a78b62934a7a7db10dea1a1a8a6bc4",
+          "20f276f37e7f77653ddd5bb4b305fd32aa0da2911507e3fca5d1986b30cf43e8",
+          "30cc8173dfb70fc2bd8a827a7ceff7d6b16690aa9b42b5a54907f10d4a04f997",
+          "e447cdfbccdb7760dc5f406284463e015658381c2816afe92c4fce884aaab006",
+          "5993bed7ab6f28de136c1093667908953d0b710ac8919f490ba68254a5b69e68",
+          "ddba7b789bf442ce4706e024da5bd1c633084e7853844fd9fb24a3775f209a67",
+          "5ecdf4f23797432e138a65141b508bdff8f8611d09a0d6988789c46a7cddc4b1"
+        ],
+        "public_digest": "731fc6a964b0fffcede1df5582455ef93a3cc33dbef8e4db3990d00ae29f5b52",
+        "maximum_public_cycle_reduction": 0.023181049820865697,
+        "maximum_timed_replacements": 1591920,
+        "target_candidate_attempts": 0,
+        "measured_candidate_labels_used": false
+      },
+      "exact_candidate_family_audit": {
+        "schema": "isaforge-ascon-target-formula-family-audit-v1",
+        "source_family_report_sha256": "906bf345f70233ee5d59f37c3062ab9ea0e7d568d541f21a7682effe5177885b",
+        "workload_group": "ascon128v13-kat-v13",
+        "public_candidate_pool_sha256": "731fc6a964b0fffcede1df5582455ef93a3cc33dbef8e4db3990d00ae29f5b52",
+        "candidate_count": 12,
+        "unique_target_formula_family_count": 7,
+        "candidates": [
+          {
+            "candidate_id": "f88f866c52a20f41741309877b626293d2d4a15766fb83952fa0babee20f311e",
+            "formula": "and(xori(in0,-1),in1)",
+            "formula_family": "and(input,xori(input,constant))",
+            "exact_prior_family_overlap": [
+              "aha_compress"
+            ],
+            "eligible_for_unseen_formula_family_training": false
+          },
+          {
+            "candidate_id": "18a8fabb82ab76433acd7c3a1efbccd748a78b62934a7a7db10dea1a1a8a6bc4",
+            "formula": "add(slli(in0,31),srli(in1,1))",
+            "formula_family": "add(slli(input,constant),srli(input,constant))",
+            "exact_prior_family_overlap": [],
+            "eligible_for_unseen_formula_family_training": true
+          },
+          {
+            "candidate_id": "20f276f37e7f77653ddd5bb4b305fd32aa0da2911507e3fca5d1986b30cf43e8",
+            "formula": "add(in0,srli(in1,1))",
+            "formula_family": "add(input,srli(input,constant))",
+            "exact_prior_family_overlap": [],
+            "eligible_for_unseen_formula_family_training": true
+          },
+          {
+            "candidate_id": "30cc8173dfb70fc2bd8a827a7ceff7d6b16690aa9b42b5a54907f10d4a04f997",
+            "formula": "add(in0,srli(in1,7))",
+            "formula_family": "add(input,srli(input,constant))",
+            "exact_prior_family_overlap": [],
+            "eligible_for_unseen_formula_family_training": true
+          },
+          {
+            "candidate_id": "e447cdfbccdb7760dc5f406284463e015658381c2816afe92c4fce884aaab006",
+            "formula": "add(slli(in0,22),in1)",
+            "formula_family": "add(input,slli(input,constant))",
+            "exact_prior_family_overlap": [
+              "ndes",
+              "nettle_md5",
+              "nettle_sha256"
+            ],
+            "eligible_for_unseen_formula_family_training": false
+          },
+          {
+            "candidate_id": "5993bed7ab6f28de136c1093667908953d0b710ac8919f490ba68254a5b69e68",
+            "formula": "add(slli(in0,31),in1)",
+            "formula_family": "add(input,slli(input,constant))",
+            "exact_prior_family_overlap": [
+              "ndes",
+              "nettle_md5",
+              "nettle_sha256"
+            ],
+            "eligible_for_unseen_formula_family_training": false
+          },
+          {
+            "candidate_id": "ddba7b789bf442ce4706e024da5bd1c633084e7853844fd9fb24a3775f209a67",
+            "formula": "add(srli(in0,7),slli(in1,25))",
+            "formula_family": "add(slli(input,constant),srli(input,constant))",
+            "exact_prior_family_overlap": [],
+            "eligible_for_unseen_formula_family_training": true
+          },
+          {
+            "candidate_id": "5ecdf4f23797432e138a65141b508bdff8f8611d09a0d6988789c46a7cddc4b1",
+            "formula": "add(in0,slli(in1,25))",
+            "formula_family": "add(input,slli(input,constant))",
+            "exact_prior_family_overlap": [
+              "ndes",
+              "nettle_md5",
+              "nettle_sha256"
+            ],
+            "eligible_for_unseen_formula_family_training": false
+          },
+          {
+            "candidate_id": "efdcd8270025739ac9ff1c3d8decdcd06070974b05dd4e3b93554140e318f6ee",
+            "formula": "add(addi(in0,144),in1)",
+            "formula_family": "add(addi(input,constant),input)",
+            "exact_prior_family_overlap": [
+              "nettle_md5"
+            ],
+            "eligible_for_unseen_formula_family_training": false
+          },
+          {
+            "candidate_id": "539e6b57e1487822a077db7fd0d418a68ff5c4625d878cac09747e6f405dc2c4",
+            "formula": "add(in0,srli(in1,3))",
+            "formula_family": "add(input,srli(input,constant))",
+            "exact_prior_family_overlap": [],
+            "eligible_for_unseen_formula_family_training": true
+          },
+          {
+            "candidate_id": "7e225847bf4bde6b35ed0e10d923f58fb809418c285c91e1d56ffa183228b99c",
+            "formula": "addi(andi(in0,1),-1)",
+            "formula_family": "addi(andi(input,constant),constant)",
+            "exact_prior_family_overlap": [],
+            "eligible_for_unseen_formula_family_training": true
+          },
+          {
+            "candidate_id": "0ff0001f72e3f711a99cdf317dd0e7eee620a8b71e19c2f38fb3a71abf739222",
+            "formula": "addi(lui(-2128830464),-571)",
+            "formula_family": "addi(lui(constant),constant)",
+            "exact_prior_family_overlap": [
+              "nettle_md5"
+            ],
+            "eligible_for_unseen_formula_family_training": false
+          }
+        ],
+        "exact_intersections_by_reference_pool": {
+          "aha_compress": [
+            "and(input,xori(input,constant))"
+          ],
+          "ndes": [
+            "add(input,slli(input,constant))"
+          ],
+          "nettle_md5": [
+            "add(addi(input,constant),input)",
+            "add(input,slli(input,constant))",
+            "addi(lui(constant),constant)"
+          ],
+          "nettle_sha256": [
+            "add(input,slli(input,constant))"
+          ]
+        },
+        "target_outcomes_read": false,
+        "target_labels": 0,
+        "model_fits": 0,
+        "same_domain_transfer": true,
+        "independent_confirmatory_family": false
+      }
+    }
+  ],
+  "accepted": {
+    "ascon128v13": "generated/ascon-target-qualification-2026-10-27"
+  },
+  "target_candidate_attempts": 0,
+  "status": "accepted",
+  "recorded_subprocess_monotonic_seconds": 101.200200626,
+  "recorded_subprocess_utc_seconds": 101.200012,
+  "clock_disagreement_phase_count": 5
+}

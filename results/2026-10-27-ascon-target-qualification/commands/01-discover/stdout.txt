@@ -1,0 +1,5671 @@
+{"workload": "slre", "eligible_formulas": 45, "pool": [["candidate_00", "and(xori(in0,-1),in1)"], ["candidate_04", "add(slli(in0,31),srli(in1,1))"], ["candidate_08", "add(in0,srli(in1,1))"], ["candidate_12", "add(in0,srli(in1,7))"], ["candidate_16", "add(slli(in0,22),in1)"], ["candidate_20", "add(slli(in0,31),in1)"], ["candidate_24", "add(srli(in0,7),slli(in1,25))"], ["candidate_28", "add(in0,slli(in1,25))"], ["candidate_32", "add(addi(in0,144),in1)"], ["candidate_36", "add(in0,srli(in1,3))"], ["candidate_40", "addi(andi(in0,1),-1)"], ["candidate_44", "addi(lui(-2128830464),-571)"]], "memory_check": {"min_sp": 7632, "max_stack_bytes": 560, "stack_headroom_bytes": 1104, "checked_cycles": 247224463}}
+{
+  "raw_formula_count": 48,
+  "executable_formula_count": 45,
+  "rejected_occurrences": {
+    "not_whole_source_statements": 4
+  },
+  "block_starts": [
+    12,
+    16,
+    64,
+    68,
+    72,
+    80,
+    84,
+    88,
+    92,
+    208,
+    824,
+    852,
+    868,
+    884,
+    900,
+    916,
+    932,
+    948,
+    964,
+    980,
+    996,
+    1012,
+    1040,
+    1068,
+    1084,
+    1100,
+    1116,
+    1132,
+    1160,
+    1208,
+    1252,
+    1276,
+    1292,
+    1336,
+    1372,
+    1400,
+    1416,
+    1544,
+    1568,
+    1592,
+    1620,
+    1700,
+    1784,
+    1820,
+    1872,
+    1912,
+    1948,
+    1976,
+    2068,
+    2132,
+    2156,
+    2220,
+    2256,
+    2320,
+    2400,
+    2452,
+    2480,
+    2508,
+    2584,
+    2628,
+    2648,
+    2672,
+    2712,
+    2768,
+    2844,
+    2988,
+    3012,
+    3036,
+    3060,
+    3136,
+    3216,
+    3248,
+    3300,
+    3348,
+    3384,
+    3388,
+    3412,
+    3520,
+    3580,
+    3604,
+    3620,
+    3728,
+    3768,
+    3836,
+    3916,
+    3972,
+    4008,
+    4040,
+    4120,
+    4164,
+    4188,
+    4216,
+    4252,
+    4320,
+    4412,
+    4436,
+    4512,
+    4580,
+    4608,
+    4652,
+    4660,
+    4672,
+    4696,
+    4712,
+    4768,
+    4800,
+    4840,
+    4916,
+    4968,
+    5036,
+    5136,
+    5156,
+    5200,
+    5388,
+    5416,
+    5440,
+    5444,
+    5472,
+    5496,
+    5500,
+    5508,
+    5520,
+    5536,
+    5572,
+    5612,
+    5644,
+    5664
+  ],
+  "executable_candidates": [
+    {
+      "formula": "and(xori(in0,-1),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000010c",
+            "0x00000120"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            15,
+            20
+          ],
+          "inputs": [
+            30,
+            14
+          ],
+          "output": 11
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000011c",
+            "0x00000130"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            19,
+            24
+          ],
+          "inputs": [
+            31,
+            28
+          ],
+          "output": 17
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000124",
+            "0x00000138"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            21,
+            26
+          ],
+          "inputs": [
+            5,
+            29
+          ],
+          "output": 14
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000134",
+            "0x00000148"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            25,
+            30
+          ],
+          "inputs": [
+            7,
+            18
+          ],
+          "output": 13
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000013c",
+            "0x00000150"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            27,
+            32
+          ],
+          "inputs": [
+            8,
+            30
+          ],
+          "output": 28
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000140",
+            "0x0000014c"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            28,
+            31
+          ],
+          "inputs": [
+            9,
+            31
+          ],
+          "output": 29
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000016c",
+            "0x00000188"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            39,
+            46
+          ],
+          "inputs": [
+            16,
+            7
+          ],
+          "output": 16
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000170",
+            "0x0000018c"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            40,
+            47
+          ],
+          "inputs": [
+            12,
+            5
+          ],
+          "output": 12
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000174",
+            "0x00000190"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            41,
+            48
+          ],
+          "inputs": [
+            15,
+            8
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000194",
+            "0x000001a0"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            49,
+            52
+          ],
+          "inputs": [
+            6,
+            9
+          ],
+          "output": 6
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 1591920,
+        "places": 10,
+        "saved": 1591920,
+        "saved_percent": 3.645320600877032,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 1,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 1,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 1,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 1591920,
+      "region_custom_instructions": 1591920,
+      "total_custom_instructions": 1591920,
+      "name": "candidate_00",
+      "candidate_id": "f88f866c52a20f41741309877b626293d2d4a15766fb83952fa0babee20f311e",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_00.S",
+      "assembly_sha256": "88ce502e8227ab5b047a02ccc27419edbfd6128977a0ae37dc641522672ba5ae"
+    },
+    {
+      "formula": "add(slli(in0,13),srli(in1,19))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000001a4",
+            "0x000001ac",
+            "0x000001bc"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            53,
+            55,
+            59
+          ],
+          "inputs": [
+            11,
+            17
+          ],
+          "output": 31
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000001b8",
+            "0x000001c0",
+            "0x000001c8"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            58,
+            60,
+            62
+          ],
+          "inputs": [
+            17,
+            11
+          ],
+          "output": 30
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 318384,
+        "places": 2,
+        "saved": 636768,
+        "saved_percent": 1.458128240350813,
+        "depth": 2,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 19,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 636768,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_01"
+    },
+    {
+      "formula": "add(slli(in0,22),srli(in1,10))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000294",
+            "0x00000298",
+            "0x000002a0"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            113,
+            114,
+            116
+          ],
+          "inputs": [
+            15,
+            6
+          ],
+          "output": 13
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000029c",
+            "0x000002a4",
+            "0x000002a8"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            115,
+            117,
+            118
+          ],
+          "inputs": [
+            6,
+            15
+          ],
+          "output": 14
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 318384,
+        "places": 2,
+        "saved": 636768,
+        "saved_percent": 1.458128240350813,
+        "depth": 2,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 22,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 636768,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_02"
+    },
+    {
+      "formula": "add(slli(in0,25),srli(in1,7))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002d8",
+            "0x000002dc",
+            "0x000002e4"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            130,
+            131,
+            133
+          ],
+          "inputs": [
+            28,
+            29
+          ],
+          "output": 14
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002e8",
+            "0x000002ec",
+            "0x000002f0"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            134,
+            135,
+            136
+          ],
+          "inputs": [
+            29,
+            28
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 318384,
+        "places": 2,
+        "saved": 636768,
+        "saved_percent": 1.458128240350813,
+        "depth": 2,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 25,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 636768,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_03"
+    },
+    {
+      "formula": "add(slli(in0,31),srli(in1,1))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000248",
+            "0x0000024c",
+            "0x00000254"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            94,
+            95,
+            97
+          ],
+          "inputs": [
+            14,
+            13
+          ],
+          "output": 11
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000258",
+            "0x0000025c",
+            "0x00000260"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            98,
+            99,
+            100
+          ],
+          "inputs": [
+            13,
+            14
+          ],
+          "output": 12
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 318384,
+        "places": 2,
+        "saved": 636768,
+        "saved_percent": 1.458128240350813,
+        "depth": 2,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 31,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 636768,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_04",
+      "candidate_id": "18a8fabb82ab76433acd7c3a1efbccd748a78b62934a7a7db10dea1a1a8a6bc4",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_04.S",
+      "assembly_sha256": "1fa9f0653c192b0fac8687fc14347d43a986adccd5f87f1e7d3fbe45371329af"
+    },
+    {
+      "formula": "add(slli(in0,4),srli(in1,28))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000001cc",
+            "0x000001d0",
+            "0x000001d8"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            63,
+            64,
+            66
+          ],
+          "inputs": [
+            11,
+            17
+          ],
+          "output": 7
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000001d4",
+            "0x000001dc",
+            "0x000001e0"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            65,
+            67,
+            68
+          ],
+          "inputs": [
+            17,
+            11
+          ],
+          "output": 5
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 318384,
+        "places": 2,
+        "saved": 636768,
+        "saved_percent": 1.458128240350813,
+        "depth": 2,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 28,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 636768,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_05"
+    },
+    {
+      "formula": "add(srli(in0,29),slli(in1,3))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000001fc",
+            "0x00000200",
+            "0x00000208"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            75,
+            76,
+            78
+          ],
+          "inputs": [
+            12,
+            16
+          ],
+          "output": 17
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000204",
+            "0x0000020c",
+            "0x00000210"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            77,
+            79,
+            80
+          ],
+          "inputs": [
+            16,
+            12
+          ],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 318384,
+        "places": 2,
+        "saved": 636768,
+        "saved_percent": 1.458128240350813,
+        "depth": 2,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 29,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 636768,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_06"
+    },
+    {
+      "formula": "add(in0,slli(in1,3))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000200",
+            "0x00000208"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            76,
+            78
+          ],
+          "inputs": [
+            17,
+            16
+          ],
+          "output": 17
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000204",
+            "0x00000210"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            77,
+            80
+          ],
+          "inputs": [
+            11,
+            12
+          ],
+          "output": 11
+        },
+        {
+          "blockStart": "0x00000994",
+          "pcs": [
+            "0x000009a0",
+            "0x000009a4"
+          ],
+          "blockRuns": 1056,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_encrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            529,
+            530
+          ],
+          "inputs": [
+            26,
+            5
+          ],
+          "output": 10
+        },
+        {
+          "blockStart": "0x00000f84",
+          "pcs": [
+            "0x00000f90",
+            "0x00000f94"
+          ],
+          "blockRuns": 2112,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            888,
+            889
+          ],
+          "inputs": [
+            15,
+            16
+          ],
+          "output": 10
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 321552,
+        "places": 4,
+        "saved": 321552,
+        "saved_percent": 0.7363184895303856,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 3,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 321552,
+      "region_custom_instructions": 321552,
+      "total_custom_instructions": 321552,
+      "name": "candidate_07"
+    },
+    {
+      "formula": "add(in0,srli(in1,1))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000024c",
+            "0x00000254"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            95,
+            97
+          ],
+          "inputs": [
+            11,
+            13
+          ],
+          "output": 11
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000258",
+            "0x00000260"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            98,
+            100
+          ],
+          "inputs": [
+            12,
+            14
+          ],
+          "output": 12
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 1,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_08",
+      "candidate_id": "20f276f37e7f77653ddd5bb4b305fd32aa0da2911507e3fca5d1986b30cf43e8",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_08.S",
+      "assembly_sha256": "831877c2df48c90abe1619764c9dead540c94e031f996147c512d1c21112e0bf"
+    },
+    {
+      "formula": "add(in0,srli(in1,10))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000298",
+            "0x000002a0"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            114,
+            116
+          ],
+          "inputs": [
+            13,
+            6
+          ],
+          "output": 13
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000029c",
+            "0x000002a8"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            115,
+            118
+          ],
+          "inputs": [
+            14,
+            15
+          ],
+          "output": 14
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 10,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_09"
+    },
+    {
+      "formula": "add(in0,srli(in1,19))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000001a4",
+            "0x000001bc"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            53,
+            59
+          ],
+          "inputs": [
+            31,
+            17
+          ],
+          "output": 31
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000001b8",
+            "0x000001c8"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            58,
+            62
+          ],
+          "inputs": [
+            30,
+            11
+          ],
+          "output": 30
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 19,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_10"
+    },
+    {
+      "formula": "add(in0,srli(in1,28))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000001d0",
+            "0x000001d8"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            64,
+            66
+          ],
+          "inputs": [
+            7,
+            17
+          ],
+          "output": 7
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000001d4",
+            "0x000001e0"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            65,
+            68
+          ],
+          "inputs": [
+            5,
+            11
+          ],
+          "output": 5
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 28,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_11"
+    },
+    {
+      "formula": "add(in0,srli(in1,7))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002dc",
+            "0x000002e4"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            131,
+            133
+          ],
+          "inputs": [
+            14,
+            29
+          ],
+          "output": 14
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002e8",
+            "0x000002f0"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            134,
+            136
+          ],
+          "inputs": [
+            15,
+            28
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 7,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_12",
+      "candidate_id": "30cc8173dfb70fc2bd8a827a7ceff7d6b16690aa9b42b5a54907f10d4a04f997",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_12.S",
+      "assembly_sha256": "7e1d863bf03599869f653996c143654752eec2ccb624337b6108886685c0fde4"
+    },
+    {
+      "formula": "add(slli(in0,13),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000001ac",
+            "0x000001bc"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            55,
+            59
+          ],
+          "inputs": [
+            11,
+            30
+          ],
+          "output": 31
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000001c0",
+            "0x000001c8"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            60,
+            62
+          ],
+          "inputs": [
+            17,
+            5
+          ],
+          "output": 30
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 13,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_13"
+    },
+    {
+      "formula": "add(slli(in0,15),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002ac",
+            "0x000002b4"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            119,
+            121
+          ],
+          "inputs": [
+            15,
+            12
+          ],
+          "output": 11
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002bc",
+            "0x000002c0"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            123,
+            124
+          ],
+          "inputs": [
+            6,
+            16
+          ],
+          "output": 12
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 15,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_14"
+    },
+    {
+      "formula": "add(slli(in0,15),srli(in1,17))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002ac",
+            "0x000002b0",
+            "0x000002b4"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            119,
+            120,
+            121
+          ],
+          "inputs": [
+            15,
+            6
+          ],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 159192,
+        "places": 1,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 17,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 159192,
+      "total_custom_instructions": 159192,
+      "name": "candidate_15"
+    },
+    {
+      "formula": "add(slli(in0,22),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000294",
+            "0x000002a0"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            113,
+            116
+          ],
+          "inputs": [
+            15,
+            14
+          ],
+          "output": 13
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002a4",
+            "0x000002a8"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            117,
+            118
+          ],
+          "inputs": [
+            6,
+            12
+          ],
+          "output": 14
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 22,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_16",
+      "candidate_id": "e447cdfbccdb7760dc5f406284463e015658381c2816afe92c4fce884aaab006",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_16.S",
+      "assembly_sha256": "f1623e3092e465f09b846ff602bbc65eade04b41efcee4adde40f61fe429167f"
+    },
+    {
+      "formula": "add(slli(in0,25),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002d8",
+            "0x000002e4"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            130,
+            133
+          ],
+          "inputs": [
+            28,
+            15
+          ],
+          "output": 14
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002ec",
+            "0x000002f0"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            135,
+            136
+          ],
+          "inputs": [
+            29,
+            13
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 25,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_17"
+    },
+    {
+      "formula": "add(slli(in0,26),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000264",
+            "0x0000026c"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            101,
+            103
+          ],
+          "inputs": [
+            14,
+            16
+          ],
+          "output": 17
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000274",
+            "0x00000278"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            105,
+            106
+          ],
+          "inputs": [
+            13,
+            30
+          ],
+          "output": 16
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 26,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_18"
+    },
+    {
+      "formula": "add(slli(in0,26),srli(in1,6))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000264",
+            "0x00000268",
+            "0x0000026c"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            101,
+            102,
+            103
+          ],
+          "inputs": [
+            14,
+            13
+          ],
+          "output": 17
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 159192,
+        "places": 1,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 26,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 159192,
+      "total_custom_instructions": 159192,
+      "name": "candidate_19"
+    },
+    {
+      "formula": "add(slli(in0,31),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000248",
+            "0x00000254"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            94,
+            97
+          ],
+          "inputs": [
+            14,
+            12
+          ],
+          "output": 11
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000025c",
+            "0x00000260"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            99,
+            100
+          ],
+          "inputs": [
+            13,
+            16
+          ],
+          "output": 12
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 31,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_20",
+      "candidate_id": "5993bed7ab6f28de136c1093667908953d0b710ac8919f490ba68254a5b69e68",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_20.S",
+      "assembly_sha256": "71219bae78ece9197b7ed5c08e5d5e2874a5029803572c793acc1089950f98ca"
+    },
+    {
+      "formula": "add(slli(in0,4),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000001cc",
+            "0x000001d8"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            63,
+            66
+          ],
+          "inputs": [
+            11,
+            5
+          ],
+          "output": 7
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000001dc",
+            "0x000001e0"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            67,
+            68
+          ],
+          "inputs": [
+            17,
+            8
+          ],
+          "output": 5
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 4,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_21"
+    },
+    {
+      "formula": "add(srli(in0,29),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000001fc",
+            "0x00000208"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            75,
+            78
+          ],
+          "inputs": [
+            12,
+            11
+          ],
+          "output": 17
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000020c",
+            "0x00000210"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            79,
+            80
+          ],
+          "inputs": [
+            16,
+            30
+          ],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 29,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_22"
+    },
+    {
+      "formula": "add(srli(in0,7),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000214",
+            "0x0000021c"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            81,
+            83
+          ],
+          "inputs": [
+            12,
+            30
+          ],
+          "output": 31
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000224",
+            "0x00000228"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            85,
+            86
+          ],
+          "inputs": [
+            16,
+            5
+          ],
+          "output": 30
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 7,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_23"
+    },
+    {
+      "formula": "add(srli(in0,7),slli(in1,25))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000214",
+            "0x00000218",
+            "0x0000021c"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            81,
+            82,
+            83
+          ],
+          "inputs": [
+            12,
+            16
+          ],
+          "output": 31
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 159192,
+        "places": 1,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 25,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 159192,
+      "total_custom_instructions": 159192,
+      "name": "candidate_24",
+      "candidate_id": "ddba7b789bf442ce4706e024da5bd1c633084e7853844fd9fb24a3775f209a67",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_24.S",
+      "assembly_sha256": "d845a49ba5eb99c96f2da1b97d54886da8bde20eab9ac771c35aac0948630a7e"
+    },
+    {
+      "formula": "add(srli(in0,9),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002f4",
+            "0x000002fc"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            137,
+            139
+          ],
+          "inputs": [
+            28,
+            13
+          ],
+          "output": 12
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000304",
+            "0x00000308"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            141,
+            142
+          ],
+          "inputs": [
+            29,
+            11
+          ],
+          "output": 13
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 9,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_25"
+    },
+    {
+      "formula": "add(srli(in0,9),slli(in1,23))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002f4",
+            "0x000002f8",
+            "0x000002fc"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            137,
+            138,
+            139
+          ],
+          "inputs": [
+            28,
+            29
+          ],
+          "output": 12
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 159192,
+        "places": 1,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 23,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 159192,
+      "total_custom_instructions": 159192,
+      "name": "candidate_26"
+    },
+    {
+      "formula": "add(in0,slli(in1,23))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002f8",
+            "0x000002fc"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            138,
+            139
+          ],
+          "inputs": [
+            12,
+            29
+          ],
+          "output": 12
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 159192,
+        "places": 1,
+        "saved": 159192,
+        "saved_percent": 0.3645320600877032,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 23,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 159192,
+      "region_custom_instructions": 159192,
+      "total_custom_instructions": 159192,
+      "name": "candidate_27"
+    },
+    {
+      "formula": "add(in0,slli(in1,25))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000218",
+            "0x0000021c"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            82,
+            83
+          ],
+          "inputs": [
+            31,
+            16
+          ],
+          "output": 31
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 159192,
+        "places": 1,
+        "saved": 159192,
+        "saved_percent": 0.3645320600877032,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 25,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 159192,
+      "region_custom_instructions": 159192,
+      "total_custom_instructions": 159192,
+      "name": "candidate_28",
+      "candidate_id": "5ecdf4f23797432e138a65141b508bdff8f8611d09a0d6988789c46a7cddc4b1",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_28.S",
+      "assembly_sha256": "4594fa306dac9467391bc65e606339861ebccca191eefb53882f7e8ee7536919"
+    },
+    {
+      "formula": "add(in0,srli(in1,17))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002b0",
+            "0x000002b4"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            120,
+            121
+          ],
+          "inputs": [
+            11,
+            6
+          ],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 159192,
+        "places": 1,
+        "saved": 159192,
+        "saved_percent": 0.3645320600877032,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 17,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 159192,
+      "region_custom_instructions": 159192,
+      "total_custom_instructions": 159192,
+      "name": "candidate_29"
+    },
+    {
+      "formula": "add(in0,srli(in1,6))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000268",
+            "0x0000026c"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            102,
+            103
+          ],
+          "inputs": [
+            17,
+            13
+          ],
+          "output": 17
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 159192,
+        "places": 1,
+        "saved": 159192,
+        "saved_percent": 0.3645320600877032,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 6,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 159192,
+      "region_custom_instructions": 159192,
+      "total_custom_instructions": 159192,
+      "name": "candidate_30"
+    },
+    {
+      "formula": "addi(lui(16777216),403)",
+      "occurrences": [
+        {
+          "blockStart": "0x000012c0",
+          "pcs": [
+            "0x000012c8",
+            "0x000012cc"
+          ],
+          "blockRuns": 34848,
+          "size": 2,
+          "symbols": [
+            "benchmark"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            1086,
+            1087
+          ],
+          "inputs": [],
+          "output": 11
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 34848,
+        "places": 1,
+        "saved": 34848,
+        "saved_percent": 0.07979806290477086,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 16777216,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 34848,
+      "region_custom_instructions": 34848,
+      "total_custom_instructions": 34848,
+      "name": "candidate_31"
+    },
+    {
+      "formula": "add(addi(in0,144),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x00001410",
+          "pcs": [
+            "0x00001410",
+            "0x00001414"
+          ],
+          "blockRuns": 17424,
+          "size": 2,
+          "symbols": [
+            "benchmark"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            1165,
+            1166
+          ],
+          "inputs": [
+            2,
+            15
+          ],
+          "output": 14
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 17424,
+        "places": 1,
+        "saved": 17424,
+        "saved_percent": 0.03989903145238543,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 144,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 17424,
+      "region_custom_instructions": 17424,
+      "total_custom_instructions": 17424,
+      "name": "candidate_32",
+      "candidate_id": "efdcd8270025739ac9ff1c3d8decdcd06070974b05dd4e3b93554140e318f6ee",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_32.S",
+      "assembly_sha256": "4bb56d73638b68a49906d2e17af098b01a9843d7187e36b7a857598d0fbb543e"
+    },
+    {
+      "formula": "add(in0,addi(in1,-1))",
+      "occurrences": [
+        {
+          "blockStart": "0x00000910",
+          "pcs": [
+            "0x00000950",
+            "0x00000958"
+          ],
+          "blockRuns": 1716,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_encrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            510,
+            512
+          ],
+          "inputs": [
+            10,
+            12
+          ],
+          "output": 12
+        },
+        {
+          "blockStart": "0x00000ad0",
+          "pcs": [
+            "0x00000adc",
+            "0x00000b10"
+          ],
+          "blockRuns": 1716,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_encrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            602,
+            615
+          ],
+          "inputs": [
+            12,
+            17
+          ],
+          "output": 17
+        },
+        {
+          "blockStart": "0x00000efc",
+          "pcs": [
+            "0x00000f3c",
+            "0x00000f44"
+          ],
+          "blockRuns": 3432,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            868,
+            870
+          ],
+          "inputs": [
+            10,
+            12
+          ],
+          "output": 12
+        },
+        {
+          "blockStart": "0x000010e0",
+          "pcs": [
+            "0x0000110c",
+            "0x00001134"
+          ],
+          "blockRuns": 3432,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            977,
+            987
+          ],
+          "inputs": [
+            12,
+            15
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 10296,
+        "places": 4,
+        "saved": 10296,
+        "saved_percent": 0.0235767004036823,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 1,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 10296,
+      "region_custom_instructions": 10296,
+      "total_custom_instructions": 10296,
+      "name": "candidate_33"
+    },
+    {
+      "formula": "add(slli(in0,29),srli(in1,3))",
+      "occurrences": [
+        {
+          "blockStart": "0x00000728",
+          "pcs": [
+            "0x0000072c",
+            "0x00000734",
+            "0x00000738"
+          ],
+          "blockRuns": 1089,
+          "size": 3,
+          "symbols": [
+            "crypto_aead_encrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            382,
+            384,
+            385
+          ],
+          "inputs": [
+            15,
+            19
+          ],
+          "output": 26
+        },
+        {
+          "blockStart": "0x00000968",
+          "pcs": [
+            "0x00000968",
+            "0x0000096c",
+            "0x00000970"
+          ],
+          "blockRuns": 1056,
+          "size": 3,
+          "symbols": [
+            "crypto_aead_encrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            516,
+            517,
+            518
+          ],
+          "inputs": [
+            17,
+            27
+          ],
+          "output": 5
+        },
+        {
+          "blockStart": "0x00000f54",
+          "pcs": [
+            "0x00000f54",
+            "0x00000f58",
+            "0x00000f5c"
+          ],
+          "blockRuns": 2112,
+          "size": 3,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            874,
+            875,
+            876
+          ],
+          "inputs": [
+            6,
+            25
+          ],
+          "output": 16
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 4257,
+        "places": 3,
+        "saved": 8514,
+        "saved_percent": 0.019496117641506515,
+        "depth": 2,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 29,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 8514,
+      "region_custom_instructions": 4257,
+      "total_custom_instructions": 4257,
+      "name": "candidate_34"
+    },
+    {
+      "formula": "addi(andi(srai(addi(in0,-1),8),1),-1)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000e44",
+          "pcs": [
+            "0x00000e44",
+            "0x00000e48",
+            "0x00000e4c",
+            "0x00000e50"
+          ],
+          "blockRuns": 2178,
+          "size": 4,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            808,
+            809,
+            810,
+            811
+          ],
+          "inputs": [
+            15
+          ],
+          "output": 10
+        }
+      ],
+      "features": {
+        "size": 4,
+        "runs": 2178,
+        "places": 1,
+        "saved": 6534,
+        "saved_percent": 0.014962136794644535,
+        "depth": 4,
+        "tree_op_count": 4,
+        "input_count": 1,
+        "constant_count": 4,
+        "unique_constant_count": 3,
+        "max_abs_constant": 8,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 2,
+        "op_andi": 1,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 1,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 6534,
+      "region_custom_instructions": 2178,
+      "total_custom_instructions": 2178,
+      "name": "candidate_35"
+    },
+    {
+      "formula": "add(in0,srli(in1,3))",
+      "occurrences": [
+        {
+          "blockStart": "0x00000728",
+          "pcs": [
+            "0x0000072c",
+            "0x00000738"
+          ],
+          "blockRuns": 1089,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_encrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            382,
+            385
+          ],
+          "inputs": [
+            13,
+            19
+          ],
+          "output": 26
+        },
+        {
+          "blockStart": "0x00000968",
+          "pcs": [
+            "0x0000096c",
+            "0x00000970"
+          ],
+          "blockRuns": 1056,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_encrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            517,
+            518
+          ],
+          "inputs": [
+            13,
+            27
+          ],
+          "output": 5
+        },
+        {
+          "blockStart": "0x00000cbc",
+          "pcs": [
+            "0x00000cc0",
+            "0x00000cc4"
+          ],
+          "blockRuns": 2178,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            718,
+            719
+          ],
+          "inputs": [
+            14,
+            27
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x00000f54",
+          "pcs": [
+            "0x00000f58",
+            "0x00000f5c"
+          ],
+          "blockRuns": 2112,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            875,
+            876
+          ],
+          "inputs": [
+            13,
+            25
+          ],
+          "output": 16
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 6435,
+        "places": 4,
+        "saved": 6435,
+        "saved_percent": 0.014735437752301435,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 3,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 6435,
+      "region_custom_instructions": 6435,
+      "total_custom_instructions": 6435,
+      "name": "candidate_36",
+      "candidate_id": "539e6b57e1487822a077db7fd0d418a68ff5c4625d878cac09747e6f405dc2c4",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 4,
+        "comparisons": 256,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_36.S",
+      "assembly_sha256": "78c25c970f8a84d19f82cb3eae7ea6f83b2c7fdd2ab71ea038289dc3719d308a"
+    },
+    {
+      "formula": "addi(andi(srai(in0,8),1),-1)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000e44",
+          "pcs": [
+            "0x00000e48",
+            "0x00000e4c",
+            "0x00000e50"
+          ],
+          "blockRuns": 2178,
+          "size": 3,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            809,
+            810,
+            811
+          ],
+          "inputs": [
+            10
+          ],
+          "output": 10
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 2178,
+        "places": 1,
+        "saved": 4356,
+        "saved_percent": 0.009974757863096357,
+        "depth": 3,
+        "tree_op_count": 3,
+        "input_count": 1,
+        "constant_count": 3,
+        "unique_constant_count": 3,
+        "max_abs_constant": 8,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 1,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 1,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 4356,
+      "region_custom_instructions": 2178,
+      "total_custom_instructions": 2178,
+      "name": "candidate_37"
+    },
+    {
+      "formula": "andi(srai(addi(in0,-1),8),1)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000e44",
+          "pcs": [
+            "0x00000e44",
+            "0x00000e48",
+            "0x00000e4c"
+          ],
+          "blockRuns": 2178,
+          "size": 3,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            808,
+            809,
+            810
+          ],
+          "inputs": [
+            15
+          ],
+          "output": 10
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 2178,
+        "places": 1,
+        "saved": 4356,
+        "saved_percent": 0.009974757863096357,
+        "depth": 3,
+        "tree_op_count": 3,
+        "input_count": 1,
+        "constant_count": 3,
+        "unique_constant_count": 3,
+        "max_abs_constant": 8,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 1,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 1,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 4356,
+      "region_custom_instructions": 2178,
+      "total_custom_instructions": 2178,
+      "name": "candidate_38"
+    },
+    {
+      "formula": "add(slli(in0,29),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000728",
+          "pcs": [
+            "0x00000734",
+            "0x00000738"
+          ],
+          "blockRuns": 1089,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_encrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            384,
+            385
+          ],
+          "inputs": [
+            15,
+            26
+          ],
+          "output": 26
+        },
+        {
+          "blockStart": "0x00000968",
+          "pcs": [
+            "0x00000968",
+            "0x00000970"
+          ],
+          "blockRuns": 1056,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_encrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            516,
+            518
+          ],
+          "inputs": [
+            17,
+            5
+          ],
+          "output": 5
+        },
+        {
+          "blockStart": "0x00000f54",
+          "pcs": [
+            "0x00000f54",
+            "0x00000f5c"
+          ],
+          "blockRuns": 2112,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            874,
+            876
+          ],
+          "inputs": [
+            6,
+            16
+          ],
+          "output": 16
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 4257,
+        "places": 3,
+        "saved": 4257,
+        "saved_percent": 0.009748058820753257,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 29,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 4257,
+      "region_custom_instructions": 4257,
+      "total_custom_instructions": 4257,
+      "name": "candidate_39"
+    },
+    {
+      "formula": "addi(andi(in0,1),-1)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000e44",
+          "pcs": [
+            "0x00000e4c",
+            "0x00000e50"
+          ],
+          "blockRuns": 2178,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            810,
+            811
+          ],
+          "inputs": [
+            10
+          ],
+          "output": 10
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 2178,
+        "places": 1,
+        "saved": 2178,
+        "saved_percent": 0.004987378931548179,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 1,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 1,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 1,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 2178,
+      "region_custom_instructions": 2178,
+      "total_custom_instructions": 2178,
+      "name": "candidate_40",
+      "candidate_id": "7e225847bf4bde6b35ed0e10d923f58fb809418c285c91e1d56ffa183228b99c",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_40.S",
+      "assembly_sha256": "1918c7f2b0b8a8b8dd0c00388877578350faeb3df13f1ea3601ca8cd6959c749"
+    },
+    {
+      "formula": "andi(srai(in0,8),1)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000e44",
+          "pcs": [
+            "0x00000e48",
+            "0x00000e4c"
+          ],
+          "blockRuns": 2178,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            809,
+            810
+          ],
+          "inputs": [
+            10
+          ],
+          "output": 10
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 2178,
+        "places": 1,
+        "saved": 2178,
+        "saved_percent": 0.004987378931548179,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 1,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 8,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 1,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 1,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 2178,
+      "region_custom_instructions": 2178,
+      "total_custom_instructions": 2178,
+      "name": "candidate_41"
+    },
+    {
+      "formula": "srai(addi(in0,-1),8)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000e44",
+          "pcs": [
+            "0x00000e44",
+            "0x00000e48"
+          ],
+          "blockRuns": 2178,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            808,
+            809
+          ],
+          "inputs": [
+            15
+          ],
+          "output": 10
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 2178,
+        "places": 1,
+        "saved": 2178,
+        "saved_percent": 0.004987378931548179,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 1,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 8,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 1,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 2178,
+      "region_custom_instructions": 2178,
+      "total_custom_instructions": 2178,
+      "name": "candidate_42"
+    },
+    {
+      "formula": "xor(in0,lui(-2147483648))",
+      "occurrences": [
+        {
+          "blockStart": "0x00000c90",
+          "pcs": [
+            "0x00000c98",
+            "0x00000ca0"
+          ],
+          "blockRuns": 2178,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            708,
+            710
+          ],
+          "inputs": [
+            15
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 2178,
+        "places": 1,
+        "saved": 2178,
+        "saved_percent": 0.004987378931548179,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 1,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 2147483648,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 1,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 2178,
+      "region_custom_instructions": 2178,
+      "total_custom_instructions": 2178,
+      "name": "candidate_43"
+    },
+    {
+      "formula": "addi(lui(-2128830464),-571)",
+      "occurrences": [
+        {
+          "blockStart": "0x00001210",
+          "pcs": [
+            "0x00001210",
+            "0x0000121c"
+          ],
+          "blockRuns": 1,
+          "size": 2,
+          "symbols": [
+            "benchmark"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            1041,
+            1044
+          ],
+          "inputs": [],
+          "output": 8
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 1,
+        "places": 1,
+        "saved": 1,
+        "saved_percent": 2.2898893165969597e-06,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 2128830464,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 1,
+      "region_custom_instructions": 1,
+      "total_custom_instructions": 1,
+      "name": "candidate_44",
+      "candidate_id": "0ff0001f72e3f711a99cdf317dd0e7eee620a8b71e19c2f38fb3a71abf739222",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_44.S",
+      "assembly_sha256": "20f3b631a5f96276d4e87ac7dcbfc91b5232b1f062a0b80c4a3d5acbd506d19d"
+    }
+  ],
+  "relocation_guard": {
+    "schema": "isaforge-relocation-source-guard-v1",
+    "source_sha256": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+    "input_executable_count": 45,
+    "rejected_count": 0,
+    "rejections": []
+  },
+  "pool": [
+    {
+      "formula": "and(xori(in0,-1),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000010c",
+            "0x00000120"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            15,
+            20
+          ],
+          "inputs": [
+            30,
+            14
+          ],
+          "output": 11
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000011c",
+            "0x00000130"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            19,
+            24
+          ],
+          "inputs": [
+            31,
+            28
+          ],
+          "output": 17
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000124",
+            "0x00000138"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            21,
+            26
+          ],
+          "inputs": [
+            5,
+            29
+          ],
+          "output": 14
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000134",
+            "0x00000148"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            25,
+            30
+          ],
+          "inputs": [
+            7,
+            18
+          ],
+          "output": 13
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000013c",
+            "0x00000150"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            27,
+            32
+          ],
+          "inputs": [
+            8,
+            30
+          ],
+          "output": 28
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000140",
+            "0x0000014c"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            28,
+            31
+          ],
+          "inputs": [
+            9,
+            31
+          ],
+          "output": 29
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000016c",
+            "0x00000188"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            39,
+            46
+          ],
+          "inputs": [
+            16,
+            7
+          ],
+          "output": 16
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000170",
+            "0x0000018c"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            40,
+            47
+          ],
+          "inputs": [
+            12,
+            5
+          ],
+          "output": 12
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000174",
+            "0x00000190"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            41,
+            48
+          ],
+          "inputs": [
+            15,
+            8
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000194",
+            "0x000001a0"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            49,
+            52
+          ],
+          "inputs": [
+            6,
+            9
+          ],
+          "output": 6
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 1591920,
+        "places": 10,
+        "saved": 1591920,
+        "saved_percent": 3.645320600877032,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 1,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 1,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 1,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 1591920,
+      "region_custom_instructions": 1591920,
+      "total_custom_instructions": 1591920,
+      "name": "candidate_00",
+      "candidate_id": "f88f866c52a20f41741309877b626293d2d4a15766fb83952fa0babee20f311e",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_00.S",
+      "assembly_sha256": "88ce502e8227ab5b047a02ccc27419edbfd6128977a0ae37dc641522672ba5ae"
+    },
+    {
+      "formula": "add(slli(in0,31),srli(in1,1))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000248",
+            "0x0000024c",
+            "0x00000254"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            94,
+            95,
+            97
+          ],
+          "inputs": [
+            14,
+            13
+          ],
+          "output": 11
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000258",
+            "0x0000025c",
+            "0x00000260"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            98,
+            99,
+            100
+          ],
+          "inputs": [
+            13,
+            14
+          ],
+          "output": 12
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 318384,
+        "places": 2,
+        "saved": 636768,
+        "saved_percent": 1.458128240350813,
+        "depth": 2,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 31,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 636768,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_04",
+      "candidate_id": "18a8fabb82ab76433acd7c3a1efbccd748a78b62934a7a7db10dea1a1a8a6bc4",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_04.S",
+      "assembly_sha256": "1fa9f0653c192b0fac8687fc14347d43a986adccd5f87f1e7d3fbe45371329af"
+    },
+    {
+      "formula": "add(in0,srli(in1,1))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000024c",
+            "0x00000254"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            95,
+            97
+          ],
+          "inputs": [
+            11,
+            13
+          ],
+          "output": 11
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000258",
+            "0x00000260"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            98,
+            100
+          ],
+          "inputs": [
+            12,
+            14
+          ],
+          "output": 12
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 1,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_08",
+      "candidate_id": "20f276f37e7f77653ddd5bb4b305fd32aa0da2911507e3fca5d1986b30cf43e8",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_08.S",
+      "assembly_sha256": "831877c2df48c90abe1619764c9dead540c94e031f996147c512d1c21112e0bf"
+    },
+    {
+      "formula": "add(in0,srli(in1,7))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002dc",
+            "0x000002e4"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            131,
+            133
+          ],
+          "inputs": [
+            14,
+            29
+          ],
+          "output": 14
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002e8",
+            "0x000002f0"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            134,
+            136
+          ],
+          "inputs": [
+            15,
+            28
+          ],
+          "output": 15
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 7,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_12",
+      "candidate_id": "30cc8173dfb70fc2bd8a827a7ceff7d6b16690aa9b42b5a54907f10d4a04f997",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_12.S",
+      "assembly_sha256": "7e1d863bf03599869f653996c143654752eec2ccb624337b6108886685c0fde4"
+    },
+    {
+      "formula": "add(slli(in0,22),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000294",
+            "0x000002a0"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            113,
+            116
+          ],
+          "inputs": [
+            15,
+            14
+          ],
+          "output": 13
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x000002a4",
+            "0x000002a8"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            117,
+            118
+          ],
+          "inputs": [
+            6,
+            12
+          ],
+          "output": 14
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 22,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_16",
+      "candidate_id": "e447cdfbccdb7760dc5f406284463e015658381c2816afe92c4fce884aaab006",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_16.S",
+      "assembly_sha256": "f1623e3092e465f09b846ff602bbc65eade04b41efcee4adde40f61fe429167f"
+    },
+    {
+      "formula": "add(slli(in0,31),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000248",
+            "0x00000254"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            94,
+            97
+          ],
+          "inputs": [
+            14,
+            12
+          ],
+          "output": 11
+        },
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x0000025c",
+            "0x00000260"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            99,
+            100
+          ],
+          "inputs": [
+            13,
+            16
+          ],
+          "output": 12
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 318384,
+        "places": 2,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 31,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 318384,
+      "total_custom_instructions": 318384,
+      "name": "candidate_20",
+      "candidate_id": "5993bed7ab6f28de136c1093667908953d0b710ac8919f490ba68254a5b69e68",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_20.S",
+      "assembly_sha256": "71219bae78ece9197b7ed5c08e5d5e2874a5029803572c793acc1089950f98ca"
+    },
+    {
+      "formula": "add(srli(in0,7),slli(in1,25))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000214",
+            "0x00000218",
+            "0x0000021c"
+          ],
+          "blockRuns": 159192,
+          "size": 3,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            81,
+            82,
+            83
+          ],
+          "inputs": [
+            12,
+            16
+          ],
+          "output": 31
+        }
+      ],
+      "features": {
+        "size": 3,
+        "runs": 159192,
+        "places": 1,
+        "saved": 318384,
+        "saved_percent": 0.7290641201754064,
+        "depth": 2,
+        "tree_op_count": 3,
+        "input_count": 2,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 25,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 318384,
+      "region_custom_instructions": 159192,
+      "total_custom_instructions": 159192,
+      "name": "candidate_24",
+      "candidate_id": "ddba7b789bf442ce4706e024da5bd1c633084e7853844fd9fb24a3775f209a67",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_24.S",
+      "assembly_sha256": "d845a49ba5eb99c96f2da1b97d54886da8bde20eab9ac771c35aac0948630a7e"
+    },
+    {
+      "formula": "add(in0,slli(in1,25))",
+      "occurrences": [
+        {
+          "blockStart": "0x000000d0",
+          "pcs": [
+            "0x00000218",
+            "0x0000021c"
+          ],
+          "blockRuns": 159192,
+          "size": 2,
+          "symbols": [
+            "ROUND"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            82,
+            83
+          ],
+          "inputs": [
+            31,
+            16
+          ],
+          "output": 31
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 159192,
+        "places": 1,
+        "saved": 159192,
+        "saved_percent": 0.3645320600877032,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 25,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 1,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 159192,
+      "region_custom_instructions": 159192,
+      "total_custom_instructions": 159192,
+      "name": "candidate_28",
+      "candidate_id": "5ecdf4f23797432e138a65141b508bdff8f8611d09a0d6988789c46a7cddc4b1",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_28.S",
+      "assembly_sha256": "4594fa306dac9467391bc65e606339861ebccca191eefb53882f7e8ee7536919"
+    },
+    {
+      "formula": "add(addi(in0,144),in1)",
+      "occurrences": [
+        {
+          "blockStart": "0x00001410",
+          "pcs": [
+            "0x00001410",
+            "0x00001414"
+          ],
+          "blockRuns": 17424,
+          "size": 2,
+          "symbols": [
+            "benchmark"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            1165,
+            1166
+          ],
+          "inputs": [
+            2,
+            15
+          ],
+          "output": 14
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 17424,
+        "places": 1,
+        "saved": 17424,
+        "saved_percent": 0.03989903145238543,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 144,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 17424,
+      "region_custom_instructions": 17424,
+      "total_custom_instructions": 17424,
+      "name": "candidate_32",
+      "candidate_id": "efdcd8270025739ac9ff1c3d8decdcd06070974b05dd4e3b93554140e318f6ee",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_32.S",
+      "assembly_sha256": "4bb56d73638b68a49906d2e17af098b01a9843d7187e36b7a857598d0fbb543e"
+    },
+    {
+      "formula": "add(in0,srli(in1,3))",
+      "occurrences": [
+        {
+          "blockStart": "0x00000728",
+          "pcs": [
+            "0x0000072c",
+            "0x00000738"
+          ],
+          "blockRuns": 1089,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_encrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            382,
+            385
+          ],
+          "inputs": [
+            13,
+            19
+          ],
+          "output": 26
+        },
+        {
+          "blockStart": "0x00000968",
+          "pcs": [
+            "0x0000096c",
+            "0x00000970"
+          ],
+          "blockRuns": 1056,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_encrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            517,
+            518
+          ],
+          "inputs": [
+            13,
+            27
+          ],
+          "output": 5
+        },
+        {
+          "blockStart": "0x00000cbc",
+          "pcs": [
+            "0x00000cc0",
+            "0x00000cc4"
+          ],
+          "blockRuns": 2178,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            718,
+            719
+          ],
+          "inputs": [
+            14,
+            27
+          ],
+          "output": 15
+        },
+        {
+          "blockStart": "0x00000f54",
+          "pcs": [
+            "0x00000f58",
+            "0x00000f5c"
+          ],
+          "blockRuns": 2112,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            875,
+            876
+          ],
+          "inputs": [
+            13,
+            25
+          ],
+          "output": 16
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 6435,
+        "places": 4,
+        "saved": 6435,
+        "saved_percent": 0.014735437752301435,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 2,
+        "constant_count": 1,
+        "unique_constant_count": 1,
+        "max_abs_constant": 3,
+        "op_add": 1,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 0,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 1,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 6435,
+      "region_custom_instructions": 6435,
+      "total_custom_instructions": 6435,
+      "name": "candidate_36",
+      "candidate_id": "539e6b57e1487822a077db7fd0d418a68ff5c4625d878cac09747e6f405dc2c4",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 4,
+        "comparisons": 256,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_36.S",
+      "assembly_sha256": "78c25c970f8a84d19f82cb3eae7ea6f83b2c7fdd2ab71ea038289dc3719d308a"
+    },
+    {
+      "formula": "addi(andi(in0,1),-1)",
+      "occurrences": [
+        {
+          "blockStart": "0x00000e44",
+          "pcs": [
+            "0x00000e4c",
+            "0x00000e50"
+          ],
+          "blockRuns": 2178,
+          "size": 2,
+          "symbols": [
+            "crypto_aead_decrypt"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            810,
+            811
+          ],
+          "inputs": [
+            10
+          ],
+          "output": 10
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 2178,
+        "places": 1,
+        "saved": 2178,
+        "saved_percent": 0.004987378931548179,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 1,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 1,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 1,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 0,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 2178,
+      "region_custom_instructions": 2178,
+      "total_custom_instructions": 2178,
+      "name": "candidate_40",
+      "candidate_id": "7e225847bf4bde6b35ed0e10d923f58fb809418c285c91e1d56ffa183228b99c",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_40.S",
+      "assembly_sha256": "1918c7f2b0b8a8b8dd0c00388877578350faeb3df13f1ea3601ca8cd6959c749"
+    },
+    {
+      "formula": "addi(lui(-2128830464),-571)",
+      "occurrences": [
+        {
+          "blockStart": "0x00001210",
+          "pcs": [
+            "0x00001210",
+            "0x0000121c"
+          ],
+          "blockRuns": 1,
+          "size": 2,
+          "symbols": [
+            "benchmark"
+          ],
+          "selectedForSavings": true,
+          "sites": [
+            1041,
+            1044
+          ],
+          "inputs": [],
+          "output": 8
+        }
+      ],
+      "features": {
+        "size": 2,
+        "runs": 1,
+        "places": 1,
+        "saved": 1,
+        "saved_percent": 2.2898893165969597e-06,
+        "depth": 2,
+        "tree_op_count": 2,
+        "input_count": 0,
+        "constant_count": 2,
+        "unique_constant_count": 2,
+        "max_abs_constant": 2128830464,
+        "op_add": 0,
+        "op_sub": 0,
+        "op_and": 0,
+        "op_or": 0,
+        "op_xor": 0,
+        "op_sll": 0,
+        "op_srl": 0,
+        "op_sra": 0,
+        "op_slt": 0,
+        "op_sltu": 0,
+        "op_addi": 1,
+        "op_andi": 0,
+        "op_ori": 0,
+        "op_xori": 0,
+        "op_slli": 0,
+        "op_srli": 0,
+        "op_srai": 0,
+        "op_slti": 0,
+        "op_sltiu": 0,
+        "op_lui": 1,
+        "op_mul": 0,
+        "op_mulh": 0,
+        "op_mulhu": 0,
+        "op_mulhsu": 0
+      },
+      "expected_instruction_reduction": 1,
+      "region_custom_instructions": 1,
+      "total_custom_instructions": 1,
+      "name": "candidate_44",
+      "candidate_id": "0ff0001f72e3f711a99cdf317dd0e7eee620a8b71e19c2f38fb3a71abf739222",
+      "lowering_check": {
+        "passed": true,
+        "blocks": 1,
+        "comparisons": 64,
+        "scope": "Sampled full-register, memory and branch equivalence per block, including jointly lowered occurrences; not a universal program proof."
+      },
+      "assembly": "discovery/attempt-000/candidate_44.S",
+      "assembly_sha256": "20f3b631a5f96276d4e87ac7dcbfc91b5232b1f062a0b80c4a3d5acbd506d19d"
+    }
+  ],
+  "pool_rule": "Reject symbolic/unsupported removed source operands before calibration filtering; Evenly spaced rank indices round(i*(N-1)/(K-1)) across all executable calibrated formulas sorted by instruction savings then formula; K fixed before discovery, no candidate performance labels.",
+  "eligible_formula_count": 45,
+  "excluded_uncalibrated_formulas": [],
+  "selected_rank_indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32,
+    36,
+    40,
+    44
+  ],
+  "context_id": "ab9ef4693ad4ad77e1256f85aabe11074dfc424eb25dfe461d1b55e9abe75e13",
+  "workload": "ascon128v13",
+  "baseline_performance": {
+    "cycles": 247224006,
+    "instructions": 43670234,
+    "benchmark_result_u32": 114230504,
+    "upstream_self_check": true,
+    "custom_instructions": 0,
+    "region_custom_instructions": 0
+  },
+  "baseline_image": "discovery/attempt-000/marked/firmware.hex",
+  "baseline_binary_identical": true,
+  "mapped_statements": 1161,
+  "memory_check": {
+    "min_sp": 7632,
+    "max_stack_bytes": 560,
+    "stack_headroom_bytes": 1104,
+    "checked_cycles": 247224463
+  },
+  "profile": "discovery/attempt-000/profile/simulation.json",
+  "artifacts": {
+    "attempt-000/assembly.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "attempt-000/candidate.v": "b8d826d8899911549e3db787ea47aff9eb34e462aabba5aa5c03683c0d045866",
+    "attempt-000/candidate_00.S": "88ce502e8227ab5b047a02ccc27419edbfd6128977a0ae37dc641522672ba5ae",
+    "attempt-000/candidate_04.S": "1fa9f0653c192b0fac8687fc14347d43a986adccd5f87f1e7d3fbe45371329af",
+    "attempt-000/candidate_08.S": "831877c2df48c90abe1619764c9dead540c94e031f996147c512d1c21112e0bf",
+    "attempt-000/candidate_12.S": "7e1d863bf03599869f653996c143654752eec2ccb624337b6108886685c0fde4",
+    "attempt-000/candidate_16.S": "f1623e3092e465f09b846ff602bbc65eade04b41efcee4adde40f61fe429167f",
+    "attempt-000/candidate_20.S": "71219bae78ece9197b7ed5c08e5d5e2874a5029803572c793acc1089950f98ca",
+    "attempt-000/candidate_24.S": "d845a49ba5eb99c96f2da1b97d54886da8bde20eab9ac771c35aac0948630a7e",
+    "attempt-000/candidate_28.S": "4594fa306dac9467391bc65e606339861ebccca191eefb53882f7e8ee7536919",
+    "attempt-000/candidate_32.S": "4bb56d73638b68a49906d2e17af098b01a9843d7187e36b7a857598d0fbb543e",
+    "attempt-000/candidate_36.S": "78c25c970f8a84d19f82cb3eae7ea6f83b2c7fdd2ab71ea038289dc3719d308a",
+    "attempt-000/candidate_40.S": "1918c7f2b0b8a8b8dd0c00388877578350faeb3df13f1ea3601ca8cd6959c749",
+    "attempt-000/candidate_44.S": "20f3b631a5f96276d4e87ac7dcbfc91b5232b1f062a0b80c4a3d5acbd506d19d",
+    "attempt-000/marked/compile.log": "a965c1c14f3b95068c7172dbd0f5f693562a40408aac611991ce6cd7df50f672",
+    "attempt-000/marked/disassembly.txt": "9ca03d1392cf02d1205c1bcd1c266deb2fc9804f3264b0a18e47085b11b3f115",
+    "attempt-000/marked/firmware.bin": "ba9bfffb82137a71f519805d378c9c35a72a6b746de5609af51eacf4ea39ebd3",
+    "attempt-000/marked/firmware.elf": "bcaa4c75ebc4e460bffcb87df49d62c84e74b1b5bb5448196c5b21cf27c669b9",
+    "attempt-000/marked/firmware.hex": "a4cd84d2be269ead296d33fb71094a25904401588f0f94262174e38968c2fd9f",
+    "attempt-000/marked/objcopy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "attempt-000/marked/symbols.txt": "f43433ebe128ed7c6376454727385d2fa2060c95d31901f0574fe94d15b8c85e",
+    "attempt-000/marked/validation.json": "d9916a9f3fec50da21b420e0473487842aa7885a9e867bdc1083a4806fa0f252",
+    "attempt-000/marked.S": "4e9046393b04107c5fe9e14ae7e726c75a098d8cb08697227e5b11c39d53a9d3",
+    "attempt-000/original/compile.log": "12a965415194729fb80ba5a748b2ebeb41852887c674fe893109089e883aae30",
+    "attempt-000/original/disassembly.txt": "870d054884ae7323dc64f8175ce61c4b147dfbd7ca90f8a320db26ba5f183f23",
+    "attempt-000/original/firmware.bin": "ba9bfffb82137a71f519805d378c9c35a72a6b746de5609af51eacf4ea39ebd3",
+    "attempt-000/original/firmware.elf": "0619d09b05ef293746d3f2520236daca6ffd460b02229630fc0926a1c51c6dad",
+    "attempt-000/original/firmware.hex": "a4cd84d2be269ead296d33fb71094a25904401588f0f94262174e38968c2fd9f",
+    "attempt-000/original/objcopy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "attempt-000/original/symbols.txt": "4e5f9cda502c914bf0de340721eda32786429a7e48777ba2d7841a98c3139143",
+    "attempt-000/original/validation.json": "d9916a9f3fec50da21b420e0473487842aa7885a9e867bdc1083a4806fa0f252",
+    "attempt-000/profile/build.log": "84171c1bd9143ccf1b9b9bd4134463225e24905563a2143777ba7402084cbe19",
+    "attempt-000/profile/observer_core.v": "609b31d116bccc4cd4f218d2dcddaef056519a7117a48b99b0f7c7d99ae6ee87",
+    "attempt-000/profile/observer_top.v": "c386bcd44d286d9a7a9dfe79bff7a75ec5ed9d34cc4f540c62d30b2054e940a1",
+    "attempt-000/profile/simulation.json": "0f92cb6328f3d384225c3e49a031128bf51052c54dcbac24514161154fd76ff0",
+    "attempt-000/profile/soc_top.v": "ab36fd12a92e6ae041c703521dcd587f387de00bf239948c17d40cdbb2c7b98f",
+    "attempt-000/program.s": "620187d497aeefb89902cfd9671f5735d61f2a3904fddcb494ea73ae87c0a605"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "schema": "isaforge-ascon-v13-target-adapter-manifest-v1",
+  "status": "target-adapter-source-and-host-loop-verified; no target qualification",
+  "upstream": {
+    "repository": "ascon/ascon-c",
+    "tag": "v1.3.0",
+    "commit": "b7ca60bbf86479785de08b75aab2425dce4e9e8b",
+    "source_manifest_sha256": "fd178acbcf69e2bfef9c4a7b1307e6a72e3b49b5e9a38f815e6c2cc9d9c77c5e",
+    "copy_manifest_sha256": "e895f69681da185a2ccfe6f629399c695eb5ff434611d56da2674c2e85e842e6",
+    "exact_byte_copies": true
+  },
+  "target_translation_unit": "benchmarks/ascon/ascon128v13_isaforge.c",
+  "target_translation_unit_sha256": "a9f7ba82739d242558fe8f4a7995cdfca8e4526cf7b1cef32627ff85b69f8168",
+  "generator": "scripts/build_ascon128_v13_target_adapter.py",
+  "kat_fingerprint": {
+    "algorithm": "FNV-1a-32 over ciphertext bytes in KAT record order",
+    "value": "0x06cf04e8",
+    "ciphertext_bytes": 34848,
+    "source_kat_sha256": "26c3e3b7ba1299f08e9e7600687a75c4455e5c857dd11d67ce89788c6af419db"
+  },
+  "host_loop_evidence": {
+    "result": "results/2026-10-26-ascon-host-preflight-r3/result.json",
+    "result_sha256": "e33d36f10cabfd0e30229ccefa7c087f6f4d44229a6d44eb4f758b59b55f741b",
+    "exact_serialized_kat_equality": true,
+    "cases": 1089,
+    "encryptions": 1089,
+    "decryptions": 2178,
+    "target_bytewise_kat_comparison": false
+  },
+  "source_family_evidence": {
+    "report": "results/2026-10-27-ascon-source-family-audit/report.json",
+    "report_sha256": "906bf345f70233ee5d59f37c3062ab9ea0e7d568d541f21a7682effe5177885b",
+    "independent_confirmatory_family": false,
+    "exact_target_formula_audit": "pending discovery"
+  },
+  "qualification": {
+    "target_jobs": 0,
+    "candidate_dispatch_enabled": false,
+    "candidate_attempts": 0,
+    "target_labels": 0,
+    "model_fits": 0
+  },
+  "source_bindings": {
+    "benchmarks/ascon/ASCON128_V13_COPY_MANIFEST.json": "e895f69681da185a2ccfe6f629399c695eb5ff434611d56da2674c2e85e842e6",
+    "benchmarks/ascon/ASCON128_V13_SOURCES.json": "fd178acbcf69e2bfef9c4a7b1307e6a72e3b49b5e9a38f815e6c2cc9d9c77c5e",
+    "benchmarks/ascon/ascon128v13_host_preflight.c": "1f873b845fd5c5e0d7bed1092fdd24df91ecde4d5d58db469d5251b2af470762",
+    "benchmarks/ascon/ascon128v13_isaforge.c": "a9f7ba82739d242558fe8f4a7995cdfca8e4526cf7b1cef32627ff85b69f8168",
+    "benchmarks/ascon/upstream/LICENSE": "5537d4d10b76b81b6e8dfd8b644480a4b1efa332fbb0cdb61126c5be781ef7b4",
+    "benchmarks/ascon/upstream/crypto_aead/ascon128v13/LWC_AEAD_KAT_128_128.txt": "26c3e3b7ba1299f08e9e7600687a75c4455e5c857dd11d67ce89788c6af419db",
+    "benchmarks/ascon/upstream/crypto_aead/ascon128v13/ref/aead.c": "71be01bb3f3aac778b1a57b9fc8e8a1d764d1aea2ab8b598222d1ae7a0883171",
+    "benchmarks/ascon/upstream/crypto_aead/ascon128v13/ref/api.h": "8b894ee855331465e5e5513cd0e0468587324c16b96b72affc1216ebf25e023e",
+    "benchmarks/ascon/upstream/crypto_aead/ascon128v13/ref/ascon.h": "c83217138b791c0e37ab1ab7bde216ed0392fc0c17bc2078f7454217bd4e1ea5",
+    "benchmarks/ascon/upstream/crypto_aead/ascon128v13/ref/constants.h": "91cae918bdd5c365090afec02767916764e2c33e72a5d89348b96d20e0c7819e",
+    "benchmarks/ascon/upstream/crypto_aead/ascon128v13/ref/permutations.h": "58ac28a23c4f310228e79dc18eb7608b62ba3abeedbc28e80d97eb7e3be5d8fb",
+    "benchmarks/ascon/upstream/crypto_aead/ascon128v13/ref/printstate.c": "628fc41e54f56917c8fdec2e31b80772eb5f673892f0fdcee5d18d934faf3121",
+    "benchmarks/ascon/upstream/crypto_aead/ascon128v13/ref/printstate.h": "bf59de3eb2e71c72f47d64c2cdee393fd3a1ca8337f0bd5636d41cca196f19d0",
+    "benchmarks/ascon/upstream/crypto_aead/ascon128v13/ref/round.h": "3ed06f5c6330b085952f6626e5df4a9ca598911f33b15b3ebc5d58dddb8fda11",
+    "benchmarks/ascon/upstream/crypto_aead/ascon128v13/ref/word.h": "7418003e426a80197c74d9eca2fa7099c0ec6593bd4522c4a2f1edc4141e4e75",
+    "benchmarks/ascon/upstream/tests/crypto_aead.h": "5c715ebe73ac8117ef5164e3d1ae7bc00f07fee85ca248e54cb153ee25cf5c34",
+    "benchmarks/ascon/upstream/tests/genkat_aead.c": "0554d03b29f1a46b0d6d07c0b6152e5977c8cf2b31e050f1533292f9f6ddee0b",
+    "docs/ascon-adapter-contract-2026-10-26.md": "4054b3c190b12b3969f3d601a789875af49ee326a4ba1e6adcfb993d8a507e85",
+    "docs/ascon-source-family-audit-2026-10-27.md": "e02f83b4b181417a7a8e1f686b9413e57774de7cd63ad9972c3cff5fb42f48db",
+    "docs/ascon-target-adapter-contract-2026-10-27.md": "6c67c5af26518d11bf4bba46355847fcdec0bba294846e0149e7af89ba7df820",
+    "results/2026-10-26-ascon-host-preflight-r3/result.json": "e33d36f10cabfd0e30229ccefa7c087f6f4d44229a6d44eb4f758b59b55f741b",
+    "results/2026-10-27-ascon-source-family-audit/report.json": "906bf345f70233ee5d59f37c3062ab9ea0e7d568d541f21a7682effe5177885b",
+    "scripts/audit_ascon_source_family.py": "6d02154b02405d77ca939fa41aa7277290c54dc41a7ed7107907f149a5928a8a",
+    "scripts/build_ascon128_v13_target_adapter.py": "8d9b959addefebe2c6d068bde750037927379ada92151564fb46773a343b85c0",
+    "scripts/build_ascon128_v13_target_manifest.py": "4350847ad35febd9d597a320de0bdad1d81ea41b36e56ec840fc00375b9b1bdb",
+    "scripts/preflight_ascon128_v13.py": "ef7665916172735dc2ccc8fe77fb265fde6e2f7eb0c6be64bffba763902cd084",
+    "tests/ascon_fake_crypto_api.c": "670e065ad2ad1c5e0831c0d8d2bf62181207ca0856f06978d90744c81b72da7e",
+    "tests/test_ascon_preflight.py": "35af839c103b9dc7d36e63011d2f10131559a02941a8327697e45293ad76cc47",
+    "tests/test_ascon_target_adapter.py": "fe0276a7396013813bda01fa7b1dbe622c4c4607801a078a90415a331a2f1181"
+  }
+}
