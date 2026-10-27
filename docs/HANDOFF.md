@@ -1,5 +1,26 @@
 # Current handoff — model evidence after Lift selection
 
+## October 27 — countnegative source-bound preflight, before target qualification
+
+The original TACLeBench `countnegative` integer kernel is now pinned by the
+existing full-suite archive hash and per-file Git/SHA-256 hashes. Its external
+adapter preserves the deterministic 20×20 matrix, original checksum, and
+initialization outside the timed benchmark function. The host smoke test passes.
+The `tacle-countnegative` workload group is absent from the authenticated
+122-label history; this is source identity only, not proof that compiler-derived
+candidate families are independent.
+
+The new qualification reuses the unchanged guarded RV32I/PCPI toolchain, 8 KiB
+RAM partition, relocation guard, twelve-candidate pool, and 0.5% / ten-replacement
+opportunity threshold. Candidate dispatch is disabled throughout. Its code and
+protocol tests pass, but no target phase has run yet. The source must be committed
+and pushed before executing
+`../work/audit-venv/bin/python scripts/qualify_tacle_countnegative.py`. Preserve
+the first target rejection; no fallback source or relaxed gate is authorized.
+If baseline-only qualification succeeds, audit exact operation-tree overlap
+before model fitting and build a complete source-bound model/policy release
+before any candidate measurements.
+
 ## October 27 — nested uncertainty-scaling diagnostic: do not promote
 
 Command: `../work/audit-venv/bin/python scripts/audit_nested_joint_uncertainty_scaling.py run --output results/2026-10-27-nested-joint-uncertainty-scaling-r3`.

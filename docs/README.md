@@ -1,5 +1,7 @@
 # Documentation
 
+[TACLeBench countnegative scout](countnegative-source-scout-2026-10-27.md): pinned original integer source and passing host checksum check; target compatibility, candidate opportunity, memory fit, and family independence remain unverified until its pushed baseline-only qualification.
+
 [Midterm report alignment](midterm-report-alignment.md): maps the course report's goals to verified project state, identifies claims that need qualification, and records the next missing research milestones.
 
 [Paid-update semantics](paid-update-semantics.md): the adaptive hardware GP refits on its verified paid prefix; fixed joint conditioning is a separate policy with an explicit noise assumption. The Ascon controller v2 wrapper failure and its zero-measurement limit are preserved in the [run diagnosis](../results/2026-10-27-ascon-selector-controller-v2-attempt/README.md).

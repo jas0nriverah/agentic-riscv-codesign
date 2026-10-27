@@ -1,4 +1,10 @@
-# Pinned TACLeBench bitcount
+# Pinned TACLeBench sources
+
+## countnegative
+
+The [`countnegative` source scout](../../docs/countnegative-source-scout-2026-10-27.md) pins a byte-authenticated integer kernel and passing host check. It is not target-qualified and contributes no measured labels.
+
+## bitcount
 
 The eight upstream files in `bitcount/` are byte-identical to
 [TACLeBench commit c6a0d73](https://github.com/tacle/tacle-bench/tree/c6a0d73e47bbd2bc86e34637156fb26dd4d5cf08/bench/kernel/bitcount).
