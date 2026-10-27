@@ -28,7 +28,7 @@ SOURCE = "scripts/prepare_ascon_selector_prereg.py"
 NATIVE = ROOT / "generated/ascon-target-qualification-2026-10-27"
 QUALIFICATION = ROOT / "results/2026-10-27-ascon-target-qualification"
 HISTORY = ROOT / "results/2026-10-26-lift-selection-corpus/corpus.json"
-OUTPUT = ROOT / "results/2026-10-27-ascon-selector-prereg"
+OUTPUT = ROOT / "results/2026-10-27-ascon-selector-prereg-v3"
 GROUP = workload.GROUP
 AREA_CAP = 64
 CLOCK_FLOOR_MHZ = 12.0
@@ -90,6 +90,7 @@ def binding_map():
     paths = [
         ROOT / "AGENTS.md",
         ROOT / "README.md",
+        ROOT / SOURCE,
         ROOT / "docs/ascon-target-adapter-contract-2026-10-27.md",
         ROOT / "docs/ascon-source-family-audit-2026-10-27.md",
         ROOT / "results/2026-10-27-ascon-source-family-audit/report.json",

@@ -30,10 +30,10 @@ from .speedup_corpus import family
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = "isaforge/ascon_selector_controller.py"
-PREREG = ROOT / "results/2026-10-27-ascon-selector-prereg"
+PREREG = ROOT / "results/2026-10-27-ascon-selector-prereg-v3"
 QUALIFICATION = ROOT / "results/2026-10-27-ascon-target-qualification"
-CAMPAIGN_DEFAULT = ROOT / "generated/ascon-native-selector-2026-10-27-v3"
-RELEASE_DEFAULT = ROOT / "results/2026-10-27-ascon-selector-controller-release-v3"
+CAMPAIGN_DEFAULT = ROOT / "generated/ascon-native-selector-2026-10-27-v5"
+RELEASE_DEFAULT = ROOT / "results/2026-10-27-ascon-selector-controller-release-v5"
 MAX_QUERIES = 3
 MAX_TOOL_CALLS = 20
 AREA_CAP = 64
@@ -61,6 +61,7 @@ POLICY_UPDATE_SEMANTICS = {
 ADDED_SOURCES = (
     SOURCE,
     "scripts/run_ascon_selector_controller.py",
+    "scripts/prepare_ascon_selector_prereg.py",
     "docs/ascon-selector-policy-semantics-2026-10-27.md",
     "docs/joint-posterior-update-contract.md",
     "docs/paid-update-semantics.md",

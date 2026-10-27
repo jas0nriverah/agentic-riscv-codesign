@@ -179,4 +179,31 @@ The campaign command and archive details remain in [`lift-selection-campaign.md`
 
 The active Codex chat model completed one bounded EDN selection replay through `scripts/run_codex_chat_selector.py`. It chose a correctness-passing 1.0004323× candidate at +32 LUT4 and 71.1187 MHz minimum routed Fmax, matching the measured-pool oracle. One shortened candidate ID consumed an invalid charged attempt, so the pilot used two charged attempts for one valid measurement. Frequency, merit, pairwise ranker, raw regression, and GP controls reach the same oracle at the two-attempt endpoint; no LLM advantage is established. It made no API call and launched no native job. The exact transcript-derived action ledger, protocol and limitations are under `results/2026-10-27-codex-chat-agent-edn-b64-s0/`; see [interpretation and reproduction](codex-chat-selector-pilot.md).
 
-The report, slides and frozen dataset export are under `submissions/midterm-2026-10-28/`. The report and slide deck include the current-chat pilot and explicitly label dynamic model routing as unimplemented. Team names, contribution attribution and exact shares still require human confirmation before Canvas upload. The next research milestone remains a fresh workload with frozen equal-budget comparison of LLM, heuristic and non-agent active-learning policies, followed by joint measurement of selected instructions.
+The report, slides and frozen dataset export are under `submissions/midterm-2026-10-28/`. The report and slide deck include the current-chat pilot and explicitly label dynamic model routing as unimplemented. Team names, contribution attribution and exact shares still require human confirmation before Canvas upload.
+
+## October 27 — Ascon selector release recovery
+
+The v1 Ascon prelabel package remains preserved but cannot authorize dispatch
+because its `AGENTS.md` and `README.md` bindings no longer match the committed
+tree. V2 is preserved as an intermediate because it omitted the package
+generator hash. The current v3 package is reproducibly frozen and authenticated
+at `results/2026-10-27-ascon-selector-prereg-v3/`: it binds 32 inputs including
+the preparation script, and contains twelve public candidates, 90 family-safe
+historical labels across 14 groups, 13 fixed policies, five seeds, budgets one
+through three, and zero target labels or attempts. Controller release v5 is
+frozen with dispatch enabled only behind its exact pushed-source gate. It is
+not yet valid for measurement until the source, package, release, and this
+handoff update are committed and pushed.
+
+The old v2 campaign root contains one charged unknown reservation and remains
+untouched. Use the new v5 root only after `authenticate_release(...,
+require_pushed=True)` passes. This is a same-domain crypto transfer, not an
+independent-family confirmation. Seal the live three-query agent trajectory
+before exposing remaining pool outcomes for oracle/control replay; retain any
+unknown attempt as charged and report a censored-oracle lower bound.
+
+The [MiBench source scout](mibench-scout-2026-10-27.md) rejected four
+read-only source candidates under the current target contract. It ran no
+benchmark and contributes no labels. Continue searching for an eligible
+independent integer workload; the six-family confirmatory cohort remains
+unestablished.

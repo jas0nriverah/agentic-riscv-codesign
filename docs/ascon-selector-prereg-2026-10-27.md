@@ -1,5 +1,13 @@
 # Ascon selector prelabel freeze — October 27, 2026
 
+**Historical v1 package.** Preserve this zero-label package, but do not use it
+to authorize candidate dispatch: its `AGENTS.md` and `README.md` bindings no
+longer match the committed source state. The replacement is
+[`Ascon selector preregistration v3`](ascon-selector-prereg-v3.md), with a new
+output directory, a hash-bound preparation script, and a separate controller
+release. The command block below is historical and now follows the current v3
+default; it does not regenerate this original v1 package.
+
 The existing ISAForge selector recipes are frozen on the accepted Ascon v1.3.0
 public pool before any target candidate outcome was read. Reproduce with:
 

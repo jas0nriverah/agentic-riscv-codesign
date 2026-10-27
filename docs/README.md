@@ -2,6 +2,8 @@
 
 [Paid-update semantics](paid-update-semantics.md): the adaptive hardware GP refits on its verified paid prefix; fixed joint conditioning is a separate policy with an explicit noise assumption. The Ascon controller v2 wrapper failure and its zero-measurement limit are preserved in the [run diagnosis](../results/2026-10-27-ascon-selector-controller-v2-attempt/README.md).
 
+[Ascon selector preregistration v3](ascon-selector-prereg-v3.md): source-closes the zero-label 12-candidate, 90-row/14-group same-domain transfer package by binding its preparation script. V1 and v2 remain preserved as superseded packages; the v2 controller's charged unknown attempt remains untouched. The v5 controller release requires its exact source release to be committed and pushed before dispatch. [MiBench source scout](mibench-scout-2026-10-27.md) records four read-only workload exclusions; it ran no benchmark and produced no labels.
+
 [October 27 final model-selection scorecard](../results/2026-10-27-final-selection-scorecard/README.md): workload-bootstrap plots and metrics for best verified cycle reduction, measured-oracle regret, paired XGB-versus-merit outcomes, selected LUT4/Fmax, evaluation time and model scoring overhead. XGBoost pairwise ranking is retained as a prospective challenger only; merit remains the fallback, and superiority is unproven. [CoreMark v1.01 baseline-fit rejection](../results/2026-10-27-coremark-fit-rejection/README.md) adds no candidate labels.
 
 [New full-text methods update](research-fulltext-update-2026-10-25.md) resolves Sun TCAD 2004 and separately reviews Hussein's 2025 preprint; exact TACO 2026 remains pending.
