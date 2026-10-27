@@ -1,0 +1,30 @@
+{
+  "schema": "isaforge-joint-paid-prefix-calibration-protocol-v1",
+  "status": "post_hoc_retrospective_not_preregistered",
+  "corpus_path": "results/2026-10-26-lift-selection-corpus/corpus.json",
+  "corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "corpus_manifest_sha256": "219806a8a9c569f783ecbbe82561f2c3199dcb1faa83054710141fdfef0930c8",
+  "source_bindings": {
+    "scripts/audit_joint_paid_prefix_calibration.py": "66bfa97d63eae098d1109017ce9a103922610fa86d4c884d02f6f5d637305450",
+    "scripts/audit_joint_posterior_calibration.py": "84b847ccfa1ea660041288e602623b9000c77b8fdde7d8d0cbf6e67c6915dda6",
+    "isaforge/joint_hardware.py": "3decbb15bc072190c3eeec5ec57fc65f5803c11f19a547de973f93e2e8929be3",
+    "isaforge/semantic_selection.py": "f1779def0ae538ff92f6f148f7a76a8d022082f5db940e5fd67825c40397ffc8",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3"
+  },
+  "folds": "leave-one-workload-group-out; exclude every operation-tree family in target successes and failures from fit",
+  "candidate_order": "ascending complete candidate_id within each held-out workload group",
+  "outcome_order": "score public-only prediction, then condition on that candidate's verified numeric outcome; failed attempts stay charged and do not condition",
+  "interval_basis": "future-observation covariance including fixed assumed alpha",
+  "charged_prefix": "number of prior attempts including failures; successful_conditions_before is recorded separately",
+  "outputs": [
+    "area_delta_lut4",
+    "routed_fmax_min_mhz",
+    "log_measurement_seconds"
+  ],
+  "fit_calls_expected": 14,
+  "native_jobs": 0,
+  "model_changes": 0,
+  "claim": "retrospective paid-prefix calibration diagnostic only"
+}

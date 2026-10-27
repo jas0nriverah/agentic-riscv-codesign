@@ -1,0 +1,37 @@
+{
+  "schema": "isaforge-joint-posterior-calibration-protocol-v1",
+  "status": "post_hoc_retrospective_exploratory_not_preregistered",
+  "corpus_path": "results/2026-10-26-lift-selection-corpus/corpus.json",
+  "corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "corpus_manifest_sha256": "219806a8a9c569f783ecbbe82561f2c3199dcb1faa83054710141fdfef0930c8",
+  "corpus_manifest_sidecar": "219806a8a9c569f783ecbbe82561f2c3199dcb1faa83054710141fdfef0930c8",
+  "source_bindings": {
+    "scripts/audit_joint_posterior_calibration.py": "84b847ccfa1ea660041288e602623b9000c77b8fdde7d8d0cbf6e67c6915dda6",
+    "isaforge/joint_hardware.py": "3decbb15bc072190c3eeec5ec57fc65f5803c11f19a547de973f93e2e8929be3",
+    "isaforge/semantic_selection.py": "f1779def0ae538ff92f6f148f7a76a8d022082f5db940e5fd67825c40397ffc8",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3"
+  },
+  "workload_split": "leave-one-workload-group-out",
+  "formula_exclusion": "exclude operation-tree families present in held-out successes and charged failures",
+  "train_labels": "complete successful measured outcomes from other workload groups/families only",
+  "target_features": "frozen public feature projection only",
+  "outputs": [
+    "area_delta_lut4",
+    "routed_fmax_min_mhz",
+    "log_measurement_seconds"
+  ],
+  "interval_basis": "future observation covariance (latent plus assumed alpha)",
+  "area_cap_lut4": 64,
+  "clock_mhz": 12.0,
+  "feasibility_formula": "independent Gaussian area and Fmax marginal probabilities times training-only Beta device-fit rate",
+  "scored_labels": 122,
+  "charged_failures": 4,
+  "native_jobs": 0,
+  "model_fits": 0,
+  "target_outcome_reads_during_fit": 0,
+  "model_changes": 0,
+  "claim": "diagnostic only; no model selection, confirmation, or superiority claim",
+  "design_history": "A one-off exploratory computation of the same LOCO split and metrics was run before this durable package was written. This package records the resulting diagnostic; it is explicitly not pre-registered or confirmatory."
+}
