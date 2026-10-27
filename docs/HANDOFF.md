@@ -1,5 +1,31 @@
 # Current handoff — model evidence after Lift selection
 
+## October 27 — nested uncertainty-scaling diagnostic: do not promote
+
+Command: `../work/audit-venv/bin/python scripts/audit_nested_joint_uncertainty_scaling.py run --output results/2026-10-27-nested-joint-uncertainty-scaling-r3`.
+The authenticated report uses 122 historical verified outcomes and four
+charged failures, with nested workload-group and operation-family holdouts.
+The calibration factor is estimated from the other workload groups only; each
+fold evaluates its first three charged attempts, so failures consume budget but
+do not condition the GP. The run made **196 fits, zero native jobs, and zero new
+measurements**. Four focused test modules pass 86 tests in the current
+checkpoint, including five nested-audit tests. Reported host time is 7.23 seconds
+for nested calibration and 0.56 seconds for the outer fit/scoring passes; no
+target evaluation time was incurred.
+
+Nested variance scaling improves some 80% interval-coverage figures after paid
+measurements, but it does **not** improve the selection-relevant hardware
+feasibility Brier score on the budget-three prefix: candidate-weighted Brier
+increases **0.2508 → 0.2593** on 41 scored outcomes; equal-workload macro Brier
+increases **0.2237 → 0.2323**. Whole-workload paired bootstrap intervals for
+both differences cross zero. The query-three Fmax variance factors are highly
+unstable (median **98.7×**, maximum **586.3×**), so the interval gain is not a
+selection win. Do not promote this correction or tune it further on these same
+labels. The [sealed report and figures](../results/2026-10-27-nested-joint-uncertainty-scaling-r3/results.md)
+preserve the method and negative outcome. This is consumed-data diagnosis only;
+the next evidence needed remains a frozen comparison on an eligible untouched
+workload.
+
 ## October 27 — MiBench stringsearch rejected at discovery
 
 After its source-bound adapter and protocol were committed and pushed, the

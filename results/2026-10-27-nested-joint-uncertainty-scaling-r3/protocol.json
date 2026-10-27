@@ -1,0 +1,51 @@
+{
+  "schema": "isaforge-nested-joint-uncertainty-scaling-protocol-v1",
+  "status": "post_hoc_retrospective_not_preregistered",
+  "corpus_path": "results/2026-10-26-lift-selection-corpus/corpus.json",
+  "corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "corpus_manifest_sha256": "219806a8a9c569f783ecbbe82561f2c3199dcb1faa83054710141fdfef0930c8",
+  "source_bindings": {
+    "scripts/audit_nested_joint_uncertainty_scaling.py": "9591013dd21882a1faf8354e10659af3460707782062483eaec5f545bb5dd052",
+    "scripts/audit_joint_paid_prefix_calibration.py": "66bfa97d63eae098d1109017ce9a103922610fa86d4c884d02f6f5d637305450",
+    "scripts/audit_joint_posterior_calibration.py": "84b847ccfa1ea660041288e602623b9000c77b8fdde7d8d0cbf6e67c6915dda6",
+    "isaforge/joint_hardware.py": "3decbb15bc072190c3eeec5ec57fc65f5803c11f19a547de973f93e2e8929be3",
+    "isaforge/semantic_selection.py": "f1779def0ae538ff92f6f148f7a76a8d022082f5db940e5fd67825c40397ffc8",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "isaforge/structural_features_v3.py": "b0a4c8233c2a39b675767151f21698d6418c5b3b7bb357741815986033396fb0",
+    "isaforge/area_model_v2.py": "389f6592d6a3fb801638dcc5237cac65f8ab504caac10efef1a43e5d49cf6cf1",
+    "isaforge/area_model.py": "ade5dcc32ef66d0ea03ea9ec4937687564dff36c4483afc76ac59f9dc4a69447",
+    "isaforge/rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247"
+  },
+  "outer_split": "leave-one-workload-group-out; exclude every target success/failure operation-tree family",
+  "calibration_split": "within each outer training cohort, leave one eligible workload group out and exclude its success/failure operation-tree families",
+  "calibration_method": "one fixed variance multiplier per output and number of prior charged attempts (0, 1, or 2); equal-weight mean group-level prequential standardized residual square",
+  "candidate_order": "ascending complete candidate_id; predict before each of the first three charged attempts; failures consume budget and only verified successes condition the posterior",
+  "training_only": true,
+  "minimum_independent_calibration_groups": 5,
+  "outputs": [
+    "area_delta_lut4",
+    "routed_fmax_min_mhz",
+    "log_measurement_seconds"
+  ],
+  "prior_charged_attempt_prefixes": [
+    0,
+    1,
+    2
+  ],
+  "native_jobs": 0,
+  "new_measurements": 0,
+  "policy_comparison": false,
+  "claim": "nested calibration diagnostic only; no promotion or superiority claim",
+  "packages": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "matplotlib": "3.11.2"
+  }
+}
