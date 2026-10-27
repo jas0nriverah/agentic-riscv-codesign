@@ -1,0 +1,95 @@
+{
+  "schema": "isaforge-feasibility-model-family-screen-v1",
+  "scope": "retrospective consumed-data model development; no independent confirmation",
+  "corpus_path": "results/2026-10-26-lift-selection-corpus/corpus.json",
+  "corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "successful_measured_rows": 122,
+  "charged_failed_attempts": 4,
+  "independent_workload_groups": [
+    "beebs-aha-compress",
+    "beebs-expint",
+    "beebs-jfdctint",
+    "beebs-ndes",
+    "beebs-nettle-md5",
+    "embench-aha-mont64",
+    "embench-crc32",
+    "embench-edn",
+    "embench-nettle-sha256",
+    "embench-slre",
+    "embench-ud",
+    "tacle-bitcount",
+    "tacle-g723-enc",
+    "tacle-lift"
+  ],
+  "source_bindings": {
+    "scripts/evaluate_feasibility_model_families.py": "15388afcb9518e1184cb066177fbdd3d823f86be027b81b4de7088d21f6843c3",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/factorized_selection_experiment.py": "545b7abb61a08a41fb6c1680b3e9ec109d73f29ed99edaf95870661818bc43da",
+    "isaforge/feasibility_selection.py": "1268bd50a167a5182a75f5fe6729c7cf5bccd7edf93a476e3a3448a4eaeaca22",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+    "scripts/reproduce_guarded_sha256.py": "26e883815bffd7f4bf2bc5688d6c3112d3c517b8aa3363e6c7ecc81899d69fcb"
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "xgboost": "3.4.1",
+    "scikit-learn": "1.9.1"
+  },
+  "model_seed": 0,
+  "policy_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "area_cap_lut4": 64,
+  "minimum_routed_fmax_mhz": 12.0,
+  "budgets": [
+    1,
+    2,
+    3
+  ],
+  "policies": [
+    "frequency",
+    "merit",
+    "calibrated_latency",
+    "latency_cost_heuristic",
+    "random",
+    "xgb_speedup_regression",
+    "xgb_pairwise_ranker",
+    "factorized_feasibility_xgb",
+    "xgb_feasibility_64",
+    "group_bootstrap_xgb_feasibility_64",
+    "logistic_feasibility_64",
+    "random_forest_feasibility_64",
+    "extra_trees_feasibility_64"
+  ],
+  "models": {
+    "existing_speedup_predictor": "20 row-bootstrap XGBoost regressors; fixed repository settings",
+    "existing_pairwise_ranker": "XGBRanker rank:pairwise; fixed repository settings",
+    "existing_factorized": "Existing 20-member XGBoost cap-conditioned feasibility model",
+    "xgb_feasibility_64": "One fixed depth-2 XGBClassifier trained on +64 feasible labels",
+    "group_bootstrap_xgb_feasibility_64": "20 depth-2 XGB classifiers; sample workload groups with replacement",
+    "logistic_feasibility_64": "StandardScaler + LogisticRegression(C=.1)",
+    "random_forest_feasibility_64": "RandomForestClassifier(300 trees, max_features=.8, min_leaf=2)",
+    "extra_trees_feasibility_64": "ExtraTreesClassifier(300 trees, max_features=.8, min_leaf=2)"
+  },
+  "decision_rule": "feasibility score \u00d7 max(0, public calibrated estimated cycle reduction); benefit prediction is unchanged",
+  "split": "Outer full-workload holdout; remove all related operation-tree families from training using both successful and failed target candidates.",
+  "unknown_failures": "All four failed attempts are retained as public target-pool queries with their actual charged durations; they never train as infeasible labels. Two infrastructure-censored candidates make their workload oracle unknown.",
+  "endpoint": "Best actually measured, correct, area-feasible and timing-feasible candidate found after 1/2/3 charged queries. Regret is computed only on complete verified candidate pools.",
+  "model_selection_warning": "These previously consumed outcomes have informed earlier model work. Results select no production model and do not support a generalization or superiority claim.",
+  "limitations": [
+    "Twelve groups have complete verified pool references; UD and G.723 include infrastructure-censored candidates and have lower-bound best-verified references only.",
+    "Estimator seeds and candidate contexts are not independent workload groups.",
+    "The 122 measured speedups equal calibrated analytic latency exactly, so the model comparison targets hardware feasibility, not benefit regression.",
+    "Feasibility scores are ranking scores; no calibration or coverage guarantee is claimed.",
+    "All policies use static zero-shot order; this is not active target adaptation or live native selection.",
+    "All policy comparisons reuse consumed results; fresh frozen candidates are required for confirmation."
+  ]
+}

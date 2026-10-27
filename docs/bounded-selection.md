@@ -1,8 +1,10 @@
 # Working selection interface and shareable demo
 
-ISAForge has a four-tool selection host, an isolated remote-model provider, and
-an offline showcase of the current six-workload evidence. Frozen models remain
-unchanged. Live LLM trials and the final joint-instruction stage remain missing.
+ISAForge has a four-tool selection host, an isolated remote-model provider, an
+interactive bridge for the active Codex chat model, and an offline showcase of
+the current six-workload evidence. Frozen models remain unchanged. One consumed-
+data in-chat selector pilot is complete; a repeatable, blinded live-model
+comparison and final joint-instruction stage remain missing.
 
 ## Try the project
 
@@ -84,6 +86,40 @@ or availability is assumed. The command refuses to create a run or call a model
 when the key/model is missing. Never commit a key. These episodes query archived
 outcomes rather than fresh synthesis jobs.
 
+### Use the active Codex chat model
+
+When an API key is unavailable, `scripts/run_codex_chat_selector.py` opens an
+interactive JSON bridge. The local evaluator presents one allowlisted public
+request per turn; the active chat model returns one `list_candidates`, `predict`,
+`measure`, or `finalize` action. The host still owns the ledger, charges invalid
+measurement requests, validates measured outcomes, and selects only a paid
+feasible result. The bridge does not call a model API or make the active chat a
+restricted sandbox; the chat session itself can have broader tools and context.
+
+```sh
+python scripts/run_codex_chat_selector.py --target edn --cap 64 --seed 0 \
+  --budget 3 --output results/my-codex-chat-selector-run
+```
+
+The command waits for the operator to relay one JSON action from the active chat
+at each prompt. Use a fresh output path. It is a development integration path,
+not a hands-off model service. Because invalid IDs consume budget, the bridge
+now explicitly instructs the model to copy the complete candidate ID without
+shortening it; a focused test protects that reminder.
+
+The October 27 EDN pilot is documented in
+[`codex-chat-selector-pilot.md`](codex-chat-selector-pilot.md). The current chat
+model queried the six-candidate pool, then selected the best measured candidate:
+386,561,849 → 386,394,809 cycles (1.000432×), +32 LUT4, 71.119 MHz minimum
+routed Fmax, correctness passed. This matched the measured-pool oracle. One
+malformed shortened candidate ID consumed an additional attempt; the pilot
+therefore used two charged attempts for one valid measurement. At the same two-
+attempt endpoint, frequency, merit, raw XGBoost regression, XGBoost ranking and
+the GP control also reach the oracle; the LLM does not beat them. This was a
+consumed-data replay, not a new hardware evaluation, blinded test, API call, or
+model-quality estimate. Model ID, token usage, and model-only latency are
+unavailable. Dynamic model routing remains unimplemented.
+
 ## Verified outcome and next work
 
 All ten policies run through the interface on EDN, UD and SHA256: **450
@@ -100,8 +136,8 @@ existing model remains unchanged. Do not launch another sweep to chase this
 case. The cost heuristic finds SHA's optimum in one query, leaving no query-count
 headroom for an agent there.
 
-Next: run the controlled live-model development comparison, then freeze a
-justified protocol before fresh source/input evidence. Native guarded dispatch
-and jointly verified final instruction sets remain necessary for the complete
-optimizer. This milestone adds no labels, formal calibration, broad
-generalization or learned/agent superiority claim.
+Next: run a controlled live-model development comparison using equal charged
+attempts, then freeze a justified protocol before fresh source/input evidence.
+Native guarded dispatch and jointly verified final instruction sets remain
+necessary for the complete optimizer. This milestone adds no labels, formal
+calibration, broad generalization or learned/agent superiority claim.

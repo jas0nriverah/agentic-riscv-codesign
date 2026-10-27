@@ -1,0 +1,6 @@
+read_verilog "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-lift-cfg-tail-2026-10-25/inputs/picorv32.v" "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-lift-cfg-tail-2026-10-25/inputs/pcpi_single.v" "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-lift-cfg-tail-2026-10-25/measurements/candidate_04/attempt-000/candidate.v" "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-lift-cfg-tail-2026-10-25/measurements/candidate_04/attempt-000/simulation/soc_top.v"
+chparam -set EXTENSION_MASK 1 soc_top
+synth_ice40 -top soc_top
+check -assert
+write_json "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-lift-cfg-tail-2026-10-25/measurements/candidate_04/attempt-000/synthesis/ice40-netlist.json"
+stat

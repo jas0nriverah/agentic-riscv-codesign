@@ -1,0 +1,652 @@
+
+/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-lift-cfg-tail-2026-10-25/discovery/attempt-000/original/firmware.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	00002137          	lui	sp,0x2
+   4:	00000097          	auipc	ra,0x0
+   8:	00c080e7          	jalr	12(ra) # 10 <main>
+   c:	00100073          	ebreak
+
+00000010 <main>:
+  10:	fe010113          	addi	sp,sp,-32 # 1fe0 <_program_end+0x1540>
+  14:	00112e23          	sw	ra,28(sp)
+  18:	00812c23          	sw	s0,24(sp)
+  1c:	00912a23          	sw	s1,20(sp)
+  20:	01212823          	sw	s2,16(sp)
+  24:	01312623          	sw	s3,12(sp)
+  28:	01412423          	sw	s4,8(sp)
+  2c:	00001097          	auipc	ra,0x1
+  30:	8f0080e7          	jalr	-1808(ra) # 91c <initialise_benchmark>
+  34:	00100513          	li	a0,1
+  38:	00001097          	auipc	ra,0x1
+  3c:	8ec080e7          	jalr	-1812(ra) # 924 <warm_caches>
+  40:	c02029f3          	rdinstret	s3
+  44:	c0002a73          	rdcycle	s4
+  48:	00001097          	auipc	ra,0x1
+  4c:	8e0080e7          	jalr	-1824(ra) # 928 <benchmark>
+  50:	00050913          	mv	s2,a0
+  54:	c00024f3          	rdcycle	s1
+  58:	c0202473          	rdinstret	s0
+  5c:	00001097          	auipc	ra,0x1
+  60:	8fc080e7          	jalr	-1796(ra) # 958 <verify_benchmark>
+  64:	49534737          	lui	a4,0x49534
+  68:	100007b7          	lui	a5,0x10000
+  6c:	14670713          	addi	a4,a4,326 # 49534146 <_program_end+0x495336a6>
+  70:	00e7a023          	sw	a4,0(a5) # 10000000 <_program_end+0xffff560>
+  74:	0127a023          	sw	s2,0(a5)
+  78:	414484b3          	sub	s1,s1,s4
+  7c:	0097a023          	sw	s1,0(a5)
+  80:	41340433          	sub	s0,s0,s3
+  84:	0087a023          	sw	s0,0(a5)
+  88:	00a7a023          	sw	a0,0(a5)
+  8c:	02050c63          	beqz	a0,c4 <main+0xb4>
+  90:	600d67b7          	lui	a5,0x600d6
+  94:	00d78793          	addi	a5,a5,13 # 600d600d <_program_end+0x600d556d>
+  98:	01c12083          	lw	ra,28(sp)
+  9c:	01812403          	lw	s0,24(sp)
+  a0:	10000737          	lui	a4,0x10000
+  a4:	00f72223          	sw	a5,4(a4) # 10000004 <_program_end+0xffff564>
+  a8:	01412483          	lw	s1,20(sp)
+  ac:	01012903          	lw	s2,16(sp)
+  b0:	00c12983          	lw	s3,12(sp)
+  b4:	00812a03          	lw	s4,8(sp)
+  b8:	00000513          	li	a0,0
+  bc:	02010113          	addi	sp,sp,32
+  c0:	00008067          	ret
+  c4:	dead07b7          	lui	a5,0xdead0
+  c8:	00378793          	addi	a5,a5,3 # dead0003 <_program_end+0xdeacf563>
+  cc:	fcdff06f          	j	98 <main+0x88>
+
+000000d0 <lift_io_init>:
+  d0:	000017b7          	lui	a5,0x1
+  d4:	a007a823          	sw	zero,-1520(a5) # a10 <lift_ctrl_dly1>
+  d8:	000017b7          	lui	a5,0x1
+  dc:	a007a623          	sw	zero,-1524(a5) # a0c <lift_ctrl_dly2>
+  e0:	00008067          	ret
+
+000000e4 <lift_ctrl_set_vals>:
+  e4:	00001737          	lui	a4,0x1
+  e8:	a6470713          	addi	a4,a4,-1436 # a64 <lift_ctrl_io_out>
+  ec:	ff070613          	addi	a2,a4,-16
+  f0:	00000793          	li	a5,0
+  f4:	00c72683          	lw	a3,12(a4)
+  f8:	00179793          	slli	a5,a5,0x1
+  fc:	ffc70713          	addi	a4,a4,-4
+ 100:	00d036b3          	snez	a3,a3
+ 104:	00f6e7b3          	or	a5,a3,a5
+ 108:	fee616e3          	bne	a2,a4,f4 <lift_ctrl_set_vals+0x10>
+ 10c:	00001737          	lui	a4,0x1
+ 110:	a0f72223          	sw	a5,-1532(a4) # a04 <lift_simio_out>
+ 114:	00001737          	lui	a4,0x1
+ 118:	a1470713          	addi	a4,a4,-1516 # a14 <lift_ctrl_io_led>
+ 11c:	fc870613          	addi	a2,a4,-56
+ 120:	03472683          	lw	a3,52(a4)
+ 124:	00179793          	slli	a5,a5,0x1
+ 128:	ffc70713          	addi	a4,a4,-4
+ 12c:	00d036b3          	snez	a3,a3
+ 130:	00f6e7b3          	or	a5,a3,a5
+ 134:	fee616e3          	bne	a2,a4,120 <lift_ctrl_set_vals+0x3c>
+ 138:	00001737          	lui	a4,0x1
+ 13c:	000016b7          	lui	a3,0x1
+ 140:	a0f72023          	sw	a5,-1536(a4) # a00 <lift_simio_led>
+ 144:	a9c6a703          	lw	a4,-1380(a3) # a9c <lift_checksum>
+ 148:	00f707b3          	add	a5,a4,a5
+ 14c:	a8f6ae23          	sw	a5,-1380(a3)
+ 150:	00008067          	ret
+
+00000154 <lift_ctrl_get_vals>:
+ 154:	000017b7          	lui	a5,0x1
+ 158:	a087a683          	lw	a3,-1528(a5) # a08 <lift_simio_in>
+ 15c:	000017b7          	lui	a5,0x1
+ 160:	a107a503          	lw	a0,-1520(a5) # a10 <lift_ctrl_dly1>
+ 164:	00001737          	lui	a4,0x1
+ 168:	a0c75603          	lhu	a2,-1524(a4) # a0c <lift_ctrl_dly2>
+ 16c:	01069693          	slli	a3,a3,0x10
+ 170:	a0a72623          	sw	a0,-1524(a4)
+ 174:	00001737          	lui	a4,0x1
+ 178:	01051593          	slli	a1,a0,0x10
+ 17c:	0106d693          	srli	a3,a3,0x10
+ 180:	a7470713          	addi	a4,a4,-1420 # a74 <lift_ctrl_io_in>
+ 184:	0105d593          	srli	a1,a1,0x10
+ 188:	a0d7a823          	sw	a3,-1520(a5)
+ 18c:	02870513          	addi	a0,a4,40
+ 190:	0015f813          	andi	a6,a1,1
+ 194:	0016f793          	andi	a5,a3,1
+ 198:	010787b3          	add	a5,a5,a6
+ 19c:	00167813          	andi	a6,a2,1
+ 1a0:	010787b3          	add	a5,a5,a6
+ 1a4:	0027a793          	slti	a5,a5,2
+ 1a8:	0017b793          	seqz	a5,a5
+ 1ac:	00f72023          	sw	a5,0(a4)
+ 1b0:	00470713          	addi	a4,a4,4
+ 1b4:	0016d693          	srli	a3,a3,0x1
+ 1b8:	0015d593          	srli	a1,a1,0x1
+ 1bc:	00165613          	srli	a2,a2,0x1
+ 1c0:	fce518e3          	bne	a0,a4,190 <lift_ctrl_get_vals+0x3c>
+ 1c4:	000017b7          	lui	a5,0x1
+ 1c8:	9fc7a703          	lw	a4,-1540(a5) # 9fc <lift_simio_adc1>
+ 1cc:	000017b7          	lui	a5,0x1
+ 1d0:	a5478793          	addi	a5,a5,-1452 # a54 <lift_ctrl_io_analog>
+ 1d4:	00e7a023          	sw	a4,0(a5)
+ 1d8:	00001737          	lui	a4,0x1
+ 1dc:	9f872703          	lw	a4,-1544(a4) # 9f8 <lift_simio_adc2>
+ 1e0:	00e7a223          	sw	a4,4(a5)
+ 1e4:	00001737          	lui	a4,0x1
+ 1e8:	9f472703          	lw	a4,-1548(a4) # 9f4 <lift_simio_adc3>
+ 1ec:	00e7a423          	sw	a4,8(a5)
+ 1f0:	00008067          	ret
+
+000001f4 <lift_ctrl_init>:
+ 1f4:	ff010113          	addi	sp,sp,-16
+ 1f8:	000017b7          	lui	a5,0x1
+ 1fc:	00112623          	sw	ra,12(sp)
+ 200:	a807ae23          	sw	zero,-1380(a5) # a9c <lift_checksum>
+ 204:	00000097          	auipc	ra,0x0
+ 208:	ecc080e7          	jalr	-308(ra) # d0 <lift_io_init>
+ 20c:	000017b7          	lui	a5,0x1
+ 210:	9a07a623          	sw	zero,-1620(a5) # 9ac <lift_cntValid>
+ 214:	000017b7          	lui	a5,0x1
+ 218:	9a07a423          	sw	zero,-1624(a5) # 9a8 <lift_cnt>
+ 21c:	000017b7          	lui	a5,0x1
+ 220:	9807aa23          	sw	zero,-1644(a5) # 994 <lift_cmd>
+ 224:	000017b7          	lui	a5,0x1
+ 228:	9807a823          	sw	zero,-1648(a5) # 990 <lift_timMotor>
+ 22c:	000017b7          	lui	a5,0x1
+ 230:	9807a623          	sw	zero,-1652(a5) # 98c <lift_timImp>
+ 234:	00100713          	li	a4,1
+ 238:	000017b7          	lui	a5,0x1
+ 23c:	98e7a423          	sw	a4,-1656(a5) # 988 <lift_directionUp>
+ 240:	000017b7          	lui	a5,0x1
+ 244:	9807a223          	sw	zero,-1660(a5) # 984 <lift_lastImp>
+ 248:	000017b7          	lui	a5,0x1
+ 24c:	9a07a023          	sw	zero,-1632(a5) # 9a0 <lift_loadLevel>
+ 250:	000017b7          	lui	a5,0x1
+ 254:	9807ae23          	sw	zero,-1636(a5) # 99c <lift_loadPending>
+ 258:	000017b7          	lui	a5,0x1
+ 25c:	9807ac23          	sw	zero,-1640(a5) # 998 <lift_loadSensor>
+ 260:	000017b7          	lui	a5,0x1
+ 264:	9b478793          	addi	a5,a5,-1612 # 9b4 <lift_levelPos>
+ 268:	07300693          	li	a3,115
+ 26c:	00d7a423          	sw	a3,8(a5)
+ 270:	0ad00693          	li	a3,173
+ 274:	00d7a623          	sw	a3,12(a5)
+ 278:	0e600693          	li	a3,230
+ 27c:	00d7a823          	sw	a3,16(a5)
+ 280:	12000693          	li	a3,288
+ 284:	00d7aa23          	sw	a3,20(a5)
+ 288:	15a00693          	li	a3,346
+ 28c:	00d7ac23          	sw	a3,24(a5)
+ 290:	19300693          	li	a3,403
+ 294:	00d7ae23          	sw	a3,28(a5)
+ 298:	1cd00693          	li	a3,461
+ 29c:	02d7a023          	sw	a3,32(a5)
+ 2a0:	20600693          	li	a3,518
+ 2a4:	02d7a223          	sw	a3,36(a5)
+ 2a8:	24000693          	li	a3,576
+ 2ac:	02d7a423          	sw	a3,40(a5)
+ 2b0:	27a00693          	li	a3,634
+ 2b4:	02d7a623          	sw	a3,44(a5)
+ 2b8:	2b300693          	li	a3,691
+ 2bc:	02d7a823          	sw	a3,48(a5)
+ 2c0:	2ed00693          	li	a3,749
+ 2c4:	02d7aa23          	sw	a3,52(a5)
+ 2c8:	32600693          	li	a3,806
+ 2cc:	02d7ac23          	sw	a3,56(a5)
+ 2d0:	00c12083          	lw	ra,12(sp)
+ 2d4:	03a00713          	li	a4,58
+ 2d8:	36000693          	li	a3,864
+ 2dc:	0007a023          	sw	zero,0(a5)
+ 2e0:	00e7a223          	sw	a4,4(a5)
+ 2e4:	02d7ae23          	sw	a3,60(a5)
+ 2e8:	000017b7          	lui	a5,0x1
+ 2ec:	9ae7a823          	sw	a4,-1616(a5) # 9b0 <lift_one_level>
+ 2f0:	01010113          	addi	sp,sp,16
+ 2f4:	00008067          	ret
+
+000002f8 <lift_init>:
+ 2f8:	ff010113          	addi	sp,sp,-16
+ 2fc:	000017b7          	lui	a5,0x1
+ 300:	00001737          	lui	a4,0x1
+ 304:	000107a3          	sb	zero,15(sp)
+ 308:	a7478793          	addi	a5,a5,-1420 # a74 <lift_ctrl_io_in>
+ 30c:	a9c70713          	addi	a4,a4,-1380 # a9c <lift_checksum>
+ 310:	0007c603          	lbu	a2,0(a5)
+ 314:	00f14683          	lbu	a3,15(sp)
+ 318:	00178793          	addi	a5,a5,1
+ 31c:	00c6c6b3          	xor	a3,a3,a2
+ 320:	fed78fa3          	sb	a3,-1(a5)
+ 324:	fee796e3          	bne	a5,a4,310 <lift_init+0x18>
+ 328:	000017b7          	lui	a5,0x1
+ 32c:	00001737          	lui	a4,0x1
+ 330:	a6478793          	addi	a5,a5,-1436 # a64 <lift_ctrl_io_out>
+ 334:	a7470713          	addi	a4,a4,-1420 # a74 <lift_ctrl_io_in>
+ 338:	0007c603          	lbu	a2,0(a5)
+ 33c:	00f14683          	lbu	a3,15(sp)
+ 340:	00178793          	addi	a5,a5,1
+ 344:	00c6c6b3          	xor	a3,a3,a2
+ 348:	fed78fa3          	sb	a3,-1(a5)
+ 34c:	fee796e3          	bne	a5,a4,338 <lift_init+0x40>
+ 350:	000017b7          	lui	a5,0x1
+ 354:	00001737          	lui	a4,0x1
+ 358:	a5478793          	addi	a5,a5,-1452 # a54 <lift_ctrl_io_analog>
+ 35c:	a6470713          	addi	a4,a4,-1436 # a64 <lift_ctrl_io_out>
+ 360:	0007c603          	lbu	a2,0(a5)
+ 364:	00f14683          	lbu	a3,15(sp)
+ 368:	00178793          	addi	a5,a5,1
+ 36c:	00c6c6b3          	xor	a3,a3,a2
+ 370:	fed78fa3          	sb	a3,-1(a5)
+ 374:	fee796e3          	bne	a5,a4,360 <lift_init+0x68>
+ 378:	000017b7          	lui	a5,0x1
+ 37c:	00001737          	lui	a4,0x1
+ 380:	a1478793          	addi	a5,a5,-1516 # a14 <lift_ctrl_io_led>
+ 384:	a5470713          	addi	a4,a4,-1452 # a54 <lift_ctrl_io_analog>
+ 388:	0007c603          	lbu	a2,0(a5)
+ 38c:	00f14683          	lbu	a3,15(sp)
+ 390:	00178793          	addi	a5,a5,1
+ 394:	00c6c6b3          	xor	a3,a3,a2
+ 398:	fed78fa3          	sb	a3,-1(a5)
+ 39c:	fee796e3          	bne	a5,a4,388 <lift_init+0x90>
+ 3a0:	000017b7          	lui	a5,0x1
+ 3a4:	a807ae23          	sw	zero,-1380(a5) # a9c <lift_checksum>
+ 3a8:	01010113          	addi	sp,sp,16
+ 3ac:	00000317          	auipc	t1,0x0
+ 3b0:	e4830067          	jr	-440(t1) # 1f4 <lift_ctrl_init>
+
+000003b4 <lift_check_level>:
+ 3b4:	000017b7          	lui	a5,0x1
+ 3b8:	9ac7a783          	lw	a5,-1620(a5) # 9ac <lift_cntValid>
+ 3bc:	00001737          	lui	a4,0x1
+ 3c0:	08078663          	beqz	a5,44c <lift_check_level+0x98>
+ 3c4:	000017b7          	lui	a5,0x1
+ 3c8:	9b07a583          	lw	a1,-1616(a5) # 9b0 <lift_one_level>
+ 3cc:	000016b7          	lui	a3,0x1
+ 3d0:	9a86a883          	lw	a7,-1624(a3) # 9a8 <lift_cnt>
+ 3d4:	00100793          	li	a5,1
+ 3d8:	000016b7          	lui	a3,0x1
+ 3dc:	4025d593          	srai	a1,a1,0x2
+ 3e0:	9af72223          	sw	a5,-1628(a4) # 9a4 <lift_level>
+ 3e4:	9b468693          	addi	a3,a3,-1612 # 9b4 <lift_levelPos>
+ 3e8:	00000613          	li	a2,0
+ 3ec:	00e00813          	li	a6,14
+ 3f0:	01078a63          	beq	a5,a6,404 <lift_check_level+0x50>
+ 3f4:	0046a503          	lw	a0,4(a3)
+ 3f8:	00468693          	addi	a3,a3,4
+ 3fc:	40b50533          	sub	a0,a0,a1
+ 400:	04a8d063          	bge	a7,a0,440 <lift_check_level+0x8c>
+ 404:	00060463          	beqz	a2,40c <lift_check_level+0x58>
+ 408:	9af72223          	sw	a5,-1628(a4)
+ 40c:	9a472603          	lw	a2,-1628(a4)
+ 410:	000017b7          	lui	a5,0x1
+ 414:	a1478793          	addi	a5,a5,-1516 # a14 <lift_ctrl_io_led>
+ 418:	fff60613          	addi	a2,a2,-1
+ 41c:	00000713          	li	a4,0
+ 420:	00e00593          	li	a1,14
+ 424:	40e606b3          	sub	a3,a2,a4
+ 428:	0016b693          	seqz	a3,a3
+ 42c:	00d7a023          	sw	a3,0(a5)
+ 430:	00170713          	addi	a4,a4,1
+ 434:	00478793          	addi	a5,a5,4
+ 438:	feb716e3          	bne	a4,a1,424 <lift_check_level+0x70>
+ 43c:	00008067          	ret
+ 440:	00178793          	addi	a5,a5,1
+ 444:	00100613          	li	a2,1
+ 448:	fa9ff06f          	j	3f0 <lift_check_level+0x3c>
+ 44c:	9a072223          	sw	zero,-1628(a4)
+ 450:	fbdff06f          	j	40c <lift_check_level+0x58>
+
+00000454 <lift_check_cmd>:
+ 454:	000016b7          	lui	a3,0x1
+ 458:	99c6a603          	lw	a2,-1636(a3) # 99c <lift_loadPending>
+ 45c:	000017b7          	lui	a5,0x1
+ 460:	a7478793          	addi	a5,a5,-1420 # a74 <lift_ctrl_io_in>
+ 464:	00001737          	lui	a4,0x1
+ 468:	02060263          	beqz	a2,48c <lift_check_cmd+0x38>
+ 46c:	0087a783          	lw	a5,8(a5)
+ 470:	0c078063          	beqz	a5,530 <lift_check_cmd+0xdc>
+ 474:	00100793          	li	a5,1
+ 478:	98f72a23          	sw	a5,-1644(a4) # 994 <lift_cmd>
+ 47c:	000017b7          	lui	a5,0x1
+ 480:	03200713          	li	a4,50
+ 484:	98e7a823          	sw	a4,-1648(a5) # 990 <lift_timMotor>
+ 488:	00008067          	ret
+ 48c:	0107a603          	lw	a2,16(a5)
+ 490:	02060263          	beqz	a2,4b4 <lift_check_cmd+0x60>
+ 494:	0047a783          	lw	a5,4(a5)
+ 498:	08079c63          	bnez	a5,530 <lift_check_cmd+0xdc>
+ 49c:	000017b7          	lui	a5,0x1
+ 4a0:	9a47a683          	lw	a3,-1628(a5) # 9a4 <lift_level>
+ 4a4:	00e00793          	li	a5,14
+ 4a8:	08f68463          	beq	a3,a5,530 <lift_check_cmd+0xdc>
+ 4ac:	00300793          	li	a5,3
+ 4b0:	fc9ff06f          	j	478 <lift_check_cmd+0x24>
+ 4b4:	0147a603          	lw	a2,20(a5)
+ 4b8:	02060263          	beqz	a2,4dc <lift_check_cmd+0x88>
+ 4bc:	0087a783          	lw	a5,8(a5)
+ 4c0:	06079863          	bnez	a5,530 <lift_check_cmd+0xdc>
+ 4c4:	000017b7          	lui	a5,0x1
+ 4c8:	9a47a683          	lw	a3,-1628(a5) # 9a4 <lift_level>
+ 4cc:	00100793          	li	a5,1
+ 4d0:	06f68063          	beq	a3,a5,530 <lift_check_cmd+0xdc>
+ 4d4:	00400793          	li	a5,4
+ 4d8:	fa1ff06f          	j	478 <lift_check_cmd+0x24>
+ 4dc:	0207a603          	lw	a2,32(a5)
+ 4e0:	04060063          	beqz	a2,520 <lift_check_cmd+0xcc>
+ 4e4:	000017b7          	lui	a5,0x1
+ 4e8:	9a07a783          	lw	a5,-1632(a5) # 9a0 <lift_loadLevel>
+ 4ec:	00200613          	li	a2,2
+ 4f0:	00078c63          	beqz	a5,508 <lift_check_cmd+0xb4>
+ 4f4:	00001637          	lui	a2,0x1
+ 4f8:	9a462603          	lw	a2,-1628(a2) # 9a4 <lift_level>
+ 4fc:	00f627b3          	slt	a5,a2,a5
+ 500:	0017b793          	seqz	a5,a5
+ 504:	00178613          	addi	a2,a5,1
+ 508:	00100793          	li	a5,1
+ 50c:	98f6ae23          	sw	a5,-1636(a3)
+ 510:	000017b7          	lui	a5,0x1
+ 514:	98c72a23          	sw	a2,-1644(a4)
+ 518:	9807ac23          	sw	zero,-1640(a5) # 998 <lift_loadSensor>
+ 51c:	f61ff06f          	j	47c <lift_check_cmd+0x28>
+ 520:	0187a683          	lw	a3,24(a5)
+ 524:	00068c63          	beqz	a3,53c <lift_check_cmd+0xe8>
+ 528:	0047a783          	lw	a5,4(a5)
+ 52c:	f40784e3          	beqz	a5,474 <lift_check_cmd+0x20>
+ 530:	99472783          	lw	a5,-1644(a4)
+ 534:	f40794e3          	bnez	a5,47c <lift_check_cmd+0x28>
+ 538:	00008067          	ret
+ 53c:	01c7a683          	lw	a3,28(a5)
+ 540:	fe0688e3          	beqz	a3,530 <lift_check_cmd+0xdc>
+ 544:	0087a783          	lw	a5,8(a5)
+ 548:	fe0794e3          	bnez	a5,530 <lift_check_cmd+0xdc>
+ 54c:	00200793          	li	a5,2
+ 550:	f29ff06f          	j	478 <lift_check_cmd+0x24>
+
+00000554 <lift_do_impulse>:
+ 554:	00001837          	lui	a6,0x1
+ 558:	98c82783          	lw	a5,-1652(a6) # 98c <lift_timImp>
+ 55c:	000018b7          	lui	a7,0x1
+ 560:	02050863          	beqz	a0,590 <lift_do_impulse+0x3c>
+ 564:	9848a703          	lw	a4,-1660(a7) # 984 <lift_lastImp>
+ 568:	02071463          	bnez	a4,590 <lift_do_impulse+0x3c>
+ 56c:	00059463          	bnez	a1,574 <lift_do_impulse+0x20>
+ 570:	02f05063          	blez	a5,590 <lift_do_impulse+0x3c>
+ 574:	000015b7          	lui	a1,0x1
+ 578:	9885a583          	lw	a1,-1656(a1) # 988 <lift_directionUp>
+ 57c:	000016b7          	lui	a3,0x1
+ 580:	9a86a703          	lw	a4,-1624(a3) # 9a8 <lift_cnt>
+ 584:	04058663          	beqz	a1,5d0 <lift_do_impulse+0x7c>
+ 588:	00170713          	addi	a4,a4,1
+ 58c:	9ae6a423          	sw	a4,-1624(a3)
+ 590:	00060c63          	beqz	a2,5a8 <lift_do_impulse+0x54>
+ 594:	00001737          	lui	a4,0x1
+ 598:	9a072423          	sw	zero,-1624(a4) # 9a8 <lift_cnt>
+ 59c:	00100693          	li	a3,1
+ 5a0:	00001737          	lui	a4,0x1
+ 5a4:	9ad72623          	sw	a3,-1620(a4) # 9ac <lift_cntValid>
+ 5a8:	98a8a223          	sw	a0,-1660(a7)
+ 5ac:	02f05063          	blez	a5,5cc <lift_do_impulse+0x78>
+ 5b0:	fff78793          	addi	a5,a5,-1
+ 5b4:	98f82623          	sw	a5,-1652(a6)
+ 5b8:	00079a63          	bnez	a5,5cc <lift_do_impulse+0x78>
+ 5bc:	000017b7          	lui	a5,0x1
+ 5c0:	9947a703          	lw	a4,-1644(a5) # 994 <lift_cmd>
+ 5c4:	00070463          	beqz	a4,5cc <lift_do_impulse+0x78>
+ 5c8:	9807aa23          	sw	zero,-1644(a5)
+ 5cc:	00008067          	ret
+ 5d0:	fff70713          	addi	a4,a4,-1
+ 5d4:	fb9ff06f          	j	58c <lift_do_impulse+0x38>
+
+000005d8 <lift_wait_for_motor_start>:
+ 5d8:	00001737          	lui	a4,0x1
+ 5dc:	99072783          	lw	a5,-1648(a4) # 990 <lift_timMotor>
+ 5e0:	000016b7          	lui	a3,0x1
+ 5e4:	fff78793          	addi	a5,a5,-1
+ 5e8:	98f72823          	sw	a5,-1648(a4)
+ 5ec:	000017b7          	lui	a5,0x1
+ 5f0:	9947a703          	lw	a4,-1644(a5) # 994 <lift_cmd>
+ 5f4:	ffd77793          	andi	a5,a4,-3
+ 5f8:	fff78793          	addi	a5,a5,-1
+ 5fc:	0017b793          	seqz	a5,a5
+ 600:	98f6a423          	sw	a5,-1656(a3) # 988 <lift_directionUp>
+ 604:	000016b7          	lui	a3,0x1
+ 608:	a6f6a423          	sw	a5,-1432(a3) # a68 <lift_ctrl_io_out+0x4>
+ 60c:	000017b7          	lui	a5,0x1
+ 610:	9ac7a603          	lw	a2,-1620(a5) # 9ac <lift_cntValid>
+ 614:	000016b7          	lui	a3,0x1
+ 618:	000017b7          	lui	a5,0x1
+ 61c:	02061463          	bnez	a2,644 <lift_wait_for_motor_start+0x6c>
+ 620:	9a07a423          	sw	zero,-1624(a5) # 9a8 <lift_cnt>
+ 624:	00300613          	li	a2,3
+ 628:	000017b7          	lui	a5,0x1
+ 62c:	9b07a783          	lw	a5,-1616(a5) # 9b0 <lift_one_level>
+ 630:	00c71663          	bne	a4,a2,63c <lift_wait_for_motor_start+0x64>
+ 634:	96f6ae23          	sw	a5,-1668(a3) # 97c <_writable_start>
+ 638:	00008067          	ret
+ 63c:	40f007b3          	neg	a5,a5
+ 640:	ff5ff06f          	j	634 <lift_wait_for_motor_start+0x5c>
+ 644:	9a87a783          	lw	a5,-1624(a5)
+ 648:	96f6ae23          	sw	a5,-1668(a3)
+ 64c:	00300793          	li	a5,3
+ 650:	02f71a63          	bne	a4,a5,684 <lift_wait_for_motor_start+0xac>
+ 654:	000017b7          	lui	a5,0x1
+ 658:	9a47a783          	lw	a5,-1628(a5) # 9a4 <lift_level>
+ 65c:	00178793          	addi	a5,a5,1
+ 660:	fff78793          	addi	a5,a5,-1
+ 664:	00d00713          	li	a4,13
+ 668:	fcf768e3          	bltu	a4,a5,638 <lift_wait_for_motor_start+0x60>
+ 66c:	00001737          	lui	a4,0x1
+ 670:	00279793          	slli	a5,a5,0x2
+ 674:	9b470713          	addi	a4,a4,-1612 # 9b4 <lift_levelPos>
+ 678:	00f707b3          	add	a5,a4,a5
+ 67c:	0007a783          	lw	a5,0(a5)
+ 680:	fb5ff06f          	j	634 <lift_wait_for_motor_start+0x5c>
+ 684:	00400793          	li	a5,4
+ 688:	faf718e3          	bne	a4,a5,638 <lift_wait_for_motor_start+0x60>
+ 68c:	000017b7          	lui	a5,0x1
+ 690:	9a47a783          	lw	a5,-1628(a5) # 9a4 <lift_level>
+ 694:	fff78793          	addi	a5,a5,-1
+ 698:	fc9ff06f          	j	660 <lift_wait_for_motor_start+0x88>
+
+0000069c <lift_check_run>:
+ 69c:	000017b7          	lui	a5,0x1
+ 6a0:	9947a503          	lw	a0,-1644(a5) # 994 <lift_cmd>
+ 6a4:	00300793          	li	a5,3
+ 6a8:	02f51663          	bne	a0,a5,6d4 <lift_check_run+0x38>
+ 6ac:	000017b7          	lui	a5,0x1
+ 6b0:	97c7a783          	lw	a5,-1668(a5) # 97c <_writable_start>
+ 6b4:	00001737          	lui	a4,0x1
+ 6b8:	9a872703          	lw	a4,-1624(a4) # 9a8 <lift_cnt>
+ 6bc:	fff78793          	addi	a5,a5,-1
+ 6c0:	06f75c63          	bge	a4,a5,738 <lift_check_run+0x9c>
+ 6c4:	000017b7          	lui	a5,0x1
+ 6c8:	a787a503          	lw	a0,-1416(a5) # a78 <lift_ctrl_io_in+0x4>
+ 6cc:	00153513          	seqz	a0,a0
+ 6d0:	00008067          	ret
+ 6d4:	00400793          	li	a5,4
+ 6d8:	02f51463          	bne	a0,a5,700 <lift_check_run+0x64>
+ 6dc:	000017b7          	lui	a5,0x1
+ 6e0:	97c7a783          	lw	a5,-1668(a5) # 97c <_writable_start>
+ 6e4:	00001737          	lui	a4,0x1
+ 6e8:	9a872703          	lw	a4,-1624(a4) # 9a8 <lift_cnt>
+ 6ec:	00178793          	addi	a5,a5,1
+ 6f0:	04e7d463          	bge	a5,a4,738 <lift_check_run+0x9c>
+ 6f4:	000017b7          	lui	a5,0x1
+ 6f8:	a7c7a503          	lw	a0,-1412(a5) # a7c <lift_ctrl_io_in+0x8>
+ 6fc:	fd1ff06f          	j	6cc <lift_check_run+0x30>
+ 700:	00100793          	li	a5,1
+ 704:	04f51463          	bne	a0,a5,74c <lift_check_run+0xb0>
+ 708:	00001737          	lui	a4,0x1
+ 70c:	99c72683          	lw	a3,-1636(a4) # 99c <lift_loadPending>
+ 710:	000017b7          	lui	a5,0x1
+ 714:	a7478793          	addi	a5,a5,-1420 # a74 <lift_ctrl_io_in>
+ 718:	02068463          	beqz	a3,740 <lift_check_run+0xa4>
+ 71c:	00c7a683          	lw	a3,12(a5)
+ 720:	02068063          	beqz	a3,740 <lift_check_run+0xa4>
+ 724:	000017b7          	lui	a5,0x1
+ 728:	9a47a683          	lw	a3,-1628(a5) # 9a4 <lift_level>
+ 72c:	000017b7          	lui	a5,0x1
+ 730:	9ad7a023          	sw	a3,-1632(a5) # 9a0 <lift_loadLevel>
+ 734:	98072e23          	sw	zero,-1636(a4)
+ 738:	00000513          	li	a0,0
+ 73c:	00008067          	ret
+ 740:	0047a783          	lw	a5,4(a5)
+ 744:	fe0798e3          	bnez	a5,734 <lift_check_run+0x98>
+ 748:	00008067          	ret
+ 74c:	00200793          	li	a5,2
+ 750:	fef514e3          	bne	a0,a5,738 <lift_check_run+0x9c>
+ 754:	00001637          	lui	a2,0x1
+ 758:	99c62703          	lw	a4,-1636(a2) # 99c <lift_loadPending>
+ 75c:	000017b7          	lui	a5,0x1
+ 760:	a7478793          	addi	a5,a5,-1420 # a74 <lift_ctrl_io_in>
+ 764:	02070c63          	beqz	a4,79c <lift_check_run+0x100>
+ 768:	00001737          	lui	a4,0x1
+ 76c:	99872583          	lw	a1,-1640(a4) # 998 <lift_loadSensor>
+ 770:	00c7a683          	lw	a3,12(a5)
+ 774:	02058263          	beqz	a1,798 <lift_check_run+0xfc>
+ 778:	02069063          	bnez	a3,798 <lift_check_run+0xfc>
+ 77c:	000017b7          	lui	a5,0x1
+ 780:	98072c23          	sw	zero,-1640(a4)
+ 784:	9a47a703          	lw	a4,-1628(a5) # 9a4 <lift_level>
+ 788:	000017b7          	lui	a5,0x1
+ 78c:	98062e23          	sw	zero,-1636(a2)
+ 790:	9ae7a023          	sw	a4,-1632(a5) # 9a0 <lift_loadLevel>
+ 794:	fa5ff06f          	j	738 <lift_check_run+0x9c>
+ 798:	98d72c23          	sw	a3,-1640(a4)
+ 79c:	0087a503          	lw	a0,8(a5)
+ 7a0:	f2dff06f          	j	6cc <lift_check_run+0x30>
+
+000007a4 <lift_do_cmd>:
+ 7a4:	000017b7          	lui	a5,0x1
+ 7a8:	9907a783          	lw	a5,-1648(a5) # 990 <lift_timMotor>
+ 7ac:	00f05663          	blez	a5,7b8 <lift_do_cmd+0x14>
+ 7b0:	00000317          	auipc	t1,0x0
+ 7b4:	e2830067          	jr	-472(t1) # 5d8 <lift_wait_for_motor_start>
+ 7b8:	ff010113          	addi	sp,sp,-16
+ 7bc:	00112623          	sw	ra,12(sp)
+ 7c0:	00000097          	auipc	ra,0x0
+ 7c4:	edc080e7          	jalr	-292(ra) # 69c <lift_check_run>
+ 7c8:	000017b7          	lui	a5,0x1
+ 7cc:	a647a703          	lw	a4,-1436(a5) # a64 <lift_ctrl_io_out>
+ 7d0:	02070463          	beqz	a4,7f8 <lift_do_cmd+0x54>
+ 7d4:	01f51693          	slli	a3,a0,0x1f
+ 7d8:	01f6d713          	srli	a4,a3,0x1f
+ 7dc:	00071e63          	bnez	a4,7f8 <lift_do_cmd+0x54>
+ 7e0:	00001737          	lui	a4,0x1
+ 7e4:	06300693          	li	a3,99
+ 7e8:	98d72a23          	sw	a3,-1644(a4) # 994 <lift_cmd>
+ 7ec:	00001737          	lui	a4,0x1
+ 7f0:	03200693          	li	a3,50
+ 7f4:	98d72623          	sw	a3,-1652(a4) # 98c <lift_timImp>
+ 7f8:	00c12083          	lw	ra,12(sp)
+ 7fc:	a6a7a223          	sw	a0,-1436(a5)
+ 800:	01010113          	addi	sp,sp,16
+ 804:	00008067          	ret
+
+00000808 <lift_ctrl_loop>:
+ 808:	000017b7          	lui	a5,0x1
+ 80c:	9947a783          	lw	a5,-1644(a5) # 994 <lift_cmd>
+ 810:	ff010113          	addi	sp,sp,-16
+ 814:	00112623          	sw	ra,12(sp)
+ 818:	04079063          	bnez	a5,858 <lift_ctrl_loop+0x50>
+ 81c:	00000097          	auipc	ra,0x0
+ 820:	c38080e7          	jalr	-968(ra) # 454 <lift_check_cmd>
+ 824:	00000097          	auipc	ra,0x0
+ 828:	b90080e7          	jalr	-1136(ra) # 3b4 <lift_check_level>
+ 82c:	000016b7          	lui	a3,0x1
+ 830:	9806a783          	lw	a5,-1664(a3) # 980 <lift_dbgCnt>
+ 834:	00c12083          	lw	ra,12(sp)
+ 838:	00001637          	lui	a2,0x1
+ 83c:	0077d713          	srli	a4,a5,0x7
+ 840:	00177713          	andi	a4,a4,1
+ 844:	00178793          	addi	a5,a5,1
+ 848:	a4e62423          	sw	a4,-1464(a2) # a48 <lift_ctrl_io_led+0x34>
+ 84c:	98f6a023          	sw	a5,-1664(a3)
+ 850:	01010113          	addi	sp,sp,16
+ 854:	00008067          	ret
+ 858:	000017b7          	lui	a5,0x1
+ 85c:	a7478793          	addi	a5,a5,-1420 # a74 <lift_ctrl_io_in>
+ 860:	00001737          	lui	a4,0x1
+ 864:	0087a603          	lw	a2,8(a5)
+ 868:	a6472583          	lw	a1,-1436(a4) # a64 <lift_ctrl_io_out>
+ 86c:	0007a503          	lw	a0,0(a5)
+ 870:	00000097          	auipc	ra,0x0
+ 874:	ce4080e7          	jalr	-796(ra) # 554 <lift_do_impulse>
+ 878:	00000097          	auipc	ra,0x0
+ 87c:	f2c080e7          	jalr	-212(ra) # 7a4 <lift_do_cmd>
+ 880:	fa5ff06f          	j	824 <lift_ctrl_loop+0x1c>
+
+00000884 <lift_controller>:
+ 884:	ff010113          	addi	sp,sp,-16
+ 888:	00112623          	sw	ra,12(sp)
+ 88c:	00000097          	auipc	ra,0x0
+ 890:	8c8080e7          	jalr	-1848(ra) # 154 <lift_ctrl_get_vals>
+ 894:	00000097          	auipc	ra,0x0
+ 898:	f74080e7          	jalr	-140(ra) # 808 <lift_ctrl_loop>
+ 89c:	00c12083          	lw	ra,12(sp)
+ 8a0:	01010113          	addi	sp,sp,16
+ 8a4:	00000317          	auipc	t1,0x0
+ 8a8:	84030067          	jr	-1984(t1) # e4 <lift_ctrl_set_vals>
+
+000008ac <lift_main>:
+ 8ac:	fe010113          	addi	sp,sp,-32
+ 8b0:	00812c23          	sw	s0,24(sp)
+ 8b4:	00912a23          	sw	s1,20(sp)
+ 8b8:	01212823          	sw	s2,16(sp)
+ 8bc:	01312623          	sw	s3,12(sp)
+ 8c0:	01412423          	sw	s4,8(sp)
+ 8c4:	00112e23          	sw	ra,28(sp)
+ 8c8:	3e900413          	li	s0,1001
+ 8cc:	00001a37          	lui	s4,0x1
+ 8d0:	000019b7          	lui	s3,0x1
+ 8d4:	00001937          	lui	s2,0x1
+ 8d8:	000014b7          	lui	s1,0x1
+ 8dc:	a00a2423          	sw	zero,-1528(s4) # a08 <lift_simio_in>
+ 8e0:	9e09ae23          	sw	zero,-1540(s3) # 9fc <lift_simio_adc1>
+ 8e4:	9e092c23          	sw	zero,-1544(s2) # 9f8 <lift_simio_adc2>
+ 8e8:	fff40413          	addi	s0,s0,-1
+ 8ec:	9e04aa23          	sw	zero,-1548(s1) # 9f4 <lift_simio_adc3>
+ 8f0:	00000097          	auipc	ra,0x0
+ 8f4:	f94080e7          	jalr	-108(ra) # 884 <lift_controller>
+ 8f8:	fe0412e3          	bnez	s0,8dc <lift_main+0x30>
+ 8fc:	01c12083          	lw	ra,28(sp)
+ 900:	01812403          	lw	s0,24(sp)
+ 904:	01412483          	lw	s1,20(sp)
+ 908:	01012903          	lw	s2,16(sp)
+ 90c:	00c12983          	lw	s3,12(sp)
+ 910:	00812a03          	lw	s4,8(sp)
+ 914:	02010113          	addi	sp,sp,32
+ 918:	00008067          	ret
+
+0000091c <initialise_benchmark>:
+ 91c:	00000317          	auipc	t1,0x0
+ 920:	9dc30067          	jr	-1572(t1) # 2f8 <lift_init>
+
+00000924 <warm_caches>:
+ 924:	00008067          	ret
+
+00000928 <benchmark>:
+ 928:	ff010113          	addi	sp,sp,-16
+ 92c:	00112623          	sw	ra,12(sp)
+ 930:	00000097          	auipc	ra,0x0
+ 934:	f7c080e7          	jalr	-132(ra) # 8ac <lift_main>
+ 938:	000017b7          	lui	a5,0x1
+ 93c:	a9c7a503          	lw	a0,-1380(a5) # a9c <lift_checksum>
+ 940:	00c12083          	lw	ra,12(sp)
+ 944:	ffc2e7b7          	lui	a5,0xffc2e
+ 948:	00f50533          	add	a0,a0,a5
+ 94c:	00a03533          	snez	a0,a0
+ 950:	01010113          	addi	sp,sp,16
+ 954:	00008067          	ret
+
+00000958 <verify_benchmark>:
+ 958:	00051e63          	bnez	a0,974 <verify_benchmark+0x1c>
+ 95c:	000017b7          	lui	a5,0x1
+ 960:	a9c7a503          	lw	a0,-1380(a5) # a9c <lift_checksum>
+ 964:	ffc2e7b7          	lui	a5,0xffc2e
+ 968:	00f50533          	add	a0,a0,a5
+ 96c:	00153513          	seqz	a0,a0
+ 970:	00008067          	ret
+ 974:	00000513          	li	a0,0
+ 978:	00008067          	ret

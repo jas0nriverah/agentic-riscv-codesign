@@ -1,0 +1,103 @@
+{
+  "controls": [
+    {
+      "name": "stack-underflow",
+      "detected_kind": "stack-pointer",
+      "raw": {
+        "status": 0,
+        "host_cycles": 24,
+        "pcpi_handshakes": 0,
+        "pcpi_valid_cycles": 0,
+        "pcpi_wait_cycles": 0,
+        "markers": 0,
+        "fault": 0,
+        "partial_report_bits": 0,
+        "words": [],
+        "region_counts": {},
+        "total_counts": {
+          "0": 1,
+          "4": 1,
+          "8": 1
+        },
+        "block_starts": [],
+        "trapped": false,
+        "stack_initialized": true,
+        "min_sp": 6524,
+        "max_stack_bytes": 1668,
+        "stack_checked_cycles": 16,
+        "stack_violations": 1,
+        "first_violation": {
+          "kind": "stack-pointer",
+          "pc": 12,
+          "address": 6524
+        }
+      }
+    },
+    {
+      "name": "guard-write",
+      "detected_kind": "ram-write",
+      "raw": {
+        "status": 0,
+        "host_cycles": 30,
+        "pcpi_handshakes": 0,
+        "pcpi_valid_cycles": 0,
+        "pcpi_wait_cycles": 0,
+        "markers": 0,
+        "fault": 0,
+        "partial_report_bits": 0,
+        "words": [],
+        "region_counts": {},
+        "total_counts": {
+          "0": 1,
+          "4": 1,
+          "8": 1,
+          "12": 1
+        },
+        "block_starts": [],
+        "trapped": false,
+        "stack_initialized": true,
+        "min_sp": 8192,
+        "max_stack_bytes": 0,
+        "stack_checked_cycles": 22,
+        "stack_violations": 4,
+        "first_violation": {
+          "kind": "ram-write",
+          "pc": 12,
+          "address": 6400
+        }
+      }
+    }
+  ],
+  "artifacts": {
+    "guard-write/candidate.v": "b8d826d8899911549e3db787ea47aff9eb34e462aabba5aa5c03683c0d045866",
+    "guard-write/firmware/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "guard-write/firmware/disassembly.txt": "5fd0b8fd32ff26bbff4d54d62d45501521a259f1d066aa336ae2f797f2fe7963",
+    "guard-write/firmware/firmware.bin": "27301330f33b2ad24dca7f693a1783be399c295ce5e886a2f9ee4d0ddbd4e91c",
+    "guard-write/firmware/firmware.elf": "8e627d52b6a5ad82ea44eaec18bad7d5c4e579dd422f99b978229980c64670fe",
+    "guard-write/firmware/firmware.hex": "8a28b3f20b25a5b49c8e53babd899a72a3fb50c273f95aad4fe1add0f49acb90",
+    "guard-write/firmware/objcopy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "guard-write/firmware/symbols.txt": "eafe82c014aec6892687ed481c94fe0c8e15fd78349b66064ef83d94663d9617",
+    "guard-write/firmware/validation.json": "44c07f83acc2fdc23461fdef13c3dc795eb293360d7e6623f62e5157394d860c",
+    "guard-write/fixture.S": "1d9f70b501bb45eb3ed7a3565afb71f4d4e94e50e808873b25178e04282e6015",
+    "guard-write/guard-simulation/build.log": "6c4b876b7e91c43691b2002a3d4148b22b3e58a9b8fdf2b1b6499d038c2ad440",
+    "guard-write/guard-simulation/observer_core.v": "609b31d116bccc4cd4f218d2dcddaef056519a7117a48b99b0f7c7d99ae6ee87",
+    "guard-write/guard-simulation/observer_top.v": "dbf48952ea0c0eccbfdd863c00526f9c1f425d56653914f1eb0fcfdace476d23",
+    "guard-write/guard-simulation/simulation.json": "f3029329fd4ec884e6cdb278dfca0cbd042821845e17fc3f86bcec635fcf825c",
+    "guard-write/guard-simulation/soc_top.v": "95ce3d761d5915cd26a7fdc12965627fabbcd90d13d5ad67d670573d86b0cdfc",
+    "stack-underflow/candidate.v": "b8d826d8899911549e3db787ea47aff9eb34e462aabba5aa5c03683c0d045866",
+    "stack-underflow/firmware/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stack-underflow/firmware/disassembly.txt": "737e56af3df6bfe3b641a12d58f78ea5c5ed515df6fb428b72a34ad7791c2dc2",
+    "stack-underflow/firmware/firmware.bin": "5e6e8882fb66d507cf75ee845e835a5ab4e2e4d9e78a4f5ccabd79b568415136",
+    "stack-underflow/firmware/firmware.elf": "af3e5836832c0a99229d44253310a4ac3e4fe2c4ea364a19b3262b399d40b3a7",
+    "stack-underflow/firmware/firmware.hex": "b458721ebe9e2aed4d6bcf2b9eeecbc8bf4e23c02dfc8cfd9a652642cc1a226a",
+    "stack-underflow/firmware/objcopy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stack-underflow/firmware/symbols.txt": "53917018656dfbf41877d76a2c8c9dc81b6bfb78e296a1487e487e9382eae9e8",
+    "stack-underflow/firmware/validation.json": "cb2351bf49e8d96f27a5c722e0a7d44c1848875110bdf4a44dedb63a13c334b7",
+    "stack-underflow/fixture.S": "5a8bd1d249f10746148a2f3075d41802d844bfafa932b7faf1d23b0e4c356935",
+    "stack-underflow/guard-simulation/build.log": "68bb34ebd84903b8100b6d14b00f5895be366254edfd706f0969818595d549e6",
+    "stack-underflow/guard-simulation/observer_core.v": "609b31d116bccc4cd4f218d2dcddaef056519a7117a48b99b0f7c7d99ae6ee87",
+    "stack-underflow/guard-simulation/observer_top.v": "8e57edc8d532948649c98bf03f7d9349c9ebe31c81e8ca03887693de270b4133",
+    "stack-underflow/guard-simulation/simulation.json": "8bfb746d1ece9cd945e0255d97c81d116b4e826d50f65616592853517543bebb",
+    "stack-underflow/guard-simulation/soc_top.v": "9ae2922d5475056d0087b6e400d92ff7d096824cb367d267b42bfa70b634f5cb"
+  }
+}

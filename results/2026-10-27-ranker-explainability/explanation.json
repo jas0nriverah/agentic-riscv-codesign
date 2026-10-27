@@ -1,0 +1,178 @@
+{
+  "schema": "isaforge-ranker-explainability-v1",
+  "scope": "retrospective consumed-data interpretation diagnostic; no new measurements, tuning, or model selection",
+  "model": "Existing XGBoost rank:pairwise ranker, seed 0, fixed repository parameters",
+  "explanation": "Native XGBoost additive tree contributions (pred_contribs); feature effects are descriptive and not causal.",
+  "global_method": "Within each held-out workload, normalize each candidate's absolute feature contributions by that candidate's total absolute contribution; average candidates within workload; then macro-average the 14 workload groups. Intervals resample workload groups, not candidates.",
+  "local_method": "One held-out candidate's signed additive tree contributions; base plus feature contributions reconstruct the model's raw rank score.",
+  "input": {
+    "path": "results/2026-10-26-lift-selection-corpus/corpus.json",
+    "sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+    "successful_labels": 122,
+    "charged_failures": 4,
+    "candidate_attempts": 126,
+    "independent_workload_groups": 14
+  },
+  "split": "Outer full-workload holdout with all related operation-tree families excluded from training.",
+  "bootstrap": {
+    "draws": 20000,
+    "seed": 20261027,
+    "unit": "workload group"
+  },
+  "global_feature_group_attribution": [
+    {
+      "feature_group": "profile-derived opportunity proxies",
+      "mean_relative_abs_contribution": 0.6638823593966663,
+      "lower_95": 0.6111108821683696,
+      "upper_95": 0.7133571296664221
+    },
+    {
+      "feature_group": "expression shape",
+      "mean_relative_abs_contribution": 0.13431070698425174,
+      "lower_95": 0.10755846888891288,
+      "upper_95": 0.16441703446409
+    },
+    {
+      "feature_group": "constant profile",
+      "mean_relative_abs_contribution": 0.07511026067991874,
+      "lower_95": 0.06074892300447183,
+      "upper_95": 0.09178576867894403
+    },
+    {
+      "feature_group": "opcode mix",
+      "mean_relative_abs_contribution": 0.12669667627570952,
+      "lower_95": 0.10243694477581552,
+      "upper_95": 0.1522296697616444
+    }
+  ],
+  "local_example": {
+    "workload_group": "tacle-bitcount",
+    "benchmark": "tacle-bitcount:00139fca615b68f2cb43c6bcfede407ddd621737e4ae687b127b3b8bd03fe682",
+    "candidate_id": "d5c550190ed7e7c7ca1870d86fe7e6ec25da99276a9b361720f4467b291ffc40",
+    "formula": "add(in0,andi(in1,15))",
+    "held_out_rank_position": 1,
+    "pool_size": 12,
+    "raw_rank_score": 0.4729456603527069,
+    "measured_speedup": 1.0087823728019671,
+    "actual_area_delta_lut4": 65,
+    "area_cap_lut4": 64,
+    "minimum_routed_fmax_mhz": 61.82380676269531,
+    "minimum_fmax_requirement_mhz": 12.0,
+    "correctness_verified": true,
+    "area_feasible": false,
+    "timing_feasible": true,
+    "area_miss_lut4": 1,
+    "interpretation": "The candidate was ranked first, but the ranker has no area input and the measured design exceeds the area cap by one LUT4. This is a descriptive explanation of a held-out decision, not an area-model result."
+  },
+  "fold_checks": [
+    {
+      "workload_group": "beebs-aha-compress",
+      "training_rows": 109,
+      "held_out_rows": 12,
+      "excluded_related_candidates": 1,
+      "max_contribution_additivity_error": 2.384185791015625e-07
+    },
+    {
+      "workload_group": "beebs-expint",
+      "training_rows": 100,
+      "held_out_rows": 6,
+      "excluded_related_candidates": 16,
+      "max_contribution_additivity_error": 5.960464477539062e-07
+    },
+    {
+      "workload_group": "beebs-jfdctint",
+      "training_rows": 108,
+      "held_out_rows": 6,
+      "excluded_related_candidates": 8,
+      "max_contribution_additivity_error": 1.7881393432617188e-07
+    },
+    {
+      "workload_group": "beebs-ndes",
+      "training_rows": 93,
+      "held_out_rows": 12,
+      "excluded_related_candidates": 17,
+      "max_contribution_additivity_error": 2.384185791015625e-07
+    },
+    {
+      "workload_group": "beebs-nettle-md5",
+      "training_rows": 84,
+      "held_out_rows": 12,
+      "excluded_related_candidates": 26,
+      "max_contribution_additivity_error": 2.384185791015625e-07
+    },
+    {
+      "workload_group": "embench-aha-mont64",
+      "training_rows": 97,
+      "held_out_rows": 6,
+      "excluded_related_candidates": 19,
+      "max_contribution_additivity_error": 4.76837158203125e-07
+    },
+    {
+      "workload_group": "embench-crc32",
+      "training_rows": 101,
+      "held_out_rows": 6,
+      "excluded_related_candidates": 15,
+      "max_contribution_additivity_error": 2.384185791015625e-07
+    },
+    {
+      "workload_group": "embench-edn",
+      "training_rows": 103,
+      "held_out_rows": 5,
+      "excluded_related_candidates": 14,
+      "max_contribution_additivity_error": 3.5762786865234375e-07
+    },
+    {
+      "workload_group": "embench-nettle-sha256",
+      "training_rows": 94,
+      "held_out_rows": 12,
+      "excluded_related_candidates": 16,
+      "max_contribution_additivity_error": 2.980232238769531e-07
+    },
+    {
+      "workload_group": "embench-slre",
+      "training_rows": 103,
+      "held_out_rows": 6,
+      "excluded_related_candidates": 13,
+      "max_contribution_additivity_error": 1.7881393432617188e-07
+    },
+    {
+      "workload_group": "embench-ud",
+      "training_rows": 106,
+      "held_out_rows": 4,
+      "excluded_related_candidates": 12,
+      "max_contribution_additivity_error": 1.4901161193847656e-07
+    },
+    {
+      "workload_group": "tacle-bitcount",
+      "training_rows": 86,
+      "held_out_rows": 12,
+      "excluded_related_candidates": 24,
+      "max_contribution_additivity_error": 3.5762786865234375e-07
+    },
+    {
+      "workload_group": "tacle-g723-enc",
+      "training_rows": 97,
+      "held_out_rows": 11,
+      "excluded_related_candidates": 14,
+      "max_contribution_additivity_error": 3.5762786865234375e-07
+    },
+    {
+      "workload_group": "tacle-lift",
+      "training_rows": 100,
+      "held_out_rows": 12,
+      "excluded_related_candidates": 10,
+      "max_contribution_additivity_error": 2.384185791015625e-07
+    }
+  ],
+  "packages": {
+    "numpy": "2.5.4",
+    "xgboost": "3.4.1"
+  },
+  "limitations": [
+    "This is a post-hoc explanation of consumed development data, not independent validation.",
+    "Native tree contributions explain the model's output decomposition; correlated features make attribution non-unique and do not establish causality.",
+    "The rank score orders candidates; it is not a calibrated speedup prediction, probability, or uncertainty estimate.",
+    "The ranker does not predict area or timing feasibility. The local miss illustrates that limitation.",
+    "Trace-derived instruction-saving features are proxies, not measured whole-program speedups; speedup labels in the corpus equal the calibrated latency estimates."
+  ]
+}

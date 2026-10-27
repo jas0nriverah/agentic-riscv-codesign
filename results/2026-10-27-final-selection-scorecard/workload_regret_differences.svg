@@ -1,0 +1,408 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1290" height="600" viewBox="0 0 1290 600">
+<rect width="100%" height="100%" fill="#fff"/>
+<style>text{font-family:Arial,Helvetica,sans-serif} .grid{stroke:#dedede;stroke-width:1} .axis{stroke:#444;stroke-width:1.2}</style>
+<title>Workload-level regret heatmap</title>
+<desc>Cell value is policy regret minus merit regret in percentage points; green favors the row policy, red favors merit, gray means oracle-censored workload.</desc>
+<text x="45.0" y="33.0" text-anchor="start" font-size="19" fill="#222" font-weight="bold">Per-workload regret difference versus merit</text>
+<text x="285.0" y="78.0" text-anchor="start" font-size="12" fill="#555" font-weight="normal">Each three-column block is one workload (B1, B2, B3). Gray cells have censored pool oracles.</text>
+<text x="315.0" y="103.0" text-anchor="middle" font-size="10" fill="#222" font-weight="normal" transform="rotate(-40 315.0 103)">aha-compress</text>
+<text x="295.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">1</text>
+<text x="315.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">2</text>
+<text x="335.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">3</text>
+<text x="384.0" y="103.0" text-anchor="middle" font-size="10" fill="#222" font-weight="normal" transform="rotate(-40 384.0 103)">expint</text>
+<text x="364.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">1</text>
+<text x="384.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">2</text>
+<text x="404.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">3</text>
+<text x="453.0" y="103.0" text-anchor="middle" font-size="10" fill="#222" font-weight="normal" transform="rotate(-40 453.0 103)">jfdctint</text>
+<text x="433.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">1</text>
+<text x="453.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">2</text>
+<text x="473.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">3</text>
+<text x="522.0" y="103.0" text-anchor="middle" font-size="10" fill="#222" font-weight="normal" transform="rotate(-40 522.0 103)">ndes</text>
+<text x="502.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">1</text>
+<text x="522.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">2</text>
+<text x="542.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">3</text>
+<text x="591.0" y="103.0" text-anchor="middle" font-size="10" fill="#222" font-weight="normal" transform="rotate(-40 591.0 103)">nettle-md5</text>
+<text x="571.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">1</text>
+<text x="591.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">2</text>
+<text x="611.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">3</text>
+<text x="660.0" y="103.0" text-anchor="middle" font-size="10" fill="#222" font-weight="normal" transform="rotate(-40 660.0 103)">aha-mont64</text>
+<text x="640.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">1</text>
+<text x="660.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">2</text>
+<text x="680.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">3</text>
+<text x="729.0" y="103.0" text-anchor="middle" font-size="10" fill="#222" font-weight="normal" transform="rotate(-40 729.0 103)">crc32</text>
+<text x="709.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">1</text>
+<text x="729.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">2</text>
+<text x="749.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">3</text>
+<text x="798.0" y="103.0" text-anchor="middle" font-size="10" fill="#222" font-weight="normal" transform="rotate(-40 798.0 103)">edn</text>
+<text x="778.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">1</text>
+<text x="798.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">2</text>
+<text x="818.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">3</text>
+<text x="867.0" y="103.0" text-anchor="middle" font-size="10" fill="#222" font-weight="normal" transform="rotate(-40 867.0 103)">nettle-sha256</text>
+<text x="847.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">1</text>
+<text x="867.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">2</text>
+<text x="887.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">3</text>
+<text x="936.0" y="103.0" text-anchor="middle" font-size="10" fill="#222" font-weight="normal" transform="rotate(-40 936.0 103)">slre</text>
+<text x="916.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">1</text>
+<text x="936.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">2</text>
+<text x="956.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">3</text>
+<text x="1005.0" y="103.0" text-anchor="middle" font-size="10" fill="#222" font-weight="normal" transform="rotate(-40 1005.0 103)">ud</text>
+<text x="985.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">1</text>
+<text x="1005.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">2</text>
+<text x="1025.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">3</text>
+<text x="1074.0" y="103.0" text-anchor="middle" font-size="10" fill="#222" font-weight="normal" transform="rotate(-40 1074.0 103)">bitcount</text>
+<text x="1054.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">1</text>
+<text x="1074.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">2</text>
+<text x="1094.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">3</text>
+<text x="1143.0" y="103.0" text-anchor="middle" font-size="10" fill="#222" font-weight="normal" transform="rotate(-40 1143.0 103)">g723-enc</text>
+<text x="1123.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">1</text>
+<text x="1143.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">2</text>
+<text x="1163.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">3</text>
+<text x="1212.0" y="103.0" text-anchor="middle" font-size="10" fill="#222" font-weight="normal" transform="rotate(-40 1212.0 103)">lift</text>
+<text x="1192.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">1</text>
+<text x="1212.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">2</text>
+<text x="1232.0" y="127.0" text-anchor="middle" font-size="9" fill="#555" font-weight="normal">3</text>
+<text x="273.0" y="153.0" text-anchor="end" font-size="11" fill="#222" font-weight="normal">Random</text>
+<rect x="285" y="135" width="20" height="25" fill="#fdfefd" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B1: -0.025 pp vs merit</title></rect>
+<rect x="305" y="135" width="20" height="25" fill="#fafdfa" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B2: -0.076 pp vs merit</title></rect>
+<rect x="325" y="135" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B3: +2.212 pp vs merit</title></rect>
+<rect x="354" y="135" width="20" height="25" fill="#fefdfd" stroke="#fff" stroke-width="1"><title>beebs-expint B1: +0.019 pp vs merit</title></rect>
+<rect x="374" y="135" width="20" height="25" fill="#fefefe" stroke="#fff" stroke-width="1"><title>beebs-expint B2: +0.003 pp vs merit</title></rect>
+<rect x="394" y="135" width="20" height="25" fill="#fefefe" stroke="#fff" stroke-width="1"><title>beebs-expint B3: +0.003 pp vs merit</title></rect>
+<rect x="423" y="135" width="20" height="25" fill="#fbdcde" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B1: +0.460 pp vs merit</title></rect>
+<rect x="443" y="135" width="20" height="25" fill="#fbdddf" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B2: +0.447 pp vs merit</title></rect>
+<rect x="463" y="135" width="20" height="25" fill="#fdebec" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B3: +0.261 pp vs merit</title></rect>
+<rect x="492" y="135" width="20" height="25" fill="#fafdfa" stroke="#fff" stroke-width="1"><title>beebs-ndes B1: -0.065 pp vs merit</title></rect>
+<rect x="512" y="135" width="20" height="25" fill="#f2faf2" stroke="#fff" stroke-width="1"><title>beebs-ndes B2: -0.188 pp vs merit</title></rect>
+<rect x="532" y="135" width="20" height="25" fill="#fbdadc" stroke="#fff" stroke-width="1"><title>beebs-ndes B3: +0.488 pp vs merit</title></rect>
+<rect x="561" y="135" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B1: +1.428 pp vs merit</title></rect>
+<rect x="581" y="135" width="20" height="25" fill="#f9c4c7" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B2: +0.782 pp vs merit</title></rect>
+<rect x="601" y="135" width="20" height="25" fill="#f9c4c7" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B3: +0.782 pp vs merit</title></rect>
+<rect x="630" y="135" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B1: +6.986 pp vs merit</title></rect>
+<rect x="650" y="135" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B2: +6.986 pp vs merit</title></rect>
+<rect x="670" y="135" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B3: +3.545 pp vs merit</title></rect>
+<rect x="699" y="135" width="20" height="25" fill="#a5dca5" stroke="#fff" stroke-width="1"><title>embench-crc32 B1: -1.935 pp vs merit</title></rect>
+<rect x="719" y="135" width="20" height="25" fill="#faced0" stroke="#fff" stroke-width="1"><title>embench-crc32 B2: +0.645 pp vs merit</title></rect>
+<rect x="739" y="135" width="20" height="25" fill="#faced0" stroke="#fff" stroke-width="1"><title>embench-crc32 B3: +0.645 pp vs merit</title></rect>
+<rect x="768" y="135" width="20" height="25" fill="#fefcfc" stroke="#fff" stroke-width="1"><title>embench-edn B1: +0.035 pp vs merit</title></rect>
+<rect x="788" y="135" width="20" height="25" fill="#fefcfd" stroke="#fff" stroke-width="1"><title>embench-edn B2: +0.027 pp vs merit</title></rect>
+<rect x="808" y="135" width="20" height="25" fill="#fefdfd" stroke="#fff" stroke-width="1"><title>embench-edn B3: +0.020 pp vs merit</title></rect>
+<rect x="837" y="135" width="20" height="25" fill="#d3eed3" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B1: -0.675 pp vs merit</title></rect>
+<rect x="857" y="135" width="20" height="25" fill="#acdeac" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B2: -1.285 pp vs merit</title></rect>
+<rect x="877" y="135" width="20" height="25" fill="#fbd5d7" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B3: +0.558 pp vs merit</title></rect>
+<rect x="906" y="135" width="20" height="25" fill="#fcfefc" stroke="#fff" stroke-width="1"><title>embench-slre B1: -0.038 pp vs merit</title></rect>
+<rect x="926" y="135" width="20" height="25" fill="#fafdfa" stroke="#fff" stroke-width="1"><title>embench-slre B2: -0.071 pp vs merit</title></rect>
+<rect x="946" y="135" width="20" height="25" fill="#fefdfd" stroke="#fff" stroke-width="1"><title>embench-slre B3: +0.016 pp vs merit</title></rect>
+<rect x="975" y="135" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B1: oracle censored</title></rect>
+<text x="985.0" y="152.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="995" y="135" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B2: oracle censored</title></rect>
+<text x="1005.0" y="152.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1015" y="135" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B3: oracle censored</title></rect>
+<text x="1025.0" y="152.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1044" y="135" width="20" height="25" fill="#fefefe" stroke="#fff" stroke-width="1"><title>tacle-bitcount B1: -0.012 pp vs merit</title></rect>
+<rect x="1064" y="135" width="20" height="25" fill="#fcfefc" stroke="#fff" stroke-width="1"><title>tacle-bitcount B2: -0.035 pp vs merit</title></rect>
+<rect x="1084" y="135" width="20" height="25" fill="#f8fcf8" stroke="#fff" stroke-width="1"><title>tacle-bitcount B3: -0.100 pp vs merit</title></rect>
+<rect x="1113" y="135" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B1: oracle censored</title></rect>
+<text x="1123.0" y="152.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1133" y="135" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B2: oracle censored</title></rect>
+<text x="1143.0" y="152.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1153" y="135" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B3: oracle censored</title></rect>
+<text x="1163.0" y="152.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1182" y="135" width="20" height="25" fill="#d8efd8" stroke="#fff" stroke-width="1"><title>tacle-lift B1: -0.605 pp vs merit</title></rect>
+<rect x="1202" y="135" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>tacle-lift B2: +2.175 pp vs merit</title></rect>
+<rect x="1222" y="135" width="20" height="25" fill="#f7b4b8" stroke="#fff" stroke-width="1"><title>tacle-lift B3: +0.993 pp vs merit</title></rect>
+<text x="273.0" y="180.0" text-anchor="end" font-size="11" fill="#222" font-weight="normal">Frequency</text>
+<rect x="285" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B1: +0.000 pp vs merit</title></rect>
+<rect x="305" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B2: +0.000 pp vs merit</title></rect>
+<rect x="325" y="162" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B3: +2.288 pp vs merit</title></rect>
+<rect x="354" y="162" width="20" height="25" fill="#fefcfc" stroke="#fff" stroke-width="1"><title>beebs-expint B1: +0.035 pp vs merit</title></rect>
+<rect x="374" y="162" width="20" height="25" fill="#fefdfd" stroke="#fff" stroke-width="1"><title>beebs-expint B2: +0.025 pp vs merit</title></rect>
+<rect x="394" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-expint B3: +0.000 pp vs merit</title></rect>
+<rect x="423" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B1: +0.000 pp vs merit</title></rect>
+<rect x="443" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B2: +0.000 pp vs merit</title></rect>
+<rect x="463" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B3: +0.000 pp vs merit</title></rect>
+<rect x="492" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-ndes B1: +0.000 pp vs merit</title></rect>
+<rect x="512" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-ndes B2: +0.000 pp vs merit</title></rect>
+<rect x="532" y="162" width="20" height="25" fill="#fce0e2" stroke="#fff" stroke-width="1"><title>beebs-ndes B3: +0.403 pp vs merit</title></rect>
+<rect x="561" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B1: +0.000 pp vs merit</title></rect>
+<rect x="581" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B2: +0.000 pp vs merit</title></rect>
+<rect x="601" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B3: +0.000 pp vs merit</title></rect>
+<rect x="630" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B1: +0.000 pp vs merit</title></rect>
+<rect x="650" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B2: +0.000 pp vs merit</title></rect>
+<rect x="670" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B3: +0.000 pp vs merit</title></rect>
+<rect x="699" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B1: +0.000 pp vs merit</title></rect>
+<rect x="719" y="162" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>embench-crc32 B2: +2.150 pp vs merit</title></rect>
+<rect x="739" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B3: +0.000 pp vs merit</title></rect>
+<rect x="768" y="162" width="20" height="25" fill="#fefefe" stroke="#fff" stroke-width="1"><title>embench-edn B1: +0.008 pp vs merit</title></rect>
+<rect x="788" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-edn B2: +0.000 pp vs merit</title></rect>
+<rect x="808" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-edn B3: +0.000 pp vs merit</title></rect>
+<rect x="837" y="162" width="20" height="25" fill="#a5dca5" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B1: -2.326 pp vs merit</title></rect>
+<rect x="857" y="162" width="20" height="25" fill="#a5dca5" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B2: -2.326 pp vs merit</title></rect>
+<rect x="877" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B3: +0.000 pp vs merit</title></rect>
+<rect x="906" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B1: +0.000 pp vs merit</title></rect>
+<rect x="926" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B2: +0.000 pp vs merit</title></rect>
+<rect x="946" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B3: +0.000 pp vs merit</title></rect>
+<rect x="975" y="162" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B1: oracle censored</title></rect>
+<text x="985.0" y="179.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="995" y="162" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B2: oracle censored</title></rect>
+<text x="1005.0" y="179.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1015" y="162" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B3: oracle censored</title></rect>
+<text x="1025.0" y="179.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1044" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B1: +0.000 pp vs merit</title></rect>
+<rect x="1064" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B2: +0.000 pp vs merit</title></rect>
+<rect x="1084" y="162" width="20" height="25" fill="#f9fcf9" stroke="#fff" stroke-width="1"><title>tacle-bitcount B3: -0.093 pp vs merit</title></rect>
+<rect x="1113" y="162" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B1: oracle censored</title></rect>
+<text x="1123.0" y="179.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1133" y="162" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B2: oracle censored</title></rect>
+<text x="1143.0" y="179.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1153" y="162" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B3: oracle censored</title></rect>
+<text x="1163.0" y="179.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1182" y="162" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-lift B1: +0.000 pp vs merit</title></rect>
+<rect x="1202" y="162" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>tacle-lift B2: +3.159 pp vs merit</title></rect>
+<rect x="1222" y="162" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>tacle-lift B3: +3.159 pp vs merit</title></rect>
+<text x="273.0" y="207.0" text-anchor="end" font-size="11" fill="#222" font-weight="normal">Timing-aware heuristic</text>
+<rect x="285" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B1: +0.000 pp vs merit</title></rect>
+<rect x="305" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B2: +0.000 pp vs merit</title></rect>
+<rect x="325" y="189" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B3: +2.288 pp vs merit</title></rect>
+<rect x="354" y="189" width="20" height="25" fill="#fefcfc" stroke="#fff" stroke-width="1"><title>beebs-expint B1: +0.035 pp vs merit</title></rect>
+<rect x="374" y="189" width="20" height="25" fill="#fefefe" stroke="#fff" stroke-width="1"><title>beebs-expint B2: +0.013 pp vs merit</title></rect>
+<rect x="394" y="189" width="20" height="25" fill="#fefefe" stroke="#fff" stroke-width="1"><title>beebs-expint B3: +0.013 pp vs merit</title></rect>
+<rect x="423" y="189" width="20" height="25" fill="#fbddde" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B1: +0.449 pp vs merit</title></rect>
+<rect x="443" y="189" width="20" height="25" fill="#fbddde" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B2: +0.449 pp vs merit</title></rect>
+<rect x="463" y="189" width="20" height="25" fill="#fbddde" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B3: +0.449 pp vs merit</title></rect>
+<rect x="492" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-ndes B1: +0.000 pp vs merit</title></rect>
+<rect x="512" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-ndes B2: +0.000 pp vs merit</title></rect>
+<rect x="532" y="189" width="20" height="25" fill="#fce0e2" stroke="#fff" stroke-width="1"><title>beebs-ndes B3: +0.403 pp vs merit</title></rect>
+<rect x="561" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B1: +0.000 pp vs merit</title></rect>
+<rect x="581" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B2: +0.000 pp vs merit</title></rect>
+<rect x="601" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B3: +0.000 pp vs merit</title></rect>
+<rect x="630" y="189" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B1: +8.602 pp vs merit</title></rect>
+<rect x="650" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B2: +0.000 pp vs merit</title></rect>
+<rect x="670" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B3: +0.000 pp vs merit</title></rect>
+<rect x="699" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B1: +0.000 pp vs merit</title></rect>
+<rect x="719" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B2: +0.000 pp vs merit</title></rect>
+<rect x="739" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B3: +0.000 pp vs merit</title></rect>
+<rect x="768" y="189" width="20" height="25" fill="#fefefe" stroke="#fff" stroke-width="1"><title>embench-edn B1: +0.008 pp vs merit</title></rect>
+<rect x="788" y="189" width="20" height="25" fill="#fefefe" stroke="#fff" stroke-width="1"><title>embench-edn B2: +0.008 pp vs merit</title></rect>
+<rect x="808" y="189" width="20" height="25" fill="#fefefe" stroke="#fff" stroke-width="1"><title>embench-edn B3: +0.008 pp vs merit</title></rect>
+<rect x="837" y="189" width="20" height="25" fill="#a5dca5" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B1: -2.326 pp vs merit</title></rect>
+<rect x="857" y="189" width="20" height="25" fill="#a5dca5" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B2: -2.326 pp vs merit</title></rect>
+<rect x="877" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B3: +0.000 pp vs merit</title></rect>
+<rect x="906" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B1: +0.000 pp vs merit</title></rect>
+<rect x="926" y="189" width="20" height="25" fill="#f9fcf9" stroke="#fff" stroke-width="1"><title>embench-slre B2: -0.086 pp vs merit</title></rect>
+<rect x="946" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B3: +0.000 pp vs merit</title></rect>
+<rect x="975" y="189" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B1: oracle censored</title></rect>
+<text x="985.0" y="206.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="995" y="189" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B2: oracle censored</title></rect>
+<text x="1005.0" y="206.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1015" y="189" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B3: oracle censored</title></rect>
+<text x="1025.0" y="206.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1044" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B1: +0.000 pp vs merit</title></rect>
+<rect x="1064" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B2: +0.000 pp vs merit</title></rect>
+<rect x="1084" y="189" width="20" height="25" fill="#f3faf3" stroke="#fff" stroke-width="1"><title>tacle-bitcount B3: -0.174 pp vs merit</title></rect>
+<rect x="1113" y="189" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B1: oracle censored</title></rect>
+<text x="1123.0" y="206.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1133" y="189" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B2: oracle censored</title></rect>
+<text x="1143.0" y="206.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1153" y="189" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B3: oracle censored</title></rect>
+<text x="1163.0" y="206.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1182" y="189" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-lift B1: +0.000 pp vs merit</title></rect>
+<rect x="1202" y="189" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>tacle-lift B2: +3.159 pp vs merit</title></rect>
+<rect x="1222" y="189" width="20" height="25" fill="#f5a0a4" stroke="#fff" stroke-width="1"><title>tacle-lift B3: +1.263 pp vs merit</title></rect>
+<text x="273.0" y="234.0" text-anchor="end" font-size="11" fill="#222" font-weight="normal">Merit</text>
+<rect x="285" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B1: +0.000 pp vs merit</title></rect>
+<rect x="305" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B2: +0.000 pp vs merit</title></rect>
+<rect x="325" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B3: +0.000 pp vs merit</title></rect>
+<rect x="354" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-expint B1: +0.000 pp vs merit</title></rect>
+<rect x="374" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-expint B2: +0.000 pp vs merit</title></rect>
+<rect x="394" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-expint B3: +0.000 pp vs merit</title></rect>
+<rect x="423" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B1: +0.000 pp vs merit</title></rect>
+<rect x="443" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B2: +0.000 pp vs merit</title></rect>
+<rect x="463" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B3: +0.000 pp vs merit</title></rect>
+<rect x="492" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-ndes B1: +0.000 pp vs merit</title></rect>
+<rect x="512" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-ndes B2: +0.000 pp vs merit</title></rect>
+<rect x="532" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-ndes B3: +0.000 pp vs merit</title></rect>
+<rect x="561" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B1: +0.000 pp vs merit</title></rect>
+<rect x="581" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B2: +0.000 pp vs merit</title></rect>
+<rect x="601" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B3: +0.000 pp vs merit</title></rect>
+<rect x="630" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B1: +0.000 pp vs merit</title></rect>
+<rect x="650" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B2: +0.000 pp vs merit</title></rect>
+<rect x="670" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B3: +0.000 pp vs merit</title></rect>
+<rect x="699" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B1: +0.000 pp vs merit</title></rect>
+<rect x="719" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B2: +0.000 pp vs merit</title></rect>
+<rect x="739" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B3: +0.000 pp vs merit</title></rect>
+<rect x="768" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-edn B1: +0.000 pp vs merit</title></rect>
+<rect x="788" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-edn B2: +0.000 pp vs merit</title></rect>
+<rect x="808" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-edn B3: +0.000 pp vs merit</title></rect>
+<rect x="837" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B1: +0.000 pp vs merit</title></rect>
+<rect x="857" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B2: +0.000 pp vs merit</title></rect>
+<rect x="877" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B3: +0.000 pp vs merit</title></rect>
+<rect x="906" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B1: +0.000 pp vs merit</title></rect>
+<rect x="926" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B2: +0.000 pp vs merit</title></rect>
+<rect x="946" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B3: +0.000 pp vs merit</title></rect>
+<rect x="975" y="216" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B1: oracle censored</title></rect>
+<text x="985.0" y="233.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="995" y="216" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B2: oracle censored</title></rect>
+<text x="1005.0" y="233.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1015" y="216" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B3: oracle censored</title></rect>
+<text x="1025.0" y="233.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1044" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B1: +0.000 pp vs merit</title></rect>
+<rect x="1064" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B2: +0.000 pp vs merit</title></rect>
+<rect x="1084" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B3: +0.000 pp vs merit</title></rect>
+<rect x="1113" y="216" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B1: oracle censored</title></rect>
+<text x="1123.0" y="233.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1133" y="216" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B2: oracle censored</title></rect>
+<text x="1143.0" y="233.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1153" y="216" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B3: oracle censored</title></rect>
+<text x="1163.0" y="233.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1182" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-lift B1: +0.000 pp vs merit</title></rect>
+<rect x="1202" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-lift B2: +0.000 pp vs merit</title></rect>
+<rect x="1222" y="216" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-lift B3: +0.000 pp vs merit</title></rect>
+<text x="273.0" y="261.0" text-anchor="end" font-size="11" fill="#222" font-weight="normal">XGB speedup regression</text>
+<rect x="285" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B1: +0.000 pp vs merit</title></rect>
+<rect x="305" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B2: +0.000 pp vs merit</title></rect>
+<rect x="325" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B3: +0.000 pp vs merit</title></rect>
+<rect x="354" y="243" width="20" height="25" fill="#fefcfc" stroke="#fff" stroke-width="1"><title>beebs-expint B1: +0.035 pp vs merit</title></rect>
+<rect x="374" y="243" width="20" height="25" fill="#fefcfc" stroke="#fff" stroke-width="1"><title>beebs-expint B2: +0.035 pp vs merit</title></rect>
+<rect x="394" y="243" width="20" height="25" fill="#fefefe" stroke="#fff" stroke-width="1"><title>beebs-expint B3: +0.013 pp vs merit</title></rect>
+<rect x="423" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B1: +0.000 pp vs merit</title></rect>
+<rect x="443" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B2: +0.000 pp vs merit</title></rect>
+<rect x="463" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B3: +0.000 pp vs merit</title></rect>
+<rect x="492" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-ndes B1: +0.000 pp vs merit</title></rect>
+<rect x="512" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-ndes B2: +0.000 pp vs merit</title></rect>
+<rect x="532" y="243" width="20" height="25" fill="#fdeaeb" stroke="#fff" stroke-width="1"><title>beebs-ndes B3: +0.273 pp vs merit</title></rect>
+<rect x="561" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B1: +0.000 pp vs merit</title></rect>
+<rect x="581" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B2: +0.000 pp vs merit</title></rect>
+<rect x="601" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B3: +0.000 pp vs merit</title></rect>
+<rect x="630" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B1: +0.000 pp vs merit</title></rect>
+<rect x="650" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B2: +0.000 pp vs merit</title></rect>
+<rect x="670" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B3: +0.000 pp vs merit</title></rect>
+<rect x="699" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B1: +0.000 pp vs merit</title></rect>
+<rect x="719" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B2: +0.000 pp vs merit</title></rect>
+<rect x="739" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B3: +0.000 pp vs merit</title></rect>
+<rect x="768" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-edn B1: +0.000 pp vs merit</title></rect>
+<rect x="788" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-edn B2: +0.000 pp vs merit</title></rect>
+<rect x="808" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-edn B3: +0.000 pp vs merit</title></rect>
+<rect x="837" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B1: +0.000 pp vs merit</title></rect>
+<rect x="857" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B2: +0.000 pp vs merit</title></rect>
+<rect x="877" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B3: +0.000 pp vs merit</title></rect>
+<rect x="906" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B1: +0.000 pp vs merit</title></rect>
+<rect x="926" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B2: +0.000 pp vs merit</title></rect>
+<rect x="946" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B3: +0.000 pp vs merit</title></rect>
+<rect x="975" y="243" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B1: oracle censored</title></rect>
+<text x="985.0" y="260.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="995" y="243" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B2: oracle censored</title></rect>
+<text x="1005.0" y="260.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1015" y="243" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B3: oracle censored</title></rect>
+<text x="1025.0" y="260.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1044" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B1: +0.000 pp vs merit</title></rect>
+<rect x="1064" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B2: +0.000 pp vs merit</title></rect>
+<rect x="1084" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B3: +0.000 pp vs merit</title></rect>
+<rect x="1113" y="243" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B1: oracle censored</title></rect>
+<text x="1123.0" y="260.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1133" y="243" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B2: oracle censored</title></rect>
+<text x="1143.0" y="260.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1153" y="243" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B3: oracle censored</title></rect>
+<text x="1163.0" y="260.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1182" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-lift B1: +0.000 pp vs merit</title></rect>
+<rect x="1202" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-lift B2: +0.000 pp vs merit</title></rect>
+<rect x="1222" y="243" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-lift B3: +0.000 pp vs merit</title></rect>
+<text x="273.0" y="288.0" text-anchor="end" font-size="11" fill="#222" font-weight="normal">XGB pairwise ranker</text>
+<rect x="285" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B1: +0.000 pp vs merit</title></rect>
+<rect x="305" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B2: +0.000 pp vs merit</title></rect>
+<rect x="325" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B3: +0.000 pp vs merit</title></rect>
+<rect x="354" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-expint B1: +0.000 pp vs merit</title></rect>
+<rect x="374" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-expint B2: +0.000 pp vs merit</title></rect>
+<rect x="394" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-expint B3: +0.000 pp vs merit</title></rect>
+<rect x="423" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B1: +0.000 pp vs merit</title></rect>
+<rect x="443" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B2: +0.000 pp vs merit</title></rect>
+<rect x="463" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B3: +0.000 pp vs merit</title></rect>
+<rect x="492" y="270" width="20" height="25" fill="#d1edd1" stroke="#fff" stroke-width="1"><title>beebs-ndes B1: -0.710 pp vs merit</title></rect>
+<rect x="512" y="270" width="20" height="25" fill="#d1edd1" stroke="#fff" stroke-width="1"><title>beebs-ndes B2: -0.710 pp vs merit</title></rect>
+<rect x="532" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-ndes B3: +0.000 pp vs merit</title></rect>
+<rect x="561" y="270" width="20" height="25" fill="#fce1e3" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B1: +0.388 pp vs merit</title></rect>
+<rect x="581" y="270" width="20" height="25" fill="#fce1e3" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B2: +0.388 pp vs merit</title></rect>
+<rect x="601" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B3: +0.000 pp vs merit</title></rect>
+<rect x="630" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B1: +0.000 pp vs merit</title></rect>
+<rect x="650" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B2: +0.000 pp vs merit</title></rect>
+<rect x="670" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B3: +0.000 pp vs merit</title></rect>
+<rect x="699" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B1: +0.000 pp vs merit</title></rect>
+<rect x="719" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B2: +0.000 pp vs merit</title></rect>
+<rect x="739" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B3: +0.000 pp vs merit</title></rect>
+<rect x="768" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-edn B1: +0.000 pp vs merit</title></rect>
+<rect x="788" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-edn B2: +0.000 pp vs merit</title></rect>
+<rect x="808" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-edn B3: +0.000 pp vs merit</title></rect>
+<rect x="837" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B1: +0.000 pp vs merit</title></rect>
+<rect x="857" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B2: +0.000 pp vs merit</title></rect>
+<rect x="877" y="270" width="20" height="25" fill="#facccf" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B3: +0.669 pp vs merit</title></rect>
+<rect x="906" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B1: +0.000 pp vs merit</title></rect>
+<rect x="926" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B2: +0.000 pp vs merit</title></rect>
+<rect x="946" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B3: +0.000 pp vs merit</title></rect>
+<rect x="975" y="270" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B1: oracle censored</title></rect>
+<text x="985.0" y="287.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="995" y="270" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B2: oracle censored</title></rect>
+<text x="1005.0" y="287.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1015" y="270" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B3: oracle censored</title></rect>
+<text x="1025.0" y="287.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1044" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B1: +0.000 pp vs merit</title></rect>
+<rect x="1064" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B2: +0.000 pp vs merit</title></rect>
+<rect x="1084" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B3: +0.000 pp vs merit</title></rect>
+<rect x="1113" y="270" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B1: oracle censored</title></rect>
+<text x="1123.0" y="287.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1133" y="270" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B2: oracle censored</title></rect>
+<text x="1143.0" y="287.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1153" y="270" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B3: oracle censored</title></rect>
+<text x="1163.0" y="287.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1182" y="270" width="20" height="25" fill="#a5dca5" stroke="#fff" stroke-width="1"><title>tacle-lift B1: -3.159 pp vs merit</title></rect>
+<rect x="1202" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-lift B2: +0.000 pp vs merit</title></rect>
+<rect x="1222" y="270" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-lift B3: +0.000 pp vs merit</title></rect>
+<text x="273.0" y="315.0" text-anchor="end" font-size="11" fill="#222" font-weight="normal">Factorized feasibility XGB</text>
+<rect x="285" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B1: +0.000 pp vs merit</title></rect>
+<rect x="305" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B2: +0.000 pp vs merit</title></rect>
+<rect x="325" y="297" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>beebs-aha-compress B3: +2.288 pp vs merit</title></rect>
+<rect x="354" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-expint B1: +0.000 pp vs merit</title></rect>
+<rect x="374" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-expint B2: +0.000 pp vs merit</title></rect>
+<rect x="394" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-expint B3: +0.000 pp vs merit</title></rect>
+<rect x="423" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B1: +0.000 pp vs merit</title></rect>
+<rect x="443" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B2: +0.000 pp vs merit</title></rect>
+<rect x="463" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-jfdctint B3: +0.000 pp vs merit</title></rect>
+<rect x="492" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-ndes B1: +0.000 pp vs merit</title></rect>
+<rect x="512" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-ndes B2: +0.000 pp vs merit</title></rect>
+<rect x="532" y="297" width="20" height="25" fill="#f9c9cc" stroke="#fff" stroke-width="1"><title>beebs-ndes B3: +0.710 pp vs merit</title></rect>
+<rect x="561" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B1: +0.000 pp vs merit</title></rect>
+<rect x="581" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B2: +0.000 pp vs merit</title></rect>
+<rect x="601" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>beebs-nettle-md5 B3: +0.000 pp vs merit</title></rect>
+<rect x="630" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B1: +0.000 pp vs merit</title></rect>
+<rect x="650" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B2: +0.000 pp vs merit</title></rect>
+<rect x="670" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-aha-mont64 B3: +0.000 pp vs merit</title></rect>
+<rect x="699" y="297" width="20" height="25" fill="#a5dca5" stroke="#fff" stroke-width="1"><title>embench-crc32 B1: -4.837 pp vs merit</title></rect>
+<rect x="719" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B2: +0.000 pp vs merit</title></rect>
+<rect x="739" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-crc32 B3: +0.000 pp vs merit</title></rect>
+<rect x="768" y="297" width="20" height="25" fill="#fefefe" stroke="#fff" stroke-width="1"><title>embench-edn B1: +0.008 pp vs merit</title></rect>
+<rect x="788" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-edn B2: +0.000 pp vs merit</title></rect>
+<rect x="808" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-edn B3: +0.000 pp vs merit</title></rect>
+<rect x="837" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B1: +0.000 pp vs merit</title></rect>
+<rect x="857" y="297" width="20" height="25" fill="#a5dca5" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B2: -2.326 pp vs merit</title></rect>
+<rect x="877" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-nettle-sha256 B3: +0.000 pp vs merit</title></rect>
+<rect x="906" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B1: +0.000 pp vs merit</title></rect>
+<rect x="926" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B2: +0.000 pp vs merit</title></rect>
+<rect x="946" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>embench-slre B3: +0.000 pp vs merit</title></rect>
+<rect x="975" y="297" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B1: oracle censored</title></rect>
+<text x="985.0" y="314.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="995" y="297" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B2: oracle censored</title></rect>
+<text x="1005.0" y="314.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1015" y="297" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>embench-ud B3: oracle censored</title></rect>
+<text x="1025.0" y="314.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1044" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B1: +0.000 pp vs merit</title></rect>
+<rect x="1064" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B2: +0.000 pp vs merit</title></rect>
+<rect x="1084" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-bitcount B3: +0.000 pp vs merit</title></rect>
+<rect x="1113" y="297" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B1: oracle censored</title></rect>
+<text x="1123.0" y="314.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1133" y="297" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B2: oracle censored</title></rect>
+<text x="1143.0" y="314.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1153" y="297" width="20" height="25" fill="#b7b7b7" stroke="#fff" stroke-width="1"><title>tacle-g723-enc B3: oracle censored</title></rect>
+<text x="1163.0" y="314.0" text-anchor="middle" font-size="11" fill="#444" font-weight="normal">×</text>
+<rect x="1182" y="297" width="20" height="25" fill="#f4f4f4" stroke="#fff" stroke-width="1"><title>tacle-lift B1: +0.000 pp vs merit</title></rect>
+<rect x="1202" y="297" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>tacle-lift B2: +3.159 pp vs merit</title></rect>
+<rect x="1222" y="297" width="20" height="25" fill="#f5969b" stroke="#fff" stroke-width="1"><title>tacle-lift B3: +3.159 pp vs merit</title></rect>
+<text x="285.0" y="349.0" text-anchor="start" font-size="11" fill="#555" font-weight="normal">Cell text: percentage-point regret difference; negative/green favors policy, positive/red favors merit.</text>
+</svg>

@@ -1,0 +1,1695 @@
+
+/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tacle-lift-cfg-tail-2026-10-25/measurements/candidate_07/attempt-000/firmware/firmware.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	00002137          	lui	sp,0x2
+   4:	00000097          	auipc	ra,0x0
+   8:	00c080e7          	jalr	12(ra) # 10 <main>
+   c:	00100073          	ebreak
+
+00000010 <main>:
+  10:	fe010113          	addi	sp,sp,-32 # 1fe0 <_program_end+0x1544>
+  14:	00112e23          	sw	ra,28(sp)
+  18:	00812c23          	sw	s0,24(sp)
+  1c:	00912a23          	sw	s1,20(sp)
+  20:	01212823          	sw	s2,16(sp)
+  24:	01312623          	sw	s3,12(sp)
+  28:	01412423          	sw	s4,8(sp)
+  2c:	00001097          	auipc	ra,0x1
+  30:	8ec080e7          	jalr	-1812(ra) # 918 <initialise_benchmark>
+  34:	00100513          	li	a0,1
+  38:	00001097          	auipc	ra,0x1
+  3c:	8e8080e7          	jalr	-1816(ra) # 920 <warm_caches>
+  40:	c02029f3          	rdinstret	s3
+  44:	c0002a73          	rdcycle	s4
+  48:	00001097          	auipc	ra,0x1
+  4c:	8dc080e7          	jalr	-1828(ra) # 924 <benchmark>
+  50:	00050913          	mv	s2,a0
+  54:	c00024f3          	rdcycle	s1
+  58:	c0202473          	rdinstret	s0
+  5c:	00001097          	auipc	ra,0x1
+  60:	8f8080e7          	jalr	-1800(ra) # 954 <verify_benchmark>
+  64:	49534737          	lui	a4,0x49534
+  68:	100007b7          	lui	a5,0x10000
+  6c:	14670713          	addi	a4,a4,326 # 49534146 <_program_end+0x495336aa>
+  70:	00e7a023          	sw	a4,0(a5) # 10000000 <_program_end+0xffff564>
+  74:	0127a023          	sw	s2,0(a5)
+  78:	414484b3          	sub	s1,s1,s4
+  7c:	0097a023          	sw	s1,0(a5)
+  80:	41340433          	sub	s0,s0,s3
+  84:	0087a023          	sw	s0,0(a5)
+  88:	00a7a023          	sw	a0,0(a5)
+  8c:	02050c63          	beqz	a0,c4 <main+0xb4>
+  90:	600d67b7          	lui	a5,0x600d6
+  94:	00d78793          	addi	a5,a5,13 # 600d600d <_program_end+0x600d5571>
+  98:	01c12083          	lw	ra,28(sp)
+  9c:	01812403          	lw	s0,24(sp)
+  a0:	10000737          	lui	a4,0x10000
+  a4:	00f72223          	sw	a5,4(a4) # 10000004 <_program_end+0xffff568>
+  a8:	01412483          	lw	s1,20(sp)
+  ac:	01012903          	lw	s2,16(sp)
+  b0:	00c12983          	lw	s3,12(sp)
+  b4:	00812a03          	lw	s4,8(sp)
+  b8:	00000513          	li	a0,0
+  bc:	02010113          	addi	sp,sp,32
+  c0:	00008067          	ret
+  c4:	dead07b7          	lui	a5,0xdead0
+  c8:	00378793          	addi	a5,a5,3 # dead0003 <_program_end+0xdeacf567>
+  cc:	fcdff06f          	j	98 <main+0x88>
+
+000000d0 <lift_io_init>:
+  d0:	000017b7          	lui	a5,0x1
+
+000000d4 <__isaforge_begin_7>:
+  d4:	a007a623          	sw	zero,-1524(a5) # a0c <lift_ctrl_dly1>
+
+000000d8 <__isaforge_begin_8>:
+  d8:	000017b7          	lui	a5,0x1
+
+000000dc <__isaforge_begin_9>:
+  dc:	a007a423          	sw	zero,-1528(a5) # a08 <lift_ctrl_dly2>
+
+000000e0 <__isaforge_begin_10>:
+  e0:	00008067          	ret
+
+000000e4 <lift_ctrl_set_vals>:
+  e4:	00001737          	lui	a4,0x1
+
+000000e8 <__isaforge_begin_12>:
+  e8:	a6070713          	addi	a4,a4,-1440 # a60 <lift_ctrl_io_out>
+
+000000ec <__isaforge_begin_13>:
+  ec:	ff070613          	addi	a2,a4,-16
+
+000000f0 <__isaforge_begin_14>:
+  f0:	00000793          	li	a5,0
+
+000000f4 <__isaforge_begin_15>:
+  f4:	00c72683          	lw	a3,12(a4)
+
+000000f8 <__isaforge_begin_16>:
+  f8:	00179793          	slli	a5,a5,0x1
+
+000000fc <__isaforge_begin_17>:
+  fc:	ffc70713          	addi	a4,a4,-4
+
+00000100 <__isaforge_begin_18>:
+ 100:	00d036b3          	snez	a3,a3
+
+00000104 <__isaforge_begin_19>:
+ 104:	00f6e7b3          	or	a5,a3,a5
+
+00000108 <__isaforge_begin_20>:
+ 108:	fee616e3          	bne	a2,a4,f4 <__isaforge_begin_15>
+
+0000010c <__isaforge_begin_21>:
+ 10c:	00001737          	lui	a4,0x1
+
+00000110 <__isaforge_begin_22>:
+ 110:	a0f72023          	sw	a5,-1536(a4) # a00 <lift_simio_out>
+
+00000114 <__isaforge_begin_23>:
+ 114:	00001737          	lui	a4,0x1
+
+00000118 <__isaforge_begin_24>:
+ 118:	a1070713          	addi	a4,a4,-1520 # a10 <lift_ctrl_io_led>
+
+0000011c <__isaforge_begin_25>:
+ 11c:	fc870613          	addi	a2,a4,-56
+
+00000120 <__isaforge_begin_26>:
+ 120:	03472683          	lw	a3,52(a4)
+
+00000124 <__isaforge_begin_27>:
+ 124:	00179793          	slli	a5,a5,0x1
+
+00000128 <__isaforge_begin_28>:
+ 128:	ffc70713          	addi	a4,a4,-4
+
+0000012c <__isaforge_begin_29>:
+ 12c:	00d036b3          	snez	a3,a3
+
+00000130 <__isaforge_begin_30>:
+ 130:	00f6e7b3          	or	a5,a3,a5
+
+00000134 <__isaforge_begin_31>:
+ 134:	fee616e3          	bne	a2,a4,120 <__isaforge_begin_26>
+
+00000138 <__isaforge_begin_32>:
+ 138:	00001737          	lui	a4,0x1
+
+0000013c <__isaforge_begin_33>:
+ 13c:	000016b7          	lui	a3,0x1
+
+00000140 <__isaforge_begin_34>:
+ 140:	9ef72e23          	sw	a5,-1540(a4) # 9fc <lift_simio_led>
+
+00000144 <__isaforge_begin_35>:
+ 144:	a986a703          	lw	a4,-1384(a3) # a98 <lift_checksum>
+
+00000148 <__isaforge_begin_36>:
+ 148:	00f707b3          	add	a5,a4,a5
+
+0000014c <__isaforge_begin_37>:
+ 14c:	a8f6ac23          	sw	a5,-1384(a3)
+
+00000150 <__isaforge_begin_38>:
+ 150:	00008067          	ret
+
+00000154 <lift_ctrl_get_vals>:
+ 154:	000017b7          	lui	a5,0x1
+
+00000158 <__isaforge_begin_40>:
+ 158:	a047a683          	lw	a3,-1532(a5) # a04 <lift_simio_in>
+
+0000015c <__isaforge_begin_41>:
+ 15c:	000017b7          	lui	a5,0x1
+
+00000160 <__isaforge_begin_42>:
+ 160:	a0c7a503          	lw	a0,-1524(a5) # a0c <lift_ctrl_dly1>
+
+00000164 <__isaforge_begin_43>:
+ 164:	00001737          	lui	a4,0x1
+
+00000168 <__isaforge_begin_44>:
+ 168:	a0875603          	lhu	a2,-1528(a4) # a08 <lift_ctrl_dly2>
+
+0000016c <__isaforge_begin_45>:
+ 16c:	01069693          	slli	a3,a3,0x10
+
+00000170 <__isaforge_begin_46>:
+ 170:	a0a72423          	sw	a0,-1528(a4)
+
+00000174 <__isaforge_begin_47>:
+ 174:	00001737          	lui	a4,0x1
+
+00000178 <__isaforge_begin_48>:
+ 178:	01051593          	slli	a1,a0,0x10
+
+0000017c <__isaforge_begin_49>:
+ 17c:	0106d693          	srli	a3,a3,0x10
+
+00000180 <__isaforge_begin_50>:
+ 180:	a7070713          	addi	a4,a4,-1424 # a70 <lift_ctrl_io_in>
+
+00000184 <__isaforge_begin_51>:
+ 184:	0105d593          	srli	a1,a1,0x10
+
+00000188 <__isaforge_begin_52>:
+ 188:	a0d7a623          	sw	a3,-1524(a5)
+
+0000018c <__isaforge_begin_53>:
+ 18c:	02870513          	addi	a0,a4,40
+
+00000190 <__isaforge_begin_54>:
+ 190:	0016f793          	andi	a5,a3,1
+
+00000194 <__isaforge_begin_56>:
+ 194:	02b7878b          	.insn	4, 0x02b7878b
+
+00000198 <__isaforge_begin_57>:
+ 198:	00167813          	andi	a6,a2,1
+
+0000019c <__isaforge_begin_58>:
+ 19c:	010787b3          	add	a5,a5,a6
+
+000001a0 <__isaforge_begin_59>:
+ 1a0:	0027a793          	slti	a5,a5,2
+
+000001a4 <__isaforge_begin_60>:
+ 1a4:	0017b793          	seqz	a5,a5
+
+000001a8 <__isaforge_begin_61>:
+ 1a8:	00f72023          	sw	a5,0(a4)
+
+000001ac <__isaforge_begin_62>:
+ 1ac:	00470713          	addi	a4,a4,4
+
+000001b0 <__isaforge_begin_63>:
+ 1b0:	0016d693          	srli	a3,a3,0x1
+
+000001b4 <__isaforge_begin_64>:
+ 1b4:	0015d593          	srli	a1,a1,0x1
+
+000001b8 <__isaforge_begin_65>:
+ 1b8:	00165613          	srli	a2,a2,0x1
+
+000001bc <__isaforge_begin_66>:
+ 1bc:	fce51ae3          	bne	a0,a4,190 <__isaforge_begin_54>
+
+000001c0 <__isaforge_begin_67>:
+ 1c0:	000017b7          	lui	a5,0x1
+
+000001c4 <__isaforge_begin_68>:
+ 1c4:	9f87a703          	lw	a4,-1544(a5) # 9f8 <lift_simio_adc1>
+
+000001c8 <__isaforge_begin_69>:
+ 1c8:	000017b7          	lui	a5,0x1
+
+000001cc <__isaforge_begin_70>:
+ 1cc:	a5078793          	addi	a5,a5,-1456 # a50 <lift_ctrl_io_analog>
+
+000001d0 <__isaforge_begin_71>:
+ 1d0:	00e7a023          	sw	a4,0(a5)
+
+000001d4 <__isaforge_begin_72>:
+ 1d4:	00001737          	lui	a4,0x1
+
+000001d8 <__isaforge_begin_73>:
+ 1d8:	9f472703          	lw	a4,-1548(a4) # 9f4 <lift_simio_adc2>
+
+000001dc <__isaforge_begin_74>:
+ 1dc:	00e7a223          	sw	a4,4(a5)
+
+000001e0 <__isaforge_begin_75>:
+ 1e0:	00001737          	lui	a4,0x1
+
+000001e4 <__isaforge_begin_76>:
+ 1e4:	9f072703          	lw	a4,-1552(a4) # 9f0 <lift_simio_adc3>
+
+000001e8 <__isaforge_begin_77>:
+ 1e8:	00e7a423          	sw	a4,8(a5)
+
+000001ec <__isaforge_begin_78>:
+ 1ec:	00008067          	ret
+
+000001f0 <lift_ctrl_init>:
+ 1f0:	ff010113          	addi	sp,sp,-16
+
+000001f4 <__isaforge_begin_80>:
+ 1f4:	000017b7          	lui	a5,0x1
+
+000001f8 <__isaforge_begin_81>:
+ 1f8:	00112623          	sw	ra,12(sp)
+
+000001fc <__isaforge_begin_82>:
+ 1fc:	a807ac23          	sw	zero,-1384(a5) # a98 <lift_checksum>
+
+00000200 <__isaforge_begin_83>:
+ 200:	00000097          	auipc	ra,0x0
+ 204:	ed0080e7          	jalr	-304(ra) # d0 <lift_io_init>
+
+00000208 <__isaforge_begin_84>:
+ 208:	000017b7          	lui	a5,0x1
+
+0000020c <__isaforge_begin_85>:
+ 20c:	9a07a423          	sw	zero,-1624(a5) # 9a8 <lift_cntValid>
+
+00000210 <__isaforge_begin_86>:
+ 210:	000017b7          	lui	a5,0x1
+
+00000214 <__isaforge_begin_87>:
+ 214:	9a07a223          	sw	zero,-1628(a5) # 9a4 <lift_cnt>
+
+00000218 <__isaforge_begin_88>:
+ 218:	000017b7          	lui	a5,0x1
+
+0000021c <__isaforge_begin_89>:
+ 21c:	9807a823          	sw	zero,-1648(a5) # 990 <lift_cmd>
+
+00000220 <__isaforge_begin_90>:
+ 220:	000017b7          	lui	a5,0x1
+
+00000224 <__isaforge_begin_91>:
+ 224:	9807a623          	sw	zero,-1652(a5) # 98c <lift_timMotor>
+
+00000228 <__isaforge_begin_92>:
+ 228:	000017b7          	lui	a5,0x1
+
+0000022c <__isaforge_begin_93>:
+ 22c:	9807a423          	sw	zero,-1656(a5) # 988 <lift_timImp>
+
+00000230 <__isaforge_begin_94>:
+ 230:	00100713          	li	a4,1
+
+00000234 <__isaforge_begin_95>:
+ 234:	000017b7          	lui	a5,0x1
+
+00000238 <__isaforge_begin_96>:
+ 238:	98e7a223          	sw	a4,-1660(a5) # 984 <lift_directionUp>
+
+0000023c <__isaforge_begin_97>:
+ 23c:	000017b7          	lui	a5,0x1
+
+00000240 <__isaforge_begin_98>:
+ 240:	9807a023          	sw	zero,-1664(a5) # 980 <lift_lastImp>
+
+00000244 <__isaforge_begin_99>:
+ 244:	000017b7          	lui	a5,0x1
+
+00000248 <__isaforge_begin_100>:
+ 248:	9807ae23          	sw	zero,-1636(a5) # 99c <lift_loadLevel>
+
+0000024c <__isaforge_begin_101>:
+ 24c:	000017b7          	lui	a5,0x1
+
+00000250 <__isaforge_begin_102>:
+ 250:	9807ac23          	sw	zero,-1640(a5) # 998 <lift_loadPending>
+
+00000254 <__isaforge_begin_103>:
+ 254:	000017b7          	lui	a5,0x1
+
+00000258 <__isaforge_begin_104>:
+ 258:	9807aa23          	sw	zero,-1644(a5) # 994 <lift_loadSensor>
+
+0000025c <__isaforge_begin_105>:
+ 25c:	000017b7          	lui	a5,0x1
+
+00000260 <__isaforge_begin_106>:
+ 260:	9b078793          	addi	a5,a5,-1616 # 9b0 <lift_levelPos>
+
+00000264 <__isaforge_begin_107>:
+ 264:	07300693          	li	a3,115
+
+00000268 <__isaforge_begin_108>:
+ 268:	00d7a423          	sw	a3,8(a5)
+
+0000026c <__isaforge_begin_109>:
+ 26c:	0ad00693          	li	a3,173
+
+00000270 <__isaforge_begin_110>:
+ 270:	00d7a623          	sw	a3,12(a5)
+
+00000274 <__isaforge_begin_111>:
+ 274:	0e600693          	li	a3,230
+
+00000278 <__isaforge_begin_112>:
+ 278:	00d7a823          	sw	a3,16(a5)
+
+0000027c <__isaforge_begin_113>:
+ 27c:	12000693          	li	a3,288
+
+00000280 <__isaforge_begin_114>:
+ 280:	00d7aa23          	sw	a3,20(a5)
+
+00000284 <__isaforge_begin_115>:
+ 284:	15a00693          	li	a3,346
+
+00000288 <__isaforge_begin_116>:
+ 288:	00d7ac23          	sw	a3,24(a5)
+
+0000028c <__isaforge_begin_117>:
+ 28c:	19300693          	li	a3,403
+
+00000290 <__isaforge_begin_118>:
+ 290:	00d7ae23          	sw	a3,28(a5)
+
+00000294 <__isaforge_begin_119>:
+ 294:	1cd00693          	li	a3,461
+
+00000298 <__isaforge_begin_120>:
+ 298:	02d7a023          	sw	a3,32(a5)
+
+0000029c <__isaforge_begin_121>:
+ 29c:	20600693          	li	a3,518
+
+000002a0 <__isaforge_begin_122>:
+ 2a0:	02d7a223          	sw	a3,36(a5)
+
+000002a4 <__isaforge_begin_123>:
+ 2a4:	24000693          	li	a3,576
+
+000002a8 <__isaforge_begin_124>:
+ 2a8:	02d7a423          	sw	a3,40(a5)
+
+000002ac <__isaforge_begin_125>:
+ 2ac:	27a00693          	li	a3,634
+
+000002b0 <__isaforge_begin_126>:
+ 2b0:	02d7a623          	sw	a3,44(a5)
+
+000002b4 <__isaforge_begin_127>:
+ 2b4:	2b300693          	li	a3,691
+
+000002b8 <__isaforge_begin_128>:
+ 2b8:	02d7a823          	sw	a3,48(a5)
+
+000002bc <__isaforge_begin_129>:
+ 2bc:	2ed00693          	li	a3,749
+
+000002c0 <__isaforge_begin_130>:
+ 2c0:	02d7aa23          	sw	a3,52(a5)
+
+000002c4 <__isaforge_begin_131>:
+ 2c4:	32600693          	li	a3,806
+
+000002c8 <__isaforge_begin_132>:
+ 2c8:	02d7ac23          	sw	a3,56(a5)
+
+000002cc <__isaforge_begin_133>:
+ 2cc:	00c12083          	lw	ra,12(sp)
+
+000002d0 <__isaforge_begin_134>:
+ 2d0:	03a00713          	li	a4,58
+
+000002d4 <__isaforge_begin_135>:
+ 2d4:	36000693          	li	a3,864
+
+000002d8 <__isaforge_begin_136>:
+ 2d8:	0007a023          	sw	zero,0(a5)
+
+000002dc <__isaforge_begin_137>:
+ 2dc:	00e7a223          	sw	a4,4(a5)
+
+000002e0 <__isaforge_begin_138>:
+ 2e0:	02d7ae23          	sw	a3,60(a5)
+
+000002e4 <__isaforge_begin_139>:
+ 2e4:	000017b7          	lui	a5,0x1
+
+000002e8 <__isaforge_begin_140>:
+ 2e8:	9ae7a623          	sw	a4,-1620(a5) # 9ac <lift_one_level>
+
+000002ec <__isaforge_begin_141>:
+ 2ec:	01010113          	addi	sp,sp,16
+
+000002f0 <__isaforge_begin_142>:
+ 2f0:	00008067          	ret
+
+000002f4 <lift_init>:
+ 2f4:	ff010113          	addi	sp,sp,-16
+
+000002f8 <__isaforge_begin_144>:
+ 2f8:	000017b7          	lui	a5,0x1
+
+000002fc <__isaforge_begin_145>:
+ 2fc:	00001737          	lui	a4,0x1
+
+00000300 <__isaforge_begin_146>:
+ 300:	000107a3          	sb	zero,15(sp)
+
+00000304 <__isaforge_begin_147>:
+ 304:	a7078793          	addi	a5,a5,-1424 # a70 <lift_ctrl_io_in>
+
+00000308 <__isaforge_begin_148>:
+ 308:	a9870713          	addi	a4,a4,-1384 # a98 <lift_checksum>
+
+0000030c <__isaforge_begin_149>:
+ 30c:	0007c603          	lbu	a2,0(a5)
+
+00000310 <__isaforge_begin_150>:
+ 310:	00f14683          	lbu	a3,15(sp)
+
+00000314 <__isaforge_begin_151>:
+ 314:	00178793          	addi	a5,a5,1
+
+00000318 <__isaforge_begin_152>:
+ 318:	00c6c6b3          	xor	a3,a3,a2
+
+0000031c <__isaforge_begin_153>:
+ 31c:	fed78fa3          	sb	a3,-1(a5)
+
+00000320 <__isaforge_begin_154>:
+ 320:	fee796e3          	bne	a5,a4,30c <__isaforge_begin_149>
+
+00000324 <__isaforge_begin_155>:
+ 324:	000017b7          	lui	a5,0x1
+
+00000328 <__isaforge_begin_156>:
+ 328:	00001737          	lui	a4,0x1
+
+0000032c <__isaforge_begin_157>:
+ 32c:	a6078793          	addi	a5,a5,-1440 # a60 <lift_ctrl_io_out>
+
+00000330 <__isaforge_begin_158>:
+ 330:	a7070713          	addi	a4,a4,-1424 # a70 <lift_ctrl_io_in>
+
+00000334 <__isaforge_begin_159>:
+ 334:	0007c603          	lbu	a2,0(a5)
+
+00000338 <__isaforge_begin_160>:
+ 338:	00f14683          	lbu	a3,15(sp)
+
+0000033c <__isaforge_begin_161>:
+ 33c:	00178793          	addi	a5,a5,1
+
+00000340 <__isaforge_begin_162>:
+ 340:	00c6c6b3          	xor	a3,a3,a2
+
+00000344 <__isaforge_begin_163>:
+ 344:	fed78fa3          	sb	a3,-1(a5)
+
+00000348 <__isaforge_begin_164>:
+ 348:	fee796e3          	bne	a5,a4,334 <__isaforge_begin_159>
+
+0000034c <__isaforge_begin_165>:
+ 34c:	000017b7          	lui	a5,0x1
+
+00000350 <__isaforge_begin_166>:
+ 350:	00001737          	lui	a4,0x1
+
+00000354 <__isaforge_begin_167>:
+ 354:	a5078793          	addi	a5,a5,-1456 # a50 <lift_ctrl_io_analog>
+
+00000358 <__isaforge_begin_168>:
+ 358:	a6070713          	addi	a4,a4,-1440 # a60 <lift_ctrl_io_out>
+
+0000035c <__isaforge_begin_169>:
+ 35c:	0007c603          	lbu	a2,0(a5)
+
+00000360 <__isaforge_begin_170>:
+ 360:	00f14683          	lbu	a3,15(sp)
+
+00000364 <__isaforge_begin_171>:
+ 364:	00178793          	addi	a5,a5,1
+
+00000368 <__isaforge_begin_172>:
+ 368:	00c6c6b3          	xor	a3,a3,a2
+
+0000036c <__isaforge_begin_173>:
+ 36c:	fed78fa3          	sb	a3,-1(a5)
+
+00000370 <__isaforge_begin_174>:
+ 370:	fee796e3          	bne	a5,a4,35c <__isaforge_begin_169>
+
+00000374 <__isaforge_begin_175>:
+ 374:	000017b7          	lui	a5,0x1
+
+00000378 <__isaforge_begin_176>:
+ 378:	00001737          	lui	a4,0x1
+
+0000037c <__isaforge_begin_177>:
+ 37c:	a1078793          	addi	a5,a5,-1520 # a10 <lift_ctrl_io_led>
+
+00000380 <__isaforge_begin_178>:
+ 380:	a5070713          	addi	a4,a4,-1456 # a50 <lift_ctrl_io_analog>
+
+00000384 <__isaforge_begin_179>:
+ 384:	0007c603          	lbu	a2,0(a5)
+
+00000388 <__isaforge_begin_180>:
+ 388:	00f14683          	lbu	a3,15(sp)
+
+0000038c <__isaforge_begin_181>:
+ 38c:	00178793          	addi	a5,a5,1
+
+00000390 <__isaforge_begin_182>:
+ 390:	00c6c6b3          	xor	a3,a3,a2
+
+00000394 <__isaforge_begin_183>:
+ 394:	fed78fa3          	sb	a3,-1(a5)
+
+00000398 <__isaforge_begin_184>:
+ 398:	fee796e3          	bne	a5,a4,384 <__isaforge_begin_179>
+
+0000039c <__isaforge_begin_185>:
+ 39c:	000017b7          	lui	a5,0x1
+
+000003a0 <__isaforge_begin_186>:
+ 3a0:	a807ac23          	sw	zero,-1384(a5) # a98 <lift_checksum>
+
+000003a4 <__isaforge_begin_187>:
+ 3a4:	01010113          	addi	sp,sp,16
+
+000003a8 <__isaforge_begin_188>:
+ 3a8:	00000317          	auipc	t1,0x0
+ 3ac:	e4830067          	jr	-440(t1) # 1f0 <lift_ctrl_init>
+
+000003b0 <lift_check_level>:
+ 3b0:	000017b7          	lui	a5,0x1
+
+000003b4 <__isaforge_begin_190>:
+ 3b4:	9a87a783          	lw	a5,-1624(a5) # 9a8 <lift_cntValid>
+
+000003b8 <__isaforge_begin_191>:
+ 3b8:	00001737          	lui	a4,0x1
+
+000003bc <__isaforge_begin_192>:
+ 3bc:	08078663          	beqz	a5,448 <__isaforge_begin_227>
+
+000003c0 <__isaforge_begin_193>:
+ 3c0:	000017b7          	lui	a5,0x1
+
+000003c4 <__isaforge_begin_194>:
+ 3c4:	9ac7a583          	lw	a1,-1620(a5) # 9ac <lift_one_level>
+
+000003c8 <__isaforge_begin_195>:
+ 3c8:	000016b7          	lui	a3,0x1
+
+000003cc <__isaforge_begin_196>:
+ 3cc:	9a46a883          	lw	a7,-1628(a3) # 9a4 <lift_cnt>
+
+000003d0 <__isaforge_begin_197>:
+ 3d0:	00100793          	li	a5,1
+
+000003d4 <__isaforge_begin_198>:
+ 3d4:	000016b7          	lui	a3,0x1
+
+000003d8 <__isaforge_begin_199>:
+ 3d8:	4025d593          	srai	a1,a1,0x2
+
+000003dc <__isaforge_begin_200>:
+ 3dc:	9af72023          	sw	a5,-1632(a4) # 9a0 <lift_level>
+
+000003e0 <__isaforge_begin_201>:
+ 3e0:	9b068693          	addi	a3,a3,-1616 # 9b0 <lift_levelPos>
+
+000003e4 <__isaforge_begin_202>:
+ 3e4:	00000613          	li	a2,0
+
+000003e8 <__isaforge_begin_203>:
+ 3e8:	00e00813          	li	a6,14
+
+000003ec <__isaforge_begin_204>:
+ 3ec:	01078a63          	beq	a5,a6,400 <__isaforge_begin_209>
+
+000003f0 <__isaforge_begin_205>:
+ 3f0:	0046a503          	lw	a0,4(a3)
+
+000003f4 <__isaforge_begin_206>:
+ 3f4:	00468693          	addi	a3,a3,4
+
+000003f8 <__isaforge_begin_207>:
+ 3f8:	40b50533          	sub	a0,a0,a1
+
+000003fc <__isaforge_begin_208>:
+ 3fc:	04a8d063          	bge	a7,a0,43c <__isaforge_begin_224>
+
+00000400 <__isaforge_begin_209>:
+ 400:	00060463          	beqz	a2,408 <__isaforge_begin_211>
+
+00000404 <__isaforge_begin_210>:
+ 404:	9af72023          	sw	a5,-1632(a4)
+
+00000408 <__isaforge_begin_211>:
+ 408:	9a072603          	lw	a2,-1632(a4)
+
+0000040c <__isaforge_begin_212>:
+ 40c:	000017b7          	lui	a5,0x1
+
+00000410 <__isaforge_begin_213>:
+ 410:	a1078793          	addi	a5,a5,-1520 # a10 <lift_ctrl_io_led>
+
+00000414 <__isaforge_begin_214>:
+ 414:	fff60613          	addi	a2,a2,-1
+
+00000418 <__isaforge_begin_215>:
+ 418:	00000713          	li	a4,0
+
+0000041c <__isaforge_begin_216>:
+ 41c:	00e00593          	li	a1,14
+
+00000420 <__isaforge_begin_217>:
+ 420:	40e606b3          	sub	a3,a2,a4
+
+00000424 <__isaforge_begin_218>:
+ 424:	0016b693          	seqz	a3,a3
+
+00000428 <__isaforge_begin_219>:
+ 428:	00d7a023          	sw	a3,0(a5)
+
+0000042c <__isaforge_begin_220>:
+ 42c:	00170713          	addi	a4,a4,1
+
+00000430 <__isaforge_begin_221>:
+ 430:	00478793          	addi	a5,a5,4
+
+00000434 <__isaforge_begin_222>:
+ 434:	feb716e3          	bne	a4,a1,420 <__isaforge_begin_217>
+
+00000438 <__isaforge_begin_223>:
+ 438:	00008067          	ret
+
+0000043c <__isaforge_begin_224>:
+ 43c:	00178793          	addi	a5,a5,1
+
+00000440 <__isaforge_begin_225>:
+ 440:	00100613          	li	a2,1
+
+00000444 <__isaforge_begin_226>:
+ 444:	fa9ff06f          	j	3ec <__isaforge_begin_204>
+
+00000448 <__isaforge_begin_227>:
+ 448:	9a072023          	sw	zero,-1632(a4)
+
+0000044c <__isaforge_begin_228>:
+ 44c:	fbdff06f          	j	408 <__isaforge_begin_211>
+
+00000450 <lift_check_cmd>:
+ 450:	000016b7          	lui	a3,0x1
+
+00000454 <__isaforge_begin_230>:
+ 454:	9986a603          	lw	a2,-1640(a3) # 998 <lift_loadPending>
+
+00000458 <__isaforge_begin_231>:
+ 458:	000017b7          	lui	a5,0x1
+
+0000045c <__isaforge_begin_232>:
+ 45c:	a7078793          	addi	a5,a5,-1424 # a70 <lift_ctrl_io_in>
+
+00000460 <__isaforge_begin_233>:
+ 460:	00001737          	lui	a4,0x1
+
+00000464 <__isaforge_begin_234>:
+ 464:	02060263          	beqz	a2,488 <__isaforge_begin_243>
+
+00000468 <__isaforge_begin_235>:
+ 468:	0087a783          	lw	a5,8(a5)
+
+0000046c <__isaforge_begin_236>:
+ 46c:	0c078063          	beqz	a5,52c <__isaforge_begin_284>
+
+00000470 <__isaforge_begin_237>:
+ 470:	00100793          	li	a5,1
+
+00000474 <__isaforge_begin_238>:
+ 474:	98f72823          	sw	a5,-1648(a4) # 990 <lift_cmd>
+
+00000478 <__isaforge_begin_239>:
+ 478:	000017b7          	lui	a5,0x1
+
+0000047c <__isaforge_begin_240>:
+ 47c:	03200713          	li	a4,50
+
+00000480 <__isaforge_begin_241>:
+ 480:	98e7a623          	sw	a4,-1652(a5) # 98c <lift_timMotor>
+
+00000484 <__isaforge_begin_242>:
+ 484:	00008067          	ret
+
+00000488 <__isaforge_begin_243>:
+ 488:	0107a603          	lw	a2,16(a5)
+
+0000048c <__isaforge_begin_244>:
+ 48c:	02060263          	beqz	a2,4b0 <__isaforge_begin_253>
+
+00000490 <__isaforge_begin_245>:
+ 490:	0047a783          	lw	a5,4(a5)
+
+00000494 <__isaforge_begin_246>:
+ 494:	08079c63          	bnez	a5,52c <__isaforge_begin_284>
+
+00000498 <__isaforge_begin_247>:
+ 498:	000017b7          	lui	a5,0x1
+
+0000049c <__isaforge_begin_248>:
+ 49c:	9a07a683          	lw	a3,-1632(a5) # 9a0 <lift_level>
+
+000004a0 <__isaforge_begin_249>:
+ 4a0:	00e00793          	li	a5,14
+
+000004a4 <__isaforge_begin_250>:
+ 4a4:	08f68463          	beq	a3,a5,52c <__isaforge_begin_284>
+
+000004a8 <__isaforge_begin_251>:
+ 4a8:	00300793          	li	a5,3
+
+000004ac <__isaforge_begin_252>:
+ 4ac:	fc9ff06f          	j	474 <__isaforge_begin_238>
+
+000004b0 <__isaforge_begin_253>:
+ 4b0:	0147a603          	lw	a2,20(a5)
+
+000004b4 <__isaforge_begin_254>:
+ 4b4:	02060263          	beqz	a2,4d8 <__isaforge_begin_263>
+
+000004b8 <__isaforge_begin_255>:
+ 4b8:	0087a783          	lw	a5,8(a5)
+
+000004bc <__isaforge_begin_256>:
+ 4bc:	06079863          	bnez	a5,52c <__isaforge_begin_284>
+
+000004c0 <__isaforge_begin_257>:
+ 4c0:	000017b7          	lui	a5,0x1
+
+000004c4 <__isaforge_begin_258>:
+ 4c4:	9a07a683          	lw	a3,-1632(a5) # 9a0 <lift_level>
+
+000004c8 <__isaforge_begin_259>:
+ 4c8:	00100793          	li	a5,1
+
+000004cc <__isaforge_begin_260>:
+ 4cc:	06f68063          	beq	a3,a5,52c <__isaforge_begin_284>
+
+000004d0 <__isaforge_begin_261>:
+ 4d0:	00400793          	li	a5,4
+
+000004d4 <__isaforge_begin_262>:
+ 4d4:	fa1ff06f          	j	474 <__isaforge_begin_238>
+
+000004d8 <__isaforge_begin_263>:
+ 4d8:	0207a603          	lw	a2,32(a5)
+
+000004dc <__isaforge_begin_264>:
+ 4dc:	04060063          	beqz	a2,51c <__isaforge_begin_280>
+
+000004e0 <__isaforge_begin_265>:
+ 4e0:	000017b7          	lui	a5,0x1
+
+000004e4 <__isaforge_begin_266>:
+ 4e4:	99c7a783          	lw	a5,-1636(a5) # 99c <lift_loadLevel>
+
+000004e8 <__isaforge_begin_267>:
+ 4e8:	00200613          	li	a2,2
+
+000004ec <__isaforge_begin_268>:
+ 4ec:	00078c63          	beqz	a5,504 <__isaforge_begin_274>
+
+000004f0 <__isaforge_begin_269>:
+ 4f0:	00001637          	lui	a2,0x1
+
+000004f4 <__isaforge_begin_270>:
+ 4f4:	9a062603          	lw	a2,-1632(a2) # 9a0 <lift_level>
+
+000004f8 <__isaforge_begin_271>:
+ 4f8:	00f627b3          	slt	a5,a2,a5
+
+000004fc <__isaforge_begin_272>:
+ 4fc:	0017b793          	seqz	a5,a5
+
+00000500 <__isaforge_begin_273>:
+ 500:	00178613          	addi	a2,a5,1
+
+00000504 <__isaforge_begin_274>:
+ 504:	00100793          	li	a5,1
+
+00000508 <__isaforge_begin_275>:
+ 508:	98f6ac23          	sw	a5,-1640(a3)
+
+0000050c <__isaforge_begin_276>:
+ 50c:	000017b7          	lui	a5,0x1
+
+00000510 <__isaforge_begin_277>:
+ 510:	98c72823          	sw	a2,-1648(a4)
+
+00000514 <__isaforge_begin_278>:
+ 514:	9807aa23          	sw	zero,-1644(a5) # 994 <lift_loadSensor>
+
+00000518 <__isaforge_begin_279>:
+ 518:	f61ff06f          	j	478 <__isaforge_begin_239>
+
+0000051c <__isaforge_begin_280>:
+ 51c:	0187a683          	lw	a3,24(a5)
+
+00000520 <__isaforge_begin_281>:
+ 520:	00068c63          	beqz	a3,538 <__isaforge_begin_287>
+
+00000524 <__isaforge_begin_282>:
+ 524:	0047a783          	lw	a5,4(a5)
+
+00000528 <__isaforge_begin_283>:
+ 528:	f40784e3          	beqz	a5,470 <__isaforge_begin_237>
+
+0000052c <__isaforge_begin_284>:
+ 52c:	99072783          	lw	a5,-1648(a4)
+
+00000530 <__isaforge_begin_285>:
+ 530:	f40794e3          	bnez	a5,478 <__isaforge_begin_239>
+
+00000534 <__isaforge_begin_286>:
+ 534:	00008067          	ret
+
+00000538 <__isaforge_begin_287>:
+ 538:	01c7a683          	lw	a3,28(a5)
+
+0000053c <__isaforge_begin_288>:
+ 53c:	fe0688e3          	beqz	a3,52c <__isaforge_begin_284>
+
+00000540 <__isaforge_begin_289>:
+ 540:	0087a783          	lw	a5,8(a5)
+
+00000544 <__isaforge_begin_290>:
+ 544:	fe0794e3          	bnez	a5,52c <__isaforge_begin_284>
+
+00000548 <__isaforge_begin_291>:
+ 548:	00200793          	li	a5,2
+
+0000054c <__isaforge_begin_292>:
+ 54c:	f29ff06f          	j	474 <__isaforge_begin_238>
+
+00000550 <lift_do_impulse>:
+ 550:	00001837          	lui	a6,0x1
+
+00000554 <__isaforge_begin_294>:
+ 554:	98882783          	lw	a5,-1656(a6) # 988 <lift_timImp>
+
+00000558 <__isaforge_begin_295>:
+ 558:	000018b7          	lui	a7,0x1
+
+0000055c <__isaforge_begin_296>:
+ 55c:	02050863          	beqz	a0,58c <__isaforge_begin_308>
+
+00000560 <__isaforge_begin_297>:
+ 560:	9808a703          	lw	a4,-1664(a7) # 980 <lift_lastImp>
+
+00000564 <__isaforge_begin_298>:
+ 564:	02071463          	bnez	a4,58c <__isaforge_begin_308>
+
+00000568 <__isaforge_begin_299>:
+ 568:	00059463          	bnez	a1,570 <__isaforge_begin_301>
+
+0000056c <__isaforge_begin_300>:
+ 56c:	02f05063          	blez	a5,58c <__isaforge_begin_308>
+
+00000570 <__isaforge_begin_301>:
+ 570:	000015b7          	lui	a1,0x1
+
+00000574 <__isaforge_begin_302>:
+ 574:	9845a583          	lw	a1,-1660(a1) # 984 <lift_directionUp>
+
+00000578 <__isaforge_begin_303>:
+ 578:	000016b7          	lui	a3,0x1
+
+0000057c <__isaforge_begin_304>:
+ 57c:	9a46a703          	lw	a4,-1628(a3) # 9a4 <lift_cnt>
+
+00000580 <__isaforge_begin_305>:
+ 580:	04058663          	beqz	a1,5cc <__isaforge_begin_324>
+
+00000584 <__isaforge_begin_306>:
+ 584:	00170713          	addi	a4,a4,1
+
+00000588 <__isaforge_begin_307>:
+ 588:	9ae6a223          	sw	a4,-1628(a3)
+
+0000058c <__isaforge_begin_308>:
+ 58c:	00060c63          	beqz	a2,5a4 <__isaforge_begin_314>
+
+00000590 <__isaforge_begin_309>:
+ 590:	00001737          	lui	a4,0x1
+
+00000594 <__isaforge_begin_310>:
+ 594:	9a072223          	sw	zero,-1628(a4) # 9a4 <lift_cnt>
+
+00000598 <__isaforge_begin_311>:
+ 598:	00100693          	li	a3,1
+
+0000059c <__isaforge_begin_312>:
+ 59c:	00001737          	lui	a4,0x1
+
+000005a0 <__isaforge_begin_313>:
+ 5a0:	9ad72423          	sw	a3,-1624(a4) # 9a8 <lift_cntValid>
+
+000005a4 <__isaforge_begin_314>:
+ 5a4:	98a8a023          	sw	a0,-1664(a7)
+
+000005a8 <__isaforge_begin_315>:
+ 5a8:	02f05063          	blez	a5,5c8 <__isaforge_begin_323>
+
+000005ac <__isaforge_begin_316>:
+ 5ac:	fff78793          	addi	a5,a5,-1
+
+000005b0 <__isaforge_begin_317>:
+ 5b0:	98f82423          	sw	a5,-1656(a6)
+
+000005b4 <__isaforge_begin_318>:
+ 5b4:	00079a63          	bnez	a5,5c8 <__isaforge_begin_323>
+
+000005b8 <__isaforge_begin_319>:
+ 5b8:	000017b7          	lui	a5,0x1
+
+000005bc <__isaforge_begin_320>:
+ 5bc:	9907a703          	lw	a4,-1648(a5) # 990 <lift_cmd>
+
+000005c0 <__isaforge_begin_321>:
+ 5c0:	00070463          	beqz	a4,5c8 <__isaforge_begin_323>
+
+000005c4 <__isaforge_begin_322>:
+ 5c4:	9807a823          	sw	zero,-1648(a5)
+
+000005c8 <__isaforge_begin_323>:
+ 5c8:	00008067          	ret
+
+000005cc <__isaforge_begin_324>:
+ 5cc:	fff70713          	addi	a4,a4,-1
+
+000005d0 <__isaforge_begin_325>:
+ 5d0:	fb9ff06f          	j	588 <__isaforge_begin_307>
+
+000005d4 <lift_wait_for_motor_start>:
+ 5d4:	00001737          	lui	a4,0x1
+
+000005d8 <__isaforge_begin_327>:
+ 5d8:	98c72783          	lw	a5,-1652(a4) # 98c <lift_timMotor>
+
+000005dc <__isaforge_begin_328>:
+ 5dc:	000016b7          	lui	a3,0x1
+
+000005e0 <__isaforge_begin_329>:
+ 5e0:	fff78793          	addi	a5,a5,-1
+
+000005e4 <__isaforge_begin_330>:
+ 5e4:	98f72623          	sw	a5,-1652(a4)
+
+000005e8 <__isaforge_begin_331>:
+ 5e8:	000017b7          	lui	a5,0x1
+
+000005ec <__isaforge_begin_332>:
+ 5ec:	9907a703          	lw	a4,-1648(a5) # 990 <lift_cmd>
+
+000005f0 <__isaforge_begin_333>:
+ 5f0:	ffd77793          	andi	a5,a4,-3
+
+000005f4 <__isaforge_begin_334>:
+ 5f4:	fff78793          	addi	a5,a5,-1
+
+000005f8 <__isaforge_begin_335>:
+ 5f8:	0017b793          	seqz	a5,a5
+
+000005fc <__isaforge_begin_336>:
+ 5fc:	98f6a223          	sw	a5,-1660(a3) # 984 <lift_directionUp>
+
+00000600 <__isaforge_begin_337>:
+ 600:	000016b7          	lui	a3,0x1
+
+00000604 <__isaforge_begin_338>:
+ 604:	a6f6a223          	sw	a5,-1436(a3) # a64 <lift_ctrl_io_out+0x4>
+
+00000608 <__isaforge_begin_339>:
+ 608:	000017b7          	lui	a5,0x1
+
+0000060c <__isaforge_begin_340>:
+ 60c:	9a87a603          	lw	a2,-1624(a5) # 9a8 <lift_cntValid>
+
+00000610 <__isaforge_begin_341>:
+ 610:	000016b7          	lui	a3,0x1
+
+00000614 <__isaforge_begin_342>:
+ 614:	000017b7          	lui	a5,0x1
+
+00000618 <__isaforge_begin_343>:
+ 618:	02061463          	bnez	a2,640 <__isaforge_begin_353>
+
+0000061c <__isaforge_begin_344>:
+ 61c:	9a07a223          	sw	zero,-1628(a5) # 9a4 <lift_cnt>
+
+00000620 <__isaforge_begin_345>:
+ 620:	00300613          	li	a2,3
+
+00000624 <__isaforge_begin_346>:
+ 624:	000017b7          	lui	a5,0x1
+
+00000628 <__isaforge_begin_347>:
+ 628:	9ac7a783          	lw	a5,-1620(a5) # 9ac <lift_one_level>
+
+0000062c <__isaforge_begin_348>:
+ 62c:	00c71663          	bne	a4,a2,638 <__isaforge_begin_351>
+
+00000630 <__isaforge_begin_349>:
+ 630:	96f6ac23          	sw	a5,-1672(a3) # 978 <_writable_start>
+
+00000634 <__isaforge_begin_350>:
+ 634:	00008067          	ret
+
+00000638 <__isaforge_begin_351>:
+ 638:	40f007b3          	neg	a5,a5
+
+0000063c <__isaforge_begin_352>:
+ 63c:	ff5ff06f          	j	630 <__isaforge_begin_349>
+
+00000640 <__isaforge_begin_353>:
+ 640:	9a47a783          	lw	a5,-1628(a5)
+
+00000644 <__isaforge_begin_354>:
+ 644:	96f6ac23          	sw	a5,-1672(a3)
+
+00000648 <__isaforge_begin_355>:
+ 648:	00300793          	li	a5,3
+
+0000064c <__isaforge_begin_356>:
+ 64c:	02f71a63          	bne	a4,a5,680 <__isaforge_begin_369>
+
+00000650 <__isaforge_begin_357>:
+ 650:	000017b7          	lui	a5,0x1
+
+00000654 <__isaforge_begin_358>:
+ 654:	9a07a783          	lw	a5,-1632(a5) # 9a0 <lift_level>
+
+00000658 <__isaforge_begin_359>:
+ 658:	00178793          	addi	a5,a5,1
+
+0000065c <__isaforge_begin_360>:
+ 65c:	fff78793          	addi	a5,a5,-1
+
+00000660 <__isaforge_begin_361>:
+ 660:	00d00713          	li	a4,13
+
+00000664 <__isaforge_begin_362>:
+ 664:	fcf768e3          	bltu	a4,a5,634 <__isaforge_begin_350>
+
+00000668 <__isaforge_begin_363>:
+ 668:	00001737          	lui	a4,0x1
+
+0000066c <__isaforge_begin_364>:
+ 66c:	00279793          	slli	a5,a5,0x2
+
+00000670 <__isaforge_begin_365>:
+ 670:	9b070713          	addi	a4,a4,-1616 # 9b0 <lift_levelPos>
+
+00000674 <__isaforge_begin_366>:
+ 674:	00f707b3          	add	a5,a4,a5
+
+00000678 <__isaforge_begin_367>:
+ 678:	0007a783          	lw	a5,0(a5)
+
+0000067c <__isaforge_begin_368>:
+ 67c:	fb5ff06f          	j	630 <__isaforge_begin_349>
+
+00000680 <__isaforge_begin_369>:
+ 680:	00400793          	li	a5,4
+
+00000684 <__isaforge_begin_370>:
+ 684:	faf718e3          	bne	a4,a5,634 <__isaforge_begin_350>
+
+00000688 <__isaforge_begin_371>:
+ 688:	000017b7          	lui	a5,0x1
+
+0000068c <__isaforge_begin_372>:
+ 68c:	9a07a783          	lw	a5,-1632(a5) # 9a0 <lift_level>
+
+00000690 <__isaforge_begin_373>:
+ 690:	fff78793          	addi	a5,a5,-1
+
+00000694 <__isaforge_begin_374>:
+ 694:	fc9ff06f          	j	65c <__isaforge_begin_360>
+
+00000698 <lift_check_run>:
+ 698:	000017b7          	lui	a5,0x1
+
+0000069c <__isaforge_begin_376>:
+ 69c:	9907a503          	lw	a0,-1648(a5) # 990 <lift_cmd>
+
+000006a0 <__isaforge_begin_377>:
+ 6a0:	00300793          	li	a5,3
+
+000006a4 <__isaforge_begin_378>:
+ 6a4:	02f51663          	bne	a0,a5,6d0 <__isaforge_begin_389>
+
+000006a8 <__isaforge_begin_379>:
+ 6a8:	000017b7          	lui	a5,0x1
+
+000006ac <__isaforge_begin_380>:
+ 6ac:	9787a783          	lw	a5,-1672(a5) # 978 <_writable_start>
+
+000006b0 <__isaforge_begin_381>:
+ 6b0:	00001737          	lui	a4,0x1
+
+000006b4 <__isaforge_begin_382>:
+ 6b4:	9a472703          	lw	a4,-1628(a4) # 9a4 <lift_cnt>
+
+000006b8 <__isaforge_begin_383>:
+ 6b8:	fff78793          	addi	a5,a5,-1
+
+000006bc <__isaforge_begin_384>:
+ 6bc:	06f75c63          	bge	a4,a5,734 <__isaforge_begin_414>
+
+000006c0 <__isaforge_begin_385>:
+ 6c0:	000017b7          	lui	a5,0x1
+
+000006c4 <__isaforge_begin_386>:
+ 6c4:	a747a503          	lw	a0,-1420(a5) # a74 <lift_ctrl_io_in+0x4>
+
+000006c8 <__isaforge_begin_387>:
+ 6c8:	00153513          	seqz	a0,a0
+
+000006cc <__isaforge_begin_388>:
+ 6cc:	00008067          	ret
+
+000006d0 <__isaforge_begin_389>:
+ 6d0:	00400793          	li	a5,4
+
+000006d4 <__isaforge_begin_390>:
+ 6d4:	02f51463          	bne	a0,a5,6fc <__isaforge_begin_400>
+
+000006d8 <__isaforge_begin_391>:
+ 6d8:	000017b7          	lui	a5,0x1
+
+000006dc <__isaforge_begin_392>:
+ 6dc:	9787a783          	lw	a5,-1672(a5) # 978 <_writable_start>
+
+000006e0 <__isaforge_begin_393>:
+ 6e0:	00001737          	lui	a4,0x1
+
+000006e4 <__isaforge_begin_394>:
+ 6e4:	9a472703          	lw	a4,-1628(a4) # 9a4 <lift_cnt>
+
+000006e8 <__isaforge_begin_395>:
+ 6e8:	00178793          	addi	a5,a5,1
+
+000006ec <__isaforge_begin_396>:
+ 6ec:	04e7d463          	bge	a5,a4,734 <__isaforge_begin_414>
+
+000006f0 <__isaforge_begin_397>:
+ 6f0:	000017b7          	lui	a5,0x1
+
+000006f4 <__isaforge_begin_398>:
+ 6f4:	a787a503          	lw	a0,-1416(a5) # a78 <lift_ctrl_io_in+0x8>
+
+000006f8 <__isaforge_begin_399>:
+ 6f8:	fd1ff06f          	j	6c8 <__isaforge_begin_387>
+
+000006fc <__isaforge_begin_400>:
+ 6fc:	00100793          	li	a5,1
+
+00000700 <__isaforge_begin_401>:
+ 700:	04f51463          	bne	a0,a5,748 <__isaforge_begin_419>
+
+00000704 <__isaforge_begin_402>:
+ 704:	00001737          	lui	a4,0x1
+
+00000708 <__isaforge_begin_403>:
+ 708:	99872683          	lw	a3,-1640(a4) # 998 <lift_loadPending>
+
+0000070c <__isaforge_begin_404>:
+ 70c:	000017b7          	lui	a5,0x1
+
+00000710 <__isaforge_begin_405>:
+ 710:	a7078793          	addi	a5,a5,-1424 # a70 <lift_ctrl_io_in>
+
+00000714 <__isaforge_begin_406>:
+ 714:	02068463          	beqz	a3,73c <__isaforge_begin_416>
+
+00000718 <__isaforge_begin_407>:
+ 718:	00c7a683          	lw	a3,12(a5)
+
+0000071c <__isaforge_begin_408>:
+ 71c:	02068063          	beqz	a3,73c <__isaforge_begin_416>
+
+00000720 <__isaforge_begin_409>:
+ 720:	000017b7          	lui	a5,0x1
+
+00000724 <__isaforge_begin_410>:
+ 724:	9a07a683          	lw	a3,-1632(a5) # 9a0 <lift_level>
+
+00000728 <__isaforge_begin_411>:
+ 728:	000017b7          	lui	a5,0x1
+
+0000072c <__isaforge_begin_412>:
+ 72c:	98d7ae23          	sw	a3,-1636(a5) # 99c <lift_loadLevel>
+
+00000730 <__isaforge_begin_413>:
+ 730:	98072c23          	sw	zero,-1640(a4)
+
+00000734 <__isaforge_begin_414>:
+ 734:	00000513          	li	a0,0
+
+00000738 <__isaforge_begin_415>:
+ 738:	00008067          	ret
+
+0000073c <__isaforge_begin_416>:
+ 73c:	0047a783          	lw	a5,4(a5)
+
+00000740 <__isaforge_begin_417>:
+ 740:	fe0798e3          	bnez	a5,730 <__isaforge_begin_413>
+
+00000744 <__isaforge_begin_418>:
+ 744:	00008067          	ret
+
+00000748 <__isaforge_begin_419>:
+ 748:	00200793          	li	a5,2
+
+0000074c <__isaforge_begin_420>:
+ 74c:	fef514e3          	bne	a0,a5,734 <__isaforge_begin_414>
+
+00000750 <__isaforge_begin_421>:
+ 750:	00001637          	lui	a2,0x1
+
+00000754 <__isaforge_begin_422>:
+ 754:	99862703          	lw	a4,-1640(a2) # 998 <lift_loadPending>
+
+00000758 <__isaforge_begin_423>:
+ 758:	000017b7          	lui	a5,0x1
+
+0000075c <__isaforge_begin_424>:
+ 75c:	a7078793          	addi	a5,a5,-1424 # a70 <lift_ctrl_io_in>
+
+00000760 <__isaforge_begin_425>:
+ 760:	02070c63          	beqz	a4,798 <__isaforge_begin_439>
+
+00000764 <__isaforge_begin_426>:
+ 764:	00001737          	lui	a4,0x1
+
+00000768 <__isaforge_begin_427>:
+ 768:	99472583          	lw	a1,-1644(a4) # 994 <lift_loadSensor>
+
+0000076c <__isaforge_begin_428>:
+ 76c:	00c7a683          	lw	a3,12(a5)
+
+00000770 <__isaforge_begin_429>:
+ 770:	02058263          	beqz	a1,794 <__isaforge_begin_438>
+
+00000774 <__isaforge_begin_430>:
+ 774:	02069063          	bnez	a3,794 <__isaforge_begin_438>
+
+00000778 <__isaforge_begin_431>:
+ 778:	000017b7          	lui	a5,0x1
+
+0000077c <__isaforge_begin_432>:
+ 77c:	98072a23          	sw	zero,-1644(a4)
+
+00000780 <__isaforge_begin_433>:
+ 780:	9a07a703          	lw	a4,-1632(a5) # 9a0 <lift_level>
+
+00000784 <__isaforge_begin_434>:
+ 784:	000017b7          	lui	a5,0x1
+
+00000788 <__isaforge_begin_435>:
+ 788:	98062c23          	sw	zero,-1640(a2)
+
+0000078c <__isaforge_begin_436>:
+ 78c:	98e7ae23          	sw	a4,-1636(a5) # 99c <lift_loadLevel>
+
+00000790 <__isaforge_begin_437>:
+ 790:	fa5ff06f          	j	734 <__isaforge_begin_414>
+
+00000794 <__isaforge_begin_438>:
+ 794:	98d72a23          	sw	a3,-1644(a4)
+
+00000798 <__isaforge_begin_439>:
+ 798:	0087a503          	lw	a0,8(a5)
+
+0000079c <__isaforge_begin_440>:
+ 79c:	f2dff06f          	j	6c8 <__isaforge_begin_387>
+
+000007a0 <lift_do_cmd>:
+ 7a0:	000017b7          	lui	a5,0x1
+
+000007a4 <__isaforge_begin_442>:
+ 7a4:	98c7a783          	lw	a5,-1652(a5) # 98c <lift_timMotor>
+
+000007a8 <__isaforge_begin_443>:
+ 7a8:	00f05663          	blez	a5,7b4 <__isaforge_begin_445>
+
+000007ac <__isaforge_begin_444>:
+ 7ac:	00000317          	auipc	t1,0x0
+ 7b0:	e2830067          	jr	-472(t1) # 5d4 <lift_wait_for_motor_start>
+
+000007b4 <__isaforge_begin_445>:
+ 7b4:	ff010113          	addi	sp,sp,-16
+
+000007b8 <__isaforge_begin_446>:
+ 7b8:	00112623          	sw	ra,12(sp)
+
+000007bc <__isaforge_begin_447>:
+ 7bc:	00000097          	auipc	ra,0x0
+ 7c0:	edc080e7          	jalr	-292(ra) # 698 <lift_check_run>
+
+000007c4 <__isaforge_begin_448>:
+ 7c4:	000017b7          	lui	a5,0x1
+
+000007c8 <__isaforge_begin_449>:
+ 7c8:	a607a703          	lw	a4,-1440(a5) # a60 <lift_ctrl_io_out>
+
+000007cc <__isaforge_begin_450>:
+ 7cc:	02070463          	beqz	a4,7f4 <__isaforge_begin_460>
+
+000007d0 <__isaforge_begin_451>:
+ 7d0:	01f51693          	slli	a3,a0,0x1f
+
+000007d4 <__isaforge_begin_452>:
+ 7d4:	01f6d713          	srli	a4,a3,0x1f
+
+000007d8 <__isaforge_begin_453>:
+ 7d8:	00071e63          	bnez	a4,7f4 <__isaforge_begin_460>
+
+000007dc <__isaforge_begin_454>:
+ 7dc:	00001737          	lui	a4,0x1
+
+000007e0 <__isaforge_begin_455>:
+ 7e0:	06300693          	li	a3,99
+
+000007e4 <__isaforge_begin_456>:
+ 7e4:	98d72823          	sw	a3,-1648(a4) # 990 <lift_cmd>
+
+000007e8 <__isaforge_begin_457>:
+ 7e8:	00001737          	lui	a4,0x1
+
+000007ec <__isaforge_begin_458>:
+ 7ec:	03200693          	li	a3,50
+
+000007f0 <__isaforge_begin_459>:
+ 7f0:	98d72423          	sw	a3,-1656(a4) # 988 <lift_timImp>
+
+000007f4 <__isaforge_begin_460>:
+ 7f4:	00c12083          	lw	ra,12(sp)
+
+000007f8 <__isaforge_begin_461>:
+ 7f8:	a6a7a023          	sw	a0,-1440(a5)
+
+000007fc <__isaforge_begin_462>:
+ 7fc:	01010113          	addi	sp,sp,16
+
+00000800 <__isaforge_begin_463>:
+ 800:	00008067          	ret
+
+00000804 <lift_ctrl_loop>:
+ 804:	000017b7          	lui	a5,0x1
+
+00000808 <__isaforge_begin_465>:
+ 808:	9907a783          	lw	a5,-1648(a5) # 990 <lift_cmd>
+
+0000080c <__isaforge_begin_466>:
+ 80c:	ff010113          	addi	sp,sp,-16
+
+00000810 <__isaforge_begin_467>:
+ 810:	00112623          	sw	ra,12(sp)
+
+00000814 <__isaforge_begin_468>:
+ 814:	04079063          	bnez	a5,854 <__isaforge_begin_482>
+
+00000818 <__isaforge_begin_469>:
+ 818:	00000097          	auipc	ra,0x0
+ 81c:	c38080e7          	jalr	-968(ra) # 450 <lift_check_cmd>
+
+00000820 <__isaforge_begin_470>:
+ 820:	00000097          	auipc	ra,0x0
+ 824:	b90080e7          	jalr	-1136(ra) # 3b0 <lift_check_level>
+
+00000828 <__isaforge_begin_471>:
+ 828:	000016b7          	lui	a3,0x1
+
+0000082c <__isaforge_begin_472>:
+ 82c:	97c6a783          	lw	a5,-1668(a3) # 97c <lift_dbgCnt>
+
+00000830 <__isaforge_begin_473>:
+ 830:	00c12083          	lw	ra,12(sp)
+
+00000834 <__isaforge_begin_474>:
+ 834:	00001637          	lui	a2,0x1
+
+00000838 <__isaforge_begin_475>:
+ 838:	0077d713          	srli	a4,a5,0x7
+
+0000083c <__isaforge_begin_476>:
+ 83c:	00177713          	andi	a4,a4,1
+
+00000840 <__isaforge_begin_477>:
+ 840:	00178793          	addi	a5,a5,1
+
+00000844 <__isaforge_begin_478>:
+ 844:	a4e62223          	sw	a4,-1468(a2) # a44 <lift_ctrl_io_led+0x34>
+
+00000848 <__isaforge_begin_479>:
+ 848:	96f6ae23          	sw	a5,-1668(a3)
+
+0000084c <__isaforge_begin_480>:
+ 84c:	01010113          	addi	sp,sp,16
+
+00000850 <__isaforge_begin_481>:
+ 850:	00008067          	ret
+
+00000854 <__isaforge_begin_482>:
+ 854:	000017b7          	lui	a5,0x1
+
+00000858 <__isaforge_begin_483>:
+ 858:	a7078793          	addi	a5,a5,-1424 # a70 <lift_ctrl_io_in>
+
+0000085c <__isaforge_begin_484>:
+ 85c:	00001737          	lui	a4,0x1
+
+00000860 <__isaforge_begin_485>:
+ 860:	0087a603          	lw	a2,8(a5)
+
+00000864 <__isaforge_begin_486>:
+ 864:	a6072583          	lw	a1,-1440(a4) # a60 <lift_ctrl_io_out>
+
+00000868 <__isaforge_begin_487>:
+ 868:	0007a503          	lw	a0,0(a5)
+
+0000086c <__isaforge_begin_488>:
+ 86c:	00000097          	auipc	ra,0x0
+ 870:	ce4080e7          	jalr	-796(ra) # 550 <lift_do_impulse>
+
+00000874 <__isaforge_begin_489>:
+ 874:	00000097          	auipc	ra,0x0
+ 878:	f2c080e7          	jalr	-212(ra) # 7a0 <lift_do_cmd>
+
+0000087c <__isaforge_begin_490>:
+ 87c:	fa5ff06f          	j	820 <__isaforge_begin_470>
+
+00000880 <lift_controller>:
+ 880:	ff010113          	addi	sp,sp,-16
+
+00000884 <__isaforge_begin_492>:
+ 884:	00112623          	sw	ra,12(sp)
+
+00000888 <__isaforge_begin_493>:
+ 888:	00000097          	auipc	ra,0x0
+ 88c:	8cc080e7          	jalr	-1844(ra) # 154 <lift_ctrl_get_vals>
+
+00000890 <__isaforge_begin_494>:
+ 890:	00000097          	auipc	ra,0x0
+ 894:	f74080e7          	jalr	-140(ra) # 804 <lift_ctrl_loop>
+
+00000898 <__isaforge_begin_495>:
+ 898:	00c12083          	lw	ra,12(sp)
+
+0000089c <__isaforge_begin_496>:
+ 89c:	01010113          	addi	sp,sp,16
+
+000008a0 <__isaforge_begin_497>:
+ 8a0:	00000317          	auipc	t1,0x0
+ 8a4:	84430067          	jr	-1980(t1) # e4 <lift_ctrl_set_vals>
+
+000008a8 <lift_main>:
+ 8a8:	fe010113          	addi	sp,sp,-32
+
+000008ac <__isaforge_begin_499>:
+ 8ac:	00812c23          	sw	s0,24(sp)
+
+000008b0 <__isaforge_begin_500>:
+ 8b0:	00912a23          	sw	s1,20(sp)
+
+000008b4 <__isaforge_begin_501>:
+ 8b4:	01212823          	sw	s2,16(sp)
+
+000008b8 <__isaforge_begin_502>:
+ 8b8:	01312623          	sw	s3,12(sp)
+
+000008bc <__isaforge_begin_503>:
+ 8bc:	01412423          	sw	s4,8(sp)
+
+000008c0 <__isaforge_begin_504>:
+ 8c0:	00112e23          	sw	ra,28(sp)
+
+000008c4 <__isaforge_begin_505>:
+ 8c4:	3e900413          	li	s0,1001
+
+000008c8 <__isaforge_begin_506>:
+ 8c8:	00001a37          	lui	s4,0x1
+
+000008cc <__isaforge_begin_507>:
+ 8cc:	000019b7          	lui	s3,0x1
+
+000008d0 <__isaforge_begin_508>:
+ 8d0:	00001937          	lui	s2,0x1
+
+000008d4 <__isaforge_begin_509>:
+ 8d4:	000014b7          	lui	s1,0x1
+
+000008d8 <__isaforge_begin_510>:
+ 8d8:	a00a2223          	sw	zero,-1532(s4) # a04 <lift_simio_in>
+
+000008dc <__isaforge_begin_511>:
+ 8dc:	9e09ac23          	sw	zero,-1544(s3) # 9f8 <lift_simio_adc1>
+
+000008e0 <__isaforge_begin_512>:
+ 8e0:	9e092a23          	sw	zero,-1548(s2) # 9f4 <lift_simio_adc2>
+
+000008e4 <__isaforge_begin_513>:
+ 8e4:	fff40413          	addi	s0,s0,-1
+
+000008e8 <__isaforge_begin_514>:
+ 8e8:	9e04a823          	sw	zero,-1552(s1) # 9f0 <lift_simio_adc3>
+
+000008ec <__isaforge_begin_515>:
+ 8ec:	00000097          	auipc	ra,0x0
+ 8f0:	f94080e7          	jalr	-108(ra) # 880 <lift_controller>
+
+000008f4 <__isaforge_begin_516>:
+ 8f4:	fe0412e3          	bnez	s0,8d8 <__isaforge_begin_510>
+
+000008f8 <__isaforge_begin_517>:
+ 8f8:	01c12083          	lw	ra,28(sp)
+
+000008fc <__isaforge_begin_518>:
+ 8fc:	01812403          	lw	s0,24(sp)
+
+00000900 <__isaforge_begin_519>:
+ 900:	01412483          	lw	s1,20(sp)
+
+00000904 <__isaforge_begin_520>:
+ 904:	01012903          	lw	s2,16(sp)
+
+00000908 <__isaforge_begin_521>:
+ 908:	00c12983          	lw	s3,12(sp)
+
+0000090c <__isaforge_begin_522>:
+ 90c:	00812a03          	lw	s4,8(sp)
+
+00000910 <__isaforge_begin_523>:
+ 910:	02010113          	addi	sp,sp,32
+
+00000914 <__isaforge_begin_524>:
+ 914:	00008067          	ret
+
+00000918 <initialise_benchmark>:
+ 918:	00000317          	auipc	t1,0x0
+ 91c:	9dc30067          	jr	-1572(t1) # 2f4 <lift_init>
+
+00000920 <warm_caches>:
+ 920:	00008067          	ret
+
+00000924 <benchmark>:
+ 924:	ff010113          	addi	sp,sp,-16
+
+00000928 <__isaforge_begin_540>:
+ 928:	00112623          	sw	ra,12(sp)
+
+0000092c <__isaforge_begin_541>:
+ 92c:	00000097          	auipc	ra,0x0
+ 930:	f7c080e7          	jalr	-132(ra) # 8a8 <lift_main>
+
+00000934 <__isaforge_begin_542>:
+ 934:	000017b7          	lui	a5,0x1
+
+00000938 <__isaforge_begin_543>:
+ 938:	a987a503          	lw	a0,-1384(a5) # a98 <lift_checksum>
+
+0000093c <__isaforge_begin_544>:
+ 93c:	00c12083          	lw	ra,12(sp)
+
+00000940 <__isaforge_begin_545>:
+ 940:	ffc2e7b7          	lui	a5,0xffc2e
+
+00000944 <__isaforge_begin_546>:
+ 944:	00f50533          	add	a0,a0,a5
+
+00000948 <__isaforge_begin_547>:
+ 948:	00a03533          	snez	a0,a0
+
+0000094c <__isaforge_begin_548>:
+ 94c:	01010113          	addi	sp,sp,16
+
+00000950 <__isaforge_begin_549>:
+ 950:	00008067          	ret
+
+00000954 <verify_benchmark>:
+ 954:	00051e63          	bnez	a0,970 <__isaforge_begin_557>
+
+00000958 <__isaforge_begin_551>:
+ 958:	000017b7          	lui	a5,0x1
+
+0000095c <__isaforge_begin_552>:
+ 95c:	a987a503          	lw	a0,-1384(a5) # a98 <lift_checksum>
+
+00000960 <__isaforge_begin_553>:
+ 960:	ffc2e7b7          	lui	a5,0xffc2e
+
+00000964 <__isaforge_begin_554>:
+ 964:	00f50533          	add	a0,a0,a5
+
+00000968 <__isaforge_begin_555>:
+ 968:	00153513          	seqz	a0,a0
+
+0000096c <__isaforge_begin_556>:
+ 96c:	00008067          	ret
+
+00000970 <__isaforge_begin_557>:
+ 970:	00000513          	li	a0,0
+
+00000974 <__isaforge_begin_558>:
+ 974:	00008067          	ret

@@ -1,0 +1,108 @@
+{
+  "schema": "isaforge-grouped-ranker-objective-diagnostic-v1",
+  "scope": "retrospective consumed-data development; no untouched confirmation",
+  "corpus_path": "results/2026-10-26-lift-selection-corpus/corpus.json",
+  "corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "corpus_rows": 122,
+  "workload_groups": [
+    "beebs-aha-compress",
+    "beebs-expint",
+    "beebs-jfdctint",
+    "beebs-ndes",
+    "beebs-nettle-md5",
+    "embench-aha-mont64",
+    "embench-crc32",
+    "embench-edn",
+    "embench-nettle-sha256",
+    "embench-slre",
+    "embench-ud",
+    "tacle-bitcount",
+    "tacle-g723-enc",
+    "tacle-lift"
+  ],
+  "workload_group_count": 14,
+  "source_bindings": {
+    "scripts/evaluate_grouped_ranker_objectives.py": "dfc299d950ac11fc1a86faa733715ed5d65f5ec9e3b8c915e13e1e24729305cd",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "scripts/reproduce_guarded_sha256.py": "26e883815bffd7f4bf2bc5688d6c3112d3c517b8aa3363e6c7ecc81899d69fcb"
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "xgboost": "3.4.1",
+    "scikit-learn": "1.9.1"
+  },
+  "models": {
+    "xgb_rank_pairwise": {
+      "objective": "rank:pairwise",
+      "parameters": {
+        "objective": "rank:pairwise",
+        "n_estimators": 80,
+        "max_depth": 2,
+        "learning_rate": 0.05,
+        "min_child_weight": 1,
+        "reg_lambda": 1.0,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "tree_method": "hist",
+        "n_jobs": 1,
+        "verbosity": 0,
+        "lambdarank_pair_method": "mean",
+        "lambdarank_num_pair_per_sample": 8
+      }
+    },
+    "xgb_rank_ndcg": {
+      "objective": "rank:ndcg",
+      "parameters": {
+        "objective": "rank:ndcg",
+        "n_estimators": 80,
+        "max_depth": 2,
+        "learning_rate": 0.05,
+        "min_child_weight": 1,
+        "reg_lambda": 1.0,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "tree_method": "hist",
+        "n_jobs": 1,
+        "verbosity": 0,
+        "lambdarank_pair_method": "mean",
+        "lambdarank_num_pair_per_sample": 8
+      }
+    }
+  },
+  "selection": {
+    "area_delta_lut4_cap": 64,
+    "minimum_routed_fmax_mhz": 12.0,
+    "budgets": [
+      1,
+      2,
+      3
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "baselines": [
+      "frequency",
+      "merit",
+      "calibrated_latency",
+      "random"
+    ]
+  },
+  "split": "Outer whole-workload holdout; all formula-tree families present in target removed from training; ranker query groups are benchmark/build/input contexts.",
+  "metric": "Macro-average workload-level cycle-reduction regret versus the fully measured, area-and-timing-feasible pool oracle.",
+  "limitations": [
+    "Post-hoc model comparison uses consumed data and cannot support a confirmatory claim.",
+    "The five model seeds are dependent repetitions; workloads are the independent bootstrap units.",
+    "Policy order is static within each candidate pool; measurements are historical costs replayed from the corpus.",
+    "Area feasibility is checked only after each simulated measurement; rankers do not predict hardware feasibility.",
+    "Operation-tree-family filtering reduces formula overlap but cannot prove semantic independence."
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "schema": "isaforge-measured-feasible-benefit-ranker-v1",
+  "scope": "retrospective consumed-data model development; no independent confirmation",
+  "corpus_path": "results/2026-10-26-lift-selection-corpus/corpus.json",
+  "corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "baseline_screen_path": "results/2026-10-26-feasibility-model-screen",
+  "baseline_manifest_sha256": "235cfe3a6c993f78c184676f24441438facdaf1f7760ece7dacddc93ecff9f93",
+  "baseline_screen_protocol_sha256": "7eff9339c71619fdf55dd24b2681314ac0740906f8ffdd36c452b645f810de5c",
+  "baseline_screen_report_sha256": "b5f28629493d90d11151be88a7996a0b9027362d5c92f463ca5621cc54080660",
+  "source_bindings": {
+    "scripts/evaluate_feasible_benefit_ranker.py": "0a870cd43ae38972f80bdfd7d78aa0020048dafbe0697d795dcb35221406a871",
+    "scripts/evaluate_feasibility_model_families.py": "15388afcb9518e1184cb066177fbdd3d823f86be027b81b4de7088d21f6843c3",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "scripts/reproduce_guarded_sha256.py": "26e883815bffd7f4bf2bc5688d6c3112d3c517b8aa3363e6c7ecc81899d69fcb"
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "xgboost": "3.4.1",
+    "scikit-learn": "1.9.1"
+  },
+  "independent_workload_groups": [
+    "beebs-aha-compress",
+    "beebs-expint",
+    "beebs-jfdctint",
+    "beebs-ndes",
+    "beebs-nettle-md5",
+    "embench-aha-mont64",
+    "embench-crc32",
+    "embench-edn",
+    "embench-nettle-sha256",
+    "embench-slre",
+    "embench-ud",
+    "tacle-bitcount",
+    "tacle-g723-enc",
+    "tacle-lift"
+  ],
+  "successful_training_labels": 122,
+  "charged_failures": 4,
+  "model": "XGBRanker with existing rank:pairwise parameters; measured feasible cycle-reduction relevance",
+  "model_settings": {
+    "objective": "rank:pairwise",
+    "n_estimators": 80,
+    "max_depth": 2,
+    "learning_rate": 0.05,
+    "min_child_weight": 1,
+    "reg_lambda": 1.0,
+    "subsample": 1.0,
+    "colsample_bytree": 1.0,
+    "tree_method": "hist",
+    "n_jobs": 1,
+    "verbosity": 0,
+    "lambdarank_pair_method": "mean",
+    "lambdarank_num_pair_per_sample": 8,
+    "random_state": 0
+  },
+  "relevance": "Within each training benchmark, dense ordinal labels of measured whole-program cycle reduction when the measured candidate is <=64 LUT4 and >=12 MHz; measured infeasible candidates receive zero relevance. Ties are preserved.",
+  "area_cap_lut4": 64,
+  "minimum_routed_fmax_mhz": 12.0,
+  "budgets": [
+    1,
+    2,
+    3
+  ],
+  "policy_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "baselines": [
+    "merit",
+    "latency_cost_heuristic",
+    "xgb_pairwise_ranker",
+    "factorized_feasibility_xgb"
+  ],
+  "split": "Whole workload held out; remove related operation-tree families from training using successful and failed target candidates.",
+  "failure_handling": "All failures remain public pool choices, consume their actual charged duration, and are excluded from training relevance and feasibility labels.",
+  "selection": "Fit once on the remaining successful measured rows, rank all target public candidates before revealing any target outcomes, then score the first 1/2/3 charged queries.",
+  "model_timing": "Fit/inference host time is reported separately from native measurement time.",
+  "limitations": [
+    "This corpus and its prior policy screen already informed development; the result is retrospective and exploratory.",
+    "Only 12 workload groups have complete verified pool oracles; two infrastructure-censored groups are reported without regret.",
+    "Policy seeds are dependent repetitions, not additional independent workloads.",
+    "The ranking output is an ordering score, not a calibrated benefit estimate or uncertainty interval.",
+    "The labels optimize single-instruction measured feasibility and benefit; they do not establish multi-instruction set utility."
+  ]
+}

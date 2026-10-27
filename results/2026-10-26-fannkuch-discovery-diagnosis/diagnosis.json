@@ -1,0 +1,186 @@
+{
+  "schema": "isaforge-fannkuch-discovery-rejection-diagnosis-v1",
+  "classification": "ineligible_frozen_pool_too_small",
+  "qualification_status": "rejected",
+  "failed_phase": "discover",
+  "candidate_attempts": 0,
+  "new_target_labels": 0,
+  "native_jobs_started_by_analysis": 0,
+  "frozen_pool_requirement": 12,
+  "saved_discovery_profile": {
+    "cycles": 5193765,
+    "instructions": 974182,
+    "benchmark_result_u32": 1081212944,
+    "upstream_self_check": true,
+    "custom_instructions": 0,
+    "scope": "Instrumented original-program discovery profile; not the separate routed baseline qualification or hardware-cost measurement.",
+    "simulation_json_sha256": "e9d60791ccc87b196fc379707407a593173cf137d4aed3c5a3f114be4da0e814"
+  },
+  "max_operation_sensitivity": [
+    {
+      "maximum_operations": 2,
+      "raw_formula_count": 2,
+      "executable_formula_count": 2,
+      "calibrated_formula_count": 2,
+      "excluded_uncalibrated": [],
+      "pool_requirement": 12,
+      "pool_gate_met": false
+    },
+    {
+      "maximum_operations": 3,
+      "raw_formula_count": 2,
+      "executable_formula_count": 2,
+      "calibrated_formula_count": 2,
+      "excluded_uncalibrated": [],
+      "pool_requirement": 12,
+      "pool_gate_met": false
+    },
+    {
+      "maximum_operations": 4,
+      "raw_formula_count": 2,
+      "executable_formula_count": 2,
+      "calibrated_formula_count": 2,
+      "excluded_uncalibrated": [],
+      "pool_requirement": 12,
+      "pool_gate_met": false
+    },
+    {
+      "maximum_operations": 5,
+      "raw_formula_count": 2,
+      "executable_formula_count": 2,
+      "calibrated_formula_count": 2,
+      "excluded_uncalibrated": [],
+      "pool_requirement": 12,
+      "pool_gate_met": false
+    },
+    {
+      "maximum_operations": 6,
+      "raw_formula_count": 2,
+      "executable_formula_count": 2,
+      "calibrated_formula_count": 2,
+      "excluded_uncalibrated": [],
+      "pool_requirement": 12,
+      "pool_gate_met": false
+    }
+  ],
+  "frozen_candidates": [
+    {
+      "formula": "add(slli(in0,2),in1)",
+      "candidate_family": "add(input,slli(input,constant))",
+      "identity_alias_key": "add(in0,slli(in1,2))",
+      "occurrence_count": 1,
+      "timed_replacements": 18508,
+      "instruction_reduction_proxy": 18508,
+      "calibrated_projection": {
+        "estimated_saved_cycles": 92540,
+        "estimated_cycle_reduction": 0.017817517735207504,
+        "estimated_speedup": 1.0181407407044387,
+        "is_measured_label": false
+      },
+      "prior_formula_family_identity_matches": [
+        {
+          "benchmark": "embench-crc32:63c7f40f7e906b046f5a1911d5ed91824bb1aa15673f8fa753a818ccc0d5f511",
+          "workload_group": "embench-crc32",
+          "candidate_id": "77710d04576085d7031f398c3890958b640ec7efef05e1adbe6c9cf15c9f4cab",
+          "formula": "add(in0,slli(in1,2))"
+        },
+        {
+          "benchmark": "embench-edn:3f53183b901bbd833b93bb6b1d88c74eef9fc851e99847a4c58e9ac1d1b54567",
+          "workload_group": "embench-edn",
+          "candidate_id": "79ad2e04c888da3ddeeff88d8c9fc4bfe48f447b13a469763948dc06a66102c1",
+          "formula": "add(in0,slli(in1,2))"
+        },
+        {
+          "benchmark": "embench-ud:dff930b3f62af548560facf4403cb3bbd411bda014b383a8383a127dd21b4d29",
+          "workload_group": "embench-ud",
+          "candidate_id": "e806ac1ee74f31e9e9519ef2dab4ff49e4242fc4d77224f8a5b4280b873014c0",
+          "formula": "add(slli(in0,2),in1)"
+        },
+        {
+          "benchmark": "beebs-ndes:a20aa9f25bb8aa7471aacd09b8cd5d200a97b72d5a9536b04bfdd8ae8f2decf6",
+          "workload_group": "beebs-ndes",
+          "candidate_id": "4fcee35c0642efab5049c2abba5b201916f083e58b396b1e2ff91e08671faade",
+          "formula": "add(in0,slli(in1,2))"
+        },
+        {
+          "benchmark": "tacle-bitcount:00139fca615b68f2cb43c6bcfede407ddd621737e4ae687b127b3b8bd03fe682",
+          "workload_group": "tacle-bitcount",
+          "candidate_id": "cdd44385c73d3944c7b97d5d3babaca977f4e0a1610cb598fe708c48178e092d",
+          "formula": "add(slli(in0,2),in1)"
+        }
+      ]
+    },
+    {
+      "formula": "add(in0,slli(in1,2))",
+      "candidate_family": "add(input,slli(input,constant))",
+      "identity_alias_key": "add(in0,slli(in1,2))",
+      "occurrence_count": 1,
+      "timed_replacements": 3620,
+      "instruction_reduction_proxy": 3620,
+      "calibrated_projection": {
+        "estimated_saved_cycles": 18100,
+        "estimated_cycle_reduction": 0.003484947817238554,
+        "estimated_speedup": 1.0034971351507487,
+        "is_measured_label": false
+      },
+      "prior_formula_family_identity_matches": [
+        {
+          "benchmark": "embench-crc32:63c7f40f7e906b046f5a1911d5ed91824bb1aa15673f8fa753a818ccc0d5f511",
+          "workload_group": "embench-crc32",
+          "candidate_id": "77710d04576085d7031f398c3890958b640ec7efef05e1adbe6c9cf15c9f4cab",
+          "formula": "add(in0,slli(in1,2))"
+        },
+        {
+          "benchmark": "embench-edn:3f53183b901bbd833b93bb6b1d88c74eef9fc851e99847a4c58e9ac1d1b54567",
+          "workload_group": "embench-edn",
+          "candidate_id": "79ad2e04c888da3ddeeff88d8c9fc4bfe48f447b13a469763948dc06a66102c1",
+          "formula": "add(in0,slli(in1,2))"
+        },
+        {
+          "benchmark": "embench-ud:dff930b3f62af548560facf4403cb3bbd411bda014b383a8383a127dd21b4d29",
+          "workload_group": "embench-ud",
+          "candidate_id": "e806ac1ee74f31e9e9519ef2dab4ff49e4242fc4d77224f8a5b4280b873014c0",
+          "formula": "add(slli(in0,2),in1)"
+        },
+        {
+          "benchmark": "beebs-ndes:a20aa9f25bb8aa7471aacd09b8cd5d200a97b72d5a9536b04bfdd8ae8f2decf6",
+          "workload_group": "beebs-ndes",
+          "candidate_id": "4fcee35c0642efab5049c2abba5b201916f083e58b396b1e2ff91e08671faade",
+          "formula": "add(in0,slli(in1,2))"
+        },
+        {
+          "benchmark": "tacle-bitcount:00139fca615b68f2cb43c6bcfede407ddd621737e4ae687b127b3b8bd03fe682",
+          "workload_group": "tacle-bitcount",
+          "candidate_id": "cdd44385c73d3944c7b97d5d3babaca977f4e0a1610cb598fe708c48178e092d",
+          "formula": "add(slli(in0,2),in1)"
+        }
+      ]
+    }
+  ],
+  "identity_rule": "Existing V12-style identity: V4-normalized formula, commutative ALU operand sorting, and global in0/in1 permutation; source-family grouping also uses speedup_corpus.family.",
+  "historical_rows_read": 122,
+  "historical_fields_used": [
+    "formula",
+    "benchmark",
+    "workload_group",
+    "candidate_id"
+  ],
+  "historical_outcome_fields_used": [],
+  "source_bindings": {
+    "isaforge/assembly_lowering.py": "e656f5591ce1fa70f8621f94349c7a1c1f90837fb572a8d42fe9a3ce88dc4554",
+    "isaforge/partitioned_workload.py": "55ea4e3a98bed427d08c92b56fdbe431bd177054931c84128413f176e79a85e3",
+    "isaforge/latency_features.py": "c0cd549e0fc7baa8317a552ba4350e86b0342af2e4c7a8737afd02e520161b92",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f"
+  },
+  "qualification_json_sha256": "452871c4883591c89fbf9858e79b79aa7d7a125131c9b285e738dba7ce44b4e4",
+  "qualification_archive_manifest_sha256": "f4bf6e5860209855d3c37a8a230c009b3d594f971e01366e3a66ea3e24eb0d2b",
+  "native_plan_sha256": "077eacd1373c6f79d3fc09aed05d2046955032c149510f0984acfb3c0280350a",
+  "history_corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "analysis_script_sha256": "3a7b36aef9f2853de4586c4a2ab3cb2f298c1a6c9e0ef15a662309dfd73afcea",
+  "limitations": [
+    "No candidate was lowered into a target instruction or measured for correctness, area, timing, or speedup.",
+    "Calibrated projections are public estimates, not measured candidate labels.",
+    "The operation-size sweep is post-rejection sensitivity analysis; only maximum size four belongs to the frozen study protocol.",
+    "Formula-family equality is the project identity convention, not a claim that the ordered input functions are pointwise equal without swapping operands."
+  ]
+}

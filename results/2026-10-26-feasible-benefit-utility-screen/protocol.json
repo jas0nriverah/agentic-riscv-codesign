@@ -1,0 +1,95 @@
+{
+  "schema": "isaforge-existing-feasible-benefit-loco-screen-v1",
+  "scope": "retrospective consumed-data model development; no independent confirmation",
+  "corpus_path": "results/2026-10-26-lift-selection-corpus/corpus.json",
+  "corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "baseline_screen_path": "results/2026-10-26-feasibility-model-screen",
+  "baseline_manifest_sha256": "235cfe3a6c993f78c184676f24441438facdaf1f7760ece7dacddc93ecff9f93",
+  "baseline_protocol_sha256": "7eff9339c71619fdf55dd24b2681314ac0740906f8ffdd36c452b645f810de5c",
+  "baseline_report_sha256": "b5f28629493d90d11151be88a7996a0b9027362d5c92f463ca5621cc54080660",
+  "source_bindings": {
+    "scripts/evaluate_feasible_benefit_utility_screen.py": "426a8cf580d34d65191da2fc347e356165b231cc86dc150c79fbedad22261c2a",
+    "scripts/evaluate_feasibility_model_families.py": "15388afcb9518e1184cb066177fbdd3d823f86be027b81b4de7088d21f6843c3",
+    "scripts/evaluate_feasible_benefit_ranker.py": "0a870cd43ae38972f80bdfd7d78aa0020048dafbe0697d795dcb35221406a871",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/feasible_benefit.py": "4a07e2c0e9ace6d1808254cef6071f99babbee8f173f4e8b3fc1d4dcf2efbfb9",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "scripts/reproduce_guarded_sha256.py": "26e883815bffd7f4bf2bc5688d6c3112d3c517b8aa3363e6c7ecc81899d69fcb"
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "xgboost": "3.4.1",
+    "scikit-learn": "1.9.1"
+  },
+  "independent_workload_groups": [
+    "beebs-aha-compress",
+    "beebs-expint",
+    "beebs-jfdctint",
+    "beebs-ndes",
+    "beebs-nettle-md5",
+    "embench-aha-mont64",
+    "embench-crc32",
+    "embench-edn",
+    "embench-nettle-sha256",
+    "embench-slre",
+    "embench-ud",
+    "tacle-bitcount",
+    "tacle-g723-enc",
+    "tacle-lift"
+  ],
+  "successful_measured_labels": 122,
+  "charged_failures": 4,
+  "model": "Existing FeasibleBenefitPredictor; 20 candidate-bootstrap XGB regressors with 3 area-cap replicas",
+  "model_settings": {
+    "ensemble_size": 20,
+    "n_estimators": 80,
+    "max_depth": 2,
+    "learning_rate": 0.05,
+    "min_child_weight": 1,
+    "reg_lambda": 1.0,
+    "subsample": 1.0,
+    "colsample_bytree": 1.0,
+    "tree_method": "hist",
+    "n_jobs": 1,
+    "objective": "reg:squarederror",
+    "bootstrap": "n measured candidates with replacement; every draw expands all caps",
+    "cap_replica_sample_weight": 0.3333333333333333,
+    "interval": 0.9
+  },
+  "target": "Signed measured savings when feasible; zero decision utility otherwise.\n\n    Failures have unknown utility and are rejected, not relabeled as zero.\n    ",
+  "area_cap_lut4": 64,
+  "minimum_routed_fmax_mhz": 12.0,
+  "budgets": [
+    1,
+    2,
+    3
+  ],
+  "policy_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "split": "Whole-workload heldout; remove every related operation-tree family found in all successful and failed target candidates from training.",
+  "failure_handling": "Failures remain target query choices and consume actual measured time. They are never imputed as infeasible or zero-benefit training examples.",
+  "selection": "Rank target public rows by existing FeasibleBenefitPredictor mean_fractional_cycle_savings at +64 LUT4; score first 1/2/3 charged attempts.",
+  "matched_baselines": [
+    "merit",
+    "latency_cost_heuristic",
+    "xgb_pairwise_ranker",
+    "factorized_feasibility_xgb"
+  ],
+  "limitations": [
+    "Every corpus workload group and the baseline comparison have already informed development; this is retrospective.",
+    "Only 12 workload groups have fully measured pool oracles; two censored groups have no regret estimate.",
+    "Policy seeds are dependent repetitions, not additional independent workload groups.",
+    "Bootstrap utility spread is not calibrated predictive uncertainty.",
+    "All 122 measured speedups exactly match the calibrated latency model; this is a feasibility/decision test, not a new benefit-residual test."
+  ]
+}

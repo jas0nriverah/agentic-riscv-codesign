@@ -6,7 +6,9 @@ Prepared October 27, 2026, for the October 28 progress presentation.
 
 - `isaforge-midterm-progress-report.docx` — methodology, AI use, measured results, model evaluation, explainability, chat-agent pilot, timeline, and contribution matrix.
 - `isaforge-midterm-progress-slides-final.pptx` — 11-slide, approximately 7-minute editable presentation with a new XGBoost model-architecture diagram, native charts, and tables.
-- `model-architecture-slide.png` — preview of the new model slide; its diagram elements remain editable in the PowerPoint deck.
+- `isaforge-xgboost-model-architecture-slide.pptx` — copy-ready standalone replacement slide with a tree-ensemble schematic and the current model details. The original full deck remains unchanged.
+- `isaforge-xgboost-model-architecture-slide-preview.png` — 16:9 preview of the standalone slide. Slide text and speaker notes are editable in PowerPoint; the tree illustration is an image.
+- `model-architecture-slide.png` — preview of the architecture slide already inside the original 11-slide deck.
 - `dataset/` — CSV data, figure exports, and data dictionary.
 - `isaforge-midterm-dataset.zip` — same dataset folder in one portable archive.
 
