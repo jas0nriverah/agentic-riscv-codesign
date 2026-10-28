@@ -41,6 +41,60 @@ def test_no_retrieval_and_empty_history():
     assert HistoricalMemory([], target_groups=set(), target_formulas=set()).search('xor') == []
 
 
+def test_retrieval_mode_keeps_full_history_host_side_and_bounds_llm_context():
+    class InspectingPolicy:
+        identity = dict(provider='test-only')
+        def choose(self, request):
+            return dict(tool='finalize', arguments=dict(candidate_id=None))
+
+    training = []
+    for copy_index in range(12):
+        for row in history():
+            row = copy.deepcopy(row)
+            row['candidate_id'] = f"{row['candidate_id']}-{copy_index}"
+            training.append(row)
+    request = dict(historical_fit_rows=len(training), historical_measurements=training,
+        candidates=[public('target-candidate', 'add(in0,slli(in1,2))')],
+        attempted_candidate_ids=[])
+    full_size = len(json.dumps(request, sort_keys=True).encode())
+    policy = MemoryAugmentedPolicy(InspectingPolicy(), mode='hybrid', top_k=3)
+    policy.choose(request)
+    bounded = policy.last_public_request
+    assert bounded['historical_measurements'] == []
+    assert bounded['historical_fit_rows'] == len(training)
+    assert bounded['historical_context_policy'] == 'retrieved_only'
+    assert 0 < len(bounded['retrieved_memory']['hits']) <= 3
+    assert len(json.dumps(bounded, sort_keys=True).encode()) < full_size
+    assert policy.last_memory_trace['source_training_rows'] == len(training)
+    assert policy.last_memory_trace['exposed_training_rows'] == 0
+    assert policy.last_memory_trace['retrieved_memory_bytes'] <= policy.max_memory_bytes
+
+
+def test_retrieval_memory_payload_shrinks_to_byte_budget():
+    class InspectingPolicy:
+        identity = dict(provider='test-only')
+        def choose(self, request):
+            return dict(tool='finalize', arguments=dict(candidate_id=None))
+
+    training = []
+    for copy_index in range(5):
+        for row in history():
+            row = copy.deepcopy(row)
+            row['candidate_id'] = f"{row['candidate_id']}-{copy_index}"
+            training.append(row)
+    request = dict(historical_fit_rows=len(training), historical_measurements=training,
+        candidates=[public('target-candidate', 'add(in0,slli(in1,2))')],
+        attempted_candidate_ids=[])
+    policy = MemoryAugmentedPolicy(InspectingPolicy(), mode='hybrid', top_k=10,
+                                   max_memory_bytes=512)
+    policy.choose(request)
+    memory_bytes = len(json.dumps(policy.last_public_request['retrieved_memory'],
+                                  sort_keys=True, allow_nan=False,
+                                  separators=(',', ':')).encode())
+    assert memory_bytes <= 512
+    assert len(policy.last_public_request['retrieved_memory']['hits']) < 10
+
+
 def test_knowledge_graph_retrieval_returns_typed_source_paths():
     m = memory()
     hits = m.search_graph(['add(in0,slli(in1,1))'], target_groups={'target'}, k=3)

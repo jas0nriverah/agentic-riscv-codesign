@@ -33,6 +33,13 @@ def export(run_dir, output):
             status=report['status'], speedup=report['selected_speedup'],
             charged_attempts=report['charged_attempts'], ledger='ledger.json',
             ledger_sha256=manifest['ledger.json'])]
+    if runs is None and report.get('schema') == 'isaforge-grouped-current-model-agent-report-v1':
+        provider = report.get('provider') or {}
+        policy = provider.get('provider', 'unknown') if isinstance(provider, dict) else str(provider)
+        runs = [dict(target=report['target_benchmark'], policy=policy,
+            status=report['status'], speedup=report['selected_speedup'],
+            charged_attempts=report['charged_attempts'], ledger='ledger.json',
+            ledger_sha256=manifest['ledger.json'])]
     if runs is None:
         raise ValueError('unsupported report schema')
     ledgers = []
@@ -55,6 +62,10 @@ def export(run_dir, output):
           total_tokens INTEGER, usage_complete INTEGER, elapsed_seconds REAL);
         CREATE TABLE retrievals (episode INTEGER, decision INTEGER, mode TEXT,
           corpus_sha256 TEXT, query TEXT, returned_ids TEXT, elapsed_seconds REAL);
+        CREATE TABLE context_windows (episode INTEGER, decision INTEGER, context_sha256 TEXT,
+          serialized_bytes INTEGER, source_training_rows INTEGER, exposed_training_rows INTEGER,
+          retrieved_memory_bytes INTEGER, max_memory_bytes INTEGER,
+          PRIMARY KEY(episode,decision));
         CREATE TABLE tools (episode INTEGER, sequence INTEGER, tool TEXT, status TEXT,
           charged_attempt INTEGER, evidence_json TEXT);
         CREATE TABLE host_events (episode INTEGER, sequence INTEGER, type TEXT,
@@ -85,7 +96,8 @@ def export(run_dir, output):
                         (index, decision, call['call'], call['role'], call.get('trigger'),
                          call['identity'].get('model'), call['status'], usage.get('input_tokens'), usage.get('output_tokens'),
                          usage.get('total_tokens'), call['usage_complete'], call['elapsed_seconds']))
-                if not event.get('provider_trace') and protocol.get('provider') == 'codex-chat-bridge':
+                if (not event.get('provider_trace') and
+                        protocol.get('provider') in ('codex-chat-bridge', 'codex-chat')):
                     db.execute('INSERT INTO model_calls VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
                         (index, decision, decision, 'interactive-subagent',
                          None, protocol['model_label'], event['status'], None, None, None,
@@ -95,6 +107,16 @@ def export(run_dir, output):
                     db.execute('INSERT INTO retrievals VALUES (?,?,?,?,?,?,?)',
                         (index, decision, memory['mode'], memory['manifest']['corpus_sha256'],
                          memory['query'], json.dumps(memory['returned_ids']), memory['elapsed_seconds']))
+                context = event.get('public_context')
+                if isinstance(context, dict):
+                    serialized_bytes = len(json.dumps(context, sort_keys=True,
+                        ensure_ascii=False, allow_nan=False, separators=(',', ':')).encode('utf-8'))
+                    db.execute('INSERT INTO context_windows VALUES (?,?,?,?,?,?,?,?)',
+                        (index, decision, event.get('public_context_sha256'), serialized_bytes,
+                         memory.get('source_training_rows') if memory else None,
+                         memory.get('exposed_training_rows') if memory else None,
+                         memory.get('retrieved_memory_bytes') if memory else None,
+                         memory.get('max_memory_bytes') if memory else None))
             for event in ledger['events']:
                 db.execute('INSERT INTO tools VALUES (?,?,?,?,?,?)',
                     (index, event['sequence'], event['tool'], event['status'],
@@ -128,6 +150,7 @@ def export(run_dir, output):
             decisions=db.execute('SELECT COUNT(*) FROM decisions').fetchone()[0],
             retrievals=db.execute('SELECT COUNT(*) FROM retrievals').fetchone()[0],
             model_calls=db.execute('SELECT COUNT(*) FROM model_calls').fetchone()[0],
+            context_windows=db.execute('SELECT COUNT(*) FROM context_windows').fetchone()[0],
             decision_rationales=db.execute('SELECT COUNT(*) FROM decision_rationales').fetchone()[0],
             rationale_measurements=db.execute('SELECT COUNT(*) FROM rationale_measurements').fetchone()[0],
             host_events=db.execute('SELECT COUNT(*) FROM host_events').fetchone()[0])

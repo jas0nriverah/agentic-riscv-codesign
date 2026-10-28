@@ -1,0 +1,247 @@
+{
+  "schema": "isaforge-grouped-current-model-agent-v1",
+  "scope": "consumed-data workload-held-out agent engineering replay; not independent confirmation",
+  "target_workload_group": "embench-crc32",
+  "target_benchmark": "embench-crc32:63c7f40f7e906b046f5a1911d5ed91824bb1aa15673f8fa753a818ccc0d5f511",
+  "target_candidate_ids": [
+    "08e8643b6db880fbbd6cf344074419f3bbd8474750a70472f3d6ebda95971f61",
+    "1dc0b30ea7fa3e635207c3c71af0a9d672134b1a3fdda39d25b5aa7fecfa44a3",
+    "205371c610d463d8bbf6958f72bf8435f118e53d43a50cf4301e141a93453c32",
+    "77710d04576085d7031f398c3890958b640ec7efef05e1adbe6c9cf15c9f4cab",
+    "aea1d642ffe2f2bd4a12195fa0530aa8cfc3c2aaeb00f7a3b66a99dd37c2ddac",
+    "fe63db5e21cd55e04d0f28884d57fb6c3a7b5054e81569fa94e8c22097bf4cbb"
+  ],
+  "target_labels_in_model_request": 0,
+  "target_outcomes_disclosed_only_after_charged_measure": true,
+  "reference_complete": true,
+  "area_cap_lut4": 64,
+  "minimum_routed_fmax_mhz": 12.0,
+  "budget": 3,
+  "seed": 0,
+  "model_seed": 0,
+  "provider": "codex-chat",
+  "model": null,
+  "escalation_model": null,
+  "model_label": "GPT-6.1 Sol selector subagent; instruction-bounded chat relay; actual deployment ID unavailable",
+  "memory_mode": "none",
+  "max_model_calls": 12,
+  "max_tool_calls": 20,
+  "max_output_tokens": null,
+  "model_bundle_metadata": {
+    "schema": "isaforge-current-grouped-predictions-v1",
+    "scope": "consumed-data whole-workload holdout; all target-workload formula families excluded",
+    "prediction_policy": "zero-shot scores frozen before target measurements",
+    "target_workload_group": "embench-crc32",
+    "target_formula_families": [
+      "add(input,slli(andi(input,constant),constant))",
+      "add(input,slli(input,constant))",
+      "andi(xor(input,input),constant)",
+      "slli(andi(input,constant),constant)",
+      "slli(andi(xor(input,input),constant),constant)",
+      "xor(input,srli(input,constant))"
+    ],
+    "area_cap_lut4": 64,
+    "minimum_routed_fmax_mhz": 12.0,
+    "pairwise_ranker": {
+      "name": "XGBRanker",
+      "objective": "rank:pairwise",
+      "seed": 0,
+      "score_semantics": "relative ordering score; not speedup or probability"
+    },
+    "factorized_feasibility": {
+      "name": "FeasibilitySelectionPredictor",
+      "seed": 0,
+      "score_semantics": "uncalibrated probability-like ranking score; not guaranteed probability",
+      "disagreement_semantics": "ensemble disagreement only; not a calibrated interval",
+      "decision_score_semantics": "feasibility_score_mean times nonnegative analytic cycle reduction"
+    },
+    "training_rows": 101,
+    "training_workload_groups": [
+      "beebs-aha-compress",
+      "beebs-expint",
+      "beebs-jfdctint",
+      "beebs-ndes",
+      "beebs-nettle-md5",
+      "embench-aha-mont64",
+      "embench-edn",
+      "embench-nettle-sha256",
+      "embench-slre",
+      "embench-ud",
+      "tacle-bitcount",
+      "tacle-g723-enc",
+      "tacle-lift"
+    ],
+    "training_ids_sha256": "a4a7650a539fec9ba8952ec81f806eb6999b2583d749469fd42d8b9bf8c81c00",
+    "target_public_ids_sha256": "8e67aefc8426d028242cffd920be147cb96ea72ca04246e86eccbdeec226af91",
+    "model_source_fingerprint": "7742558ec9dfa1eebe23023723a16a1bdf7545d3de84ebe9bcdb3549fe7fe966",
+    "model_fit_and_prediction_seconds": {
+      "ranker_fit": 0.015144165998208337,
+      "ranker_prediction": 0.00022741701104678214,
+      "feasibility_fit": 0.058785125002032146,
+      "feasibility_prediction": 0.0021219589980319142
+    },
+    "uncertainty_calibrated": false,
+    "target_benchmark": "embench-crc32:63c7f40f7e906b046f5a1911d5ed91824bb1aa15673f8fa753a818ccc0d5f511",
+    "input_evidence_fingerprint": "1ae10dc16c547c9e03a233662029fc9abab73bcec7bfa6486e34a38f66196807",
+    "screen_protocol_sha256": "7eff9339c71619fdf55dd24b2681314ac0740906f8ffdd36c452b645f810de5c",
+    "historical_training_measurements": 101,
+    "historical_attempt_seconds": 6990.527965251147
+  },
+  "model_predictions_sha256": "2e87895c53ad50e4dd4d50cbfc867a42d076473a0c088742267044a5c896aeac",
+  "public_case_metadata": {
+    "schema": "isaforge-current-grouped-agent-case-v1",
+    "scope": "consumed-data engineering replay",
+    "target_workload_group": "embench-crc32",
+    "target_benchmark": "embench-crc32:63c7f40f7e906b046f5a1911d5ed91824bb1aa15673f8fa753a818ccc0d5f511",
+    "context_id": "63c7f40f7e906b046f5a1911d5ed91824bb1aa15673f8fa753a818ccc0d5f511",
+    "context_sha256": "d90f25dc862206b612e7644f77151f3f5aa3e6ce08e3d2f5426edf538fbe0dd5",
+    "hardware_context_id": "8b4f3925621b56f7f07a45a9febc6f2be53d954d9ae6b87cf8fa9453a303b977",
+    "target_formula_families": [
+      "add(input,slli(andi(input,constant),constant))",
+      "add(input,slli(input,constant))",
+      "andi(xor(input,input),constant)",
+      "slli(andi(input,constant),constant)",
+      "slli(andi(xor(input,input),constant),constant)",
+      "xor(input,srli(input,constant))"
+    ],
+    "training_ids_sha256": "a4a7650a539fec9ba8952ec81f806eb6999b2583d749469fd42d8b9bf8c81c00",
+    "excluded_related_ids_sha256": "df02cf6cede600c30dfab6e44ac955eb039fb39420a3a2205ba48cc69866d5db",
+    "target_ids_sha256": "8e67aefc8426d028242cffd920be147cb96ea72ca04246e86eccbdeec226af91",
+    "training_sha256": "e9a41493bc645f8fc2f031a1804cf69aff982b280c837d22c0e68a2489cffbab",
+    "public_sha256": "27bee27e4af0a3bb34c4c1c4fda97959170c456812513cc3689991ed578a5cf1",
+    "training_rows": 101,
+    "training_workload_groups": [
+      "beebs-aha-compress",
+      "beebs-expint",
+      "beebs-jfdctint",
+      "beebs-ndes",
+      "beebs-nettle-md5",
+      "embench-aha-mont64",
+      "embench-edn",
+      "embench-nettle-sha256",
+      "embench-slre",
+      "embench-ud",
+      "tacle-bitcount",
+      "tacle-g723-enc",
+      "tacle-lift"
+    ],
+    "historical_available_rows": 116,
+    "historical_available_attempts": 120,
+    "historical_attempt_seconds": 6990.527965251147,
+    "timer_scope": "Sum of recorded historical attempt durations; heterogeneous original timer scopes, excluding the held-out workload.",
+    "input_bindings": {
+      "corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+      "corpus_manifest_sha256": "219806a8a9c569f783ecbbe82561f2c3199dcb1faa83054710141fdfef0930c8",
+      "screen_protocol_sha256": "7eff9339c71619fdf55dd24b2681314ac0740906f8ffdd36c452b645f810de5c",
+      "screen_manifest_sha256": "235cfe3a6c993f78c184676f24441438facdaf1f7760ece7dacddc93ecff9f93",
+      "screen_report_sha256": "b5f28629493d90d11151be88a7996a0b9027362d5c92f463ca5621cc54080660"
+    },
+    "source_bindings": {
+      "scripts/evaluate_feasibility_model_families.py": "15388afcb9518e1184cb066177fbdd3d823f86be027b81b4de7088d21f6843c3",
+      "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+      "isaforge/factorized_selection_experiment.py": "545b7abb61a08a41fb6c1680b3e9ec109d73f29ed99edaf95870661818bc43da",
+      "isaforge/feasibility_selection.py": "1268bd50a167a5182a75f5fe6729c7cf5bccd7edf93a476e3a3448a4eaeaca22",
+      "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+      "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+      "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+      "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+      "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+      "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+      "scripts/reproduce_guarded_sha256.py": "26e883815bffd7f4bf2bc5688d6c3112d3c517b8aa3363e6c7ecc81899d69fcb",
+      "isaforge/grouped_agent_case.py": "1c8db7874652cd19e416550e563593a5ef2f3c986f472aae2c9f762fb131b8b6"
+    },
+    "target_outcomes_in_public_metadata": false,
+    "new_native_jobs": 0
+  },
+  "sources": {
+    "scripts/run_grouped_agent_selector.py": "8d8d574e82b98fcd790088af2db52a864c959c0d94aeb2fd75667bcf9abe3207",
+    "isaforge/grouped_agent_case.py": "1c8db7874652cd19e416550e563593a5ef2f3c986f472aae2c9f762fb131b8b6",
+    "isaforge/current_grouped_predictions.py": "def97b93d0e719bbc0e5230575468f70e2eadf4280d930e7478862f4c9ae3b72",
+    "isaforge/bounded_selector.py": "7dc988477c167818ba74a293f354135f0d1f24bbe2c795e1bfc641db75b969ee",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/selection_provider.py": "3e0f902289877d825b5c3febf56b454c79eb4cb4d850def2855f04788fe3a19b",
+    "isaforge/codex_chat_selector.py": "d2de849ce37270bdd714904ecea4d085cf9b9313dac08f8d5eb8567b5d7c6cc2",
+    "isaforge/routed_selection.py": "6df97cbe6330c7b8dde75e92fd56f3fc977288e9d367813931d478d2c328c2b4",
+    "isaforge/agent_memory.py": "f23448e868436aadd6c6bd167c1ea661151b7c9cdfc74e11d7e48e17db064546"
+  },
+  "tools": [
+    {
+      "type": "function",
+      "name": "list_candidates",
+      "description": "List public candidates and selection constraints.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "predict",
+      "description": "Query fixed predictors for candidate IDs.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "candidate_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "measure",
+      "description": "Pay for one candidate measurement, including failures.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "finalize",
+      "description": "Finalize only the current host-computed incumbent.candidate_id; use null only when no measured feasible improvement exists.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "summary": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_id",
+          "summary"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "token_usage": "Unavailable for Codex chat relay; API usage retained when using Responses.",
+  "new_native_jobs": 0
+}

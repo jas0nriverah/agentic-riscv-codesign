@@ -20,6 +20,7 @@ from .selection_provider import ProviderBudgetError
 from .speedup_corpus import family
 
 SCHEMA = 'isaforge-bounded-selector-v2'
+GROUPED_PREDICTION_SCHEMA = 'isaforge-current-grouped-predictions-v1'
 PROMPT = (
     'Select one RISC-V custom instruction, or the unchanged baseline. Maximize '
     'VERIFIED FEASIBLE whole-program speedup within the measurement-attempt '
@@ -52,6 +53,22 @@ HARDWARE_FIELDS = ('area_delta_lut4_mean', 'area_delta_lut4_std',
 MEASURED_FIELDS = ('baseline_cycles', 'candidate_cycles', 'speedup',
                    'area_delta_lut4', 'routed_fmax_min_mhz', 'device_fits',
                    'correctness_verified', 'measurement_seconds')
+GROUPED_PREDICTION_FIELDS = (
+    'pairwise_rank_score', 'pairwise_rank_position',
+    'factorized_feasibility_probability', 'factorized_feasibility_disagreement',
+    'factorized_decision_score',
+)
+GROUPED_PROMPT = (
+    ' The request may include current_grouped_ml_bundle metadata. When present, '
+    'the predict tool returns pairwise_rank_score (an ordering score, not a '
+    'speedup estimate), pairwise_rank_position, factorized_feasibility_probability '
+    'and factorized_decision_score for the 64-LUT4 cap. Feasibility scores and '
+    'their ensemble disagreement are uncalibrated; disagreement is not a '
+    'confidence interval. The decision score is feasibility score multiplied '
+    'by the nonnegative public analytic cycle-reduction estimate. Use these '
+    'current grouped-model outputs alongside merit, frequency and paid evidence; '
+    'only a paid outcome verifies area, timing and correctness.'
+)
 
 
 def _project_prediction(value, fields):
@@ -60,6 +77,19 @@ def _project_prediction(value, fields):
         if field in value:
             result[field] = _number(value[field], field)
     return result
+
+
+def _contains_target_outcome_key(value):
+    """Fail closed if model-only provenance embeds any measured test label."""
+    forbidden = {'label', 'speedup', 'candidate_cycles', 'area_delta_lut4', 'area',
+                 'routed_fmax_min_mhz', 'correctness_verified', 'measurement_seconds',
+                 'oracle', 'regret', 'outcome'}
+    if isinstance(value, dict):
+        return any(key in forbidden or _contains_target_outcome_key(item)
+                   for key, item in value.items())
+    if isinstance(value, (list, tuple)):
+        return any(_contains_target_outcome_key(item) for item in value)
+    return False
 
 
 def _observation(row):
@@ -84,7 +114,8 @@ class ReplaySelectionSession:
 
     def __init__(self, public, training, predictions, provider, *, area_cap,
                  clock_mhz=12.0, budget=3, max_tool_calls=20, ledger_path,
-                 historical_available_rows=None, historical_attempt_seconds=0.0):
+                 historical_available_rows=None, historical_attempt_seconds=0.0,
+                 grouped_predictions=None, grouped_model_metadata=None):
         self.public = b.public_rows(public)
         c.require(len({r['benchmark'] for r in self.public}) == 1, 'One target context required')
         validate_training_rows(training)
@@ -111,25 +142,62 @@ class ReplaySelectionSession:
         self.training = copy.deepcopy(training)
         self.provider = provider
         self._rows = {r['candidate_id']: r for r in self.public}
+        self.prediction_mode = 'historical'
         self.predictions = {}
-        for name in ('raw', 'normalized', 'ranking', 'hardware'):
-            values = predictions[name]
-            c.require(len(values) == len(self.public) and
-                      {v['candidate_id'] for v in values} == self._rows.keys(),
-                      'Complete unique prediction pool required')
-            allowed = HARDWARE_FIELDS if name == 'hardware' else (
-                ('rank_score',) if name == 'ranking' else BENEFIT_FIELDS)
-            self.predictions[name] = {v['candidate_id']: _project_prediction(v, allowed)
-                                      for v in values}
-            for value in self.predictions[name].values():
-                required = set(HARDWARE_FIELDS) if name == 'hardware' else (
-                    {'rank_score'} if name == 'ranking' else {'mean', 'lower', 'upper', 'std'})
-                c.require(required <= value.keys(), 'Incomplete prediction fields')
-                c.require(all(value[key] >= 0 for key in value if key.endswith('_std') or key == 'std'),
-                          'Negative predictive spread')
-                if name == 'hardware':
-                    c.require(0 <= value['device_fit_probability'] <= 1, 'Invalid device-fit probability')
-        self.seed = predictions['seed']
+        self.grouped_predictions = None
+        self.grouped_model_metadata = None
+        if grouped_predictions is not None:
+            c.require(predictions is None, 'Choose one prediction bundle')
+            c.require(isinstance(grouped_predictions, dict),
+                      'Current grouped predictions must be an object')
+            c.require(grouped_predictions.get('schema') == GROUPED_PREDICTION_SCHEMA,
+                      'Unsupported current grouped prediction schema')
+            values = grouped_predictions.get('rows')
+            c.require(isinstance(values, list) and len(values) == len(self.public) and
+                      {row.get('candidate_id') for row in values} == self._rows.keys(),
+                      'Complete unique current-model prediction pool required')
+            projected = {}
+            for row in values:
+                c.require(set(row) == {'candidate_id', *GROUPED_PREDICTION_FIELDS},
+                          'Current-model predictions may contain scores only')
+                value = {key: _number(row[key], key) for key in GROUPED_PREDICTION_FIELDS}
+                c.require(value['pairwise_rank_position'] >= 1 and
+                          float(value['pairwise_rank_position']).is_integer(),
+                          'Invalid pairwise rank position')
+                c.require(0 <= value['factorized_feasibility_probability'] <= 1 and
+                          value['factorized_feasibility_disagreement'] >= 0 and
+                          value['factorized_decision_score'] >= 0,
+                          'Invalid factorized model scores')
+                projected[row['candidate_id']] = value
+            metadata = copy.deepcopy(grouped_model_metadata)
+            c.require(isinstance(metadata, dict) and metadata.get('schema') == GROUPED_PREDICTION_SCHEMA,
+                      'Current model provenance is required')
+            c.require(not _contains_target_outcome_key(metadata),
+                      'Model metadata must not contain target outcomes')
+            self.grouped_predictions = projected
+            self.grouped_model_metadata = metadata
+            self.prediction_mode = 'current_grouped'
+            self.seed = grouped_predictions.get('seed')
+        else:
+            c.require(isinstance(predictions, dict), 'Prediction bundle required')
+            for name in ('raw', 'normalized', 'ranking', 'hardware'):
+                values = predictions[name]
+                c.require(len(values) == len(self.public) and
+                          {v['candidate_id'] for v in values} == self._rows.keys(),
+                          'Complete unique prediction pool required')
+                allowed = HARDWARE_FIELDS if name == 'hardware' else (
+                    ('rank_score',) if name == 'ranking' else BENEFIT_FIELDS)
+                self.predictions[name] = {v['candidate_id']: _project_prediction(v, allowed)
+                                          for v in values}
+                for value in self.predictions[name].values():
+                    required = set(HARDWARE_FIELDS) if name == 'hardware' else (
+                        {'rank_score'} if name == 'ranking' else {'mean', 'lower', 'upper', 'std'})
+                    c.require(required <= value.keys(), 'Incomplete prediction fields')
+                    c.require(all(value[key] >= 0 for key in value if key.endswith('_std') or key == 'std'),
+                              'Negative predictive spread')
+                    if name == 'hardware':
+                        c.require(0 <= value['device_fit_probability'] <= 1, 'Invalid device-fit probability')
+            self.seed = predictions['seed']
         c.require(type(self.seed) is int and self.seed >= 0, 'Invalid seed')
         self.path = Path(ledger_path)
         c.require(not self.path.exists(), 'Preserve prior selection ledger')
@@ -137,7 +205,8 @@ class ReplaySelectionSession:
         self.observations, self.attempted_ids, self.messages = [], [], []
         self.calls, self.charged, self.model_calls = 0, 0, 0
         self._hardware_cache_version = 0
-        self._hardware_cache = copy.deepcopy(self.predictions['hardware'])
+        self._hardware_cache = (copy.deepcopy(self.predictions['hardware'])
+                                if self.prediction_mode == 'historical' else None)
         self.hardware_refit_seconds = 0.0
         available = len(training) if historical_available_rows is None else historical_available_rows
         c.require(type(available) is int and available >= len(training), 'Invalid history count')
@@ -149,16 +218,21 @@ class ReplaySelectionSession:
             limits=dict(measurement_attempts=budget, tool_calls=max_tool_calls,
                         model_decision_turns=self.max_model_calls),
             seed=self.seed, public_sha256=c.digest(self.public),
-            training_sha256=c.digest(self.training), predictions_sha256=c.digest(predictions),
+            training_sha256=c.digest(self.training),
+            predictions_sha256=c.digest(grouped_predictions if grouped_predictions is not None else predictions),
             historical_available_rows=available, historical_fit_rows=len(training),
             historical_fitting_groups=sorted({r['workload_group'] for r in training}),
             historical_attempt_seconds=cost, events=[], model_events=[], curve=[],
             fallback='best paid verified feasible improvement, else baseline',
             uncertainty_calibrated=False, new_native_jobs=0,
+            prediction_mode=self.prediction_mode,
+            grouped_model_metadata=copy.deepcopy(self.grouped_model_metadata),
             host_events=[],
             timer_scope='Replay observation durations retain original record/ledger scope; not live evaluation wall time.',
             source_bindings={name: c.sha(c.ROOT/name) for name in
-                ('isaforge/bounded_selector.py', 'isaforge/budgeted_selection.py')})
+                ('isaforge/bounded_selector.py', 'isaforge/budgeted_selection.py')},
+            grouped_predictions_sha256=(c.digest(grouped_predictions)
+                if grouped_predictions is not None else None))
         self._persist()
 
     @property
@@ -184,7 +258,8 @@ class ReplaySelectionSession:
         history = [{key: copy.deepcopy(row[key]) for key in
                     (*b.PUBLIC_KEYS, *MEASURED_FIELDS, 'workload_group')} for row in self.training]
         best = self._best()
-        return copy.deepcopy(dict(schema=SCHEMA+'-request', instructions=PROMPT,
+        instructions = PROMPT + (GROUPED_PROMPT if self.prediction_mode == 'current_grouped' else '')
+        request = dict(schema=SCHEMA+'-request', instructions=instructions,
             scope=self.ledger['scope'], seed=self.seed,
             constraints=self.ledger['constraints'],
             remaining=dict(measurement_attempts=self.budget-self.charged,
@@ -205,9 +280,17 @@ class ReplaySelectionSession:
                 required_candidate_id=best['candidate_id'] if best else None,
                 allowed_candidate_ids=[best['candidate_id']] if best else [],
                 rule='Finalize only the current incumbent; null means baseline and is allowed only when there is no measured feasible improvement.'),
-            uncertainty_calibrated=False, messages=self.messages))
+            uncertainty_calibrated=False, messages=self.messages)
+        if self.grouped_model_metadata is not None:
+            request['current_grouped_ml_bundle'] = copy.deepcopy(self.grouped_model_metadata)
+        return copy.deepcopy(request)
 
     def _predictions(self, identities):
+        if self.prediction_mode == 'current_grouped':
+            return [dict(candidate_id=identity,
+                current_grouped_ml=copy.deepcopy(self.grouped_predictions[identity]),
+                calibrated_latency_speedup=self._rows[identity]['latency_features']['estimated_speedup'],
+                uncertainty_calibrated=False) for identity in identities]
         if self._hardware_cache_version != len(self.observations):
             start = time.monotonic()
             values = b.HardwareSurrogate().fit(self.training+self.observations).predict(self.public)

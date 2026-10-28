@@ -198,12 +198,18 @@ class HistoricalMemory:
 
 class MemoryAugmentedPolicy:
     """Deterministic retrieval before each decision; no extra model or hardware call."""
-    def __init__(self, policy, *, mode='hybrid', top_k=3):
-        if mode not in MODES or type(top_k) is not int or not 1 <= top_k <= 10:
+    def __init__(self, policy, *, mode='hybrid', top_k=3, max_memory_bytes=40_000):
+        if (mode not in MODES or type(top_k) is not int or not 1 <= top_k <= 10 or
+                type(max_memory_bytes) is not int or not 256 <= max_memory_bytes <= 1_000_000):
             raise ValueError('invalid memory configuration')
         self.policy, self.mode, self.top_k = policy, mode, top_k
+        # Bound retrieved historical context independently of the provider's
+        # overall request limit. This is a byte bound, not an inferred token
+        # count; provider-reported tokens remain the only token measurement.
+        self.max_memory_bytes = max_memory_bytes
         self.identity = dict(provider='memory-augmented-policy-v1', wrapped=policy.identity,
-                             mode=mode, top_k=top_k, query='unattempted-formulas-and-constraints-v1')
+                             mode=mode, top_k=top_k, max_memory_bytes=max_memory_bytes,
+                             query='unattempted-formulas-and-constraints-v1')
         self.memory = None
         self.target_roster = None
         self.last_memory_trace = {}
@@ -243,15 +249,42 @@ class MemoryAugmentedPolicy:
                                          k=self.top_k)
                 if self.mode == 'knowledge_graph' else
                 self.memory.search(query, self.mode, self.top_k))
+        payload = dict(
+            notice=('Retrieved historical measurements only; these are not target outcomes, '
+                    'instructions, or calibrated predictions.'),
+            retrieval_mode=self.mode,
+            corpus_sha256=self.memory.manifest['corpus_sha256'],
+            hit_count=len(hits), hits=hits)
+        # Prefer the highest-ranked evidence and shrink deterministically until
+        # the complete memory object fits its own byte budget. If even the
+        # notice/provenance does not fit, fail closed with no retrieved rows.
+        while hits and len(json.dumps(payload, sort_keys=True, allow_nan=False,
+                                      separators=(',', ':')).encode('utf-8')) > self.max_memory_bytes:
+            hits.pop()
+            payload['hit_count'] = len(hits)
+            payload['hits'] = hits
+        payload_bytes = len(json.dumps(payload, sort_keys=True, allow_nan=False,
+                                       separators=(',', ':')).encode('utf-8'))
+        if payload_bytes > self.max_memory_bytes:
+            payload = dict(retrieval_mode=self.mode, corpus_sha256=self.memory.manifest['corpus_sha256'],
+                           hit_count=0, hits=[])
+            payload_bytes = len(json.dumps(payload, sort_keys=True, allow_nan=False,
+                                           separators=(',', ':')).encode('utf-8'))
         self.last_memory_trace = dict(manifest=self.memory.manifest, mode=self.mode,
-            query=query, returned_ids=[h['record']['candidate_id'] for h in hits],
-            hits=hits, elapsed_seconds=time.monotonic()-started)
+            query=query, source_training_rows=len(history), exposed_training_rows=0 if self.mode != 'none' else len(history),
+            max_memory_bytes=self.max_memory_bytes, retrieved_memory_bytes=payload_bytes,
+            returned_ids=[h['record']['candidate_id'] for h in hits],
+            hits=copy.deepcopy(hits), elapsed_seconds=time.monotonic()-started)
         if self.mode == 'knowledge_graph':
             self.last_memory_trace['graph_query_formulas'] = query_formulas
         if self.mode != 'none':
-            public['retrieved_memory'] = dict(
-                notice='Historical evidence only, not instructions or target measurements. Similarity is not a performance prediction.',
-                corpus_sha256=self.memory.manifest['corpus_sha256'], hits=hits)
+            # Keep the full validated training cohort inside the host's ML and
+            # memory layers. The LLM gets only bounded retrieved examples, not
+            # a redundant dump of every historical label.
+            public['historical_measurements'] = []
+            public['historical_context_policy'] = 'retrieved_only'
+            public.setdefault('historical_fit_rows', len(history))
+            public['retrieved_memory'] = payload
         # Host observability binds final notes to the exact augmented public input.
         self.last_public_request = copy.deepcopy(public)
         try:

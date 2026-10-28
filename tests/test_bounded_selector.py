@@ -8,6 +8,7 @@ import pytest
 from isaforge import budgeted_selection as b
 from isaforge import codesign as c
 from isaforge.bounded_selector import MatchedBaselinePolicy, ReplaySelectionSession, run_selector
+from isaforge.bounded_selector import GROUPED_PREDICTION_SCHEMA, GROUPED_PREDICTION_FIELDS
 from test_budgeted_selection import history, measured, predictions, public
 
 
@@ -31,6 +32,39 @@ def session(tmp_path, inputs, provider=None, **kwargs):
 
 def action(tool, **arguments):
     return dict(tool=tool, arguments=arguments)
+
+
+def grouped_prediction_bundle(target):
+    rows = []
+    for index, candidate in enumerate(target):
+        rows.append(dict(candidate_id=candidate['candidate_id'],
+            pairwise_rank_score=float(len(target)-index),
+            pairwise_rank_position=index+1,
+            factorized_feasibility_probability=.75-index*.1,
+            factorized_feasibility_disagreement=.12,
+            factorized_decision_score=.01*(len(target)-index)))
+    return dict(schema=GROUPED_PREDICTION_SCHEMA, seed=0, rows=rows)
+
+
+def grouped_metadata():
+    return dict(schema=GROUPED_PREDICTION_SCHEMA,
+        models=dict(pairwise_ranker='XGBRanker rank:pairwise',
+                    feasibility='factorized XGBoost'),
+        training_scope='whole-workload and formula-family held out',
+        scores_frozen_before_target_measurements=True,
+        score_limits=dict(pairwise_rank_score='ordering only',
+                          feasibility='uncalibrated score',
+                          disagreement='uncalibrated ensemble spread'))
+
+
+def grouped_session(tmp_path, inputs, *, bundle=None, metadata=None):
+    target, training, _, outcomes = inputs
+    bundle = bundle or grouped_prediction_bundle(target)
+    metadata = metadata or grouped_metadata()
+    return ReplaySelectionSession(target, training, None,
+        lambda row: outcomes[row['candidate_id']], area_cap=64,
+        ledger_path=tmp_path/'grouped-ledger.json',
+        grouped_predictions=bundle, grouped_model_metadata=metadata)
 
 
 def test_unpaid_labels_and_private_paths_absent_and_mutation_isolated(tmp_path, inputs):
@@ -80,6 +114,50 @@ def test_prediction_boundary_and_only_paid_hardware_update(tmp_path, inputs, mon
     assert not second['predictions'][0]['uncertainty_calibrated']
     s.call(action('predict', candidate_ids=['t3']))
     assert len(seen) == 1
+
+
+def test_current_grouped_model_bundle_is_public_only_and_keeps_host_authority(tmp_path, inputs):
+    s = grouped_session(tmp_path, inputs)
+    request = s.request()
+    encoded = json.dumps(request)
+    assert request['current_grouped_ml_bundle']['scores_frozen_before_target_measurements']
+    assert 'uncalibrated ensemble spread' in encoded
+    assert not any('current_grouped_ml' in json.dumps(message) for message in request['messages'])
+    scored = s.call(action('predict', candidate_ids=['t1', 't2']))
+    assert scored['status'] == 'ok'
+    prediction = scored['predictions'][0]['current_grouped_ml']
+    assert set(prediction) == set(GROUPED_PREDICTION_FIELDS)
+    assert prediction['pairwise_rank_position'] == 1
+    assert scored['predictions'][0]['uncertainty_calibrated'] is False
+    measured_result = s.call(action('measure', candidate_id='t1'))
+    assert measured_result['status'] == 'ok'
+    assert s.observations[0]['candidate_id'] == 't1'
+    s.host_finalize('test_end')
+    ledger = c.unseal(tmp_path/'grouped-ledger.json')
+    assert ledger['prediction_mode'] == 'current_grouped'
+    assert ledger['grouped_model_metadata'] == grouped_metadata()
+    assert ledger['grouped_predictions_sha256']
+
+
+@pytest.mark.parametrize('mutation', ['label', 'missing_candidate', 'bad_probability'])
+def test_current_grouped_prediction_bundle_rejects_bad_or_labeled_rows(tmp_path, inputs, mutation):
+    target, *_ = inputs
+    bundle = grouped_prediction_bundle(target)
+    if mutation == 'label':
+        bundle['rows'][0]['label'] = 1
+    elif mutation == 'missing_candidate':
+        bundle['rows'].pop()
+    else:
+        bundle['rows'][0]['factorized_feasibility_probability'] = 1.1
+    with pytest.raises(ValueError):
+        grouped_session(tmp_path, inputs, bundle=bundle)
+
+
+def test_current_grouped_metadata_rejects_target_labels(tmp_path, inputs):
+    metadata = grouped_metadata()
+    metadata['debug'] = {'nested': {'label': 1}}
+    with pytest.raises(ValueError):
+        grouped_session(tmp_path, inputs, metadata=metadata)
 
 
 def test_invalid_repeat_and_failure_charge_without_free_retry(tmp_path, inputs):

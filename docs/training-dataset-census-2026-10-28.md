@@ -37,6 +37,19 @@ External agent traces and explanations are a separate data type. The current liv
 | [CoreMark](https://github.com/eembc/coremark) | Portable embedded C benchmark under Apache-2.0. | Already rejected at target baseline because it exceeded the fixed memory partition by 6,360 bytes. Do not lower RAM/stack or use other-core scores as PicoRV32 labels. |
 | SNU-RT-origin kernels ([lineage table in TACLeBench's primary repository](https://github.com/tacle/tacle-bench/blob/master/doc/wcet-paper/taclebench.tex)) | Real-time kernels that also appear as sources in other benchmark suites. | Do not relabel duplicate kernels as new data; compare exact source/input and formula families to TACLeBench/Embench/BEEBS before considering reuse. The public suites are not automatically independent. |
 
+## Large ML-for-HLS datasets checked separately
+
+These projects add many measured rows, but their labels describe HLS-generated accelerators or FPGA physical-design configurations, not custom-instruction speedup on the fixed PicoRV32/PCPI system. Do not merge their area, latency, or resource labels into the ISAForge target table.
+
+| Dataset/system | Published or repository scope | ISAForge use |
+| --- | --- | --- |
+| [ForgeHLS](https://github.com/zedong-peng/ForgeHLS), [paper](https://arxiv.org/abs/2507.03255) | Public HLS dataset with over 400k designs from 846 kernels; pragma exploration and HLS QoR targets. | Useful reference for dataset versioning and kernel-level generalization. HLS pragma/QoR labels do not transfer to PicoRV32 instruction speedup or iCE40 core-integrated area. |
+| [wa-hls4ml](https://huggingface.co/datasets/fastmachinelearning/wa-hls4ml), [paper](https://arxiv.org/abs/2511.05615) | More than 680k fully connected/convolutional networks synthesized with hls4ml for Xilinx FPGA resource and latency estimation. | Distinct accelerator design space, feature representation, toolchain, FPGA family, and target. Not speedup/hardware-cost labels for this instruction-selection task. |
+| [HLSDataset](https://arxiv.org/abs/2302.10977), [data release](https://github.com/UT-LCA/ML4Accel-Dataset/tree/main/fpga_ml_dataset/HLS_dataset) | C/SystemC HLS sources, reports, and post-route prediction examples for a particular FPGA flow. | The paper itself identifies its one-device scope. It can guide provenance and dataset practices, not cross-platform label pooling. |
+| [HLSFactory](https://github.com/sharc-lab/HLSFactory) | Framework and source adapters for PolyBench, MachSuite, CHStone and other HLS datasets. | A way to assemble HLS studies, not an independent set of ISAForge-compatible measured outcomes. Its C kernels can be source-review leads only. |
+
+The fact that these datasets are much larger does not make them more relevant to the target. The next valid training rows must be produced by the same compiler/ISA, candidate-to-PCPI lowering, correctness verifier, PicoRV32 cycle measurement, and integrated synthesis/routing path. Transfer-learning from HLS labels would require a separately justified source/target mapping experiment; no such need is demonstrated by the current measurements.
+
 The SNU-RT lineage link above is not a training recommendation: it documents that several SNU-RT-origin kernels are already collected in TACLeBench. Dataset names alone do not establish independent workload evidence.
 
 ## Intake contract for new data

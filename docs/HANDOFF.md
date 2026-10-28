@@ -1,5 +1,46 @@
 # Current handoff — model evidence after Lift selection
 
+## October 28: grouped XGBoost + live-chat selector replay and bounded memory
+
+The existing pairwise-ranking and factorized-feasibility XGBoost recipes are
+now exposed to the four-tool selector on an authenticated, whole-workload and
+target-family-held-out CRC32 case. The current model bundle adds no estimator
+or label: pairwise scores are relative ranks, feasibility outputs and ensemble
+disagreement are uncalibrated, and the analytic latency feature remains the
+only quantity equivalent to measured cycle speedup on the current corpus.
+
+Two GPT-6.1 Sol chat-relay episodes replayed the same six-candidate, already
+measured CRC32 pool under +64 LUT4 / 12 MHz constraints. The no-retrieval run
+found the complete-pool best feasible design in two charged measurements; the
+hybrid top-three retrieval run found it in one. The design measured
+32,387,382 → 30,820,662 cycles (1.050833x), +31 LUT4, 71.489845 MHz, correct,
+and 42.0438 archived evaluation seconds. Factorized-feasibility XGBoost also
+finds it in one retrospective measurement; pairwise XGBoost, merit, calibrated
+latency, latency-cost and random reach it by two, frequency by three. Thus the
+LLM ties current best selection in this one replay. The no-retrieval run
+includes two invalid manually relayed candidate IDs and measures one
+area-infeasible candidate before the best; those invalid actions were not
+charged. One seed, one consumed workload, differing context framing, a
+non-sandboxed Codex relay, and unknown model latency/token use prevent a causal
+memory or agent-quality claim. No native jobs or new labels were generated.
+
+Hybrid retrieval now keeps full history out of the LLM context, returns at most
+three approved records, and enforces a 40,000-byte retrieved-payload ceiling.
+On the initial CRC32 request it reduced serialized context from 154,008 bytes
+(101 raw historical rows) to 17,353 bytes (three rows, 5,103 retrieval bytes).
+This is a byte-count result, not token, latency, or decision-quality evidence.
+The local SQLite exports record context windows, retrievals, decisions, tool
+actions and null token usage for the Codex relay. Three authenticated Ascon
+measurements remain a separate training-only supplement; the two-model
+workload-holdout ablation changes no model promotion decision. Details,
+commands, limitations and source references are in the [integration record](ml-agent-integration-2026-10-28.md).
+
+Validation for the combined memory, bounded-selector, grouped-prediction,
+grouped-case, rationale and Ascon-supplement changes: **104 focused tests
+passed**. No live Responses API call or native evaluation was made. The research
+goal remains open; next require a fresh eligible workload and a preregistered,
+same-information prospective comparison.
+
 ## October 28: trace-bound rationales and separate provider budgets
 
 Accepted LLM finalization notes are retained as explicitly unverified prose and bound to the exact visible decision context, accepted action, provider/policy trace, host-verified outcome, constraints, and measurement references/hashes. Host fallbacks get deterministic evidence with no invented model explanation. Requests expose remaining outer decision turns and provider calls; routed recovery enforces the effective allowance. The runner records provider calls separately and stops before opening an empty decision after provider-budget exhaustion. SQLite includes rationale, measurement-evidence, host-event, and provider-call fields.

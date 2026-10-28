@@ -200,3 +200,39 @@ def test_sqlite_exports_host_fallback_provider_accounting(tmp_path, inputs):
         row = db.execute('SELECT reason, model_calls, provider_calls, tool_calls, charged_attempts '
                          'FROM host_events').fetchone()
     assert row == ('provider_call_limit', 0, 0, 0, 0)
+
+
+def test_sqlite_exports_grouped_chat_context_and_retrieval_telemetry(tmp_path):
+    root = tmp_path/'grouped-chat-run'
+    root.mkdir()
+    context = dict(schema='public-state-v1', historical_measurements=[],
+                   retrieved_memory=dict(hits=[dict(record=dict(candidate_id='h1'))]))
+    ledger = dict(model_events=[dict(call=1, status='complete', tool_sequence=1,
+        elapsed_seconds=1.25, provider_trace=[], public_context=context,
+        public_context_sha256=c.digest(context), memory_trace=dict(mode='hybrid',
+            manifest=dict(corpus_sha256='a'*64), query='xor', returned_ids=['h1'],
+            elapsed_seconds=.01, source_training_rows=100, exposed_training_rows=0,
+            retrieved_memory_bytes=512, max_memory_bytes=40_000))],
+        events=[], host_events=[])
+    c.seal(root/'ledger.json', ledger)
+    protocol = dict(provider='codex-chat', model_label='GPT-6.1 Sol selector subagent',
+                    memory_mode='hybrid')
+    c.seal(root/'protocol.json', protocol)
+    report = dict(schema='isaforge-grouped-current-model-agent-report-v1',
+        protocol_sha256=c.sha(root/'protocol.json'), target_benchmark='embench-crc32:ctx',
+        provider=dict(provider='memory-augmented-policy-v1'), status='finalized',
+        selected_speedup=1.05, charged_attempts=1)
+    c.seal(root/'report.json', report)
+    c.seal(root/'manifest.json', {name:c.sha(root/name) for name in
+        ('protocol.json','report.json','ledger.json')})
+
+    counts=export(root,tmp_path/'grouped.sqlite')
+    assert counts['episodes']==counts['decisions']==counts['model_calls']==counts['retrievals']==1
+    assert counts['context_windows']==1
+    with sqlite3.connect(tmp_path/'grouped.sqlite') as db:
+        assert db.execute('SELECT target,policy,status,charged_attempts FROM episodes').fetchone()==(
+            'embench-crc32:ctx','memory-augmented-policy-v1','finalized',1)
+        assert db.execute('SELECT role,model,usage_complete FROM model_calls').fetchone()==(
+            'interactive-subagent','GPT-6.1 Sol selector subagent',0)
+        assert db.execute('SELECT source_training_rows,exposed_training_rows,retrieved_memory_bytes,max_memory_bytes '
+                          'FROM context_windows').fetchone()==(100,0,512,40_000)
