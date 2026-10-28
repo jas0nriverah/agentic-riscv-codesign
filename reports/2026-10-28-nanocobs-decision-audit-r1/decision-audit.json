@@ -1,0 +1,86 @@
+{
+  "schema": "isaforge-postepisode-decision-audit-v1",
+  "scope": "Post-episode deterministic explanation audit; no feedback to policies or hidden-pool outcome decoding.",
+  "charged_probes": 1,
+  "paid_budget": 3,
+  "unused_budget": 2,
+  "model_decisions": 3,
+  "provider_calls": 0,
+  "provider_calls_semantics": "Bridge API telemetry; not model decision count.",
+  "selected_id": "c1461416687c586de22e1286e134717d5ec21e83cd7d0e9c261e85a5cd4a4a13",
+  "episode_status": "finalized",
+  "probes": [
+    {
+      "probe": 1,
+      "tool_sequence": 2,
+      "candidate_id": "c1461416687c586de22e1286e134717d5ec21e83cd7d0e9c261e85a5cd4a4a13",
+      "formula": "addi(lui(16842752),257)",
+      "logged_reason": {
+        "text": "Measure the utility recommendation: highest pairwise rank, factorized score 0.0017768 and analytic cycle reduction 0.2517%. Its feasibility score is uncalibrated; actual correctness, area and timing must be measured.",
+        "author": "model",
+        "verified": false,
+        "interpretation": "Recorded decision note; not validated reasoning or chain of thought."
+      },
+      "public_advice": {
+        "pairwise_rank": 1,
+        "pairwise_recommendation_id": "c1461416687c586de22e1286e134717d5ec21e83cd7d0e9c261e85a5cd4a4a13",
+        "utility_rank": 1,
+        "utility_recommendation_id": "c1461416687c586de22e1286e134717d5ec21e83cd7d0e9c261e85a5cd4a4a13",
+        "utility_score_ratio": 1.0,
+        "feasibility_score": 0.7058798670768738,
+        "analytic_cycle_reduction": 0.0025171736456341964,
+        "frequency_max_ids": [
+          "c1461416687c586de22e1286e134717d5ec21e83cd7d0e9c261e85a5cd4a4a13"
+        ],
+        "merit_max_ids": [
+          "c1461416687c586de22e1286e134717d5ec21e83cd7d0e9c261e85a5cd4a4a13"
+        ],
+        "analytic_max_ids": [
+          "c1461416687c586de22e1286e134717d5ec21e83cd7d0e9c261e85a5cd4a4a13"
+        ],
+        "uncertainty_calibrated": false
+      },
+      "host_descriptive_comparison": {
+        "followed_pairwise_advice": true,
+        "followed_utility_advice": true,
+        "interpretation": "Post-episode comparison of public fields; not an inferred agent intention."
+      },
+      "observed_verification": {
+        "status": "verified_feasible_improvement",
+        "correctness_verified": true,
+        "device_fits": true,
+        "area_delta_lut4": 10.0,
+        "area_fits": true,
+        "routed_fmax_min_mhz": 61.659881591796875,
+        "timing_fits": true,
+        "verified_feasible": true,
+        "speedup": 1.0025235257982676
+      },
+      "measurement_seconds": 46.234854082998936,
+      "provenance": {
+        "action_context_sha256": "1963f19ba485252ae05f475e0ebb7099371450375fa09f8738088de770535d3d",
+        "model_decision_call": 2,
+        "action_context_role": null,
+        "action_context_provider_call": null,
+        "measurement_id": "tool-2",
+        "ledger_observation_sha256": "9b1e7b42df4b5cbad1bb26c5758f94b75a3f51486a841dd017739ad5019541e4",
+        "training_sha256": "02aee0454ad5a6920326ca75b2cb8fec086cd69d79441f087f648747755b3ddd",
+        "grouped_predictions_sha256": "8fb028fe1230e557e1d4165228e535b242f02289c7f2e57018ed53dac9a0c549"
+      }
+    }
+  ],
+  "limitations": [
+    "Logged reasons are unverified model/policy notes; no hidden chain of thought is inferred.",
+    "Scores and ensemble spread are uncalibrated advice, not feasibility labels.",
+    "Historical v1 boards did not log utility recommendations; missing advice remains unavailable rather than retroactively inferred.",
+    "Observed outcomes are checked only against this episode\u2019s paid ledger projection; full native replay is separate.",
+    "One episode cannot establish that explanation or reviewer support improves decision quality."
+  ],
+  "provenance": {
+    "result_manifest_sha256": "ece98ea9b5ec4f7931053e9f608de69b77918f27c68f8c0ff991fdad39dec46b",
+    "agent_manifest_sha256": "6ab6de06781eed65ed38644fbfef4eb1632f0702aa7c569f55adaec9ef0a2e24",
+    "ledger_sha256": "ed0ebcab90b3c25722c58a08b36f1bf67d47cbf53f4963da66d679eaf863455a",
+    "agent_report_sha256": "0a6228252bdb7ab67145174e9cb0359918ec043a70b2d9316d7d9b0fb9b9bf22",
+    "script_sha256": "94005b5a2b5821b3a8e88a5bf158e9f5750e92951f7234ad5444b1dcbc828cc5"
+  }
+}

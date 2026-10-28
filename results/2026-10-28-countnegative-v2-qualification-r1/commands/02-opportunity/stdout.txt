@@ -1,0 +1,62 @@
+{
+  "schema": "isaforge-countnegative-variable-pool-v2-gate",
+  "protocol": {
+    "schema": "isaforge-countnegative-variable-pool-v2",
+    "workload_group": "tacle-countnegative",
+    "pool_cap": 30,
+    "minimum_legal_candidates": 1,
+    "admission_rule": "Any nonempty calibrated relocation-safe pool under the existing four-operation extractor; no benefit or occurrence admission minima.",
+    "technical_calibration_limit": "Existing public latency feature API requires calibrated source instruction latencies. Unsupported latency formulas remain excluded; this is a runtime coverage limit, not a benefit threshold.",
+    "unchanged_input": true,
+    "unchanged_upstream_source": true,
+    "unchanged_verifier": true,
+    "correctness": "Original countnegative_return requires checksum0x1778de over the deterministic original 20x20 matrix.",
+    "build_context": "Single unchanged upstream translation unit; rename original main only; ILP32 asserted.",
+    "compiler_flags": [
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-Os",
+      "-std=gnu17",
+      "-nostdlib",
+      "-nostartfiles",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-msmall-data-limit=0",
+      "-mno-relax",
+      "-DCPU_MHZ=1"
+    ],
+    "isa": "rv32i_zicsr",
+    "abi": "ilp32",
+    "optimization": "-Os",
+    "memory_partition": {
+      "ram_bytes": 8192,
+      "program_limit": 6400,
+      "stack_floor": 6528,
+      "stack_bytes": 1664,
+      "minimum_guard_bytes": 128
+    },
+    "clock_mhz": 12,
+    "route_seeds": [
+      1,
+      2,
+      3
+    ],
+    "candidate_dispatch_enabled": false,
+    "target_candidate_attempts": 0,
+    "historical_status": "Previously screened under fixed-size v1 gates; this is a separately authorized variable-pool context, not an untouched-source claim."
+  },
+  "passed": true,
+  "actual_pool_size": 4,
+  "computational_pool_cap": 30,
+  "public_digest": "cd80baf6ace2fd2a198fd67bfb100417083f0e430dbbe602806e9267614dab59",
+  "qualifying_candidate_ids": [
+    "c9fea2df4ac51d27ecd10b98600c886eee7527515aaa22038ad835d6e93d42f3",
+    "44b462b19f848483602ad318ee524905331f212083f3cb66e09e9041584288f2",
+    "f85497bb06dae4846bde5e9269c03f4faeda446e4e3e7fccc79383646cdfd0aa",
+    "42e0aad5a2bedc3c6b7d6d909cf97e4999943cbb1f97f1ac99fab88d7a231f07"
+  ],
+  "target_candidate_attempts": 0,
+  "measured_candidate_labels_used": false
+}

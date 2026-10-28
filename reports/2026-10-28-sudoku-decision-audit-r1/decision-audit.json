@@ -1,0 +1,204 @@
+{
+  "schema": "isaforge-postepisode-decision-audit-v1",
+  "scope": "Post-episode deterministic explanation audit; no feedback to policies or hidden-pool outcome decoding.",
+  "charged_probes": 3,
+  "paid_budget": 3,
+  "unused_budget": 0,
+  "model_decisions": 6,
+  "provider_calls": 0,
+  "provider_calls_semantics": "Bridge API telemetry; not model decision count.",
+  "selected_id": null,
+  "episode_status": "finalized",
+  "probes": [
+    {
+      "probe": 1,
+      "tool_sequence": 2,
+      "candidate_id": "f497a981238cd6eb23d7ebeac34ba2f1f530700b8c760903ae2929e7aa17ecc4",
+      "formula": "add(in0,slli(in1,2))",
+      "logged_reason": {
+        "text": "Top pairwise XGBoost rank and factorized score, with the largest public analytic cycle reduction (~4.54%). Feasibility remains uncertain and uncalibrated, so spend one of three measurements.",
+        "author": "model",
+        "verified": false,
+        "interpretation": "Recorded decision note; not validated reasoning or chain of thought."
+      },
+      "public_advice": {
+        "pairwise_rank": 1,
+        "pairwise_recommendation_id": "f497a981238cd6eb23d7ebeac34ba2f1f530700b8c760903ae2929e7aa17ecc4",
+        "utility_rank": null,
+        "utility_recommendation_id": null,
+        "utility_score_ratio": null,
+        "feasibility_score": 0.49648910760879517,
+        "analytic_cycle_reduction": 0.04543906705994494,
+        "frequency_max_ids": [
+          "f497a981238cd6eb23d7ebeac34ba2f1f530700b8c760903ae2929e7aa17ecc4"
+        ],
+        "merit_max_ids": [
+          "f497a981238cd6eb23d7ebeac34ba2f1f530700b8c760903ae2929e7aa17ecc4"
+        ],
+        "analytic_max_ids": [
+          "f497a981238cd6eb23d7ebeac34ba2f1f530700b8c760903ae2929e7aa17ecc4"
+        ],
+        "uncertainty_calibrated": false
+      },
+      "host_descriptive_comparison": {
+        "followed_pairwise_advice": true,
+        "followed_utility_advice": null,
+        "interpretation": "Post-episode comparison of public fields; not an inferred agent intention."
+      },
+      "observed_verification": {
+        "status": "area_infeasible",
+        "correctness_verified": true,
+        "device_fits": true,
+        "area_delta_lut4": 70.0,
+        "area_fits": false,
+        "routed_fmax_min_mhz": 61.85439682006836,
+        "timing_fits": true,
+        "verified_feasible": false,
+        "speedup": 1.0476020602686853
+      },
+      "measurement_seconds": 41.057731541004614,
+      "provenance": {
+        "action_context_sha256": "3889a1bee95fb826f21f8820d0f2e2611e3b3a9d26eefb65e3a7b9cd1bb2a33c",
+        "model_decision_call": 2,
+        "action_context_role": null,
+        "action_context_provider_call": null,
+        "measurement_id": "tool-2",
+        "ledger_observation_sha256": "173f9575dd95aafdd0eab135faf04746b75d8012523aedbab5a68955b4bec91f",
+        "training_sha256": "c3f664bcd059729ad0748c3f1ecdcca0355e094ac7e07e7b0832f97f59082759",
+        "grouped_predictions_sha256": "0ef9f38adca8867db919a18fd53619c2a2b635a8a16840b9715b1ae419f42b98"
+      }
+    },
+    {
+      "probe": 2,
+      "tool_sequence": 4,
+      "candidate_id": "05a60c1d788112c01edc4961ccd183abc6b55e883b3528ef777b0604938647c9",
+      "formula": "add(slli(in0,3),in0)",
+      "logged_reason": {
+        "text": "The first high-speed candidate exceeded the area cap. Among unmeasured candidates, this remains the next-highest factorized utility and pairwise rank; its feasibility score is uncalibrated, so another paid result tests whether the smaller predicted gain fits area.",
+        "author": "model",
+        "verified": false,
+        "interpretation": "Recorded decision note; not validated reasoning or chain of thought."
+      },
+      "public_advice": {
+        "pairwise_rank": 2,
+        "pairwise_recommendation_id": "05a60c1d788112c01edc4961ccd183abc6b55e883b3528ef777b0604938647c9",
+        "utility_rank": null,
+        "utility_recommendation_id": null,
+        "utility_score_ratio": null,
+        "feasibility_score": 0.49648910760879517,
+        "analytic_cycle_reduction": 0.020794447008407824,
+        "frequency_max_ids": [
+          "05a60c1d788112c01edc4961ccd183abc6b55e883b3528ef777b0604938647c9",
+          "489e091f01e939bb249a06c15f9b1f0ce608ea2a1e75f5cf9c81a289a9f55fac"
+        ],
+        "merit_max_ids": [
+          "05a60c1d788112c01edc4961ccd183abc6b55e883b3528ef777b0604938647c9",
+          "489e091f01e939bb249a06c15f9b1f0ce608ea2a1e75f5cf9c81a289a9f55fac"
+        ],
+        "analytic_max_ids": [
+          "05a60c1d788112c01edc4961ccd183abc6b55e883b3528ef777b0604938647c9"
+        ],
+        "uncertainty_calibrated": false
+      },
+      "host_descriptive_comparison": {
+        "followed_pairwise_advice": true,
+        "followed_utility_advice": null,
+        "interpretation": "Post-episode comparison of public fields; not an inferred agent intention."
+      },
+      "observed_verification": {
+        "status": "area_infeasible",
+        "correctness_verified": true,
+        "device_fits": true,
+        "area_delta_lut4": 71.0,
+        "area_fits": false,
+        "routed_fmax_min_mhz": 63.63751983642578,
+        "timing_fits": true,
+        "verified_feasible": false,
+        "speedup": 1.0212360386896073
+      },
+      "measurement_seconds": 36.0205463339953,
+      "provenance": {
+        "action_context_sha256": "602a134878a8459baafe9f559e7b5afbe84cc0092967a40a7c3970b49a99b71a",
+        "model_decision_call": 4,
+        "action_context_role": null,
+        "action_context_provider_call": null,
+        "measurement_id": "tool-4",
+        "ledger_observation_sha256": "ca1260921c1f4edb64ff5693a31b0345b42b2b038e396fe1ead210e13c7714f5",
+        "training_sha256": "c3f664bcd059729ad0748c3f1ecdcca0355e094ac7e07e7b0832f97f59082759",
+        "grouped_predictions_sha256": "0ef9f38adca8867db919a18fd53619c2a2b635a8a16840b9715b1ae419f42b98"
+      }
+    },
+    {
+      "probe": 3,
+      "tool_sequence": 5,
+      "candidate_id": "c25c958f1729673ac5a064ac923068aa483e7e9e07d7e33462b5f4378c87a663",
+      "formula": "sub(slli(in0,3),in0)",
+      "logged_reason": {
+        "text": "Both highest-speed candidates exceeded the 64-LUT4 cap. This remaining candidate ties for the highest uncalibrated feasibility score (~0.529) and has the largest analytic gain in that tier; use the final measurement to test feasible benefit.",
+        "author": "model",
+        "verified": false,
+        "interpretation": "Recorded decision note; not validated reasoning or chain of thought."
+      },
+      "public_advice": {
+        "pairwise_rank": 11,
+        "pairwise_recommendation_id": "489e091f01e939bb249a06c15f9b1f0ce608ea2a1e75f5cf9c81a289a9f55fac",
+        "utility_rank": null,
+        "utility_recommendation_id": null,
+        "utility_score_ratio": null,
+        "feasibility_score": 0.5287710428237915,
+        "analytic_cycle_reduction": 0.0017914135091702255,
+        "frequency_max_ids": [
+          "489e091f01e939bb249a06c15f9b1f0ce608ea2a1e75f5cf9c81a289a9f55fac"
+        ],
+        "merit_max_ids": [
+          "489e091f01e939bb249a06c15f9b1f0ce608ea2a1e75f5cf9c81a289a9f55fac"
+        ],
+        "analytic_max_ids": [
+          "489e091f01e939bb249a06c15f9b1f0ce608ea2a1e75f5cf9c81a289a9f55fac"
+        ],
+        "uncertainty_calibrated": false
+      },
+      "host_descriptive_comparison": {
+        "followed_pairwise_advice": false,
+        "followed_utility_advice": null,
+        "interpretation": "Post-episode comparison of public fields; not an inferred agent intention."
+      },
+      "observed_verification": {
+        "status": "area_infeasible",
+        "correctness_verified": true,
+        "device_fits": true,
+        "area_delta_lut4": 110.0,
+        "area_fits": false,
+        "routed_fmax_min_mhz": 70.84159851074219,
+        "timing_fits": true,
+        "verified_feasible": false,
+        "speedup": 1.001794628430785
+      },
+      "measurement_seconds": 43.44496279199666,
+      "provenance": {
+        "action_context_sha256": "da750fe760d4b7b302aa40a74caca4dfd05960d29b7a2fe6bbb29d3ce4fef119",
+        "model_decision_call": 5,
+        "action_context_role": null,
+        "action_context_provider_call": null,
+        "measurement_id": "tool-5",
+        "ledger_observation_sha256": "8fd1bfaab74be36e37c8f6f9d3dc4d40c4a08a444a2c76fe79476dfc389612fe",
+        "training_sha256": "c3f664bcd059729ad0748c3f1ecdcca0355e094ac7e07e7b0832f97f59082759",
+        "grouped_predictions_sha256": "0ef9f38adca8867db919a18fd53619c2a2b635a8a16840b9715b1ae419f42b98"
+      }
+    }
+  ],
+  "limitations": [
+    "Logged reasons are unverified model/policy notes; no hidden chain of thought is inferred.",
+    "Scores and ensemble spread are uncalibrated advice, not feasibility labels.",
+    "Historical v1 boards did not log utility recommendations; missing advice remains unavailable rather than retroactively inferred.",
+    "Observed outcomes are checked only against this episode\u2019s paid ledger projection; full native replay is separate.",
+    "One episode cannot establish that explanation or reviewer support improves decision quality."
+  ],
+  "provenance": {
+    "result_manifest_sha256": "a19d25146c764cf5fa9edb53e9f1046b75a41a4a58b0a9e6375740ef7eb15b3c",
+    "agent_manifest_sha256": "968d6fca92daebf2c7ce5a33f819ea3a3a3a7bd11f0609dc2def7c5f2ba431de",
+    "ledger_sha256": "c86653a2b740543cb3eafd1800803f7e089c894f67fb0197e6e39f59104fd227",
+    "agent_report_sha256": "5df97f6028c6b112e3b9c098c9e20fc2955d156dc01ebc98d2b947ef2c3846f9",
+    "script_sha256": "94005b5a2b5821b3a8e88a5bf158e9f5750e92951f7234ad5444b1dcbc828cc5"
+  }
+}

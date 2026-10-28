@@ -1,0 +1,35 @@
+{
+  "method": "group-balanced logistic calibration of clipped logit score",
+  "C": 1.0,
+  "solver": "lbfgs",
+  "seed": 0,
+  "minimum_calibration_groups": 5,
+  "fallback": "identity for fewer than five groups, one class, or nonpositive fitted slope",
+  "clipping": 1e-06,
+  "model": "unchanged 20-member feasibility XGBoost ensemble",
+  "cap": 64,
+  "budgets": [
+    1,
+    2,
+    3
+  ],
+  "random_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "scope": "retrospective consumed development; nested workload and canonical-family holdouts",
+  "primary": "workload-macro verified cycle reduction at B3; probability metrics secondary",
+  "promotion": "none automatically; fresh prospective measurement required",
+  "corpus_sha256": "da094a211f4688d9586a0457e79cf5992917c5258040aa46a225b7129814446b",
+  "source_bindings": {
+    "scripts/evaluate_grouped_feasibility_calibration.py": "dd34bd042b8ec0c0f304aa013e63b316ed1c166001fca4bf4d52537eaec59036",
+    "scripts/export_expanded_selection_corpus.py": "e82419c29c669983bb109d62bc11660596fae102bbe6eeed07658d2d0681e9e7",
+    "isaforge/feasibility_selection.py": "1268bd50a167a5182a75f5fe6729c7cf5bccd7edf93a476e3a3448a4eaeaca22",
+    "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+    "scripts/evaluate_feasibility_model_families.py": "15388afcb9518e1184cb066177fbdd3d823f86be027b81b4de7088d21f6843c3",
+    "scripts/evaluate_ast_path_feasibility.py": "0d93fc60f9fe78ce9cc047425c49f1d35b769277912274d4d663f86fdc385d00"
+  }
+}
