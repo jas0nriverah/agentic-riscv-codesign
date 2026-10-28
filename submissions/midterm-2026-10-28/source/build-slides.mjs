@@ -171,15 +171,20 @@ txt(s,'A high rank can still fail',790,176,410,70,30,C.navy,true);txt(s,'Bitcoun
 txt(s,'Uncertainty guides questions; measured correctness and feasibility decide.',72,588,1136,60,27,C.blue,true);
 }
 {
-const s=slide(8,'Agentic selection: working loop + planned routing',45,'Our current agent uses structured actions to inspect candidates, query predictions, request a bounded measurement, and finalize a verified result. Guardrails enforce the hardware budget and keep unmeasured outcomes hidden. We plan dynamic language model routing: start with a smaller model, escalate ambiguous cases to a stronger model, and record token usage and latency. This router is not implemented yet. Agent memory would contain only public information and paid results. We will compare routing against fixed-model and non-agent controls under the same hardware budget. In the Ascon pilot, three candidates were measured; the best feasible one reached 1.024 times cycle speedup, but there is no matched agent win.','Implemented: isaforge/bounded_selector.py, isaforge/selection_provider.py, scripts/run_codex_chat_selector.py; four tools list_candidates, predict, measure, finalize. Remote provider records model, tool calls, usage and latency where returned; active chat does not expose exact deployment ID or model-only usage. EDN consumed replay; Ascon three native measurements and live GP update defect fixed afterward. Proposed: smaller/stronger model routing, context/token budgets, retrieval, and complete cost/quality evaluation. No dynamic LLM routing, RAG/vector database, MCP integration, LangGraph, Ragas or production observability is claimed. See agent-architecture-plan.md.');
-txt(s,'WORKING  |  Bounded agentic loop',72,143,850,35,26,C.teal,true);
-flow(s,[['Inspect','Candidates +\nconstraints'],['Predict','XGBoost score\n+ diagnostics'],['Measure','Pay one attempt;\nverify outcome'],['Finalize','Best verified\nfeasible result']],190);
-addLine(s,1088,324,1088,347,C.blue,2);addLine(s,415,347,1088,347,C.blue,2);txt(s,'Paid outcomes inform the next decision',430,357,700,34,23,C.blue,true);
-addLine(s,72,411,1208,411,C.grid,1);
-txt(s,'PLANNED  |  Dynamic LLM routing',72,430,820,36,26,C.amber,true);
-txt(s,'Small model → escalate difficult cases → stronger model',72,477,1040,40,27,C.navy,true);
-txt(s,'Structured outputs • tool guardrails • bounded context / memory',72,531,1136,36,25);
-txt(s,'Evaluate selection quality, token cost and latency against fixed-model controls.',72,583,1136,45,23,C.muted);
+const s=slide(8,'AI agent architecture: implemented and planned',45,'Our agent has four stages: analyze candidates and query ML predictions, choose a structured action, execute it through host guardrails, and record measured evidence. Paid observations feed the next decision. The lower half shows planned extensions. A bounded context builder would route routine decisions to a smaller language model and escalate difficult cases to a stronger one. Optional retrieval could supply approved historical evidence using chunking, embeddings, hybrid search and reranking. These components are not implemented yet. Across the system, LLMOps would version releases and track quality, tokens, latency and cost. We will judge every addition by verified feasible performance under the same measurement budget.','Implemented: isaforge/bounded_selector.py, isaforge/selection_provider.py, scripts/run_codex_chat_selector.py; four tools list_candidates, predict, measure, finalize. Remote provider records model, tool calls, usage and latency where returned; active chat does not expose exact deployment ID or model-only usage. EDN consumed replay; Ascon three native measurements and live GP update defect fixed afterward. Proposed: smaller/stronger model routing, context/token budgets, retrieval, and complete cost/quality evaluation. No dynamic LLM routing, RAG/vector database, MCP integration, LangGraph, Ragas or production observability is claimed. See agent-architecture-plan.md.');
+txt(s,'WORKING CORE',72,137,650,28,22,C.teal,true);
+flow(s,[['Analyze + predict','Legal candidates\nXGBoost rankings'],['LLM decision','Structured outputs\nFunction calling'],['Host + tools','Budget guardrails\nMeasure / finalize'],['Agent memory','Cycles, area, timing\nPersistent ledger']],179);
+addLine(s,1088,318,1088,341,C.teal,2);addLine(s,430,341,1088,341,C.teal,2);
+txt(s,'Paid observations feed the next decision',420,350,760,31,23,C.teal,true);
+addLine(s,72,395,1208,395,C.grid,1);
+txt(s,'PLANNED DECISION LAYER',72,411,535,30,23,C.amber,true);
+txt(s,'Context window + token budget\nSmall LLM → escalate → strong LLM',72,453,555,76,24);
+txt(s,'OPTIONAL KNOWLEDGE LAYER',680,411,530,30,23,C.amber,true);
+txt(s,'Approved history → chunk + embed\nHybrid search → rerank → RAG context',680,453,530,76,24);
+txt(s,'Both feed the LLM decision. Hidden target outcomes stay excluded.',72,540,1136,32,22,C.muted);
+addLine(s,72,587,1208,587,C.grid,1);
+txt(s,'LLMOps plan: version → evaluate → monitor → deploy',72,602,1136,36,25,C.navy,true);
+txt(s,'Track feasible speedup, evaluation cost, tool errors, tokens and latency.',72,644,1136,29,21,C.muted);
 
 }
 {

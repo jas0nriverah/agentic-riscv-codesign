@@ -62,9 +62,9 @@ Tree contributions show what drives the ranking: estimated instruction savings a
 
 results/2026-10-27-ranker-explainability/explanation.json; global_feature_contributions.csv. Normalized absolute additive tree contributions macro-averaged over14 held-out workloads; profile opportunity features account for66.39%. Local add(in0,andi(in1,15)) rank1/12;1.008782x,+65LUT4,61.82MHz. Uncertainty calibration remains unproved.
 
-## 8. Agentic selection: working loop + planned routing (45 seconds)
+## 8. AI agent architecture: implemented and planned (45 seconds)
 
-Our current agent uses structured actions to inspect candidates, query predictions, request a bounded measurement, and finalize a verified result. Guardrails enforce the hardware budget and keep unmeasured outcomes hidden. We plan dynamic language model routing: start with a smaller model, escalate ambiguous cases to a stronger model, and record token usage and latency. This router is not implemented yet. Agent memory would contain only public information and paid results. We will compare routing against fixed-model and non-agent controls under the same hardware budget. In the Ascon pilot, three candidates were measured; the best feasible one reached 1.024 times cycle speedup, but there is no matched agent win.
+Our agent has four stages: analyze candidates and query ML predictions, choose a structured action, execute it through host guardrails, and record measured evidence. Paid observations feed the next decision. The lower half shows planned extensions. A bounded context builder would route routine decisions to a smaller language model and escalate difficult cases to a stronger one. Optional retrieval could supply approved historical evidence using chunking, embeddings, hybrid search and reranking. These components are not implemented yet. Across the system, LLMOps would version releases and track quality, tokens, latency and cost. We will judge every addition by verified feasible performance under the same measurement budget.
 
 ### Sources / Q&A
 

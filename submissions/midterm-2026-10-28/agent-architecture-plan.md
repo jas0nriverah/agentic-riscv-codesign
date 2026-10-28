@@ -69,3 +69,47 @@ For a practical LLMOps lifecycle: **build and version** prompt, schemas, model I
 - [LangGraph: thinking in state and durable workflow steps](https://docs.langchain.com/oss/javascript/langgraph/thinking-in-langgraph). Framework concepts support explicit state and checkpoints; they do not replace our paid-attempt ledger.
 - [Ragas: available metrics](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/). Includes retrieval and agent/tool metrics; hardware outcomes remain the primary endpoint.
 - [MCP: tool annotations and limits](https://blog.modelcontextprotocol.io/posts/2026-03-16-tool-annotations/). Tool annotations are hints; the host still needs actual enforcement.
+
+## Placement and adoption evaluation for the presentation
+
+The runtime architecture has four stages: legal candidate analysis and ML scoring; an LLM decision; a host-enforced tool dispatch; and measured evidence stored for the next decision. The loop ends at the best paid, verified feasible design or baseline. A development-time coding agent and its subagents help build and review these stages, but are not runtime selectors or evidence of better hardware performance.
+
+| Concept | Where it fits | Benefit and adoption test |
+| --- | --- | --- |
+| Tokens | Each LLM request and response | Account for input/output usage and cost. Introduce explicit ceilings; report missing usage rather than zero. |
+| Context windows | Before each LLM decision | Supply roster, predictions, constraints and paid observations. Test truncation preserves exact candidate IDs, budgets and incumbent. |
+| Dynamic LLM usage | Between context builder and provider | Start with a small model, escalate at most once under a frozen rule. Compare with fixed-small and fixed-strong on cost and feasible performance. Planned. |
+| Structured outputs | LLM action boundary | Existing schemas make actions machine-checkable. A schema-valid proposal can still be a bad selection. |
+| Function calling | Decision-to-host interface | Existing four tools make requests executable. The host validates and charges actions independently. |
+| AI agents / agentic workflows | Observe, propose, act, observe again | Existing bounded selector and pilots demonstrate execution. Matched controls are still needed to demonstrate value. |
+| Loop engineering | Controller state transitions | Preserve stop rules, exact attempt accounting, failures and fallback. Test restart and interruption without duplicate paid dispatch. |
+| Agent memory | Evidence ledger feeding context | Existing records preserve paid results. Planned summaries must retain provenance and cannot introduce unqueried labels. |
+| Guardrails | Before dispatch and final selection | Existing budgets, schemas and feasibility checks. Extend with model-call and token limits; verify negative cases. |
+| Chunking | Optional approved-document ingestion | Split by experiment/method with source and split provenance. Useful only when structured lookup cannot supply necessary context. |
+| Embeddings | Optional representation of those chunks | Enable conceptual similarity. They do not estimate candidate speedup. Test useful retrieval on development questions. |
+| Vector databases | Optional storage of embeddings | Useful at larger retrieval scale. A small document set can start with a local index; a separate database is not inherently needed. |
+| Semantic search | Optional evidence retrieval | Find conceptually related methods. Evaluate relevant-source recall and contamination. |
+| Hybrid search | Optional retrieval before context | Combine semantic matching with exact instruction names and workload identifiers. Compare with simple lexical lookup. |
+| Reranking | After document retrieval | Reorder retrieved evidence for relevance. Separate this from the existing XGBoost ranking of instruction candidates. |
+| RAG | Evidence retrieval into LLM context | Supply source-linked prior knowledge. Add only if it improves decisions over equal-information no-retrieval controls. Never retrieve hidden target measurements. |
+| LangGraph | Optional replacement for orchestration plumbing | Consider explicit durable state only if current controller maintenance warrants it. Preserve existing paid-attempt semantics. No migration needed for the presentation. |
+| LangChain | Optional provider/retriever integration | Consider if it removes concrete adapter work. It is not a research contribution or current dependency. |
+| MCP | Optional adapter around existing tools | Enables interoperable clients. Keep tool allowlists and enforcement in the host. Not currently the selector protocol. |
+| LLM evaluations | Offline policy replay, then frozen prospective tests | Primary endpoint: best verified feasible performance per evaluation budget. Also record errors, cost, escalation and latency. |
+| Ragas | Optional retrieval/tool evaluation tooling | Can supplement evidence-relevance or tool metrics if retrieval exists. Cannot substitute for cycle, synthesis and routing measurements. |
+| LLM observability | Around model calls and tool dispatch | Existing metadata is partial. Planned traces join model decisions to charged jobs, timing, tokens and failures. |
+| LLMOps | Across build, evaluate, monitor and deploy | Version prompts, model IDs, schemas, manifests and routing rules; test frozen releases; monitor operational cost; deploy with rollback and fallback. Production deployment remains planned. |
+
+### Recommended implementation order after the presentation
+
+1. Complete task-specific trace and evaluation accounting using the existing controller. Record provider/model version, prompt/schema hashes, request IDs, tokens when available, latency, charged attempt IDs and feasible incumbent. Keep historical training costs separate and visible.
+2. Test a fixed-model selector against strong heuristics and non-agent active learning under a frozen shared information and measurement contract. Include tool validity, baseline retention and interruption tests.
+3. Add a small bounded router only after those controls work. Compare fixed-small, fixed-strong and routed policies on feasible performance and actual model cost. Change one factor at a time.
+4. Add retrieval only when an explicit missing-information failure supports it. First try structured source lookup. Test retrieval without target-label leakage before allowing it in a selection trial.
+5. Adopt frameworks or deploy a service only when they solve a demonstrated operational need. They are optional implementation choices rather than milestones in the core research result.
+
+### Slide 8 speaking script (45 seconds)
+
+Our agent has four stages: analyze candidates and query ML predictions, choose a structured action, execute it through host guardrails, and record measured evidence. Paid observations feed the next decision. The lower half shows planned extensions. A bounded context builder would route routine decisions to a smaller language model and escalate difficult cases to a stronger one. Optional retrieval could supply approved historical evidence using chunking, embeddings, hybrid search and reranking. These components are not implemented yet. Across the system, LLMOps would version releases and track quality, tokens, latency and cost. We will judge every addition by verified feasible performance under the same measurement budget.
+
+For Q&A: LangGraph and LangChain could support orchestration and integrations, MCP could expose tools, and Ragas could assess retrieval. These are optional choices, not components we claim to have built. Coding subagents are a separate AI-assisted development workflow.
