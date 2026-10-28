@@ -1,5 +1,41 @@
 # Current handoff — model evidence after Lift selection
 
+## October 27 — owner-requested presentation stopping point
+
+The owner asked to stop research after one bounded implementation and prepare
+to present. The final change adds archive-only reproduction of the countnegative
+diagnosis. The original diagnostic and sealed results remain byte-for-byte
+unchanged; the new wrapper restores authenticated regular-file archive members
+into temporary storage, runs the original diagnostic, and requires exact report
+and file-hash agreement. It rejects unsafe/duplicate members and writes only to
+a fresh directory under `generated/`.
+
+Command: `make reproduce-countnegative-diagnosis PYTHON=../work/audit-venv/bin/python`.
+For repeat checks, set `COUNTNEGATIVE_REPLAY_OUTPUT` to a fresh generated path.
+The focused tests include an actual complete replay with subprocess execution
+and reads of the original native root forbidden. No new measurements, model
+fits, target qualification, or policy sweep was launched.
+
+[Stopping-point validation](../results/2026-10-27-presentation-stop-validation/README.md)
+records eight latest focused passes, exact archive replay, and successful
+six-model/processor replays. The full suite had 4,293 passes / 181 passing
+subtests and the previously documented blocked-pipe cleanup failure; no fix is
+claimed. Its reported child PID was absent at the final process check.
+
+The [AI report inserts and presentation notes](../submissions/midterm-2026-10-28/ai-track-insert.md)
+provide Sections 2.3/3.3, a seven-minute allocation, and Q&A grounded in the
+current evidence. The supplied PDF and slide files are unchanged. The central
+message is a functioning prototype with 122 historical measured labels across
+14 groups, a pairwise XGBoost challenger, and bounded agent integration, with
+no established overall ML/LLM advantage. Merit leads at budget three. The
+timing constraint is loose in the existing cohort, the uncertainty assumptions
+remain provisional, and final instruction combinations remain unmeasured.
+
+Research is at the requested stop point. Focus next on inserting the AI text,
+confirming the contribution matrix/contact fields, and rehearsing. Resume
+new-workload qualification and the prospective comparison only when the owner
+asks to resume development. The broader research objective remains unachieved.
+
 ## October 27 — countnegative rejected at target discovery
 
 The original TACLeBench `countnegative` integer kernel is now pinned by the

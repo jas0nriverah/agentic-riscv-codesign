@@ -1,5 +1,7 @@
 # ISAForge coding-agent instructions
 
+**Owner-requested stopping point (October 27):** research development stops after the bounded archive-only countnegative replay improvement. Prioritize the [AI report inserts and rehearsal notes](submissions/midterm-2026-10-28/ai-track-insert.md). Do not start another workload qualification or model sweep until the owner resumes development. The research goal is unfinished; this stop is for presentation preparation.
+
 Read [README.md](README.md) before planning work. It is the active scope contract, grounded in the [original proposal](docs/original-project-proposal.txt) and the owner's latest clarification. Then read [docs/HANDOFF.md](docs/HANDOFF.md), [the teammate branch review](docs/teammate-branch-review-2026-10-21.md), and [CONTRIBUTING.md](CONTRIBUTING.md). Current user instructions take precedence over this file.
 
 The October 28 midterm report is a progress snapshot. Follow the report's research question, but use [the report-to-evidence crosswalk](docs/midterm-report-alignment.md), the current README and the latest dated handoff entries for implementation status. Do not convert proposed future work or historical measurements into completed claims. The project still has no evidence that ML or the LLM beats the strongest heuristic, and the final jointly measured instruction set remains unfinished.

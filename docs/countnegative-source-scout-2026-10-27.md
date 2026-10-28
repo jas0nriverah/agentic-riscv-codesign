@@ -36,8 +36,10 @@ The one-shot target command is recorded here for provenance only; **do not rerun
 ../work/audit-venv/bin/python scripts/qualify_tacle_countnegative.py
 ```
 
-Reproduce the diagnosis without rerunning the target qualification:
+Reproduce the diagnosis from the committed raw archive without the original generated native root or any target jobs. The wrapper checks exact agreement with the preserved report. Output must be a fresh directory under `generated/`:
 
 ```sh
-../work/audit-venv/bin/python scripts/diagnose_tacle_countnegative_discovery.py
+make reproduce-countnegative-diagnosis PYTHON=../work/audit-venv/bin/python
 ```
+
+For repeated checks set `COUNTNEGATIVE_REPLAY_OUTPUT` to a different fresh path. The original diagnostic and result directory are frozen evidence and remain unchanged.

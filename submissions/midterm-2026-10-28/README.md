@@ -12,6 +12,8 @@ to fill those gaps from verified results before submitting.
 
 ## Deliverables
 
+- [AI track inserts and presentation notes](ai-track-insert.md) — copy-ready text for the current PDF's empty Sections 2.3/3.3, an evidence-based stopping-point analysis, seven-minute allocation, and Q&A. The PDF and decks have not been overwritten by these notes.
+
 - `isaforge-midterm-progress-report.docx` — methodology, AI use, measured results, model evaluation, explainability, chat-agent pilot, timeline, and contribution matrix.
 - `isaforge-midterm-progress-slides-final.pptx` — 11-slide, approximately 7-minute editable presentation with a new XGBoost model-architecture diagram, native charts, and tables.
 - `isaforge-xgboost-model-architecture-slide.pptx` — copy-ready standalone replacement slide with a tree-ensemble schematic and the current model details. The original full deck remains unchanged.

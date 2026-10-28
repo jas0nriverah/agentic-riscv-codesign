@@ -71,6 +71,11 @@ help:
 test:
 	$(PYTHON) -m pytest -q
 
+COUNTNEGATIVE_REPLAY_OUTPUT ?= generated/reproduction/countnegative-diagnosis
+.PHONY: reproduce-countnegative-diagnosis
+reproduce-countnegative-diagnosis:
+	$(PYTHON) scripts/reproduce_countnegative_diagnosis.py --output "$(COUNTNEGATIVE_REPLAY_OUTPUT)"
+
 BITCOUNT_CAMPAIGN ?= results/2026-10-22-bitcount-campaign
 BITCOUNT_REPLAY_OUTPUT ?= generated/reproduction/bitcount
 BITCOUNT_REPORT_OUTPUT ?= generated/reproduction/bitcount-report

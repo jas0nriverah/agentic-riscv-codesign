@@ -1,0 +1,30 @@
+{
+  "schema": "isaforge-presentation-stop-validation-v1",
+  "parent_commit": "c31070a4b6a23c02927f1674ca333f141e33a312",
+  "focused_tests": {
+    "passed": 8,
+    "command": "../work/audit-venv/bin/python -m pytest tests/test_reproduce_countnegative_diagnosis.py -q"
+  },
+  "full_suite": {
+    "passed": 4293,
+    "subtests_passed": 181,
+    "failed": 1,
+    "seconds": 259.27,
+    "failure": "tests/test_capture_v11_spooled.py::test_blocked_pipe_or_compressor_drain_has_finite_cleanup[pipe]",
+    "scope": "Full suite collected seven replay tests before the final dot-path guard/test addition; the latest focused eight-test run covers that final tightening. Existing pipe-cleanup failure is preserved; no fix claimed."
+  },
+  "matched_replay": "passed: all six metrics match",
+  "processor_replay": "passed: CRC32 and automatic-workload archives, routing evidence, and 120 policy/seed/budget outcomes each",
+  "archive_replay": {
+    "status": "exact_replay",
+    "report_sha256": "fdd788ffb7d52e00da32e042b131e74818881580b2b38d5d0e4b822d2e4a9d44",
+    "native_jobs": 0,
+    "new_candidate_labels": 0
+  },
+  "source_bindings": {
+    "scripts/reproduce_countnegative_diagnosis.py": "46f3b73d106eab0ff23b6572582766360b8ba73bde3d1d03406188db474f3b46",
+    "tests/test_reproduce_countnegative_diagnosis.py": "5e2ea0475c8e39abe702f19f94d50a41cd979433a94e87c1388398b4723d4d1d",
+    "Makefile": "140dd7d77d7aecdb9d1a178c0270f310a440a0d13bc32c1beb0071c0f00abfea"
+  },
+  "stopped_child_check": "The PID 36305 reported by the failed cleanup assertion was absent at the final ps check."
+}

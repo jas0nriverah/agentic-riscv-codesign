@@ -1,5 +1,7 @@
 # Documentation
 
+[Presentation stopping point](../submissions/midterm-2026-10-28/ai-track-insert.md): AI methodology/results inserts, complete-versus-open analysis, seven-minute plan, and Q&A. The final bounded implementation is `make reproduce-countnegative-diagnosis`, which authenticates and replays committed archive evidence without the original native build directory. Further research is paused at the owner's request.
+
 [TACLeBench countnegative qualification](countnegative-source-scout-2026-10-27.md): original host and target checksum checks pass, but baseline-only discovery was rejected at the unchanged 12-candidate gate (4 relocation-safe/calibrated formulas). The archive-authenticated [diagnosis](../results/2026-10-27-countnegative-discovery-diagnosis/README.md) preserves the negative result; no candidate labels or hardware outcomes were produced.
 
 [Midterm report alignment](midterm-report-alignment.md): compares the owner's current 15-page PDF to verified project state, maps the AI-selection commitments to the work in scope, identifies stale/empty report sections, and records the missing research milestones.
