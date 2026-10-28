@@ -1,0 +1,29 @@
+# Codex activity and baseline evidence
+
+Snapshot for presentation preparation, October 27, 2026. This is a scoped inventory of the ISAForge chat and recorded research artifacts, not a count of all work by every team member.
+
+## What the Codex logs record
+
+The local Codex thread-history database for the project chat records **90 turns with a duration totaling 29.94 hours**: 84 completed turns (28.06 h), four failed turns (1.84 h), and two interrupted turns (0.04 h). A further in-progress turn was excluded from that snapshot. Durations are Codex-reported turn durations; they include tool execution and waiting. They are not model-training hours, human hours, continuous uptime, or additional evidence of experimental success. They should not be added to overlapping subagent activity.
+
+The same snapshot contains **48 directly spawned subagent threads**, 4,707 command-execution items and 147 web-search items in the main chat. An item is a recorded event, not necessarily a unique experiment, successful command, or paper. Search of recorded items surfaced extensive discussion of XGBoost, Gaussian processes, feasibility, CRC32 and aha-mont64. These activity counts do not count all work in other chats or independently establish what ran; the experiment artifacts below are the authority for results. Thread and source data remain local; this note contains aggregate counts rather than transcripts.
+
+Recorded turn duration by local start date: October 19 1.76 h, 20 3.73 h, 21 4.97 h, 22 3.29 h, 25 2.61 h, 26 6.21 h, and 27 7.38 h. These are rounded daily totals and can include failed/interrupted turns. The chat's active span is longer than 29.94 hours and is not itself evidence of continuous activity.
+
+## Datasets and selection methods
+
+The frozen selection corpus contains 122 successful measured candidate/program rows, four charged failures, 14 workload groups and 15 contexts: Embench 39 labels across six groups; BEEBS 48 across five; TACLeBench 35 across three. Three later Ascon labels are separate. Rows are not independent programs; failed attempts do not receive invented outcomes. See [dataset README](dataset/README.md).
+
+The final retrospective screen evaluated 13 policies: eight learned policies (XGBoost speedup regression, XGBoost pairwise ranker, factorized feasibility XGBoost, cap-specific feasibility XGBoost, group-bootstrap feasibility XGBoost, logistic feasibility, random-forest feasibility, and Extra-Trees feasibility); and five controls (frequency, merit, calibrated latency, latency/cost heuristic and random). These eight policies are not eight independent algorithm families. The 2,925 policy-budget replay outcomes reuse the existing measured labels over 13 policies, five seeds, three budgets and 15 contexts: they are **not new hardware evaluations**. Other experiments, including Gaussian-process acquisition and earlier isolated LUT models, are outside that screen and may overlap its data or infrastructure. There is no reliable lifetime count of all model fits or unique independent datasets in these aggregate logs. See [model screen](../../docs/model-screen-2026-10-26.md) and [scorecard](../../results/2026-10-27-final-selection-scorecard/README.md).
+
+## The initial baseline and comparison baselines
+
+For the first complete six-candidate CRC32 study, the **performance baseline** was the unmodified Embench program on the unmodified PicoRV32 SoC, using RV32I/Zicsr, the same firmware and memory configuration, and a common 12 MHz clock target. The benchmark window covered 170 repetitions of the benchmark body; startup, independent checksum, warm-up and serial reporting were outside the measured window. RTL simulation yielded **32,387,382 cycles**, and integrated synthesis yielded **1,653 LUT4**. The unmodified program's correctness was checked. Routed baseline Fmax ranged from 68.49 to 77.16 MHz over three seeds.
+
+The best measured candidate, `index_offset`, ran in **30,820,662 cycles**, a **1.050833× common-clock cycle speedup**, and used 1,684 LUT4 (+31). All six candidates passed the stated checks, but `mask_offset` was slower than baseline (0.984131×), so replacement was not automatically beneficial. Stock firmware on the extended core reproduced the baseline, and custom firmware trapped on the unextended core. The first study used a +128 LUT4 limit; the later cross-workload screen uses +64 LUT4. These are RTL-simulation and FPGA synthesis/routing measurements, not physical-board stopwatch results. Details and all six outcomes: [CRC32 methods](../../docs/codesign-loop.md).
+
+A **selection baseline** is different: frequency orders candidates by occurrence count; merit orders by the `saved` feature, `(size − 1) × runs`. Calibrated latency and latency/cost heuristics provide stronger architecture-aware controls, while random supplies a simple reference. The measured oracle sees all candidate outcomes and identifies the best correct and feasible result in a complete pool; it is a retrospective ceiling, not a deployable selector. The early CRC32 study found that merit reached the best candidate with one query in all five tested seeds. See [selection implementation](../../isaforge/selection.py), [feature validation](../../isaforge/features.py) and the CRC32 methods.
+
+## Reproducibility and limits
+
+The activity totals were queried read-only from `~/.codex/thread_history_1.sqlite` (`thread_turns` and `thread_items`) and `~/.codex/state_5.sqlite` (`thread_spawn_edges`), using the project chat ID and excluding the in-progress turn. No content from unrelated chats was needed. These databases are local Codex implementation records and may change as the session continues. For independent reproduction of numerical experimental results, use the repository's saved artifacts rather than the activity counts.

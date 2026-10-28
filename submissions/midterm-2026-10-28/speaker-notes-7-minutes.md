@@ -24,23 +24,23 @@ Repository method reviews: docs/research-foundation.md; docs/selection-methods-r
 
 ## 3. Timeline and team contributions (20 seconds)
 
-We progressed from CRC32 and aha-mont64 to a multi-workload measured corpus, then added budgeted comparisons, explanations, and bounded LLM tools. Software, hardware, and machine learning connect through one measurement contract. The contribution mapping shown is provisional: Git evidence supports the named author areas, while the software role comes from the team report and needs team confirmation.
+We progressed from CRC32 and aha-mont64 to a multi-workload corpus, followed by budgeted comparisons, explanations, and LLM tools. Codex records approximately thirty hours of turn duration in this chat; that includes tool waits and failures and is not model training time. The team contribution mapping is provisional and needs confirmation.
 
 ### Sources / Q&A
 
-Dated results directories October19–27; git history; docs/original-project-proposal.txt; supplied AgenticRiscPredictor.pdf. Contribution names, author aliases and actual work must be confirmed by the team before submission. Git alone does not measure contribution shares.
+Dated results directories October19–27; git history; docs/original-project-proposal.txt; supplied AgenticRiscPredictor.pdf. Codex thread history snapshot through October 27: 90 turns with duration total 29.94 hours, including 84 completed, 4 failed and 2 interrupted; tool waiting is included. 48 directly spawned subagent threads; counts are activity, not research outcomes. See codex-history-and-baseline.md. Team must confirm roles and aliases; Git alone cannot measure contribution shares.
 
 ## 4. From workload to verified improvement (35 seconds)
 
-A supported RV32 integer workload is compiled and traced. We extract repeated dataflow patterns and reject illegal operations, unsafe dependencies, or excess inputs and outputs. The selected expression is lowered to a custom opcode connected through PicoRV32’s PCPI interface. We then execute the modified program, verify its output, and measure cycles plus integrated area and routed timing. Only a correct design within the constraints becomes an improvement. Cycle speedup assumes a common clock; these are simulation and synthesis measurements, not physical-chip timings.
+First we compile and run the unmodified benchmark on the unmodified PicoRV32 and check its output. In the original CRC32 experiment, that reference took 32.39 million simulated cycles. The best candidate took 30.82 million: a 1.051 times common-clock speedup. We extract legal dataflow, lower the candidate to a custom opcode, and rerun the same benchmark. Integrated synthesis and routing measure area and timing. These are simulation and FPGA tool results, not physical-chip stopwatch measurements.
 
 ### Sources / Q&A
 
-Existing extractor, lowering and PicoRV32 PCPI evaluation; README.md and docs/HANDOFF.md. Restricted integer patterns, two register inputs/one output. Reject unsafe/unsupported rewrites. Integrated hardware metrics must stay separate from standalone LUT predictors.
+docs/codesign-loop.md; results/2026-10-19-codesign/independent-audit.json. Embench CRC32,170 benchmark repetitions; startup, independent checksum, warm-up and serial reporting excluded from counter window. Same RV32I PicoRV32, 8KiB RAM and 12MHz target. Baseline 32,387,382 cycles,1653 LUT4; index_offset 30,820,662 cycles,1684 LUT4 (+31), 1.050833x. Both correctness checked; same-clock speedup, not measured board runtime. Baseline synth/routing Fmax 68.49–77.16 MHz. Distinguish this unmodified reference from heuristic selection baselines.
 
 ## 5. Dataset: measured programs, not synthetic labels (40 seconds)
 
-Our frozen corpus contains 122 successful candidate-program measurements from fourteen workload groups, with four failed attempts retained and charged. The chart shows coverage from three benchmark suites. Each row contains premeasurement candidate features and separately recorded whole-program speedup, area, timing, and correctness. Candidates from one program are related, so we hold out entire workloads and exclude related expression families. The three later Ascon measurements remain separate. Thousands of policy replays reuse these labels; they are not thousands of new hardware experiments.
+Our frozen corpus contains 122 successful candidate-program measurements from fourteen workload groups, plus four charged failures. These come from three benchmark suites. We tested thirteen selection policies in the final screen: eight learned policies and five heuristics or random controls. Their 2,925 replay results reuse the same hardware measurements; they are not new hardware runs. We evaluate by holding out entire workloads. Three later Ascon measurements remain separate.
 
 ### Sources / Q&A
 
@@ -48,7 +48,7 @@ Dataset: submissions/midterm-2026-10-28/dataset/; results/2026-10-27-final-selec
 
 ## 6. The ML model: shallow boosted-tree ranking (40 seconds)
 
-Our main learned challenger is XGBoost pairwise ranking, not a neural network. Thirty-five premeasurement features describe the expression, constants, operations, and trace opportunity. Training pairs are ordered using actual measured speedup within the same workload context. Eighty shallow trees produce a relative ranking score. That score is neither a predicted speedup nor a confidence probability. We also tried regression, feasibility models, and active learning; those are comparisons, not evidence that every new model helped. The goal is better selection, not simply lower prediction error.
+Our main challenger is XGBoost pairwise ranking, not a neural network. Thirty-five premeasurement features describe each candidate. Pairs are ordered using measured speedup within a workload context. Eighty shallow trees produce a relative ranking score, not a predicted speedup or confidence probability. We also tested XGBoost regression and feasibility models, logistic regression, random forests, Extra Trees, and Gaussian-process active learning. We assess them on selection, not just prediction error.
 
 ### Sources / Q&A
 
@@ -72,7 +72,7 @@ Agent protocol and logs: results/2026-10-27-codex-chat-agent-edn-b64-s0/; Ascon 
 
 ## 9. Baselines and a fair measurement budget (35 seconds)
 
-We compare against frequency, simple merit, architecture-aware heuristics, random search, and non-agent active learning. Merit prioritizes repeated instruction savings; it is already a strong baseline. Every policy should see the same pool and information, with one, two, or three charged attempts. Outcomes stay hidden until a permitted query. A result counts only if correct and feasible. The measured oracle is a retrospective reference, not a deployable policy. Historical training cost must be reported separately; this current development cohort is not untouched confirmation.
+The unmodified program gives the performance reference. A different kind of baseline is a selection policy: frequency counts occurrences, while merit estimates operations eliminated times executions. We compare these with latency-aware heuristics, random search, and learned policies. Every method gets the same pool and one, two, or three charged attempts; unqueried results remain hidden. The measured oracle knows all outcomes and gives a retrospective ceiling, not a deployable policy. Historical training cost is tracked separately.
 
 ### Sources / Q&A
 
