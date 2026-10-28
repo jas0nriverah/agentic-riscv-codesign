@@ -1,0 +1,143 @@
+{
+  "schema": "isaforge-pulpino-hanoi-v1-qualification",
+  "workload_group": "pulpino-hanoi",
+  "upstream_suite": "PULPino sequential tests Tower of Hanoi",
+  "upstream_repository": "https://github.com/pulp-platform/pulpino",
+  "upstream_commit": "6631c49ba38a9258da44d6b120d902f7b81f9233",
+  "pool_size": 12,
+  "plate_count": 12,
+  "minimum_calibrated_cycle_reduction": 0.005,
+  "minimum_timed_replacements": 10,
+  "joint_gate": "At least one same candidate meets both unchanged public opportunity minima.",
+  "unchanged_upstream_algorithm_and_fixed_input": true,
+  "output_adapter": "Freestanding ISAForge benchmark ABI; upstream suite registration, timer callbacks, and formatted output are omitted.",
+  "correctness": "Require benchmark completion and equality of every destination B[i] to i for i in [0,12), matching the pinned upstream check.",
+  "correctness_limitation": "One fixed twelve-plate input and destination-array oracle; no generalized parameter sweep.",
+  "library_runtime": "No target libc or formatted output is linked; only the pinned recursive solver and ABI adapter are used.",
+  "timing_limitation": "Includes deterministic array initialization and the recursive solver; excludes host verification.",
+  "compiler_flags": [
+    "-march=rv32i_zicsr",
+    "-mabi=ilp32",
+    "-Os",
+    "-std=gnu17",
+    "-nostdlib",
+    "-nostartfiles",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-msmall-data-limit=0",
+    "-mno-relax",
+    "-DCPU_MHZ=1"
+  ],
+  "isa": "rv32i_zicsr",
+  "abi": "ilp32",
+  "optimization": "-Os",
+  "clock_mhz": 12,
+  "route_seeds": [
+    1,
+    2,
+    3
+  ],
+  "memory_partition": {
+    "ram_bytes": 8192,
+    "program_limit": 6400,
+    "stack_floor": 6528,
+    "stack_bytes": 1664,
+    "minimum_guard_bytes": 128
+  },
+  "candidate_dispatch_enabled": false,
+  "target_candidate_attempts": 0,
+  "family_status": "Fixed-input recursive transfer workload; source/operator-family overlap must be audited before any independence claim.",
+  "created_at_utc": "2026-10-28T13:01:38.119245+00:00",
+  "phases": [
+    "prepare",
+    "discover",
+    "opportunity",
+    "baseline",
+    "public",
+    "freeze"
+  ],
+  "reference_root": "generated/codesign-crc32-2026-10-19-r1",
+  "reference_plan_sha256": "796167e07bdc413f348c829ca93e60eda87162ca02143d3f57269ff2059197b9",
+  "historical_corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "native_root": "generated/pulpino-hanoi-qualification-2026-10-28-r1",
+  "source_bindings": {
+    "scripts/qualify_pulpino_hanoi.py": "08f7b7472335880c7c5a648d4c3f466b3ff48e21836a58c22e96eba4a3d457c7",
+    "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+    "scripts/qualify_opportunity_sources.py": "389e34ba724f2dcc3766752e404e46006b6aa7fced4f2e21508127ac08e8ffe1",
+    "isaforge/observed_command.py": "f56bf235b31205c842ea04ab5a493ee7f7e6731844e05b6d8991f21d9f3be41e",
+    "isaforge/pulpino_hanoi_workload.py": "f5c8fe1f1a725e84cab3384026c5095eca7d8c37eeacc61a2c89e8da29fad438",
+    "tests/test_pulpino_hanoi_workload.py": "8620d090336cebd9ba6e4db12af61cdc720ab2c5e7388220f95e4408b15223c3",
+    "docs/pulpino-hanoi-adapter-contract-2026-10-28.md": "4a9a41aaebe244e4314387f9e2501e8ce89001072f1912ba71fb6960c86ba192",
+    "benchmarks/pulpino-hanoi/SOURCE_PIN.json": "5d05ccacc1f06025878afc7c562cd0e5c2a429ff6bbc755f4da6b1412b77d607",
+    "benchmarks/pulpino-hanoi/adapter.c": "4657fe4667bd63d32270c55d18e6567ac96f633930fdd0d0776d9bdd808693d1",
+    "benchmarks/pulpino-hanoi/algorithm.c": "eddbddd02ada2574c018defa35e09d2f7071e04b7ca181fbcaba616787f93d00",
+    "benchmarks/pulpino-hanoi/upstream/towerofhanoi.c": "d1f2951cca657e3cdd1974ad445549094b370e817aeae09987d317dbd32f06f2",
+    "benchmarks/pulpino-hanoi/LICENSE": "b41106a9d0de1cf6ab4ea56bedf677503085c0570248f37fe2cdf657a5e72601",
+    "results/2026-10-26-lift-selection-corpus/corpus.json": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+    "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+    "isaforge/campaign_evidence.py": "96e4a96379dc336e1c04fc8a3bbfb9971cf65281d14cfe140f4eecaec51a748e",
+    "isaforge/prospective_inputs.py": "90abbebb74ad967d498c126134b30401e195da7e12ceef405661e5742ef5f446",
+    "hardware/embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+    "hardware/embench_memory.c": "343b26ae849f9bfab8ed197636449c4a91c5d78f26fe7f6ff4f960901520b847",
+    "hardware/checked_sim.cpp": "477635f316551bf85bd7ac1addc11bb9fa2c252969202621e75692ea5cfd9f07"
+  },
+  "workers": 1,
+  "build_workers": 2,
+  "phase_timeout_seconds": 3600,
+  "phase_commands": {
+    "prepare": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/.venv/bin/python",
+      "-m",
+      "isaforge.pulpino_hanoi_workload",
+      "prepare",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/pulpino-hanoi-qualification-2026-10-28-r1",
+      "--reference-root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+    ],
+    "discover": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/.venv/bin/python",
+      "-m",
+      "isaforge.pulpino_hanoi_workload",
+      "discover",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/pulpino-hanoi-qualification-2026-10-28-r1"
+    ],
+    "opportunity": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/.venv/bin/python",
+      "-m",
+      "isaforge.pulpino_hanoi_workload",
+      "opportunity",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/pulpino-hanoi-qualification-2026-10-28-r1"
+    ],
+    "baseline": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/.venv/bin/python",
+      "-m",
+      "isaforge.pulpino_hanoi_workload",
+      "baseline",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/pulpino-hanoi-qualification-2026-10-28-r1"
+    ],
+    "public": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/.venv/bin/python",
+      "-m",
+      "isaforge.pulpino_hanoi_workload",
+      "public",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/pulpino-hanoi-qualification-2026-10-28-r1"
+    ],
+    "freeze": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/.venv/bin/python",
+      "-m",
+      "isaforge.pulpino_hanoi_workload",
+      "freeze",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/pulpino-hanoi-qualification-2026-10-28-r1"
+    ]
+  },
+  "rejection_rule": "Preserve the first failed phase and raw archive. A nonzero phase is a workload rejection only when its source-bound gate artifact records an explicit failed gate. Do not alter source, tests, compiler, ISA, memory split, pool size, or thresholds.",
+  "pool_freeze_is_candidate_authorization": false
+}

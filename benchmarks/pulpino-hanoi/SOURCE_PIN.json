@@ -1,0 +1,26 @@
+{
+  "schema": "isaforge-workload-source-pin-v1",
+  "suite": "PULPino sequential tests Tower of Hanoi",
+  "repository": "https://github.com/pulp-platform/pulpino",
+  "commit": "6631c49ba38a9258da44d6b120d902f7b81f9233",
+  "license": {
+    "path": "benchmarks/pulpino-hanoi/LICENSE",
+    "sha256": "b41106a9d0de1cf6ab4ea56bedf677503085c0570248f37fe2cdf657a5e72601",
+    "status": "Exact upstream Solderpad Hardware License, Version 0.51"
+  },
+  "files": {
+    "benchmarks/pulpino-hanoi/upstream/towerofhanoi.c": {
+      "bytes": 1847,
+      "sha256": "d1f2951cca657e3cdd1974ad445549094b370e817aeae09987d317dbd32f06f2",
+      "git_blob_sha1": "8faf367c9f2215efa9e70543c9942f55d462dab7"
+    }
+  },
+  "fixed_workload": {
+    "input": "The original twelve plates initialized A[i]=i, B[i]=C[i]=0",
+    "repetitions": 1,
+    "maximum_source_recursion_depth": 12,
+    "oracle": "The original check requires B[i] == i for every i in [0, 12)"
+  },
+  "adapter_sha256": "4657fe4667bd63d32270c55d18e6567ac96f633930fdd0d0776d9bdd808693d1",
+  "algorithm_extraction_sha256": "eddbddd02ada2574c018defa35e09d2f7071e04b7ca181fbcaba616787f93d00"
+}

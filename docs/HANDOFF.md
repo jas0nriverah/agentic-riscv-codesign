@@ -37,6 +37,25 @@ gates, followed by a pushed zero-label preregistration and same-budget evaluatio
 of this route against primary-only, merit, frequency, latency/cost, random, and
 non-agent active learning.
 
+## October 28 PULPino Hanoi source-screen rejection
+
+The pinned twelve-plate Hanoi adapter passed its upstream destination-array
+self-check on the target simulator: **416,259 cycles / 71,780 instructions**;
+stack use was **432 / 1,664 bytes**. Automatic discovery found three executable
+formulas, all three removed by the source relocation guard because they include
+symbolic `%hi/%lo` references to global arrays `A`, `B`, and `C`. The guarded
+pool therefore has **zero legal candidates versus twelve required**. Discovery
+stopped before the opportunity gate and routed baseline. No candidate attempts,
+speedup labels, area, or routed timing measurements were produced.
+
+The qualification wrapper preserves the `discover` exit as failed. The separate
+read-only [diagnosis](../results/2026-10-28-pulpino-hanoi-qualification-r1/README.md)
+binds the archived source snapshot and reclassifies the cause as source-pool
+ineligibility, not a toolchain failure. Keep both records. Do not move arrays,
+weaken relocation safety, shrink the pool, or lower the opportunity gate. This
+source adds no training rows and does not change the frozen model. Continue
+screening a different untouched workload; Hanoi is consumed and rejected.
+
 ## October 28 previous result: tiny-regex-c complete-pool selection
 
 This section supersedes the baseline-only status below. The prelabel r5 release

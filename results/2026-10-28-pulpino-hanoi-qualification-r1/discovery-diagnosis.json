@@ -1,0 +1,139 @@
+{
+  "schema": "isaforge-pulpino-hanoi-discovery-diagnosis-v1",
+  "status": "source_rejected_no_relocation_safe_candidates",
+  "source_level_rejection": true,
+  "target_candidate_attempts": 0,
+  "candidate_measurements": 0,
+  "target_candidate_labels": 0,
+  "reason": "The fixed 12-candidate pool cannot be formed: only three formulas are executable and all three remove symbolic global-array relocations; relocation-safe and calibrated legal counts are zero.",
+  "source_gate": {
+    "pool_size": 12,
+    "relocation_guard": "isaforge-relocation-source-guard-v1",
+    "opportunity_gate": "not reached; no legal pool existed"
+  },
+  "counts": {
+    "raw": 3,
+    "executable": 3,
+    "relocation_safe": 0,
+    "calibrated": 0,
+    "required": 12
+  },
+  "raw_formulas": [
+    {
+      "name": "candidate_00",
+      "formula": "addi(lui(0),508)"
+    },
+    {
+      "name": "candidate_01",
+      "formula": "addi(lui(0),520)"
+    },
+    {
+      "name": "candidate_02",
+      "formula": "addi(lui(0),532)"
+    }
+  ],
+  "relocation_rejections": [
+    {
+      "name": "candidate_00",
+      "formula": "addi(lui(0),508)",
+      "safe": false,
+      "checked_sites": 2,
+      "unsafe_sites": [
+        {
+          "site": 40,
+          "assembly": "\tlui\ta3,%hi(C)",
+          "reason": "relocation_modifier",
+          "function": "benchmark",
+          "source_line": 78
+        },
+        {
+          "site": 45,
+          "assembly": "\taddi\ta3,a3,%lo(C)",
+          "reason": "relocation_modifier",
+          "function": "benchmark",
+          "source_line": 83
+        }
+      ],
+      "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+    },
+    {
+      "name": "candidate_01",
+      "formula": "addi(lui(0),520)",
+      "safe": false,
+      "checked_sites": 2,
+      "unsafe_sites": [
+        {
+          "site": 39,
+          "assembly": "\tlui\ta2,%hi(B)",
+          "reason": "relocation_modifier",
+          "function": "benchmark",
+          "source_line": 77
+        },
+        {
+          "site": 44,
+          "assembly": "\taddi\ta2,a2,%lo(B)",
+          "reason": "relocation_modifier",
+          "function": "benchmark",
+          "source_line": 82
+        }
+      ],
+      "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+    },
+    {
+      "name": "candidate_02",
+      "formula": "addi(lui(0),532)",
+      "safe": false,
+      "checked_sites": 2,
+      "unsafe_sites": [
+        {
+          "site": 38,
+          "assembly": "\tlui\ta1,%hi(A)",
+          "reason": "relocation_modifier",
+          "function": "benchmark",
+          "source_line": 76
+        },
+        {
+          "site": 43,
+          "assembly": "\taddi\ta1,a1,%lo(A)",
+          "reason": "relocation_modifier",
+          "function": "benchmark",
+          "source_line": 81
+        }
+      ],
+      "rule": "Every removed statement must use supported register operands and literal immediates; no symbolic relocation or PC-relative operation."
+    }
+  ],
+  "uncalibrated_formulas": [],
+  "baseline_simulator_result": {
+    "cycles": 416259,
+    "instructions": 71780,
+    "benchmark_result_u32": 1,
+    "upstream_self_check": true,
+    "custom_instructions": 0,
+    "region_custom_instructions": 0
+  },
+  "memory_check": {
+    "min_sp": 7760,
+    "max_stack_bytes": 432,
+    "stack_headroom_bytes": 1232,
+    "checked_cycles": 416914
+  },
+  "measured_hardware": null,
+  "interpretation": "The qualification wrapper records a failed discover command because the generic extractor raises on a short pool. This label-free diagnosis reclassifies that preserved outcome as a source-level eligibility rejection, not a toolchain or simulator failure. Do not move arrays to the stack, relax the relocation guard, shrink the pool, or lower the opportunity gate to rescue it.",
+  "protocol_sha256": "70dc8b8482ee965f4d90b4c9ff984b89b7b7952187775367f2a804667330f3ec",
+  "diagnostic_script_sha256": "afca138b7c644f90a58d3fac4b8155d2fec1ad603a209fb700ed8ea1383a6f9f",
+  "bound_artifacts": {
+    "generated/pulpino-hanoi-qualification-2026-10-28-r1/plan.json": "39ec9e3a460a209c503768226be0b459dcd22f4c18517abd7762e870a3f27b6b",
+    "generated/pulpino-hanoi-qualification-2026-10-28-r1/inputs/program.c": "4657fe4667bd63d32270c55d18e6567ac96f633930fdd0d0776d9bdd808693d1",
+    "generated/pulpino-hanoi-qualification-2026-10-28-r1/inputs/algorithm.c": "eddbddd02ada2574c018defa35e09d2f7071e04b7ca181fbcaba616787f93d00",
+    "generated/pulpino-hanoi-qualification-2026-10-28-r1/inputs/latency-calibration.json": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+    "results/2026-10-28-pulpino-hanoi-qualification-r1/protocol.json": "70dc8b8482ee965f4d90b4c9ff984b89b7b7952187775367f2a804667330f3ec",
+    "results/2026-10-28-pulpino-hanoi-qualification-r1/qualification.json": "3b0d4131c9493a6c22b87a8547de34c443dcc097ec08a6cdb5a9d8e9eecf4a1f",
+    "generated/pulpino-hanoi-qualification-2026-10-28-r1/discovery/attempt-000/program.s": "7c06fe21867df4a220f53252e53d07f43ef6abe252b10508a53920b95f955cfd",
+    "generated/pulpino-hanoi-qualification-2026-10-28-r1/discovery/attempt-000/marked.S": "b6fc250bdefd5e18673ffb5b73b2ecd2c9ac13f61342b045adf10ce9a8b492d9",
+    "generated/pulpino-hanoi-qualification-2026-10-28-r1/discovery/attempt-000/marked/disassembly.txt": "96a0d337ac4c0d6e8539f747d64d607e81477182d80d46001780af7887b9916d",
+    "generated/pulpino-hanoi-qualification-2026-10-28-r1/discovery/attempt-000/marked/symbols.txt": "1116b774cd5b78df787275a858a6cda066469c0100b7fd2d3a9815acda9b9ab1",
+    "generated/pulpino-hanoi-qualification-2026-10-28-r1/discovery/attempt-000/profile/simulation.json": "7a99e08b794d4530b41538ae71e81e8ee895e6804881a4d2d17443c1b39f16e4",
+    "results/2026-10-28-pulpino-hanoi-qualification-r1/commands/01-discover/stderr.txt": "cbe83576eff40cd7dab5cc6e7a9161eed3963c6b3a116fac46bcbb8d624d79b5"
+  }
+}
