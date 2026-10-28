@@ -171,20 +171,42 @@ txt(s,'A high rank can still fail',790,176,410,70,30,C.navy,true);txt(s,'Bitcoun
 txt(s,'Uncertainty guides questions; measured correctness and feasibility decide.',72,588,1136,60,27,C.blue,true);
 }
 {
-const s=slide(8,'Agent architecture and live LLM pilot',45,'Our agent combines predictions, function calling, measured feedback and persistent memory. Historical retrieval uses lexical and latent-semantic search with hybrid rank fusion. Versioned runs and SQL traces connect decisions to tool outcomes. We tested this with two fresh GPT-6 Luna agents on archived SHA256 measurements. Both found the same verified 1.0214-times speedup. The hybrid-memory agent used two queries and four decision turns. The no-retrieval agent used three queries and nine turns, including three rejected infeasible finalizations. This demonstrates live agent behavior and guardrails. It does not prove memory caused the difference, and the latency-cost heuristic found the optimum in one query.','October 28 implementation: isaforge/agent_memory.py, isaforge/routed_selection.py, isaforge/bounded_selector.py, scripts/export_agent_observability.py, scripts/evaluate_agent_memory.py. Semantic retrieval is TF-IDF plus truncated SVD and cosine similarity, not pretrained language embeddings. Hybrid search uses reciprocal rank fusion with k=60. Historical records are already host-filtered; target groups and exact formulas receive an additional exclusion check before index fitting. Retrieval is automatically injected before a decision, not a fifth LLM tool. Function calling retains list_candidates, predict, measure, finalize. Routing escalates once only for InvalidActionError, not calibrated decision uncertainty. Trace exporter verifies sealed artifact hashes and creates a derived SQLite database. LLMOps here means versioned protocols, source/prompt/model identity, offline evaluation and local trace inspection; cloud deployment and live monitoring remain future work. Offline controls ignore retrieval and prove noninterference only. Live pilot results/2026-10-28-live-luna-memory: two fresh configured gpt-6-luna medium agents, no inherited context, instruction-enforced public-file access. No retrieval: 9 live turns, 3 queries, 3 rejected finalizations. Hybrid: 4 live turns, 2 queries, 0 rejections. Both select add(in0,slli(in1,21)): 26135630 to 25588430 cycles, +50 LUT4, 65.99353 MHz. Both reach pool oracle. Frequency and latency/cost reach it at query 1. One sample per arm, consumed data, unknown token usage and model-only latency. Real LLM choices, no fresh hardware. No causal or superiority claim. Semantic method is local LSA; no live routing escalation was exercised. https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html; docs/agent-memory-operations.md.');
-txt(s,'BOUNDED AGENTIC LOOP',72,137,650,28,22,C.teal,true);
-flow(s,[['Analyze + predict','Legal candidates\nXGBoost rankings'],['LLM decision','Function calling\nRouting tested offline'],['Host + tools','Budget guardrails\nMeasure / finalize'],['Episode memory','Paid results\nBest feasible design']],179);
-addLine(s,1088,318,1088,341,C.teal,2);addLine(s,430,341,1088,341,C.teal,2);
-txt(s,'Loop engineering: observe, act, update, stop',420,350,760,31,23,C.teal,true);
-addLine(s,72,395,1208,395,C.grid,1);
-txt(s,'HISTORICAL MEMORY',72,411,535,30,23,C.blue,true);
-txt(s,'Lexical + latent-semantic search\nRank fusion feeds approved evidence',72,453,555,76,24);
-txt(s,'LLMOPS + OBSERVABILITY',680,411,530,30,23,C.blue,true);
-txt(s,'Versioned runs and offline evaluation\nSQLite: decisions, calls, tools, results',680,453,530,76,24);
-txt(s,'Source hashes and tool traces; live token counts and inference latency unavailable',72,540,1136,32,22,C.muted);
-addLine(s,72,587,1208,587,C.grid,1);
-txt(s,'Live Luna: 3 vs 2 queries, both reach 1.0214× speedup',72,602,1136,36,25,C.amber,true);
-txt(s,'One trial per arm on archived SHA256. Latency/cost heuristic needs 1 query.',72,644,1136,29,21,C.muted);
+const s=slide(8,'ML-guided agentic instruction selection',45,'Read this diagram from left to right. Offline, measured examples provide candidate features and speedup-based ranking labels. We train an XGBoost ranker and evaluate it on held-out workloads. At selection time, the LLM queries predictions and receives approved historical memory. It chooses an action, but the host controls the measurement budget and checks correctness, area and timing. Paid outcomes update the episode state and inform the next choice. The final output is the best verified feasible design. We train the predictor, not the language model. Our live Luna pilot exercised this loop using archived hardware outcomes; it does not establish a general advantage over heuristics.','Training: 35 premeasurement features, rank:pairwise, relevance derived from measured within-context speedup order. Split entire workloads and related formula families; held-out labels do not enter fitting or retrieval. Diagram trees are schematic, not an actual fitted-tree explanation. The trained ranker returns a ranking score, not calibrated speedup. Runtime also supports other frozen predictors and a hardware GP; this diagram focuses on the trained ranker connection. Selected models are not retrained on hidden target labels. Paid observations update episode state and may support an explicitly configured hardware-GP update, not XGBoost or LLM fine-tuning. Four tools: list_candidates, predict, measure, finalize. Historical memory uses local lexical TF-IDF + latent-semantic SVD retrieval and RRF, scoped to approved history. Host feasibility is measured correctness, integrated area and timing. Live pilot: results/2026-10-28-live-luna-memory/README.md. Two fresh gpt-6-luna agents, one trial each, archived SHA256 evidence. Both 1.0213847x, +50 LUT4, 65.99353 MHz; memory 2 queries, no retrieval 3, cost heuristic 1. No causal claim, new hardware or fine-tuned LLM. Local LLMOps covers protocol versioning and SQLite traces; token/model-only latency unavailable in live pilot.');
+addRect(s,{left:70,top:149,width:405,height:431},'#F3F8FC',solid('#B7D3E5',1.5),'roundRect');
+addRect(s,{left:520,top:149,width:690,height:431},'#F2F9F6',solid('#B8DACC',1.5),'roundRect');
+txt(s,'OFFLINE  /  TRAIN THE PREDICTOR',94,168,367,32,21,C.blue,true);
+txt(s,'RUNTIME  /  SELECT AND VERIFY',545,168,625,32,21,C.teal,true);
+addRect(s,{left:95,top:217,width:355,height:72},C.white,solid('#B7D3E5'),'roundRect');
+txt(s,'Measured training examples',111,226,327,30,24,C.navy,true);
+txt(s,'Candidate features + speedup order',111,260,327,27,20,C.muted);
+addRect(s,{left:263,top:291,width:19,height:24},C.blue,noneLine,'downArrow');
+addRect(s,{left:95,top:318,width:355,height:143},C.white,solid('#B7D3E5'),'roundRect');
+txt(s,'XGBoost ranker',112,329,320,33,27,C.navy,true);
+for(const x of [157,270,383]){
+ addLine(s,x,381,x,397,C.blue,2);addLine(s,x-24,397,x+24,397,C.blue,2);addLine(s,x-24,397,x-24,413,C.blue,2);addLine(s,x+24,397,x+24,413,C.blue,2);
+ for(const [xx,yy] of [[x,381],[x-24,413],[x+24,413]])addRect(s,{left:xx-7,top:yy-7,width:14,height:14},'#C8E2F2',solid(C.blue,1),'ellipse');
+}
+txt(s,'Boosted decision trees',111,433,320,26,20,C.muted);
+txt(s,'Output: candidate ranking score',95,480,355,32,23,C.blue,true);
+txt(s,'Validate on held-out workloads',95,524,355,32,21,C.muted);
+addRect(s,{left:545,top:217,width:280,height:72},C.white,solid('#B8DACC'),'roundRect');
+txt(s,'Workload candidates',561,226,250,30,23,C.navy,true);txt(s,'Legal patterns + constraints',561,260,250,26,20,C.muted);
+addRect(s,{left:851,top:217,width:334,height:72},C.white,solid('#B8DACC'),'roundRect');
+txt(s,'Historical memory',867,226,305,30,23,C.navy,true);txt(s,'Lexical + semantic retrieval',867,260,305,26,20,C.muted);
+addLine(s,685,290,685,322,C.teal,2);addLine(s,685,309,1018,309,C.teal,2);addLine(s,1018,290,1018,309,C.teal,2);
+addRect(s,{left:676,top:315,width:18,height:18},C.teal,noneLine,'downArrow');
+addRect(s,{left:593,top:337,width:290,height:111},'#E0F0E9',solid(C.teal,2),'roundRect');
+txt(s,'LLM selection agent',609,352,258,32,25,C.navy,true);txt(s,'Query predictions\nChoose next evaluation',609,391,258,55,22,C.ink);
+addLine(s,451,390,570,390,C.blue,2);addRect(s,{left:569,top:381,width:22,height:18},C.blue,noneLine,'rightArrow');
+txt(s,'predict()',477,354,110,28,19,C.blue,true);
+addRect(s,{left:898,top:379,width:29,height:20},C.teal,noneLine,'rightArrow');
+addRect(s,{left:940,top:337,width:245,height:111},C.white,solid(C.teal,1.5),'roundRect');
+txt(s,'Host + evaluator',954,352,218,32,24,C.navy,true);txt(s,'Charge attempt\nVerify cycles / hardware',954,391,218,55,20,C.ink);
+addLine(s,1063,449,1063,478,C.teal,2);addLine(s,739,478,1063,478,C.teal,2);addRect(s,{left:730,top:450,width:18,height:28},C.teal,noneLine,'upArrow');
+txt(s,'Paid outcomes update episode memory',594,489,587,30,23,C.teal,true);
+txt(s,'Stop at budget → best verified feasible design',545,538,640,32,23,C.navy,true);
+txt(s,'LLMOps: versioned runs and SQL traces of decisions, tools and outcomes',72,604,1136,36,25,C.navy,true);
+txt(s,'Live pilot: same 1.0214× result in 3 vs 2 queries. Strong cost heuristic: 1 query.',72,648,1136,28,21,C.muted);
 
 }
 {
