@@ -1,5 +1,7 @@
 # Documentation
 
+[Nanocobs measured selection](../reports/2026-10-28-nanocobs-selection/README.md): ten new measured candidates; LLM and non-random controls tie at B1. [Reconsideration inventory](../reports/2026-10-28-admission-reconsideration/README.md) identifies countnegative as the next smaller pool.
+
 [Active workload admission policy](workload-admission-policy.md): owner removed fixed twelve-candidate and minimum projected-benefit/replacement gates on October 28. Historical stopping points and fixed-pool exclusions below remain historical evidence, not current admission instructions.
 
 [Presentation stopping point](../submissions/midterm-2026-10-28/ai-track-insert.md): AI methodology/results inserts, complete-versus-open analysis, seven-minute plan, and Q&A. The final bounded implementation is `make reproduce-countnegative-diagnosis`, which authenticates and replays committed archive evidence without the original native build directory. Further research is paused at the owner's request.

@@ -1,5 +1,7 @@
 # Research result archives
 
+[Nanocobs variable-pool selection](2026-10-28-nanocobs-v2-selection-r1/README.md): ten measured candidates, eight feasible at +64 LUT4; one-measurement live relay and non-random controls tie the complete oracle (1.002523526×, +10 LUT4). [Separate verification amendment](2026-10-28-nanocobs-selection-verification-r1/README.md) preserves the original SQLite verifier omission and successful corrected raw audit/replay. [Plots and complete tables](../reports/2026-10-28-nanocobs-selection/README.md). Historical fixed-pool exclusions below are not current admission policy.
+
 [MiBench stringsearch target qualification](2026-10-27-mibench-stringsearch-qualification/README.md): pinned source passes 57/57 host cases and target self-check, but discovery finds only ten calibrated formulas and two relocation-safe formulas against the unchanged twelve-candidate gate. Rejected before opportunity/routed-baseline phases; zero candidate attempts or labels. Raw run and offline reconstruction are preserved.
 
 [Ascon selector controller v2 failure](2026-10-27-ascon-selector-controller-v2-attempt/README.md): one unknown controller reservation, zero candidate evaluations and zero target outcomes. The baseline-wrapper bug, sealed attempt evidence, and correction are recorded without retrying the v2 slot.

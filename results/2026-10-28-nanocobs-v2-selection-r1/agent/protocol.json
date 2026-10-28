@@ -1,0 +1,31 @@
+{
+  "schema": "isaforge-nanocobs-v2-live-agent-observability-v1",
+  "target": "nanocobs",
+  "target_context_id": "9eb8d5b253b033212eabf55f5d70b556014200eb93895f2f7242a127b5c90185",
+  "provider": "codex-chat-bridge",
+  "model_label": "current Codex chat model; exact deployment ID unavailable",
+  "prelabel_commit": "85fc99cf162372bfa76352af951ade1c1e2e4ab8",
+  "preregistration_manifest_sha256": "63acf91428d4ecb12a1356eb90a89fa5b464ba17184a2d999da16721d2b6a823",
+  "budget": 3,
+  "area_cap_lut4": 64,
+  "minimum_routed_fmax_mhz": 12.0,
+  "memory": {
+    "mode": "hybrid",
+    "corpus_rows": 109,
+    "target_families_excluded": true,
+    "lexical": "TF-IDF cosine",
+    "semantic": "TF-IDF + truncated-SVD cosine",
+    "fusion": "reciprocal-rank fusion; k=60",
+    "knowledge_graph": "typed graph constructed and source-hashed; separate graph mode is available but not queried in this episode",
+    "max_retrieved_bytes": 40000
+  },
+  "tools": [
+    "list_candidates",
+    "predict",
+    "measure",
+    "finalize"
+  ],
+  "model_routing": "single current Codex chat model; no cross-provider routing or API model selection in this episode",
+  "telemetry": "SQLite is a read-only analysis projection; sealed JSON ledger remains authoritative",
+  "token_usage": "unavailable for current Codex chat bridge"
+}
