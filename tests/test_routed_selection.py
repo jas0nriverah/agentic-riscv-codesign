@@ -7,10 +7,10 @@ from isaforge.selection_provider import (
 from isaforge.routed_selection import RoutedSelectionProvider
 
 
-def response(name='measure'):
+def response(name='measure', candidate_id='c0', summary='Select the leading public candidate.'):
     return dict(status='completed', output=[dict(type='function_call', name=name,
-        arguments=json.dumps({'candidate_id': 'c0',
-            'decision_summary': 'Select the leading public candidate.'}))],
+        arguments=json.dumps({'candidate_id': candidate_id,
+            'decision_summary': summary}))],
         usage=dict(input_tokens=10, output_tokens=4, total_tokens=14))
 
 
@@ -30,6 +30,87 @@ def test_valid_action_uses_primary_only():
     assert p.choose({'public': 1})['tool'] == 'measure'
     assert p.calls == len(seen) == 1
     assert p.last_trace[0]['usage_complete'] is True
+
+
+def _utility_override_request(*, provider_calls=2):
+    return dict(remaining={
+            'provider_calls_available_including_this_response': provider_calls},
+        selection_board=dict(utility_recommendation_candidate_id='c0',
+            utility_recommendation=dict(candidate_id='c0', factorized_decision_score=0.01),
+            rows=[dict(candidate_id='c0', attempted=False,
+                       decision_score_ratio_to_recommendation=1.0),
+                  dict(candidate_id='c1', attempted=False,
+                       decision_score_ratio_to_recommendation=0.1)]))
+
+
+def test_utility_override_routes_for_review_before_any_measurement():
+    seen = []
+    primary = provider('small', response(candidate_id='c1',
+        summary='Choose c1 because the public tree pattern is relevant.'), seen)
+    stronger = provider('large', response(candidate_id='c0',
+        summary='Use the top utility recommendation.'), seen)
+    router = RoutedSelectionProvider(primary, stronger, max_calls=2,
+        review_utility_overrides=True)
+
+    action = router.choose(_utility_override_request())
+
+    assert action['arguments']['candidate_id'] == 'c0'
+    assert [call['model'] for call in seen] == ['small', 'large']
+    first_request = json.loads(seen[0]['input'][0]['content'])
+    review_request = json.loads(seen[1]['input'][0]['content'])
+    assert 'routing_review' not in first_request
+    assert review_request['routing_review']['trigger'] == (
+        'primary_measurement_overrides_utility_recommendation')
+    assert review_request['routing_review']['primary_action']['arguments']['candidate_id'] == 'c1'
+    assert review_request['routing_review']['proposed_candidate_score_ratio'] == 0.1
+    assert router.last_trace[0]['primary_action']['arguments']['candidate_id'] == 'c1'
+    assert router.last_trace[1]['trigger'] == 'utility_override_review'
+    assert router.last_trace[1]['reviewed_utility_recommendation_candidate_id'] == 'c0'
+    assert router.calls == 2
+
+
+def test_utility_override_review_is_skipped_when_only_one_call_is_available():
+    seen = []
+    router = RoutedSelectionProvider(
+        provider('small', response(candidate_id='c1'), seen),
+        provider('large', response(candidate_id='c0'), seen),
+        max_calls=12, review_utility_overrides=True)
+
+    action = router.choose(_utility_override_request(provider_calls=1))
+
+    assert action['arguments']['candidate_id'] == 'c1'
+    assert [call['model'] for call in seen] == ['small']
+    assert router.last_trace[0]['utility_override_review_skipped'] == 'provider_budget'
+
+
+def test_utility_recommendation_match_does_not_escalate():
+    seen = []
+    router = RoutedSelectionProvider(
+        provider('small', response(candidate_id='c0'), seen),
+        provider('large', response(candidate_id='c1'), seen),
+        max_calls=2, review_utility_overrides=True)
+
+    action = router.choose(_utility_override_request())
+
+    assert action['arguments']['candidate_id'] == 'c0'
+    assert [call['model'] for call in seen] == ['small']
+    assert len(router.last_trace) == 1
+
+
+def test_failed_utility_override_review_falls_back_to_valid_primary():
+    seen = []
+    primary = provider('small', response(candidate_id='c1'), seen)
+    stronger = provider('large', ProviderError('network'), seen)
+    router = RoutedSelectionProvider(primary, stronger, max_calls=2,
+        review_utility_overrides=True)
+
+    action = router.choose(_utility_override_request())
+
+    assert action['arguments']['candidate_id'] == 'c1'
+    assert [call['model'] for call in seen] == ['small', 'large']
+    assert router.last_trace[1]['trigger'] == 'utility_override_review'
+    assert router.last_trace[1]['review_fallback'] == dict(
+        selected='primary_action', error_type='ProviderError')
 
 
 def test_escalation_same_public_state_and_aggregate_cost():

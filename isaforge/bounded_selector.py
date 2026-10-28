@@ -41,7 +41,9 @@ PROMPT = (
     'If the remaining decision/provider allowance is exhausted, the host selects '
     'its verified incumbent or baseline. You may stop '
     'early. Every measure action must include a concise public-evidence '
-    'decision_summary of at most 320 characters. Do not provide private chain '
+    'decision_summary of at most 320 characters. If routing_review is present, '
+    'review the primary proposal against the public evidence and utility '
+    'recommendation before returning the action you support. Do not provide private chain '
     'of thought. The final summary you submit is an unverified '
     'agent note; the host returns the authoritative measured result. Single '
     'instructions only; individual '
@@ -394,7 +396,8 @@ class ReplaySelectionSession:
         while isinstance(identity, dict) and 'wrapped' in identity:
             identity = identity['wrapped']
         model_authored = identity.get('provider') in (
-            'openai-responses', 'bounded-recovery-router-v2', 'codex-chat-bridge')
+            'openai-responses', 'bounded-recovery-router-v2',
+            'bounded-recovery-router-v3', 'codex-chat-bridge')
         measurements = []
         for event in self.ledger['events']:
             if 'charged_attempt' not in event:

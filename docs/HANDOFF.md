@@ -1,6 +1,43 @@
-# Current handoff — evidence after tiny-regex-c selection
+# Current handoff — evidence after PULPino Sudoku r4 selection
 
-## October 28 latest result: tiny-regex-c complete-pool selection
+
+## October 28 latest result: PULPino Sudoku r4 complete-pool selection
+
+The frozen 12-candidate study measured every candidate with correctness,
+integrated area, and three routed timing seeds. Baseline is 1,024,889 cycles.
+The best feasible pool result is candidate_02, `slli(add(in0,in1),2)`, at
+1,007,129 cycles (1.017634×), +40 LUT4, and 66.984 MHz minimum routed Fmax.
+Candidate_09 is also feasible at 1,023,359 cycles, +36 LUT4, and 67.806 MHz.
+The unconstrained fastest candidate_00 reaches 1.047602× but costs +70 LUT4,
+above the +64 cap. All twelve correctness checks pass; the measured feasible
+oracle has 1.732871% cycle reduction.
+
+The one live LLM episode queried candidate_00, candidate_01, and candidate_11;
+all three exceeded the area cap, so it finalized baseline. At its third decision
+it chose candidate_11 even though candidate_02 was the displayed factorized
+utility recommendation; candidate_11's score was about 0.11× the recommended
+score. In matched replay, pairwise XGBoost and merit reach the feasible oracle
+by budget three; ten of twelve non-agent policy types reach it in all five
+dependent seeds. The frozen model fit used 106 family-filtered historical rows
+across 14 workload groups and saw zero Sudoku outcomes. This is one fixed puzzle
+and one agent episode, not an independent replication or generalization result.
+Full measurements, policy results, costs, figures, and limitations are in the
+[study report](../reports/2026-10-28-pulpino-sudoku-selector-r4/README.md) and
+[sealed evidence](../results/2026-10-28-pulpino-sudoku-selection-r4/README.md).
+
+After the study, the selector board and prompt were changed to expose utility
+rank, relative score, and overrides. An optional one-shot stronger-model review
+now runs before measurement when the primary proposes a candidate other than
+the utility recommendation. It receives the primary's structured action and
+public-evidence note, shares the call budget, and falls back to the valid primary
+action if review cannot run. The route has offline protocol tests only; r4 is
+pre-change evidence and is not a live evaluation of it. Production XGBoost
+remains frozen. The next required result is a fresh source that passes existing
+gates, followed by a pushed zero-label preregistration and same-budget evaluation
+of this route against primary-only, merit, frequency, latency/cost, random, and
+non-agent active learning.
+
+## October 28 previous result: tiny-regex-c complete-pool selection
 
 This section supersedes the baseline-only status below. The prelabel r5 release
 was pushed before dispatch. All twelve candidates were measured once and

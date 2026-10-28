@@ -103,7 +103,8 @@ def run(*, target_group: str, benchmark: str, output: Path, provider: str = 'cod
         model: str | None = None, escalation_model: str | None = None,
         model_label: str = 'current Codex chat model; exact deployment ID unavailable',
         seed: int = 0, budget: int = 3, area_cap: int = 64,
-        memory_mode: str = 'none', max_model_calls: int = 12):
+        memory_mode: str = 'none', max_model_calls: int = 12,
+        review_utility_overrides: bool = False):
     c.require(provider in ('codex-chat', 'responses'), 'Unknown provider')
     c.require(memory_mode in MODES, 'Unknown memory mode')
     c.require(type(seed) is int and 0 <= seed < 5, 'Use one of the screen policy seeds')
@@ -113,6 +114,8 @@ def run(*, target_group: str, benchmark: str, output: Path, provider: str = 'cod
               'Invalid model-call limit')
     c.require(escalation_model is None or provider == 'responses',
               'Model routing requires the Responses provider')
+    c.require(not review_utility_overrides or escalation_model is not None,
+              'Utility-override review requires an escalation model')
     if provider == 'responses':
         c.require(bool(model) and bool(__import__('os').environ.get('OPENAI_API_KEY')),
                   'Live Responses selection requires OPENAI_API_KEY and an explicit model')
@@ -147,11 +150,12 @@ def run(*, target_group: str, benchmark: str, output: Path, provider: str = 'cod
         if escalation_model:
             policy = RoutedSelectionProvider(policy, ResponsesSelectionProvider(
                 escalation_model, max_calls=max_model_calls, max_output_tokens=512),
-                max_calls=max_model_calls)
+                max_calls=max_model_calls,
+                review_utility_overrides=review_utility_overrides)
     if memory_mode != 'none':
         policy = MemoryAugmentedPolicy(policy, mode=memory_mode)
 
-    protocol = dict(schema='isaforge-grouped-current-model-agent-v1',
+    protocol = dict(schema='isaforge-grouped-current-model-agent-v2',
         scope='consumed-data workload-held-out agent engineering replay; not independent confirmation',
         target_workload_group=target_group, target_benchmark=benchmark,
         target_candidate_ids=[row['candidate_id'] for row in case['public']],
@@ -162,6 +166,7 @@ def run(*, target_group: str, benchmark: str, output: Path, provider: str = 'cod
         budget=budget, seed=seed, model_seed=0, provider=provider,
         model=model, escalation_model=escalation_model, model_label=model_label,
         memory_mode=memory_mode, max_model_calls=max_model_calls,
+        review_utility_overrides=review_utility_overrides,
         max_tool_calls=20, max_output_tokens=512 if provider == 'responses' else None,
         model_bundle_metadata=model_metadata, model_predictions_sha256=c.digest(bundle),
         public_case_metadata=public_metadata,
@@ -273,6 +278,8 @@ def main(argv=None):
     parser.add_argument('--provider', choices=('codex-chat', 'responses'), default='codex-chat')
     parser.add_argument('--model')
     parser.add_argument('--escalation-model')
+    parser.add_argument('--review-utility-overrides', action='store_true',
+                        help='Use one stronger-model review when the primary proposes measuring a nonrecommended candidate.')
     parser.add_argument('--model-label', default='current Codex chat model; exact deployment ID unavailable')
     parser.add_argument('--seed', type=int, default=0)
     parser.add_argument('--budget', type=int, default=3)
@@ -289,7 +296,8 @@ def main(argv=None):
         output=args.output, provider=args.provider, model=args.model,
         escalation_model=args.escalation_model, model_label=args.model_label,
         seed=args.seed, budget=args.budget, area_cap=args.area_cap,
-        memory_mode=args.memory_mode, max_model_calls=args.max_model_calls)
+        memory_mode=args.memory_mode, max_model_calls=args.max_model_calls,
+        review_utility_overrides=args.review_utility_overrides)
     return 0
 
 

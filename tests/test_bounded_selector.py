@@ -372,6 +372,63 @@ def test_routed_errors_spend_model_calls_not_hardware_attempts(tmp_path, inputs)
     assert saved['model_events'][0]['provider_trace'][1]['identity']['model'] == 'large'
 
 
+def test_utility_override_review_completes_before_charging_measurement(tmp_path, inputs):
+    from isaforge.selection_provider import ResponsesSelectionProvider
+    from isaforge.routed_selection import RoutedSelectionProvider
+    seen = []
+    charged_during_calls = []
+    session_holder = {}
+
+    def transport(payload, *args):
+        request = json.loads(payload['input'][0]['content'])
+        charged_during_calls.append(session_holder['session'].charged)
+        seen.append((payload['model'], request))
+        if 'routing_review' in request:
+            name, arguments = 'measure', dict(candidate_id='t1',
+                decision_summary='Review supports the displayed utility recommendation.')
+        elif payload['model'] == 'small' and not request['messages']:
+            name, arguments = 'list_candidates', {}
+        elif payload['model'] == 'small' and request['messages'][-1]['tool'] == 'list_candidates':
+            name, arguments = 'predict', dict(candidate_ids=['t1', 't2', 't3'])
+        elif payload['model'] == 'small' and request['messages'][-1]['tool'] == 'predict':
+            assert request['selection_board']['utility_recommendation_candidate_id'] == 't1'
+            name, arguments = 'measure', dict(candidate_id='t3',
+                decision_summary='Primary prefers t3 based on a competing public feature.')
+        else:
+            name, arguments = 'finalize', dict(candidate_id=request['incumbent']['candidate_id'],
+                summary='Finalize the host-computed measured incumbent.')
+        return dict(status='completed', output=[dict(type='function_call', name=name,
+            arguments=json.dumps(arguments))],
+            usage=dict(input_tokens=10, output_tokens=4, total_tokens=14))
+
+    policy = RoutedSelectionProvider(
+        ResponsesSelectionProvider('small', api_key='test', transport=transport),
+        ResponsesSelectionProvider('large', api_key='test', transport=transport),
+        max_calls=5, review_utility_overrides=True)
+    test_session = grouped_session(tmp_path, inputs)
+    session_holder['session'] = test_session
+
+    result = run_selector(test_session, policy, max_model_calls=5)
+
+    assert result['status'] == 'finalized'
+    assert result['selected_id'] == 't1'
+    assert result['charged_attempts'] == 1
+    assert [model for model, _ in seen] == ['small', 'small', 'small', 'large', 'small']
+    assert charged_during_calls == [0, 0, 0, 0, 1]
+    review = seen[3][1]['routing_review']
+    assert review['primary_action']['arguments']['candidate_id'] == 't3'
+    event = next(event for event in test_session.ledger['model_events']
+                 if any(call['trigger'] == 'utility_override_review'
+                        for call in event['provider_trace']))
+    assert [call['trigger'] for call in event['provider_trace']] == [
+        'primary', 'utility_override_review']
+    assert event['provider_trace'][0]['primary_action']['arguments']['candidate_id'] == 't3'
+    from isaforge.routed_selection import summarize_model_events
+    accounting = summarize_model_events(test_session.ledger['model_events'])
+    assert accounting['escalation_triggers'] == {'utility_override_review': 1}
+    assert accounting['dispatched_calls'] == 5
+
+
 def test_host_incumbent_correction_escalates_once_and_finalizes_integration(tmp_path, inputs):
     from isaforge.selection_provider import ResponsesSelectionProvider
     from isaforge.routed_selection import RoutedSelectionProvider, summarize_model_events

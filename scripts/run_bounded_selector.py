@@ -91,13 +91,16 @@ def load_case(folder):
 
 
 def run(output, *, provider='controls', model=None, targets=None,
-        seeds=None, caps=None, budget=3, max_model_calls=12, escalation_model=None, memory_mode="none"):
+        seeds=None, caps=None, budget=3, max_model_calls=12, escalation_model=None,
+        memory_mode="none", review_utility_overrides=False):
     run_started = time.monotonic()
     c.require(provider in ('controls', 'responses'), 'Unknown provider')
     if provider == 'responses':
         c.require(model and os.environ.get('OPENAI_API_KEY'),
                   'Live run requires explicit --model and OPENAI_API_KEY; no model call was made.')
     c.require(escalation_model is None or provider == 'responses', 'Routing requires responses provider')
+    c.require(not review_utility_overrides or escalation_model is not None,
+              'Utility-override review requires an escalation model')
     c.require(type(max_model_calls) is int and 0 < max_model_calls <= 100, 'Invalid model limit')
     c.require(memory_mode in POLICY_MODES, 'Invalid memory mode')
     output = Path(output).resolve()
@@ -114,10 +117,12 @@ def run(output, *, provider='controls', model=None, targets=None,
     c.require(selected_caps and len(set(selected_caps)) == len(selected_caps) and
               all(cap in (32, 64, 128) for cap in selected_caps), 'Invalid frozen caps')
     policies = list(b.POLICIES) if provider == 'controls' else ['llm_selector']
-    protocol = dict(schema='isaforge-bounded-selector-development-v3',
+    protocol = dict(schema='isaforge-bounded-selector-development-v4',
         scope='Consumed-data engineering replay; not prospective source generalization.',
         provider=provider, model=model, escalation_model=escalation_model, memory_mode=memory_mode,
+        review_utility_overrides=review_utility_overrides,
         routing_rule=("one escalation on malformed structured output or explicit host incumbent correction; "
+                      "optional pre-measurement review when the primary overrides the utility recommendation; "
                       "shared model-call budget; no transport retries"), policies=policies, targets=target_names,
         seeds=selected_seeds, area_caps=selected_caps, budget=budget, clock_mhz=12,
         max_model_calls=max_model_calls, max_tool_calls=20,
@@ -157,7 +162,9 @@ def run(output, *, provider='controls', model=None, targets=None,
                     if provider == 'responses':
                         secondary = (ResponsesSelectionProvider(escalation_model, max_calls=max_model_calls,
                                      max_output_tokens=512) if escalation_model else None)
-                        policy = RoutedSelectionProvider(policy, secondary, max_calls=max_model_calls)
+                        policy = RoutedSelectionProvider(policy, secondary,
+                            max_calls=max_model_calls,
+                            review_utility_overrides=review_utility_overrides)
                     if memory_mode != "none":
                         policy = MemoryAugmentedPolicy(policy, mode=memory_mode)
                     result = run_selector(session, policy, max_model_calls=max_model_calls)
@@ -233,6 +240,8 @@ def main(argv=None):
     parser.add_argument('--model')
     parser.add_argument('--memory-mode', choices=POLICY_MODES, default='none')
     parser.add_argument('--escalation-model')
+    parser.add_argument('--review-utility-overrides', action='store_true',
+                        help='Use one stronger-model review when the primary proposes measuring a nonrecommended candidate.')
     parser.add_argument('--max-model-calls', type=int, default=12)
     parser.add_argument('--target', choices=tuple(TARGETS), action='append')
     parser.add_argument('--seed', type=int, action='append')
@@ -241,7 +250,9 @@ def main(argv=None):
     args = parser.parse_args(argv)
     result = run(args.output, provider=args.provider, model=args.model,
                  targets=args.target, seeds=args.seed, caps=args.cap, budget=args.budget,
-                 escalation_model=args.escalation_model, max_model_calls=args.max_model_calls, memory_mode=args.memory_mode)
+                 escalation_model=args.escalation_model, max_model_calls=args.max_model_calls,
+                 memory_mode=args.memory_mode,
+                 review_utility_overrides=args.review_utility_overrides)
     print({key:result[key] for key in ('trajectories', 'endpoints', 'all_controls_match', 'llm_calls', 'new_native_jobs')})
 
 

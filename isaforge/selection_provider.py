@@ -27,7 +27,10 @@ INSTRUCTIONS = (
     'do not provide private chain of thought. Finalize only the current '
     'host-computed incumbent.candidate_id; use null only when that incumbent is '
     'null. Your summary is an unverified note; the host return is authoritative. '
-    'Do not invent observations.'
+    'If routing_review is present, independently review the primary model\'s '
+    'proposed measurement against the complete public state and the named '
+    'utility recommendation; return the action you support and do not invent '
+    'observations.'
 )
 
 
