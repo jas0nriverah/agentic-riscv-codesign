@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/scripts/execute_mibench_stringsearch_v2_selector.py", line 1043, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/scripts/execute_mibench_stringsearch_v2_selector.py", line 953, in main
+    result = evaluate()
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/scripts/execute_mibench_stringsearch_v2_selector.py", line 782, in evaluate
+    audit = c.unseal(STUDY / "native-audit.json")
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/codesign.py", line 88, in unseal
+    require(sha(path) == Path(str(path)+'.sha256').read_text().strip(), 'Cached record changed')
+            ~~~^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/codesign.py", line 63, in sha
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+                          ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 777, in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/mibench-stringsearch-v2-selection-study-r1/native-audit.json'

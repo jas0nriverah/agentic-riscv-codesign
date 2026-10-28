@@ -1,0 +1,17 @@
+# Workload transfer sensitivity contract — October 28
+
+This is a bounded exploratory paired sensitivity on the authenticated expanded-r2 consumed corpus: 156 successful measurements, four charged unknown failures, 17 workload groups. Preserve the historical strict-family B3 comparison as primary. This analysis does not promote a model or establish prospective performance or superiority. It reads no later countnegative or stringsearch target labels.
+
+For every workload, compare ordinary entire-workload exclusion against the same exclusion plus all canonical operator-tree families from successful and failed target candidates. Use identical target pools, +64 LUT4, 12 MHz minimum, requested B1/B2/B3 and effective min(B,N). Fit only unchanged seed-zero pairwise XGBoost and the existing 20-member feasibility predictor once per split/fold; there is no tuning, calibration, model-family search or sweep. Retain merit, analytic latency, frequency and five dependent random seeds.
+
+The exact-formula hardware-cache comparator uses `parse_formula().canonical()` with constants, ordered operands and input roles intact. Only successful training records can supply summaries. Compatibility requires matching actual authenticated hardware inputs, compiler flags and executable hash, linker hash, memory partition, clock and hardware code-generation source bindings, including `core_routing.py` and `codesign.py` for the routing/device recipe. Missing provenance means no hit. Contexts come from `prepare_countnegative_v2_selector.history_contexts`; bind that source and its context/release files. Embedded old contexts are bound by the corpus hash. The cache is conservative about compatibility; the unchanged ML models receive the same full historical success cohort, including mixed contexts. No historical success is hidden from ML.
+
+A cache hit reports maximum historical area, minimum historical routed Fmax and conjunction of historical device-fit values. These are historical summaries, not safe bounds or proof about a new implementation. Historically infeasible summaries rank last; all other candidates follow analytic latency, including unknown/no-hit candidates. A hit never substitutes an outcome: every selected target candidate pays its actual measurement cost and correctness/feasibility result. Failed attempts retain unknown labels, costs and censoring.
+
+Seal protocol JSON with corpus, source and context bindings before any estimator fit. Bind this contract and the focused test source, and reject any attempt with missing, nonnumeric, nonfinite or negative measured cost before fitting. Save training IDs/groups/families, excluded IDs, target families, public prediction/order snapshots, compatible cache record IDs and hit rates, training cost and separate fit/predict times. Strict folds must assert zero exact-formula training hits. Report equal-workload macro selection over 17 groups, regret only on 15 complete workload oracles, and paired workload bootstrap versus merit. Seeds are dependent repetitions. Difference between the splits changes training cohort size and composition and cannot isolate formula memorization. Selection metrics use actual held-out outcomes only after prediction; all outcomes were already consumed before this exploratory analysis.
+
+Run only after source/protocol review:
+
+```sh
+.venv/bin/python scripts/evaluate_workload_transfer.py --corpus results/2026-10-28-expanded-selection-corpus-r2 --output reports/2026-10-28-workload-transfer-sensitivity-r1
+```
