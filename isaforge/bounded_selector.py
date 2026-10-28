@@ -16,10 +16,11 @@ import time
 from . import budgeted_selection as b
 from . import codesign as c
 from .model import _number, validate_training_rows
+from .selector_decision_support import build_grouped_decision_board
 from .selection_provider import ProviderBudgetError
 from .speedup_corpus import family
 
-SCHEMA = 'isaforge-bounded-selector-v2'
+SCHEMA = 'isaforge-bounded-selector-v3'
 GROUPED_PREDICTION_SCHEMA = 'isaforge-current-grouped-predictions-v1'
 PROMPT = (
     'Select one RISC-V custom instruction, or the unchanged baseline. Maximize '
@@ -38,9 +39,11 @@ PROMPT = (
     'permits one tool action; reserve a later call to finalize after a measurement. '
     'If the remaining decision/provider allowance is exhausted, the host selects '
     'its verified incumbent or baseline. You may stop '
-    'early. The summary you submit is an unverified '
-    'agent note; the host returns the authoritative measured result. Provide a short decision '
-    'summary, not private chain of thought. Single instructions only; individual '
+    'early. Every measure action must include a concise public-evidence '
+    'decision_summary of at most 320 characters. Do not provide private chain '
+    'of thought. The final summary you submit is an unverified '
+    'agent note; the host returns the authoritative measured result. Single '
+    'instructions only; individual '
     'speedups and area cannot be added. This is consumed-data replay, not fresh '
     'hardware measurement or an unseen-workload experiment.'
 )
@@ -64,10 +67,14 @@ GROUPED_PROMPT = (
     'speedup estimate), pairwise_rank_position, factorized_feasibility_probability '
     'and factorized_decision_score for the 64-LUT4 cap. Feasibility scores and '
     'their ensemble disagreement are uncalibrated; disagreement is not a '
-    'confidence interval. The decision score is feasibility score multiplied '
-    'by the nonnegative public analytic cycle-reduction estimate. Use these '
-    'current grouped-model outputs alongside merit, frequency and paid evidence; '
-    'only a paid outcome verifies area, timing and correctness.'
+    'confidence interval. A selection_board appears after predict and separates '
+    'the frozen pairwise order, analytic latency estimate, uncalibrated '
+    'feasibility-like signals and paid verification. Its advisory default is the '
+    'highest-ranked unattempted candidate; it is not mandatory. If you override '
+    'it, explain the public evidence in decision_summary. Never infer area or '
+    'feasibility from operation count or the uncalibrated score. The decision '
+    'score is feasibility score multiplied by the nonnegative public analytic '
+    'cycle-reduction estimate. Only a paid outcome verifies area, timing and correctness.'
 )
 
 
@@ -146,6 +153,7 @@ class ReplaySelectionSession:
         self.predictions = {}
         self.grouped_predictions = None
         self.grouped_model_metadata = None
+        self.grouped_predictions_revealed = set()
         if grouped_predictions is not None:
             c.require(predictions is None, 'Choose one prediction bundle')
             c.require(isinstance(grouped_predictions, dict),
@@ -283,10 +291,18 @@ class ReplaySelectionSession:
             uncertainty_calibrated=False, messages=self.messages)
         if self.grouped_model_metadata is not None:
             request['current_grouped_ml_bundle'] = copy.deepcopy(self.grouped_model_metadata)
+        if (self.prediction_mode == 'current_grouped' and
+            self.grouped_predictions_revealed == self._rows.keys()):
+            paid = [copy.deepcopy(event['observation']) for event in self.ledger['events']
+                    if 'charged_attempt' in event and 'observation' in event]
+            request['selection_board'] = build_grouped_decision_board(
+                self.public, self.grouped_predictions, self.attempted_ids, paid,
+                area_cap=self.area_cap, clock_mhz=self.clock_mhz)
         return copy.deepcopy(request)
 
     def _predictions(self, identities):
         if self.prediction_mode == 'current_grouped':
+            self.grouped_predictions_revealed.update(identities)
             return [dict(candidate_id=identity,
                 current_grouped_ml=copy.deepcopy(self.grouped_predictions[identity]),
                 calibrated_latency_speedup=self._rows[identity]['latency_features']['estimated_speedup'],
@@ -410,10 +426,40 @@ class ReplaySelectionSession:
                 selection_rule='best paid verified feasible improvement, else baseline',
                 charged_attempts=self.charged, tool_calls=self.calls,
                 model_decisions=self.model_calls, provider_calls=self.provider_calls),
-            measurements=measurements, policy_identity=policy,
+            measurements=measurements,
+            selection_decisions=self._selection_decisions(model_authored),
+            policy_identity=policy,
             measurement_hash_scope='Canonical JSON public/ledger observations; not native measurement-file hashes.',
             policy_identity_sha256=c.digest(policy), model_call_references=references,
             correctness_basis='Host-validated measurement fields only; summary prose is unverified.')
+
+    def _selection_decisions(self, model_authored):
+        """Bind measurement notes to the exact pre-measurement public snapshot."""
+        calls = {entry.get('tool_sequence'): entry for entry in self.ledger['model_events']
+                 if entry.get('tool_sequence') is not None}
+        result = []
+        for event in self.ledger['events']:
+            if 'charged_attempt' not in event:
+                continue
+            call = calls.get(event.get('sequence'))
+            context = call.get('public_context', {}) if call else {}
+            board = context.get('selection_board', {}) if isinstance(context, dict) else {}
+            candidate = next((row for row in board.get('rows', [])
+                              if row.get('candidate_id') == event.get('candidate_id')), None)
+            result.append(dict(tool_sequence=event.get('sequence'),
+                charged_attempt=event.get('charged_attempt'),
+                candidate_id=event.get('candidate_id'),
+                decision_summary=event.get('decision_summary'),
+                author='model' if model_authored else 'policy', verified=False,
+                public_context_sha256=(call.get('public_context_sha256') if call else None),
+                pairwise_rank_position=(candidate.get('pairwise_rank_position')
+                                        if candidate else None),
+                advisory_default_candidate_id=board.get('advisory_default_candidate_id'),
+                deviation_from_advisory=(candidate is not None and
+                    candidate.get('candidate_id') != board.get('advisory_default_candidate_id')),
+                paid_verification=(copy.deepcopy(candidate.get('paid_verification'))
+                                   if candidate else None)))
+        return result
 
     def _result(self, event, result):
         event.update(public_result=copy.deepcopy(result), status=result['status'])
@@ -460,10 +506,17 @@ class ReplaySelectionSession:
             if 'charged_attempt' not in event:
                 return error('Measurement-attempt budget exhausted.')
             identity = arguments.get('candidate_id')
-            if set(arguments) != {'candidate_id'} or type(identity) is not str or identity not in self._rows:
+            decision_summary = arguments.get('decision_summary')
+            if (set(arguments) != {'candidate_id', 'decision_summary'} or
+                type(identity) is not str or type(decision_summary) is not str or
+                not 0 < len(decision_summary) <= 320):
                 self.ledger['curve'].append(self._point())
-                return error('measure requires one public candidate ID; attempt charged.')
+                return error('measure requires a public candidate ID and concise decision_summary (1–320 characters); attempt charged.')
             event['candidate_id'] = identity
+            event['decision_summary'] = decision_summary
+            if identity not in self._rows:
+                self.ledger['curve'].append(self._point())
+                return error('measure requires a public candidate ID; attempt charged.')
             if identity in self.attempted_ids:
                 self.ledger['curve'].append(self._point())
                 return error('Candidate already attempted; repeat charged without a new evaluation.')
@@ -567,7 +620,9 @@ class MatchedBaselinePolicy:
             if self.policy == 'normalized_xgb': return (value['normalized_xgb']['mean'],)
             if self.policy == 'ranking': return (value['ranking']['rank_score'],)
             return (value['acquisition' if self.policy == 'hybrid_gp_adapt' else 'zero_shot_acquisition'], analytic)
-        return dict(tool='measure', arguments=dict(candidate_id=max(rows, key=score)['candidate_id']))
+        candidate = max(rows, key=score)
+        return dict(tool='measure', arguments=dict(candidate_id=candidate['candidate_id'],
+            decision_summary=f'Matched deterministic control: {self.policy}; selected by its frozen score among unattempted candidates.'))
 
 
 def run_selector(session, policy, *, max_model_calls=12):

@@ -46,6 +46,11 @@ def test_model_note_bound_to_exact_augmented_context_and_host_facts(tmp_path, in
     assert 'OUTCOME-CANARY' not in json.dumps(note)
     assert note['summary'] == dict(text='Model note: t1 has zero area cost.',
         author='model', verified=False, purpose='unverified decision note')
+    decision = note['selection_decisions'][0]
+    assert decision['decision_summary'] == 'Synthetic policy choice for protocol test.'
+    assert decision['author'] == 'model' and decision['verified'] is False
+    assert decision['candidate_id'] == 't1'
+    assert len(decision['public_context_sha256']) == 64
     facts = note['host_verified_facts']
     assert facts['selection'] == result['authoritative_selection']
     assert facts['selection']['area_delta_lut4'] == 40
@@ -168,13 +173,16 @@ def test_sqlite_exports_rationale_and_measurement_evidence(tmp_path, inputs):
         ('protocol.json', 'report.json', 'ledger.json')})
     counts = export(root, tmp_path/'trace.sqlite')
     assert counts['decision_rationales'] == counts['rationale_measurements'] == 1
+    assert counts['rationale_selection_decisions'] == 1
     with sqlite3.connect(tmp_path/'trace.sqlite') as db:
         row = db.execute('SELECT finalization_source, summary_author, summary_verified, public_context_sha256, rationale_json FROM decision_rationales').fetchone()
         evidence = db.execute('SELECT measurement_id, candidate_id, public_observation_sha256 FROM rationale_measurements').fetchone()
+        decision = db.execute('SELECT candidate_id, decision_summary, author, verified FROM rationale_selection_decisions').fetchone()
     assert row[:3] == ('agent', 'model', 0)
     assert row[3] == result['decision_rationale']['public_context_sha256']
     assert json.loads(row[4]) == result['decision_rationale']
     assert evidence == ('tool-1', 't1', result['decision_rationale']['measurements'][0]['public_observation_sha256'])
+    assert decision == ('t1', 'Synthetic policy choice for protocol test.', 'model', 0)
 
 
 def test_sqlite_exports_host_fallback_provider_accounting(tmp_path, inputs):

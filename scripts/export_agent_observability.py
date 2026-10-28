@@ -80,6 +80,11 @@ def export(run_dir, output):
           candidate_id TEXT, tool_sequence INTEGER, charged_attempt INTEGER, status TEXT,
           public_observation_sha256 TEXT, ledger_observation_sha256 TEXT,
           evidence_json TEXT, PRIMARY KEY(episode,measurement_id));
+        CREATE TABLE rationale_selection_decisions (episode INTEGER, tool_sequence INTEGER,
+          charged_attempt INTEGER, candidate_id TEXT, decision_summary TEXT, author TEXT,
+          verified INTEGER, public_context_sha256 TEXT, pairwise_rank_position INTEGER,
+          advisory_default_candidate_id TEXT, deviation_from_advisory INTEGER,
+          paid_verification_json TEXT, PRIMARY KEY(episode,tool_sequence));
         ''')
         db.execute('INSERT INTO releases VALUES (?,?)', (release, json.dumps(protocol, sort_keys=True)))
         for index, (run, ledger) in enumerate(zip(runs, ledgers)):
@@ -145,6 +150,16 @@ def export(run_dir, output):
                          evidence['tool_sequence'], evidence['charged_attempt'], evidence['status'],
                          evidence.get('public_observation_sha256'),
                          evidence.get('ledger_observation_sha256'), json.dumps(evidence, sort_keys=True)))
+                for decision in rationale.get('selection_decisions', []):
+                    db.execute('INSERT INTO rationale_selection_decisions VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+                        (index, decision['tool_sequence'], decision['charged_attempt'],
+                         decision.get('candidate_id'), decision.get('decision_summary'),
+                         decision.get('author'), decision.get('verified'),
+                         decision.get('public_context_sha256'),
+                         decision.get('pairwise_rank_position'),
+                         decision.get('advisory_default_candidate_id'),
+                         decision.get('deviation_from_advisory'),
+                         json.dumps(decision.get('paid_verification'), sort_keys=True)))
         db.commit()
         return dict(release_id=release, episodes=len(ledgers),
             decisions=db.execute('SELECT COUNT(*) FROM decisions').fetchone()[0],
@@ -153,6 +168,7 @@ def export(run_dir, output):
             context_windows=db.execute('SELECT COUNT(*) FROM context_windows').fetchone()[0],
             decision_rationales=db.execute('SELECT COUNT(*) FROM decision_rationales').fetchone()[0],
             rationale_measurements=db.execute('SELECT COUNT(*) FROM rationale_measurements').fetchone()[0],
+            rationale_selection_decisions=db.execute('SELECT COUNT(*) FROM rationale_selection_decisions').fetchone()[0],
             host_events=db.execute('SELECT COUNT(*) FROM host_events').fetchone()[0])
     finally:
         db.close()

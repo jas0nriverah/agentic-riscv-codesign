@@ -116,7 +116,8 @@ def test_recorded_failed_outcome_retains_charging_data_and_no_numeric_label(tmp_
         predictions(case["training"], case["public"], 0),
         lambda row: case["outcomes"][row["candidate_id"]],
         area_cap=64, ledger_path=tmp_path / "ledger.json")
-    result = session.call(dict(tool="measure", arguments=dict(candidate_id=identity)))
+    result = session.call(dict(tool="measure", arguments=dict(candidate_id=identity,
+        decision_summary="Measure this public candidate to learn its outcome.")))
     assert result["status"] == "failed"
     assert session.charged == 1 and session.observations == []
     assert session.ledger["replayed_target_measurement_seconds"] == failure["measurement_seconds"]

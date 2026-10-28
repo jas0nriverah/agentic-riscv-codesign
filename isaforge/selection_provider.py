@@ -16,13 +16,15 @@ import urllib.request
 from typing import Callable
 
 ENDPOINT = 'https://api.openai.com/v1/responses'
-PROTOCOL = 'isaforge-four-tools-v2'
+PROTOCOL = 'isaforge-four-tools-v3'
 INSTRUCTIONS = (
     'Select RISC-V custom instructions using only the supplied public state. '
     'Request one permitted action. Predictions are uncalibrated estimates; only '
     'paid verified measurements establish feasibility. Respect measurement and '
     'action budgets, include failures in costs, and retain baseline when no '
-    'verified feasible improvement is available. Finalize only the current '
+    'verified feasible improvement is available. For every measure action, '
+    'include a concise public-evidence decision_summary (at most 320 characters); '
+    'do not provide private chain of thought. Finalize only the current '
     'host-computed incumbent.candidate_id; use null only when that incumbent is '
     'null. Your summary is an unverified note; the host return is authoritative. '
     'Do not invent observations.'
@@ -42,8 +44,10 @@ def tool_definitions():
         _function('predict', 'Query fixed predictors for candidate IDs.',
                   {'candidate_ids': {'type': 'array', 'items': {'type': 'string'}}},
                   ['candidate_ids']),
-        _function('measure', 'Pay for one candidate measurement, including failures.',
-                  {'candidate_id': {'type': 'string'}}, ['candidate_id']),
+        _function('measure', 'Pay for one candidate measurement, including failures. Include a short public-evidence decision summary; never provide private chain of thought.',
+                  {'candidate_id': {'type': 'string'},
+                   'decision_summary': {'type': 'string', 'minLength': 1, 'maxLength': 320}},
+                  ['candidate_id', 'decision_summary']),
         _function('finalize', 'Finalize only the current host-computed incumbent.candidate_id; use null only when no measured feasible improvement exists.',
                   {'candidate_id': {'type': ['string', 'null']}, 'summary': {'type': 'string'}},
                   ['candidate_id', 'summary']),
@@ -184,7 +188,10 @@ def _valid_action(name, args):
         return (set(args) == {'candidate_ids'} and type(args['candidate_ids']) is list
                 and all(type(value) is str for value in args['candidate_ids']))
     if name == 'measure':
-        return set(args) == {'candidate_id'} and type(args['candidate_id']) is str
+        return (set(args) == {'candidate_id', 'decision_summary'} and
+                type(args['candidate_id']) is str and
+                type(args['decision_summary']) is str and
+                0 < len(args['decision_summary']) <= 320)
     if name == 'finalize':
         return (set(args) == {'candidate_id', 'summary'}
                 and (args['candidate_id'] is None or type(args['candidate_id']) is str)

@@ -31,6 +31,8 @@ def session(tmp_path, inputs, provider=None, **kwargs):
 
 
 def action(tool, **arguments):
+    if tool == 'measure' and 'decision_summary' not in arguments:
+        arguments['decision_summary'] = 'Synthetic policy choice for protocol test.'
     return dict(tool=tool, arguments=arguments)
 
 
@@ -121,6 +123,7 @@ def test_current_grouped_model_bundle_is_public_only_and_keeps_host_authority(tm
     request = s.request()
     encoded = json.dumps(request)
     assert request['current_grouped_ml_bundle']['scores_frozen_before_target_measurements']
+    assert 'selection_board' not in request
     assert 'uncalibrated ensemble spread' in encoded
     assert not any('current_grouped_ml' in json.dumps(message) for message in request['messages'])
     scored = s.call(action('predict', candidate_ids=['t1', 't2']))
@@ -129,9 +132,16 @@ def test_current_grouped_model_bundle_is_public_only_and_keeps_host_authority(tm
     assert set(prediction) == set(GROUPED_PREDICTION_FIELDS)
     assert prediction['pairwise_rank_position'] == 1
     assert scored['predictions'][0]['uncertainty_calibrated'] is False
+    assert 'selection_board' not in s.request()
+    s.call(action('predict', candidate_ids=['t3']))
+    board = s.request()['selection_board']
+    assert board['advisory_default_candidate_id'] == 't1'
+    assert board['rows'][0]['pairwise_rank_position'] == 1
     measured_result = s.call(action('measure', candidate_id='t1'))
     assert measured_result['status'] == 'ok'
     assert s.observations[0]['candidate_id'] == 't1'
+    assert s.request()['selection_board']['rows'][0]['paid_verification']['status'] == \
+        'verified_feasible_improvement'
     s.host_finalize('test_end')
     ledger = c.unseal(tmp_path/'grouped-ledger.json')
     assert ledger['prediction_mode'] == 'current_grouped'
@@ -256,7 +266,8 @@ def test_finalize_requires_current_best_feasible_incumbent(tmp_path, inputs):
     assert result['selection']['speedup'] == best['speedup']
     assert s.ledger['selected_id'] == best['candidate_id']
     assert s.ledger['agent_summary'] == 'Keep best.'
-    assert 'decision_summary' not in s.ledger
+    assert s.ledger['decision_rationale']['selection_decisions'][0]['decision_summary'] == \
+        'Synthetic policy choice for protocol test.'
 
 
 def test_model_limit_falls_back_to_best_paid_feasible(tmp_path, inputs):
@@ -338,7 +349,8 @@ def test_routed_errors_spend_model_calls_not_hardware_attempts(tmp_path, inputs)
     def transport(payload, *args):
         name = 'shell' if payload['model'] == 'small' else 'measure'
         return dict(status='completed', output=[dict(type='function_call', name=name,
-            arguments=json.dumps({'candidate_id': 't1'}))],
+            arguments=json.dumps({'candidate_id': 't1',
+                                  'decision_summary': 'Choose the fixture candidate.'}))],
             usage=dict(input_tokens=10, output_tokens=4, total_tokens=14))
     small = ResponsesSelectionProvider('small', api_key='test', transport=transport)
     large = ResponsesSelectionProvider('large', api_key='test', transport=transport)
@@ -369,7 +381,8 @@ def test_host_incumbent_correction_escalates_once_and_finalizes_integration(tmp_
         model = payload['model']
         ordinal = sum(row['model'] == model for row in seen)
         if model == 'small' and ordinal == 0:
-            name, arguments = 'measure', {'candidate_id': 't1'}
+            name, arguments = 'measure', {'candidate_id': 't1',
+                'decision_summary': 'Choose the fixture candidate.'}
         elif model == 'small':
             name, arguments = 'finalize', {'candidate_id': 't2', 'summary': 'Stale choice.'}
         else:
@@ -409,7 +422,8 @@ def test_failed_stronger_recovery_closes_on_host_incumbent(tmp_path, inputs):
         if payload['model'] == 'small':
             small_calls += 1
             if small_calls == 1:
-                name, arguments = 'measure', {'candidate_id': 't1'}
+                name, arguments = 'measure', {'candidate_id': 't1',
+                    'decision_summary': 'Choose the fixture candidate.'}
             else:
                 name, arguments = 'finalize', {'candidate_id': 't2', 'summary': 'Stale choice.'}
         else:

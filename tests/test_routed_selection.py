@@ -9,7 +9,8 @@ from isaforge.routed_selection import RoutedSelectionProvider
 
 def response(name='measure'):
     return dict(status='completed', output=[dict(type='function_call', name=name,
-        arguments=json.dumps({'candidate_id': 'c0'}))],
+        arguments=json.dumps({'candidate_id': 'c0',
+            'decision_summary': 'Select the leading public candidate.'}))],
         usage=dict(input_tokens=10, output_tokens=4, total_tokens=14))
 
 

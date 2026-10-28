@@ -1,5 +1,27 @@
 # Current handoff — model evidence after Lift selection
 
+## October 28: grouped selection board and decision audit
+
+The latest AHA-compress replay exposed a concrete interface issue: the agent
+selected pairwise ranks 1, 5 and 9, while rank 3 was the feasible oracle. The
+grouped selector now builds an advisory board after the full public roster is
+queried, showing pairwise order, analytic latency estimate, merit/frequency,
+uncalibrated feasibility scores, and paid verification separately. It suggests
+the highest-ranked unattempted candidate but does not force that choice or
+filter candidates. Every charged measurement now carries a short public-evidence
+`decision_summary` (not private chain of thought), stored with the exact
+pre-measure context hash, rank, advisory deviation, and later host-verified
+outcome. SQLite export adds `rationale_selection_decisions`.
+
+The 110-test focused suite passes across decision-board construction, grouped
+predictions, bounded actions, provider schema, routing, rationale provenance,
+and SQLite export. No live provider call, hardware job, label, or model fit was
+made. The trained XGBoost recipes remain frozen; the board is an auditability
+and context-use improvement with no selection-quality claim. External source
+review added CIDRE as a methods reference and tiny-regex-c as an unqualified
+source-only lead. Neither contributes training rows. See the [integration
+record](ml-agent-integration-2026-10-28.md) and [dataset census](training-dataset-census-2026-10-28.md).
+
 ## October 28: grouped XGBoost + live-chat selector replay and bounded memory
 
 The existing pairwise-ranking and factorized-feasibility XGBoost recipes are

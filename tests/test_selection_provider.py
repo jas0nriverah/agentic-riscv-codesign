@@ -6,7 +6,8 @@ from isaforge.selection_provider import ResponsesSelectionProvider, ProviderErro
 
 def answer(name='measure', arguments=None, **kwargs):
     return dict(status='completed', output=[dict(type='function_call', name=name,
-                arguments=json.dumps(arguments or {'candidate_id': 'c0'}))],
+                arguments=json.dumps(arguments or {'candidate_id': 'c0',
+                    'decision_summary': 'Select the leading public candidate.'}))],
                 usage=dict(input_tokens=10, output_tokens=4, total_tokens=14), **kwargs)
 
 
@@ -22,7 +23,8 @@ def test_wire_allowlist_and_stateless_public_input():
         return answer()
     p = provider(transport, timeout_seconds=3, max_output_tokens=127)
     public = {'observations': [{'candidate_id': 'c0', 'prediction': 1.01}]}
-    assert p.choose(public) == {'tool': 'measure', 'arguments': {'candidate_id': 'c0'}}
+    assert p.choose(public) == {'tool': 'measure', 'arguments': {
+        'candidate_id': 'c0', 'decision_summary': 'Select the leading public candidate.'}}
     wire = seen[0]
     assert set(wire) == {'model', 'instructions', 'input', 'tools', 'tool_choice',
                          'parallel_tool_calls', 'max_output_tokens', 'store'}
@@ -88,6 +90,7 @@ def test_public_size_is_bounded():
 
 
 @pytest.mark.parametrize('name,args', [('list_candidates', {}), ('predict', {'candidate_ids': ['a']}),
+    ('measure', {'candidate_id': 'a', 'decision_summary': 'select top public score'}),
     ('finalize', {'candidate_id': None, 'summary': 'baseline'})])
 def test_other_valid_actions(name, args):
     response = answer()

@@ -83,6 +83,28 @@ that passes the existing gates.
 | Human-in-the-loop | Human approval points for workload/constraint/release decisions; the relay operator copied requests and actions for the Codex pilot. | Human review is not yet an interactive runtime approval product. |
 | Frameworks and deployment | Existing Python host controller is the orchestration layer. | LangChain, LangGraph, MCP, cloud deployment and general-document RAG are deferred; no demonstrated need or measured benefit. |
 
+### Selection board and auditable measurement choices
+
+The grouped selector now builds a host-side decision board once the model has
+queried the complete public candidate roster. It places the frozen pairwise
+rank beside the analytic latency estimate, merit/frequency, and the
+factorized-feasibility signals, while explicitly marking those feasibility
+signals as uncalibrated. Its advisory default is the highest-pairwise-ranked
+candidate not yet attempted. This is guidance, not a hard filter: the agent may
+override it, and only paid host-verified outcomes can mark area, timing, or
+correctness as verified. The board does not add an estimator, update a model,
+reveal unmeasured outcomes, or claim that rank means speedup.
+
+Each charged `measure` tool action must now carry a bounded
+`decision_summary` (1–320 characters) stating the public evidence behind that
+measurement. It deliberately asks for a short action note rather than private
+chain of thought. The selector binds the note to the exact pre-measure context
+hash, candidate, pairwise position, advisory default, whether it deviated, and
+the later paid verification result. The SQLite exporter stores those records
+in `rationale_selection_decisions`. This makes a choice auditable without
+pretending a model-authored note is causal truth. It improves observability and
+context use; it has not yet been shown to improve design selection.
+
 The retrieved-only memory change reduced the serialized initial request from
 154,008 bytes with 101 raw historical rows to 17,353 bytes with three retrieved
 rows and 5,103 bytes of retrieved payload (about 88.7% fewer serialized
@@ -173,10 +195,12 @@ uncalibrated and should not be treated as a reliable hard filter.
 
 Archived native evaluation durations summed to 125.6829 seconds. The
 194.4627-second chat-replay elapsed time includes manual relay/waiting and is
-not model latency. API token use remains unavailable. No additional native
-jobs or labels were created. The one-run comparison does not establish a
-population-level loss, but it is an important negative result and must be
-preserved alongside CRC32. Its SQLite export is
+not model latency. SQLite records five model decision contexts of 24,386 to
+32,089 serialized bytes, zero raw training rows exposed, and at most 5,202
+retrieved-memory bytes under the 40,000-byte limit. API token use remains
+unavailable. No additional native jobs or labels were created. The one-run
+comparison does not establish a population-level loss, but it is an important
+negative result and must be preserved alongside CRC32. Its SQLite export is
 `results/2026-10-28-grouped-agent-observability-r1/aha-compress-hybrid.sqlite`.
 
 Artifacts:
@@ -226,10 +250,12 @@ requires manual relaying of each JSON request; it is not an API benchmark):
 ```
 
 The historical results are immutable; do not reuse their output paths.
-The focused relevant suite previously passed **104 tests**. No new live model
-API call, model fine-tuning, native job, or speedup label was made in this
-integration. The Ascon retrospective does perform local fits of the existing
-models and is fully reported above.
+Current validation for the board, grouped predictions, selector, provider,
+chat bridge, routing, rationale and grouped-agent case passes **110 focused
+tests**. No new live model API call, model fine-tuning, native job, or speedup
+label was made for the board implementation. The Ascon retrospective described
+above performs local fits of the existing models; it adds no model version or
+new label.
 
 ## Next research gate
 
