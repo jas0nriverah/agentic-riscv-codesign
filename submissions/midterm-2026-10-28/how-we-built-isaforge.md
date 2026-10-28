@@ -10,6 +10,10 @@ The earlier project chat began with existing Spike tracing and dataflow candidat
 - [`src/candidates.py`](../../src/candidates.py) constructs and filters dataflow candidates, including input/output and legality checks.
 - The October 13 pilot produced **339 candidate examples / 301 distinct synthesized formulas** from eight benchmarks; Verilator checked candidate RTL and Yosys mapped isolated candidate circuits to FPGA resources. The record includes **338,324 input/output comparisons**. The first XGBoost cost model's nested held-out error was **33.08 LUT4 versus 77.32 for a mean baseline** on that study. This is isolated hardware-cost prediction, not measured whole-program speedup. [Original evidence and exact methods](../../results/2026-10-13/README.md).
 
+### The earlier dataset grew beyond the first pilot
+
+The original 301-formula dataset was followed by transfer and final collections. Together the three collections contain **1,098 benchmark/formula rows and 713 distinct formulas**, including overlap across stages. Across 19 self-checking Embench programs, 17 produced candidate-bearing rows. The final set contained **331 formulas absent from training and calibration**. On those 331 isolated-cost labels, the frozen structural linear model had **23.154 LUT4 MAE**, versus **87.595** for the original XGBoost model. These are hardware-cost prediction results, not CPU-speedup or final-selection wins; the later all-713-formula refit has no independent test. The primary one-query +64-LUT selection endpoint tied merit. The first transfer selection was a negative result. [Results, frozen artifacts and limits](../../results/2026-10-13-prospective/README.md); [stage-by-stage methodology](../../docs/methodology-history.md).
+
 ## 2. Connect selection to processor measurements
 
 The October 19 CRC32 study connected candidates to a PicoRV32 processor, so the performance label could come from executing the benchmark with the instruction installed. The unmodified CRC32 baseline ran in **32,387,382 simulated cycles**; the best of six tested extensions ran in **30,820,662 cycles** (1.050833× at a common clock). Integrated synthesis increased area from 1,653 to 1,684 LUT4. Correctness controls and routed timing were recorded. The six candidates included a slowdown, which was preserved. [Methods and all results](../../docs/codesign-loop.md).
@@ -27,6 +31,10 @@ The guarded corpus expanded to **122 successful whole-program candidate measurem
 - [`scripts/reproduce_codesign.py`](../../scripts/reproduce_codesign.py) and [`scripts/reproduce_workload.py`](../../scripts/reproduce_workload.py) verify archived CRC32 and aha results. These are replay/verification tools, not fresh hardware collection.
 
 The final screen compared 13 policies (eight learned and five heuristic/random controls). Its 2,925 policy-budget replay records reused existing labels. The strongest point estimate varied with budget; no consistent ML advantage was established. All 122 historical cycle-speedup labels match independent calibrated latency estimates, so the corpus does not demonstrate a learned residual speedup signal. [Full scorecard](../../results/2026-10-27-final-selection-scorecard/README.md).
+
+### A useful but limited ML result
+
+A predeclared three-source campaign found that two GP selectors reached each measured-pool optimum at three queries, averaging **1.602185% cycle reduction versus merit’s 1.144539%**, under +64 LUT4 and 12 MHz. Its complete native pool was measured, followed by cooperative policy replay; this was not a live adaptive race or a demonstrated total-cost win. On the subsequent bitcount experiment, the latency/cost heuristic reached the feasible pool optimum within three queries while both GP policies returned baseline. This is a concrete example of promising source transfer that did not generalize consistently. [Campaign](../../docs/blind-source-campaign.md); [bitcount outcomes](../../results/2026-10-22-bitcount-report/results.md).
 
 ## 4. Add the LLM tool loop
 

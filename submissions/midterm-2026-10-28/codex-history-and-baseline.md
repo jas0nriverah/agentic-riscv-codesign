@@ -33,3 +33,9 @@ A **selection baseline** is different: frequency orders candidates by occurrence
 ## Reproducibility and limits
 
 The activity totals were queried read-only from `~/.codex/thread_history_1.sqlite` (`thread_turns` and `thread_items`) and `~/.codex/state_5.sqlite` (`thread_spawn_edges`), using the project chat ID and excluding the in-progress turn. The earlier project chat was also inspected using Codex thread history and the app thread reader; no unrelated chat contents were needed. These databases are local Codex implementation records and may change as the session continues. For independent reproduction of numerical experimental results, use the repository's saved artifacts rather than the activity counts.
+
+## Broader chat search and source limits
+
+The local Codex metadata inventory contained 263 thread records. Searches of title, first user message, preview, working directory and Git origin for ISAForge, the repository name, custom instructions, PicoRV32 and ECE 4803 found the two project parent chats above. We also inspected the latest indexed messages across their 72 directly linked subagent threads; some indexed messages were interim, so repository artifacts were used to establish completed results. We checked several plausibly relevant recent ChatGPT conversations, without finding additional project evidence. The app exposes only a bounded recent active-chat list, not an exhaustive full-text search of every ChatGPT conversation; therefore this is not proof that no other relevant ChatGPT chat exists.
+
+The earlier subagent reports pointed to a larger historical area dataset, the three-source GP result, and its later bitcount reversal. Those details are cross-checked and documented in [how we built ISAForge](how-we-built-isaforge.md). Chat-generated claims alone do not supersede the frozen experiment records.
