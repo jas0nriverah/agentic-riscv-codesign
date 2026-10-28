@@ -102,3 +102,14 @@ def test_memory_modes_preserve_controls_and_sql_trace(tmp_path):
     ledger.write_text('{}')
     with pytest.raises(ValueError):
         export(tmp_path/'hybrid', tmp_path/'tampered.sqlite')
+
+
+def test_export_preserved_live_pilot_retains_missing_tokens(tmp_path):
+    import sqlite3
+    from scripts.export_agent_observability import export
+    source = c.ROOT/'results/2026-10-28-live-luna-memory/hybrid'
+    result = export(source, tmp_path/'live.sqlite')
+    assert result['model_calls'] == result['retrievals'] == 4
+    with sqlite3.connect(tmp_path/'live.sqlite') as db:
+        assert db.execute('SELECT COUNT(*) FROM model_calls WHERE total_tokens IS NULL').fetchone()[0] == 4
+        assert db.execute('SELECT SUM(usage_complete) FROM model_calls').fetchone()[0] == 0

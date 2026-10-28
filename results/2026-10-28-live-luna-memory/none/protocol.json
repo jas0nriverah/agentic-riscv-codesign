@@ -1,0 +1,119 @@
+{
+  "schema": "isaforge-codex-chat-selector-development-v1",
+  "scope": "Consumed-data interactive development replay; no source generalization claim.",
+  "provider": "codex-chat-bridge",
+  "model_label": "gpt-6-luna-configured-subagent-medium",
+  "memory_mode": "none",
+  "request_files": true,
+  "exact_model_id_available": false,
+  "objective": "Best paid, verified, correct whole-program speedup subject to measured area/timing and a fixed attempt budget.",
+  "target": "sha256",
+  "area_cap_lut4": 64,
+  "clock_floor_mhz": 12.0,
+  "seed": 0,
+  "budget": 3,
+  "max_model_calls": 10,
+  "max_tool_calls": 20,
+  "max_output_tokens": null,
+  "prompt": "Select one RISC-V custom instruction, or the unchanged baseline. Maximize VERIFIED FEASIBLE whole-program speedup within the measurement-attempt budget. Predictions are uncalibrated, not measurements. Consider all provided heuristics, structure, uncertainty, area, timing and measurement cost. Use only list_candidates, predict, measure and finalize. Every submitted measure request, including an invalid ID or repeat, consumes an attempt; failed measurements also count. No unqueried outcome is available. Only a paid, correct, device-fitting, area/timing-feasible improving candidate can be finalized. You may stop early. Provide a short decision summary, not private chain of thought. Single instructions only; individual speedups and area cannot be added. This is consumed-data replay, not fresh hardware measurement or an unseen-workload experiment.",
+  "prompt_sha256": "92b0e161813255c51457f4d025666cd4e103d6f57fa5aea740119ce904dcc541",
+  "tools": [
+    {
+      "type": "function",
+      "name": "list_candidates",
+      "description": "List public candidates and selection constraints.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "predict",
+      "description": "Query fixed predictors for candidate IDs.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "candidate_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "measure",
+      "description": "Pay for one candidate measurement, including failures.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "finalize",
+      "description": "Choose one verified feasible candidate or baseline (null).",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "summary": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_id",
+          "summary"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "input_bindings": {
+    "protocol.json": "814a8d4bec37ac39f77bdd94ebe4c9dd2013686716f06bcd5ddf31f021a8eff6",
+    "public.json": "fe2ccfae4013d5f16c4bddb21c8f52ca9691d6d8d9bef546edb2e996ff7dd51d",
+    "history.json": "da31398cc363b701e777f0e25875345ad93628b4cb7b016adccb9f859e976c48",
+    "predictions.json": "51dac6c7f6fce08d1a0031281a627b3f54c02de93d442a33f4051743434f4025",
+    "report.json": "689dc290c4d2df1f8ade8acc00d4d24a9395b17f5390bf68292e5c4c50c182ed"
+  },
+  "source_bindings": {
+    "scripts/run_codex_chat_selector.py": "d7c605d46e0fe13d6b913facc182e6d47af02b1c7129ddc5c14a905f7b47993c",
+    "isaforge/codex_chat_selector.py": "d2de849ce37270bdd714904ecea4d085cf9b9313dac08f8d5eb8567b5d7c6cc2",
+    "isaforge/bounded_selector.py": "1c256ff14afcd5e1e7f01e88698bc1a2347d58f6560f80524156721b376a7dba",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/selection_provider.py": "91074992546a1cd183d32e70dfe49849569679f47b1ef7462621ef1e0c5a31c8",
+    "isaforge/agent_memory.py": "c59ac4084dc49ff31244864e1299b339811154096e3a519f4ba2e019a5ec0be9"
+  },
+  "historical_cost_note": "Archived attempt costs retain original timer scopes; no project-time savings are inferred.",
+  "chat_boundary": "The request/output channel contains allowlisted JSON; the active Codex session itself also has broader workspace tools.",
+  "token_usage": "Unavailable for in-chat orchestration.",
+  "new_native_jobs": 0,
+  "uncertainty_calibrated": false,
+  "joint_sets_supported": false
+}

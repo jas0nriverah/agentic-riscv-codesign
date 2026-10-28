@@ -27,8 +27,16 @@ def export(run_dir, output):
     release = c.sha(run_dir/'protocol.json')
     if report['protocol_sha256'] != release:
         raise ValueError('protocol binding mismatch')
+    runs = report.get('runs')
+    if runs is None and report.get('schema') == 'isaforge-codex-chat-selector-report-v1':
+        runs = [dict(target=report['target'], policy='live-codex-subagent',
+            status=report['status'], speedup=report['selected_speedup'],
+            charged_attempts=report['charged_attempts'], ledger='ledger.json',
+            ledger_sha256=manifest['ledger.json'])]
+    if runs is None:
+        raise ValueError('unsupported report schema')
     ledgers = []
-    for run in report['runs']:
+    for run in runs:
         path = (run_dir/run['ledger']).resolve()
         if not path.is_relative_to(run_dir) or c.sha(path) != run['ledger_sha256']:
             raise ValueError('ledger binding mismatch')
@@ -51,7 +59,7 @@ def export(run_dir, output):
           charged_attempt INTEGER, evidence_json TEXT);
         ''')
         db.execute('INSERT INTO releases VALUES (?,?)', (release, json.dumps(protocol, sort_keys=True)))
-        for index, (run, ledger) in enumerate(zip(report['runs'], ledgers)):
+        for index, (run, ledger) in enumerate(zip(runs, ledgers)):
             db.execute('INSERT INTO episodes VALUES (?,?,?,?,?,?,?,?)',
                 (index, release, run['target'], run['policy'], run['status'],
                  run['speedup'], run['charged_attempts'], run['ledger_sha256']))
@@ -65,6 +73,11 @@ def export(run_dir, output):
                         (index, decision, call['call'], call['role'], call['identity'].get('model'),
                          call['status'], usage.get('input_tokens'), usage.get('output_tokens'),
                          usage.get('total_tokens'), call['usage_complete'], call['elapsed_seconds']))
+                if not event.get('provider_trace') and protocol.get('provider') == 'codex-chat-bridge':
+                    db.execute('INSERT INTO model_calls VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                        (index, decision, decision, 'interactive-subagent',
+                         protocol['model_label'], event['status'], None, None, None,
+                         False, event['elapsed_seconds']))
                 memory = event.get('memory_trace')
                 if memory:
                     db.execute('INSERT INTO retrievals VALUES (?,?,?,?,?,?,?)',

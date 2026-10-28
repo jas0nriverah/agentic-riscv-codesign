@@ -2,7 +2,7 @@
 
 **An AI-guided RISC-V program optimization system that selects custom instructions using learned performance predictions and bounded hardware measurements.**
 
-**October 28 agent engineering:** bounded schema-recovery LLM routing and per-call usage/latency traces now work in offline tests. Primary and escalation models share one call allowance; hardware budgets remain host-owned. No live routed-model comparison or performance gain is claimed. See [the implementation evaluation](docs/agent-routing-implementation.md).
+**October 28 live-agent and memory pilot:** local lexical/latent-semantic/hybrid retrieval, episode memory, function calling and verified SQLite traces now connect to the bounded selector. Two fresh GPT-6 Luna subagents reached the same archived SHA256 oracle (1.0213847x): hybrid used two queries/four turns, no retrieval three queries/nine turns with three rejected infeasible finalizations. Frequency and latency/cost already reach it on query one. This is one consumed-data episode per arm, not causal evidence or superiority. No new native jobs or labels. See [the pilot](results/2026-10-28-live-luna-memory/README.md) and [implementation/commands](docs/agent-memory-operations.md).
 
 **Working research prototype:** fourteen real workload groups (six Embench, five BEEBS and three TACLeBench), **122 verified candidate speedup labels across 15 contexts**, and **126 charged candidate attempts**, including four preserved failures. Original CRC32, aha-mont64, and every historical experiment remain intact.
 

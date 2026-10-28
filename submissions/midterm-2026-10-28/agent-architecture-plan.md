@@ -1,3 +1,5 @@
+**Latest October 28 status:** local latent-semantic/hybrid historical retrieval and SQLite operations traces are implemented and exercised with two fresh live Luna selectors. See [implementation](../../docs/agent-memory-operations.md) and [complete pilot](../../results/2026-10-28-live-luna-memory/README.md). The plan below is retained as historical context; its unimplemented labels are superseded only for these bounded components. Deployment, pretrained embeddings and general document retrieval remain planned.
+
 **October 28 implementation update:** the presentation below preserves its October 27 snapshot. A limited schema-error router and per-call accounting now have offline software tests; broader uncertainty-based routing, RAG and production operations remain planned. See [implementation status](../../docs/agent-routing-implementation.md).
 
 # ISAForge agent architecture: current system and proposed extensions

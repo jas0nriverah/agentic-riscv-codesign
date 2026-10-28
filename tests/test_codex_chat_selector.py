@@ -61,3 +61,17 @@ def test_codex_bridge_enforces_request_and_action_byte_limits():
     with pytest.raises(CodexChatBridgeError, match='action exceeds'):
         provider.choose({'schema': 'ok'})
     assert provider.calls == 1
+
+
+def test_public_request_files_are_exact_and_bounded(tmp_path):
+    import io
+    import json
+    from isaforge.codex_chat_selector import CodexChatSelectionProvider
+    output = io.StringIO()
+    p = CodexChatSelectionProvider(input_stream=io.StringIO('{"tool":"list_candidates","arguments":{}}\n'),
+        output_stream=output, request_directory=tmp_path/'requests')
+    public = {'candidate': 'full-id', 'observations': []}
+    assert p.choose(public)['tool'] == 'list_candidates'
+    assert json.loads((tmp_path/'requests'/'public-01.json').read_text()) == public
+    assert 'PUBLIC_REQUEST_FILE=' in output.getvalue()
+    assert 'BEGIN_PUBLIC_REQUEST' not in output.getvalue()

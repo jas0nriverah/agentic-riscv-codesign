@@ -1,5 +1,12 @@
 # Current handoff — model evidence after Lift selection
 
+## October 28: live Luna memory and operations evidence
+
+Implemented local TF-IDF/LSA/hybrid historical retrieval over approved training records, memory augmentation, decision-to-tool links, sealed-run SQLite export and file-based public request transport. No general document RAG, pretrained embeddings, production deployment or live model-routing improvement is claimed. [Implementation](agent-memory-operations.md).
+
+The frozen two-arm GPT-6 Luna pilot is complete: no retrieval 9 turns/3 charged archive queries/3 rejected finalizations; hybrid 4 turns/2 queries/0 rejections. Both reach 1.0213847x at +50 LUT4, 65.99353MHz. Strong frequency and cost heuristics reach it at query one. Preserve [all evidence](../results/2026-10-28-live-luna-memory/README.md). No replacement runs or new hardware measurements. One trial per arm does not establish causal memory improvement. Configured alias known, exact deployment version/tokens unavailable. Public-file restrictions are instruction-enforced, not sandboxed.
+
+
 ## October 28: bounded agent routing engineering
 
 The owner resumed implementation of useful agent-plan components. Added schema-error-only primary/escalation routing, a shared reserved-call allowance, per-call identity/request-hash/usage/latency traces, and separate dispatched-call accounting in the remote replay CLI. Host-owned hardware charging, hidden-outcome boundaries and incumbent fallback remain intact. See [implementation analysis and commands](agent-routing-implementation.md).
@@ -325,3 +332,5 @@ Continue searching for an eligible independent integer workload; the
 six-family confirmatory cohort remains unestablished.
 
 **Latest October 27 update — Ascon three-query run and paid-update bug:** the v5 release passed its pushed-source gate at `007d6593`, then the operator-relayed chat agent measured three candidates. C01: 1.019698×, +73 LUT4, 62.992 MHz (area-infeasible); C06: 1.017027×, +41 LUT4, 67.069 MHz; C02: 1.023731×, +42 LUT4, 64.620 MHz. All passed correctness; C02 is best among the three measured feasible results. Nine candidates are still censored, so there is no complete-pool oracle or heuristic comparison. The complete generated campaign is preserved as a hash-checked archive in [`results/2026-10-27-ascon-selector-chat-run-v5/`](../results/2026-10-27-ascon-selector-chat-run-v5/). A real paid-prefix audit found `_dynamic_gp` excluded all three successes because audit rows omitted `status`; it recorded zero fit time. The working source now persists success status and includes a regression test. Four focused test modules pass (30 tests), and a post-hoc 90+3-row replay confirms refit execution and the paid-prefix hash, but this is consumed-data software validation. The v5 release remains archived against commit `007d6593` and is no longer valid for further dispatch after these source changes. Treat this run as integration development, not a prospective comparative result. The next blocker is still a fresh independent workload; the disclosed Ascon pool cannot be reused to claim confirmation.
+
+October 28 agent release validation: 84 focused provider/selector/memory/bridge tests pass. Preserved live pilot artifacts and SQL exports are in `results/2026-10-28-live-luna-memory/`; the 11-slide, 420-second presentation includes the live result and stronger heuristic caveat. No new model-quality or workload-generalization conclusion is established.
