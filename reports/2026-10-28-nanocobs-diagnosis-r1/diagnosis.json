@@ -1,0 +1,319 @@
+{
+  "schema": "isaforge-nanocobs-discovery-diagnosis-v1",
+  "status": "source_rejected_candidate_pool_too_small",
+  "source_level_rejection": true,
+  "target_candidate_attempts": 0,
+  "candidate_measurements": 0,
+  "target_candidate_labels": 0,
+  "reason": "The fixed 12-candidate pool cannot be formed: 12 raw, 10 executable, 10 relocation-safe, 10 calibrated formulas.",
+  "source_gate": {
+    "pool_size": 12,
+    "relocation_guard": "isaforge-relocation-source-guard-v1",
+    "opportunity_gate": "not reached; no legal pool existed"
+  },
+  "counts": {
+    "raw": 12,
+    "executable": 10,
+    "relocation_safe": 10,
+    "calibrated": 10,
+    "required": 12
+  },
+  "raw_formulas": [
+    {
+      "name": "candidate_00",
+      "formula": "addi(lui(16842752),257)"
+    },
+    {
+      "name": "candidate_01",
+      "formula": "or(sltiu(in0,1),in1)"
+    },
+    {
+      "name": "candidate_02",
+      "formula": "add(andi(in0,-4),in1)"
+    },
+    {
+      "name": "candidate_03",
+      "formula": "sub(addi(in0,-1),in1)"
+    },
+    {
+      "name": "candidate_04",
+      "formula": "addi(lui(-16842752),-257)"
+    },
+    {
+      "name": "candidate_05",
+      "formula": "addi(lui(-2139062272),128)"
+    },
+    {
+      "name": "candidate_06",
+      "formula": "or(sltiu(in0,1),sltiu(in1,2))"
+    },
+    {
+      "name": "candidate_07",
+      "formula": "or(in0,sltiu(in1,2))"
+    },
+    {
+      "name": "candidate_08",
+      "formula": "or(sltiu(in0,1),sltiu(in1,1))"
+    },
+    {
+      "name": "candidate_09",
+      "formula": "or(in0,sltiu(in1,1))"
+    }
+  ],
+  "relocation_rejections": [],
+  "uncalibrated_formulas": [],
+  "baseline_simulator_result": {
+    "cycles": 96372374,
+    "instructions": 18831889,
+    "benchmark_result_u32": 0,
+    "upstream_self_check": true,
+    "custom_instructions": 0,
+    "region_custom_instructions": 0
+  },
+  "memory_check": {
+    "min_sp": 7760,
+    "max_stack_bytes": 432,
+    "stack_headroom_bytes": 1232,
+    "checked_cycles": 96372764
+  },
+  "measured_hardware": null,
+  "interpretation": "The qualification wrapper records a failed discover command because the generic extractor raises on a short pool. This label-free diagnosis reclassifies that preserved outcome as a source-level eligibility rejection, not a toolchain or simulator failure. Do not change source, relax the relocation guard, shrink the pool, or lower opportunity gates to rescue it.",
+  "protocol_sha256": "573feeca8b2c13f0d49d08afd725ec27aeb6dcf65bfc9163a25f000e97e084db",
+  "diagnostic_script_sha256": "768d7cd7d64b5c182494c334bfd6f172e29ff616729b28e368b58f5fa6c2b6fd",
+  "bound_artifacts": {
+    "generated/nanocobs-qualification-2026-10-28-r1/plan.json": "4fa6f0aff725bb83dbc6853ec39a219370aa61e39f9a0df68ca345c4b3d467b5",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/program.c": "7cc86cb168a76e153c202b330824787f6daa1cb7734e9030fc10da8ee1d88aa9",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/upstream/tests/cobs_ref.c": "133e8a6844c1c10e2a0ccbd079970dafc0f8adb413f404e105b058fd530984c9",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/latency-calibration.json": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+    "results/2026-10-28-nanocobs-qualification-r1/protocol.json": "573feeca8b2c13f0d49d08afd725ec27aeb6dcf65bfc9163a25f000e97e084db",
+    "results/2026-10-28-nanocobs-qualification-r1/qualification.json": "0b48f2946f0d30529d63dfc3d4ed7c12c60c039c0f4941ab55180b5cc7676cfd",
+    "generated/nanocobs-qualification-2026-10-28-r1/discovery/attempt-000/program.s": "5cee231e515902f13770df8a3134c65bd2414e10357121fd2e22a01ecf8aefdb",
+    "generated/nanocobs-qualification-2026-10-28-r1/discovery/attempt-000/marked.S": "2a04134f6a913b7d0794bf9db61dc11998e66610e8972c12588d3fc5641ab0a9",
+    "generated/nanocobs-qualification-2026-10-28-r1/discovery/attempt-000/marked/disassembly.txt": "9bc942b2293f1a8a2195b8af413df8cf8faf20517f11870ddb9731cad18addfb",
+    "generated/nanocobs-qualification-2026-10-28-r1/discovery/attempt-000/marked/symbols.txt": "29039a319050545608318547e24948bb379ad14540aa01c6f12a14dd858278b1",
+    "generated/nanocobs-qualification-2026-10-28-r1/discovery/attempt-000/profile/simulation.json": "6d06eafb42a9c5acadc1afc56321789c81766d1e15b6317d44fbc98bbd6b1a07",
+    "results/2026-10-28-nanocobs-qualification-r1/commands/01-discover/stderr.txt": "901fd5a4ac1cba0c518d5ebefbe84fb8d805103e0706dde59c8496dd88b15c1e",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/COPYING": "041ebc727233e5bf096dd41260cbb81014d3d29ca007a15f3b1807d4e9ff288e",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/adapter.c": "288871f8107c222ae5c2746caa0b1c49233cb204ae8f10834d1a4e80e76b819d",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/beebsc.c": "4fa588eefa678fa89b16f2b898970cfed162845bd494fa47e619fa636ff5d1e1",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/beebsc.h": "9a9fdef180978ec3caa6531d3c2dc6823bc5387731b568402c6c65442a2d7c6c",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/candidate_sim.cpp": "e03f8ee324c1fd039e10621a8779b438070405ba6f4547b0cc612fe5b6e61a34",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/checked_sim.cpp": "1a61a9f7406ce88f35285af814d2b47e26d8802ff79b31c12d3860d35546d437",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/cobs.h": "9923b13fb8d3f3d7d3000290670fdc099d1cb0af9ff9fe65cac82514842f8745",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/common.pcf": "90f30f5e0ab7657903b7e0ef8e094c5217eaffcb56697c3d4887deb30b04f010",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/core_crc_firmware.c": "e327ab1768dc8dc8d140cde0aff20f9d93d1cca8cd6d4b165e3e83aa9d5be041",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/crc32.c": "8180991358e28507a14426207840ec5c340e2491beac8e72658b3832621efb9c",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/embench_memory.c": "143f04d4a6ef0b753370797222cd0d9229d6e36fd277f1ee1d0ed8a66fdef784",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/pcpi_single.v": "1382dac78eed053726c34a127bb8355c3b2c2894e4995f9c61471f8bf18623ca",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/picorv32.v": "0836050971b3c6cdd28ac3b1e5719a67fb645161912bef1e472e63995ceb0622",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/profile_sim.cpp": "76770bcff03f67a82bfdb410c7687f24f733326b2a221d615f11c8116da43b45",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/soc_link.ld": "7cd389e654197908ab8a8e06a6981b86a94b2fd5cb4d5214616cc9a1f251dd28",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/soc_sim.cpp": "450c71eb16cebab41577dd0ab309945c1447a632d7ab085493751ed92f61669d",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/soc_start.S": "5f80f0e780ab4f8eb2bd18846dbeb5ab4406ca1efaa3221fb4c1e305bb4b0447",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/soc_top.v": "912829da3e0754ff2522754b57368b11a9d38b8fb2494ca73ff8abaf38f2cb98",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/stack_monitor.hpp": "01c093bc88d281f8b940182215d94b991e1aa4f9122c45161571213338d6aa69",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/support.h": "3c0862b8279c8d01951b2c8a180f04bd996431c2fb63ffb91773e38895f25e53",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/upstream/LICENSE": "be1ed16b605545037e3922495f3387a1630d0dc5e360905cb01fd9be16ff8f34",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/upstream/cobs.c": "7cc86cb168a76e153c202b330824787f6daa1cb7734e9030fc10da8ee1d88aa9",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/upstream/cobs.h": "9923b13fb8d3f3d7d3000290670fdc099d1cb0af9ff9fe65cac82514842f8745",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/upstream/tests/cobs_ref.h": "e3eab4c6bfd8177e428be14f99823b2486f2873d0bb07dc854664cc037aeb7c9",
+    "generated/nanocobs-qualification-2026-10-28-r1/inputs/upstream/tests/qemu/probe.c": "8a85a901a409049ba3b73e0488c5ce32c3aef04d23ee103dfb0fefcad32b93c4",
+    "generated/nanocobs-qualification-2026-10-28-r1/discovery/attempt-000/original/firmware.hex": "5f715bce3fecbf1a944255683345315cee9b9c88bdf2a0e845fa4462a767929e",
+    "generated/nanocobs-qualification-2026-10-28-r1/discovery/attempt-000/marked/firmware.hex": "5f715bce3fecbf1a944255683345315cee9b9c88bdf2a0e845fa4462a767929e",
+    "generated/nanocobs-qualification-2026-10-28-r1/discovery/attempt-000/marked/validation.json": "eb473c74675081a2fec591c49adfd85e4578163bc7c4c79b1884b673d4e712c1"
+  },
+  "posthoc_projection_not_opportunity_gate": [
+    {
+      "name": "candidate_00",
+      "formula": "addi(lui(16842752),257)",
+      "timed_replacements": 80862,
+      "latency_features": {
+        "baseline_cycles": 96372374,
+        "baseline_instructions": 18831889,
+        "baseline_cpi": 5.117509666714795,
+        "replacement_execution_fraction": 0.0042938868214442,
+        "occurrence_size_min": 2,
+        "occurrence_size_max": 2,
+        "dynamic_software_cycles": 646896,
+        "dynamic_custom_cycles": 404310,
+        "dynamic_shift_extra_cycles": 0,
+        "estimated_saved_cycles": 242586,
+        "estimated_cycle_reduction": 0.002517173645634173,
+        "estimated_speedup": 1.0025235257982676
+      }
+    },
+    {
+      "name": "candidate_01",
+      "formula": "or(sltiu(in0,1),in1)",
+      "timed_replacements": 65576,
+      "latency_features": {
+        "baseline_cycles": 96372374,
+        "baseline_instructions": 18831889,
+        "baseline_cpi": 5.117509666714795,
+        "replacement_execution_fraction": 0.0034821785536225283,
+        "occurrence_size_min": 2,
+        "occurrence_size_max": 2,
+        "dynamic_software_cycles": 524608,
+        "dynamic_custom_cycles": 327880,
+        "dynamic_shift_extra_cycles": 0,
+        "estimated_saved_cycles": 196728,
+        "estimated_cycle_reduction": 0.0020413318862519667,
+        "estimated_speedup": 1.0020455074458248
+      }
+    },
+    {
+      "name": "candidate_02",
+      "formula": "add(andi(in0,-4),in1)",
+      "timed_replacements": 47932,
+      "latency_features": {
+        "baseline_cycles": 96372374,
+        "baseline_instructions": 18831889,
+        "baseline_cpi": 5.117509666714795,
+        "replacement_execution_fraction": 0.00254525714334871,
+        "occurrence_size_min": 2,
+        "occurrence_size_max": 2,
+        "dynamic_software_cycles": 383456,
+        "dynamic_custom_cycles": 239660,
+        "dynamic_shift_extra_cycles": 0,
+        "estimated_saved_cycles": 143796,
+        "estimated_cycle_reduction": 0.001492087348600544,
+        "estimated_speedup": 1.0014943170000912
+      }
+    },
+    {
+      "name": "candidate_03",
+      "formula": "sub(addi(in0,-1),in1)",
+      "timed_replacements": 47932,
+      "latency_features": {
+        "baseline_cycles": 96372374,
+        "baseline_instructions": 18831889,
+        "baseline_cpi": 5.117509666714795,
+        "replacement_execution_fraction": 0.00254525714334871,
+        "occurrence_size_min": 2,
+        "occurrence_size_max": 2,
+        "dynamic_software_cycles": 383456,
+        "dynamic_custom_cycles": 239660,
+        "dynamic_shift_extra_cycles": 0,
+        "estimated_saved_cycles": 143796,
+        "estimated_cycle_reduction": 0.001492087348600544,
+        "estimated_speedup": 1.0014943170000912
+      }
+    },
+    {
+      "name": "candidate_04",
+      "formula": "addi(lui(-16842752),-257)",
+      "timed_replacements": 35234,
+      "latency_features": {
+        "baseline_cycles": 96372374,
+        "baseline_instructions": 18831889,
+        "baseline_cpi": 5.117509666714795,
+        "replacement_execution_fraction": 0.0018709753440029303,
+        "occurrence_size_min": 2,
+        "occurrence_size_max": 2,
+        "dynamic_software_cycles": 281872,
+        "dynamic_custom_cycles": 176170,
+        "dynamic_shift_extra_cycles": 0,
+        "estimated_saved_cycles": 105702,
+        "estimated_cycle_reduction": 0.0010968080956478253,
+        "estimated_speedup": 1.0010980124045423
+      }
+    },
+    {
+      "name": "candidate_05",
+      "formula": "addi(lui(-2139062272),128)",
+      "timed_replacements": 35234,
+      "latency_features": {
+        "baseline_cycles": 96372374,
+        "baseline_instructions": 18831889,
+        "baseline_cpi": 5.117509666714795,
+        "replacement_execution_fraction": 0.0018709753440029303,
+        "occurrence_size_min": 2,
+        "occurrence_size_max": 2,
+        "dynamic_software_cycles": 281872,
+        "dynamic_custom_cycles": 176170,
+        "dynamic_shift_extra_cycles": 0,
+        "estimated_saved_cycles": 105702,
+        "estimated_cycle_reduction": 0.0010968080956478253,
+        "estimated_speedup": 1.0010980124045423
+      }
+    },
+    {
+      "name": "candidate_06",
+      "formula": "or(sltiu(in0,1),sltiu(in1,2))",
+      "timed_replacements": 16406,
+      "latency_features": {
+        "baseline_cycles": 96372374,
+        "baseline_instructions": 18831889,
+        "baseline_cpi": 5.117509666714795,
+        "replacement_execution_fraction": 0.0008711818554155667,
+        "occurrence_size_min": 3,
+        "occurrence_size_max": 3,
+        "dynamic_software_cycles": 196872,
+        "dynamic_custom_cycles": 82030,
+        "dynamic_shift_extra_cycles": 0,
+        "estimated_saved_cycles": 114842,
+        "estimated_cycle_reduction": 0.0011916485527273615,
+        "estimated_speedup": 1.0011930702731917
+      }
+    },
+    {
+      "name": "candidate_07",
+      "formula": "or(in0,sltiu(in1,2))",
+      "timed_replacements": 16406,
+      "latency_features": {
+        "baseline_cycles": 96372374,
+        "baseline_instructions": 18831889,
+        "baseline_cpi": 5.117509666714795,
+        "replacement_execution_fraction": 0.0008711818554155667,
+        "occurrence_size_min": 2,
+        "occurrence_size_max": 2,
+        "dynamic_software_cycles": 131248,
+        "dynamic_custom_cycles": 82030,
+        "dynamic_shift_extra_cycles": 0,
+        "estimated_saved_cycles": 49218,
+        "estimated_cycle_reduction": 0.0005107065225974407,
+        "estimated_speedup": 1.0005109674770207
+      }
+    },
+    {
+      "name": "candidate_08",
+      "formula": "or(sltiu(in0,1),sltiu(in1,1))",
+      "timed_replacements": 8191,
+      "latency_features": {
+        "baseline_cycles": 96372374,
+        "baseline_instructions": 18831889,
+        "baseline_cpi": 5.117509666714795,
+        "replacement_execution_fraction": 0.00043495371069784874,
+        "occurrence_size_min": 3,
+        "occurrence_size_max": 3,
+        "dynamic_software_cycles": 98292,
+        "dynamic_custom_cycles": 40955,
+        "dynamic_shift_extra_cycles": 0,
+        "estimated_saved_cycles": 57337,
+        "estimated_cycle_reduction": 0.0005949526572832999,
+        "estimated_speedup": 1.0005953068366678
+      }
+    },
+    {
+      "name": "candidate_09",
+      "formula": "or(in0,sltiu(in1,1))",
+      "timed_replacements": 8191,
+      "latency_features": {
+        "baseline_cycles": 96372374,
+        "baseline_instructions": 18831889,
+        "baseline_cpi": 5.117509666714795,
+        "replacement_execution_fraction": 0.00043495371069784874,
+        "occurrence_size_min": 2,
+        "occurrence_size_max": 2,
+        "dynamic_software_cycles": 65528,
+        "dynamic_custom_cycles": 40955,
+        "dynamic_shift_extra_cycles": 0,
+        "estimated_saved_cycles": 24573,
+        "estimated_cycle_reduction": 0.0002549797102642714,
+        "estimated_speedup": 1.0002550447414986
+      }
+    }
+  ],
+  "program_data_end_bytes": 3408
+}

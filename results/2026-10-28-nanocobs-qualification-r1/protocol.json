@@ -1,0 +1,151 @@
+{
+  "schema": "isaforge-nanocobs-v1-qualification",
+  "workload_group": "nanocobs",
+  "upstream_suite": "nanocobs original QEMU differential probe",
+  "upstream_repository": "https://github.com/charlesnicholson/nanocobs",
+  "upstream_commit": "8d47d35ebe81c7caecc2b8954b1355d223ecabcb",
+  "pool_size": 12,
+  "fixed_cases": 8215,
+  "minimum_calibrated_cycle_reduction": 0.005,
+  "minimum_timed_replacements": 10,
+  "joint_gate": "At least one same candidate meets both unchanged public opportunity minima.",
+  "unchanged_upstream_algorithm_and_fixed_input": true,
+  "eligible_translation_unit": "benchmarks/nanocobs/upstream/cobs.c",
+  "fixed_translation_units": [
+    "adapter.c",
+    "upstream/tests/cobs_ref.c"
+  ],
+  "correctness": "Original full probe returns zero with failed == 0 and passed == 8215.",
+  "correctness_limitation": "Scalar reference includes the same pinned cobs.c with renamed symbols and SWAR disabled; differential agreement cannot exclude shared source bugs.",
+  "library_runtime": "Existing byte memcpy in hardware/embench_memory.c retained unchanged.",
+  "timing_limitation": "Complete original probe including scalar reference and checker is timed; only production cobs.c can be rewritten.",
+  "compiler_flags": [
+    "-march=rv32i_zicsr",
+    "-mabi=ilp32",
+    "-Os",
+    "-std=gnu17",
+    "-nostdlib",
+    "-nostartfiles",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-msmall-data-limit=0",
+    "-mno-relax",
+    "-DCPU_MHZ=1",
+    "-DCOBS_SWAR_WORD_BITS=32"
+  ],
+  "isa": "rv32i_zicsr",
+  "abi": "ilp32",
+  "optimization": "-Os",
+  "clock_mhz": 12,
+  "route_seeds": [
+    1,
+    2,
+    3
+  ],
+  "memory_partition": {
+    "ram_bytes": 8192,
+    "program_limit": 6400,
+    "stack_floor": 6528,
+    "stack_bytes": 1664,
+    "minimum_guard_bytes": 128
+  },
+  "candidate_dispatch_enabled": false,
+  "target_candidate_attempts": 0,
+  "family_status": "Formula-family overlap must be audited before independence claims.",
+  "created_at_utc": "2026-10-28T13:58:45.714256+00:00",
+  "phases": [
+    "prepare",
+    "discover",
+    "opportunity",
+    "baseline",
+    "public",
+    "freeze"
+  ],
+  "reference_root": "generated/codesign-crc32-2026-10-19-r1",
+  "reference_plan_sha256": "796167e07bdc413f348c829ca93e60eda87162ca02143d3f57269ff2059197b9",
+  "historical_corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "native_root": "generated/nanocobs-qualification-2026-10-28-r1",
+  "source_bindings": {
+    "scripts/qualify_nanocobs.py": "200aa2a3e38c5a1ae8fae8c66bf7609f86a6e0392c9bd42576c9b94e78866ad5",
+    "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+    "scripts/qualify_opportunity_sources.py": "389e34ba724f2dcc3766752e404e46006b6aa7fced4f2e21508127ac08e8ffe1",
+    "isaforge/observed_command.py": "f56bf235b31205c842ea04ab5a493ee7f7e6731844e05b6d8991f21d9f3be41e",
+    "isaforge/nanocobs_workload.py": "de0cc32f331959cad43f188a343d686d2703d0ed1f373484acb3d011dc07d707",
+    "tests/test_nanocobs_workload.py": "9a44e319bc0646b75c44582cd06f0fc09f678fcbd5b87fdd13520bd047283d7c",
+    "docs/nanocobs-adapter-contract-2026-10-28.md": "f57871d535f0c0e7f640f5bb4104ff733ef452879dc176c0409a380b59a4b712",
+    "benchmarks/nanocobs/SOURCE_PIN.json": "a5ca3bd627f6cf3df01bf53c32487d1ea73448b3b54e87bbacb536781a1ada42",
+    "benchmarks/nanocobs/adapter.c": "288871f8107c222ae5c2746caa0b1c49233cb204ae8f10834d1a4e80e76b819d",
+    "benchmarks/nanocobs/upstream/LICENSE": "be1ed16b605545037e3922495f3387a1630d0dc5e360905cb01fd9be16ff8f34",
+    "benchmarks/nanocobs/upstream/cobs.c": "7cc86cb168a76e153c202b330824787f6daa1cb7734e9030fc10da8ee1d88aa9",
+    "benchmarks/nanocobs/upstream/cobs.h": "9923b13fb8d3f3d7d3000290670fdc099d1cb0af9ff9fe65cac82514842f8745",
+    "benchmarks/nanocobs/upstream/tests/cobs_ref.c": "133e8a6844c1c10e2a0ccbd079970dafc0f8adb413f404e105b058fd530984c9",
+    "benchmarks/nanocobs/upstream/tests/cobs_ref.h": "e3eab4c6bfd8177e428be14f99823b2486f2873d0bb07dc854664cc037aeb7c9",
+    "benchmarks/nanocobs/upstream/tests/qemu/probe.c": "8a85a901a409049ba3b73e0488c5ce32c3aef04d23ee103dfb0fefcad32b93c4",
+    "results/2026-10-26-lift-selection-corpus/corpus.json": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+    "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+    "isaforge/campaign_evidence.py": "96e4a96379dc336e1c04fc8a3bbfb9971cf65281d14cfe140f4eecaec51a748e",
+    "isaforge/prospective_inputs.py": "90abbebb74ad967d498c126134b30401e195da7e12ceef405661e5742ef5f446",
+    "hardware/embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+    "hardware/embench_memory.c": "343b26ae849f9bfab8ed197636449c4a91c5d78f26fe7f6ff4f960901520b847",
+    "hardware/checked_sim.cpp": "477635f316551bf85bd7ac1addc11bb9fa2c252969202621e75692ea5cfd9f07"
+  },
+  "workers": 1,
+  "build_workers": 2,
+  "phase_timeout_seconds": 3600,
+  "phase_commands": {
+    "prepare": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/.venv/bin/python",
+      "-m",
+      "isaforge.nanocobs_workload",
+      "prepare",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/nanocobs-qualification-2026-10-28-r1",
+      "--reference-root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+    ],
+    "discover": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/.venv/bin/python",
+      "-m",
+      "isaforge.nanocobs_workload",
+      "discover",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/nanocobs-qualification-2026-10-28-r1"
+    ],
+    "opportunity": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/.venv/bin/python",
+      "-m",
+      "isaforge.nanocobs_workload",
+      "opportunity",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/nanocobs-qualification-2026-10-28-r1"
+    ],
+    "baseline": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/.venv/bin/python",
+      "-m",
+      "isaforge.nanocobs_workload",
+      "baseline",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/nanocobs-qualification-2026-10-28-r1"
+    ],
+    "public": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/.venv/bin/python",
+      "-m",
+      "isaforge.nanocobs_workload",
+      "public",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/nanocobs-qualification-2026-10-28-r1"
+    ],
+    "freeze": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/.venv/bin/python",
+      "-m",
+      "isaforge.nanocobs_workload",
+      "freeze",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/nanocobs-qualification-2026-10-28-r1"
+    ]
+  },
+  "rejection_rule": "Preserve the first failed phase and raw archive. A nonzero phase is a workload rejection only when its source-bound gate artifact records an explicit failed gate. Do not alter source, tests, compiler, ISA, memory split, pool size, or thresholds.",
+  "pool_freeze_is_candidate_authorization": false
+}

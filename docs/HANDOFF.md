@@ -1,3 +1,7 @@
+## October 28: nanocobs source integration and qualification
+
+Sol implemented the production-only adapter, Terra independently reviewed the rewrite/correctness boundary, and Luna built the independent short-frame oracle. Source release `c121a0ec` is pushed. Fifteen focused tests and all 8,215 independent host oracle cases passed. The baseline-only target run then failed discovery at the unchanged twelve-candidate gate. Target self-check passed at 96,372,374 cycles / 18,831,889 instructions, with 432 stack bytes used and 3,408 program/data bytes. No candidate labels or model changes. Preserve [qualification](../results/2026-10-28-nanocobs-qualification-r1/README.md) and [host oracle](../results/2026-10-28-nanocobs-fixed-oracle-r1/README.md); do not weaken gates or retry this source.
+
 # Current handoff — evidence after PULPino Sudoku r4 selection
 
 
