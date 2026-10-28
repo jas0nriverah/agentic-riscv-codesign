@@ -1,0 +1,107 @@
+[
+  {
+    "name": "host32_build",
+    "argv": [
+      "/usr/bin/clang",
+      "-std=c99",
+      "-Os",
+      "-DCOBS_SWAR_WORD_BITS=32",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/upstream/cobs.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/upstream/tests/cobs_ref.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/upstream/tests/qemu/probe.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/host_shim.c",
+      "-o",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/nanocobs-preflight-reproduction-20261028-r1/host32"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.41356208400975447
+  },
+  {
+    "name": "host32_execute",
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/nanocobs-preflight-reproduction-20261028-r1/host32"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.16764191599213518
+  },
+  {
+    "name": "host32_fault_build",
+    "argv": [
+      "/usr/bin/clang",
+      "-std=c99",
+      "-Os",
+      "-DCOBS_SWAR_WORD_BITS=32",
+      "-DCOBS_PROBE_FAULT",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/upstream/cobs.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/upstream/tests/cobs_ref.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/upstream/tests/qemu/probe.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/host_shim.c",
+      "-o",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/nanocobs-preflight-reproduction-20261028-r1/host32_fault"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.15147266699932516
+  },
+  {
+    "name": "host32_fault_execute",
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/nanocobs-preflight-reproduction-20261028-r1/host32_fault"
+    ],
+    "returncode": 1,
+    "elapsed_seconds": 0.1039647919969866
+  },
+  {
+    "name": "rv32_link",
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-Os",
+      "-std=gnu17",
+      "-nostdlib",
+      "-nostartfiles",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-msmall-data-limit=0",
+      "-mno-relax",
+      "-DCPU_MHZ=1",
+      "-fstack-usage",
+      "-Wl,--gc-sections",
+      "-Wl,--no-relax",
+      "-Wl,-Map,/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/nanocobs-preflight-reproduction-20261028-r1/firmware.map",
+      "-Wl,-T,/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/soc_link.ld",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/soc_start.S",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/embench_firmware.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/embench_memory.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/adapter.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/upstream/cobs.c",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/results/2026-10-28-nanocobs-source-preflight-r1/inputs/upstream/tests/cobs_ref.c",
+      "-o",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/nanocobs-preflight-reproduction-20261028-r1/firmware.elf"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.4163319999934174
+  },
+  {
+    "name": "rv32_symbols",
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-nm",
+      "-n",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/nanocobs-preflight-reproduction-20261028-r1/firmware.elf"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.0058793749922188
+  },
+  {
+    "name": "rv32_unresolved",
+    "argv": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-nm",
+      "-u",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/nanocobs-preflight-reproduction-20261028-r1/firmware.elf"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.0035490419977577403
+  }
+]
