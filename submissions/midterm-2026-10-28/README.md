@@ -12,13 +12,13 @@ to fill those gaps from verified results before submitting.
 
 ## Deliverables
 
-- [AI track inserts and presentation notes](ai-track-insert.md) — copy-ready text for the current PDF's empty Sections 2.3/3.3, an evidence-based stopping-point analysis, seven-minute allocation, and Q&A. The PDF and decks have not been overwritten by these notes.
+- [AI track inserts and presentation notes](ai-track-insert.md) — copy-ready text for the current PDF's empty Sections 2.3/3.3, an evidence-based stopping-point analysis, seven-minute allocation, and Q&A. The supplied PDF remains unchanged; the full deck has now been revised using these evidence qualifications.
 
 - `isaforge-midterm-progress-report.docx` — methodology, AI use, measured results, model evaluation, explainability, chat-agent pilot, timeline, and contribution matrix.
-- `isaforge-midterm-progress-slides-final.pptx` — 11-slide, approximately 7-minute editable presentation with a new XGBoost model-architecture diagram, native charts, and tables.
-- `isaforge-xgboost-model-architecture-slide.pptx` — copy-ready standalone replacement slide with a tree-ensemble schematic and the current model details. The original full deck remains unchanged.
+- `isaforge-midterm-progress-slides-final.pptx` — Revised 11-slide presentation: research foundations, timeline/contributions, methodology, dataset, XGBoost ranking, explainability/uncertainty, LLM agent, baselines, results, and next steps. Native editable charts and diagrams; speaker scripts total 420 seconds (941 words).
+- `isaforge-xgboost-model-architecture-slide.pptx` — copy-ready standalone replacement slide with a tree-ensemble schematic and the current model details. This is a historical standalone asset; the revised full deck is the presentation deliverable.
 - `isaforge-xgboost-model-architecture-slide-preview.png` — 16:9 preview of the standalone slide. Slide text and speaker notes are editable in PowerPoint; the tree illustration is an image.
-- `model-architecture-slide.png` — preview of the architecture slide already inside the original 11-slide deck.
+- `model-architecture-slide.png` — historical architecture preview; not a preview of the revised full deck.
 - `dataset/` — CSV data, figure exports, and data dictionary.
 - `isaforge-midterm-dataset.zip` — same dataset folder in one portable archive.
 
@@ -35,3 +35,10 @@ Before Canvas upload, confirm the member names, Git author aliases, actual contr
 The slide and dataset artifacts are included in this bundle; the report still
 needs the AI-section and placeholder corrections above, and the contribution
 matrix needs team confirmation. No Canvas upload was performed.
+
+## Revised 11-slide deck
+
+- `speaker-notes-7-minutes.md` mirrors the embedded scripts, per-slide timings and source/Q&A notes. Rehearse once for handoffs; source notes are not part of the seven-minute script.
+- `source/build-slides.mjs` preserves the Artifact Tool authoring source. It requires the bundled `@oai/artifact-tool` runtime and presentation skill paths recorded in the source; set `RUNTIME_NODE_MODULES` to the bundled module directory. The script writes a fresh private build directory and does not automatically overwrite the submitted deck.
+- All 11 slides were rendered and visually inspected; native chart/workbook, table, package, layout, and first-party import validation passed. Native PowerPoint opening was not tested.
+- Contribution mapping on slide 3 remains provisional and must be team-confirmed.
