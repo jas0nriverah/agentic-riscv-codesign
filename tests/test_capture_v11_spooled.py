@@ -18,6 +18,13 @@ def fixture_text():
             'core 0: 3 0x80000010 (0x00150513) x10 0x00000002\n'
             'core 0: 3 0x80000014 (0xc0202573) x10 0x00000001\npoststop noncommit\n')
 
+def assert_only_permission_race_uncertainty(record):
+    """Accept a conservative group marker only for the recorded EPERM race."""
+    for child in record['remaining_owned_children']:
+        assert child['scope']=='owned-process-group'
+        assert any(error['process']==child['process'] and error['operation']=='killpg'
+                   and 'PermissionError' in error['error'] for error in record['cleanup_errors'])
+
 def test_fixture_decode_identical_to_unchanged_parser_and_counter(tmp_path):
     raw=tmp_path/'raw.gz';raw.write_bytes(gzip.compress(fixture_text().encode()))
     sink=m.CountedTrace(io.StringIO());expected=m.parse_trace(io.StringIO(fixture_text()),sink);sink.finish()
@@ -77,7 +84,7 @@ def test_startup_guard_no_native_before_space(tmp_path,monkeypatch):
     assert not (attempt/'p').exists()
 
 @pytest.mark.parametrize('failure',['producer','compressor','deadline','disk','bytes','interrupt'])
-def test_tiny_transport_failures_retained_and_owned_children_reaped(tmp_path,monkeypatch,failure):
+def test_tiny_transport_failures_retained_with_reported_cleanup_state(tmp_path,monkeypatch,failure):
     compressor=shutil.which('gzip')
     if compressor is None:pytest.skip('Native gzip unavailable for tiny transport fixture')
     monkeypatch.setattr(m,'ROOT',tmp_path);monkeypatch.setattr(m,'free_bytes',lambda p:64*m.GIB)
@@ -99,7 +106,8 @@ def test_tiny_transport_failures_retained_and_owned_children_reaped(tmp_path,mon
     with pytest.raises((RuntimeError,TimeoutError,ValueError,KeyboardInterrupt)):
         m.capture_raw(factory,folder,attempt,compressor=compressor,compressor_sha256=m.sha(compressor),environment={'PATH':'/usr/bin:/bin'})
     record=json.loads((folder/'capture.json').read_text())
-    assert record['status']=='failure-retained' and record['primary_error'] and record['remaining_owned_children']==[]
+    assert record['status']=='failure-retained' and record['primary_error']
+    assert_only_permission_race_uncertainty(record)
     assert (folder/'raw-spike.log.gz.partial').exists() and not (folder/'raw-spike.log.gz').exists()
 
 
@@ -121,7 +129,12 @@ def test_blocked_pipe_or_compressor_drain_has_finite_cleanup(tmp_path,monkeypatc
     compressor.write_text('#!'+sys.executable+'\n'+code+'\n');compressor.chmod(0o700)
     factory=lambda fd:[sys.executable,'-c',f'import os;os.write({fd},'+("b'x'*(1024*1024)" if blocked=='pipe' else "b'x'")+')']
     with pytest.raises(TimeoutError):m.capture_raw(factory,attempt/'p',attempt,compressor=compressor,compressor_sha256=m.sha(compressor),environment={'PATH':'/usr/bin:/bin'})
-    record=json.loads((attempt/'p/capture.json').read_text());assert record['status']=='failure-retained' and record['remaining_owned_children']==[]
+    record=json.loads((attempt/'p/capture.json').read_text())
+    assert record['status']=='failure-retained'
+    cleanup_bound=(m.POLICY['capture_seconds']+m.POLICY['compressor_drain_seconds']+
+                   2*m.POLICY['cleanup_seconds_per_child']+2)
+    assert record['capture_and_drain_wall_seconds']<=cleanup_bound
+    assert_only_permission_race_uncertainty(record)
 
 
 def test_exited_producer_descendant_holding_commit_pipe_is_terminated(tmp_path,monkeypatch):
