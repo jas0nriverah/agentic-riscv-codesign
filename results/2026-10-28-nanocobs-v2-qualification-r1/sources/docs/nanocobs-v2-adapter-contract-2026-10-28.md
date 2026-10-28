@@ -1,0 +1,13 @@
+# Nanocobs v2: variable-pool admission
+
+The owner explicitly removed the fixed twelve-candidate, 0.5% projected-benefit and ten-replacement admission rules. This fresh experiment implements the [active admission policy](workload-admission-policy.md). The earlier r1 failure stays unchanged and is prior source-screen exposure; v2 is not an untouched source discovery.
+
+Reuse the exact pinned nanocobs source, original 8,215-case probe, production-only rewrite boundary, unchanged scalar reference/checker, ISA, compiler flags, memory partition, 12 MHz floor and route seeds from the [v1 contract](nanocobs-adapter-contract-2026-10-28.md). Its fixed-pool/opportunity/no-revisit provisions are superseded here. Correctness and memory checks remain mandatory. Host oracle scope remains valid <=12-byte frames, not arbitrary inputs or target instruction equivalence.
+
+The inherited profiled source-mapped extractor finds expressions of at most four operations. Retain its complete discovered roster, reject unsafe lowering/relocations, and use the calibrated executable subset supported by the existing feature/evaluation path. Record uncalibrated exclusions explicitly as a technical coverage limitation, not a benefit cutoff. At least one supported legal candidate permits the selection experiment; empty pools remain source-screen evidence. No minimum estimated benefit or timed replacement count applies.
+
+Predeclare computational cap30, a maximum only. Keep every eligible candidate when N<=30; otherwise sample deterministic evenly spaced merit-rank indices. The immutable plan's legacy pool_size field means this cap; discovery records and independently authenticates actual_pool_size. Do not silently reseal the plan after discovering N. One-candidate pools must work.
+
+Requested policy budgets are separate from N; effective budget is min(B,N), equal for all policies on that workload. Exhausting a pool cannot demonstrate search efficiency. Preserve low/negative measured outcomes and baseline fallback. This baseline-only qualification freezes the actual pool and uses zero candidate measurements. A subsequent source-bound selector release supplies the fair comparison, family exclusions and measurement budgets before new target candidate outcomes; it does not require asking the owner to reapprove ordinary authorized development.
+
+Run `.venv/bin/python scripts/qualify_nanocobs_v2.py` in fresh v2 output/native roots. Report every failed phase, actual baseline metrics and tests. Source exposure and any revised experiment retries must remain explicit. Do not claim new labels, training or model improvement from qualification alone.

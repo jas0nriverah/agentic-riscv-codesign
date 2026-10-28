@@ -1,5 +1,7 @@
 ## October 28: nanocobs source integration and qualification
 
+**Variable-pool implementation verified:** nanocobs v2 now passes all six qualification phases with ten candidates and no projected-benefit/replacement minimum. Baseline: 96,372,374 cycles, 1,653 LUT4, minimum routed Fmax68.493MHz; zero candidate labels so far. The historical fixed-twelve rejection remains unchanged. See [v2 measured evidence](../results/2026-10-28-nanocobs-v2-qualification-r1/README.md).
+
 **Active owner correction (October 28):** fixed twelve-candidate pools, the 0.5% projected-benefit cutoff, and the ten-replacement cutoff are no longer workload admission requirements. Use variable-sized legal pools and retain low/neutral/negative outcomes. Historical gates below describe frozen experiments only; their blanket no-revisit instructions are superseded for pool-size/opportunity exclusions. Correctness, ISA/lowering, memory, hardware constraints, split integrity and evidence preservation remain required. See [the active admission policy](workload-admission-policy.md).
 
 
