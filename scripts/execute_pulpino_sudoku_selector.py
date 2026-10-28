@@ -36,17 +36,17 @@ from isaforge import pulpino_sudoku_workload as workload
 from isaforge.codex_chat_selector import CodexChatSelectionProvider
 from isaforge.routed_selection import summarize_model_events
 from scripts.prepare_pulpino_sudoku_selector import (OUTPUT as PREREG, SOURCES,
-    authenticate as authenticate_prereg)
+    PREVIOUS_RELAY_FAILURE, authenticate as authenticate_prereg)
 from scripts.reproduce_codesign import pack_archive, restore_archive
 from scripts.export_agent_observability import export as export_agent_observability
 
 
 SOURCE = "scripts/execute_pulpino_sudoku_selector.py"
 QUALIFICATION = ROOT / "results/2026-10-28-pulpino-sudoku-qualification-r1"
-STUDY = ROOT / "generated/pulpino-sudoku-selection-study-r2"
+STUDY = ROOT / "generated/pulpino-sudoku-selection-study-r4"
 NATIVE = STUDY / "native"
 RELEASE = STUDY / "release.json"
-RESULTS = ROOT / "results/2026-10-28-pulpino-sudoku-selection-r2"
+RESULTS = ROOT / "results/2026-10-28-pulpino-sudoku-selection-r4"
 BRANCH = "ai-guided-ml"
 AREA_CAP = 64
 CLOCK_MHZ = 12.0
@@ -122,6 +122,9 @@ def _verify_committed_prereg(commit, *, dispatch=True):
     for path, expected in prereg["input_bindings"].items():
         require(_commit_file(commit, path) == expected,
                 "Pushed source differs from frozen model input: " + path)
+    for path, expected in prereg["evidence_bindings"].items():
+        require(_commit_file(commit, path) == expected,
+                "Pushed commit differs from frozen evidence: " + path)
     return prereg
 
 
@@ -316,6 +319,13 @@ def _agent_attempt_costs(native_root, study_root, native_job_ids, names, returne
         outer_operation_time_unknown_ids=outer_unknown)
 
 
+def _require_interactive_relay(stream=None):
+    stream = sys.stdin if stream is None else stream
+    isatty = getattr(stream, "isatty", None)
+    require(callable(isatty) and isatty(),
+            "Agent relay requires an interactive PTY; no episode was started")
+
+
 class ProspectiveLiveSelectionSession(bounded_selector.ReplaySelectionSession):
     """Keep the tested allowlist/ledger while correcting replay-only framing."""
 
@@ -345,7 +355,7 @@ class ProspectiveLiveSelectionSession(bounded_selector.ReplaySelectionSession):
         self.ledger["new_native_jobs"] = self.live_native_jobs
         self.ledger["timer_scope"] = (
             "Live selection session elapsed time; overlaps model response, local retrieval, and hardware measurement.")
-        self.ledger["target_attempt_wall_seconds"] = sum(
+        self.ledger["returned_observation_measurement_seconds"] = sum(
             event.get("observation", {}).get("measurement_seconds", 0)
             for event in self.ledger["events"] if "charged_attempt" in event)
         self.ledger.pop("replayed_target_measurement_seconds", None)
@@ -353,6 +363,7 @@ class ProspectiveLiveSelectionSession(bounded_selector.ReplaySelectionSession):
 
 
 def run_agent():
+    _require_interactive_relay()
     prereg, release_record, _ = _verify_release()
     workload.require_zero_candidates(NATIVE)
     agent_dir = STUDY / "agent"
@@ -427,6 +438,9 @@ def run_agent():
             "Agent episode must close through agent finalization or explicit host fallback")
     require(session.ledger.get("decision_rationale") == result.get("decision_rationale"),
             "Decision rationale differs from the authoritative host ledger")
+    cost_accounting = _agent_attempt_costs(NATIVE, STUDY, native_job_ids, names, outcomes)
+    session.ledger["native_attempt_cost_accounting"] = cost_accounting
+    session._persist()
     observability_protocol = dict(
         schema="isaforge-pulpino-sudoku-live-agent-observability-v1",
         target=workload.GROUP, target_context_id=prereg["target_context_id"],
@@ -445,7 +459,6 @@ def run_agent():
         telemetry="SQLite is a read-only analysis projection; sealed JSON ledger remains authoritative",
         token_usage="unavailable for current Codex chat bridge")
     c.seal(agent_dir / "protocol.json", observability_protocol)
-    cost_accounting = _agent_attempt_costs(NATIVE, STUDY, native_job_ids, names, outcomes)
     report = dict(schema="isaforge-pulpino-sudoku-live-agent-report-v1",
         protocol_sha256=c.sha(agent_dir / "protocol.json"),
         target_workload=workload.GROUP, target_context_id=prereg["target_context_id"],
@@ -745,6 +758,7 @@ def evaluate():
     c.seal(STUDY / "outer-times.json", outer_times)
     c.seal(STUDY / "outcomes.json", outcomes)
     agent = c.unseal(STUDY / "agent/report.json")
+    prior_relay_failure = c.unseal(PREVIOUS_RELAY_FAILURE / "failure-summary.json")
     successes = [row for row in outcomes if row.get("status", "success") == "success"]
     feasible = [row for row in successes if row["correctness_verified"] and row["device_fits"]
                 and row["area_delta_lut4"] <= AREA_CAP and row["routed_fmax_min_mhz"] >= CLOCK_MHZ]
@@ -815,6 +829,7 @@ def evaluate():
             scope="full-pool corpus/oracle collection; costs all twelve measured attempts, irrespective of replay budget"),
         policy_costs_note="Each non-agent policy is replayed with one-at-a-time outcome release and counts only its own B1/B2/B3 prefix. Those are offline counterfactual decision costs on already collected target labels; actual corpus construction measured the complete pool.",
         baseline=dict(c.unseal(PREREG / "inputs/cost-provenance.json")["target_baseline"]),
+        prior_relay_startup_failure=prior_relay_failure,
         source_family_audit=c.unseal(PREREG / "source-family-audit.json"),
         inference_training_cost=c.unseal(PREREG / "model-fit-costs.json"),
         hardware_training_cost=prereg["cost_provenance"]["historical"],
@@ -859,6 +874,7 @@ def evaluate():
     archive_record = pack_archive(NATIVE, RESULTS / "native.tar.gz")
     c.seal(RESULTS / "archive-manifest.json", archive_record)
     shutil.copytree(STUDY / "agent", RESULTS / "agent")
+    shutil.copytree(PREVIOUS_RELAY_FAILURE, RESULTS / "prior-relay-startup-failure-r2")
     c.seal(RESULTS / "manifest.json", _inventory(RESULTS))
     return report
 
@@ -886,10 +902,24 @@ def main(argv=None):
                 ledger.get("status") == agent.get("status") and
                 ledger.get("selected_id") == agent.get("selected_id"),
                 "Agent report differs from the host-authoritative decision ledger")
+        costs = ledger.get("native_attempt_cost_accounting")
+        require(isinstance(costs, dict) and
+                agent.get("agent_attempt_costs") == costs.get("attempts") and
+                agent.get("actual_agent_measurement_seconds") == costs.get("measurement_seconds") and
+                agent.get("known_agent_measurement_seconds") == costs.get("known_measurement_seconds") and
+                agent.get("agent_measurement_time_complete") == costs.get("measurement_time_complete") and
+                agent.get("agent_outer_operation_seconds") == costs.get("outer_operation_seconds") and
+                agent.get("known_agent_outer_operation_seconds") == costs.get("known_outer_operation_seconds"),
+                "Agent cost report differs from durable host-ledger accounting")
         archive_record = c.unseal(RESULTS / "archive-manifest.json")
         require(_inventory(RESULTS / "agent") ==
                 c.unseal(RESULTS / "agent/manifest.json"),
                 "Agent evidence package manifest differs")
+        prior_failure = RESULTS / "prior-relay-startup-failure-r2"
+        require(_inventory(prior_failure) == c.unseal(prior_failure / "manifest.json") and
+                result.get("prior_relay_startup_failure") ==
+                    c.unseal(prior_failure / "failure-summary.json"),
+                "Preserved prior non-PTY relay failure evidence differs")
         observability = c.unseal(RESULTS / "agent/observability-export.json")
         database = RESULTS / "agent/observability.sqlite"
         require(c.sha(database) == observability["database_sha256"],

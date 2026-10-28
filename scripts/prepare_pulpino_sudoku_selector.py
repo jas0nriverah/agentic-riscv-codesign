@@ -25,7 +25,9 @@ SOURCE = 'scripts/prepare_pulpino_sudoku_selector.py'
 QUALIFICATION = ROOT / 'results/2026-10-28-pulpino-sudoku-qualification-r1'
 BASELINE_ROOT = ROOT / 'generated/pulpino-sudoku-selection-baseline-r1'
 HISTORY = ROOT / workload.HISTORY
-OUTPUT = ROOT / 'results/2026-10-28-pulpino-sudoku-selector-prereg-r2'
+OUTPUT = ROOT / 'results/2026-10-28-pulpino-sudoku-selector-prereg-r4'
+PREVIOUS_RELAY_STUDY = ROOT / 'generated/pulpino-sudoku-selection-study-r2'
+PREVIOUS_RELAY_FAILURE = ROOT / 'results/2026-10-28-pulpino-sudoku-selector-launch-failure-r3'
 SEEDS = (0, 1, 2, 3, 4)
 BUDGETS = (1, 2, 3)
 AREA_CAPS = (32, 64, 128)
@@ -76,6 +78,60 @@ QUALIFICATION_INPUTS = (
 
 def require(condition, message):
     c.require(bool(condition), message)
+
+
+def _snapshot_previous_relay_failure():
+    """Freeze the failed non-PTY zero-candidate agent launch as provenance."""
+    agent_dir = PREVIOUS_RELAY_STUDY / 'agent'
+    require(not PREVIOUS_RELAY_FAILURE.exists(),
+            'Preserve an existing prior-relay failure package')
+    source_manifest = c.unseal(agent_dir / 'manifest.json')
+    for relative, digest in source_manifest.items():
+        require(c.sha(agent_dir / relative) == digest,
+                'Prior relay attempt differs from its agent manifest: ' + relative)
+    report = c.unseal(agent_dir / 'report.json')
+    ledger = c.unseal(agent_dir / 'ledger.json')
+    events = ledger.get('model_events', [])
+    require(report.get('ledger_sha256') == c.sha(agent_dir / 'ledger.json') and
+            ledger.get('model_calls') == len(events) == 1 and
+            events[0].get('status') == 'model_error',
+            'Prior relay error report differs from its authoritative ledger')
+    workload.require_zero_candidates(PREVIOUS_RELAY_STUDY / 'native')
+    require(report.get('status') == ledger.get('status') == 'host_fallback' and
+            report.get('charged_attempts') == ledger.get('charged_attempts') == 0 and
+            report.get('new_native_jobs') == ledger.get('new_native_jobs') == 0 and
+            report.get('tool_calls') == ledger.get('tool_calls') == 0 and
+            report.get('provider_calls') == ledger.get('provider_calls') == 0 and
+            report.get('unique_target_labels_revealed_to_model') == 0 and
+            report.get('attempted_candidate_ids') == [],
+            'Prior relay snapshot is not a label-free pre-action host fallback')
+    require((agent_dir / 'public-requests/public-01.json').is_file(),
+            'Prior relay request transcript is missing')
+    PREVIOUS_RELAY_FAILURE.mkdir(parents=True)
+    shutil.copytree(agent_dir, PREVIOUS_RELAY_FAILURE / 'agent')
+    failure = dict(schema='isaforge-pulpino-sudoku-relay-launch-failure-v1',
+        attempt='r2 non-PTY Codex chat bridge launch',
+        launch_mode='exec_command without a PTY; recorded from the invocation used for this attempt',
+        cause='The stdin-driven bridge returned CodexChatBridgeError before a usable action. The saved ledger preserves only the exception class, not its message; EOF is the likely cause inferred from the non-PTY invocation, not independently verifiable.',
+        provider_error_type=events[0].get('error_type'),
+        model_calls=ledger.get('model_calls'), provider_calls=report.get('provider_calls'),
+        tool_calls=report.get('tool_calls'), candidate_attempts=report.get('charged_attempts'),
+        native_jobs=report.get('new_native_jobs'), target_labels_seen=report.get(
+            'unique_target_labels_revealed_to_model'),
+        source_agent_manifest_sha256=c.sha(agent_dir / 'manifest.json'),
+        preserved_agent_manifest_sha256=c.sha(PREVIOUS_RELAY_FAILURE / 'agent/manifest.json'),
+        disposition='Preserved unchanged. Do not score this as an agent selection; retry only in a new source-bound preregistration with an enforced live PTY.')
+    c.seal(PREVIOUS_RELAY_FAILURE / 'failure-summary.json', failure)
+    (PREVIOUS_RELAY_FAILURE / 'README.md').write_text(
+        '# PULPino Sudoku relay launch failure — r2 snapshot r3\n\n'
+        'The zero-label agent process was launched without a PTY. The bridge returned `CodexChatBridgeError` before a usable structured action, and the host finalized baseline fallback. The saved ledger keeps the exception class but not its message, so EOF is the likely cause inferred from the pipe invocation rather than a separately recorded error string. No provider response, tool call, candidate attempt, or target label occurred.\n\n'
+        'The original agent request, ledger, report, protocol, and SQLite projection are preserved under `agent/`. This is a failed launch, not a selection result. The corrected r4 experiment checks for a live PTY before creating an episode.\n')
+    entries = {path.relative_to(PREVIOUS_RELAY_FAILURE).as_posix(): c.sha(path)
+        for path in sorted(PREVIOUS_RELAY_FAILURE.rglob('*')) if path.is_file() and
+        path.name not in ('manifest.json', 'manifest.json.sha256')}
+    c.seal(PREVIOUS_RELAY_FAILURE / 'manifest.json', entries)
+    return {path.relative_to(ROOT).as_posix(): c.sha(path)
+        for path in sorted(PREVIOUS_RELAY_FAILURE.rglob('*')) if path.is_file()}
 
 
 def _manifest(root):
@@ -137,6 +193,7 @@ def freeze(output=OUTPUT):
     output = Path(output).resolve()
     require(output.is_relative_to(ROOT) and not output.exists(),
             'Use a fresh in-repository preregistration directory')
+    previous_relay_evidence = _snapshot_previous_relay_failure()
     public, context, before, qualification, qualification_protocol = _baseline()
     corpus = _history()
     target_families = sorted({family(row['formula']) for row in public})
@@ -216,6 +273,7 @@ def freeze(output=OUTPUT):
         schema='isaforge-pulpino-sudoku-bounded-agent-prereg-v1',
         scope='one prospective live Codex chat-relay episode with host-measured target observations',
         provider='codex-chat-bridge', model_label='current Codex chat model; exact deployment ID unavailable',
+        relay_transport='interactive PTY; one strict JSON action per request; stdin EOF is a failed episode and is not retried',
         model_id_available=False, api_key_available=bool(os.environ.get('OPENAI_API_KEY')),
         tools=['list_candidates', 'predict', 'measure', 'finalize'],
         structured_action='one strict JSON object per response through the local bridge; host enforces identities, correctness, area, timing, and budget',
@@ -251,9 +309,11 @@ def freeze(output=OUTPUT):
     source_bindings = {name: c.sha(ROOT / name) for name in SOURCES}
     evidence_bindings = {relative: c.sha(ROOT / relative) for relative in QUALIFICATION_INPUTS}
     evidence_bindings.update({
-        'history/corpus.json': c.sha(HISTORY),
-        'history/manifest.json': c.sha(HISTORY.parent / 'manifest.json'),
+        HISTORY.relative_to(ROOT).as_posix(): c.sha(HISTORY),
+        (HISTORY.parent / 'manifest.json').relative_to(ROOT).as_posix():
+            c.sha(HISTORY.parent / 'manifest.json'),
     })
+    evidence_bindings.update(previous_relay_evidence)
     roster = dict(schema='isaforge-pulpino-sudoku-source-family-audit-v1',
         target_families=target_families, overlapping_families=overlapping,
         novel_target_families=sorted(set(target_families) - historical_families),
@@ -331,7 +391,7 @@ def freeze(output=OUTPUT):
         shutil.copyfile(ROOT / name, destination)
     (output / 'README.md').write_text(
         '# PULPino Sudoku prospective selection preregistration\n\n'
-        'This zero-label package freezes the second selector preregistration after code review of the preserved r1 snapshot. The r1 directory remains unchanged but must not be released: its guard did not recheck candidate-ledger emptiness at agent startup, cost reporting could omit a charged job after result-projection failure, and family wording overstated the canonicalization. This r2 package contains no Sudoku candidate measurements.\n\n'
+        'This zero-label package freezes the r4 selector release after code review and two preserved pre-action snapshots. The r1 directory remains unchanged and is not releasable: its guard did not recheck candidate-ledger emptiness at agent startup, cost reporting could omit a charged job after result-projection failure, and family wording overstated the canonicalization. The r2 prereg fixed those issues but its launch used no PTY and received no usable action; that failed episode is preserved with zero candidate measurements. The r3 prereg documented a PTY but did not enforce it. This r4 package requires an interactive PTY before creating the agent episode and contains no Sudoku candidate measurements.\n\n'
         '## Frozen cohort and models\n\n'
         '- Target: one pinned 9×9 Sudoku puzzle run twice; 12 legal, executable single-instruction candidates with calibrated public cycle-opportunity features.\n'
         '- Historical data: 122 successful measured labels and 4 failed attempts across 14 workload groups. Exclude the target workload and all target canonical operation-tree families before fitting: 106 rows / 14 groups remain; 16 historical successes are excluded.\n'
@@ -342,7 +402,7 @@ def freeze(output=OUTPUT):
         'The endpoint is best verified feasible whole-program speedup by budget and cycle-reduction regret versus the measured pool oracle. Correctness, timing, area, evaluation count and measured evaluation time are reported separately. No superiority claim is preregistered.\n\n'
         'The qualification found baseline **1,024,889 cycles / 198,711 instructions**, a **2,288-byte image**, **3,968-byte observed stack** with **1,792-byte headroom**, no stack/guard violations, **1,653 LUT4**, 295 carry cells, 655 flip-flops, 20 BRAMs, and routed timing above 12 MHz on all three seeds. These are baseline measurements, not candidate speedups.\n\n'
         '## Release rule\n\n'
-        'Candidate dispatch is blocked until the preregistration, source, and evidence hashes are committed and pushed to `ai-guided-ml`. The executor verifies the exact local and remote commit and rechecks zero candidate attempts immediately before agent startup. See `preregistration.json`, `agent-protocol.json`, `source-family-audit.json`, `model-fit-costs.json`, and `manifest.json`.\n')
+        'The earlier r2 bridge launch failure is preserved under `results/2026-10-28-pulpino-sudoku-selector-launch-failure-r3/`; it used zero candidate attempts. The r4 command enforces an interactive PTY before creating an agent episode. Candidate dispatch is blocked until the preregistration, source, and evidence hashes are committed and pushed to `ai-guided-ml`. The executor verifies the exact local and remote commit and rechecks zero candidate attempts immediately before agent startup. See `preregistration.json`, `agent-protocol.json`, `source-family-audit.json`, `model-fit-costs.json`, and `manifest.json`.\n')
     entries = {path.relative_to(output).as_posix(): c.sha(path)
                for path in sorted(output.rglob('*')) if path.is_file() and
                path.name not in ('manifest.json', 'manifest.json.sha256')}
@@ -369,7 +429,7 @@ def authenticate(output=OUTPUT, *, verify_live_sources=True):
         if verify_live_sources:
             require(c.sha(ROOT / name) == digest, 'Frozen model input changed: ' + name)
     for name, digest in prereg['evidence_bindings'].items():
-        if name.startswith('results/') and verify_live_sources:
+        if verify_live_sources:
             require(c.sha(ROOT / name) == digest, 'Frozen qualification/history evidence changed: ' + name)
     for name, version in prereg['model_packages'].items():
         require(importlib.metadata.version(name) == version, 'Frozen dependency differs: ' + name)

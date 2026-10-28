@@ -64,11 +64,15 @@ features reduce historical held-out feasibility error but worsen selection at
 measurement budgets one and two; merit remains stronger at budget three. Keep
 that challenger result as a negative model-selection finding.
 
-The r1 preregistration directory is preserved as a superseded zero-label
-snapshot. Independent code review found that it did not recheck the native
-candidate ledger immediately before agent startup, could omit costs for a paid
-attempt when outcome projection failed, and overstated family canonicalization.
-It must not be released. The corrected r2 package is the only release candidate.
+The r1, r2, and r3 preregistration directories are preserved as superseded
+zero-label snapshots. Reviews found successive issues: r1 did not recheck the
+native candidate ledger at agent startup, could omit cost for a charged job
+after a projection failure, and overstated family canonicalization; r2 fixed
+those issues but its non-PTY bridge launch returned before a usable action; r3
+documented PTY use but did not enforce it. The r2 failed launch is preserved as
+`results/2026-10-28-pulpino-sudoku-selector-launch-failure-r3/`. The r4
+preregistration enforces `stdin.isatty()` before creating an agent episode and
+is the only release candidate.
 
 ## Agent, tools, memory, and AI operations
 
@@ -93,7 +97,9 @@ RAG evaluation suite, or LLM-as-a-judge claim in this experiment.
 
 The host seals structured requests, action traces, model/tool call counts,
 retrieval IDs and source hashes, pre-measure context hashes, attempt outcomes,
-and the agent's decision rationale. A SQLite observability database is a
+and the agent's decision rationale. The authoritative ledger stores physical
+attempt durations from durable native attempt files, separate from durations
+of outcomes actually returned to the selector; unknown time stays null. A SQLite observability database is a
 read-only, reproducible projection; sealed JSON is authoritative. Exact chat
 model ID, token usage, and model-only latency are unavailable through the
 current relay. The rationale is recorded for audit; it is not treated as proof
@@ -142,7 +148,9 @@ python3 scripts/execute_pulpino_sudoku_selector.py verify
 
 `release` must verify that the frozen prelabel commit is the exact local and
 pushed `ai-guided-ml` head, and must confirm zero target attempts before the
-agent starts. Preserve qualification, source hashes, raw evidence archive,
+agent starts. Run the `agent` command with an interactive PTY; the runner checks
+`stdin.isatty()` before creating the agent episode. Preserve qualification,
+source hashes, raw evidence archive,
 selection transcript, model package/version hashes, protocol, costs, and
 failures. A source or protocol change after preregistration requires a new
 study root; never overwrite the sealed run.

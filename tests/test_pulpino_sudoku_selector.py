@@ -1,6 +1,10 @@
 """Regression checks for the prospective Sudoku selector boundary."""
 from __future__ import annotations
 
+from io import StringIO
+
+import pytest
+
 from isaforge import codesign as c
 from isaforge import guarded_attempts as attempts
 from isaforge import pulpino_sudoku_workload as workload
@@ -43,6 +47,8 @@ def test_live_agent_request_names_held_out_sudoku_scope_and_no_inherited_failure
     assert session.ledger["scope"] == (
         "prospective live measurement on a source- and exact-family-held-out workload"
     )
+    assert session.ledger["returned_observation_measurement_seconds"] == 0
+    assert "target_attempt_wall_seconds" not in session.ledger
     assert not hasattr(study, "STARTUP_FAILURE")
 
 
@@ -52,8 +58,13 @@ def test_agent_measurement_and_resource_budget_remain_frozen():
     assert study.CLOCK_MHZ == 12.0
     assert study.MAX_MODEL_CALLS == 12
     assert study.MAX_TOOL_CALLS == 20
-    assert study.RESULTS.name == "2026-10-28-pulpino-sudoku-selection-r2"
-    assert study.PREREG.name == "2026-10-28-pulpino-sudoku-selector-prereg-r2"
+    assert study.RESULTS.name == "2026-10-28-pulpino-sudoku-selection-r4"
+    assert study.PREREG.name == "2026-10-28-pulpino-sudoku-selector-prereg-r4"
+
+
+def test_agent_refuses_a_noninteractive_stdin_before_creating_an_episode():
+    with pytest.raises(ValueError, match="interactive PTY"):
+        study._require_interactive_relay(StringIO())
 
 
 def test_agent_attempt_costs_include_charged_attempt_even_when_projection_is_missing(tmp_path):
