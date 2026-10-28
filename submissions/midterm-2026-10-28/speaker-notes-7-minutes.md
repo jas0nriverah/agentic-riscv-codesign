@@ -62,13 +62,13 @@ Tree contributions show what drives the ranking: estimated instruction savings a
 
 results/2026-10-27-ranker-explainability/explanation.json; global_feature_contributions.csv. Normalized absolute additive tree contributions macro-averaged over14 held-out workloads; profile opportunity features account for66.39%. Local add(in0,andi(in1,15)) rank1/12;1.008782x,+65LUT4,61.82MHz. Uncertainty calibration remains unproved.
 
-## 8. The LLM agent: choose, measure, respond (45 seconds)
+## 8. Agentic selection: working loop + planned routing (45 seconds)
 
-The LLM selector uses controlled tools to inspect candidates, query predictions, request a bounded measurement, and return a validated selection. Paid outcomes feed its next decision, and failed requests consume budget. This is an actual agentic loop, separate from the coding assistants used for implementation, debugging, and analysis. The Ascon pilot measured three correct candidates; the best feasible one achieved about 1.024 times cycle speedup. But nine candidates remain unmeasured and there are no matched controls. A status-handling bug prevented live GP updates; the fix was verified afterward. We also have not implemented dynamic routing between language models.
+Our current agent uses structured actions to inspect candidates, query predictions, request a bounded measurement, and finalize a verified result. Guardrails enforce the hardware budget and keep unmeasured outcomes hidden. We plan dynamic language model routing: start with a smaller model, escalate ambiguous cases to a stronger model, and record token usage and latency. This router is not implemented yet. Agent memory would contain only public information and paid results. We will compare routing against fixed-model and non-agent controls under the same hardware budget. In the Ascon pilot, three candidates were measured; the best feasible one reached 1.024 times cycle speedup, but there is no matched agent win.
 
 ### Sources / Q&A
 
-Agent protocol and logs: results/2026-10-27-codex-chat-agent-edn-b64-s0/; Ascon results and docs/HANDOFF.md. EDN consumed replay:2 charged attempts including1 invalid ID, matched oracle and ordinary policies. Ascon C01:1.019698x,+73LUT4,62.992MHz; C06:1.017027x,+41LUT4,67.069MHz; C02:1.023731x,+42LUT4,64.620MHz.3/12 measured; correctness passed for all3. No claim of agent superiority or successful live GP refitting.
+Implemented: isaforge/bounded_selector.py, isaforge/selection_provider.py, scripts/run_codex_chat_selector.py; four tools list_candidates, predict, measure, finalize. Remote provider records model, tool calls, usage and latency where returned; active chat does not expose exact deployment ID or model-only usage. EDN consumed replay; Ascon three native measurements and live GP update defect fixed afterward. Proposed: smaller/stronger model routing, context/token budgets, retrieval, and complete cost/quality evaluation. No dynamic LLM routing, RAG/vector database, MCP integration, LangGraph, Ragas or production observability is claimed. See agent-architecture-plan.md.
 
 ## 9. Baselines and a fair measurement budget (35 seconds)
 

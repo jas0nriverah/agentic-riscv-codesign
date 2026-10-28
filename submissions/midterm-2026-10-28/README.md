@@ -15,7 +15,7 @@ to fill those gaps from verified results before submitting.
 - [AI track inserts and presentation notes](ai-track-insert.md) — copy-ready text for the current PDF's empty Sections 2.3/3.3, an evidence-based stopping-point analysis, seven-minute allocation, and Q&A. The supplied PDF remains unchanged; the full deck has now been revised using these evidence qualifications.
 
 - `isaforge-midterm-progress-report.docx` — methodology, AI use, measured results, model evaluation, explainability, chat-agent pilot, timeline, and contribution matrix.
-- `isaforge-midterm-progress-slides-final.pptx` — Revised 11-slide presentation: research foundations, timeline/contributions, methodology, dataset, XGBoost ranking, explainability/uncertainty, LLM agent, baselines, results, and next steps. Native editable charts and diagrams; speaker scripts total 420 seconds (906 words).
+- `isaforge-midterm-progress-slides-final.pptx` — Revised 11-slide presentation: research foundations, timeline/contributions, methodology, dataset, XGBoost ranking, explainability/uncertainty, LLM agent, baselines, results, and next steps. Native editable charts and diagrams; speaker scripts total 420 seconds (916 words).
 - `isaforge-xgboost-model-architecture-slide.pptx` — copy-ready standalone replacement slide with a tree-ensemble schematic and the current model details. This is a historical standalone asset; the revised full deck is the presentation deliverable.
 - `isaforge-xgboost-model-architecture-slide-preview.png` — 16:9 preview of the standalone slide. Slide text and speaker notes are editable in PowerPoint; the tree illustration is an image.
 - `model-architecture-slide.png` — historical architecture preview; not a preview of the revised full deck.
@@ -46,3 +46,5 @@ matrix needs team confirmation. No Canvas upload was performed.
 - [Codex activity and baseline evidence](codex-history-and-baseline.md) documents the scoped log inventory, model screen and initial CRC32 reference; activity durations are not model-training time.
 
 - [How we built ISAForge](how-we-built-isaforge.md) traces early benchmark collection and isolated LUT experiments through processor measurement, dataset creation, model evaluation, and the agent tools, with links to the actual scripts and safe replay commands.
+
+- [Agent architecture and LLMOps plan](agent-architecture-plan.md) distinguishes the working bounded selector from proposed dynamic routing, memory, retrieval, evaluation and monitoring.
