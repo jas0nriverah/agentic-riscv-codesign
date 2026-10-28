@@ -64,7 +64,7 @@ results/2026-10-27-ranker-explainability/explanation.json; global_feature_contri
 
 ## 8. ML-guided agentic instruction selection (45 seconds)
 
-Read this diagram from left to right. Offline, measured examples provide candidate features and speedup-based ranking labels. We train an XGBoost ranker and evaluate it on held-out workloads. At selection time, the LLM queries predictions and receives approved historical memory. It chooses an action, but the host controls the measurement budget and checks correctness, area and timing. Paid outcomes update the episode state and inform the next choice. The final output is the best verified feasible design. We train the predictor, not the language model. Our live Luna pilot exercised this loop using archived hardware outcomes; it does not establish a general advantage over heuristics.
+Read this diagram from left to right. During model training, measured examples provide candidate features and speedup-based ranking labels. We train an XGBoost ranker and evaluate it on held-out workloads. At selection time, the LLM queries predictions and receives approved historical memory. It chooses an action, but the host controls the measurement budget and checks correctness, area and timing. Paid outcomes update the episode state and inform the next choice. The final output is the best verified feasible design. We train the predictor, not the language model. Our live Luna pilot exercised this loop using archived hardware outcomes; it does not establish a general advantage over heuristics.
 
 ### Sources / Q&A
 
