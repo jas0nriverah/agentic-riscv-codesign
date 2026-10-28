@@ -39,7 +39,7 @@ The full repository run passed 4,672 tests and 181 subtests, with one intentiona
 .venv/bin/python scripts/finish_selection_study.py stringsearch
 .venv/bin/python scripts/export_incremental_selection_corpus.py --verify results/2026-10-28-expanded-selection-corpus-r3
 .venv/bin/python scripts/report_forward_selection_checkpoint.py
-.venv/bin/python scripts/report_workload_transfer.py
+.venv/bin/python scripts/report_workload_transfer.py --output reports/<fresh-transfer-directory>
 .venv/bin/python scripts/analyze_candidate_size_coverage.py --output reports/<fresh-directory>/report.json
 ```
 
