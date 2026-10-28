@@ -1,0 +1,172 @@
+{
+  "schema": "isaforge-tiny-regex-fixed-suite-v1-qualification",
+  "workload_group": "tiny-regex-fixed-suite",
+  "upstream_suite": "tiny-regex-c",
+  "upstream_repository": "https://github.com/kokke/tiny-regex-c",
+  "upstream_commit": "f2632c6d9ed25272987471cdb8b70395c2460bdb",
+  "pool_size": 12,
+  "fixed_cases": 76,
+  "minimum_calibrated_cycle_reduction": 0.005,
+  "minimum_timed_replacements": 10,
+  "joint_gate": "At least one same candidate satisfies both public opportunity minima.",
+  "unchanged_upstream_regex_and_test_vectors": true,
+  "output_adapter": "Call renamed upstream test main; suppress printf/fprintf; retain upstream test expectations and failure-count result.",
+  "correctness": "The unchanged test1.c checks expected match/failure and match length for 76 fixed regex/text pairs; nonzero upstream failure count fails verify_benchmark.",
+  "correctness_limitation": "This is fixed-suite correctness only; it does not establish arbitrary-pattern or arbitrary-input correctness.",
+  "library_runtime": "Freestanding C-locale ASCII isdigit/isalpha/isspace; the pinned input strings are ASCII; no host libc is linked.",
+  "timing_limitation": "The measured region is the complete fixed 76-case suite, including the upstream test loop and a small adapter call; print calls are no-ops.",
+  "compiler_flags": [
+    "-march=rv32i_zicsr",
+    "-mabi=ilp32",
+    "-Os",
+    "-std=gnu17",
+    "-nostdlib",
+    "-nostartfiles",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-msmall-data-limit=0",
+    "-mno-relax",
+    "-DCPU_MHZ=1"
+  ],
+  "isa": "rv32i_zicsr",
+  "abi": "ilp32",
+  "optimization": "-Os",
+  "clock_mhz": 12,
+  "route_seeds": [
+    1,
+    2,
+    3
+  ],
+  "memory_partition": {
+    "ram_bytes": 8192,
+    "program_limit": 6400,
+    "stack_floor": 6528,
+    "stack_bytes": 1664,
+    "minimum_guard_bytes": 128
+  },
+  "candidate_dispatch_enabled": false,
+  "target_candidate_attempts": 0,
+  "family_status": "Regex/text-processing source; not independent confirmation until exact extracted formula families are audited against historical pools.",
+  "created_at_utc": "2026-10-28T09:19:32.213168+00:00",
+  "phases": [
+    "prepare",
+    "discover",
+    "opportunity",
+    "baseline",
+    "public",
+    "freeze"
+  ],
+  "reference_root": "generated/codesign-crc32-2026-10-19-r1",
+  "reference_plan_sha256": "796167e07bdc413f348c829ca93e60eda87162ca02143d3f57269ff2059197b9",
+  "historical_corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "upstream": {
+    "suite": "tiny-regex-c",
+    "repository": "https://github.com/kokke/tiny-regex-c",
+    "commit": "f2632c6d9ed25272987471cdb8b70395c2460bdb",
+    "files": {
+      "benchmarks/tiny-regex/upstream/re.c": {
+        "bytes": 13850,
+        "sha256": "846f87cd2527d7e1cdacddbcfed973cf953e50ba5d3ef50b69f592ed8622a34e",
+        "git_blob_sha1": "20d1474a16c4b2432433678c72f46ffc7a96c83f"
+      },
+      "benchmarks/tiny-regex/upstream/re.h": {
+        "bytes": 1721,
+        "sha256": "8ba52081ac279e7e8cf9a60165e5ca9ff84f417f49c921dda7dd8635c2f720bd",
+        "git_blob_sha1": "69facc683f07b51309b1ece3bd6a7b2d172fee5a"
+      },
+      "benchmarks/tiny-regex/upstream/tests/test1.c": {
+        "bytes": 8053,
+        "sha256": "216a4f2bbaa6bd097ea2a2cee8b1cdb0245bec5e503c1c49b50203ed834a6447",
+        "git_blob_sha1": "665c6cbe6b5de49ce351a00ea2c467e7a78b6785"
+      }
+    },
+    "license": "benchmarks/tiny-regex/LICENSE",
+    "license_sha256": "88d9b4eb60579c191ec391ca04c16130572d7eedc4a86daa58bf28c6e14c9bcd",
+    "fixed_cases": 76,
+    "fixed_suite_sha256": "216a4f2bbaa6bd097ea2a2cee8b1cdb0245bec5e503c1c49b50203ed834a6447"
+  },
+  "native_root": "generated/tiny-regex-c-qualification-2026-10-28-r3",
+  "source_bindings": {
+    "scripts/qualify_tiny_regex.py": "da836b88487938e998b9d83ef6d7c760b30c7c99db8f91023bf502366a9bc41a",
+    "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+    "scripts/qualify_opportunity_sources.py": "389e34ba724f2dcc3766752e404e46006b6aa7fced4f2e21508127ac08e8ffe1",
+    "isaforge/observed_command.py": "f56bf235b31205c842ea04ab5a493ee7f7e6731844e05b6d8991f21d9f3be41e",
+    "isaforge/tiny_regex_workload.py": "50fb423da2ecb6b6d51c8b82dce1070b48ba183361ed4bcd0263e01938c7b632",
+    "tests/test_tiny_regex_workload.py": "37a1d7ee71d9e35e21ed2e4f4e1b3e18f0d7a0d22063146264a091afaa8aef75",
+    "docs/tiny-regex-adapter-contract-2026-10-28.md": "59bb537895ce12fadc87d90b0b12b13203d027e3e639c2dce75d4d5784ea4397",
+    "benchmarks/tiny-regex/SOURCE_PIN.json": "e64bbef3bbc77462065ad6d83b707c426038d648f5e87d2c8149e313399e1b6c",
+    "benchmarks/tiny-regex/adapter.c": "d74bf4b391d00604074e0780e500b654b0b096f97d8c77d0c4264fb92eae173c",
+    "benchmarks/tiny-regex/upstream/re.c": "846f87cd2527d7e1cdacddbcfed973cf953e50ba5d3ef50b69f592ed8622a34e",
+    "benchmarks/tiny-regex/upstream/re.h": "8ba52081ac279e7e8cf9a60165e5ca9ff84f417f49c921dda7dd8635c2f720bd",
+    "benchmarks/tiny-regex/upstream/tests/test1.c": "216a4f2bbaa6bd097ea2a2cee8b1cdb0245bec5e503c1c49b50203ed834a6447",
+    "benchmarks/tiny-regex/LICENSE": "88d9b4eb60579c191ec391ca04c16130572d7eedc4a86daa58bf28c6e14c9bcd",
+    "benchmarks/tiny-regex/include/ctype.h": "e0383554a3cea861e7dba141f913c000b7617abef2d4d6ef6ae91b300524d620",
+    "benchmarks/tiny-regex/include/stdio.h": "f6cdd46d6ac08d635e85d8e78159cb0d1333ee4a927e167717c227af697370fc",
+    "results/2026-10-26-lift-selection-corpus/corpus.json": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+    "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+    "isaforge/campaign_evidence.py": "96e4a96379dc336e1c04fc8a3bbfb9971cf65281d14cfe140f4eecaec51a748e",
+    "isaforge/prospective_inputs.py": "90abbebb74ad967d498c126134b30401e195da7e12ceef405661e5742ef5f446",
+    "hardware/embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+    "hardware/embench_memory.c": "343b26ae849f9bfab8ed197636449c4a91c5d78f26fe7f6ff4f960901520b847",
+    "hardware/checked_sim.cpp": "477635f316551bf85bd7ac1addc11bb9fa2c252969202621e75692ea5cfd9f07"
+  },
+  "workers": 1,
+  "build_workers": 2,
+  "phase_timeout_seconds": 3600,
+  "phase_commands": {
+    "prepare": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-m",
+      "isaforge.tiny_regex_workload",
+      "prepare",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tiny-regex-c-qualification-2026-10-28-r3",
+      "--reference-root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+    ],
+    "discover": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-m",
+      "isaforge.tiny_regex_workload",
+      "discover",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tiny-regex-c-qualification-2026-10-28-r3"
+    ],
+    "opportunity": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-m",
+      "isaforge.tiny_regex_workload",
+      "opportunity",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tiny-regex-c-qualification-2026-10-28-r3"
+    ],
+    "baseline": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-m",
+      "isaforge.tiny_regex_workload",
+      "baseline",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tiny-regex-c-qualification-2026-10-28-r3"
+    ],
+    "public": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-m",
+      "isaforge.tiny_regex_workload",
+      "public",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tiny-regex-c-qualification-2026-10-28-r3"
+    ],
+    "freeze": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-m",
+      "isaforge.tiny_regex_workload",
+      "freeze",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/tiny-regex-c-qualification-2026-10-28-r3"
+    ]
+  },
+  "rejection_rule": "Preserve the first failed phase and raw archive. A nonzero phase is a workload rejection only when its source-bound gate artifact records an explicit failed gate; otherwise classify it as pipeline failure. Do not alter source, tests, compiler, ISA, partition, pool size, or thresholds.",
+  "pool_freeze_is_candidate_authorization": false
+}

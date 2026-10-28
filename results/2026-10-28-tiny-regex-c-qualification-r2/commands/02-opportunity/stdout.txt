@@ -1,0 +1,105 @@
+{
+  "schema": "isaforge-tiny-regex-fixed-suite-v1-gate",
+  "protocol": {
+    "schema": "isaforge-tiny-regex-fixed-suite-v1",
+    "workload_group": "tiny-regex-fixed-suite",
+    "upstream_suite": "tiny-regex-c",
+    "upstream_repository": "https://github.com/kokke/tiny-regex-c",
+    "upstream_commit": "f2632c6d9ed25272987471cdb8b70395c2460bdb",
+    "pool_size": 12,
+    "fixed_cases": 76,
+    "minimum_calibrated_cycle_reduction": 0.005,
+    "minimum_timed_replacements": 10,
+    "joint_gate": "At least one same candidate satisfies both public opportunity minima.",
+    "unchanged_upstream_regex_and_test_vectors": true,
+    "output_adapter": "Call renamed upstream test main; suppress printf/fprintf; retain upstream test expectations and failure-count result.",
+    "correctness": "The unchanged test1.c checks expected match/failure and match length for 76 fixed regex/text pairs; nonzero upstream failure count fails verify_benchmark.",
+    "correctness_limitation": "This is fixed-suite correctness only; it does not establish arbitrary-pattern or arbitrary-input correctness.",
+    "library_runtime": "Freestanding C-locale ASCII isdigit/isalpha/isspace; the pinned input strings are ASCII; no host libc is linked.",
+    "timing_limitation": "The measured region is the complete fixed 76-case suite, including the upstream test loop and a small adapter call; print calls are no-ops.",
+    "compiler_flags": [
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-Os",
+      "-std=gnu17",
+      "-nostdlib",
+      "-nostartfiles",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-msmall-data-limit=0",
+      "-mno-relax",
+      "-DCPU_MHZ=1"
+    ],
+    "isa": "rv32i_zicsr",
+    "abi": "ilp32",
+    "optimization": "-Os",
+    "clock_mhz": 12,
+    "route_seeds": [
+      1,
+      2,
+      3
+    ],
+    "memory_partition": {
+      "ram_bytes": 8192,
+      "program_limit": 6400,
+      "stack_floor": 6528,
+      "stack_bytes": 1664,
+      "minimum_guard_bytes": 128
+    },
+    "candidate_dispatch_enabled": false,
+    "target_candidate_attempts": 0,
+    "family_status": "Regex/text-processing source; not independent confirmation until exact extracted formula families are audited against historical pools."
+  },
+  "passed": true,
+  "qualifying_candidate_ids": [
+    "a6d67d80d11c5898836c977f78386e7f8eb057f6995764d7ba1cf8ab27c1cf42"
+  ],
+  "source_family_audit": {
+    "schema": "isaforge-tiny-regex-fixed-suite-v1-source-family-audit",
+    "historical_corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+    "historical_workload_groups": 14,
+    "historical_verified_labels": 122,
+    "target_candidate_count": 12,
+    "target_operation_family_count": 11,
+    "historical_operation_family_count": 71,
+    "overlapping_operation_families": [
+      "add(input,slli(input,constant))",
+      "addi(andi(input,constant),constant)",
+      "or(input,sltiu(input,constant))"
+    ],
+    "novel_operation_families": [
+      "and(input,sltu(constant,input))",
+      "andi(addi(input,constant),constant)",
+      "sltiu(addi(andi(input,constant),constant),constant)",
+      "sltiu(sltiu(addi(input,constant),constant),constant)",
+      "sltiu(sltiu(input,constant),constant)",
+      "sltiu(sltu(input,input),constant)",
+      "sltu(constant,sub(input,input))",
+      "sub(constant,xori(input,constant))"
+    ],
+    "overlap_candidate_ids": [
+      "2962d545bfd32bb66db7f997970da181acbb3a1bb51fa625674da5dcce6dd828",
+      "4ed2e5fd6200a20e1d71c155197dfec3237dae81543fe8a89df57e0549c536ca",
+      "65a8b47daff35d69e981805263d181440a52d4e1e808648ea89268f2f873c9c6",
+      "a6d67d80d11c5898836c977f78386e7f8eb057f6995764d7ba1cf8ab27c1cf42"
+    ],
+    "novel_candidate_ids": [
+      "215c39e9ac438ab5975e88bab20db509bcda5fa495e7cd2b6a96b99eba37c45b",
+      "491d769a79a78f0ac1232c027018889ffbb10c198e037440a6708f800bded2fe",
+      "92b98592fdb71ac07901a80c4bf7b1fd001dace7ca89f3b5b95bb2386d921979",
+      "981f13730bc216c9f9b3110a4d4363ba6ece3746d135b0221073cfe4710f74a8",
+      "cb80d23e0e7b8e69a4c6234687dd907c5c0185e23f5572e139964ab9e8438731",
+      "e0431eca63e4ecc85c2e7b22da18c3ca91b724da3b665f2c5c050d5510793abc",
+      "f82ebaa33c8d8365ad509b9ab245e80e94865364158893b48eb1e7a9b0683cef",
+      "fedfa0ed0506e9fa6eaafd9bc93c2d823da132d53f87afc92dec6d81278f7ff8"
+    ],
+    "interpretation": "Descriptive formula-tree overlap only. This regex/text-processing fixed-suite workload is not counted as an independent source family; family-held-out evaluation must exclude every overlapping target operation family."
+  },
+  "public_digest": "79ce4948f8f9f8ed56f7db40730d3be466bb0ae56cf66f0635bf1ea36b058415",
+  "maximum_public_cycle_reduction": 0.008456799847445963,
+  "maximum_timed_replacements": 612,
+  "target_candidate_attempts": 0,
+  "measured_candidate_labels_used": false
+}

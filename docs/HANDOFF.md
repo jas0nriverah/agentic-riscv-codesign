@@ -1,5 +1,31 @@
 # Current handoff — model evidence after Lift selection
 
+## October 28: tiny-regex-c passes baseline-only qualification
+
+The pinned upstream [`tiny-regex-c`](tiny-regex-c-qualification-2026-10-28.md)
+fixed suite cleared host correctness, target baseline self-check, RV32I/ILP32
+build, 6,400-byte code/data, 1,664-byte stack, 12-candidate pool, and the
+unchanged joint opportunity gate. The target baseline is **361,839 cycles /
+66,206 instructions**, with **1,653 LUT4 / 295 carry / 20 BRAM / 655 FF**, and
+three routed Fmax results of **77.160 / 68.493 / 70.388 MHz**. It found 26 raw,
+22 executable and 17 eligible formulas; 12 were frozen. The strongest public
+analytic projection is 0.8457% at 612 timed replacements. This is not an
+observed candidate speedup. Three formula families overlap the historical
+corpus, so tiny-regex remains related-domain transfer, not independent
+confirmation.
+
+The historical measured corpus remains **122 labels / 126 attempts / 14
+groups**. Candidate dispatch is still disabled; no model was fit. The first two
+baseline-qualification runs exposed and preserved a candidate-ID field bug and
+a benchmark-group normalization mismatch. The accepted third run is archived
+with the [source-bound results](../results/2026-10-28-tiny-regex-c-qualification-r3/).
+Before any candidate measurement, freeze and push a separate prelabel study
+with model predictions, source-family exclusions, the LLM agent, frequency,
+merit, latency/cost, random, and non-agent active learning under matched public
+information and measurement budgets. The next blocker is that release and a
+per-attempt sealed selector protocol; do not treat baseline qualification as
+candidate-measurement authorization.
+
 ## October 28: grouped selection board and decision audit
 
 The latest AHA-compress replay exposed a concrete interface issue: the agent

@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/tiny_regex_workload.py", line 394, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/tiny_regex_workload.py", line 369, in main
+    rows, context, before = baseline_public(args.root)
+                            ~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/tiny_regex_workload.py", line 345, in baseline_public
+    c.require(opportunity_gate(rows) == c.unseal(Path(root) / 'opportunity.json'),
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              'Discovery and routed-baseline public projections differ')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/codesign.py", line 59, in require
+    raise ValueError(message)
+ValueError: Discovery and routed-baseline public projections differ

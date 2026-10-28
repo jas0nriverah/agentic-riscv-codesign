@@ -1,0 +1,320 @@
+{
+  "schema": "isaforge-automatic-workload-v1",
+  "workload": "tiny-regex-fixed-suite",
+  "reference_context": "cf16df2e04d6c845c4d990e9355bfe2060a79d71e5a92cc22afc4dedb5373fb2",
+  "core_commit": "ef203c2b0a3fb793280f5114941416c425c5b461",
+  "embench_commit": "0466a18e4f6b47e19598d7c6ba72916d54b68f65",
+  "tools": {
+    "gcc": {
+      "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-gcc",
+      "sha256": "d21f58713e7f2f9a9ef9de8762b2c2d1995cd4cdeda724d5fe4834f3af4737b2",
+      "version": "riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC arm64) 15.2.0"
+    },
+    "objcopy": {
+      "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy",
+      "sha256": "96d0c832bf77a27380eb6a638bfec2ee5df6a732d1fb7141234698472f66aec7",
+      "version": "GNU objcopy (xPack GNU RISC-V Embedded GCC arm64) 2.45"
+    },
+    "objdump": {
+      "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objdump",
+      "sha256": "87a57cf5bdabdf2ca91ebca54fe568bd6c3524f2558782520547b1b8f29b925b",
+      "version": "GNU objdump (xPack GNU RISC-V Embedded GCC arm64) 2.45"
+    },
+    "nm": {
+      "path": "/Users/jasonrivera/Documents/Codex/2026-10-11/can-this-run-offline/work/toolchains/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-nm",
+      "sha256": "45c2086551a3decd7e4fd24a4d25a9710bc7bc665a4ca4dc7e669e5d70b8309f",
+      "version": "GNU nm (xPack GNU RISC-V Embedded GCC arm64) 2.45"
+    },
+    "verilator": {
+      "path": "/opt/homebrew/Cellar/verilator/5.050/bin/verilator",
+      "sha256": "fb2cc573b1055cf096c90e1efc9966fe56bdb4b265c83590cf2a49f7a0defcdf",
+      "version": "Verilator 5.050 2026-07-01 rev vUNKNOWN-built20260701"
+    },
+    "yosys": {
+      "path": "/opt/homebrew/Cellar/yosys/0.69_1/bin/yosys",
+      "sha256": "1222a95c90c84f66238b0a5ecb8b228bf787318cf1c412b41363e26ace5544cf",
+      "version": "Yosys 0.69+post (git sha1 143eb14f9cc55d6f8927e68523b0c9d2166ed02c, Release, AppleClang clang++ 21.0.0.21000334)"
+    },
+    "nextpnr": {
+      "path": "/opt/homebrew/Cellar/nextpnr-ice40/0.11.1_1/bin/nextpnr-ice40",
+      "sha256": "c3df2ed2fb9be697db09e3bb5332ce2474b5437bde79e8edf9397c213048722e",
+      "version": "\"nextpnr-ice40\" -- Next Generation Place and Route (Version )"
+    }
+  },
+  "source_bindings": {
+    "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/selection.py": "cf76a3f37f86a35b60454beb2be9e69a03944cac287d7485b1a6f20a6fdd5c7e",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/dataset.py": "bb568ef7ca5f6ad79fd6a9ffef9ff18c510b29ffb9f4b6a7e3bfd5cb4cae3cbc",
+    "isaforge/rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+    "isaforge/core_experiment.py": "3e300f3054224050cd600eea0a3a76db496b67951323115cdb5d349bb2f8acc8",
+    "isaforge/soc_experiment.py": "af8691054b626f687a8962b149bf3431ee7e34951d0aee0fd8692b0e334e3c1a",
+    "isaforge/core_routing.py": "dfe14bb5e7236630fe376a5131f4d492309933ae98c0a1e3ea9e798b28a36058",
+    "results/2026-10-13/candidates/crc32.json": "cd400959026c08dc2eb49e0ed9975f006ef50dd69b53881cf437e9e5987e22c0",
+    "hardware/pcpi_single.v": "1382dac78eed053726c34a127bb8355c3b2c2894e4995f9c61471f8bf18623ca",
+    "hardware/soc_top.v": "912829da3e0754ff2522754b57368b11a9d38b8fb2494ca73ff8abaf38f2cb98",
+    "hardware/soc_sim.cpp": "def529598ca2113b2b44891dbad268c3d2d5999a3d5650989c0686cab2c544cf",
+    "hardware/soc_start.S": "5f80f0e780ab4f8eb2bd18846dbeb5ab4406ca1efaa3221fb4c1e305bb4b0447",
+    "hardware/soc_link.ld": "03a68ad454871b9d0092972107a7900c24c56fb5f6cbf5bec21d055e040a80dc",
+    "hardware/core_crc_firmware.c": "e327ab1768dc8dc8d140cde0aff20f9d93d1cca8cd6d4b165e3e83aa9d5be041",
+    "hardware/candidate_sim.cpp": "e03f8ee324c1fd039e10621a8779b438070405ba6f4547b0cc612fe5b6e61a34",
+    "isaforge/workload_experiment.py": "2aaf44ead779ae43dabf2da4d85a62bb463632da68ee89ae2115c236e7f54fa8",
+    "isaforge/assembly_lowering.py": "e656f5591ce1fa70f8621f94349c7a1c1f90837fb572a8d42fe9a3ce88dc4554",
+    "isaforge/workload_probe.py": "b5779445c1f242acc7c2c5137dc971bcd21b6be31b8df1f805e3201dec7776c0",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+    "src/candidates.py": "44f83fb2f0c421fd1bae5d89c90787a4dd997f4df1a2c433680c696f6b9486eb",
+    "src/tracing.py": "b3010ece9ef1bbc261a9efa801981a55a640468c8c6a87ed29386ccf89f49724",
+    "src/verify_candidate_fusions.py": "0bff84bb4f787ef6fee7ce3935369964242286b714a2fd162ae490ef0ec3cc03",
+    "hardware/profile_sim.cpp": "76770bcff03f67a82bfdb410c7687f24f733326b2a221d615f11c8116da43b45",
+    "hardware/embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+    "hardware/embench_memory.c": "343b26ae849f9bfab8ed197636449c4a91c5d78f26fe7f6ff4f960901520b847",
+    "benchmarks/tiny-regex/adapter.c": "d74bf4b391d00604074e0780e500b654b0b096f97d8c77d0c4264fb92eae173c",
+    "isaforge/compact_workload.py": "636a86462f1ae2d2fb245aaacaa5e0b2d25ffb37b58e44af9a1c3348e8d7eaa5",
+    "isaforge/workload_campaign.py": "16366c2d1bbdfb710365a79248f8d7d9186a5bae3094f4b472cfe865ab6669d3",
+    "isaforge/partitioned_workload.py": "55ea4e3a98bed427d08c92b56fdbe431bd177054931c84128413f176e79a85e3",
+    "hardware/checked_sim.cpp": "477635f316551bf85bd7ac1addc11bb9fa2c252969202621e75692ea5cfd9f07",
+    "hardware/stack_monitor.hpp": "387f968d6960846d3f45aba87f8031d599616cc9fa48eab941e7a033a23d2f08",
+    "isaforge/latency_features.py": "c0cd549e0fc7baa8317a552ba4350e86b0342af2e4c7a8737afd02e520161b92",
+    "isaforge/workload_audit.py": "250d3c175232b67e16983256d2267e5451c4de854ae010fe0751a0f2f1403fe7",
+    "isaforge/bounded_workload.py": "b488bedc0a2bc6b3ab84c3a113383e2567a992a3407ecfe89b83a6b2c5fde9ac",
+    "isaforge/qualified_workload.py": "322278e840af5f2d352036758fd236df580948e2cb02bc46b34b0ca6b41913b6",
+    "isaforge/extended_workload.py": "ff2531e158ba6185a054b7dcb604c633c48d35ea431838d295304333a5da756f",
+    "isaforge/tiny_regex_workload.py": "50fb423da2ecb6b6d51c8b82dce1070b48ba183361ed4bcd0263e01938c7b632",
+    "isaforge/relocation_guard.py": "13dd9b5db4f67adcfe9c47728e33072ab7b9a67e4123ed2b12ada961e127da5f",
+    "isaforge/guarded_attempts.py": "a382bb5061cfb9e0b0a61591870735195a7f98fb5f10c4f760d8acef398d454d",
+    "isaforge/guarded_evidence.py": "ea5730c8cb72e6e0b079b8f0c10bafb822ffd7f666bfc59651cfbf3b1f72a50e",
+    "isaforge/campaign_evidence.py": "96e4a96379dc336e1c04fc8a3bbfb9971cf65281d14cfe140f4eecaec51a748e",
+    "isaforge/prospective_inputs.py": "90abbebb74ad967d498c126134b30401e195da7e12ceef405661e5742ef5f446",
+    "scripts/qualify_tiny_regex.py": "da836b88487938e998b9d83ef6d7c760b30c7c99db8f91023bf502366a9bc41a",
+    "tests/test_tiny_regex_workload.py": "37a1d7ee71d9e35e21ed2e4f4e1b3e18f0d7a0d22063146264a091afaa8aef75",
+    "docs/tiny-regex-adapter-contract-2026-10-28.md": "59bb537895ce12fadc87d90b0b12b13203d027e3e639c2dce75d4d5784ea4397",
+    "benchmarks/tiny-regex/SOURCE_PIN.json": "e64bbef3bbc77462065ad6d83b707c426038d648f5e87d2c8149e313399e1b6c",
+    "benchmarks/tiny-regex/upstream/re.c": "846f87cd2527d7e1cdacddbcfed973cf953e50ba5d3ef50b69f592ed8622a34e",
+    "benchmarks/tiny-regex/upstream/re.h": "8ba52081ac279e7e8cf9a60165e5ca9ff84f417f49c921dda7dd8635c2f720bd",
+    "benchmarks/tiny-regex/upstream/tests/test1.c": "216a4f2bbaa6bd097ea2a2cee8b1cdb0245bec5e503c1c49b50203ed834a6447",
+    "benchmarks/tiny-regex/LICENSE": "88d9b4eb60579c191ec391ca04c16130572d7eedc4a86daa58bf28c6e14c9bcd",
+    "benchmarks/tiny-regex/include/ctype.h": "e0383554a3cea861e7dba141f913c000b7617abef2d4d6ef6ae91b300524d620",
+    "benchmarks/tiny-regex/include/stdio.h": "f6cdd46d6ac08d635e85d8e78159cb0d1333ee4a927e167717c227af697370fc",
+    "results/2026-10-26-lift-selection-corpus/corpus.json": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+    "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+    "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+    "scripts/qualify_opportunity_sources.py": "389e34ba724f2dcc3766752e404e46006b6aa7fced4f2e21508127ac08e8ffe1"
+  },
+  "inputs": {
+    "COPYING": "041ebc727233e5bf096dd41260cbb81014d3d29ca007a15f3b1807d4e9ff288e",
+    "beebsc.c": "4fa588eefa678fa89b16f2b898970cfed162845bd494fa47e619fa636ff5d1e1",
+    "beebsc.h": "9a9fdef180978ec3caa6531d3c2dc6823bc5387731b568402c6c65442a2d7c6c",
+    "candidate_sim.cpp": "e03f8ee324c1fd039e10621a8779b438070405ba6f4547b0cc612fe5b6e61a34",
+    "checked_sim.cpp": "1a61a9f7406ce88f35285af814d2b47e26d8802ff79b31c12d3860d35546d437",
+    "common.pcf": "90f30f5e0ab7657903b7e0ef8e094c5217eaffcb56697c3d4887deb30b04f010",
+    "core_crc_firmware.c": "e327ab1768dc8dc8d140cde0aff20f9d93d1cca8cd6d4b165e3e83aa9d5be041",
+    "crc32.c": "8180991358e28507a14426207840ec5c340e2491beac8e72658b3832621efb9c",
+    "ctype.h": "e0383554a3cea861e7dba141f913c000b7617abef2d4d6ef6ae91b300524d620",
+    "embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+    "embench_memory.c": "143f04d4a6ef0b753370797222cd0d9229d6e36fd277f1ee1d0ed8a66fdef784",
+    "latency-calibration.json": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+    "pcpi_single.v": "1382dac78eed053726c34a127bb8355c3b2c2894e4995f9c61471f8bf18623ca",
+    "picorv32.v": "0836050971b3c6cdd28ac3b1e5719a67fb645161912bef1e472e63995ceb0622",
+    "profile_sim.cpp": "76770bcff03f67a82bfdb410c7687f24f733326b2a221d615f11c8116da43b45",
+    "program.c": "d74bf4b391d00604074e0780e500b654b0b096f97d8c77d0c4264fb92eae173c",
+    "re.h": "8ba52081ac279e7e8cf9a60165e5ca9ff84f417f49c921dda7dd8635c2f720bd",
+    "soc_link.ld": "7cd389e654197908ab8a8e06a6981b86a94b2fd5cb4d5214616cc9a1f251dd28",
+    "soc_sim.cpp": "450c71eb16cebab41577dd0ab309945c1447a632d7ab085493751ed92f61669d",
+    "soc_start.S": "5f80f0e780ab4f8eb2bd18846dbeb5ab4406ca1efaa3221fb4c1e305bb4b0447",
+    "soc_top.v": "912829da3e0754ff2522754b57368b11a9d38b8fb2494ca73ff8abaf38f2cb98",
+    "stack_monitor.hpp": "01c093bc88d281f8b940182215d94b991e1aa4f9122c45161571213338d6aa69",
+    "stdio.h": "f6cdd46d6ac08d635e85d8e78159cb0d1333ee4a927e167717c227af697370fc",
+    "support.h": "3c0862b8279c8d01951b2c8a180f04bd996431c2fb63ffb91773e38895f25e53",
+    "upstream/re.c": "846f87cd2527d7e1cdacddbcfed973cf953e50ba5d3ef50b69f592ed8622a34e",
+    "upstream/re.h": "8ba52081ac279e7e8cf9a60165e5ca9ff84f417f49c921dda7dd8635c2f720bd",
+    "upstream/tests/test1.c": "216a4f2bbaa6bd097ea2a2cee8b1cdb0245bec5e503c1c49b50203ed834a6447"
+  },
+  "compiler_flags": [
+    "-march=rv32i_zicsr",
+    "-mabi=ilp32",
+    "-Os",
+    "-std=gnu17",
+    "-nostdlib",
+    "-nostartfiles",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-msmall-data-limit=0",
+    "-mno-relax",
+    "-DCPU_MHZ=1"
+  ],
+  "pool_size": 12,
+  "maximum_candidate_operations": 4,
+  "pool_rule": "Reject symbolic/unsupported removed source operands before calibration filtering; Evenly spaced rank indices round(i*(N-1)/(K-1)) across all executable calibrated formulas sorted by instruction savings then formula; K fixed before discovery, no candidate performance labels.",
+  "configuration": {
+    "workload": "tiny-regex-fixed-suite",
+    "isa": "rv32i_zicsr",
+    "repetitions": 170,
+    "updates_per_repetition": 1024,
+    "ram_bytes": 8192,
+    "pcpi_response_wait_cycles": 1,
+    "frequency_mhz": 12.0,
+    "route_seeds": [
+      1,
+      2,
+      3
+    ],
+    "max_added_lut4": 128,
+    "native_workers": 1,
+    "build_workers": 2,
+    "command_seconds": 180,
+    "total_native_seconds": 2400,
+    "max_native_commands": 240,
+    "live_seed": 0,
+    "live_budget": 3,
+    "bootstrap": 2,
+    "comparison_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "comparison_budgets": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "stack_bytes": 1664
+  },
+  "profile": "Actual pinned PicoRV32 counter increments and PC, between rdinstret markers; baseline binary and counters independently checked.",
+  "measurement": "Full benchmark invocation including software helper routines; startup, warmup and verification excluded; fixed common 12 MHz.",
+  "selection_scope": "Exhaustive oracle over this restricted, predeclared single-instruction pool; no claim about all possible instructions.",
+  "native_limits": {
+    "commands": 480,
+    "seconds": 3600,
+    "command_seconds": 180,
+    "workers": 1,
+    "build_workers": 2,
+    "candidate_attempts": 1
+  },
+  "build_variant": {
+    "optimization": "-Os",
+    "required_entrypoint": "isaforge/tiny_regex_workload.py",
+    "reason": "Predeclared memory-fit fallback; no performance labels used to choose compiler settings."
+  },
+  "memory_partition": {
+    "ram_bytes": 8192,
+    "program_limit": 6400,
+    "stack_floor": 6528,
+    "stack_bytes": 1664,
+    "minimum_guard_bytes": 128
+  },
+  "qualification_order": [
+    "tiny-regex-fixed-suite"
+  ],
+  "qualification_rule": "One pinned original 76-case suite on guarded RV32I/Zicsr PicoRV32; require 12 legal executable formulas and the unchanged joint 0.5%-plus-10-replacement opportunity gate. No candidate labels, retries or gate changes.",
+  "runtime_support": "Original regex implementation and test vectors are copied unchanged. Only output is suppressed and ASCII C-locale ctype functions are supplied freestanding.",
+  "output_check": "Unmodified upstream self-check.",
+  "guard_controls": [
+    "SP below stack floor must fail with exit10",
+    "RAM write in guard must fail with exit10"
+  ],
+  "calibration_compatibility": {
+    "context_id": "4a1a4de005fda8472c58cbe60174a194a856180658e8ab4fe3cdf8bc795c1014",
+    "report_sha256": "96ad1714f521e22d0b8bfec55250af91097e8d3b5fa13c0531b9753dc36e775e",
+    "scope": "Identical core, synchronous 8 KiB RAM and one-wait PCPI; explicit -Os and checked partition. Analytic transfer is tested by measured labels."
+  },
+  "partition_amendment": "Fresh relocation-guarded context; declared checked partition and complete original benchmark input. No earlier frozen pool is modified or retried.",
+  "monitor_derivation": "Exact replacement of the frozen monitor configuration predicate only; observation logic unchanged.",
+  "simulation_cycle_limit": 800000000,
+  "driver_derivation": "Exact cycle<200000000 to cycle<800000000 replacement only in both frozen simulation drivers.",
+  "relocation_guard": {
+    "schema": "isaforge-relocation-source-guard-v1",
+    "stage": "before_calibration_and_stratification",
+    "required": true
+  },
+  "upstream": {
+    "suite": "tiny-regex-c",
+    "repository": "https://github.com/kokke/tiny-regex-c",
+    "commit": "f2632c6d9ed25272987471cdb8b70395c2460bdb",
+    "files": {
+      "benchmarks/tiny-regex/upstream/re.c": {
+        "bytes": 13850,
+        "sha256": "846f87cd2527d7e1cdacddbcfed973cf953e50ba5d3ef50b69f592ed8622a34e",
+        "git_blob_sha1": "20d1474a16c4b2432433678c72f46ffc7a96c83f"
+      },
+      "benchmarks/tiny-regex/upstream/re.h": {
+        "bytes": 1721,
+        "sha256": "8ba52081ac279e7e8cf9a60165e5ca9ff84f417f49c921dda7dd8635c2f720bd",
+        "git_blob_sha1": "69facc683f07b51309b1ece3bd6a7b2d172fee5a"
+      },
+      "benchmarks/tiny-regex/upstream/tests/test1.c": {
+        "bytes": 8053,
+        "sha256": "216a4f2bbaa6bd097ea2a2cee8b1cdb0245bec5e503c1c49b50203ed834a6447",
+        "git_blob_sha1": "665c6cbe6b5de49ce351a00ea2c467e7a78b6785"
+      }
+    },
+    "license": "benchmarks/tiny-regex/LICENSE",
+    "license_sha256": "88d9b4eb60579c191ec391ca04c16130572d7eedc4a86daa58bf28c6e14c9bcd",
+    "fixed_cases": 76,
+    "fixed_suite_sha256": "216a4f2bbaa6bd097ea2a2cee8b1cdb0245bec5e503c1c49b50203ed834a6447"
+  },
+  "workload_group": "tiny-regex-fixed-suite",
+  "source_family_review": "Regex/text-processing lead; extracted operation-tree overlap must be audited before any independent-family claim.",
+  "qualification_context": "Unchanged PicoRV32/PCPI, RV32I/ILP32 -Os, synchronous 8 KiB RAM, 6400-byte program/data limit, 6528-byte stack floor and three-route 12 MHz target.",
+  "tiny_regex_protocol": {
+    "schema": "isaforge-tiny-regex-fixed-suite-v1",
+    "workload_group": "tiny-regex-fixed-suite",
+    "upstream_suite": "tiny-regex-c",
+    "upstream_repository": "https://github.com/kokke/tiny-regex-c",
+    "upstream_commit": "f2632c6d9ed25272987471cdb8b70395c2460bdb",
+    "pool_size": 12,
+    "fixed_cases": 76,
+    "minimum_calibrated_cycle_reduction": 0.005,
+    "minimum_timed_replacements": 10,
+    "joint_gate": "At least one same candidate satisfies both public opportunity minima.",
+    "unchanged_upstream_regex_and_test_vectors": true,
+    "output_adapter": "Call renamed upstream test main; suppress printf/fprintf; retain upstream test expectations and failure-count result.",
+    "correctness": "The unchanged test1.c checks expected match/failure and match length for 76 fixed regex/text pairs; nonzero upstream failure count fails verify_benchmark.",
+    "correctness_limitation": "This is fixed-suite correctness only; it does not establish arbitrary-pattern or arbitrary-input correctness.",
+    "library_runtime": "Freestanding C-locale ASCII isdigit/isalpha/isspace; the pinned input strings are ASCII; no host libc is linked.",
+    "timing_limitation": "The measured region is the complete fixed 76-case suite, including the upstream test loop and a small adapter call; print calls are no-ops.",
+    "compiler_flags": [
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-Os",
+      "-std=gnu17",
+      "-nostdlib",
+      "-nostartfiles",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-msmall-data-limit=0",
+      "-mno-relax",
+      "-DCPU_MHZ=1"
+    ],
+    "isa": "rv32i_zicsr",
+    "abi": "ilp32",
+    "optimization": "-Os",
+    "clock_mhz": 12,
+    "route_seeds": [
+      1,
+      2,
+      3
+    ],
+    "memory_partition": {
+      "ram_bytes": 8192,
+      "program_limit": 6400,
+      "stack_floor": 6528,
+      "stack_bytes": 1664,
+      "minimum_guard_bytes": 128
+    },
+    "candidate_dispatch_enabled": false,
+    "target_candidate_attempts": 0,
+    "family_status": "Regex/text-processing source; not independent confirmation until exact extracted formula families are audited against historical pools."
+  },
+  "historical_corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "context_id": "290157dfd68e0a43dd84124aefa82923c33898addcf36999f03c7cb46265c114"
+}
