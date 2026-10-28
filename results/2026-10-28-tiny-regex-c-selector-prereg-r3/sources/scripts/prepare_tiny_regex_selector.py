@@ -1,0 +1,401 @@
+"""Freeze the tiny-regex transfer-selection study before candidate labels.
+
+This reuses the current model/control recipes. It never opens candidate
+outcomes, launches candidate hardware jobs, or changes the baseline archive.
+"""
+from __future__ import annotations
+
+import argparse
+from datetime import datetime, timezone
+import importlib.metadata
+from pathlib import Path
+import shutil
+import sys
+import time
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from isaforge import budgeted_selection as b
+from isaforge import campaign_evidence as evidence
+from isaforge import codesign as c
+from isaforge import current_grouped_predictions as grouped
+from isaforge import factorized_selection_experiment as factorized
+from isaforge import tiny_regex_workload as workload
+from isaforge.speedup_corpus import family
+from scripts.reproduce_codesign import restore_archive
+
+
+SOURCE = "scripts/prepare_tiny_regex_selector.py"
+QUALIFICATION = ROOT / "results/2026-10-28-tiny-regex-c-qualification-r3"
+BASELINE_ROOT = ROOT / "generated/tiny-regex-c-selection-baseline-r1"
+HISTORY = ROOT / "results/2026-10-26-lift-selection-corpus/corpus.json"
+OUTPUT = ROOT / "results/2026-10-28-tiny-regex-c-selector-prereg-r3"
+SEEDS = (0, 1, 2, 3, 4)
+BUDGETS = (1, 2, 3)
+AREA_CAPS = (32, 64, 128)
+CLOCK_MHZ = 12.0
+PRIMARY_AREA_CAP = 64
+PRIMARY_BUDGET = 3
+
+SOURCES = tuple(dict.fromkeys((
+    SOURCE,
+    "AGENTS.md",
+    "docs/tiny-regex-c-qualification-2026-10-28.md",
+    "docs/tiny-regex-adapter-contract-2026-10-28.md",
+    "docs/tiny-regex-selection-study-contract-2026-10-28.md",
+    "scripts/qualify_tiny_regex.py", "scripts/reproduce_codesign.py",
+    "scripts/execute_tiny_regex_selector.py",
+    "scripts/export_agent_observability.py",
+    "isaforge/tiny_regex_workload.py", "isaforge/guarded_workload.py",
+    "isaforge/guarded_attempts.py", "isaforge/guarded_evidence.py",
+    "isaforge/qualified_workload.py", "isaforge/bounded_workload.py",
+    "isaforge/partitioned_workload.py", "isaforge/workload_experiment.py",
+    "isaforge/assembly_lowering.py", "isaforge/relocation_guard.py",
+    "isaforge/campaign_evidence.py", "isaforge/prospective_inputs.py",
+    "isaforge/budgeted_selection.py", "isaforge/feasible_benefit_experiment.py",
+    "isaforge/feasible_benefit.py",
+    "isaforge/factorized_selection_experiment.py", "isaforge/feasibility_selection.py",
+    "isaforge/current_grouped_predictions.py", "isaforge/bounded_selector.py",
+    "isaforge/selector_decision_support.py", "isaforge/selection_provider.py",
+    "isaforge/codex_chat_selector.py", "isaforge/agent_memory.py",
+    "isaforge/routed_selection.py", "isaforge/model.py", "isaforge/ranking.py",
+    "isaforge/features.py", "isaforge/prospective_selection.py",
+    "isaforge/speedup_corpus.py", "isaforge/codesign.py",
+)))
+
+
+def require(condition, message):
+    c.require(bool(condition), message)
+
+
+def _manifest(root: Path):
+    manifest = c.unseal(root / "manifest.json")
+    require(isinstance(manifest, dict) and manifest, "Authenticated nonempty manifest required")
+    for relative, digest in manifest.items():
+        path = (root / relative).resolve()
+        require(path.is_relative_to(root.resolve()) and path.is_file() and c.sha(path) == digest,
+                "Manifest entry differs: " + relative)
+    return manifest
+
+
+def _baseline():
+    _manifest(QUALIFICATION)
+    qualification = c.unseal(QUALIFICATION / "qualification.json")
+    protocol = c.unseal(QUALIFICATION / "protocol.json")
+    require(qualification.get("status") == "accepted" and
+            qualification.get("target_candidate_attempts") == 0 and
+            qualification.get("accepted") == {workload.WORKLOAD: "generated/tiny-regex-c-qualification-2026-10-28-r3"},
+            "Accepted zero-candidate tiny-regex qualification required")
+    require(protocol.get("candidate_dispatch_enabled") is False and
+            protocol.get("target_candidate_attempts") == 0,
+            "The accepted qualification must remain candidate-label-free")
+    if not BASELINE_ROOT.exists():
+        archive_record = c.unseal(QUALIFICATION / "archive-manifest.json")
+        restore_archive(QUALIFICATION, archive_record, BASELINE_ROOT)
+    workload.validate_inputs(BASELINE_ROOT)
+    workload.require_zero_candidates(BASELINE_ROOT)
+    public, context, before = workload.baseline_public(BASELINE_ROOT)
+    require(len(public) == workload.POOL_SIZE == 12 and
+            len({row["candidate_id"] for row in public}) == 12,
+            "Complete unique twelve-candidate public pool required")
+    require(context["workload_group"] == workload.GROUP and
+            public[0]["benchmark"].split(":", 1)[0] == workload.GROUP,
+            "Target workload identity differs")
+    require(not list((BASELINE_ROOT / "attempt-ledger").glob("candidate_*.json")),
+            "Candidate attempt ledger must be empty before fit")
+    return public, context, before, qualification, protocol
+
+
+def _history():
+    manifest = c.unseal(HISTORY.parent / "manifest.json")
+    require(manifest.get("corpus.json") == c.sha(HISTORY),
+            "Historical corpus manifest binding differs")
+    corpus = c.unseal(HISTORY)
+    rows, failures = corpus.get("rows", []), corpus.get("failed_attempts", [])
+    require(corpus.get("successful_labels") == len(rows) == 122 and
+            len(failures) == 4 and corpus.get("total_candidate_attempts") == 126 and
+            len(corpus.get("independent_workload_groups", [])) == 14,
+            "Expected authenticated historical 122-label / 126-attempt corpus")
+    require(len({row["candidate_id"] for row in rows + failures}) == 126,
+            "Historical attempt identities must be unique")
+    require(all(b.validate_outcome(row) for row in rows),
+            "Only verified historical successful labels may be fitted")
+    return corpus
+
+
+def freeze(output=OUTPUT):
+    started = time.monotonic()
+    output = Path(output).resolve()
+    require(output.is_relative_to(ROOT) and not output.exists(),
+            "Use a fresh in-repository preregistration directory")
+    public, context, before, qualification, qualification_protocol = _baseline()
+    corpus = _history()
+    target_families = sorted({family(row["formula"]) for row in public})
+    historical_families = {family(row["formula"]) for row in corpus["rows"]}
+    overlapping = sorted(set(target_families) & historical_families)
+    training = [row for row in corpus["rows"] if family(row["formula"]) not in set(target_families)]
+    excluded = [row for row in corpus["rows"]
+                if family(row["formula"]) in set(target_families)]
+    require(len(target_families) == 11 and len(overlapping) == 3 and
+            len(training) == 106 and len(excluded) == 16 and
+            len({row["workload_group"] for row in training}) == 14,
+            "Expected family-disjoint 106-row / 14-workload fitting cohort")
+    require(all(row["workload_group"] != workload.GROUP and
+                family(row["formula"]) not in set(target_families) for row in training),
+            "Target workload or operation family leaked into fitting rows")
+
+    contexts = dict(corpus["contexts"])
+    contexts[public[0]["benchmark"]] = context
+    calibration = evidence._calibration(BASELINE_ROOT)
+    baseline_record = c.unseal(BASELINE_ROOT / "measurements/baseline/measurement.json")
+    cost_provenance = dict(
+        historical=dict(successful_labels=122, failures=4, charged_attempts=126,
+            candidate_wall_seconds=corpus["total_candidate_attempt_wall_seconds"],
+            corpus_sha256=c.sha(HISTORY)),
+        target_qualification=dict(status=qualification["status"], candidate_attempts=0,
+            protocol_sha256=c.sha(QUALIFICATION / "protocol.json"),
+            result_sha256=c.sha(QUALIFICATION / "qualification.json"),
+            archive_sha256=c.sha(QUALIFICATION / "raw.tar.gz")),
+        target_baseline=dict(context_id=context["context_id"],
+            measurement_sha256=c.sha(BASELINE_ROOT / "measurements/baseline/measurement.json"),
+            performance=baseline_record["performance"], resources=baseline_record["resources"],
+            minimum_routed_fmax_mhz=min(r["limiting_internal_fmax_mhz"] for r in baseline_record["routes"])),
+        calibration=dict(native_commands=calibration["native_commands"],
+            native_command_seconds=calibration["native_command_seconds"],
+            labels_collected=calibration["application_labels_collected"]),
+        note="Historical, qualification, baseline, calibration, model-fit, agent, and candidate-evaluation timers are separately reported; overlapping native and wrapper scopes are not summed.")
+    inputs = {name: c.sha(ROOT / name) for name in SOURCES if name != SOURCE}
+    inputs.update({
+        "results/2026-10-28-tiny-regex-c-qualification-r3/manifest.json": c.sha(QUALIFICATION / "manifest.json"),
+        "results/2026-10-28-tiny-regex-c-qualification-r3/archive-manifest.json": c.sha(QUALIFICATION / "archive-manifest.json"),
+        "results/2026-10-28-tiny-regex-c-qualification-r3/raw.tar.gz": c.sha(QUALIFICATION / "raw.tar.gz"),
+        "results/2026-10-26-lift-selection-corpus/corpus.json": c.sha(HISTORY),
+        "results/2026-10-26-lift-selection-corpus/manifest.json": c.sha(HISTORY.parent / "manifest.json"),
+    })
+
+    output.mkdir(parents=True)
+    for relative, value in (
+        ("inputs/public.json", public), ("inputs/context.json", context),
+        ("inputs/before.json", before), ("inputs/history-all.json", corpus["rows"]),
+        ("inputs/historical-failures.json", corpus["failed_attempts"]),
+        ("inputs/contexts.json", contexts), ("inputs/family-exclusions.json", excluded),
+        ("inputs/cost-provenance.json", cost_provenance),
+    ):
+        c.seal(output / relative, value)
+    selection = output / "selection"
+    model_started = time.monotonic()
+    selection_protocol = factorized.freeze(corpus["rows"], public, contexts, selection,
+        target_workload=workload.GROUP, target_labels_observed=0,
+        calibration_cost_seconds=calibration["native_command_seconds"],
+        cost_provenance=cost_provenance, input_bindings=inputs,
+        scope="prospective source holdout")
+    fit_seconds = time.monotonic() - model_started
+    filtered_history = c.unseal(selection / "controls11/model/history.json")
+    agent_rows, agent_metadata = [], []
+    for seed in SEEDS:
+        bundle, metadata = grouped.fit_current_grouped_predictions(
+            filtered_history, public, target_workload_group=workload.GROUP,
+            target_formula_families=target_families, seed=seed,
+            area_cap_lut4=PRIMARY_AREA_CAP)
+        agent_rows.append(bundle)
+        agent_metadata.append(metadata)
+    c.seal(output / "agent-predictions.json", agent_rows)
+    c.seal(output / "agent-model-metadata.json", agent_metadata)
+    primary_fit_costs = c.unseal(selection / "controls11/model/predictions.json")
+    utility_fit_costs = c.unseal(selection / "controls11/utility-inference-costs.json")
+    factorized_fit_costs = c.unseal(selection / "feasibility-costs.json")
+
+    agent_protocol = dict(
+        schema="isaforge-tiny-regex-bounded-agent-prereg-v1",
+        scope="one prospective live current-Codex chat-relay episode with host-measured target observations",
+        provider="codex-chat-bridge",
+        model_label="current Codex chat model; exact deployment ID unavailable",
+        model_id_available=False, api_key_available=bool(__import__("os").environ.get("OPENAI_API_KEY")),
+        tools=["list_candidates", "predict", "measure", "finalize"],
+        structured_action="one strict JSON object per response through the local bridge; no Responses API call is claimed",
+        model_bundle="seed-0 XGBRanker objective=rank:pairwise trained on historical measured whole-program speedup orderings, plus a 20-member XGBClassifier hardware-feasibility ensemble multiplied by public analytic cycle savings; target workload/families excluded",
+        ml_training=dict(rows=106, workload_groups=14, labels="historical whole-program measured speedup; measured area/timing feasibility", xgb_ranker=dict(objective="rank:pairwise", n_estimators=80, max_depth=2, learning_rate=0.05), feasibility=dict(members=20, objective="binary:logistic", calibrated=False)),
+        llm_training="No LLM fine-tuning. Prompt-based current Codex model receives structured state, predictions and bounded retrieved historical examples through a tool loop.",
+        memory=dict(mode="hybrid", top_k=3, max_memory_bytes=40_000,
+            store="local TF-IDF / truncated-SVD historical memory; one measured record per chunk",
+            retrieval="lexical plus latent-semantic cosine with reciprocal-rank fusion",
+            knowledge_graph="available in the memory subsystem and logged in provenance; not queried in hybrid mode",
+            corpus="same 106-row family-excluded historical fitting set",
+            target_outcomes="never indexed or retrieved; only the agent's own paid observations are returned in the active request"),
+        human_in_loop="A human relay supplies the current chat model's JSON action to the bridge. The host validates action schema, identity and budget before dispatch; no claim is made that a separate reviewer approves each measurement.",
+        attempts=PRIMARY_BUDGET, area_cap_lut4=PRIMARY_AREA_CAP,
+        minimum_routed_fmax_mhz=CLOCK_MHZ, model_calls=12, tool_calls=20,
+        complete_public_roster_required_before_decision_board=True,
+        stop_rule="Host finalizes the best paid verified feasible improvement, otherwise the baseline.",
+        agent_trials=[0], agent_trial_count=1,
+        observability=["provider/decision/tool/measurement counts", "public request hashes",
+            "pre-measure decision context hashes", "retrieved record IDs and source hashes",
+            "host-measured outcome and charge", "final selection and regret",
+            "verified SQLite projection of decisions, model calls, retrievals, contexts and tools"],
+        limitations=[
+            "The Codex bridge uses the active chat model with broader workspace tools available; it is a cooperative relay, not a security sandbox.",
+            "Exact model ID, token usage and model-only latency are unavailable for the chat bridge.",
+            "Only one LLM episode is planned; it is exploratory, not a multi-seed agent-quality estimate.",
+            "The workload is related-domain regex/text transfer, not independent-family confirmation.",
+            "The current dataset contains no combined-instruction outcomes; selections are single instructions.",
+        ])
+    c.seal(output / "agent-protocol.json", agent_protocol)
+
+    source_bindings = {name: c.sha(ROOT / name) for name in SOURCES}
+    manifests = {
+        relative: c.sha(path)
+        for relative, path in (("qualification/manifest.json", QUALIFICATION / "manifest.json"),
+            ("qualification/protocol.json", QUALIFICATION / "protocol.json"),
+            ("qualification/result.json", QUALIFICATION / "qualification.json"),
+            ("qualification/archive-manifest.json", QUALIFICATION / "archive-manifest.json"),
+            ("qualification/raw.tar.gz", QUALIFICATION / "raw.tar.gz"),
+            ("history/corpus.json", HISTORY),
+            ("history/manifest.json", HISTORY.parent / "manifest.json"))
+    }
+    roster = dict(schema="isaforge-tiny-regex-source-family-audit-v1",
+        target_families=target_families, overlapping_families=overlapping,
+        novel_target_families=sorted(set(target_families) - historical_families),
+        target_candidate_count=len(public),
+        overlap_candidate_ids=sorted(row["candidate_id"] for row in public
+                                     if family(row["formula"]) in set(overlapping)),
+        excluded_historical_success_ids=[row["candidate_id"] for row in excluded],
+        training_rows=len(filtered_history), training_workload_groups=sorted(
+            {row["workload_group"] for row in filtered_history}),
+        related_domain_groups_retained=sorted({row["workload_group"] for row in filtered_history
+            if "slre" in row["workload_group"].lower()}),
+        interpretation="Exact operation-tree families are excluded from training. Regex/text workload lineage remains related-domain transfer; this pilot is not independent confirmation.")
+    c.seal(output / "source-family-audit.json", roster)
+    c.seal(output / "model-fit-costs.json", dict(
+        primary_predictor_fit_and_prediction_seconds=[dict(seed=row["seed"], **row["inference_seconds"])
+            for row in primary_fit_costs],
+        utility_model_fit_and_prediction_seconds=utility_fit_costs,
+        factorized_feasibility_fit_and_prediction_seconds=factorized_fit_costs,
+        grouped_model_fit_and_prediction_seconds=[m["model_fit_and_prediction_seconds"] for m in agent_metadata],
+        factorized_package_freeze_operation_seconds=fit_seconds,
+        total_zero_label_package_build_operation_seconds=time.monotonic() - started,
+        packages={name: importlib.metadata.version(name) for name in
+                  ("numpy", "scipy", "xgboost", "scikit-learn")},
+        target_labels_read=0, target_labels_observed=0, candidate_attempts=0))
+
+    prereg = dict(schema="isaforge-tiny-regex-selector-prereg-v1",
+        created_at_utc=datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        scope="related-domain transfer pilot; not independent workload-family confirmation",
+        target_workload=workload.GROUP, target_context_id=context["context_id"],
+        target_labels_read=0, target_labels_observed=0, candidate_attempts_before_fit=0,
+        target_public_pool_size=len(public), target_candidate_ids=[row["candidate_id"] for row in public],
+        target_families=target_families, target_family_overlap_count=len(overlapping),
+        historical_rows=122, historical_failed_attempts=4, historical_attempts=126,
+        family_excluded_training_rows=len(filtered_history),
+        family_excluded_training_groups=sorted({row["workload_group"] for row in filtered_history}),
+        excluded_successes=len(excluded), excluded_ids_sha256=c.digest(sorted(row["candidate_id"] for row in excluded)),
+        model_schema=selection_protocol["schema"],
+        selection_protocol_sha256=c.sha(selection / "protocol.json"),
+        selection_manifest={path.relative_to(selection).as_posix(): c.sha(path)
+                            for path in sorted(selection.rglob("*")) if path.is_file()},
+        agent_protocol_sha256=c.sha(output / "agent-protocol.json"),
+        agent_predictions_sha256=c.sha(output / "agent-predictions.json"),
+        agent_model_metadata_sha256=c.sha(output / "agent-model-metadata.json"),
+        source_family_audit_sha256=c.sha(output / "source-family-audit.json"),
+        primary=dict(area_cap_lut4=PRIMARY_AREA_CAP, minimum_routed_fmax_mhz=CLOCK_MHZ,
+                     budgets=list(BUDGETS), endpoint="best verified feasible whole-program speedup by budget; cycle-reduction regret to complete measured pool"),
+        policies=[*selection_protocol["policies"], "codex_chat_agent_hybrid_memory"],
+        seeds=list(SEEDS), agent_seeds=[0], area_caps=list(AREA_CAPS), clock_mhz=CLOCK_MHZ,
+        target_baseline=dict(cycles=baseline_record["performance"]["cycles"],
+            instructions=baseline_record["performance"]["instructions"],
+            lut4=baseline_record["resources"]["lut4_count"],
+            minimum_routed_fmax_mhz=min(r["limiting_internal_fmax_mhz"] for r in baseline_record["routes"]),
+            correctness_verified=True),
+        measurement_plan="Run one prospective live agent episode first, allowing only one-at-a-time host measurement feedback and at most three paid attempts. Only after the episode closes, serially measure all remaining pool members (one attempt each) to establish the complete reference pool. Then run the prespecified non-agent policy replay from hidden per-policy callbacks at budgets one, two and three. The physical dataset collection costs up to twelve candidate evaluations; replay trajectories do not erase that cost.",
+        source_bindings=source_bindings, input_bindings=inputs,
+        evidence_bindings=manifests,
+        model_packages={name: importlib.metadata.version(name) for name in
+                        ("numpy", "scipy", "xgboost", "scikit-learn")},
+        model_protocol=dict(existing_pairwise_ranker="XGBRanker rank:pairwise, 80 trees, depth 2, learning rate .05, fixed seed; no target labels",
+            existing_factorized_model="existing feasibility/analytic-benefit XGBoost recipe, seeds 0-4, fixed current settings",
+            active_learning="existing hybrid Gaussian-process acquisition and paid-update implementation; no retuning",
+            confidence="all uncertainty/disagreement outputs remain uncalibrated"),
+        agent_protocol=agent_protocol, cost_provenance=cost_provenance,
+        factorized_fit_operation_seconds=fit_seconds,
+        created_operation_seconds=time.monotonic() - started,
+        status="zero-label package frozen; requires commit and push before any candidate dispatch",
+        limitations=agent_protocol["limitations"] + [
+            "Only one new related-domain source and one Codex-agent episode are included.",
+            "Candidate measurements will be collected to build an oracle; only charged per-policy prefixes count toward selector budgets.",
+            "Hardware timing is FPGA synthesis/routing on the established toolchain, not silicon measurement.",
+            "Individual-instruction results do not establish multi-instruction composition.",
+        ])
+    c.seal(output / "preregistration.json", prereg)
+    for name in SOURCES:
+        destination = output / "sources" / name
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / name, destination)
+    (output / "README.md").write_text(
+        "# Tiny-regex prospective selector preregistration\n\n"
+        "This package freezes the next ISAForge selection experiment before any target candidate is measured. "
+        "It is a related-domain regex/text transfer pilot, not a generalization or superiority result.\n\n"
+        "## Frozen data and models\n\n"
+        "- Target: the pinned 76-case `tiny-regex-c` fixed suite; 12 executable candidates across 11 operation-tree families.\n"
+        "- Training: 106 historical measured rows across 14 workload groups after excluding all 11 target families; 16 overlapping historical successes are held out. Six SLRE rows remain, so workload lineage is related-domain.\n"
+        "- Ranker: existing XGBRanker `rank:pairwise` recipe trained on historical measured whole-program speedup orderings. Its score is relative rank, not a speedup estimate.\n"
+        "- Hardware selector: existing 20-member XGBoost feasibility ensemble multiplied by public analytic cycle savings. Scores and member spread are uncalibrated.\n"
+        "- LLM: no fine-tuning. One current Codex chat relay receives bounded predictions and hybrid retrieved historical examples through four structured JSON tools. The exact model ID and token counts are unavailable; cross-provider routing is not used.\n\n"
+        "## AI engineering and evidence\n\n"
+        "The host owns the budget, candidate identities, one-attempt dispatch, correctness and feasibility checks, final selection, and the rationale-to-measurement links. Hybrid retrieval uses TF-IDF lexical and TF-IDF/truncated-SVD semantic similarity with reciprocal-rank fusion; a typed knowledge graph is available but is not queried in this hybrid-mode episode. A verified SQLite database will project the sealed requests, decisions, tool calls, memory traces, and host outcomes. The JSON ledger remains authoritative.\n\n"
+        "## Status and release sequence\n\n"
+        "Target labels read: **0**. Target labels observed: **0**. Candidate attempts: **0**. Do not dispatch candidates until this complete directory, its source code, and its data bindings are committed and pushed to `ai-guided-ml`. Then run the commands in `docs/tiny-regex-selection-study-contract-2026-10-28.md` in order.\n\n"
+        "The experiment runs the live agent first with up to three measurements, measures the remaining pool only after it finalizes, then replays all frozen controls at budgets 1, 2, and 3. The physical oracle collection costs up to twelve candidate evaluations. If any outcome is unknown or infrastructure-censored, oracle speedup and regret remain null. Known correctness failures are charged and excluded as infeasible.\n\n"
+        "See `preregistration.json`, `agent-protocol.json`, `model-fit-costs.json`, `source-family-audit.json`, and `manifest.json` for machine-readable protocol and provenance.\n")
+    entries = {path.relative_to(output).as_posix(): c.sha(path)
+               for path in sorted(output.rglob("*")) if path.is_file() and
+               path.name not in ("manifest.json", "manifest.json.sha256")}
+    c.seal(output / "manifest.json", entries)
+    return prereg
+
+
+def authenticate(output=OUTPUT, *, verify_live_sources=True):
+    output = Path(output).resolve()
+    prereg = c.unseal(output / "preregistration.json")
+    require(prereg.get("schema") == "isaforge-tiny-regex-selector-prereg-v1" and
+            prereg.get("target_labels_read") == prereg.get("target_labels_observed") == 0 and
+            prereg.get("candidate_attempts_before_fit") == 0,
+            "Expected zero-label tiny-regex selection preregistration")
+    for relative, digest in _manifest(output).items():
+        require(c.sha(output / relative) == digest, "Prerelease artifact changed: " + relative)
+    for name, digest in prereg["source_bindings"].items():
+        require(c.sha(output / "sources" / name) == digest,
+                "Frozen source copy differs: " + name)
+        if verify_live_sources:
+            require(c.sha(ROOT / name) == digest, "Frozen source changed: " + name)
+    for name, digest in prereg["input_bindings"].items():
+        if verify_live_sources:
+            require(c.sha(ROOT / name) == digest, "Frozen model input changed: " + name)
+    for name, version in prereg["model_packages"].items():
+        require(importlib.metadata.version(name) == version,
+                "Frozen model package version differs: " + name)
+    protocol = c.unseal(output / "selection/protocol.json")
+    require(protocol.get("target_labels_read") == protocol.get("target_labels_observed") == 0 and
+            protocol.get("target_workload") == workload.GROUP and
+            protocol.get("policies") == prereg["policies"][:-1],
+            "Frozen selector policy/model contract differs")
+    c.require(c.sha(output / "selection/protocol.json") == prereg["selection_protocol_sha256"],
+              "Selector protocol changed")
+    return prereg
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("command", choices=("freeze", "verify"))
+    parser.add_argument("--output", type=Path, default=OUTPUT)
+    args = parser.parse_args(argv)
+    result = freeze(args.output) if args.command == "freeze" else authenticate(args.output)
+    print({"status": "verified", "target_labels_read": result.get("target_labels_read"),
+           "target_labels_observed": result.get("target_labels_observed"),
+           "candidate_attempts_before_fit": result.get("candidate_attempts_before_fit"),
+           "training_rows": result.get("family_excluded_training_rows"),
+           "policies": len(result.get("policies", [])), "output": str(args.output)})
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

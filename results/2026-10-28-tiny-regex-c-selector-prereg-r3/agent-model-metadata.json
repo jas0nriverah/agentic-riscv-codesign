@@ -1,0 +1,307 @@
+[
+  {
+    "schema": "isaforge-current-grouped-predictions-v1",
+    "scope": "consumed-data whole-workload holdout; all target-workload formula families excluded",
+    "prediction_policy": "zero-shot scores frozen before target measurements",
+    "target_workload_group": "tiny-regex-fixed-suite",
+    "target_formula_families": [
+      "add(input,slli(input,constant))",
+      "addi(andi(input,constant),constant)",
+      "and(input,sltu(constant,input))",
+      "andi(addi(input,constant),constant)",
+      "or(input,sltiu(input,constant))",
+      "sltiu(addi(andi(input,constant),constant),constant)",
+      "sltiu(sltiu(addi(input,constant),constant),constant)",
+      "sltiu(sltiu(input,constant),constant)",
+      "sltiu(sltu(input,input),constant)",
+      "sltu(constant,sub(input,input))",
+      "sub(constant,xori(input,constant))"
+    ],
+    "area_cap_lut4": 64,
+    "minimum_routed_fmax_mhz": 12.0,
+    "pairwise_ranker": {
+      "name": "XGBRanker",
+      "objective": "rank:pairwise",
+      "seed": 0,
+      "score_semantics": "relative ordering score; not speedup or probability"
+    },
+    "factorized_feasibility": {
+      "name": "FeasibilitySelectionPredictor",
+      "seed": 0,
+      "score_semantics": "uncalibrated probability-like ranking score; not guaranteed probability",
+      "disagreement_semantics": "ensemble disagreement only; not a calibrated interval",
+      "decision_score_semantics": "feasibility_score_mean times nonnegative analytic cycle reduction"
+    },
+    "training_rows": 106,
+    "training_workload_groups": [
+      "beebs-aha-compress",
+      "beebs-expint",
+      "beebs-jfdctint",
+      "beebs-ndes",
+      "beebs-nettle-md5",
+      "embench-aha-mont64",
+      "embench-crc32",
+      "embench-edn",
+      "embench-nettle-sha256",
+      "embench-slre",
+      "embench-ud",
+      "tacle-bitcount",
+      "tacle-g723-enc",
+      "tacle-lift"
+    ],
+    "training_ids_sha256": "c06bea15294c6616c83cedfa8bb630a2e6b9b3b6d8d6a7e14f2067b3ff7e4c65",
+    "target_public_ids_sha256": "6a6f40a430b6deb3fe597ecf9ac1d3fe7277870d018ceb2a6636cfa0155eb27d",
+    "model_source_fingerprint": "9b9d3dc790540172e1a8db639e050e8bd7bc6a333a87147c4566aa9a35fbdf4b",
+    "model_fit_and_prediction_seconds": {
+      "ranker_fit": 0.006006042007356882,
+      "ranker_prediction": 0.00021579200983978808,
+      "feasibility_fit": 0.058674833009717986,
+      "feasibility_prediction": 0.0025283750001108274
+    },
+    "uncertainty_calibrated": false
+  },
+  {
+    "schema": "isaforge-current-grouped-predictions-v1",
+    "scope": "consumed-data whole-workload holdout; all target-workload formula families excluded",
+    "prediction_policy": "zero-shot scores frozen before target measurements",
+    "target_workload_group": "tiny-regex-fixed-suite",
+    "target_formula_families": [
+      "add(input,slli(input,constant))",
+      "addi(andi(input,constant),constant)",
+      "and(input,sltu(constant,input))",
+      "andi(addi(input,constant),constant)",
+      "or(input,sltiu(input,constant))",
+      "sltiu(addi(andi(input,constant),constant),constant)",
+      "sltiu(sltiu(addi(input,constant),constant),constant)",
+      "sltiu(sltiu(input,constant),constant)",
+      "sltiu(sltu(input,input),constant)",
+      "sltu(constant,sub(input,input))",
+      "sub(constant,xori(input,constant))"
+    ],
+    "area_cap_lut4": 64,
+    "minimum_routed_fmax_mhz": 12.0,
+    "pairwise_ranker": {
+      "name": "XGBRanker",
+      "objective": "rank:pairwise",
+      "seed": 1,
+      "score_semantics": "relative ordering score; not speedup or probability"
+    },
+    "factorized_feasibility": {
+      "name": "FeasibilitySelectionPredictor",
+      "seed": 1,
+      "score_semantics": "uncalibrated probability-like ranking score; not guaranteed probability",
+      "disagreement_semantics": "ensemble disagreement only; not a calibrated interval",
+      "decision_score_semantics": "feasibility_score_mean times nonnegative analytic cycle reduction"
+    },
+    "training_rows": 106,
+    "training_workload_groups": [
+      "beebs-aha-compress",
+      "beebs-expint",
+      "beebs-jfdctint",
+      "beebs-ndes",
+      "beebs-nettle-md5",
+      "embench-aha-mont64",
+      "embench-crc32",
+      "embench-edn",
+      "embench-nettle-sha256",
+      "embench-slre",
+      "embench-ud",
+      "tacle-bitcount",
+      "tacle-g723-enc",
+      "tacle-lift"
+    ],
+    "training_ids_sha256": "c06bea15294c6616c83cedfa8bb630a2e6b9b3b6d8d6a7e14f2067b3ff7e4c65",
+    "target_public_ids_sha256": "6a6f40a430b6deb3fe597ecf9ac1d3fe7277870d018ceb2a6636cfa0155eb27d",
+    "model_source_fingerprint": "9b9d3dc790540172e1a8db639e050e8bd7bc6a333a87147c4566aa9a35fbdf4b",
+    "model_fit_and_prediction_seconds": {
+      "ranker_fit": 0.0055767089943401515,
+      "ranker_prediction": 0.0001873339933808893,
+      "feasibility_fit": 0.057475042005535215,
+      "feasibility_prediction": 0.002302249995409511
+    },
+    "uncertainty_calibrated": false
+  },
+  {
+    "schema": "isaforge-current-grouped-predictions-v1",
+    "scope": "consumed-data whole-workload holdout; all target-workload formula families excluded",
+    "prediction_policy": "zero-shot scores frozen before target measurements",
+    "target_workload_group": "tiny-regex-fixed-suite",
+    "target_formula_families": [
+      "add(input,slli(input,constant))",
+      "addi(andi(input,constant),constant)",
+      "and(input,sltu(constant,input))",
+      "andi(addi(input,constant),constant)",
+      "or(input,sltiu(input,constant))",
+      "sltiu(addi(andi(input,constant),constant),constant)",
+      "sltiu(sltiu(addi(input,constant),constant),constant)",
+      "sltiu(sltiu(input,constant),constant)",
+      "sltiu(sltu(input,input),constant)",
+      "sltu(constant,sub(input,input))",
+      "sub(constant,xori(input,constant))"
+    ],
+    "area_cap_lut4": 64,
+    "minimum_routed_fmax_mhz": 12.0,
+    "pairwise_ranker": {
+      "name": "XGBRanker",
+      "objective": "rank:pairwise",
+      "seed": 2,
+      "score_semantics": "relative ordering score; not speedup or probability"
+    },
+    "factorized_feasibility": {
+      "name": "FeasibilitySelectionPredictor",
+      "seed": 2,
+      "score_semantics": "uncalibrated probability-like ranking score; not guaranteed probability",
+      "disagreement_semantics": "ensemble disagreement only; not a calibrated interval",
+      "decision_score_semantics": "feasibility_score_mean times nonnegative analytic cycle reduction"
+    },
+    "training_rows": 106,
+    "training_workload_groups": [
+      "beebs-aha-compress",
+      "beebs-expint",
+      "beebs-jfdctint",
+      "beebs-ndes",
+      "beebs-nettle-md5",
+      "embench-aha-mont64",
+      "embench-crc32",
+      "embench-edn",
+      "embench-nettle-sha256",
+      "embench-slre",
+      "embench-ud",
+      "tacle-bitcount",
+      "tacle-g723-enc",
+      "tacle-lift"
+    ],
+    "training_ids_sha256": "c06bea15294c6616c83cedfa8bb630a2e6b9b3b6d8d6a7e14f2067b3ff7e4c65",
+    "target_public_ids_sha256": "6a6f40a430b6deb3fe597ecf9ac1d3fe7277870d018ceb2a6636cfa0155eb27d",
+    "model_source_fingerprint": "9b9d3dc790540172e1a8db639e050e8bd7bc6a333a87147c4566aa9a35fbdf4b",
+    "model_fit_and_prediction_seconds": {
+      "ranker_fit": 0.0055882500018924475,
+      "ranker_prediction": 0.0001916250039357692,
+      "feasibility_fit": 0.05768595900735818,
+      "feasibility_prediction": 0.002299833999131806
+    },
+    "uncertainty_calibrated": false
+  },
+  {
+    "schema": "isaforge-current-grouped-predictions-v1",
+    "scope": "consumed-data whole-workload holdout; all target-workload formula families excluded",
+    "prediction_policy": "zero-shot scores frozen before target measurements",
+    "target_workload_group": "tiny-regex-fixed-suite",
+    "target_formula_families": [
+      "add(input,slli(input,constant))",
+      "addi(andi(input,constant),constant)",
+      "and(input,sltu(constant,input))",
+      "andi(addi(input,constant),constant)",
+      "or(input,sltiu(input,constant))",
+      "sltiu(addi(andi(input,constant),constant),constant)",
+      "sltiu(sltiu(addi(input,constant),constant),constant)",
+      "sltiu(sltiu(input,constant),constant)",
+      "sltiu(sltu(input,input),constant)",
+      "sltu(constant,sub(input,input))",
+      "sub(constant,xori(input,constant))"
+    ],
+    "area_cap_lut4": 64,
+    "minimum_routed_fmax_mhz": 12.0,
+    "pairwise_ranker": {
+      "name": "XGBRanker",
+      "objective": "rank:pairwise",
+      "seed": 3,
+      "score_semantics": "relative ordering score; not speedup or probability"
+    },
+    "factorized_feasibility": {
+      "name": "FeasibilitySelectionPredictor",
+      "seed": 3,
+      "score_semantics": "uncalibrated probability-like ranking score; not guaranteed probability",
+      "disagreement_semantics": "ensemble disagreement only; not a calibrated interval",
+      "decision_score_semantics": "feasibility_score_mean times nonnegative analytic cycle reduction"
+    },
+    "training_rows": 106,
+    "training_workload_groups": [
+      "beebs-aha-compress",
+      "beebs-expint",
+      "beebs-jfdctint",
+      "beebs-ndes",
+      "beebs-nettle-md5",
+      "embench-aha-mont64",
+      "embench-crc32",
+      "embench-edn",
+      "embench-nettle-sha256",
+      "embench-slre",
+      "embench-ud",
+      "tacle-bitcount",
+      "tacle-g723-enc",
+      "tacle-lift"
+    ],
+    "training_ids_sha256": "c06bea15294c6616c83cedfa8bb630a2e6b9b3b6d8d6a7e14f2067b3ff7e4c65",
+    "target_public_ids_sha256": "6a6f40a430b6deb3fe597ecf9ac1d3fe7277870d018ceb2a6636cfa0155eb27d",
+    "model_source_fingerprint": "9b9d3dc790540172e1a8db639e050e8bd7bc6a333a87147c4566aa9a35fbdf4b",
+    "model_fit_and_prediction_seconds": {
+      "ranker_fit": 0.005520834005437791,
+      "ranker_prediction": 0.00018200000340584666,
+      "feasibility_fit": 0.058641415991587564,
+      "feasibility_prediction": 0.002307249989826232
+    },
+    "uncertainty_calibrated": false
+  },
+  {
+    "schema": "isaforge-current-grouped-predictions-v1",
+    "scope": "consumed-data whole-workload holdout; all target-workload formula families excluded",
+    "prediction_policy": "zero-shot scores frozen before target measurements",
+    "target_workload_group": "tiny-regex-fixed-suite",
+    "target_formula_families": [
+      "add(input,slli(input,constant))",
+      "addi(andi(input,constant),constant)",
+      "and(input,sltu(constant,input))",
+      "andi(addi(input,constant),constant)",
+      "or(input,sltiu(input,constant))",
+      "sltiu(addi(andi(input,constant),constant),constant)",
+      "sltiu(sltiu(addi(input,constant),constant),constant)",
+      "sltiu(sltiu(input,constant),constant)",
+      "sltiu(sltu(input,input),constant)",
+      "sltu(constant,sub(input,input))",
+      "sub(constant,xori(input,constant))"
+    ],
+    "area_cap_lut4": 64,
+    "minimum_routed_fmax_mhz": 12.0,
+    "pairwise_ranker": {
+      "name": "XGBRanker",
+      "objective": "rank:pairwise",
+      "seed": 4,
+      "score_semantics": "relative ordering score; not speedup or probability"
+    },
+    "factorized_feasibility": {
+      "name": "FeasibilitySelectionPredictor",
+      "seed": 4,
+      "score_semantics": "uncalibrated probability-like ranking score; not guaranteed probability",
+      "disagreement_semantics": "ensemble disagreement only; not a calibrated interval",
+      "decision_score_semantics": "feasibility_score_mean times nonnegative analytic cycle reduction"
+    },
+    "training_rows": 106,
+    "training_workload_groups": [
+      "beebs-aha-compress",
+      "beebs-expint",
+      "beebs-jfdctint",
+      "beebs-ndes",
+      "beebs-nettle-md5",
+      "embench-aha-mont64",
+      "embench-crc32",
+      "embench-edn",
+      "embench-nettle-sha256",
+      "embench-slre",
+      "embench-ud",
+      "tacle-bitcount",
+      "tacle-g723-enc",
+      "tacle-lift"
+    ],
+    "training_ids_sha256": "c06bea15294c6616c83cedfa8bb630a2e6b9b3b6d8d6a7e14f2067b3ff7e4c65",
+    "target_public_ids_sha256": "6a6f40a430b6deb3fe597ecf9ac1d3fe7277870d018ceb2a6636cfa0155eb27d",
+    "model_source_fingerprint": "9b9d3dc790540172e1a8db639e050e8bd7bc6a333a87147c4566aa9a35fbdf4b",
+    "model_fit_and_prediction_seconds": {
+      "ranker_fit": 0.005616207999992184,
+      "ranker_prediction": 0.00019304199668113142,
+      "feasibility_fit": 0.057337500009452924,
+      "feasibility_prediction": 0.0023432500020135194
+    },
+    "uncertainty_calibrated": false
+  }
+]
