@@ -14,6 +14,8 @@ Saved model schemas hash their runtime source files. Existing `area_model*.py`, 
 
 ## Add an experiment
 
+Follow the [active workload admission policy](docs/workload-admission-policy.md): candidate-pool size and projected opportunity are not universal eligibility thresholds. Historical fixed-pool protocols remain preserved.
+
 Record the hypothesis, primary metric, training cohort, exclusions, candidate set, seeds, tool versions, and measurement budget before inspecting test labels. Save label-free predictions and model/source hashes before scoring. If a test set informs the next revision, call it development data and collect another untouched test set.
 
 Write a new result snapshot with a short README, commands, input/source hashes, raw or locatable evidence, and all declared outcomes. Distinguish isolated mapped resources, instruction-saving proxies, simulated processor cycles, and conditional timing estimates. Include preprocessing and historical measurement costs when comparing methods.

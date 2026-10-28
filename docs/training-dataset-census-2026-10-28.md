@@ -1,5 +1,8 @@
 # Public workload and training-data census — October 28, 2026
 
+**Active owner correction (October 28):** fixed twelve-candidate pools, the 0.5% projected-benefit cutoff, and the ten-replacement cutoff are no longer workload admission requirements. Use variable-sized legal pools and retain low/neutral/negative outcomes. Historical gates below describe frozen experiments only; their blanket no-revisit instructions are superseded for pool-size/opportunity exclusions. Correctness, ISA/lowering, memory, hardware constraints, split integrity and evidence preservation remain required. See [the active admission policy](workload-admission-policy.md).
+
+
 ## Decision
 
 We found many public benchmark suites, but no external dataset that is ready to train ISAForge's candidate selector with comparable labels. ISAForge's target is **candidate-level, whole-program PicoRV32 speedup plus integrated resource and routed-timing outcomes**, under our compiler, PCPI interface, fixed inputs, correctness checks, and iCE40 flow. Published cycle/PPA data from another core, FPGA family, or RTL flow are useful method/feature references, not interchangeable target labels.

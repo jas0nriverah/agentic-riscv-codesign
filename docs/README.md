@@ -1,5 +1,7 @@
 # Documentation
 
+[Active workload admission policy](workload-admission-policy.md): owner removed fixed twelve-candidate and minimum projected-benefit/replacement gates on October 28. Historical stopping points and fixed-pool exclusions below remain historical evidence, not current admission instructions.
+
 [Presentation stopping point](../submissions/midterm-2026-10-28/ai-track-insert.md): AI methodology/results inserts, complete-versus-open analysis, seven-minute plan, and Q&A. The final bounded implementation is `make reproduce-countnegative-diagnosis`, which authenticates and replays committed archive evidence without the original native build directory. Further research is paused at the owner's request.
 
 [TACLeBench countnegative qualification](countnegative-source-scout-2026-10-27.md): original host and target checksum checks pass, but baseline-only discovery was rejected at the unchanged 12-candidate gate (4 relocation-safe/calibrated formulas). The archive-authenticated [diagnosis](../results/2026-10-27-countnegative-discovery-diagnosis/README.md) preserves the negative result; no candidate labels or hardware outcomes were produced.
