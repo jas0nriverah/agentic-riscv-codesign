@@ -113,3 +113,31 @@ def test_export_preserved_live_pilot_retains_missing_tokens(tmp_path):
     with sqlite3.connect(tmp_path/'live.sqlite') as db:
         assert db.execute('SELECT COUNT(*) FROM model_calls WHERE total_tokens IS NULL').fetchone()[0] == 4
         assert db.execute('SELECT SUM(usage_complete) FROM model_calls').fetchone()[0] == 0
+        assert db.execute('SELECT COUNT(*) FROM model_calls WHERE trigger_reason IS NULL').fetchone()[0] == 4
+
+
+def test_sql_export_preserves_host_recovery_trigger(tmp_path):
+    import sqlite3
+    from scripts.export_agent_observability import export
+
+    root = tmp_path/'routed-run'
+    root.mkdir()
+    protocol = dict(schema='router-test-v1', provider='responses')
+    c.seal(root/'protocol.json', protocol)
+    ledger = dict(model_events=[dict(call=3, status='complete', elapsed_seconds=.5,
+        provider_trace=[dict(call=4, role='escalation', trigger='host_incumbent_correction',
+            identity=dict(model='strong-model'), status='complete', usage={},
+            usage_complete=False, elapsed_seconds=.4)])], events=[])
+    c.seal(root/'ledger.json', ledger)
+    report = dict(protocol_sha256=c.sha(root/'protocol.json'), runs=[dict(
+        target='sha256', policy='bounded-recovery-router-v2', status='finalized',
+        speedup=1.02, charged_attempts=1, ledger='ledger.json',
+        ledger_sha256=c.sha(root/'ledger.json'))])
+    c.seal(root/'report.json', report)
+    c.seal(root/'manifest.json', {name:c.sha(root/name) for name in
+        ('protocol.json', 'ledger.json', 'report.json')})
+
+    export(root, tmp_path/'routed.sqlite')
+    with sqlite3.connect(tmp_path/'routed.sqlite') as db:
+        row = db.execute('SELECT role, trigger_reason, model FROM model_calls').fetchone()
+    assert row == ('escalation', 'host_incumbent_correction', 'strong-model')

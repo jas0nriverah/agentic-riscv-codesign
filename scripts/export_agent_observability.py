@@ -51,7 +51,7 @@ def export(run_dir, output):
         CREATE TABLE decisions (episode INTEGER, decision INTEGER, status TEXT,
           tool_sequence INTEGER, elapsed_seconds REAL, PRIMARY KEY(episode,decision));
         CREATE TABLE model_calls (episode INTEGER, decision INTEGER, call INTEGER, role TEXT,
-          model TEXT, status TEXT, input_tokens INTEGER, output_tokens INTEGER,
+          trigger_reason TEXT, model TEXT, status TEXT, input_tokens INTEGER, output_tokens INTEGER,
           total_tokens INTEGER, usage_complete INTEGER, elapsed_seconds REAL);
         CREATE TABLE retrievals (episode INTEGER, decision INTEGER, mode TEXT,
           corpus_sha256 TEXT, query TEXT, returned_ids TEXT, elapsed_seconds REAL);
@@ -69,14 +69,14 @@ def export(run_dir, output):
                     (index, decision, event['status'], event.get('tool_sequence'), event['elapsed_seconds']))
                 for call in event.get('provider_trace', []):
                     usage = call['usage']
-                    db.execute('INSERT INTO model_calls VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                        (index, decision, call['call'], call['role'], call['identity'].get('model'),
-                         call['status'], usage.get('input_tokens'), usage.get('output_tokens'),
+                    db.execute('INSERT INTO model_calls VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+                        (index, decision, call['call'], call['role'], call.get('trigger'),
+                         call['identity'].get('model'), call['status'], usage.get('input_tokens'), usage.get('output_tokens'),
                          usage.get('total_tokens'), call['usage_complete'], call['elapsed_seconds']))
                 if not event.get('provider_trace') and protocol.get('provider') == 'codex-chat-bridge':
-                    db.execute('INSERT INTO model_calls VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                    db.execute('INSERT INTO model_calls VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
                         (index, decision, decision, 'interactive-subagent',
-                         protocol['model_label'], event['status'], None, None, None,
+                         None, protocol['model_label'], event['status'], None, None, None,
                          False, event['elapsed_seconds']))
                 memory = event.get('memory_trace')
                 if memory:

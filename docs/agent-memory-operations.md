@@ -59,6 +59,7 @@ ORDER BY d.episode,d.decision;
 
 SELECT decision, mode, corpus_sha256, returned_ids FROM retrievals;
 SELECT model, COUNT(*), SUM(total_tokens), SUM(usage_complete) FROM model_calls GROUP BY model;
+SELECT role, trigger_reason, status, COUNT(*) FROM model_calls GROUP BY role, trigger_reason, status;
 ```
 
 Null total tokens mean unavailable, not free. `elapsed_seconds` on interactive model rows includes host waiting and orchestration. No token-cost comparison is supported by this pilot.
