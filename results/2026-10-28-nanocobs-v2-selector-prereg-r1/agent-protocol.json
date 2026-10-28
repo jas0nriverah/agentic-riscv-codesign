@@ -1,0 +1,73 @@
+{
+  "schema": "isaforge-nanocobs-v2-bounded-agent-prereg-v1",
+  "scope": "one prospective live current-Codex chat-relay episode with host-measured target observations",
+  "provider": "codex-chat-bridge",
+  "model_label": "current Codex chat model; exact deployment ID unavailable",
+  "model_id_available": false,
+  "api_key_available": false,
+  "tools": [
+    "list_candidates",
+    "predict",
+    "measure",
+    "finalize"
+  ],
+  "structured_action": "one strict JSON object per response through the local bridge; no Responses API call is claimed",
+  "model_bundle": "seed-0 XGBRanker objective=rank:pairwise trained on historical measured whole-program speedup orderings, plus a 20-member XGBClassifier hardware-feasibility ensemble multiplied by public analytic cycle savings; target workload/families excluded",
+  "ml_training": {
+    "rows": 109,
+    "workload_groups": 14,
+    "labels": "historical whole-program measured speedup; measured area/timing feasibility",
+    "xgb_ranker": {
+      "objective": "rank:pairwise",
+      "n_estimators": 80,
+      "max_depth": 2,
+      "learning_rate": 0.05
+    },
+    "feasibility": {
+      "members": 20,
+      "objective": "binary:logistic",
+      "calibrated": false
+    }
+  },
+  "llm_training": "No LLM fine-tuning. Prompt-based current Codex model receives structured state, predictions and bounded retrieved historical examples through a tool loop.",
+  "memory": {
+    "mode": "hybrid",
+    "top_k": 3,
+    "max_memory_bytes": 40000,
+    "store": "local TF-IDF / truncated-SVD historical memory; one measured record per chunk",
+    "retrieval": "lexical plus latent-semantic cosine with reciprocal-rank fusion",
+    "knowledge_graph": "available in the memory subsystem and logged in provenance; not queried in hybrid mode",
+    "corpus": "same dynamically sized family-excluded historical fitting set",
+    "target_outcomes": "never indexed or retrieved; only the agent's own paid observations are returned in the active request"
+  },
+  "human_in_loop": "Codex orchestration relays model JSON; the human sets objective and budgets and may intervene, with no human review of each action. The host validates action schema, identity and budget before dispatch.",
+  "attempts": 3,
+  "area_cap_lut4": 64,
+  "minimum_routed_fmax_mhz": 12.0,
+  "model_calls": 12,
+  "tool_calls": 20,
+  "complete_public_roster_required_before_decision_board": true,
+  "stop_rule": "Host finalizes the best paid verified feasible improvement, otherwise the baseline.",
+  "agent_trials": [
+    0
+  ],
+  "agent_trial_count": 1,
+  "observability": [
+    "provider/decision/tool/measurement counts",
+    "public request hashes",
+    "pre-measure decision context hashes",
+    "retrieved record IDs and source hashes",
+    "host-measured outcome and charge",
+    "final selection and regret",
+    "verified SQLite projection of decisions, model calls, retrievals, contexts and tools"
+  ],
+  "limitations": [
+    "The Codex bridge uses the active chat model with broader workspace tools available; it is a cooperative relay, not a security sandbox.",
+    "Exact model ID, token usage and model-only latency are unavailable for the chat bridge.",
+    "Only one LLM episode is planned; it is exploratory, not a multi-seed agent-quality estimate.",
+    "The workload is binary-framing fixed-probe transfer, not independent-family confirmation.",
+    "The current dataset contains no combined-instruction outcomes; selections are single instructions.",
+    "Scalar reference includes the same pinned cobs.c with renamed symbols and SWAR disabled; differential agreement cannot exclude shared source bugs.",
+    "The complete timed probe includes its scalar reference and checker; this is not standalone codec throughput."
+  ]
+}
