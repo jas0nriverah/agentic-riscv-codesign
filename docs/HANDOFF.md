@@ -1,5 +1,11 @@
 # Current handoff — model evidence after Lift selection
 
+## October 28: trace-bound rationales and separate provider budgets
+
+Accepted LLM finalization notes are retained as explicitly unverified prose and bound to the exact visible decision context, accepted action, provider/policy trace, host-verified outcome, constraints, and measurement references/hashes. Host fallbacks get deterministic evidence with no invented model explanation. Requests expose remaining outer decision turns and provider calls; routed recovery enforces the effective allowance. The runner records provider calls separately and stops before opening an empty decision after provider-budget exhaustion. SQLite includes rationale, measurement-evidence, host-event, and provider-call fields.
+
+Validation: **122 focused tests pass** across selector, routing, memory, rationale, provider, chat bridge and SQLite export. Full `make test` returned **4,350 passed, 181 subtests passed, one failure**: the previously documented intermittent `tests/test_capture_v11_spooled.py::test_blocked_pipe_or_compressor_drain_has_finite_cleanup[pipe]` cleanup race. It retained an owned producer group; no fix or change to that subsystem is claimed. The focused selector changes pass. This work does not change the speedup model, establish an LLM-quality result, or create new hardware labels.
+
 ## October 28: selector v2 incumbent guard and failure audit
 
 The owner resumed a 10-hour improvement block focused on the bounded LLM selector and evidence-backed ML decisions. Selector protocol v2 exposes the host-computed current best feasible incumbent, rejects finalization of any stale/lower candidate or an unnecessary baseline choice, and returns canonical measured fields separately from the LLM's unverified `agent_summary`. The four-tool allowlist and charged-measurement behavior remain unchanged. The earlier pilot's three rejected no-memory finalizations are a concrete motivation; this implementation does **not** establish that a future LLM run will need fewer turns.
@@ -15,6 +21,12 @@ No new model fit is warranted: speedup labels still equal the calibrated latency
 The bounded model router now allows one stronger-model call after either malformed structured output or a specific recoverable host result: selector v2 rejected a finalization and returned the current incumbent ID. The reason is preserved in the model-call trace and `model_calls.trigger_reason` SQLite column. Both roles receive the same public snapshot; the escalation shares the model-call allowance and can occur only once per episode. Measurement failures, transport errors, timeouts, and unrelated tool errors do not trigger it. This directly addresses the prior no-memory Luna pilot's three rejected finalizations while preserving incumbent-only host acceptance. It is a software recovery feature; there is no live v2 LLM comparison or evidence of improved selection quality yet.
 
 The focused selector/router suite passes **85 tests**, including a full host-correction recovery loop. The live API key is not configured in this workspace, so no paid model call was made. Slides 7–8 and the seven-minute notes now show the trigger and distinguish software validation from live evidence; the regenerated 11-slide deck validates at 420 seconds / 966 spoken words. The next experiment is a frozen fixed-primary / fixed-stronger / recovery-router comparison on the same consumed pool and measurement budget, with model calls, observed tokens, latency, paid measurements, and final feasible speedup reported separately. Keep the original live pilot unchanged.
+
+## October 28: host-owned fail-safe finalization
+
+If the primary and permitted recovery fail, or the bounded model/tool loop runs out before the LLM finalizes, `run_selector` now closes through `host_finalize`. The host commits only its best paid, verified, feasible incumbent or the baseline. `status=host_fallback`, `finalization_source=host`, and `fallback_reason` distinguish this from a model-authored finalize; the `host_events` audit record preserves trigger, error type, model/tool calls, charged attempts, and selected ID. It adds no model/tool call or measurement and does not create an `agent_summary`. Process interruption is still re-raised after an interrupted ledger write; target-evaluator and host-integrity failures remain failures.
+
+SQLite export now includes a `host_events` table. The focused suite passes **87 tests**, including a failed stronger-model recovery that safely closes on the incumbent, provider/tool-budget fallback, and SQL export checks. This is offline engineering evidence only: no live call, target job, label, model fit, or selection comparison was added. It improves completion/accountability of the agent loop, not candidate ranking or speedup.
 
 ## October 28: live Luna memory and operations evidence
 

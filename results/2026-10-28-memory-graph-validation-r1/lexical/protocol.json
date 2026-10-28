@@ -1,0 +1,140 @@
+{
+  "schema": "isaforge-bounded-selector-development-v3",
+  "scope": "Consumed-data engineering replay; not prospective source generalization.",
+  "provider": "controls",
+  "model": null,
+  "escalation_model": null,
+  "memory_mode": "lexical",
+  "routing_rule": "one escalation on malformed structured output or explicit host incumbent correction; shared model-call budget; no transport retries",
+  "policies": [
+    "frequency",
+    "merit",
+    "calibrated_latency",
+    "latency_cost_heuristic",
+    "random",
+    "raw_regression",
+    "ranking",
+    "normalized_xgb",
+    "hybrid_gp_zero_shot",
+    "hybrid_gp_adapt"
+  ],
+  "targets": [
+    "sha256"
+  ],
+  "seeds": [
+    0
+  ],
+  "area_caps": [
+    64
+  ],
+  "budget": 3,
+  "clock_mhz": 12,
+  "max_model_calls": 12,
+  "max_tool_calls": 20,
+  "max_output_tokens_per_call": null,
+  "prompt": "Select one RISC-V custom instruction, or the unchanged baseline. Maximize VERIFIED FEASIBLE whole-program speedup within the measurement-attempt budget. Predictions are uncalibrated, not measurements. Consider all provided heuristics, structure, uncertainty, area, timing and measurement cost. Use only list_candidates, predict, measure and finalize. Every submitted measure request, including an invalid ID or repeat, consumes an attempt; failed measurements also count. No unqueried outcome is available. Only the current incumbent may be finalized: use incumbent.candidate_id exactly, or use null only when incumbent.candidate_id is null. The host computes the best paid, correct, device-fitting, area/timing-feasible improvement; never finalize a stale, unmeasured, infeasible, or lower-speedup candidate. You may stop early. The summary you submit is an unverified agent note; the host returns the authoritative measured result. Provide a short decision summary, not private chain of thought. Single instructions only; individual speedups and area cannot be added. This is consumed-data replay, not fresh hardware measurement or an unseen-workload experiment.",
+  "prompt_sha256": "95f7d8c7542c041674a65841879b60332d8d3e33257baa47b9ca56807c3c0f19",
+  "tools": [
+    {
+      "type": "function",
+      "name": "list_candidates",
+      "description": "List public candidates and selection constraints.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "predict",
+      "description": "Query fixed predictors for candidate IDs.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "candidate_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "measure",
+      "description": "Pay for one candidate measurement, including failures.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "finalize",
+      "description": "Finalize only the current host-computed incumbent.candidate_id; use null only when no measured feasible improvement exists.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "summary": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_id",
+          "summary"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "source_bindings": {
+    "scripts/run_bounded_selector.py": "eff8d74be4087fb5d3e930cbcf137ef5baac327378c584e6e3a944abc6a6a465",
+    "isaforge/bounded_selector.py": "8d49ff887bc30c71fd5f28c11b6b8e4a995e4b2e8e6ecc7d8a49abc15d90c5ca",
+    "isaforge/selection_provider.py": "646628f3e32f21b5f635ed001477b4f35c763ef9a42c3c992a9af4b0fbcc02b1",
+    "isaforge/routed_selection.py": "a383a059ef8e8cec84a48ac978e7b41dac1bd60197a4265bce4d44e90932b59c",
+    "isaforge/agent_memory.py": "61f12cce0ee0275c16d8bcbc8b37adf1977392f4254b05920323f513a969979d",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3"
+  },
+  "input_bindings": {
+    "sha256": {
+      "protocol.json": "814a8d4bec37ac39f77bdd94ebe4c9dd2013686716f06bcd5ddf31f021a8eff6",
+      "public.json": "fe2ccfae4013d5f16c4bddb21c8f52ca9691d6d8d9bef546edb2e996ff7dd51d",
+      "history.json": "da31398cc363b701e777f0e25875345ad93628b4cb7b016adccb9f859e976c48",
+      "predictions.json": "51dac6c7f6fce08d1a0031281a627b3f54c02de93d442a33f4051743434f4025",
+      "report.json": "689dc290c4d2df1f8ade8acc00d4d24a9395b17f5390bf68292e5c4c50c182ed"
+    }
+  },
+  "fallback": "best paid verified feasible improvement, else baseline",
+  "invalid_measurements": "Every submitted measure, including invalid IDs/repeats, charges before lookup while budget remains.",
+  "historical_cost_note": "All historical available attempts are charged, including failed/excluded rows. Setup/calibration separate.",
+  "timer_note": "Target durations are archived record/ledger durations, not live search time; these scopes differ and overlap with command timing.",
+  "isolation": "External Responses model has only serialized allowlisted JSON and four strict functions; no shell, files, MCP or oracle; optional retrieval only from approved public history.",
+  "uncertainty_calibrated": false,
+  "joint_sets_supported": false,
+  "new_native_jobs": 0
+}

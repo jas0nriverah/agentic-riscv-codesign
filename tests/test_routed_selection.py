@@ -1,7 +1,9 @@
 """Offline protocol tests, not live model quality experiments."""
 import json
 import pytest
-from isaforge.selection_provider import ResponsesSelectionProvider, ProviderError, InvalidActionError
+from isaforge.selection_provider import (
+    ResponsesSelectionProvider, ProviderError, ProviderBudgetError, InvalidActionError,
+)
 from isaforge.routed_selection import RoutedSelectionProvider
 
 
@@ -45,9 +47,22 @@ def test_shared_budget_blocks_escalation():
     seen = []
     p = RoutedSelectionProvider(provider('small', response('shell'), seen),
                                 provider('large', response(), seen), max_calls=1)
-    with pytest.raises(ProviderError, match='shared model call'):
+    with pytest.raises(ProviderError, match='shared provider call'):
         p.choose({})
     assert len(seen) == 1
+
+
+def test_request_budget_blocks_escalation_when_only_one_provider_call_remains():
+    seen = []
+    p = RoutedSelectionProvider(provider('small', response('shell'), seen),
+                                provider('large', response(), seen), max_calls=12)
+    request = {'remaining': {
+        'provider_calls_available_including_this_response': 1,
+    }}
+    with pytest.raises(ProviderBudgetError, match='shared provider call'):
+        p.choose(request)
+    assert p.calls == len(seen) == 1
+    assert p.last_trace[0]['status'] == 'invalid_action'
 
 
 def test_transport_failure_never_escalates():

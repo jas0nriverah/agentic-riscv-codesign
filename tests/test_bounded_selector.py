@@ -185,9 +185,15 @@ def test_model_limit_falls_back_to_best_paid_feasible(tmp_path, inputs):
     class Policy:
         def choose(self, request): return action('measure', candidate_id='t1')
     result = run_selector(session(tmp_path, inputs), Policy(), max_model_calls=1)
-    assert result['status'] == 'model_call_limit'
+    assert result['status'] == 'host_fallback'
     assert result['charged_attempts'] == 1
     assert result['selected_id'] == 't1'
+    assert result['finalization_source'] == 'host'
+    assert result['fallback_reason'] == 'model_call_limit'
+    assert result['authoritative_selection']['candidate_id'] == 't1'
+    assert result['host_events'] == [dict(type='fallback_finalize',
+        reason='model_call_limit', error_type=None, candidate_id='t1',
+        model_calls=1, provider_calls=0, tool_calls=1, charged_attempts=1)]
 
 
 def test_model_exception_and_private_errors_not_released(tmp_path, inputs):
@@ -195,8 +201,27 @@ def test_model_exception_and_private_errors_not_released(tmp_path, inputs):
         def choose(self, request): raise RuntimeError('/private/MODEL-CANARY')
     s = session(tmp_path, inputs)
     result = run_selector(s, Policy())
-    assert result['status'] == 'model_error' and result['charged_attempts'] == 0
+    assert result['status'] == 'host_fallback' and result['charged_attempts'] == 0
+    assert result['selected_id'] is None
+    assert result['authoritative_selection'] == dict(candidate_id=None, status='baseline', speedup=1.0)
+    assert result['host_events'][0]['reason'] == 'model_error'
+    assert result['host_events'][0]['error_type'] == 'RuntimeError'
     assert 'MODEL-CANARY' not in json.dumps(result)
+
+
+def test_tool_limit_host_fallback_preserves_incumbent_without_extra_tool(tmp_path, inputs):
+    class Policy:
+        def choose(self, request):
+            if request['remaining']['measurement_attempts']:
+                return action('measure', candidate_id='t1')
+            return action('list_candidates')
+    s = session(tmp_path, inputs, max_tool_calls=2)
+    result = run_selector(s, Policy(), max_model_calls=5)
+    assert result['status'] == 'host_fallback'
+    assert result['fallback_reason'] == 'tool_limit'
+    assert result['charged_attempts'] == result['tool_calls'] == 2
+    assert result['selected_id'] == 't1'
+    assert result['host_events'][0]['candidate_id'] == 't1'
 
 
 def test_model_interrupt_is_persisted_and_reraised(tmp_path, inputs):
@@ -244,7 +269,11 @@ def test_routed_errors_spend_model_calls_not_hardware_attempts(tmp_path, inputs)
     assert policy.calls == 2
     assert result['charged_attempts'] == 1
     assert result['selected_id'] == 't1'
-    assert result['status'] == 'model_error'  # Shared LLM budget exhausted, incumbent retained.
+    assert result['model_calls'] == 1 and result['provider_calls'] == 2
+    assert result['status'] == 'host_fallback'  # Shared LLM budget exhausted; host commits incumbent.
+    assert result['finalization_source'] == 'host'
+    assert result['fallback_reason'] == 'provider_call_limit'
+    assert result['authoritative_selection']['candidate_id'] == 't1'
     accounting = summarize_model_events(result['model_events'])
     assert accounting['dispatched_calls'] == 2
     assert accounting['observed_tokens']['total_tokens'] == 28
@@ -288,6 +317,43 @@ def test_host_incumbent_correction_escalates_once_and_finalizes_integration(tmp_
     assert result['model_events'][-1]['provider_trace'][0]['trigger'] == 'host_incumbent_correction'
     assert summarize_model_events(result['model_events'])['escalation_triggers'] == {
         'host_incumbent_correction': 1}
+
+
+def test_failed_stronger_recovery_closes_on_host_incumbent(tmp_path, inputs):
+    from isaforge.selection_provider import ResponsesSelectionProvider
+    from isaforge.routed_selection import RoutedSelectionProvider
+    small_calls = 0
+    seen = []
+
+    def transport(payload, *args):
+        nonlocal small_calls
+        seen.append(payload['model'])
+        if payload['model'] == 'small':
+            small_calls += 1
+            if small_calls == 1:
+                name, arguments = 'measure', {'candidate_id': 't1'}
+            else:
+                name, arguments = 'finalize', {'candidate_id': 't2', 'summary': 'Stale choice.'}
+        else:
+            name, arguments = 'not_a_tool', {}
+        return dict(status='completed', output=[dict(type='function_call', name=name,
+            arguments=json.dumps(arguments))],
+            usage=dict(input_tokens=10, output_tokens=4, total_tokens=14))
+
+    primary = ResponsesSelectionProvider('small', api_key='test', transport=transport)
+    stronger = ResponsesSelectionProvider('strong', api_key='test', transport=transport)
+    router = RoutedSelectionProvider(primary, stronger, max_calls=4)
+    result = run_selector(session(tmp_path, inputs), router, max_model_calls=4)
+
+    assert seen == ['small', 'small', 'strong']
+    assert result['status'] == 'host_fallback'
+    assert result['finalization_source'] == 'host'
+    assert result['fallback_reason'] == 'model_error'
+    assert result['selected_id'] == result['authoritative_selection']['candidate_id'] == 't1'
+    assert result['charged_attempts'] == 1
+    assert router.calls == result['model_calls'] == 3
+    assert result['host_events'][0]['error_type'] == 'InvalidActionError'
+    assert result['model_events'][-1]['provider_trace'][-1]['trigger'] == 'host_incumbent_correction'
 
 
 def test_memory_policy_is_label_safe_and_preserves_paid_loop(tmp_path, inputs):

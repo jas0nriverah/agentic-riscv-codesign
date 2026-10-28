@@ -54,6 +54,10 @@ class ProviderError(RuntimeError):
     """Bound exceeded, unavailable service, or invalid model action."""
 
 
+class ProviderBudgetError(ProviderError):
+    """The shared allowance for actual provider invocations is exhausted."""
+
+
 class InvalidActionError(ProviderError):
     """Completed response has no usable allowlisted structured action."""
 
@@ -115,7 +119,7 @@ class ResponsesSelectionProvider:
 
     def choose(self, request: dict) -> dict:
         if self.calls >= self.max_calls:
-            raise ProviderError('model call budget exhausted')
+            raise ProviderBudgetError('provider call budget exhausted')
         if not self._api_key:
             raise ProviderError('OPENAI_API_KEY is required; no live model call was made')
         if type(request) is not dict:

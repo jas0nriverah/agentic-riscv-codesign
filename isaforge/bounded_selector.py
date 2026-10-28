@@ -16,6 +16,7 @@ import time
 from . import budgeted_selection as b
 from . import codesign as c
 from .model import _number, validate_training_rows
+from .selection_provider import ProviderBudgetError
 from .speedup_corpus import family
 
 SCHEMA = 'isaforge-bounded-selector-v2'
@@ -31,7 +32,12 @@ PROMPT = (
     'exactly, or use null only when incumbent.candidate_id is null. The host '
     'computes the best paid, correct, device-fitting, area/timing-feasible '
     'improvement; never finalize a stale, unmeasured, infeasible, or lower-speedup '
-    'candidate. You may stop early. The summary you submit is an unverified '
+    'candidate. Check remaining.decision_turns_after_this_response and '
+    'provider_calls_available_including_this_response. Each provider response '
+    'permits one tool action; reserve a later call to finalize after a measurement. '
+    'If the remaining decision/provider allowance is exhausted, the host selects '
+    'its verified incumbent or baseline. You may stop '
+    'early. The summary you submit is an unverified '
     'agent note; the host returns the authoritative measured result. Provide a short decision '
     'summary, not private chain of thought. Single instructions only; individual '
     'speedups and area cannot be added. This is consumed-data replay, not fresh '
@@ -99,6 +105,9 @@ class ReplaySelectionSession:
         c.require(self.area_cap >= 0, 'Negative area cap')
         self.clock_mhz = _number(clock_mhz, 'clock MHz', positive=True)
         self.budget, self.max_tool_calls = budget, max_tool_calls
+        self.max_model_calls = 12
+        self.provider_calls_remaining = None
+        self.provider_calls = 0
         self.training = copy.deepcopy(training)
         self.provider = provider
         self._rows = {r['candidate_id']: r for r in self.public}
@@ -137,7 +146,8 @@ class ReplaySelectionSession:
         self.ledger = dict(schema=SCHEMA, scope='consumed-data development replay',
             status='running', selected_id=None, best_speedup=1.0,
             constraints=dict(area_delta_lut4_cap=self.area_cap, clock_mhz=self.clock_mhz),
-            limits=dict(measurement_attempts=budget, tool_calls=max_tool_calls),
+            limits=dict(measurement_attempts=budget, tool_calls=max_tool_calls,
+                        model_decision_turns=self.max_model_calls),
             seed=self.seed, public_sha256=c.digest(self.public),
             training_sha256=c.digest(self.training), predictions_sha256=c.digest(predictions),
             historical_available_rows=available, historical_fit_rows=len(training),
@@ -145,6 +155,7 @@ class ReplaySelectionSession:
             historical_attempt_seconds=cost, events=[], model_events=[], curve=[],
             fallback='best paid verified feasible improvement, else baseline',
             uncertainty_calibrated=False, new_native_jobs=0,
+            host_events=[],
             timer_scope='Replay observation durations retain original record/ledger scope; not live evaluation wall time.',
             source_bindings={name: c.sha(c.ROOT/name) for name in
                 ('isaforge/bounded_selector.py', 'isaforge/budgeted_selection.py')})
@@ -161,7 +172,8 @@ class ReplaySelectionSession:
 
     def _persist(self):
         self.ledger.update(charged_attempts=self.charged, tool_calls=self.calls,
-            model_calls=self.model_calls, hardware_refit_seconds=self.hardware_refit_seconds,
+            model_calls=self.model_calls, provider_calls=self.provider_calls,
+            hardware_refit_seconds=self.hardware_refit_seconds,
             host_elapsed_seconds=time.monotonic()-self.started,
             replayed_target_measurement_seconds=sum(e.get('replayed_measurement_seconds', 0)
                                                     for e in self.ledger['events']))
@@ -176,7 +188,11 @@ class ReplaySelectionSession:
             scope=self.ledger['scope'], seed=self.seed,
             constraints=self.ledger['constraints'],
             remaining=dict(measurement_attempts=self.budget-self.charged,
-                           tool_calls=self.max_tool_calls-self.calls),
+                           tool_calls=self.max_tool_calls-self.calls,
+                           decision_turns_after_this_response=max(
+                               0, self.max_model_calls-self.model_calls),
+                           provider_calls_available_including_this_response=
+                               self.provider_calls_remaining),
             baseline=dict(candidate_id=None, speedup=1.0),
             historical_available_rows=self.ledger['historical_available_rows'],
             historical_fit_rows=len(history), historical_measurements=history,
@@ -236,6 +252,86 @@ class ReplaySelectionSession:
                                best_speedup=best['speedup'] if best else 1.0)
             self._persist()
 
+    def host_finalize(self, reason, *, error_type=None):
+        """Close safely with the verified incumbent after agent-loop exhaustion.
+
+        This is a host decision, not an LLM action or a new tool call. Keep it
+        separate in the ledger so it cannot be mistaken for agent performance.
+        """
+        if self.finished:
+            return
+        best = self._best()
+        selection = (_observation(best) if best else
+                     dict(candidate_id=None, status='baseline', speedup=1.0))
+        self.ledger.update(status='host_fallback',
+            selected_id=best['candidate_id'] if best else None,
+            best_speedup=best['speedup'] if best else 1.0,
+            finalization_source='host', fallback_reason=reason,
+            authoritative_selection=copy.deepcopy(selection))
+        self.ledger['host_events'].append(dict(type='fallback_finalize', reason=reason,
+            error_type=error_type, candidate_id=selection['candidate_id'],
+            model_calls=self.model_calls, provider_calls=self.provider_calls,
+            tool_calls=self.calls,
+            charged_attempts=self.charged))
+        self._record_rationale(selection, source='host', context=self.request())
+        self._persist()
+
+    def _record_rationale(self, selection, *, source, context, summary=None,
+                          tool_sequence=None, decision=None):
+        """Record provenance and deterministic facts, never validate model prose.
+
+        Hashes bind JSON evidence to this ledger; they do not establish that an
+        explanation is truthful or that the chosen policy improves selection.
+        """
+        policy = copy.deepcopy(self.ledger.get('policy_identity', {}))
+        identity = policy
+        while isinstance(identity, dict) and 'wrapped' in identity:
+            identity = identity['wrapped']
+        model_authored = identity.get('provider') in (
+            'openai-responses', 'bounded-recovery-router-v2', 'codex-chat-bridge')
+        measurements = []
+        for event in self.ledger['events']:
+            if 'charged_attempt' not in event:
+                continue
+            evidence = dict(measurement_id='tool-'+str(event['sequence']),
+                tool_sequence=event['sequence'], charged_attempt=event['charged_attempt'],
+                candidate_id=event.get('candidate_id'), status=event['status'])
+            if 'observation' in event:
+                public = _observation(event['observation'])
+                evidence.update(public_observation=public,
+                    public_observation_sha256=c.digest(public),
+                    ledger_observation_sha256=c.digest(event['observation']))
+            measurements.append(evidence)
+        references = []
+        for entry in self.ledger['model_events']:
+            references.append(dict(decision_call=entry['call'], status=entry['status'],
+                public_context_sha256=entry.get('public_context_sha256'),
+                provider_calls=[dict(call=call.get('call'),
+                    role=call.get('role'), identity=copy.deepcopy(call.get('identity')),
+                    request_sha256=call.get('request_sha256'), status=call.get('status'))
+                    for call in entry.get('provider_trace', [])]))
+        self.ledger['decision_rationale'] = dict(
+            schema='isaforge-decision-rationale-v1', finalization_source=source,
+            tool_sequence=tool_sequence, decision_call=decision['call'] if decision else None,
+            context_source=('agent_decision_input' if decision else
+                            'host_finalization_state' if source == 'host' else 'public_state_before_finalize'),
+            public_context=copy.deepcopy(context), public_context_sha256=c.digest(context),
+            summary=(dict(text=summary, author='model' if model_authored else 'policy',
+                          verified=False, purpose='unverified decision note')
+                     if summary is not None else None),
+            host_verified_facts=dict(selection=copy.deepcopy(selection),
+                selected_measurement_id=next((row['measurement_id'] for row in measurements
+                    if 'public_observation' in row and
+                    row['public_observation']['candidate_id'] == selection['candidate_id']), None),
+                constraints=copy.deepcopy(self.ledger['constraints']),
+                selection_rule='best paid verified feasible improvement, else baseline',
+                charged_attempts=self.charged, tool_calls=self.calls,
+                model_decisions=self.model_calls, provider_calls=self.provider_calls),
+            measurements=measurements, policy_identity=policy,
+            measurement_hash_scope='Canonical JSON public/ledger observations; not native measurement-file hashes.',
+            policy_identity_sha256=c.digest(policy), model_call_references=references,
+            correctness_basis='Host-validated measurement fields only; summary prose is unverified.')
+
     def _result(self, event, result):
         event.update(public_result=copy.deepcopy(result), status=result['status'])
         if ('charged_attempt' in event and
@@ -251,8 +347,9 @@ class ReplaySelectionSession:
         if self.calls >= self.max_tool_calls:
             self.stop('tool_limit')
             return dict(status='error', error='Tool-call budget exhausted.')
-        self.calls += 1
         tool = action.get('tool') if isinstance(action, dict) else None
+        decision_context = self.request() if tool == 'finalize' else None
+        self.calls += 1
         event = dict(sequence=self.calls, tool=tool if isinstance(tool, str) else None,
                      charged_before=self.charged, status='pending')
         self.ledger['events'].append(event)
@@ -331,7 +428,13 @@ class ReplaySelectionSession:
                          dict(candidate_id=None, status='baseline', speedup=1.0))
             self.ledger.update(status='finalized', selected_id=identity,
                 best_speedup=speedup, agent_summary=summary,
-                authoritative_selection=copy.deepcopy(selection))
+                authoritative_selection=copy.deepcopy(selection),
+                finalization_source='agent')
+            decision = next((entry for entry in reversed(self.ledger['model_events'])
+                             if entry.get('tool_sequence') == self.calls), None)
+            self._record_rationale(selection, source='agent', summary=summary,
+                context=decision['public_context'] if decision else decision_context,
+                tool_sequence=self.calls, decision=decision)
             return self._result(event, dict(status='ok', selected_id=identity,
                                            speedup=speedup, selection=selection))
         return error('Unknown tool; only list_candidates, predict, measure and finalize are allowed.')
@@ -387,34 +490,71 @@ class MatchedBaselinePolicy:
 def run_selector(session, policy, *, max_model_calls=12):
     """Remote provider chooses; deterministic host owns every acceptance/charge."""
     c.require(type(max_model_calls) is int and 0 < max_model_calls <= 100, 'Invalid model limit')
+    session.max_model_calls = max_model_calls
     session.ledger['policy_identity'] = copy.deepcopy(getattr(policy, 'identity', {'provider': 'trusted-local-test'}))
     session.ledger['max_model_calls'] = max_model_calls
+    session.ledger['limits']['model_decision_turns'] = max_model_calls
     while not session.finished and session.model_calls < max_model_calls:
         if session.calls >= session.max_tool_calls:
-            session.stop('tool_limit')
+            session.host_finalize('tool_limit')
+            break
+        provider_budget = _provider_budget_owner(policy)
+        if provider_budget is not None and provider_budget.calls >= provider_budget.max_calls:
+            session.provider_calls_remaining = 0
+            session.host_finalize('provider_call_limit')
             break
         session.model_calls += 1
         event = dict(call=session.model_calls, status='pending')
         session.ledger['model_events'].append(event)
         session._persist()
         start = time.monotonic()
+        provider_failure = None
+        provider_calls_before = provider_budget.calls if provider_budget is not None else None
+        if provider_budget is not None:
+            session.provider_calls_remaining = min(
+                provider_budget.max_calls-provider_budget.calls,
+                max_model_calls-session.model_calls+1)
+        else:
+            session.provider_calls_remaining = None
+        public_request = session.request()
         try:
-            action = policy.choose(session.request())
+            action = policy.choose(public_request)
             event.update(status='complete', elapsed_seconds=time.monotonic()-start,
                          usage=copy.deepcopy(getattr(policy, 'last_usage', {})))
         except BaseException as exc:
-            event.update(status='model_error' if isinstance(exc, Exception) else 'interrupted', error_type=type(exc).__name__,
+            status = ('provider_budget_exhausted' if isinstance(exc, ProviderBudgetError) else
+                      'model_error' if isinstance(exc, Exception) else 'interrupted')
+            event.update(status=status, error_type=type(exc).__name__,
                          usage=copy.deepcopy(getattr(policy, 'last_usage', {})),
                          elapsed_seconds=time.monotonic()-start)
-            session.stop(event['status'])
             if not isinstance(exc, Exception):
+                session.stop(event['status'])
                 raise
-            break
+            provider_failure = exc
         finally:
             event['provider_trace'] = copy.deepcopy(getattr(policy, 'last_trace', []))
             event['memory_trace'] = copy.deepcopy(getattr(policy, 'last_memory_trace', {}))
+            trace = event['provider_trace']
+            if trace:
+                session.provider_calls += sum(bool(call.get('provider_call_charged'))
+                                              for call in trace)
+            elif provider_budget is not None:
+                session.provider_calls += max(0, provider_budget.calls-provider_calls_before)
+            event['public_context'] = copy.deepcopy(
+                getattr(policy, 'last_public_request', public_request))
+            event['public_context_sha256'] = c.digest(event['public_context'])
+            if provider_budget is not None:
+                session.provider_calls_remaining = min(
+                    provider_budget.max_calls-provider_budget.calls,
+                    max(0, max_model_calls-session.model_calls))
             session._persist()
+        if provider_failure is not None:
+            reason = ('provider_call_limit' if isinstance(provider_failure, ProviderBudgetError)
+                      else 'model_error')
+            session.host_finalize(reason, error_type=type(provider_failure).__name__)
+            break
         try:
+            event['tool_sequence'] = session.calls + 1
             session.call(action)
             event['tool_sequence'] = session.calls
             session._persist()
@@ -422,5 +562,18 @@ def run_selector(session, policy, *, max_model_calls=12):
             event.update(status='host_error', error_type=type(exc).__name__)
             session.stop('host_error')
             break
-    session.stop('model_call_limit')
+    session.host_finalize('model_call_limit')
     return copy.deepcopy(session.ledger)
+
+
+def _provider_budget_owner(policy):
+    """Find the serialized provider or shared router below memory wrappers."""
+    seen = set()
+    current = policy
+    while current is not None and id(current) not in seen:
+        seen.add(id(current))
+        maximum, calls = getattr(current, 'max_calls', None), getattr(current, 'calls', None)
+        if type(maximum) is int and type(calls) is int:
+            return current
+        current = getattr(current, 'policy', None) or getattr(current, 'wrapped', None)
+    return None

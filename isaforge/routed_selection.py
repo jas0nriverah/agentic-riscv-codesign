@@ -11,7 +11,9 @@ import hashlib
 import json
 import time
 
-from isaforge.selection_provider import ProviderError, InvalidActionError, INSTRUCTIONS, tool_definitions
+from isaforge.selection_provider import (
+    ProviderError, ProviderBudgetError, InvalidActionError, INSTRUCTIONS, tool_definitions,
+)
 
 
 class RoutedSelectionProvider:
@@ -47,6 +49,11 @@ class RoutedSelectionProvider:
         self.last_usage, self.last_trace = {}, []
         # Snapshot once: an adapter cannot mutate the state seen by the next role.
         public = copy.deepcopy(request)
+        remaining = public.get('remaining', {}) if isinstance(public, dict) else {}
+        action_budget = remaining.get('provider_calls_available_including_this_response')
+        if type(action_budget) is not int or action_budget < 0:
+            action_budget = self.max_calls-self.calls
+        action_start = self.calls
         host_recovery = (self.escalation is not None and not self.escalation_used and
                          self._needs_incumbent_recovery(public))
         roles = ([('escalation', self.escalation, 'host_incumbent_correction')]
@@ -54,8 +61,9 @@ class RoutedSelectionProvider:
         if self.escalation is not None and not self.escalation_used and not host_recovery:
             roles.append(('escalation', self.escalation, 'invalid_action'))
         for role, provider, trigger in roles:
-            if self.calls >= self.max_calls:
-                raise ProviderError('shared model call budget exhausted')
+            if (self.calls >= self.max_calls or
+                    self.calls-action_start >= action_budget):
+                raise ProviderBudgetError('shared provider call budget exhausted')
             if role == 'escalation':
                 self.escalation_used = True
             self.calls += 1  # Reserve even a failed provider invocation.

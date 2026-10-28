@@ -1,6 +1,6 @@
 # Agent memory, retrieval and local LLMOps
 
-October 28, 2026. Implemented and exercised both offline and with two fresh live GPT-6 Luna subagents. This extends the existing selector; it does not replace the numeric models, hardware guardrails or historical measurements.
+October 28, 2026. Implemented and exercised both offline and with two fresh live GPT-6 Luna subagents. This extends the existing selector; it does not replace the numeric models, hardware guardrails or historical measurements. ISAForge trains XGBoost ranking/regression models from measured candidate outcomes; the LLM selector is **not fine-tuned**. It uses a versioned prompt, structured tools, current episode state, and split-approved prior measurements as context.
 
 | Capability | Concrete implementation | Evidence |
 | --- | --- | --- |
@@ -8,14 +8,17 @@ October 28, 2026. Implemented and exercised both offline and with two fresh live
 | Historical memory | One approved historical measurement per source-linked record/chunk | Corpus and record hashes appear in retrieval traces |
 | Semantic search | Local TF-IDF + truncated SVD embeddings and cosine similarity | Semantic-mode offline replay and live hybrid retrieval |
 | Hybrid search | TF-IDF cosine ranking + latent-semantic ranking, reciprocal rank fusion k=60 | Four retrieval events in live hybrid episode |
+| Knowledge graph | Typed local graph: workload, candidate, expression family, operator, measurement; operator-overlap retrieval with source triples | Software prototype and leakage/path tests; no live-agent quality comparison |
 | Function calling | Existing list_candidates, predict, measure, finalize structured actions | 13 live agent decisions, relayed unchanged into the host |
-| Loop engineering | Finite calls, charged attempts, outcome feedback, host acceptance and baseline fallback | Three infeasible finalization requests rejected in the no-retrieval episode |
-| Observability | Verified SQLite export joins decisions, tools, calls and retrieval events | Separate databases for both live arms, with 9 and 4 model-turn rows |
+| Loop engineering | Finite decision turns, actual provider-call allowance, charged attempts, outcome feedback, one-shot recovery, host-owned incumbent/baseline fallback | Three infeasible finalization requests rejected in the no-retrieval episode; separate budget/fallback accounting is offline-tested |
+| Observability | Verified SQLite export joins decisions, tools, calls, retrievals and host fallback events | Live-pilot exports retain calls/retrievals; new controller traces export fallback reasons separately |
 | LLMOps | Source/prompt/model configurations, sealed run protocols, repeatable tests and versioned reports | Frozen commit 46957811 precedes the live pilot |
 
 ## Scope and method
 
-`HistoricalMemory` indexes only the historical measurement records in the host's approved public request. No repository search, arbitrary documents or hidden target labels enter the index. The host's existing history filtering excludes target workload and matching expression families; retrieval adds checks for target groups and exact formulas before fitting. This is a restricted evidence-memory implementation, not a general research-document search engine.
+`HistoricalMemory` indexes only the historical measurement records in the host's approved public request. No repository search, arbitrary documents or hidden target labels enter the index. The host's existing history filtering excludes target workload and matching expression families; memory and graph lookup repeat that exclusion. The new typed evidence graph links the approved candidate record to workload, expression-family, operator, and measurement nodes. It returns source hashes and matched graph triples. The graph score uses operator overlap only and does not use measured outcome values. This is a restricted evidence-memory implementation, not a general research-document search engine or graph database; see the [graph contract](candidate-evidence-graph.md).
+
+The LLM sees the current episode's candidate roster, public predictions, paid measurements, remaining decision/provider/tool/measurement budgets, and optional approved historical rows. This is bounded in-context state, not a long-term chat-memory system. The final model-authored rationale is retained for audit but is not currently fed back as a future training example or memory hit. Do not fine-tune or claim that the LLM learned from one live trajectory; those traces are Evals evidence only.
 
 The semantic baseline is **latent semantic analysis**, not pretrained neural language embeddings. Its vocabulary is learned locally; unseen terms cannot produce useful matches. With fewer than two documents no semantic projection is fitted. TF-IDF cosine is the lexical baseline, not BM25. SVD dimensions are min(16, record count minus one, vocabulary size minus one), random state 0. Hybrid uses reciprocal rank fusion with k=60. One historical record is one chunk; no arbitrary prose chunking or cross-encoder reranker is claimed. [scikit-learn method documentation](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html).
 
@@ -31,12 +34,15 @@ SQLite is a derived local inspection store. The exporter verifies sealed manifes
   tests/test_selection_provider.py tests/test_bounded_selector.py \
   tests/test_run_bounded_selector.py tests/test_codex_chat_selector.py -q
 
+# Trace-bound decision-note and provider-budget tests.
+../work/audit-venv/bin/python -m pytest tests/test_decision_rationale.py -q
+
 # Requires a fresh output path. Runs deterministic controls, no LLM or hardware calls.
 ../work/audit-venv/bin/python scripts/evaluate_agent_memory.py \
   --output generated/my-agent-memory-check
 ```
 
-The completed engineering check ran none/lexical/semantic/hybrid modes, each with ten matched archived SHA256 controls and 30 endpoints: 40 trajectories, 120 endpoints, 232 decisions and 174 retrieval events. All controls match. These policies ignore retrieval, so matching proves noninterference only, not retrieval quality or better selection. The new retrieval fits are not new speedup/hardware model versions.
+The completed engineering check is preserved at [`results/2026-10-28-memory-graph-validation-r1`](../results/2026-10-28-memory-graph-validation-r1/README.md). It ran none/lexical/semantic/hybrid/knowledge_graph modes, each with ten matched archived SHA256 controls and 30 endpoints: 50 trajectories, 150 endpoints, 290 decisions and 232 retrieval events. All controls match; there were zero LLM calls and zero new native jobs. These deterministic policies ignore retrieval, so matching proves noninterference only, not retrieval quality or better selection. The new retrieval mode is not a new speedup/hardware model version.
 
 ## Inspect actual live-agent evidence
 
@@ -60,7 +66,15 @@ ORDER BY d.episode,d.decision;
 SELECT decision, mode, corpus_sha256, returned_ids FROM retrievals;
 SELECT model, COUNT(*), SUM(total_tokens), SUM(usage_complete) FROM model_calls GROUP BY model;
 SELECT role, trigger_reason, status, COUNT(*) FROM model_calls GROUP BY role, trigger_reason, status;
+SELECT reason, error_type, candidate_id, model_calls, provider_calls, tool_calls,
+       charged_attempts FROM host_events;
+SELECT finalization_source, decision_call, tool_sequence, public_context_sha256,
+       summary_author, summary_verified, host_facts_json FROM decision_rationales;
+SELECT measurement_id, candidate_id, charged_attempt, status,
+       public_observation_sha256, ledger_observation_sha256 FROM rationale_measurements;
 ```
+
+`agent_summary` in the sealed ledger remains model-authored and unverified. The SQL rationale tables link it to the visible context and host-verified facts; the hashes identify exact logged JSON and are not hashes of native measurement files. A host fallback has no invented model explanation.
 
 Null total tokens mean unavailable, not free. `elapsed_seconds` on interactive model rows includes host waiting and orchestration. No token-cost comparison is supported by this pilot.
 

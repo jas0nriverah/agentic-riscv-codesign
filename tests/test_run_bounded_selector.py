@@ -127,7 +127,9 @@ def test_sql_export_preserves_host_recovery_trigger(tmp_path):
     ledger = dict(model_events=[dict(call=3, status='complete', elapsed_seconds=.5,
         provider_trace=[dict(call=4, role='escalation', trigger='host_incumbent_correction',
             identity=dict(model='strong-model'), status='complete', usage={},
-            usage_complete=False, elapsed_seconds=.4)])], events=[])
+            usage_complete=False, elapsed_seconds=.4)])], events=[], host_events=[dict(
+                type='fallback_finalize', reason='model_error', error_type='ProviderError',
+                candidate_id='c1', model_calls=3, tool_calls=4, charged_attempts=1)])
     c.seal(root/'ledger.json', ledger)
     report = dict(protocol_sha256=c.sha(root/'protocol.json'), runs=[dict(
         target='sha256', policy='bounded-recovery-router-v2', status='finalized',
@@ -140,4 +142,6 @@ def test_sql_export_preserves_host_recovery_trigger(tmp_path):
     export(root, tmp_path/'routed.sqlite')
     with sqlite3.connect(tmp_path/'routed.sqlite') as db:
         row = db.execute('SELECT role, trigger_reason, model FROM model_calls').fetchone()
+        fallback = db.execute('SELECT reason, error_type, candidate_id, charged_attempts FROM host_events').fetchone()
     assert row == ('escalation', 'host_incumbent_correction', 'strong-model')
+    assert fallback == ('model_error', 'ProviderError', 'c1', 1)

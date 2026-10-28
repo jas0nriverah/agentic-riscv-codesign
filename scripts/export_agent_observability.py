@@ -57,6 +57,18 @@ def export(run_dir, output):
           corpus_sha256 TEXT, query TEXT, returned_ids TEXT, elapsed_seconds REAL);
         CREATE TABLE tools (episode INTEGER, sequence INTEGER, tool TEXT, status TEXT,
           charged_attempt INTEGER, evidence_json TEXT);
+        CREATE TABLE host_events (episode INTEGER, sequence INTEGER, type TEXT,
+          reason TEXT, error_type TEXT, candidate_id TEXT, model_calls INTEGER,
+          provider_calls INTEGER, tool_calls INTEGER, charged_attempts INTEGER);
+        CREATE TABLE decision_rationales (episode INTEGER PRIMARY KEY,
+          finalization_source TEXT, decision_call INTEGER, tool_sequence INTEGER,
+          public_context_sha256 TEXT, summary TEXT, summary_author TEXT,
+          summary_verified INTEGER, context_json TEXT, host_facts_json TEXT,
+          policy_identity_json TEXT, model_call_references_json TEXT, rationale_json TEXT);
+        CREATE TABLE rationale_measurements (episode INTEGER, measurement_id TEXT,
+          candidate_id TEXT, tool_sequence INTEGER, charged_attempt INTEGER, status TEXT,
+          public_observation_sha256 TEXT, ledger_observation_sha256 TEXT,
+          evidence_json TEXT, PRIMARY KEY(episode,measurement_id));
         ''')
         db.execute('INSERT INTO releases VALUES (?,?)', (release, json.dumps(protocol, sort_keys=True)))
         for index, (run, ledger) in enumerate(zip(runs, ledgers)):
@@ -87,11 +99,38 @@ def export(run_dir, output):
                 db.execute('INSERT INTO tools VALUES (?,?,?,?,?,?)',
                     (index, event['sequence'], event['tool'], event['status'],
                      event.get('charged_attempt'), json.dumps(event, sort_keys=True)))
+            for sequence, event in enumerate(ledger.get('host_events', []), start=1):
+                db.execute('INSERT INTO host_events VALUES (?,?,?,?,?,?,?,?,?,?)',
+                    (index, sequence, event.get('type'), event.get('reason'),
+                     event.get('error_type'), event.get('candidate_id'),
+                     event.get('model_calls'), event.get('provider_calls'), event.get('tool_calls'),
+                     event.get('charged_attempts')))
+            rationale = ledger.get('decision_rationale')
+            if rationale:
+                note = rationale.get('summary') or {}
+                db.execute('INSERT INTO decision_rationales VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                    (index, rationale['finalization_source'], rationale['decision_call'],
+                     rationale['tool_sequence'], rationale['public_context_sha256'],
+                     note.get('text'), note.get('author'), note.get('verified'),
+                     json.dumps(rationale['public_context'], sort_keys=True),
+                     json.dumps(rationale['host_verified_facts'], sort_keys=True),
+                     json.dumps(rationale['policy_identity'], sort_keys=True),
+                     json.dumps(rationale['model_call_references'], sort_keys=True),
+                     json.dumps(rationale, sort_keys=True)))
+                for evidence in rationale['measurements']:
+                    db.execute('INSERT INTO rationale_measurements VALUES (?,?,?,?,?,?,?,?,?)',
+                        (index, evidence['measurement_id'], evidence.get('candidate_id'),
+                         evidence['tool_sequence'], evidence['charged_attempt'], evidence['status'],
+                         evidence.get('public_observation_sha256'),
+                         evidence.get('ledger_observation_sha256'), json.dumps(evidence, sort_keys=True)))
         db.commit()
         return dict(release_id=release, episodes=len(ledgers),
             decisions=db.execute('SELECT COUNT(*) FROM decisions').fetchone()[0],
             retrievals=db.execute('SELECT COUNT(*) FROM retrievals').fetchone()[0],
-            model_calls=db.execute('SELECT COUNT(*) FROM model_calls').fetchone()[0])
+            model_calls=db.execute('SELECT COUNT(*) FROM model_calls').fetchone()[0],
+            decision_rationales=db.execute('SELECT COUNT(*) FROM decision_rationales').fetchone()[0],
+            rationale_measurements=db.execute('SELECT COUNT(*) FROM rationale_measurements').fetchone()[0],
+            host_events=db.execute('SELECT COUNT(*) FROM host_events').fetchone()[0])
     finally:
         db.close()
 

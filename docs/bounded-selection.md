@@ -118,7 +118,7 @@ attempt endpoint, frequency, merit, raw XGBoost regression, XGBoost ranking and
 the GP control also reach the oracle; the LLM does not beat them. This was a
 consumed-data replay, not a new hardware evaluation, blinded test, API call, or
 model-quality estimate. Model ID, token usage, and model-only latency are
-unavailable. Dynamic model routing remains unimplemented.
+unavailable. The later bounded recovery route and host-incumbent fallback are implemented and offline-tested, but have no live v2 model comparison.
 
 ## Verified outcome and next work
 
@@ -144,4 +144,4 @@ calibration, broad generalization or learned/agent superiority claim.
 
 ## October 28 bounded routing extension
 
-The remote replay CLI now supports `--escalation-model` and `--max-model-calls`. See [the implementation and evaluation plan](agent-routing-implementation.md). This is schema-recovery routing with offline tests, not uncertainty-based routing or evidence of an LLM advantage.
+The remote replay CLI supports `--escalation-model` and `--max-model-calls`. See [the implementation and evaluation plan](agent-routing-implementation.md). This is schema/host-correction recovery with offline tests, not uncertainty-based routing or evidence of an LLM advantage. When model/tool calls fail or run out before finalization, the host records a separate `host_fallback` to the measured feasible incumbent or baseline; it adds no measurement. SQLite exports this event in `host_events`.
