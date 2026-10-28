@@ -3,11 +3,13 @@ import copy
 import json
 import sqlite3
 
+import pytest
+
 from isaforge import codesign as c
 from isaforge.agent_memory import MemoryAugmentedPolicy
 from isaforge.bounded_selector import MatchedBaselinePolicy, run_selector
 from scripts.export_agent_observability import export
-from test_bounded_selector import action, inputs, session
+from test_bounded_selector import action, grouped_session, inputs, session
 
 
 class ModelPolicy:
@@ -51,6 +53,8 @@ def test_model_note_bound_to_exact_augmented_context_and_host_facts(tmp_path, in
     assert decision['author'] == 'model' and decision['verified'] is False
     assert decision['candidate_id'] == 't1'
     assert len(decision['public_context_sha256']) == 64
+    assert decision['paid_verification']['status'] == 'verified_feasible_improvement'
+    assert decision['paid_verification']['area_delta_lut4'] == 40
     facts = note['host_verified_facts']
     assert facts['selection'] == result['authoritative_selection']
     assert facts['selection']['area_delta_lut4'] == 40
@@ -153,6 +157,65 @@ def test_failed_and_invalid_attempts_remain_evidence_without_success_labels(tmp_
     assert 'speedup' not in evidence[1]['public_observation']
     assert s.ledger['decision_rationale']['host_verified_facts']['selection']['candidate_id'] is None
     assert s.ledger['decision_rationale']['host_verified_facts']['selected_measurement_id'] is None
+    decisions = s.ledger['decision_rationale']['selection_decisions']
+    assert decisions[0]['paid_verification'] is None
+    assert decisions[1]['paid_verification'] == dict(
+        status='failed_no_performance_or_hardware_label', measurement_seconds=7)
+
+
+@pytest.mark.parametrize('outcome_status', [
+    'verified_feasible_improvement', 'area_infeasible',
+    'failed_no_performance_or_hardware_label',
+])
+def test_grouped_decision_links_later_outcome_without_changing_pre_attempt_context(
+        tmp_path, inputs, outcome_status):
+    if outcome_status == 'area_infeasible':
+        inputs[3]['t2']['area_delta_lut4'] = 65
+    elif outcome_status == 'failed_no_performance_or_hardware_label':
+        inputs[3]['t2'] = dict(**inputs[0][1], status='failed',
+                              measurement_seconds=7, error='fixture failure')
+
+    class GroupedPolicy(ModelPolicy):
+        def choose(self, request):
+            self.seen.append(copy.deepcopy(request))
+            if 'selection_board' not in request:
+                return action('predict', candidate_ids=['t1', 't2', 't3'])
+            if not request['attempted_candidate_ids']:
+                return action('measure', candidate_id='t2')
+            return action('finalize', candidate_id=request['incumbent']['candidate_id'],
+                          summary='Use the host-verified incumbent.')
+
+    policy = GroupedPolicy()
+    result = run_selector(grouped_session(tmp_path, inputs), policy)
+    pre_attempt = policy.seen[1]
+    decision = result['decision_rationale']['selection_decisions'][0]
+    assert decision['public_context_sha256'] == c.digest(pre_attempt)
+    assert decision['pairwise_rank_position'] == 2
+    assert decision['advisory_default_candidate_id'] == 't1'
+    assert decision['deviation_from_advisory'] is True
+    assert pre_attempt['selection_board']['rows'][1]['paid_verification'] is None
+    assert pre_attempt['observations'] == []
+    assert decision['paid_verification']['status'] == outcome_status
+    assert decision['verified'] is False
+    if outcome_status == 'failed_no_performance_or_hardware_label':
+        assert set(decision['paid_verification']) == {'status', 'measurement_seconds'}
+
+
+def test_repeated_grouped_attempt_does_not_reuse_prior_paid_verification(tmp_path, inputs):
+    class RepeatedPolicy(ModelPolicy):
+        def choose(self, request):
+            self.seen.append(copy.deepcopy(request))
+            if 'selection_board' not in request:
+                return action('predict', candidate_ids=['t1', 't2', 't3'])
+            if len(self.seen) <= 3:
+                return action('measure', candidate_id='t2')
+            return action('finalize', candidate_id='t2', summary='Use the paid incumbent.')
+
+    result = run_selector(grouped_session(tmp_path, inputs), RepeatedPolicy())
+    first, repeated = result['decision_rationale']['selection_decisions']
+    assert first['paid_verification']['verified_feasible'] is True
+    assert repeated['paid_verification'] is None
+    assert result['charged_attempts'] == 2
 
 
 def test_control_note_is_not_mislabeled_model_authored(tmp_path, inputs):
@@ -177,12 +240,14 @@ def test_sqlite_exports_rationale_and_measurement_evidence(tmp_path, inputs):
     with sqlite3.connect(tmp_path/'trace.sqlite') as db:
         row = db.execute('SELECT finalization_source, summary_author, summary_verified, public_context_sha256, rationale_json FROM decision_rationales').fetchone()
         evidence = db.execute('SELECT measurement_id, candidate_id, public_observation_sha256 FROM rationale_measurements').fetchone()
-        decision = db.execute('SELECT candidate_id, decision_summary, author, verified FROM rationale_selection_decisions').fetchone()
+        decision = db.execute('SELECT candidate_id, decision_summary, author, verified, paid_verification_json FROM rationale_selection_decisions').fetchone()
     assert row[:3] == ('agent', 'model', 0)
     assert row[3] == result['decision_rationale']['public_context_sha256']
     assert json.loads(row[4]) == result['decision_rationale']
     assert evidence == ('tool-1', 't1', result['decision_rationale']['measurements'][0]['public_observation_sha256'])
-    assert decision == ('t1', 'Synthetic policy choice for protocol test.', 'model', 0)
+    assert decision[:4] == ('t1', 'Synthetic policy choice for protocol test.', 'model', 0)
+    assert json.loads(decision[4]) == result['decision_rationale']['selection_decisions'][0]['paid_verification']
+    assert json.loads(decision[4])['status'] == 'verified_feasible_improvement'
 
 
 def test_sqlite_exports_host_fallback_provider_accounting(tmp_path, inputs):

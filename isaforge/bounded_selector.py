@@ -16,7 +16,7 @@ import time
 from . import budgeted_selection as b
 from . import codesign as c
 from .model import _number, validate_training_rows
-from .selector_decision_support import build_grouped_decision_board
+from .selector_decision_support import build_grouped_decision_board, _paid_status
 from .selection_provider import ProviderBudgetError
 from .speedup_corpus import family
 
@@ -457,8 +457,11 @@ class ReplaySelectionSession:
                 advisory_default_candidate_id=board.get('advisory_default_candidate_id'),
                 deviation_from_advisory=(candidate is not None and
                     candidate.get('candidate_id') != board.get('advisory_default_candidate_id')),
-                paid_verification=(copy.deepcopy(candidate.get('paid_verification'))
-                                   if candidate else None)))
+                # The board is the pre-attempt snapshot. Verification belongs
+                # to this event's later host outcome, never a previous attempt.
+                paid_verification=(_paid_status(event['observation'],
+                    area_cap=self.area_cap, clock_mhz=self.clock_mhz)
+                    if 'observation' in event else None)))
         return result
 
     def _result(self, event, result):
