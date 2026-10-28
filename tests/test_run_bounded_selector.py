@@ -84,3 +84,21 @@ def test_private_outcome_change_rejected_even_when_resealed(tmp_path):
 def test_invalid_experiment_grid_rejected(tmp_path, kwargs):
     with pytest.raises(ValueError): run(tmp_path/'bad', **kwargs)
     assert not (tmp_path/'bad').exists()
+
+
+def test_memory_modes_preserve_controls_and_sql_trace(tmp_path):
+    import sqlite3
+    from scripts.export_agent_observability import export
+    report = run(tmp_path/'hybrid', targets=['sha256'], seeds=[0], caps=[64], memory_mode='hybrid')
+    assert report['all_controls_match'] and report['llm_calls'] == 0
+    summary = export(tmp_path/'hybrid', tmp_path/'trace.sqlite')
+    assert summary['episodes'] == 10 and summary['retrievals'] > 0
+    with sqlite3.connect(tmp_path/'trace.sqlite') as db:
+        assert db.execute('SELECT COUNT(*) FROM tools WHERE tool="measure"').fetchone()[0] == 30
+        assert db.execute('SELECT COUNT(*) FROM decisions WHERE tool_sequence IS NULL').fetchone()[0] == 0
+    with pytest.raises(ValueError, match='fresh output'):
+        export(tmp_path/'hybrid', tmp_path/'trace.sqlite')
+    ledger = tmp_path/'hybrid'/report['runs'][0]['ledger']
+    ledger.write_text('{}')
+    with pytest.raises(ValueError):
+        export(tmp_path/'hybrid', tmp_path/'tampered.sqlite')

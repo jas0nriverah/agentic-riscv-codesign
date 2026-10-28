@@ -22,13 +22,14 @@ from isaforge import codesign as c
 from isaforge.bounded_selector import (PROMPT, MatchedBaselinePolicy,
                                       ReplaySelectionSession, run_selector)
 from isaforge.selection_provider import ResponsesSelectionProvider, tool_definitions
+from isaforge.agent_memory import MemoryAugmentedPolicy, MODES
 from isaforge.routed_selection import RoutedSelectionProvider, summarize_model_events
 
 TARGETS = dict(edn='results/2026-10-20-budget-campaign/selection/embench-edn',
                ud='results/2026-10-20-budget-campaign/selection/embench-ud',
                sha256='results/2026-10-21-sha256-selection/model')
 SOURCES = ('scripts/run_bounded_selector.py', 'isaforge/bounded_selector.py',
-           'isaforge/selection_provider.py', 'isaforge/routed_selection.py', 'isaforge/budgeted_selection.py')
+           'isaforge/selection_provider.py', 'isaforge/routed_selection.py', 'isaforge/agent_memory.py', 'isaforge/budgeted_selection.py')
 
 
 def complete_frontier(result, budget):
@@ -90,7 +91,7 @@ def load_case(folder):
 
 
 def run(output, *, provider='controls', model=None, targets=None,
-        seeds=None, caps=None, budget=3, max_model_calls=12, escalation_model=None):
+        seeds=None, caps=None, budget=3, max_model_calls=12, escalation_model=None, memory_mode="none"):
     run_started = time.monotonic()
     c.require(provider in ('controls', 'responses'), 'Unknown provider')
     if provider == 'responses':
@@ -98,6 +99,7 @@ def run(output, *, provider='controls', model=None, targets=None,
                   'Live run requires explicit --model and OPENAI_API_KEY; no model call was made.')
     c.require(escalation_model is None or provider == 'responses', 'Routing requires responses provider')
     c.require(type(max_model_calls) is int and 0 < max_model_calls <= 100, 'Invalid model limit')
+    c.require(memory_mode in MODES, 'Invalid memory mode')
     output = Path(output).resolve()
     c.require(not output.exists(), 'Use a fresh output directory')
     target_names = list(TARGETS) if targets is None else list(targets)
@@ -114,7 +116,7 @@ def run(output, *, provider='controls', model=None, targets=None,
     policies = list(b.POLICIES) if provider == 'controls' else ['llm_selector']
     protocol = dict(schema='isaforge-bounded-selector-development-v1',
         scope='Consumed-data engineering replay; not prospective source generalization.',
-        provider=provider, model=model, escalation_model=escalation_model,
+        provider=provider, model=model, escalation_model=escalation_model, memory_mode=memory_mode,
         routing_rule="one schema-error escalation; shared model-call budget", policies=policies, targets=target_names,
         seeds=selected_seeds, area_caps=selected_caps, budget=budget, clock_mhz=12,
         max_model_calls=max_model_calls, max_tool_calls=20,
@@ -127,7 +129,7 @@ def run(output, *, provider='controls', model=None, targets=None,
         invalid_measurements='Every submitted measure, including invalid IDs/repeats, charges before lookup while budget remains.',
         historical_cost_note='All historical available attempts are charged, including failed/excluded rows. Setup/calibration separate.',
         timer_note='Target durations are archived record/ledger durations, not live search time; these scopes differ and overlap with command timing.',
-        isolation='External Responses model has only serialized allowlisted JSON and four strict functions; no shell, files, MCP, retrieval or oracle.',
+        isolation='External Responses model has only serialized allowlisted JSON and four strict functions; no shell, files, MCP or oracle; optional retrieval only from approved public history.',
         uncertainty_calibrated=False, joint_sets_supported=False, new_native_jobs=0)
     output.mkdir(parents=True)
     c.seal(output/'protocol.json', protocol)  # Saved before the first policy episode.
@@ -155,6 +157,8 @@ def run(output, *, provider='controls', model=None, targets=None,
                         secondary = (ResponsesSelectionProvider(escalation_model, max_calls=max_model_calls,
                                      max_output_tokens=512) if escalation_model else None)
                         policy = RoutedSelectionProvider(policy, secondary, max_calls=max_model_calls)
+                    if memory_mode != "none":
+                        policy = MemoryAugmentedPolicy(policy, mode=memory_mode)
                     result = run_selector(session, policy, max_model_calls=max_model_calls)
                     # Only the privileged scorer uses oracle values, after policy execution.
                     for point in complete_frontier(result, budget):
@@ -226,6 +230,7 @@ def main(argv=None):
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--provider', choices=('controls', 'responses'), default='controls')
     parser.add_argument('--model')
+    parser.add_argument('--memory-mode', choices=MODES, default='none')
     parser.add_argument('--escalation-model')
     parser.add_argument('--max-model-calls', type=int, default=12)
     parser.add_argument('--target', choices=tuple(TARGETS), action='append')
@@ -235,7 +240,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     result = run(args.output, provider=args.provider, model=args.model,
                  targets=args.target, seeds=args.seed, caps=args.cap, budget=args.budget,
-                 escalation_model=args.escalation_model, max_model_calls=args.max_model_calls)
+                 escalation_model=args.escalation_model, max_model_calls=args.max_model_calls, memory_mode=args.memory_mode)
     print({key:result[key] for key in ('trajectories', 'endpoints', 'all_controls_match', 'llm_calls', 'new_native_jobs')})
 
 

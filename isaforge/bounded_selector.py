@@ -392,9 +392,12 @@ def run_selector(session, policy, *, max_model_calls=12):
             break
         finally:
             event['provider_trace'] = copy.deepcopy(getattr(policy, 'last_trace', []))
+            event['memory_trace'] = copy.deepcopy(getattr(policy, 'last_memory_trace', {}))
             session._persist()
         try:
             session.call(action)
+            event['tool_sequence'] = session.calls
+            session._persist()
         except Exception as exc:
             event.update(status='host_error', error_type=type(exc).__name__)
             session.stop('host_error')

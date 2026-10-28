@@ -220,3 +220,20 @@ def test_routed_errors_spend_model_calls_not_hardware_attempts(tmp_path, inputs)
     assert accounting['escalation_calls'] == 1 and accounting['usage_complete']
     saved = c.unseal(tmp_path/'ledger.json')
     assert saved['model_events'][0]['provider_trace'][1]['identity']['model'] == 'large'
+
+
+def test_memory_policy_is_label_safe_and_preserves_paid_loop(tmp_path, inputs):
+    from isaforge.agent_memory import MemoryAugmentedPolicy
+    class InspectingPolicy(MatchedBaselinePolicy):
+        def choose(self, request):
+            text = json.dumps(request['retrieved_memory'])
+            assert 'UNPAID-CANARY' not in text
+            assert all(h['record']['workload_group'] != 'target'
+                       for h in request['retrieved_memory']['hits'])
+            return super().choose(request)
+    inputs[3]['t1']['private_path'] = 'UNPAID-CANARY'
+    p = MemoryAugmentedPolicy(InspectingPolicy('merit'))
+    result = run_selector(session(tmp_path, inputs), p)
+    assert result['charged_attempts'] == 3 and result['status'] == 'finalized'
+    assert result['model_events'][0]['memory_trace']['mode'] == 'hybrid'
+    assert result['model_events'][0]['tool_sequence'] == 1

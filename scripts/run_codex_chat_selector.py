@@ -20,13 +20,16 @@ sys.path.insert(0, str(ROOT/'scripts'))
 from isaforge import budgeted_selection as b
 from isaforge import codesign as c
 from isaforge.bounded_selector import PROMPT, ReplaySelectionSession, run_selector
+from isaforge.agent_memory import MemoryAugmentedPolicy, MODES
 from isaforge.codex_chat_selector import CodexChatSelectionProvider
 from isaforge.selection_provider import tool_definitions
 from run_bounded_selector import TARGETS, load_case
 
 
 def run(*, target: str, cap: int, seed: int, budget: int, output: Path,
-        model_label: str = 'current Codex chat model; deployment ID unavailable'):
+        model_label: str = 'current Codex chat model; deployment ID unavailable',
+        memory_mode='none', request_files=False):
+    c.require(memory_mode in MODES, 'Invalid memory mode')
     c.require(target in TARGETS, 'Unknown target')
     c.require(cap in (32, 64, 128), 'Area cap must be 32, 64 or 128 LUT4')
     c.require(type(seed) is int and seed in range(5), 'Seed must be one of the five frozen seeds')
@@ -38,7 +41,8 @@ def run(*, target: str, cap: int, seed: int, budget: int, output: Path,
     prediction = next(row for row in case['predictions'] if row['seed'] == seed)
     protocol = dict(schema='isaforge-codex-chat-selector-development-v1',
         scope='Consumed-data interactive development replay; no source generalization claim.',
-        provider='codex-chat-bridge', model_label=model_label,
+        provider='codex-chat-bridge', model_label=model_label, memory_mode=memory_mode,
+        request_files=request_files,
         exact_model_id_available=False,
         objective='Best paid, verified, correct whole-program speedup subject to measured area/timing and a fixed attempt budget.',
         target=target, area_cap_lut4=cap, clock_floor_mhz=12.0, seed=seed,
@@ -50,7 +54,7 @@ def run(*, target: str, cap: int, seed: int, budget: int, output: Path,
         source_bindings={name: c.sha(ROOT/name) for name in
                         ('scripts/run_codex_chat_selector.py', 'isaforge/codex_chat_selector.py',
                          'isaforge/bounded_selector.py', 'isaforge/budgeted_selection.py',
-                         'isaforge/selection_provider.py')},
+                         'isaforge/selection_provider.py', 'isaforge/agent_memory.py')},
         historical_cost_note='Archived attempt costs retain original timer scopes; no project-time savings are inferred.',
         chat_boundary='The request/output channel contains allowlisted JSON; the active Codex session itself also has broader workspace tools.',
         token_usage='Unavailable for in-chat orchestration.',
@@ -68,7 +72,10 @@ def run(*, target: str, cap: int, seed: int, budget: int, output: Path,
         max_tool_calls=protocol['max_tool_calls'], ledger_path=output/'ledger.json',
         historical_available_rows=case['protocol']['historical_available_rows'],
         historical_attempt_seconds=case['historical_seconds'])
-    agent = CodexChatSelectionProvider(model_label=model_label)
+    agent = CodexChatSelectionProvider(model_label=model_label,
+        request_directory=output/'public-requests' if request_files else None)
+    if memory_mode != 'none':
+        agent = MemoryAugmentedPolicy(agent, mode=memory_mode)
     result = run_selector(session, agent, max_model_calls=protocol['max_model_calls'])
 
     feasible_outcomes = [row for row in case['outcomes'].values()
@@ -142,10 +149,13 @@ def main(argv=None):
     parser.add_argument('--seed', type=int, choices=range(5), default=0)
     parser.add_argument('--budget', type=int, choices=(1, 2, 3), default=3)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--memory-mode', choices=MODES, default='none')
+    parser.add_argument('--request-files', action='store_true')
     parser.add_argument('--model-label', default='current Codex chat model; deployment ID unavailable')
     args = parser.parse_args(argv)
     run(target=args.target, cap=args.cap, seed=args.seed, budget=args.budget,
-        output=args.output, model_label=args.model_label)
+        output=args.output, model_label=args.model_label,
+        memory_mode=args.memory_mode, request_files=args.request_files)
 
 
 if __name__ == '__main__':

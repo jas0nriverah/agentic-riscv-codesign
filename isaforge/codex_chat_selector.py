@@ -7,6 +7,7 @@ host retains charge accounting, hidden replay outcomes, and final acceptance.
 from __future__ import annotations
 
 import json
+from pathlib import Path
 import sys
 import time
 from typing import TextIO
@@ -25,7 +26,7 @@ class CodexChatSelectionProvider:
                  output_stream: TextIO | None = None,
                  model_label: str = 'current Codex chat model; deployment ID unavailable',
                  max_request_bytes: int = 300_000,
-                 max_action_bytes: int = 10_000):
+                 max_action_bytes: int = 10_000, request_directory: Path | None = None):
         if not isinstance(model_label, str) or not model_label.strip():
             raise ValueError('model_label must be a nonempty string')
         if type(max_request_bytes) is not int or not 1 <= max_request_bytes <= 1_000_000:
@@ -36,6 +37,9 @@ class CodexChatSelectionProvider:
         self.output_stream = output_stream or sys.stdout
         self.max_request_bytes = max_request_bytes
         self.max_action_bytes = max_action_bytes
+        self.request_directory = request_directory
+        if request_directory is not None:
+            Path(request_directory).mkdir(parents=True, exist_ok=False)
         self.calls = 0
         self.last_usage = {}
         self.last_elapsed_seconds = 0.0
@@ -59,6 +63,19 @@ class CodexChatSelectionProvider:
         self.calls += 1
         self.last_usage = {}
         started = time.monotonic()
+        if self.request_directory is not None:
+            request_path = Path(self.request_directory)/f'public-{self.calls:02d}.json'
+            with request_path.open('x') as handle:
+                handle.write(body)
+            self.output_stream.write(f'PUBLIC_REQUEST_FILE={request_path}\nACTION_JSON> ')
+        else:
+            self._write_request(body, encoded)
+        self.output_stream.flush()
+        line = self.input_stream.readline(self.max_action_bytes + 2)
+        self.last_elapsed_seconds = time.monotonic() - started
+        return self._parse_action(line)
+
+    def _write_request(self, body, encoded):
         self.output_stream.write(
             f'\nISAForge Codex selector request {self.calls} ({len(encoded)} bytes)\n'
             'Return exactly one JSON line: {"tool":"...","arguments":{...}}\n'
@@ -66,9 +83,8 @@ class CodexChatSelectionProvider:
             'BEGIN_PUBLIC_REQUEST\n'
         )
         self.output_stream.write(body + '\nEND_PUBLIC_REQUEST\nACTION_JSON> ')
-        self.output_stream.flush()
-        line = self.input_stream.readline(self.max_action_bytes + 2)
-        self.last_elapsed_seconds = time.monotonic() - started
+
+    def _parse_action(self, line):
         if not line:
             raise CodexChatBridgeError('no action received; session stopped without retry')
         if len(line.encode('utf-8')) > self.max_action_bytes:
