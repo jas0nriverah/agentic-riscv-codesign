@@ -114,10 +114,11 @@ def run(output, *, provider='controls', model=None, targets=None,
     c.require(selected_caps and len(set(selected_caps)) == len(selected_caps) and
               all(cap in (32, 64, 128) for cap in selected_caps), 'Invalid frozen caps')
     policies = list(b.POLICIES) if provider == 'controls' else ['llm_selector']
-    protocol = dict(schema='isaforge-bounded-selector-development-v2',
+    protocol = dict(schema='isaforge-bounded-selector-development-v3',
         scope='Consumed-data engineering replay; not prospective source generalization.',
         provider=provider, model=model, escalation_model=escalation_model, memory_mode=memory_mode,
-        routing_rule="one schema-error escalation; shared model-call budget", policies=policies, targets=target_names,
+        routing_rule=("one escalation on malformed structured output or explicit host incumbent correction; "
+                      "shared model-call budget; no transport retries"), policies=policies, targets=target_names,
         seeds=selected_seeds, area_caps=selected_caps, budget=budget, clock_mhz=12,
         max_model_calls=max_model_calls, max_tool_calls=20,
         max_output_tokens_per_call=512 if provider == 'responses' else None,

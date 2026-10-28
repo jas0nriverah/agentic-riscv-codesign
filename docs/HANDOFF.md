@@ -10,6 +10,12 @@ The [failure audit](../results/2026-10-28-incumbent-v2-control-replay-r2/README.
 
 No new model fit is warranted: speedup labels still equal the calibrated latency estimate on the current corpus, and no independent held-out workload has established transfer. The next useful experiment remains a frozen prospective comparison on a newly qualified workload or family, with merit/frequency/latency-cost, XGBoost and an LLM agent sharing the same public state and paid budget. Fresh workload gates remain binding.
 
+## October 28: host-feedback recovery routing
+
+The bounded model router now allows one stronger-model call after either malformed structured output or a specific recoverable host result: selector v2 rejected a finalization and returned the current incumbent ID. Both roles receive the same public snapshot; the escalation shares the model-call allowance and can occur only once per episode. Measurement failures, transport errors, timeouts, and unrelated tool errors do not trigger it. This directly addresses the prior no-memory Luna pilot's three rejected finalizations while preserving incumbent-only host acceptance. It is a software recovery feature; there is no live v2 LLM comparison or evidence of improved selection quality yet.
+
+The focused selector/router suite passes **84 tests**, including a full host-correction recovery loop. The live API key is not configured in this workspace, so no paid model call was made. Slides 7–8 and the seven-minute notes now show the trigger and distinguish software validation from live evidence; the regenerated 11-slide deck validates at 420 seconds / 966 spoken words. The next experiment is a frozen fixed-primary / fixed-stronger / recovery-router comparison on the same consumed pool and measurement budget, with model calls, observed tokens, latency, paid measurements, and final feasible speedup reported separately. Keep the original live pilot unchanged.
+
 ## October 28: live Luna memory and operations evidence
 
 Implemented local TF-IDF/LSA/hybrid historical retrieval over approved training records, memory augmentation, decision-to-tool links, sealed-run SQLite export and file-based public request transport. No general document RAG, pretrained embeddings, production deployment or live model-routing improvement is claimed. [Implementation](agent-memory-operations.md).

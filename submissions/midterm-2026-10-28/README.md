@@ -15,7 +15,7 @@ to fill those gaps from verified results before submitting.
 - [AI track inserts and presentation notes](ai-track-insert.md) — copy-ready text for the current PDF's empty Sections 2.3/3.3, an evidence-based stopping-point analysis, seven-minute allocation, and Q&A. The supplied PDF remains unchanged; the full deck has now been revised using these evidence qualifications.
 
 - `isaforge-midterm-progress-report.docx` — methodology, AI use, measured results, model evaluation, explainability, chat-agent pilot, timeline, and contribution matrix.
-- `isaforge-midterm-progress-slides-final.pptx` — Current, validated 11-slide presentation: research foundations, timeline/contributions, methodology, dataset, XGBoost ranking, explainability/uncertainty, LLM agent, baselines, results, and next steps. Native editable charts and diagrams; speaker scripts total 420 seconds (931 words). The October 28 refresh documents the selector-v2 host incumbent guard, distinguishes the four charged failures, and explains the workload qualification bottleneck. It does not claim that v2 improves live LLM performance; no v2 LLM run has occurred.
+- `isaforge-midterm-progress-slides-final.pptx` — Current, validated 11-slide presentation: research foundations, timeline/contributions, methodology, dataset, XGBoost ranking, explainability/uncertainty, LLM agent, baselines, results, and next steps. Native editable charts and diagrams; speaker scripts total 420 seconds (966 words); deck SHA-256 `9752c36a27a76f283f40249212479925f4e5007f6056a3fb9f5a69e4246c4e5a`. The October 28 refresh documents the selector-v2 host incumbent guard, one-shot recovery routing, the four charged failures, and the workload qualification bottleneck. Recovery routing is software-tested only; no live v2 LLM run has occurred.
 - `isaforge-xgboost-model-architecture-slide.pptx` — copy-ready standalone replacement slide with a tree-ensemble schematic and the current model details. This is a historical standalone asset; the revised full deck is the presentation deliverable.
 - `isaforge-xgboost-model-architecture-slide-preview.png` — 16:9 preview of the standalone slide. Slide text and speaker notes are editable in PowerPoint; the tree illustration is an image.
 - `model-architecture-slide.png` — historical architecture preview; not a preview of the revised full deck.
@@ -30,7 +30,7 @@ Before Canvas upload, confirm the member names, Git author aliases, actual contr
 - CRC32 and aha-mont64 six-candidate experiments remain preserved. The best aha-mont64 result is 1.094120×, +42 LUT4, 64.88 MHz minimum routed Fmax, correctness passed.
 - Pairwise XGBoost has lower mean regret than merit at budgets 1 and 2, but paired intervals cross zero; merit wins at budget 3. No ML superiority is established.
 - The current Codex chat model completed one bounded EDN selector replay and matched the measured-pool oracle after one valid measurement; a malformed ID charged a second attempt. Frequency, merit, XGBoost, and GP controls also match the oracle at the same two-attempt endpoint. This is not a new native measurement or an LLM win.
-- Dynamic LLM routing and cost-tiered model selection are not implemented. One-to-three-instruction joint selection and validation remains future work.
+- A narrow dynamic route can use one stronger-model call after malformed structured output or an explicit host incumbent correction, under a shared call budget. This recovery path has offline tests but no live v2 comparison. Cost-tiered or uncertainty-triggered routing is not implemented. One-to-three-instruction joint selection and validation remains future work.
 
 The slide and dataset artifacts are included in this bundle; the report still
 needs the AI-section and placeholder corrections above, and the contribution
@@ -47,4 +47,4 @@ matrix needs team confirmation. No Canvas upload was performed.
 
 - [How we built ISAForge](how-we-built-isaforge.md) traces early benchmark collection and isolated LUT experiments through processor measurement, dataset creation, model evaluation, and the agent tools, with links to the actual scripts and safe replay commands.
 
-- [Agent architecture and LLMOps plan](agent-architecture-plan.md) distinguishes the working bounded selector from proposed dynamic routing, memory, retrieval, evaluation and monitoring.
+- [Agent architecture and LLMOps plan](agent-architecture-plan.md) distinguishes the working bounded selector and narrow recovery route from proposed cost/uncertainty-based routing, retrieval and production monitoring.

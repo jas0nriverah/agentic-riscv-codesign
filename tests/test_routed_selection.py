@@ -38,6 +38,7 @@ def test_escalation_same_public_state_and_aggregate_cost():
     assert seen[0]['input'] == seen[1]['input']
     assert p.last_usage['total_tokens'] == 28
     assert [x['status'] for x in p.last_trace] == ['invalid_action', 'complete']
+    assert p.last_trace[1]['trigger'] == 'invalid_action'
 
 
 def test_shared_budget_blocks_escalation():
@@ -65,6 +66,41 @@ def test_invalid_secondary_stops_at_two_calls():
     with pytest.raises(InvalidActionError):
         p.choose({})
     assert p.calls == len(seen) == 2
+
+
+def test_explicit_incumbent_correction_routes_once_to_secondary():
+    seen = []
+    primary = provider('small', response(), seen)
+    secondary = provider('large', response(), seen)
+    p = RoutedSelectionProvider(primary, secondary)
+    correction = {'messages': [{'tool': 'finalize', 'result': {
+        'status': 'error', 'required_candidate_id': 'c1',
+        'allowed_candidate_ids': ['c1']}}]}
+
+    assert p.choose(correction)['tool'] == 'measure'
+    assert [call['model'] for call in seen] == ['large']
+    assert p.last_trace[0]['trigger'] == 'host_incumbent_correction'
+    assert p.last_trace[0]['role'] == 'escalation'
+
+    # The stronger model is a one-shot recovery, not a second policy loop.
+    p.choose(correction)
+    assert [call['model'] for call in seen] == ['large', 'small']
+    assert p.last_trace[0]['trigger'] == 'primary'
+
+
+@pytest.mark.parametrize('message', [
+    {'tool': 'measure', 'result': {'status': 'error', 'error': 'Candidate already attempted.'}},
+    {'tool': 'finalize', 'result': {'status': 'error', 'error': 'Malformed arguments.'}},
+    {'tool': 'finalize', 'result': {'status': 'failed', 'required_candidate_id': 'c1',
+                                   'allowed_candidate_ids': ['c1']}},
+])
+def test_only_explicit_v2_incumbent_correction_triggers_recovery(message):
+    seen = []
+    p = RoutedSelectionProvider(provider('small', response(), seen),
+                                provider('large', response(), seen))
+    p.choose({'messages': [message]})
+    assert [call['model'] for call in seen] == ['small']
+    assert p.last_trace[0]['trigger'] == 'primary'
 
 
 def test_missing_usage_is_not_zero_complete_usage():

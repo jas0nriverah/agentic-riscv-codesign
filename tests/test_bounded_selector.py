@@ -253,6 +253,43 @@ def test_routed_errors_spend_model_calls_not_hardware_attempts(tmp_path, inputs)
     assert saved['model_events'][0]['provider_trace'][1]['identity']['model'] == 'large'
 
 
+def test_host_incumbent_correction_escalates_once_and_finalizes_integration(tmp_path, inputs):
+    from isaforge.selection_provider import ResponsesSelectionProvider
+    from isaforge.routed_selection import RoutedSelectionProvider, summarize_model_events
+    seen = []
+
+    def transport(payload, *args):
+        model = payload['model']
+        ordinal = sum(row['model'] == model for row in seen)
+        if model == 'small' and ordinal == 0:
+            name, arguments = 'measure', {'candidate_id': 't1'}
+        elif model == 'small':
+            name, arguments = 'finalize', {'candidate_id': 't2', 'summary': 'Stale choice.'}
+        else:
+            name, arguments = 'finalize', {'candidate_id': 't1', 'summary': 'Use corrected incumbent.'}
+        seen.append(dict(model=model, payload=payload))
+        return dict(status='completed', output=[dict(type='function_call', name=name,
+            arguments=json.dumps(arguments))],
+            usage=dict(input_tokens=10, output_tokens=4, total_tokens=14))
+
+    small = ResponsesSelectionProvider('small', api_key='test', transport=transport)
+    large = ResponsesSelectionProvider('large', api_key='test', transport=transport)
+    policy = RoutedSelectionProvider(small, large, max_calls=5)
+    result = run_selector(session(tmp_path, inputs), policy, max_model_calls=5)
+
+    assert result['status'] == 'finalized'
+    assert result['selected_id'] == 't1'
+    assert result['charged_attempts'] == 1
+    assert [row['model'] for row in seen] == ['small', 'small', 'large']
+    recovery_request = json.loads(seen[-1]['payload']['input'][0]['content'])
+    correction = recovery_request['messages'][-1]['result']
+    assert correction['required_candidate_id'] == 't1'
+    assert correction['allowed_candidate_ids'] == ['t1']
+    assert result['model_events'][-1]['provider_trace'][0]['trigger'] == 'host_incumbent_correction'
+    assert summarize_model_events(result['model_events'])['escalation_triggers'] == {
+        'host_incumbent_correction': 1}
+
+
 def test_memory_policy_is_label_safe_and_preserves_paid_loop(tmp_path, inputs):
     from isaforge.agent_memory import MemoryAugmentedPolicy
     class InspectingPolicy(MatchedBaselinePolicy):

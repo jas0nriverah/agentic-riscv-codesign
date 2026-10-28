@@ -1,10 +1,10 @@
 **Latest October 28 status:** local latent-semantic/hybrid historical retrieval and SQLite operations traces are implemented and exercised with two fresh live Luna selectors. See [implementation](../../docs/agent-memory-operations.md) and [complete pilot](../../results/2026-10-28-live-luna-memory/README.md). The plan below is retained as historical context; its unimplemented labels are superseded only for these bounded components. Deployment, pretrained embeddings and general document retrieval remain planned.
 
-**October 28 implementation update:** the presentation below preserves its October 27 snapshot. A limited schema-error router and per-call accounting now have offline software tests; broader uncertainty-based routing, RAG and production operations remain planned. See [implementation status](../../docs/agent-routing-implementation.md).
+**October 28 implementation update:** the presentation below preserves its October 27 snapshot. Bounded recovery routing now escalates once after a malformed structured action or an explicit host incumbent correction; per-call trigger accounting is recorded. The full model route has offline software tests but no live v2 comparison. Uncertainty/cost-triggered routing, RAG and production operations remain planned. See [implementation status](../../docs/agent-routing-implementation.md).
 
 # ISAForge agent architecture: current system and proposed extensions
 
-**Status: presentation design and research plan.** Dynamic LLM routing, RAG, a vector database, LangGraph/LangChain, MCP, Ragas, and production monitoring have not been implemented or evaluated for the selector. A historical rule-based router between LUT-cost predictors is a different experiment. Do not present the proposed boxes as completed work.
+**Status: presentation design and research plan with a narrow implemented recovery route.** The selector can use one stronger-model call after malformed structured output or an explicit host incumbent correction, under a shared model-call budget. This is offline-tested only; no live v2 model comparison exists. Cost/uncertainty-based routing, RAG, a vector database, LangGraph/LangChain, MCP, Ragas, and production monitoring remain unimplemented or unevaluated for the selector. A historical rule-based router between LUT-cost predictors is a different experiment. Do not present the proposed boxes as completed work.
 
 ```mermaid
 flowchart TB
@@ -82,7 +82,7 @@ The runtime architecture has four stages: legal candidate analysis and ML scorin
 | --- | --- | --- |
 | Tokens | Each LLM request and response | Account for input/output usage and cost. Introduce explicit ceilings; report missing usage rather than zero. |
 | Context windows | Before each LLM decision | Supply roster, predictions, constraints and paid observations. Test truncation preserves exact candidate IDs, budgets and incumbent. |
-| Dynamic LLM usage | Between context builder and provider | Start with a small model, escalate at most once under a frozen rule. Compare with fixed-small and fixed-strong on cost and feasible performance. Planned. |
+| Dynamic LLM usage | Between context builder and provider | Implemented narrow recovery rule: one escalation after malformed structured output or explicit host incumbent correction, under a shared call cap. Live matched evaluation pending; uncertainty/cost routing remains planned. |
 | Structured outputs | LLM action boundary | Existing schemas make actions machine-checkable. A schema-valid proposal can still be a bad selection. |
 | Function calling | Decision-to-host interface | Existing four tools make requests executable. The host validates and charges actions independently. |
 | AI agents / agentic workflows | Observe, propose, act, observe again | Existing bounded selector and pilots demonstrate execution. Matched controls are still needed to demonstrate value. |
@@ -114,6 +114,6 @@ The runtime architecture has four stages: legal candidate analysis and ML scorin
 
 ### Slide 8 speaking script (45 seconds)
 
-Our agent has four stages: analyze candidates and query ML predictions, choose a structured action, execute it through host guardrails, and record measured evidence. Paid observations feed the next decision. The lower half shows planned extensions. A bounded context builder would route routine decisions to a smaller language model and escalate difficult cases to a stronger one. Optional retrieval could supply approved historical evidence using chunking, embeddings, hybrid search and reranking. These components are not implemented yet. Across the system, LLMOps would version releases and track quality, tokens, latency and cost. We will judge every addition by verified feasible performance under the same measurement budget.
+Our agent has four stages: analyze candidates and query ML predictions, choose a structured action, execute it through host guardrails, and record measured evidence. Paid observations feed the next decision. The lower half shows planned extensions. The bounded router currently escalates only after malformed structured output or an explicit host incumbent correction; it does not infer decision difficulty or route by cost. Optional retrieval from approved historical evidence uses local TF-IDF/LSA hybrid search, but pretrained embeddings, general document retrieval, and reranking are not implemented. Across the system, LLMOps would version releases and track quality, tokens, latency and cost. We will judge every addition by verified feasible performance under the same measurement budget.
 
 For Q&A: LangGraph and LangChain could support orchestration and integrations, MCP could expose tools, and Ragas could assess retrieval. These are optional choices, not components we claim to have built. Coding subagents are a separate AI-assisted development workflow.
