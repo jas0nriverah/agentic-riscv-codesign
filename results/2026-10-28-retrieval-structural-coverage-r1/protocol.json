@@ -1,0 +1,53 @@
+{
+  "schema": "isaforge-retrieval-structural-coverage-v1-protocol",
+  "scope": "retrospective consumed-data structural-support diagnostic",
+  "corpus_path": "results/2026-10-26-lift-selection-corpus/corpus.json",
+  "corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "candidate_rows": 122,
+  "target_workload_groups": [
+    "beebs-aha-compress",
+    "beebs-expint",
+    "beebs-jfdctint",
+    "beebs-ndes",
+    "beebs-nettle-md5",
+    "embench-aha-mont64",
+    "embench-crc32",
+    "embench-edn",
+    "embench-nettle-sha256",
+    "embench-slre",
+    "embench-ud",
+    "tacle-bitcount",
+    "tacle-g723-enc",
+    "tacle-lift"
+  ],
+  "target_exclusion": "whole workload_group plus all matching speedup_corpus.family(formula) rows",
+  "query_fields": [
+    "candidate_id",
+    "workload_group",
+    "formula"
+  ],
+  "query_uses_target_outcomes": false,
+  "metric_definition": "unique operator types in union of top-k retrieved formula ASTs intersect target formula operator types, divided by target operator-type count",
+  "top_k": 3,
+  "modes": [
+    "none",
+    "lexical",
+    "semantic",
+    "hybrid",
+    "knowledge_graph"
+  ],
+  "packages": {
+    "numpy": "2.5.4",
+    "scikit-learn": "1.9.1"
+  },
+  "source_bindings": {
+    "scripts/evaluate_retrieval_structure.py": "3fec4befa4edc4c0496833a61900d61066db715d4d7f918ce4c292057c3e0c5e",
+    "isaforge/agent_memory.py": "f23448e868436aadd6c6bd167c1ea661151b7c9cdfc74e11d7e48e17db064546",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f"
+  },
+  "new_labels": 0,
+  "new_native_jobs": 0,
+  "llm_calls": 0,
+  "claims": []
+}

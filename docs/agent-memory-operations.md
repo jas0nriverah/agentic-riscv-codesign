@@ -44,6 +44,19 @@ SQLite is a derived local inspection store. The exporter verifies sealed manifes
 
 The completed engineering check is preserved at [`results/2026-10-28-memory-graph-validation-r1`](../results/2026-10-28-memory-graph-validation-r1/README.md). It ran none/lexical/semantic/hybrid/knowledge_graph modes, each with ten matched archived SHA256 controls and 30 endpoints: 50 trajectories, 150 endpoints, 290 decisions and 232 retrieval events. All controls match; there were zero LLM calls and zero new native jobs. These deterministic policies ignore retrieval, so matching proves noninterference only, not retrieval quality or better selection. The new retrieval mode is not a new speedup/hardware model version.
 
+### Held-out structural support diagnostic
+
+The new [retrieval structural-coverage report](../results/2026-10-28-retrieval-structural-coverage-r1/README.md) queries the existing 122-label / 14-workload corpus with each candidate formula only. Each fold excludes the complete target workload and all matching expression-tree families before indexing. It scores the fraction of target formula operator *types* represented in the top three retrieved formulas; target speedup, area, timing, and correctness labels are not used in scoring. Workload-macro coverage@3 is 0.9301 for the typed knowledge graph, 0.9103 for lexical TF-IDF, 0.9041 for hybrid retrieval, and 0.8765 for TF-IDF/SVD semantic retrieval; no retrieval is 0.0000 by definition. Every retrieval arm returned at least one hit.
+
+This measures **structural support**, not semantic relevance or whether retrieved history helps an LLM choose better hardware. The graph directly ranks by operator overlap, so its higher coverage is not independent evidence of decision value. It adds zero labels, hardware runs, LLM calls, or model fits. Reproduce it with:
+
+```sh
+../work/audit-venv/bin/python scripts/evaluate_retrieval_structure.py \
+  --output results/my-retrieval-structure-check
+```
+
+Choose a fresh output path. The report seals its corpus, source, and split bindings.
+
 ## Inspect actual live-agent evidence
 
 See [the frozen pilot and results](../results/2026-10-28-live-luna-memory/README.md). These contain actual model choices, paid archived measurements, public request snapshots and sealed ledgers. They are not mock responses.

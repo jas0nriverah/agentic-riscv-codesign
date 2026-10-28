@@ -10,6 +10,12 @@ Validation: **122 focused tests pass** across selector, routing, memory, rationa
 
 At pinned upstream commit [`6236e59`](https://github.com/breagen/MachSuite/tree/6236e593012cb86b0d2f08d9fb9ba0411ff989b4), Viterbi's harness actively compares all 140 reference path bytes, despite a conflicting suite-wide README statement that final checks are not performed. Its standard configuration still cannot enter the current PicoRV32 pipeline: arrays occupy 66,328 bytes and the local dynamic-programming table adds 71,680 bytes of stack, before code/runtime, versus 8,192 bytes of total RAM. Its bundled text input is 157,301 bytes and would need to be re-expressed in the fixed input/ROM contract. No workload was modified, no compiler or target job was run, and no labels were created. The commented small dimensions would need a separate context review. See the [source census](training-dataset-census-2026-10-28.md) for exact source links and arithmetic.
 
+## October 28: expanded public-source screen and memory retrieval evaluation
+
+An independent source review added LLVM Richards, jsmn, and heatshrink to the census. Richards is the strongest new lead because it has a deterministic built-in oracle and a small live data structure, but its upstream small mode fails its own reference, while the default needs `malloc` and an unresolved indirect function call that the current CFG extractor rejects. jsmn's stock 128-token stack array exceeds our stack contract; heatshrink's full tests include a 32-KiB VLA and compression-family overlap. No source passed all current gates, and none was built or run on target. The [census](training-dataset-census-2026-10-28.md) records exact pins, licenses, and blockers.
+
+The [held-out retrieval structural-coverage diagnostic](../results/2026-10-28-retrieval-structural-coverage-r1/README.md) reports 0.9301 workload-macro operator-type coverage@3 for the knowledge graph, 0.9103 for lexical TF-IDF, 0.9041 for hybrid, and 0.8765 for TF-IDF/SVD. It excludes each entire workload and all related expression families before indexing, and scores only formula operator types—not outcomes. This shows structural support for the existing retrieval feature; it does not measure relevance or improve LLM decisions. It used the consumed 122-label / 14-group corpus and added no labels, jobs, LLM calls, or model fit. A new prospective controller in [the finite-benefit guard contract](prospective-finite-benefit-guard.md) also stops before a second dispatch if a successful paid outcome contradicts the selector's calibrated-cycle-benefit assumption. Its software tests use synthetic fixtures only; no existing frozen campaign or report was changed.
+
 ## October 28: selector v2 incumbent guard and failure audit
 
 The owner resumed a 10-hour improvement block focused on the bounded LLM selector and evidence-backed ML decisions. Selector protocol v2 exposes the host-computed current best feasible incumbent, rejects finalization of any stale/lower candidate or an unnecessary baseline choice, and returns canonical measured fields separately from the LLM's unverified `agent_summary`. The four-tool allowlist and charged-measurement behavior remain unchanged. The earlier pilot's three rejected no-memory finalizations are a concrete motivation; this implementation does **not** establish that a future LLM run will need fewer turns.
@@ -46,7 +52,14 @@ The owner resumed implementation of useful agent-plan components. Added schema-e
 Validation: 74 focused selector/provider/bridge tests pass. The separate `generated/routing-controls-20261028` CLI replay has 10 trajectories / 30 endpoints, all archived controls exact, zero LLM calls and zero new native jobs. No routed live-model comparison, model fit or candidate label was produced. Routing handles invalid structured output only; uncertainty-based routing, token-aware compression, RAG/frameworks and deployment remain deferred. Current slides retain their presentation snapshot; do not present planned routing quality/cost improvements as measured. Next is a frozen fixed-primary/fixed-strong/routed comparison with matched hardware budgets and separately reported model costs.
 
 
-## October 27 — owner-requested presentation stopping point
+## October 27 — historical presentation stopping point (superseded October 28)
+
+This is a preserved historical checkpoint, not the current instruction. On
+October 27 the owner paused research for presentation preparation. On October 28
+the owner explicitly resumed a 10-hour research and implementation goal focused
+on the bounded agent, measured-outcome ML decisions, and reproducible evidence.
+Follow [the active goal](ACTIVE_GOAL.md) and the October 28 entries above; do not
+use the old stopping-point instructions below to block resumed work.
 
 The owner asked to stop research after one bounded implementation and prepare
 to present. The final change adds archive-only reproduction of the countnegative
@@ -77,10 +90,10 @@ no established overall ML/LLM advantage. Merit leads at budget three. The
 timing constraint is loose in the existing cohort, the uncertainty assumptions
 remain provisional, and final instruction combinations remain unmeasured.
 
-Research is at the requested stop point. Focus next on inserting the AI text,
-confirming the contribution matrix/contact fields, and rehearsing. Resume
-new-workload qualification and the prospective comparison only when the owner
-asks to resume development. The broader research objective remains unachieved.
+At that historical checkpoint, presentation work was the requested next action.
+The broader research objective remained unachieved. This dated record remains
+for provenance; its next-action guidance was superseded by the October 28
+resumption above.
 
 ## October 27 — countnegative rejected at target discovery
 
