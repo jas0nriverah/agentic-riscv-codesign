@@ -24,31 +24,31 @@ Repository method reviews: docs/research-foundation.md; docs/selection-methods-r
 
 ## 3. Timeline and team contributions (20 seconds)
 
-We progressed from CRC32 and aha-mont64 to a multi-workload corpus, followed by budgeted comparisons, explanations, and LLM tools. Codex records approximately thirty hours of turn duration in this chat; that includes tool waits and failures and is not model training time. The team contribution mapping is provisional and needs confirmation.
+We started by collecting real benchmark traces and synthesizing isolated circuits for a hardware-cost model. Next we connected candidates to whole-program execution on PicoRV32, expanded the dataset, and tested selection policies. Two project chats record about forty-six hours of turn duration, including waits and interruptions, not training time. Team roles are provisional and need confirmation.
 
 ### Sources / Q&A
 
-Dated results directories October19–27; git history; docs/original-project-proposal.txt; supplied AgenticRiscPredictor.pdf. Codex thread history snapshot through October 27: 90 turns with duration total 29.94 hours, including 84 completed, 4 failed and 2 interrupted; tool waiting is included. 48 directly spawned subagent threads; counts are activity, not research outcomes. See codex-history-and-baseline.md. Team must confirm roles and aliases; Git alone cannot measure contribution shares.
+Dated results directories October19–27; git history; docs/original-project-proposal.txt; supplied AgenticRiscPredictor.pdf. Codex history snapshot: two project chats record 15.82 and 29.97 hours of ended turn duration, approximately 45.8 hours combined, including tool waits and interruptions. The earlier 15.82 hours includes 4.51 hours across two interrupted turns. 72 distinct directly spawned subagent threads; activity is not training time or a research outcome. See codex-history-and-baseline.md. Team must confirm roles and aliases; Git alone cannot measure contribution shares.
 
 ## 4. From workload to verified improvement (35 seconds)
 
-First we compile and run the unmodified benchmark on the unmodified PicoRV32 and check its output. In the original CRC32 experiment, that reference took 32.39 million simulated cycles. The best candidate took 30.82 million: a 1.051 times common-clock speedup. We extract legal dataflow, lower the candidate to a custom opcode, and rerun the same benchmark. Integrated synthesis and routing measure area and timing. These are simulation and FPGA tool results, not physical-chip stopwatch measurements.
+We wrote scripts that compile and profile workloads, extract legal candidates, and lower them to custom instructions. The evaluator executes each modified program with Verilator and checks correctness; Yosys and nextpnr measure integrated area and timing. The unmodified CRC32 reference took 32.39 million simulated cycles. The best candidate took 30.82 million, a 1.051 times common-clock speedup. These are simulation and FPGA tool results, not physical-chip stopwatch measurements.
 
 ### Sources / Q&A
 
-docs/codesign-loop.md; results/2026-10-19-codesign/independent-audit.json. Embench CRC32,170 benchmark repetitions; startup, independent checksum, warm-up and serial reporting excluded from counter window. Same RV32I PicoRV32, 8KiB RAM and 12MHz target. Baseline 32,387,382 cycles,1653 LUT4; index_offset 30,820,662 cycles,1684 LUT4 (+31), 1.050833x. Both correctness checked; same-clock speedup, not measured board runtime. Baseline synth/routing Fmax 68.49–77.16 MHz. Distinguish this unmodified reference from heuristic selection baselines.
+src/candidates.py extracts legal candidates; isaforge/workload_experiment.py orchestrates workload preparation and collection; isaforge/codesign.py implements ProcessorEvaluator; Verilator simulates, Yosys synthesizes, nextpnr routes. docs/codesign-loop.md; results/2026-10-19-codesign/independent-audit.json. Embench CRC32,170 benchmark repetitions; startup, independent checksum, warm-up and serial reporting excluded from counter window. Same RV32I PicoRV32, 8KiB RAM and 12MHz target. Baseline 32,387,382 cycles,1653 LUT4; index_offset 30,820,662 cycles,1684 LUT4 (+31), 1.050833x. Both correctness checked; same-clock speedup, not measured board runtime. Baseline synth/routing Fmax 68.49–77.16 MHz. Distinguish this unmodified reference from heuristic selection baselines.
 
 ## 5. Dataset: measured programs, not synthetic labels (40 seconds)
 
-Our frozen corpus contains 122 successful candidate-program measurements from fourteen workload groups, plus four charged failures. These come from three benchmark suites. We tested thirteen selection policies in the final screen: eight learned policies and five heuristics or random controls. Their 2,925 replay results reuse the same hardware measurements; they are not new hardware runs. We evaluate by holding out entire workloads. Three later Ascon measurements remain separate.
+Our first dataset used eight Embench programs and 301 synthesized isolated circuits to train a LUT-cost model. That is separate from the current whole-program dataset of 122 measured candidate-program results across fourteen workload groups, plus four charged failures. The chart shows the three suites in that current corpus. We hold out entire workloads. Our thirteen-policy screen includes 2,925 replays of existing measurements, not new hardware runs.
 
 ### Sources / Q&A
 
-Dataset: submissions/midterm-2026-10-28/dataset/; results/2026-10-27-final-selection-scorecard/scorecard.json. 15 build/input contexts;12 complete measured-pool oracles,2 censored. Embench39 labels/6 groups; BEEBS48/5; TACLeBench35/3. Original teammate hardware-branch data uses a distinct context and is not silently merged.
+Earlier area dataset: results/2026-10-13/README.md: 339 candidate examples, 301 distinct synthesized formulas from eight Embench programs; isolated LUT4 labels, not processor cycles; grouped held-out XGBoost MAE 33.08 versus 77.32 LUT4 mean baseline. Current dataset: submissions/midterm-2026-10-28/dataset/; results/2026-10-27-final-selection-scorecard/scorecard.json. 15 build/input contexts;12 complete measured-pool oracles,2 censored. Embench39 labels/6 groups; BEEBS48/5; TACLeBench35/3. Original teammate hardware-branch data uses a distinct context and is not silently merged.
 
 ## 6. The ML model: shallow boosted-tree ranking (40 seconds)
 
-Our main challenger is XGBoost pairwise ranking, not a neural network. Thirty-five premeasurement features describe each candidate. Pairs are ordered using measured speedup within a workload context. Eighty shallow trees produce a relative ranking score, not a predicted speedup or confidence probability. We also tested XGBoost regression and feasibility models, logistic regression, random forests, Extra Trees, and Gaussian-process active learning. We assess them on selection, not just prediction error.
+Our main challenger is XGBoost pairwise ranking, not a neural network. Thirty-five premeasurement features describe each candidate. We use measured speedup to order pairs within a workload, then fit eighty shallow trees. The output is a relative ranking, not a speedup or confidence probability. We tried eight learned policies in the final screen and five controls. Separate experiments tested Gaussian-process active learning. We assess selection quality, not just prediction error.
 
 ### Sources / Q&A
 

@@ -10,6 +10,12 @@ The same snapshot contains **48 directly spawned subagent threads**, 4,707 comma
 
 Recorded turn duration by local start date: October 19 1.76 h, 20 3.73 h, 21 4.97 h, 22 3.29 h, 25 2.61 h, 26 6.21 h, and 27 7.38 h. These are rounded daily totals and can include failed/interrupted turns. The chat's active span is longer than 29.94 hours and is not itself evidence of continuous activity.
 
+## Earlier project chat: October 13–19
+
+The earlier project chat, **Advance RISC-V instruction selection**, records 32 ended turns totaling **15.82 hours** (11.31 hours completed and 4.51 hours across two interrupted turns) and 24 directly spawned subagent threads. Together with the later chat snapshot above, that is approximately **45.8 hours of recorded turn duration** and **72 distinct directly spawned subagent threads**. This is a sum of the two parent chats only, with their dates not overlapping; it includes waits and interruptions and does not sum concurrent subagent time. It is not GPU time, model-training time, total person-hours or a measure of scientific success. Other unrelated chats were excluded.
+
+The early conversation records the progression from Spike tracing and candidate extraction to real Embench traces, isolated circuit verification and synthesis, XGBoost area prediction, and later model experiments. The contemporaneous [October 13 pilot](../../results/2026-10-13/README.md) records 339 candidate examples, 301 distinct synthesized circuits and 338,324 RTL checks. These are historical **isolated LUT-cost** observations; they are not the later whole-program speedup labels and are not additional independent rows in the 122-label selection corpus. See [how we built ISAForge](how-we-built-isaforge.md) for the script-by-script sequence.
+
 ## Datasets and selection methods
 
 The frozen selection corpus contains 122 successful measured candidate/program rows, four charged failures, 14 workload groups and 15 contexts: Embench 39 labels across six groups; BEEBS 48 across five; TACLeBench 35 across three. Three later Ascon labels are separate. Rows are not independent programs; failed attempts do not receive invented outcomes. See [dataset README](dataset/README.md).
@@ -26,4 +32,4 @@ A **selection baseline** is different: frequency orders candidates by occurrence
 
 ## Reproducibility and limits
 
-The activity totals were queried read-only from `~/.codex/thread_history_1.sqlite` (`thread_turns` and `thread_items`) and `~/.codex/state_5.sqlite` (`thread_spawn_edges`), using the project chat ID and excluding the in-progress turn. No content from unrelated chats was needed. These databases are local Codex implementation records and may change as the session continues. For independent reproduction of numerical experimental results, use the repository's saved artifacts rather than the activity counts.
+The activity totals were queried read-only from `~/.codex/thread_history_1.sqlite` (`thread_turns` and `thread_items`) and `~/.codex/state_5.sqlite` (`thread_spawn_edges`), using the project chat ID and excluding the in-progress turn. The earlier project chat was also inspected using Codex thread history and the app thread reader; no unrelated chat contents were needed. These databases are local Codex implementation records and may change as the session continues. For independent reproduction of numerical experimental results, use the repository's saved artifacts rather than the activity counts.
