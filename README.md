@@ -2,6 +2,8 @@
 
 **An AI-guided RISC-V program optimization system that selects custom instructions using learned performance predictions and bounded hardware measurements.**
 
+**October 28 agent engineering:** bounded schema-recovery LLM routing and per-call usage/latency traces now work in offline tests. Primary and escalation models share one call allowance; hardware budgets remain host-owned. No live routed-model comparison or performance gain is claimed. See [the implementation evaluation](docs/agent-routing-implementation.md).
+
 **Working research prototype:** fourteen real workload groups (six Embench, five BEEBS and three TACLeBench), **122 verified candidate speedup labels across 15 contexts**, and **126 charged candidate attempts**, including four preserved failures. Original CRC32, aha-mont64, and every historical experiment remain intact.
 
 **October 27 current-chat selector pilot:** the active Codex chat model used the bounded four-tool bridge on a consumed EDN pool. It reached the measured-pool oracle (1.000432×, +32 LUT4, 71.12 MHz, correctness passed) with one valid measurement, but a malformed ID consumed a second charged attempt. Frequency, merit, pairwise XGBoost, and GP controls also reach the oracle at that two-attempt budget; this is not an LLM win or a new hardware job. The exact protocol and limitations are in [the pilot record](docs/codex-chat-selector-pilot.md). The [midterm submission bundle](submissions/midterm-2026-10-28/README.md) contains the report, slides, and dataset export.

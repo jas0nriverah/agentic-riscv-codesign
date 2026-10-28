@@ -196,3 +196,27 @@ def test_existing_ledger_not_overwritten(tmp_path, inputs):
 def test_invalid_prediction_spread_rejected(tmp_path, inputs, value):
     inputs[2]['hardware'][0]['area_delta_lut4_std'] = value
     with pytest.raises(ValueError): session(tmp_path, inputs)
+
+
+def test_routed_errors_spend_model_calls_not_hardware_attempts(tmp_path, inputs):
+    from isaforge.selection_provider import ResponsesSelectionProvider
+    from isaforge.routed_selection import RoutedSelectionProvider, summarize_model_events
+    def transport(payload, *args):
+        name = 'shell' if payload['model'] == 'small' else 'measure'
+        return dict(status='completed', output=[dict(type='function_call', name=name,
+            arguments=json.dumps({'candidate_id': 't1'}))],
+            usage=dict(input_tokens=10, output_tokens=4, total_tokens=14))
+    small = ResponsesSelectionProvider('small', api_key='test', transport=transport)
+    large = ResponsesSelectionProvider('large', api_key='test', transport=transport)
+    policy = RoutedSelectionProvider(small, large, max_calls=2)
+    result = run_selector(session(tmp_path, inputs), policy)
+    assert policy.calls == 2
+    assert result['charged_attempts'] == 1
+    assert result['selected_id'] == 't1'
+    assert result['status'] == 'model_error'  # Shared LLM budget exhausted, incumbent retained.
+    accounting = summarize_model_events(result['model_events'])
+    assert accounting['dispatched_calls'] == 2
+    assert accounting['observed_tokens']['total_tokens'] == 28
+    assert accounting['escalation_calls'] == 1 and accounting['usage_complete']
+    saved = c.unseal(tmp_path/'ledger.json')
+    assert saved['model_events'][0]['provider_trace'][1]['identity']['model'] == 'large'

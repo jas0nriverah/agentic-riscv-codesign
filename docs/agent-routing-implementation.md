@@ -1,0 +1,65 @@
+# Bounded agent implementation and evaluation
+
+October 28, 2026. The owner resumed bounded engineering after presentation preparation. Existing measurements, trained models and hardware campaigns remain unchanged.
+
+## What makes sense for ISAForge
+
+The scientific question is whether intelligent selection finds better verified feasible designs with fewer costly measurements. Existing numerical models and hardware guards already supply the key tools. Adding retrieval frameworks or more predictors would not resolve the missing matched agent comparison.
+
+| Plan component | Decision and reason |
+| --- | --- |
+| Structured tools, host guardrails and memory | Reuse the four-tool controller and paid-outcome ledger. Never move acceptance or attempt accounting into an LLM. |
+| Dynamic model use | Implement one narrow, testable policy: primary model first, one escalation on malformed structured output. This tests recovery, not calibrated decision difficulty. |
+| Observability and versioning | Implement separate per-provider traces and model/prompt/tool identities. Preserve source-bound protocol, explicit model IDs and archived-input hashes. |
+| Context management | Retain existing stateless public JSON and request-byte limit. Reject oversized input rather than silently discard evidence. Token-aware summaries are deferred. |
+| Tokens and cost | Retain observed input/output/total tokens with missing-usage indicators. Per-call output cap remains 512 in the runner. No aggregate input-token or dollar ceiling is claimed; dollar cost stays null without explicit pricing. |
+| Uncertainty-based escalation | Defer until a public-state trigger is frozen and validated. Existing uncertainty is not calibrated and LLM self-confidence is not a substitute. |
+| RAG, embeddings, vector database, hybrid search and reranking | Defer. Current candidates and measurements are structured records. Retrieval introduces leakage risk and needs an actual missing-information use case. |
+| LangGraph / LangChain / MCP | Defer. The existing controller already owns state and tools. No demonstrated need for framework migration. |
+| Ragas | Defer. Direct selection and tool-validity metrics are available; retrieval-quality metrics do not measure processor improvement. |
+| Deployment | Defer until fixed-model and routed policies have a useful matched comparison. Keep the local research entry point. |
+
+## Implemented behavior
+
+`RoutedSelectionProvider` wraps the existing Responses provider. Both model roles get the same public-state snapshot and tool schema. A successfully parsed legal action returns directly to the host. Only `InvalidActionError` permits one stronger-model call. Network errors, incomplete responses, byte limits and other provider failures stop without escalation. Unknown candidate IDs and repeated measurements still reach the host's existing charging checks; routing does not erase submitted mistakes.
+
+All primary and escalation invocations reserve from one shared allowance. An escalation never dispatches hardware. The host still owns each charged measurement and final acceptance. Exhaustion retains the paid feasible incumbent or baseline. The existing host reports this provider-budget exhaustion as `model_error`; per-call traces disambiguate the exhausted allowance from completed calls.
+
+Each decision records provider role, model identity, request hash, latency, status, usage and whether a provider call was charged. Report accounting distinguishes reserved invocations from dispatched calls and decision iterations. Missing usage is explicit; observed token totals are lower bounds when usage is missing. No token count is inferred from characters. Traces are private evaluation data, never added to model input. On normal return, exceptions or catchable interruption the host persists the trace. Abrupt process death during an inner provider call can leave only the host's pending outer event; resume/retry is not implemented. The network timeout is not a strict process wall-time limit.
+
+## Working commands
+
+Use Python 3.12 with the pinned project environment. This command is offline and includes an actual archived SHA256 ten-policy comparison against the preserved control trajectories:
+
+```sh
+../work/audit-venv/bin/python -m pytest \
+  tests/test_routed_selection.py tests/test_selection_provider.py \
+  tests/test_bounded_selector.py tests/test_run_bounded_selector.py \
+  tests/test_codex_chat_selector.py -q
+```
+
+For an offline controls report, choose a fresh output directory:
+
+```sh
+../work/audit-venv/bin/python scripts/run_bounded_selector.py \
+  --provider controls --target sha256 --seed 0 --cap 64 --budget 3 \
+  --output generated/routing-controls-20261028
+```
+
+After explicitly selecting available model IDs and setting `OPENAI_API_KEY`, the remote replay command is:
+
+```sh
+../work/audit-venv/bin/python scripts/run_bounded_selector.py \
+  --provider responses --model "$PRIMARY_MODEL" \
+  --escalation-model "$ESCALATION_MODEL" --max-model-calls 12 \
+  --target sha256 --seed 0 --cap 64 --budget 3 \
+  --output generated/routed-selector-first-run
+```
+
+The latter is a paid LLM call against consumed archived hardware outcomes, not a fresh hardware experiment. It was not executed for this implementation. Omit `--escalation-model` for a fixed-model control using the same trace accounting. The CLI uses explicit model choices, never saved Codex credentials or an inferred model tier.
+
+## Validation and next experiment
+
+The final focused suite passed 74 tests. A separate CLI run produced 10 archived SHA256 control trajectories and 30 endpoints, all matching the preserved controls, with zero LLM calls and zero native jobs. Coverage includes: valid primary only; identical public input on escalation; two-call cap; no retry on transport failure; invalid secondary termination; missing usage; stale metadata rejection; persisted traces; and one hardware attempt despite two model calls. Archived ten-policy SHA256 controls match their original trajectories and costs. These are software validation results, not LLM-quality results. No new native jobs, candidate labels or model fits were performed.
+
+Next freeze three policies: fixed primary, fixed stronger model, and schema-recovery routing. Give each the same target pool, historical data, prediction tools, area/timing limits and hardware allowance; separately report model calls/tokens/time. Include merit, calibrated latency/cost, random and non-agent active learning. Count all failed episodes, report best feasible performance and regret only where the oracle is complete, and account for historical measurement cost. Use consumed pools only for engineering; a subsequent unseen-workload test is required for generalization. Schema recovery may save failed decisions, but may also add cost without changing final performance. Preserve either result.

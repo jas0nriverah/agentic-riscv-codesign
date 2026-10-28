@@ -1,3 +1,5 @@
+**October 28 implementation update:** the presentation below preserves its October 27 snapshot. A limited schema-error router and per-call accounting now have offline software tests; broader uncertainty-based routing, RAG and production operations remain planned. See [implementation status](../../docs/agent-routing-implementation.md).
+
 # ISAForge agent architecture: current system and proposed extensions
 
 **Status: presentation design and research plan.** Dynamic LLM routing, RAG, a vector database, LangGraph/LangChain, MCP, Ragas, and production monitoring have not been implemented or evaluated for the selector. A historical rule-based router between LUT-cost predictors is a different experiment. Do not present the proposed boxes as completed work.

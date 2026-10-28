@@ -51,6 +51,10 @@ class ProviderError(RuntimeError):
     """Bound exceeded, unavailable service, or invalid model action."""
 
 
+class InvalidActionError(ProviderError):
+    """Completed response has no usable allowlisted structured action."""
+
+
 def _http_post(payload, api_key, timeout):
     request = urllib.request.Request(
         ENDPOINT, data=json.dumps(payload, allow_nan=False).encode(), method='POST',
@@ -148,19 +152,19 @@ class ResponsesSelectionProvider:
             raise ProviderError('invalid Responses output')
         if any(not isinstance(item, dict) or item.get('type') not in
                ('reasoning', 'function_call') for item in output):
-            raise ProviderError('unexpected model output type')
+            raise InvalidActionError('unexpected model output type')
         calls = [item for item in output if isinstance(item, dict)
                  and item.get('type') == 'function_call']
         if len(calls) != 1:
-            raise ProviderError('expected exactly one function call')
+            raise InvalidActionError('expected exactly one function call')
         call = calls[0]
         name = call.get('name')
         try:
             arguments = json.loads(call.get('arguments', ''))
         except (ValueError, TypeError):
-            raise ProviderError('invalid function arguments') from None
+            raise InvalidActionError('invalid function arguments') from None
         if not _valid_action(name, arguments):
-            raise ProviderError('model action violates four-tool schema')
+            raise InvalidActionError('model action violates four-tool schema')
         return dict(tool=name, arguments=arguments)
 
 

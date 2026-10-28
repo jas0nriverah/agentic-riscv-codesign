@@ -1,5 +1,12 @@
 # Current handoff — model evidence after Lift selection
 
+## October 28: bounded agent routing engineering
+
+The owner resumed implementation of useful agent-plan components. Added schema-error-only primary/escalation routing, a shared reserved-call allowance, per-call identity/request-hash/usage/latency traces, and separate dispatched-call accounting in the remote replay CLI. Host-owned hardware charging, hidden-outcome boundaries and incumbent fallback remain intact. See [implementation analysis and commands](agent-routing-implementation.md).
+
+Validation: 74 focused selector/provider/bridge tests pass. The separate `generated/routing-controls-20261028` CLI replay has 10 trajectories / 30 endpoints, all archived controls exact, zero LLM calls and zero new native jobs. No routed live-model comparison, model fit or candidate label was produced. Routing handles invalid structured output only; uncertainty-based routing, token-aware compression, RAG/frameworks and deployment remain deferred. Current slides retain their presentation snapshot; do not present planned routing quality/cost improvements as measured. Next is a frozen fixed-primary/fixed-strong/routed comparison with matched hardware budgets and separately reported model costs.
+
+
 ## October 27 — owner-requested presentation stopping point
 
 The owner asked to stop research after one bounded implementation and prepare

@@ -390,6 +390,9 @@ def run_selector(session, policy, *, max_model_calls=12):
             if not isinstance(exc, Exception):
                 raise
             break
+        finally:
+            event['provider_trace'] = copy.deepcopy(getattr(policy, 'last_trace', []))
+            session._persist()
         try:
             session.call(action)
         except Exception as exc:

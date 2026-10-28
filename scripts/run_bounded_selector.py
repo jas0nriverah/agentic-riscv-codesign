@@ -22,12 +22,13 @@ from isaforge import codesign as c
 from isaforge.bounded_selector import (PROMPT, MatchedBaselinePolicy,
                                       ReplaySelectionSession, run_selector)
 from isaforge.selection_provider import ResponsesSelectionProvider, tool_definitions
+from isaforge.routed_selection import RoutedSelectionProvider, summarize_model_events
 
 TARGETS = dict(edn='results/2026-10-20-budget-campaign/selection/embench-edn',
                ud='results/2026-10-20-budget-campaign/selection/embench-ud',
                sha256='results/2026-10-21-sha256-selection/model')
 SOURCES = ('scripts/run_bounded_selector.py', 'isaforge/bounded_selector.py',
-           'isaforge/selection_provider.py', 'isaforge/budgeted_selection.py')
+           'isaforge/selection_provider.py', 'isaforge/routed_selection.py', 'isaforge/budgeted_selection.py')
 
 
 def complete_frontier(result, budget):
@@ -89,12 +90,14 @@ def load_case(folder):
 
 
 def run(output, *, provider='controls', model=None, targets=None,
-        seeds=None, caps=None, budget=3, max_model_calls=12):
+        seeds=None, caps=None, budget=3, max_model_calls=12, escalation_model=None):
     run_started = time.monotonic()
     c.require(provider in ('controls', 'responses'), 'Unknown provider')
     if provider == 'responses':
         c.require(model and os.environ.get('OPENAI_API_KEY'),
                   'Live run requires explicit --model and OPENAI_API_KEY; no model call was made.')
+    c.require(escalation_model is None or provider == 'responses', 'Routing requires responses provider')
+    c.require(type(max_model_calls) is int and 0 < max_model_calls <= 100, 'Invalid model limit')
     output = Path(output).resolve()
     c.require(not output.exists(), 'Use a fresh output directory')
     target_names = list(TARGETS) if targets is None else list(targets)
@@ -111,7 +114,8 @@ def run(output, *, provider='controls', model=None, targets=None,
     policies = list(b.POLICIES) if provider == 'controls' else ['llm_selector']
     protocol = dict(schema='isaforge-bounded-selector-development-v1',
         scope='Consumed-data engineering replay; not prospective source generalization.',
-        provider=provider, model=model, policies=policies, targets=target_names,
+        provider=provider, model=model, escalation_model=escalation_model,
+        routing_rule="one schema-error escalation; shared model-call budget", policies=policies, targets=target_names,
         seeds=selected_seeds, area_caps=selected_caps, budget=budget, clock_mhz=12,
         max_model_calls=max_model_calls, max_tool_calls=20,
         max_output_tokens_per_call=512 if provider == 'responses' else None,
@@ -147,6 +151,10 @@ def run(output, *, provider='controls', model=None, targets=None,
                         historical_attempt_seconds=case['historical_seconds'])
                     policy = (MatchedBaselinePolicy(policy_name) if provider == 'controls' else
                               ResponsesSelectionProvider(model, max_calls=max_model_calls, max_output_tokens=512))
+                    if provider == 'responses':
+                        secondary = (ResponsesSelectionProvider(escalation_model, max_calls=max_model_calls,
+                                     max_output_tokens=512) if escalation_model else None)
+                        policy = RoutedSelectionProvider(policy, secondary, max_calls=max_model_calls)
                     result = run_selector(session, policy, max_model_calls=max_model_calls)
                     # Only the privileged scorer uses oracle values, after policy execution.
                     for point in complete_frontier(result, budget):
@@ -174,7 +182,9 @@ def run(output, *, provider='controls', model=None, targets=None,
                         finalized_regret_to_verified_reference=reference-result['best_speedup'],
                         original_trajectory_matches=matched, ledger=str(ledger.relative_to(output)),
                         ledger_sha256=c.sha(ledger), decision_calls=result['model_calls'],
-                        llm_calls=policy.calls if provider == 'responses' else 0,
+                        llm_calls=summarize_model_events(result['model_events'])['dispatched_calls'],
+                        reserved_model_calls=policy.calls if provider == 'responses' else 0,
+                        model_accounting=summarize_model_events(result['model_events']),
                         replayed_target_seconds=result['replayed_target_measurement_seconds'],
                         historical_attempt_seconds=case['historical_seconds'],
                         new_native_jobs=0))
@@ -216,13 +226,16 @@ def main(argv=None):
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--provider', choices=('controls', 'responses'), default='controls')
     parser.add_argument('--model')
+    parser.add_argument('--escalation-model')
+    parser.add_argument('--max-model-calls', type=int, default=12)
     parser.add_argument('--target', choices=tuple(TARGETS), action='append')
     parser.add_argument('--seed', type=int, action='append')
     parser.add_argument('--cap', type=int, action='append')
     parser.add_argument('--budget', type=int, default=3)
     args = parser.parse_args(argv)
     result = run(args.output, provider=args.provider, model=args.model,
-                 targets=args.target, seeds=args.seed, caps=args.cap, budget=args.budget)
+                 targets=args.target, seeds=args.seed, caps=args.cap, budget=args.budget,
+                 escalation_model=args.escalation_model, max_model_calls=args.max_model_calls)
     print({key:result[key] for key in ('trajectories', 'endpoints', 'all_controls_match', 'llm_calls', 'new_native_jobs')})
 
 

@@ -141,3 +141,7 @@ attempts, then freeze a justified protocol before fresh source/input evidence.
 Native guarded dispatch and jointly verified final instruction sets remain
 necessary for the complete optimizer. This milestone adds no labels, formal
 calibration, broad generalization or learned/agent superiority claim.
+
+## October 28 bounded routing extension
+
+The remote replay CLI now supports `--escalation-model` and `--max-model-calls`. See [the implementation and evaluation plan](agent-routing-implementation.md). This is schema-recovery routing with offline tests, not uncertainty-based routing or evidence of an LLM advantage.
