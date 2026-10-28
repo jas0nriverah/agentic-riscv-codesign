@@ -29,6 +29,11 @@ class RoutedSelectionProvider:
         self.review_utility_overrides = review_utility_overrides
         self.escalation_used = False
         self.last_usage, self.last_trace = {}, []
+        self.last_action_context = None
+        self.last_action_role = None
+        self.last_action_provider_call = None
+        self.last_action_trigger = None
+        self.last_action_request_sha256 = None
         self.identity = dict(provider='bounded-recovery-router-v3', max_calls=max_calls,
             primary=copy.deepcopy(primary.identity),
             escalation=copy.deepcopy(escalation.identity) if escalation else None,
@@ -92,17 +97,30 @@ class RoutedSelectionProvider:
         if (self.calls >= self.max_calls or
                 self.calls-action_start >= action_budget):
             raise ProviderBudgetError('shared provider call budget exhausted')
+        available = min(self.max_calls-self.calls,
+                        action_budget-(self.calls-action_start))
         if role == 'escalation':
             self.escalation_used = True
         self.calls += 1  # Reserve even a failed provider invocation.
         event = dict(call=self.calls, role=role, identity=copy.deepcopy(provider.identity),
                      trigger=trigger, status='pending', usage={})
         self.last_trace.append(event)
+        dispatch_request = copy.deepcopy(request)
+        if isinstance(dispatch_request, dict) and isinstance(dispatch_request.get('remaining'), dict):
+            dispatch_request['remaining']['provider_calls_available_including_this_response'] = max(
+                0, available)
+        request_json = json.dumps(dispatch_request, sort_keys=True, allow_nan=False)
+        request_sha256 = hashlib.sha256(request_json.encode()).hexdigest()
         before = provider.calls
         start = time.monotonic()
         try:
-            action = provider.choose(copy.deepcopy(request))
+            action = provider.choose(dispatch_request)
             event['status'] = 'complete'
+            self.last_action_context = copy.deepcopy(dispatch_request)
+            self.last_action_role = role
+            self.last_action_provider_call = self.calls
+            self.last_action_trigger = trigger
+            self.last_action_request_sha256 = request_sha256
             return action
         except InvalidActionError:
             event['status'] = 'invalid_action'
@@ -138,9 +156,25 @@ class RoutedSelectionProvider:
             reviewed_action = self._dispatch('escalation', self.escalation,
                 'utility_override_review', review_request,
                 action_start=action_start, action_budget=action_budget)
-            self.last_trace[-1]['reviewed_primary_action'] = copy.deepcopy(primary_action)
-            self.last_trace[-1]['reviewed_utility_recommendation_candidate_id'] = (
+            review_event = self.last_trace[-1]
+            review_event['reviewed_primary_action'] = copy.deepcopy(primary_action)
+            review_event['reviewed_action'] = copy.deepcopy(reviewed_action)
+            review_event['review_action_changed'] = reviewed_action != primary_action
+            review_event['reviewed_utility_recommendation_candidate_id'] = (
                 review['utility_recommendation_candidate_id'])
+            primary_arguments = primary_action.get('arguments')
+            reviewed_arguments = (reviewed_action.get('arguments')
+                                  if isinstance(reviewed_action, dict) else None)
+            primary_candidate = (primary_arguments.get('candidate_id')
+                if primary_action.get('tool') == 'measure' and
+                isinstance(primary_arguments, dict) else None)
+            reviewed_candidate = (reviewed_arguments.get('candidate_id')
+                if isinstance(reviewed_action, dict) and
+                reviewed_action.get('tool') == 'measure' and
+                isinstance(reviewed_arguments, dict) else None)
+            review_event['review_candidate_changed'] = (
+                primary_candidate != reviewed_candidate
+                if primary_candidate is not None and reviewed_candidate is not None else None)
             return reviewed_action
         except (InvalidActionError, ProviderError) as error:
             # The primary action is already schema-valid. A failed review must
@@ -152,6 +186,11 @@ class RoutedSelectionProvider:
 
     def choose(self, request):
         self.last_usage, self.last_trace = {}, []
+        self.last_action_context = None
+        self.last_action_role = None
+        self.last_action_provider_call = None
+        self.last_action_trigger = None
+        self.last_action_request_sha256 = None
         # Snapshot once: an adapter cannot mutate the state seen by the next role.
         public = copy.deepcopy(request)
         remaining = public.get('remaining', {}) if isinstance(public, dict) else {}
@@ -186,9 +225,24 @@ def summarize_model_events(events):
         if call['role'] == 'escalation':
             trigger = call.get('trigger', 'unspecified')
             escalation_triggers[trigger] = escalation_triggers.get(trigger, 0) + 1
+    review_calls = [call for call in trace
+                    if call.get('trigger') == 'utility_override_review']
+    review_requests = [call for call in trace
+                       if isinstance(call.get('utility_override_review'), dict)]
+    review_skipped = sum('utility_override_review_skipped' in call for call in trace)
     return dict(reserved_calls=len(trace), dispatched_calls=len(charged),
         escalation_calls=sum(call['role'] == 'escalation' for call in charged),
         escalation_triggers=escalation_triggers,
+        utility_override_requests=len(review_requests),
+        utility_override_reviews=len(review_calls),
+        utility_override_reviews_completed=sum(call.get('status') == 'complete'
+                                               for call in review_calls),
+        utility_override_actions_changed=sum(call.get('review_action_changed') is True
+                                             for call in review_calls),
+        utility_override_candidates_changed=sum(call.get('review_candidate_changed') is True
+                                                for call in review_calls),
+        utility_override_review_fallbacks=sum('review_fallback' in call for call in review_calls),
+        utility_override_review_skipped=review_skipped,
         usage_complete=all(call['usage_complete'] for call in charged),
         calls_missing_usage=sum(not call['usage_complete'] for call in charged),
         observed_tokens={key: sum(call['usage'].get(key, 0) for call in charged)

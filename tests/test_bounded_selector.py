@@ -372,9 +372,13 @@ def test_routed_errors_spend_model_calls_not_hardware_attempts(tmp_path, inputs)
     assert saved['model_events'][0]['provider_trace'][1]['identity']['model'] == 'large'
 
 
-def test_utility_override_review_completes_before_charging_measurement(tmp_path, inputs):
-    from isaforge.selection_provider import ResponsesSelectionProvider
+@pytest.mark.parametrize('provider_allowance', [4, 5])
+@pytest.mark.parametrize('review_result', ['accept', 'provider_error', 'invalid_action'])
+def test_utility_override_review_completes_before_charging_measurement(
+        tmp_path, inputs, provider_allowance, review_result):
+    from isaforge.selection_provider import ResponsesSelectionProvider, ProviderError
     from isaforge.routed_selection import RoutedSelectionProvider
+    from isaforge.agent_memory import MemoryAugmentedPolicy
     seen = []
     charged_during_calls = []
     session_holder = {}
@@ -384,8 +388,12 @@ def test_utility_override_review_completes_before_charging_measurement(tmp_path,
         charged_during_calls.append(session_holder['session'].charged)
         seen.append((payload['model'], request))
         if 'routing_review' in request:
+            if review_result == 'provider_error':
+                raise ProviderError('offline review failure')
             name, arguments = 'measure', dict(candidate_id='t1',
                 decision_summary='Review supports the displayed utility recommendation.')
+            if review_result == 'invalid_action':
+                name = 'shell'
         elif payload['model'] == 'small' and not request['messages']:
             name, arguments = 'list_candidates', {}
         elif payload['model'] == 'small' and request['messages'][-1]['tool'] == 'list_candidates':
@@ -401,20 +409,25 @@ def test_utility_override_review_completes_before_charging_measurement(tmp_path,
             arguments=json.dumps(arguments))],
             usage=dict(input_tokens=10, output_tokens=4, total_tokens=14))
 
-    policy = RoutedSelectionProvider(
+    router = RoutedSelectionProvider(
         ResponsesSelectionProvider('small', api_key='test', transport=transport),
         ResponsesSelectionProvider('large', api_key='test', transport=transport),
-        max_calls=5, review_utility_overrides=True)
+        max_calls=provider_allowance, review_utility_overrides=True)
+    policy = MemoryAugmentedPolicy(router, mode='hybrid')
     test_session = grouped_session(tmp_path, inputs)
     session_holder['session'] = test_session
 
     result = run_selector(test_session, policy, max_model_calls=5)
 
-    assert result['status'] == 'finalized'
-    assert result['selected_id'] == 't1'
+    assert result['status'] == ('finalized' if provider_allowance == 5 else 'host_fallback')
+    if provider_allowance == 4:
+        assert result['fallback_reason'] == 'provider_call_limit'
+        assert result['decision_rationale']['summary'] is None
+    assert result['selected_id'] == ('t1' if review_result == 'accept' else 't3')
     assert result['charged_attempts'] == 1
-    assert [model for model, _ in seen] == ['small', 'small', 'small', 'large', 'small']
-    assert charged_during_calls == [0, 0, 0, 0, 1]
+    assert [model for model, _ in seen] == (
+        ['small', 'small', 'small', 'large'] + ['small'] * (provider_allowance-4))
+    assert charged_during_calls == [0, 0, 0, 0] + [1] * (provider_allowance-4)
     review = seen[3][1]['routing_review']
     assert review['primary_action']['arguments']['candidate_id'] == 't3'
     event = next(event for event in test_session.ledger['model_events']
@@ -423,10 +436,96 @@ def test_utility_override_review_completes_before_charging_measurement(tmp_path,
     assert [call['trigger'] for call in event['provider_trace']] == [
         'primary', 'utility_override_review']
     assert event['provider_trace'][0]['primary_action']['arguments']['candidate_id'] == 't3'
+    assert 'routing_review' not in event['public_context']
+    accepted_call = 4 if review_result == 'accept' else 3
+    accepted_role = 'escalation' if review_result == 'accept' else 'primary'
+    accepted_trigger = 'utility_override_review' if review_result == 'accept' else 'primary'
+    assert event['action_context'] == seen[accepted_call-1][1]
+    assert event['action_context_sha256'] == c.digest(event['action_context'])
+    assert event['provider_action_context_sha256'] == event['action_context_sha256']
+    assert event['action_context_role'] == accepted_role
+    assert event['action_context_provider_call'] == accepted_call
+    assert seen[2][1]['remaining']['provider_calls_available_including_this_response'] == provider_allowance-2
+    assert seen[3][1]['remaining']['provider_calls_available_including_this_response'] == provider_allowance-3
+    assert event['memory_trace']['serialized_request_bytes'] == len(json.dumps(
+        event['public_context'], sort_keys=True, allow_nan=False).encode('utf-8'))
+    decision = result['decision_rationale']['selection_decisions'][0]
+    assert decision['action_context'] == event['action_context']
+    assert decision['action_context_sha256'] == event['action_context_sha256']
+    export_root = tmp_path/'review-export-run'
+    export_root.mkdir()
+    c.seal(export_root/'protocol.json', dict(provider='offline-fixture'))
+    c.seal(export_root/'ledger.json', result)
+    c.seal(export_root/'report.json', dict(
+        protocol_sha256=c.sha(export_root/'protocol.json'),
+        runs=[dict(target='fixture', policy='routed', status=result['status'],
+            speedup=result['best_speedup'], charged_attempts=result['charged_attempts'],
+            ledger='ledger.json', ledger_sha256=c.sha(export_root/'ledger.json'))]))
+    c.seal(export_root/'manifest.json', {name:c.sha(export_root/name) for name in
+        ('protocol.json', 'report.json', 'ledger.json')})
+    from scripts.export_agent_observability import export
+    import sqlite3
+    exported = tmp_path/'review-export.sqlite'
+    counts = export(export_root, exported)
+    assert counts['action_contexts'] == result['model_calls']
+    with sqlite3.connect(exported) as db:
+        row = db.execute('SELECT context_sha256, provider_request_sha256, action_role, '
+            'provider_call, trigger, context_json FROM action_contexts '
+            'WHERE episode=0 AND decision=?', (event['call'],)).fetchone()
+    assert row[:5] == (event['action_context_sha256'],
+        event['provider_action_context_sha256'], accepted_role, accepted_call, accepted_trigger)
+    assert json.loads(row[5]) == event['action_context']
     from isaforge.routed_selection import summarize_model_events
     accounting = summarize_model_events(test_session.ledger['model_events'])
     assert accounting['escalation_triggers'] == {'utility_override_review': 1}
-    assert accounting['dispatched_calls'] == 5
+    assert accounting['dispatched_calls'] == provider_allowance
+    assert accounting['utility_override_requests'] == 1
+    assert accounting['utility_override_reviews_completed'] == int(review_result == 'accept')
+    assert accounting['utility_override_actions_changed'] == int(review_result == 'accept')
+    assert accounting['utility_override_candidates_changed'] == int(review_result == 'accept')
+    assert accounting['utility_override_review_fallbacks'] == int(review_result != 'accept')
+
+
+def test_reviewer_finalization_rationale_uses_the_review_context(tmp_path, inputs):
+    from isaforge.selection_provider import ResponsesSelectionProvider
+    from isaforge.routed_selection import RoutedSelectionProvider
+    seen = []
+
+    def transport(payload, *args):
+        request = json.loads(payload['input'][0]['content'])
+        seen.append((payload['model'], request))
+        if 'routing_review' in request:
+            name, arguments = 'finalize', dict(candidate_id=None,
+                summary='Keep baseline after review of the proposed override.')
+        elif not request['messages']:
+            name, arguments = 'list_candidates', {}
+        elif request['messages'][-1]['tool'] == 'list_candidates':
+            name, arguments = 'predict', dict(candidate_ids=['t1', 't2', 't3'])
+        else:
+            name, arguments = 'measure', dict(candidate_id='t3',
+                decision_summary='Primary proposes t3 despite the utility recommendation.')
+        return dict(status='completed', output=[dict(type='function_call', name=name,
+            arguments=json.dumps(arguments))],
+            usage=dict(input_tokens=10, output_tokens=4, total_tokens=14))
+
+    policy = RoutedSelectionProvider(
+        ResponsesSelectionProvider('small', api_key='test', transport=transport),
+        ResponsesSelectionProvider('large', api_key='test', transport=transport),
+        max_calls=5, review_utility_overrides=True)
+    result = run_selector(grouped_session(tmp_path, inputs), policy, max_model_calls=5)
+
+    assert result['status'] == 'finalized'
+    assert result['charged_attempts'] == 0
+    assert [model for model, _ in seen] == ['small', 'small', 'small', 'large']
+    rationale = result['decision_rationale']
+    assert rationale['summary']['text'] == (
+        'Keep baseline after review of the proposed override.')
+    assert rationale['action_context']['routing_review']['primary_action']['arguments'][
+        'candidate_id'] == 't3'
+    assert rationale['action_context_role'] == 'escalation'
+    assert rationale['action_context_sha256'] == c.digest(rationale['action_context'])
+    assert rationale['action_context_sha256'] == \
+        rationale['model_call_references'][-1]['provider_calls'][-1]['request_sha256']
 
 
 def test_host_incumbent_correction_escalates_once_and_finalizes_integration(tmp_path, inputs):

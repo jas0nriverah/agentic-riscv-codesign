@@ -71,6 +71,10 @@ def export(run_dir, output):
           serialized_history_bytes INTEGER, serialized_retrieved_object_bytes INTEGER,
           serialization_format TEXT,
           PRIMARY KEY(episode,decision));
+        CREATE TABLE action_contexts (episode INTEGER, decision INTEGER,
+          context_sha256 TEXT, provider_request_sha256 TEXT, action_role TEXT,
+          provider_call INTEGER, trigger TEXT, serialized_bytes INTEGER,
+          context_json TEXT, PRIMARY KEY(episode,decision));
         CREATE TABLE tools (episode INTEGER, sequence INTEGER, tool TEXT, status TEXT,
           charged_attempt INTEGER, evidence_json TEXT);
         CREATE TABLE host_events (episode INTEGER, sequence INTEGER, type TEXT,
@@ -118,6 +122,35 @@ def export(run_dir, output):
                         (index, decision, memory['mode'], memory['manifest']['corpus_sha256'],
                          memory['query'], json.dumps(memory['returned_ids']), memory['elapsed_seconds']))
                 context = event.get('public_context')
+                action_context = event.get('action_context', context)
+                if isinstance(action_context, dict):
+                    action_json = json.dumps(action_context, sort_keys=True, allow_nan=False)
+                    action_hash = c.digest(action_context)
+                    declared_action_hash = event.get('action_context_sha256')
+                    if declared_action_hash is not None and declared_action_hash != action_hash:
+                        raise ValueError('accepted-action context hash mismatch')
+                    provider_action_hash = event.get('provider_action_context_sha256')
+                    if provider_action_hash is not None and provider_action_hash != action_hash:
+                        raise ValueError('provider request hash does not match accepted-action context')
+                    action_call = event.get('action_context_provider_call')
+                    if any(event.get(field) is not None for field in (
+                            'action_context_provider_call', 'action_context_role',
+                            'action_context_trigger', 'provider_action_context_sha256')):
+                        origins = [call for call in event.get('provider_trace', [])
+                                   if call.get('call') == action_call]
+                        if (type(action_call) is not int or len(origins) != 1 or
+                                origins[0].get('role') != event.get('action_context_role') or
+                                origins[0].get('trigger') != event.get('action_context_trigger') or
+                                origins[0].get('request_sha256') != action_hash or
+                                origins[0].get('status') != 'complete' or
+                                origins[0].get('provider_call_charged') is not True):
+                            raise ValueError('accepted-action provider trace linkage mismatch')
+                    db.execute('INSERT INTO action_contexts VALUES (?,?,?,?,?,?,?,?,?)',
+                        (index, event['call'], action_hash, provider_action_hash,
+                         event.get('action_context_role'),
+                         event.get('action_context_provider_call'),
+                         event.get('action_context_trigger'),
+                         len(action_json.encode('utf-8')), action_json))
                 if isinstance(context, dict):
                     serialized_bytes = len(json.dumps(context, sort_keys=True,
                         ensure_ascii=False, allow_nan=False, separators=(',', ':')).encode('utf-8'))
@@ -200,6 +233,7 @@ def export(run_dir, output):
             retrievals=db.execute('SELECT COUNT(*) FROM retrievals').fetchone()[0],
             model_calls=db.execute('SELECT COUNT(*) FROM model_calls').fetchone()[0],
             context_windows=db.execute('SELECT COUNT(*) FROM context_windows').fetchone()[0],
+            action_contexts=db.execute('SELECT COUNT(*) FROM action_contexts').fetchone()[0],
             decision_rationales=db.execute('SELECT COUNT(*) FROM decision_rationales').fetchone()[0],
             rationale_measurements=db.execute('SELECT COUNT(*) FROM rationale_measurements').fetchone()[0],
             rationale_selection_decisions=db.execute('SELECT COUNT(*) FROM rationale_selection_decisions').fetchone()[0],

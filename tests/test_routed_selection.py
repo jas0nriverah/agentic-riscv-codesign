@@ -59,6 +59,8 @@ def test_utility_override_routes_for_review_before_any_measurement():
     first_request = json.loads(seen[0]['input'][0]['content'])
     review_request = json.loads(seen[1]['input'][0]['content'])
     assert 'routing_review' not in first_request
+    assert first_request['remaining']['provider_calls_available_including_this_response'] == 2
+    assert review_request['remaining']['provider_calls_available_including_this_response'] == 1
     assert review_request['routing_review']['trigger'] == (
         'primary_measurement_overrides_utility_recommendation')
     assert review_request['routing_review']['primary_action']['arguments']['candidate_id'] == 'c1'
@@ -66,7 +68,15 @@ def test_utility_override_routes_for_review_before_any_measurement():
     assert router.last_trace[0]['primary_action']['arguments']['candidate_id'] == 'c1'
     assert router.last_trace[1]['trigger'] == 'utility_override_review'
     assert router.last_trace[1]['reviewed_utility_recommendation_candidate_id'] == 'c0'
+    assert router.last_trace[1]['reviewed_action'] == action
+    assert router.last_trace[1]['review_action_changed'] is True
+    assert router.last_trace[1]['review_candidate_changed'] is True
     assert router.calls == 2
+    assert router.last_action_context == review_request
+    assert router.last_action_role == 'escalation'
+    assert router.last_action_provider_call == 2
+    assert router.last_action_trigger == 'utility_override_review'
+    assert router.last_action_request_sha256 == router.last_trace[1]['request_sha256']
 
 
 def test_utility_override_review_is_skipped_when_only_one_call_is_available():
@@ -81,6 +91,8 @@ def test_utility_override_review_is_skipped_when_only_one_call_is_available():
     assert action['arguments']['candidate_id'] == 'c1'
     assert [call['model'] for call in seen] == ['small']
     assert router.last_trace[0]['utility_override_review_skipped'] == 'provider_budget'
+    assert router.last_action_context == json.loads(seen[0]['input'][0]['content'])
+    assert router.last_action_role == 'primary'
 
 
 def test_utility_recommendation_match_does_not_escalate():
@@ -111,6 +123,41 @@ def test_failed_utility_override_review_falls_back_to_valid_primary():
     assert router.last_trace[1]['trigger'] == 'utility_override_review'
     assert router.last_trace[1]['review_fallback'] == dict(
         selected='primary_action', error_type='ProviderError')
+    assert router.last_action_context == json.loads(seen[0]['input'][0]['content'])
+    assert router.last_action_role == 'primary'
+
+
+def test_invalid_utility_override_review_falls_back_to_valid_primary():
+    seen = []
+    router = RoutedSelectionProvider(
+        provider('small', response(candidate_id='c1'), seen),
+        provider('large', response('shell'), seen), max_calls=2,
+        review_utility_overrides=True)
+
+    action_result = router.choose(_utility_override_request())
+
+    primary_request = json.loads(seen[0]['input'][0]['content'])
+    assert action_result['arguments']['candidate_id'] == 'c1'
+    assert router.last_trace[1]['status'] == 'invalid_action'
+    assert router.last_trace[1]['review_fallback']['selected'] == 'primary_action'
+    assert router.last_action_context == primary_request
+    assert router.last_action_role == 'primary'
+
+
+def test_invalid_primary_recovery_sees_decremented_provider_allowance():
+    seen = []
+    router = RoutedSelectionProvider(
+        provider('small', response('shell'), seen),
+        provider('large', response(), seen), max_calls=5)
+
+    router.choose(_utility_override_request(provider_calls=2))
+
+    primary, recovery = [json.loads(call['input'][0]['content']) for call in seen]
+    assert primary['remaining']['provider_calls_available_including_this_response'] == 2
+    assert recovery['remaining']['provider_calls_available_including_this_response'] == 1
+    assert router.last_action_context == recovery
+    assert router.last_action_role == 'escalation'
+    assert router.last_action_trigger == 'invalid_action'
 
 
 def test_escalation_same_public_state_and_aggregate_cost():
@@ -218,3 +265,4 @@ def test_failed_preflight_does_not_reuse_stale_usage():
         p.choose({})
     assert p.last_usage == {} and p.last_trace[0]['request_sha256'] is None
     assert not p.last_trace[0]['provider_call_charged']
+    assert p.last_action_context is None

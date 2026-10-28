@@ -26,7 +26,7 @@ The existing test suite uses injected transport responses to exercise unexpected
 - malformed output receives at most one stronger-model recovery under a shared call limit;
 - failure after recovery closes on the host's verified incumbent/baseline, labeled `finalization_source=host`;
 - process interruption, target evaluation failures, and host integrity errors remain distinguishable;
-- the final model-authored note is bound to the exact model-visible public context and model/policy trace; host facts and measurement evidence are stored separately;
+- the final model-authored note is bound to the exact accepted-action context and model/policy trace; routed review inputs are preserved separately from the memory layer's byte-accounted context, and host facts and measurement evidence are stored separately;
 - host fallback produces no invented model explanation;
 - SQLite export preserves escalation triggers, fallback events, rationale provenance, missing token data, and charged-attempt counts.
 
@@ -36,14 +36,15 @@ Reproduce the focused suite with:
 ../work/audit-venv/bin/python -m pytest \
   tests/test_agent_memory.py tests/test_decision_rationale.py tests/test_routed_selection.py \
   tests/test_selection_provider.py tests/test_bounded_selector.py \
-  tests/test_run_bounded_selector.py tests/test_codex_chat_selector.py -q
+  tests/test_run_bounded_selector.py tests/test_codex_chat_selector.py \
+  tests/test_current_grouped_predictions.py tests/test_grouped_agent_case.py -q
 ```
 
-These tests establish controller behavior and accounting invariants. They do not evaluate whether an actual LLM chooses better candidates.
+The October 28 budget/provenance refresh passes **173 focused tests** with this command, **4,523 full-suite tests / 181 subtests**, and the frozen six-model reproduction. The full suite retains one existing duplicate-ZIP-name warning. These tests establish controller behavior and accounting invariants. They do not evaluate whether an actual LLM chooses better candidates.
 
 ### Decision explanations and traceability
 
-The existing `finalize.summary` is now retained as a **model-authored, unverified note**. The host links it to the exact public context snapshot/hash visible to that decision, the final tool sequence and provider/policy references. A separate host-generated record contains the accepted candidate's verified measurement facts, the area/timing constraints, charged attempts, and hashes for public and raw ledger observations. SQLite exposes `decision_rationales` and `rationale_measurements` for review. Hashes establish which records were logged, not that the model's prose is true or causally complete. Host fallback explanations are deterministic facts with `summary=null`; the system never fabricates an LLM explanation.
+The existing `finalize.summary` is now retained as a **model-authored, unverified note**. The host links it to the exact accepted-action context snapshot/hash visible to that decision, the final tool sequence and provider/policy references. For each decision turn, SQLite's `action_contexts` stores the serialized action input, hash, role, provider-call number, and routing trigger. This preserves a reviewer's input—including the decremented call allowance—without changing `context_windows`, which remains bound to the memory layer's input for byte-accounting. A separate host-generated record contains the accepted candidate's verified measurement facts, the area/timing constraints, charged attempts, and hashes for public and raw ledger observations. SQLite exposes `decision_rationales`, `rationale_measurements`, and `action_contexts` for review. Hashes establish which records were logged, not that the model's prose is true or causally complete. Host fallback explanations are deterministic facts with `summary=null`; the system never fabricates an LLM explanation.
 
 This logging does not add a model call, a tool, or a measurement. It makes the model's stated rationale auditable; it does not establish that the rationale caused the choice. A reviewer can inspect whether the explanation is consistent with visible facts, but the host verifier remains the authority on correctness and final selection.
 

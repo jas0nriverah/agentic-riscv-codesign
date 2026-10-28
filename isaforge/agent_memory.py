@@ -218,6 +218,11 @@ class MemoryAugmentedPolicy:
         self.target_roster = None
         self.last_memory_trace = {}
         self.last_usage, self.last_trace = {}, []
+        self.last_action_context = None
+        self.last_action_role = None
+        self.last_action_provider_call = None
+        self.last_action_trigger = None
+        self.last_action_request_sha256 = None
 
     @property
     def calls(self):
@@ -225,6 +230,11 @@ class MemoryAugmentedPolicy:
 
     def choose(self, request):
         self.last_usage, self.last_trace, self.last_memory_trace = {}, [], {}
+        self.last_action_context = None
+        self.last_action_role = None
+        self.last_action_provider_call = None
+        self.last_action_trigger = None
+        self.last_action_request_sha256 = None
         self.last_public_request = copy.deepcopy(request)
         started = time.monotonic()
         public = copy.deepcopy(request)
@@ -336,3 +346,11 @@ class MemoryAugmentedPolicy:
         finally:
             self.last_usage = copy.deepcopy(getattr(self.policy, 'last_usage', {}))
             self.last_trace = copy.deepcopy(getattr(self.policy, 'last_trace', []))
+            self.last_action_context = copy.deepcopy(
+                getattr(self.policy, 'last_action_context', None))
+            self.last_action_role = getattr(self.policy, 'last_action_role', None)
+            self.last_action_provider_call = getattr(
+                self.policy, 'last_action_provider_call', None)
+            self.last_action_trigger = getattr(self.policy, 'last_action_trigger', None)
+            self.last_action_request_sha256 = getattr(
+                self.policy, 'last_action_request_sha256', None)

@@ -415,6 +415,10 @@ class ReplaySelectionSession:
         for entry in self.ledger['model_events']:
             references.append(dict(decision_call=entry['call'], status=entry['status'],
                 public_context_sha256=entry.get('public_context_sha256'),
+                action_context_sha256=entry.get('action_context_sha256'),
+                action_context_role=entry.get('action_context_role'),
+                action_context_provider_call=entry.get('action_context_provider_call'),
+                action_context_trigger=entry.get('action_context_trigger'),
                 provider_calls=[dict(call=call.get('call'),
                     role=call.get('role'), identity=copy.deepcopy(call.get('identity')),
                     request_sha256=call.get('request_sha256'), status=call.get('status'))
@@ -425,6 +429,12 @@ class ReplaySelectionSession:
             context_source=('agent_decision_input' if decision else
                             'host_finalization_state' if source == 'host' else 'public_state_before_finalize'),
             public_context=copy.deepcopy(context), public_context_sha256=c.digest(context),
+            action_context=copy.deepcopy(context), action_context_sha256=c.digest(context),
+            action_context_role=decision.get('action_context_role') if decision else None,
+            action_context_provider_call=(decision.get('action_context_provider_call')
+                                          if decision else None),
+            action_context_trigger=(decision.get('action_context_trigger')
+                                    if decision else None),
             summary=(dict(text=summary, author='model' if model_authored else 'policy',
                           verified=False, purpose='unverified decision note')
                      if summary is not None else None),
@@ -452,7 +462,8 @@ class ReplaySelectionSession:
             if 'charged_attempt' not in event:
                 continue
             call = calls.get(event.get('sequence'))
-            context = call.get('public_context', {}) if call else {}
+            context = (call.get('action_context', call.get('public_context', {}))
+                       if call else {})
             board = context.get('selection_board', {}) if isinstance(context, dict) else {}
             candidate = next((row for row in board.get('rows', [])
                               if row.get('candidate_id') == event.get('candidate_id')), None)
@@ -461,7 +472,14 @@ class ReplaySelectionSession:
                 candidate_id=event.get('candidate_id'),
                 decision_summary=event.get('decision_summary'),
                 author='model' if model_authored else 'policy', verified=False,
-                public_context_sha256=(call.get('public_context_sha256') if call else None),
+                public_context_sha256=(call.get('action_context_sha256',
+                    call.get('public_context_sha256')) if call else None),
+                action_context=copy.deepcopy(context),
+                action_context_sha256=(call.get('action_context_sha256') if call else None),
+                action_context_role=(call.get('action_context_role') if call else None),
+                action_context_provider_call=(call.get('action_context_provider_call')
+                                              if call else None),
+                action_context_trigger=(call.get('action_context_trigger') if call else None),
                 pairwise_rank_position=(candidate.get('pairwise_rank_position')
                                         if candidate else None),
                 advisory_default_candidate_id=board.get('advisory_default_candidate_id'),
@@ -592,7 +610,8 @@ class ReplaySelectionSession:
             decision = next((entry for entry in reversed(self.ledger['model_events'])
                              if entry.get('tool_sequence') == self.calls), None)
             self._record_rationale(selection, source='agent', summary=summary,
-                context=decision['public_context'] if decision else decision_context,
+                context=(decision.get('action_context', decision['public_context'])
+                         if decision else decision_context),
                 tool_sequence=self.calls, decision=decision)
             return self._result(event, dict(status='ok', selected_id=identity,
                                            speedup=speedup, selection=selection))
@@ -704,6 +723,18 @@ def run_selector(session, policy, *, max_model_calls=12):
             event['public_context'] = copy.deepcopy(
                 getattr(policy, 'last_public_request', public_request))
             event['public_context_sha256'] = c.digest(event['public_context'])
+            action_context = getattr(policy, 'last_action_context', None)
+            if not isinstance(action_context, dict):
+                action_context = event['public_context']
+            event['action_context'] = copy.deepcopy(action_context)
+            event['action_context_sha256'] = c.digest(event['action_context'])
+            event['action_context_role'] = getattr(policy, 'last_action_role', None)
+            event['action_context_provider_call'] = getattr(
+                policy, 'last_action_provider_call', None)
+            event['action_context_trigger'] = getattr(policy, 'last_action_trigger', None)
+            provider_context_hash = getattr(policy, 'last_action_request_sha256', None)
+            if provider_context_hash is not None:
+                event['provider_action_context_sha256'] = provider_context_hash
             if provider_budget is not None:
                 session.provider_calls_remaining = min(
                     provider_budget.max_calls-provider_budget.calls,

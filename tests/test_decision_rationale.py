@@ -34,6 +34,17 @@ class ModelPolicy:
         return action('finalize', candidate_id='t1', summary='Model note: t1 has zero area cost.')
 
 
+def seal_export_run(root, result):
+    root.mkdir(parents=True, exist_ok=True)
+    c.seal(root/'protocol.json', dict(provider='fixture'))
+    c.seal(root/'report.json', dict(protocol_sha256=c.sha(root/'protocol.json'), runs=[dict(
+        target='fixture', policy='fixture', status=result['status'], speedup=result['best_speedup'],
+        charged_attempts=result['charged_attempts'], ledger='ledger.json',
+        ledger_sha256=c.sha(root/'ledger.json'))]))
+    c.seal(root/'manifest.json', {name:c.sha(root/name) for name in
+        ('protocol.json', 'report.json', 'ledger.json')})
+
+
 def test_model_note_bound_to_exact_augmented_context_and_host_facts(tmp_path, inputs):
     inputs[3]['t1']['private_path'] = '/private/OUTCOME-CANARY'
     policy = ModelPolicy()
@@ -237,19 +248,17 @@ def test_sqlite_exports_rationale_and_measurement_evidence(tmp_path, inputs):
     root = tmp_path/'run'
     root.mkdir()
     result = run_selector(session(root, inputs), ModelPolicy())
-    c.seal(root/'protocol.json', dict(provider='fixture'))
-    c.seal(root/'report.json', dict(protocol_sha256=c.sha(root/'protocol.json'), runs=[dict(
-        target='fixture', policy='fixture', status=result['status'], speedup=result['best_speedup'],
-        charged_attempts=1, ledger='ledger.json', ledger_sha256=c.sha(root/'ledger.json'))]))
-    c.seal(root/'manifest.json', {name:c.sha(root/name) for name in
-        ('protocol.json', 'report.json', 'ledger.json')})
+    seal_export_run(root, result)
     counts = export(root, tmp_path/'trace.sqlite')
     assert counts['decision_rationales'] == counts['rationale_measurements'] == 1
     assert counts['rationale_selection_decisions'] == 1
+    assert counts['action_contexts'] == len(result['model_events'])
     with sqlite3.connect(tmp_path/'trace.sqlite') as db:
         row = db.execute('SELECT finalization_source, summary_author, summary_verified, public_context_sha256, rationale_json FROM decision_rationales').fetchone()
         evidence = db.execute('SELECT measurement_id, candidate_id, public_observation_sha256 FROM rationale_measurements').fetchone()
         decision = db.execute('SELECT candidate_id, decision_summary, author, verified, paid_verification_json FROM rationale_selection_decisions').fetchone()
+        action_context = db.execute('SELECT context_sha256, action_role, context_json '
+            'FROM action_contexts WHERE episode=0 AND decision=1').fetchone()
     assert row[:3] == ('agent', 'model', 0)
     assert row[3] == result['decision_rationale']['public_context_sha256']
     assert json.loads(row[4]) == result['decision_rationale']
@@ -257,6 +266,80 @@ def test_sqlite_exports_rationale_and_measurement_evidence(tmp_path, inputs):
     assert decision[:4] == ('t1', 'Synthetic policy choice for protocol test.', 'model', 0)
     assert json.loads(decision[4]) == result['decision_rationale']['selection_decisions'][0]['paid_verification']
     assert json.loads(decision[4])['status'] == 'verified_feasible_improvement'
+    assert action_context[0] == result['model_events'][0]['action_context_sha256']
+    assert action_context[1] is None
+    assert json.loads(action_context[2]) == result['model_events'][0]['action_context']
+
+
+def test_sqlite_action_context_export_supports_legacy_ledgers(tmp_path, inputs):
+    root = tmp_path/'legacy-run'
+    root.mkdir()
+    result = run_selector(session(root, inputs), ModelPolicy())
+    for event in result['model_events']:
+        for field in ('action_context', 'action_context_sha256', 'action_context_role',
+                      'action_context_provider_call', 'action_context_trigger',
+                      'provider_action_context_sha256'):
+            event.pop(field, None)
+    c.seal(root/'ledger.json', result)
+    seal_export_run(root, result)
+    export(root, tmp_path/'legacy.sqlite')
+    with sqlite3.connect(tmp_path/'legacy.sqlite') as db:
+        saved = db.execute('SELECT context_sha256, context_json, provider_request_sha256, '
+            'action_role, provider_call, trigger FROM action_contexts '
+            'WHERE episode=0 AND decision=1').fetchone()
+    assert saved[0] == c.digest(result['model_events'][0]['public_context'])
+    assert json.loads(saved[1]) == result['model_events'][0]['public_context']
+    assert saved[2:] == (None, None, None, None)
+
+
+@pytest.mark.parametrize('field', ['action_context_sha256', 'provider_action_context_sha256'])
+def test_sqlite_action_context_export_rejects_hash_mismatch(tmp_path, inputs, field):
+    root = tmp_path/field
+    root.mkdir()
+    result = run_selector(session(root, inputs), ModelPolicy())
+    result['model_events'][0][field] = '0' * 64
+    c.seal(root/'ledger.json', result)
+    seal_export_run(root, result)
+    with pytest.raises(ValueError, match='context hash mismatch|provider request hash'):
+        export(root, tmp_path/(field+'.sqlite'))
+
+
+@pytest.mark.parametrize('corruption', [
+    'missing_call', 'missing_origin_call', 'duplicate_call', 'role', 'trigger', 'request_hash',
+    'status', 'not_dispatched',
+])
+def test_sqlite_action_context_export_checks_provider_trace_origin(
+        tmp_path, inputs, corruption):
+    root = tmp_path/'trace-linkage-run'
+    root.mkdir()
+    result = run_selector(session(root, inputs), ModelPolicy())
+    event = result['model_events'][0]
+    event.update(action_context_role='primary', action_context_provider_call=1,
+                 action_context_trigger='primary',
+                 provider_action_context_sha256=event['action_context_sha256'])
+    trace = event['provider_trace'][0]
+    trace['trigger'] = 'primary'
+    if corruption == 'missing_call':
+        event['action_context_provider_call'] = 999
+    elif corruption == 'missing_origin_call':
+        event.pop('action_context_provider_call')
+    elif corruption == 'duplicate_call':
+        event['provider_trace'].append(copy.deepcopy(trace))
+    elif corruption == 'role':
+        trace['role'] = 'escalation'
+    elif corruption == 'trigger':
+        trace['trigger'] = 'utility_override_review'
+    elif corruption == 'request_hash':
+        trace['request_sha256'] = '0' * 64
+    elif corruption == 'status':
+        trace['status'] = 'invalid_action'
+    else:
+        trace['provider_call_charged'] = False
+    c.seal(root/'ledger.json', result)
+    seal_export_run(root, result)
+
+    with pytest.raises(ValueError, match='provider trace linkage mismatch'):
+        export(root, tmp_path/'trace-linkage.sqlite')
 
 
 def test_sqlite_exports_host_fallback_provider_accounting(tmp_path, inputs):
