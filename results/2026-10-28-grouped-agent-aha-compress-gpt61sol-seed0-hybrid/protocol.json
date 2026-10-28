@@ -1,0 +1,257 @@
+{
+  "schema": "isaforge-grouped-current-model-agent-v1",
+  "scope": "consumed-data workload-held-out agent engineering replay; not independent confirmation",
+  "target_workload_group": "beebs-aha-compress",
+  "target_benchmark": "beebs-aha-compress:56fc6fb2ebba72e8396e83826d3d72969e531f7a3084d28d8ff2f674f4522460",
+  "target_candidate_ids": [
+    "04d1358163ca46ec5078595c64014c44d540a5b700aea4315a256373c8d6287b",
+    "324bd3161f9ca0c1114f66b9eddb52542e86670e21df6a2e7762b5b48ffe1851",
+    "51f00c49bd708ab183deea6ab8b9bab7f55a9104d917ac1f26009afa00af55be",
+    "6aa46b9a526e1d06e706ab70d477c94376d0ec28e3c9e6e8bb5ed3512cc0f48e",
+    "6b17afca9aafb6c1ef3def081d7e2422d911e58f5fea9b5a5c719f6dd7be75c9",
+    "749a17d1c2b2870e3e5494dc235abba398b7e1414e5349ae28aee37e040f05f1",
+    "8fc232031b974189b590fa51284550497e76ff6b8654a50783c4ed51fa57634c",
+    "984e0fac72b4e95c77e69caf6e5be3e5c7e0ab5ce8e534ee18f5737b2acffcf8",
+    "a5aaa84ee35c9ec85db25007ec8c034f827ac15a92e21cacac3bf94c7396badf",
+    "a5c81f410e52cf465eaad3a48b79adf035c1a6219b863195c4c48509d398544c",
+    "c77fd12b6b69132abb796b01e50f53b9d1209cb96951c31ac2385847a3261187",
+    "e147c0d589ee09522a8c8783f2fb4bfa0eb7de64b08d420a57f2e6f7c959896c"
+  ],
+  "target_labels_in_model_request": 0,
+  "target_outcomes_disclosed_only_after_charged_measure": true,
+  "reference_complete": true,
+  "area_cap_lut4": 64,
+  "minimum_routed_fmax_mhz": 12.0,
+  "budget": 3,
+  "seed": 0,
+  "model_seed": 0,
+  "provider": "codex-chat",
+  "model": null,
+  "escalation_model": null,
+  "model_label": "current Codex chat model; exact deployment ID unavailable",
+  "memory_mode": "hybrid",
+  "max_model_calls": 12,
+  "max_tool_calls": 20,
+  "max_output_tokens": null,
+  "model_bundle_metadata": {
+    "schema": "isaforge-current-grouped-predictions-v1",
+    "scope": "consumed-data whole-workload holdout; all target-workload formula families excluded",
+    "prediction_policy": "zero-shot scores frozen before target measurements",
+    "target_workload_group": "beebs-aha-compress",
+    "target_formula_families": [
+      "and(input,xori(input,constant))",
+      "slli(xori(input,constant),constant)",
+      "xor(input,slli(input,constant))",
+      "xor(input,srli(input,constant))",
+      "xor(slli(xor(input,input),constant),xor(input,input))",
+      "xor(slli(xor(input,slli(input,constant)),constant),xor(input,slli(input,constant)))",
+      "xor(srli(and(input,input),constant),xor(and(input,input),input))",
+      "xor(srli(input,constant),xor(input,input))"
+    ],
+    "area_cap_lut4": 64,
+    "minimum_routed_fmax_mhz": 12.0,
+    "pairwise_ranker": {
+      "name": "XGBRanker",
+      "objective": "rank:pairwise",
+      "seed": 0,
+      "score_semantics": "relative ordering score; not speedup or probability"
+    },
+    "factorized_feasibility": {
+      "name": "FeasibilitySelectionPredictor",
+      "seed": 0,
+      "score_semantics": "uncalibrated probability-like ranking score; not guaranteed probability",
+      "disagreement_semantics": "ensemble disagreement only; not a calibrated interval",
+      "decision_score_semantics": "feasibility_score_mean times nonnegative analytic cycle reduction"
+    },
+    "training_rows": 109,
+    "training_workload_groups": [
+      "beebs-expint",
+      "beebs-jfdctint",
+      "beebs-ndes",
+      "beebs-nettle-md5",
+      "embench-aha-mont64",
+      "embench-crc32",
+      "embench-edn",
+      "embench-nettle-sha256",
+      "embench-slre",
+      "embench-ud",
+      "tacle-bitcount",
+      "tacle-g723-enc",
+      "tacle-lift"
+    ],
+    "training_ids_sha256": "c8ee9a2c24667b087ed173855e9aa920970082451e1a26b99e62f3123b457628",
+    "target_public_ids_sha256": "8b9b008d160feb592db4a12701d64db70e0b64d603923917cc2d0559a63d391b",
+    "model_source_fingerprint": "7742558ec9dfa1eebe23023723a16a1bdf7545d3de84ebe9bcdb3549fe7fe966",
+    "model_fit_and_prediction_seconds": {
+      "ranker_fit": 0.03883383399806917,
+      "ranker_prediction": 0.0009933749970514327,
+      "feasibility_fit": 0.05995104199973866,
+      "feasibility_prediction": 0.0031494590075453743
+    },
+    "uncertainty_calibrated": false,
+    "target_benchmark": "beebs-aha-compress:56fc6fb2ebba72e8396e83826d3d72969e531f7a3084d28d8ff2f674f4522460",
+    "input_evidence_fingerprint": "1ae10dc16c547c9e03a233662029fc9abab73bcec7bfa6486e34a38f66196807",
+    "screen_protocol_sha256": "7eff9339c71619fdf55dd24b2681314ac0740906f8ffdd36c452b645f810de5c",
+    "historical_training_measurements": 109,
+    "historical_attempt_seconds": 6746.255709166153
+  },
+  "model_predictions_sha256": "9e9fba08f37ce65361a44cc8a4ac740fa3196080e3314ff312e3a7d9af0a088d",
+  "public_case_metadata": {
+    "schema": "isaforge-current-grouped-agent-case-v1",
+    "scope": "consumed-data engineering replay",
+    "target_workload_group": "beebs-aha-compress",
+    "target_benchmark": "beebs-aha-compress:56fc6fb2ebba72e8396e83826d3d72969e531f7a3084d28d8ff2f674f4522460",
+    "context_id": "56fc6fb2ebba72e8396e83826d3d72969e531f7a3084d28d8ff2f674f4522460",
+    "context_sha256": "9752354a2833b9022e4cc6496024ed46923b33c7c849731c460090ab1862ec1b",
+    "hardware_context_id": "d45d883602e8c8dde8990b0a263651dbce6311b8ab7ab44530e5d04e937abd40",
+    "target_formula_families": [
+      "and(input,xori(input,constant))",
+      "slli(xori(input,constant),constant)",
+      "xor(input,slli(input,constant))",
+      "xor(input,srli(input,constant))",
+      "xor(slli(xor(input,input),constant),xor(input,input))",
+      "xor(slli(xor(input,slli(input,constant)),constant),xor(input,slli(input,constant)))",
+      "xor(srli(and(input,input),constant),xor(and(input,input),input))",
+      "xor(srli(input,constant),xor(input,input))"
+    ],
+    "training_ids_sha256": "c8ee9a2c24667b087ed173855e9aa920970082451e1a26b99e62f3123b457628",
+    "excluded_related_ids_sha256": "31ef4ca6493603b1fbc2624c601361d7541b790a2fe47e2a88dda177278bc9d0",
+    "target_ids_sha256": "8b9b008d160feb592db4a12701d64db70e0b64d603923917cc2d0559a63d391b",
+    "training_sha256": "c43175ca1305692f95c04311e5b8690014a304ed0e5871474f7f9488b86e0d67",
+    "public_sha256": "cdc6c9b555d244975d14f43f518a81da27ed26751aef40983bbd8780dee7170d",
+    "training_rows": 109,
+    "training_workload_groups": [
+      "beebs-expint",
+      "beebs-jfdctint",
+      "beebs-ndes",
+      "beebs-nettle-md5",
+      "embench-aha-mont64",
+      "embench-crc32",
+      "embench-edn",
+      "embench-nettle-sha256",
+      "embench-slre",
+      "embench-ud",
+      "tacle-bitcount",
+      "tacle-g723-enc",
+      "tacle-lift"
+    ],
+    "historical_available_rows": 110,
+    "historical_available_attempts": 114,
+    "historical_attempt_seconds": 6746.255709166153,
+    "timer_scope": "Sum of recorded historical attempt durations; heterogeneous original timer scopes, excluding the held-out workload.",
+    "input_bindings": {
+      "corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+      "corpus_manifest_sha256": "219806a8a9c569f783ecbbe82561f2c3199dcb1faa83054710141fdfef0930c8",
+      "screen_protocol_sha256": "7eff9339c71619fdf55dd24b2681314ac0740906f8ffdd36c452b645f810de5c",
+      "screen_manifest_sha256": "235cfe3a6c993f78c184676f24441438facdaf1f7760ece7dacddc93ecff9f93",
+      "screen_report_sha256": "b5f28629493d90d11151be88a7996a0b9027362d5c92f463ca5621cc54080660"
+    },
+    "source_bindings": {
+      "scripts/evaluate_feasibility_model_families.py": "15388afcb9518e1184cb066177fbdd3d823f86be027b81b4de7088d21f6843c3",
+      "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+      "isaforge/factorized_selection_experiment.py": "545b7abb61a08a41fb6c1680b3e9ec109d73f29ed99edaf95870661818bc43da",
+      "isaforge/feasibility_selection.py": "1268bd50a167a5182a75f5fe6729c7cf5bccd7edf93a476e3a3448a4eaeaca22",
+      "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+      "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+      "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+      "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+      "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+      "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+      "scripts/reproduce_guarded_sha256.py": "26e883815bffd7f4bf2bc5688d6c3112d3c517b8aa3363e6c7ecc81899d69fcb",
+      "isaforge/grouped_agent_case.py": "1c8db7874652cd19e416550e563593a5ef2f3c986f472aae2c9f762fb131b8b6"
+    },
+    "target_outcomes_in_public_metadata": false,
+    "new_native_jobs": 0
+  },
+  "sources": {
+    "scripts/run_grouped_agent_selector.py": "8d8d574e82b98fcd790088af2db52a864c959c0d94aeb2fd75667bcf9abe3207",
+    "isaforge/grouped_agent_case.py": "1c8db7874652cd19e416550e563593a5ef2f3c986f472aae2c9f762fb131b8b6",
+    "isaforge/current_grouped_predictions.py": "def97b93d0e719bbc0e5230575468f70e2eadf4280d930e7478862f4c9ae3b72",
+    "isaforge/bounded_selector.py": "7dc988477c167818ba74a293f354135f0d1f24bbe2c795e1bfc641db75b969ee",
+    "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+    "isaforge/selection_provider.py": "3e0f902289877d825b5c3febf56b454c79eb4cb4d850def2855f04788fe3a19b",
+    "isaforge/codex_chat_selector.py": "d2de849ce37270bdd714904ecea4d085cf9b9313dac08f8d5eb8567b5d7c6cc2",
+    "isaforge/routed_selection.py": "6df97cbe6330c7b8dde75e92fd56f3fc977288e9d367813931d478d2c328c2b4",
+    "isaforge/agent_memory.py": "fbbd0c29531b9294aee9f89edf8006b25276ffa7ade5fb9262e5afbea02f0572"
+  },
+  "tools": [
+    {
+      "type": "function",
+      "name": "list_candidates",
+      "description": "List public candidates and selection constraints.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "predict",
+      "description": "Query fixed predictors for candidate IDs.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "candidate_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "measure",
+      "description": "Pay for one candidate measurement, including failures.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "finalize",
+      "description": "Finalize only the current host-computed incumbent.candidate_id; use null only when no measured feasible improvement exists.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "candidate_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "summary": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_id",
+          "summary"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "token_usage": "Unavailable for Codex chat relay; API usage retained when using Responses.",
+  "new_native_jobs": 0
+}

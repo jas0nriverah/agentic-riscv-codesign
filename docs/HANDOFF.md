@@ -29,11 +29,18 @@ three approved records, and enforces a 40,000-byte retrieved-payload ceiling.
 On the initial CRC32 request it reduced serialized context from 154,008 bytes
 (101 raw historical rows) to 17,353 bytes (three rows, 5,103 retrieval bytes).
 This is a byte-count result, not token, latency, or decision-quality evidence.
-The local SQLite exports record context windows, retrievals, decisions, tool
-actions and null token usage for the Codex relay. Three authenticated Ascon
-measurements remain a separate training-only supplement; the two-model
-workload-holdout ablation changes no model promotion decision. Details,
-commands, limitations and source references are in the [integration record](ml-agent-integration-2026-10-28.md).
+The second AHA-compress replay used the same hybrid policy and 12-candidate
+pool: after three measurements it finalized baseline because all selected
+candidates exceeded the area cap; its best feasible complete-pool oracle is
+1.023418x (+61 LUT4, 64.184853 MHz, correctness passed). In the matched seed,
+merit, calibrated latency and pairwise XGBoost hit that oracle by B3; the
+factorized-feasibility model did not. This is a preserved counterexample, not
+a prospective generalization result. The local SQLite exports record context
+windows, retrievals, decisions, tool actions and null token usage for the Codex
+relay. Three authenticated Ascon measurements remain a separate training-only
+supplement; the two-model workload-holdout ablation changes no model promotion
+decision. Details, commands, limitations and source references are in the
+[integration record](ml-agent-integration-2026-10-28.md).
 
 Validation for the combined memory, bounded-selector, grouped-prediction,
 grouped-case, rationale and Ascon-supplement changes: **104 focused tests

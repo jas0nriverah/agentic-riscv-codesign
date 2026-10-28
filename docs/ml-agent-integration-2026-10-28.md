@@ -132,10 +132,58 @@ so they do **not** isolate retrieval causally. Both tie the best current
 non-agent policy at its best budget; hybrid ties factorized XGBoost and does
 not beat it.
 
+## Second workload replay: BEEBS AHA-compress
+
+To test whether the controller could carry over beyond CRC32, the same
+hybrid-memory agent and current grouped models were run on the authenticated
+12-candidate BEEBS AHA-compress pool. Training used 109 labels from 13 other
+workload groups and excluded all eight target expression families. The oracle
+is complete; all candidate outcomes were already in the corpus. This is a
+retrospective second workload check, not a fresh benchmark label.
+
+| Agent measurement | Whole-program cycles | Speedup | Added LUT4 | Minimum routed Fmax | Correct | Feasible at +64 LUT4 / 12 MHz |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| `xor(slli(xor(slli(in0,4),in0),8),xor(slli(in0,4),in0))` | 70,797 → 68,277 | 1.036908x | +72 | 66.299805 MHz | yes | no: area |
+| `xor(slli(in0,2),in0)` | 70,797 → 69,897 | 1.012876x | +77 | 62.449257 MHz | yes | no: area |
+| `and(in0,xori(in1,-1))` | 70,797 → 70,527 | 1.003828x | +96 | 66.648895 MHz | yes | no: area |
+| Best feasible measured-pool oracle (not selected by agent) | 70,797 → 69,177 | 1.023418x | +61 | 64.184853 MHz | yes | yes |
+
+The LLM finalized the baseline after three measurements, so its verified
+best-so-far remained 1.0x and its cycle-reduction regret was 0.0228823 (2.2882
+percentage points). It made five valid tool calls (one prediction, three
+measurements, one finalization) and zero invalid actions. The first choice was
+the pairwise ranker's top candidate; its later choices were rank positions 5
+and 9. All three measured candidates were correct and timing-feasible, but all
+exceeded the area cap. By budget three, merit, calibrated latency, and the
+pairwise XGBoost control found the feasible oracle; factorized feasibility,
+frequency, random, and latency-cost remained at baseline in this seed-0
+trajectory. This exposes a concrete gap: after its first top-ranked choice,
+the LLM did not follow the rank order to the feasible oracle, and the separate
+factorized-feasibility control also missed it. The feasibility score remains
+uncalibrated and should not be treated as a reliable hard filter.
+
+| Policy | B1 best speedup | B2 | B3 |
+| --- | ---: | ---: | ---: |
+| GPT-6.1 Sol hybrid agent | 1.000000x | 1.000000x | 1.000000x |
+| Merit | 1.000000x | 1.000000x | 1.023418x |
+| Calibrated latency | 1.000000x | 1.000000x | 1.023418x |
+| XGBoost pairwise rank | 1.000000x | 1.000000x | 1.023418x |
+| Factorized-feasibility XGBoost | 1.000000x | 1.000000x | 1.000000x |
+| Frequency / random / latency-cost | 1.000000x | 1.000000x | 1.000000x |
+
+Archived native evaluation durations summed to 125.6829 seconds. The
+194.4627-second chat-replay elapsed time includes manual relay/waiting and is
+not model latency. API token use remains unavailable. No additional native
+jobs or labels were created. The one-run comparison does not establish a
+population-level loss, but it is an important negative result and must be
+preserved alongside CRC32. Its SQLite export is
+`results/2026-10-28-grouped-agent-observability-r1/aha-compress-hybrid.sqlite`.
+
 Artifacts:
 
 - `results/2026-10-28-grouped-agent-crc32-gpt61sol-seed0-pilot2/`
 - `results/2026-10-28-grouped-agent-crc32-hybrid-seed0/`
+- `results/2026-10-28-grouped-agent-aha-compress-gpt61sol-seed0-hybrid/`
 - `results/2026-10-28-grouped-agent-observability-r1/`
 - `results/2026-10-28-grouped-agent-crc32-gpt61sol-seed0/` preserves the initial
   no-TTY EOF/host-fallback start (zero paid attempts); it is not a model result.
