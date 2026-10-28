@@ -32,15 +32,17 @@ def test_board_distinguishes_predictions_from_paid_verification(board_inputs):
     board = build_grouped_decision_board(candidates, predictions, ['t1'], [paid],
         area_cap=64, clock_mhz=12)
 
-    assert board['schema'] == 'isaforge-grouped-decision-board-v1'
+    assert board['schema'] == 'isaforge-grouped-decision-board-v2'
     assert board['uncertainty_calibrated'] is False
     assert board['advisory_default_candidate_id'] == 't2'
+    assert board['utility_recommendation_candidate_id'] == 't2'
     assert [row['pairwise_rank_position'] for row in board['rows']] == [1, 2, 3]
     assert board['rows'][0]['paid_verification']['status'] == 'area_infeasible'
     assert board['rows'][0]['paid_verification']['verified_feasible'] is False
     assert board['rows'][1]['paid_verification'] is None
     assert 'speedup' not in board['rows'][1]
     assert board['rows'][1]['factorized_feasibility_score'] == .5
+    assert board['rows'][1]['decision_score_ratio_to_recommendation'] == 1.0
 
 
 def test_board_changes_only_when_public_paid_observation_is_added(board_inputs):
@@ -87,3 +89,23 @@ def test_board_rejects_paid_outcome_for_unattempted_candidate(board_inputs):
     with pytest.raises(ValueError):
         build_grouped_decision_board(candidates, predictions, [], [paid],
             area_cap=64, clock_mhz=12)
+
+
+def test_board_makes_utility_recommendation_distinct_from_pairwise_and_raw_feasibility(board_inputs):
+    candidates, predictions = board_inputs
+    predictions['t1']['factorized_decision_score'] = .01
+    predictions['t2']['factorized_feasibility_probability'] = .9
+    predictions['t2']['factorized_decision_score'] = .02
+    predictions['t3']['factorized_feasibility_probability'] = .5
+    predictions['t3']['factorized_decision_score'] = .04
+
+    board = build_grouped_decision_board(candidates, predictions, [], [],
+        area_cap=64, clock_mhz=12)
+
+    assert board['advisory_default_candidate_id'] == 't1'
+    assert board['utility_recommendation_candidate_id'] == 't3'
+    assert board['utility_recommendation']['factorized_decision_score'] == .04
+    by_id = {row['candidate_id']: row for row in board['rows']}
+    assert by_id['t2']['factorized_feasibility_score'] > by_id['t3']['factorized_feasibility_score']
+    assert by_id['t2']['decision_score_ratio_to_recommendation'] == .5
+    assert by_id['t3']['factorized_decision_rank'] == 1

@@ -20,14 +20,15 @@ from .selector_decision_support import build_grouped_decision_board, _paid_statu
 from .selection_provider import ProviderBudgetError
 from .speedup_corpus import family
 
-SCHEMA = 'isaforge-bounded-selector-v3'
+SCHEMA = 'isaforge-bounded-selector-v4'
 GROUPED_PREDICTION_SCHEMA = 'isaforge-current-grouped-predictions-v1'
 PROMPT = (
     'Select one RISC-V custom instruction, or the unchanged baseline. Maximize '
     'VERIFIED FEASIBLE whole-program speedup within the measurement-attempt '
-    'budget. Predictions are uncalibrated, not measurements. Consider all '
-    'provided heuristics, structure, uncertainty, area, timing and measurement '
-    'cost. Use only list_candidates, predict, measure and finalize. Every '
+    'budget. Predictions are uncalibrated, not measurements. Consider the '
+    'factorized decision score, pairwise rank, public workload features, paid '
+    'outcomes, hardware constraints and measurement cost. Use only '
+    'list_candidates, predict, measure and finalize. Every '
     'submitted measure request, including an invalid ID or repeat, consumes an '
     'attempt; failed measurements also count. No unqueried outcome is available. '
     'Only the current incumbent may be finalized: use incumbent.candidate_id '
@@ -69,12 +70,18 @@ GROUPED_PROMPT = (
     'their ensemble disagreement are uncalibrated; disagreement is not a '
     'confidence interval. A selection_board appears after predict and separates '
     'the frozen pairwise order, analytic latency estimate, uncalibrated '
-    'feasibility-like signals and paid verification. Its advisory default is the '
-    'highest-ranked unattempted candidate; it is not mandatory. If you override '
-    'it, explain the public evidence in decision_summary. Never infer area or '
-    'feasibility from operation count or the uncalibrated score. The decision '
-    'score is feasibility score multiplied by the nonnegative public analytic '
-    'cycle-reduction estimate. Only a paid outcome verifies area, timing and correctness.'
+    'feasibility-like signals and paid verification. The board separately names '
+    'the highest pairwise-ranked candidate and the unattempted candidate with '
+    'the highest frozen factorized decision score. Use the utility recommendation '
+    'as the default next measurement unless a paid observation or specific public '
+    'evidence supports an override. Do not choose by raw feasibility score alone. '
+    'When overriding, state the recommended candidate, the alternative, their '
+    'relative decision-score ratio, and the evidence that justifies the tradeoff '
+    'in decision_summary. Never infer area or feasibility from operation count '
+    'or any uncalibrated score. The factorized score is an ordering proxy made '
+    'from an uncalibrated feasibility signal times the nonnegative public analytic '
+    'cycle-reduction estimate; it is not a calibrated expected value. Only a '
+    'paid outcome verifies area, timing and correctness.'
 )
 
 
@@ -457,6 +464,16 @@ class ReplaySelectionSession:
                 advisory_default_candidate_id=board.get('advisory_default_candidate_id'),
                 deviation_from_advisory=(candidate is not None and
                     candidate.get('candidate_id') != board.get('advisory_default_candidate_id')),
+                factorized_decision_rank=(candidate.get('factorized_decision_rank')
+                                          if candidate else None),
+                decision_score_ratio_to_recommendation=(
+                    candidate.get('decision_score_ratio_to_recommendation')
+                    if candidate else None),
+                utility_recommendation_candidate_id=(
+                    board.get('utility_recommendation_candidate_id')),
+                deviation_from_utility_recommendation=(candidate is not None and
+                    candidate.get('candidate_id') !=
+                    board.get('utility_recommendation_candidate_id')),
                 # The board is the pre-attempt snapshot. Verification belongs
                 # to this event's later host outcome, never a previous attempt.
                 paid_verification=(_paid_status(event['observation'],

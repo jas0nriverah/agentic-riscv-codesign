@@ -11,7 +11,10 @@ Links were inspected on October 28; upstream branch URLs are mutable. Pin exact
 commits, inputs and applicable license notices before any future intake.
 “Observed” below means inspected public source or release contents, not an
 independent reproduction of the authors' measurements. No data was imported,
-model fitted, program built or candidate evaluated for this census.
+model fitted, program built or candidate evaluated for this census. **Later
+project work on October 28 qualified and measured the PULPino Sudoku source
+listed below; that work is documented separately and does not change the
+external-dataset compatibility decision.**
 
 ## External outcome releases: keep separate
 
@@ -31,7 +34,7 @@ whole-program PicoRV32 speedup, integrated iCE40 area and routed-timing labels.
 | Pool and candidates | Direct source facts | Compatibility assessment — inference unless stated |
 | --- | --- | --- |
 | [LLVM test-suite](https://llvm.org/docs/TestSuiteGuide.html): Stanford [Queens](https://github.com/llvm/llvm-test-suite/blob/main/SingleSource/Benchmarks/Stanford/Queens.c) and [Towers](https://github.com/llvm/llvm-test-suite/blob/main/SingleSource/Benchmarks/Stanford/Towers.c) | C sources and reference outputs are public. Queens uses integer backtracking with direct recursion; Towers uses integer recursion and an array-backed freelist. Neither executed solver calls `malloc`. The [root license](https://github.com/llvm/llvm-test-suite/blob/main/LICENSE.TXT) is Apache-2.0 with LLVM exceptions and separately identifies third-party terms; retain the applicable notices at the pinned revision. | Plausible RV32I source screens. Unused suite-wide globals require linker garbage collection. Recursive stack, code/data fit, CFG support, twelve legal candidates and opportunity remain untested. These classic kernels are not automatically independent application families. |
-| PULPino sequential tests: [Sudoku solver](https://github.com/pulp-platform/pulpino/blob/master/sw/apps/sequential_tests/sudokusolver/sudokusolver.c), [expected solution](https://github.com/pulp-platform/pulpino/blob/master/sw/apps/sequential_tests/sudokusolver/sudokusolver.h), [Hanoi](https://github.com/pulp-platform/pulpino/blob/master/sw/apps/sequential_tests/towerofhanoi/towerofhanoi.c) | Inspected headers specify Solderpad Hardware License 0.51. Sudoku supplies a fixed 9×9 puzzle, two solver iterations and comparison against all 81 expected cells. Hanoi uses twelve plates and checks the destination array. | Integer kernels are plausible, but PULP harness headers, callbacks and core/timer calls need a declared adapter. Sudoku's recursion can reach roughly 81 cells, creating substantial stack risk under the unchanged 1,664-byte limit. No target compatibility is established. |
+| PULPino sequential tests: [Sudoku solver](https://github.com/pulp-platform/pulpino/blob/master/sw/apps/sequential_tests/sudokusolver/sudokusolver.c), [expected solution](https://github.com/pulp-platform/pulpino/blob/master/sw/apps/sequential_tests/sudokusolver/sudokusolver.h), [Hanoi](https://github.com/pulp-platform/pulpino/blob/master/sw/apps/sequential_tests/towerofhanoi/towerofhanoi.c) | Inspected headers specify Solderpad Hardware License 0.51. Sudoku supplies a fixed 9×9 puzzle, two solver iterations and comparison against all 81 expected cells. Hanoi uses twelve plates and checks the destination array. | **Sudoku was subsequently qualified** with a pinned adapter, preserved solver, fixed 9×9 input and all-81-cell output check. Its preregistered memory split is 2,304-byte program / 5,760-byte stack within the same 8 KiB RAM, deliberately different from the earlier 6,400/1,664 split. The 12-candidate campaign produced all-correct outcomes and a +64-LUT4 oracle speedup of 1.017634×. It establishes only that fixed input, not arbitrary Sudoku. See the [measured report](../reports/2026-10-28-pulpino-sudoku-selector-r4/README.md). |
 | [rv8-bench](https://github.com/larkmjc/rv8-bench) | Integer-oriented programs include qsort, AES, NORX, Dhrystone, primes, miniz and SHA-512. README documents RISC-V 32/64 builds with a musl toolchain and rv8/QEMU execution. No clear repository-wide reuse license was found. | Hosted runtime and memory assumptions need review. Many algorithms overlap consumed sorting/crypto/compression families. Emulator benchmark results are not custom-instruction hardware labels. Lower priority. |
 
 Some attractive names already fail a source-level size/interface screen:
@@ -51,25 +54,25 @@ Some attractive names already fail a source-level size/interface screen:
 These are source observations, not target-tested qualification rejections.
 Do not shrink inputs or relax gates to rescue them.
 
-## Safest next screens
+## Source-screen decisions and follow-up
 
-1. **Queens first.** Preserve all original iterations and upstream failure
-   reporting; compare the [reference output](https://github.com/llvm/llvm-test-suite/blob/main/SingleSource/Benchmarks/Stanford/Queens.reference_output).
-   Its four active local arrays total 200 bytes on ILP32, but this excludes
-   recursion and call frames. First review the oracle and lineage, then inspect
-   the exact RV32I build's retained sections and stack bound. A small footprint
-   is not evidence of twelve candidates or useful opportunity.
-2. **Sudoku second, with stack as the first stop/go gate.** The two mutable
-   grids plus expected grid total about 972 bytes on ILP32, excluding other
-   state. Preserve the original puzzle, expected solution and both iterations.
-   Review recursive frames before any native qualification: a stack failure
-   must stop the lead, not motivate fewer cells or a larger partition.
+1. **Queens was screened and rejected** under the unchanged pool/opportunity
+   requirements: three calibrated executable formulas and at most 600
+   analytically saved cycles (0.000129%), below the preregistered opportunity
+   threshold. The original 5,000-solve self-check passed; no candidate was
+   measured. Preserve the [discovery diagnosis](../reports/2026-10-28-llvm-stanford-queens-discovery-diagnosis-r1/README.md)
+   and do not retry by weakening the gate.
+2. **Sudoku is now completed as a fixed-input pilot.** The r4 report records
+   baseline qualification, full-pool measured outcomes, selected-family
+   exclusion, and matched-budget policy replay. Do not present its 12 candidate
+   rows as 12 independent workloads or rerun this consumed target as
+   prospective evidence.
 
-For either lead, pin source/license/input/oracle hashes and a separate adapter
-contract before baseline-only qualification. Require the unchanged RV32I/ILP32,
-compiler, 8-KiB RAM partition, stack verifier, relocation-safe extraction,
-twelve-candidate pool and joint opportunity gates. Audit exact formula families
-and source lineage against every historical context. Only an accepted workload
-followed by a separate reviewed, committed and pushed zero-label policy release
-can proceed to candidate measurements. Qualification itself adds no training
-label or model-quality evidence.
+For any new source, pin source/license/input/oracle hashes and a separate
+adapter contract before baseline-only qualification. Require the declared
+RV32I/ILP32 compiler and PCPI interface, an explicit 8-KiB RAM partition and
+stack verifier, relocation-safe extraction, the frozen candidate-pool and joint
+opportunity gates, and a formula-family/source-lineage audit. Only an accepted
+workload followed by a separate reviewed, committed and pushed zero-label
+policy release can proceed to candidate measurements. Qualification alone
+adds no candidate label or model-quality evidence.

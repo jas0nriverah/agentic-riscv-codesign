@@ -11,7 +11,7 @@ import copy
 from . import budgeted_selection as b, codesign as c
 from .model import _number
 
-SCHEMA = 'isaforge-grouped-decision-board-v1'
+SCHEMA = 'isaforge-grouped-decision-board-v2'
 PREDICTION_FIELDS = {
     'pairwise_rank_score', 'pairwise_rank_position',
     'factorized_feasibility_probability',
@@ -119,6 +119,22 @@ def build_grouped_decision_board(candidates: list[dict], predictions: dict[str, 
               list(range(1, len(rows)+1)),
               'Pairwise rank positions must form one complete unique ordering')
     rows.sort(key=lambda row: (row['pairwise_rank_position'], row['candidate_id']))
+    unattempted = [row for row in rows if not row['attempted']]
+    utility_order = sorted(unattempted, key=lambda row: (
+        -row['factorized_decision_score'],
+        -row['analytic_cycle_reduction'],
+        row['pairwise_rank_position'], row['candidate_id']))
+    utility_recommended = utility_order[0] if utility_order else None
+    utility_max = (utility_recommended['factorized_decision_score']
+                   if utility_recommended is not None else None)
+    utility_ranks = {row['candidate_id']: index
+                     for index, row in enumerate(utility_order, start=1)}
+    for row in rows:
+        row['factorized_decision_rank'] = utility_ranks.get(row['candidate_id'])
+        row['decision_score_ratio_to_recommendation'] = (
+            row['factorized_decision_score'] / utility_max
+            if not row['attempted'] and utility_max is not None and utility_max > 0
+            else None)
     recommended = next((row['candidate_id'] for row in rows if not row['attempted']), None)
     return dict(schema=SCHEMA, scope='public features + frozen predictions + paid observations only',
         area_cap_lut4=area_cap, minimum_routed_fmax_mhz=clock_mhz,
@@ -126,8 +142,21 @@ def build_grouped_decision_board(candidates: list[dict], predictions: dict[str, 
         score_semantics=dict(pairwise_rank='relative ordering only; not speedup or probability',
             factorized_feasibility_score='uncalibrated ranking signal; never a hard feasibility gate',
             factorized_score_disagreement='uncalibrated ensemble spread; not an interval',
-            analytic_latency_speedup='calibrated analytic estimate; not a measured outcome'),
+            analytic_latency_speedup='calibrated analytic estimate; not a measured outcome',
+            factorized_decision_score='uncalibrated candidate-ordering proxy: feasibility score multiplied by analytic cycle reduction; not a calibrated expected value'),
         advisory_default_candidate_id=recommended,
         advisory_basis='highest pairwise-ranked unattempted candidate; LLM may override with a concise evidence-based decision summary',
+        utility_recommendation_candidate_id=(utility_recommended['candidate_id']
+                                            if utility_recommended else None),
+        utility_recommendation=(dict(candidate_id=utility_recommended['candidate_id'],
+            formula=utility_recommended['formula'],
+            factorized_decision_score=utility_recommended['factorized_decision_score'],
+            factorized_decision_rank=1,
+            factorized_feasibility_score=utility_recommended['factorized_feasibility_score'],
+            analytic_cycle_reduction=utility_recommended['analytic_cycle_reduction'],
+            pairwise_rank_position=utility_recommended['pairwise_rank_position'])
+            if utility_recommended else None),
+        utility_recommendation_basis=(
+            'highest frozen factorized decision score among unattempted candidates; proxy is uncalibrated and advisory only'),
         unattempted_candidates=sum(not row['attempted'] for row in rows),
         rows=rows)

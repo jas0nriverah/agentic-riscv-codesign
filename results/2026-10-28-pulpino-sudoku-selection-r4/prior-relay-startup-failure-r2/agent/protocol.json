@@ -1,0 +1,31 @@
+{
+  "schema": "isaforge-pulpino-sudoku-live-agent-observability-v1",
+  "target": "pulpino-sudoku",
+  "target_context_id": "830a8fd39202ed2a7550ae2d202b66fba3f229076d1ba83f579d8bd8b0e2f114",
+  "provider": "codex-chat-bridge",
+  "model_label": "current Codex chat model; exact deployment ID unavailable",
+  "prelabel_commit": "70ec2c011f6bfaab8676d518146d01e5f4967aa7",
+  "preregistration_manifest_sha256": "b44e6ad0e79be03620b797dc782141b27d90538ca9ffe9257bf9ab64f3ba6030",
+  "budget": 3,
+  "area_cap_lut4": 64,
+  "minimum_routed_fmax_mhz": 12.0,
+  "memory": {
+    "mode": "hybrid",
+    "corpus_rows": 106,
+    "target_families_excluded": true,
+    "lexical": "TF-IDF cosine",
+    "semantic": "TF-IDF + truncated-SVD cosine",
+    "fusion": "reciprocal-rank fusion; k=60",
+    "knowledge_graph": "typed graph constructed and source-hashed; separate graph mode is available but not queried in this episode",
+    "max_retrieved_bytes": 40000
+  },
+  "tools": [
+    "list_candidates",
+    "predict",
+    "measure",
+    "finalize"
+  ],
+  "model_routing": "single current Codex chat model; no cross-provider routing or API model selection in this episode",
+  "telemetry": "SQLite is a read-only analysis projection; sealed JSON ledger remains authoritative",
+  "token_usage": "unavailable for current Codex chat bridge"
+}

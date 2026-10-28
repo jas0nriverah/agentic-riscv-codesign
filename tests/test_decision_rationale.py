@@ -193,6 +193,15 @@ def test_grouped_decision_links_later_outcome_without_changing_pre_attempt_conte
     assert decision['pairwise_rank_position'] == 2
     assert decision['advisory_default_candidate_id'] == 't1'
     assert decision['deviation_from_advisory'] is True
+    board = pre_attempt['selection_board']
+    chosen_board_row = next(row for row in board['rows'] if row['candidate_id'] == 't2')
+    assert decision['utility_recommendation_candidate_id'] == \
+        board['utility_recommendation_candidate_id']
+    assert decision['factorized_decision_rank'] == chosen_board_row['factorized_decision_rank']
+    assert decision['decision_score_ratio_to_recommendation'] == \
+        chosen_board_row['decision_score_ratio_to_recommendation']
+    assert decision['deviation_from_utility_recommendation'] == \
+        ('t2' != board['utility_recommendation_candidate_id'])
     assert pre_attempt['selection_board']['rows'][1]['paid_verification'] is None
     assert pre_attempt['observations'] == []
     assert decision['paid_verification']['status'] == outcome_status
