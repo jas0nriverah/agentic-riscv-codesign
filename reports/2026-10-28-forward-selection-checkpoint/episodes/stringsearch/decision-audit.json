@@ -1,0 +1,144 @@
+{
+  "schema": "isaforge-postepisode-decision-audit-v1",
+  "scope": "Post-episode deterministic explanation audit; no feedback to policies or hidden-pool outcome decoding.",
+  "charged_probes": 2,
+  "paid_budget": 2,
+  "unused_budget": 0,
+  "model_decisions": 4,
+  "provider_calls": 0,
+  "provider_calls_semantics": "Bridge API telemetry; not model decision count.",
+  "selected_id": null,
+  "episode_status": "finalized",
+  "probes": [
+    {
+      "probe": 1,
+      "tool_sequence": 2,
+      "candidate_id": "ee8ec7bf00baeb6021de6d78c7183215b7e866a92954e0d6ceaec6cf15ac3da5",
+      "formula": "add(in0,slli(in1,2))",
+      "logged_reason": {
+        "text": "Measure the utility recommendation: rank 1 in pairwise, merit and frequency, projected cycle reduction 0.739%, versus 0.0435% for the other candidate. Its feasibility score 0.498 is uncalibrated; verify actual area, timing and correctness.",
+        "author": "model",
+        "verified": false,
+        "interpretation": "Recorded decision note; not validated reasoning or chain of thought."
+      },
+      "public_advice": {
+        "pairwise_rank": 1,
+        "pairwise_recommendation_id": "ee8ec7bf00baeb6021de6d78c7183215b7e866a92954e0d6ceaec6cf15ac3da5",
+        "utility_rank": 1,
+        "utility_recommendation_id": "ee8ec7bf00baeb6021de6d78c7183215b7e866a92954e0d6ceaec6cf15ac3da5",
+        "utility_score_ratio": 1.0,
+        "feasibility_score": 0.4983265995979309,
+        "analytic_cycle_reduction": 0.007388266771111152,
+        "frequency_max_ids": [
+          "ee8ec7bf00baeb6021de6d78c7183215b7e866a92954e0d6ceaec6cf15ac3da5"
+        ],
+        "merit_max_ids": [
+          "ee8ec7bf00baeb6021de6d78c7183215b7e866a92954e0d6ceaec6cf15ac3da5"
+        ],
+        "analytic_max_ids": [
+          "ee8ec7bf00baeb6021de6d78c7183215b7e866a92954e0d6ceaec6cf15ac3da5"
+        ],
+        "uncertainty_calibrated": false
+      },
+      "host_descriptive_comparison": {
+        "followed_pairwise_advice": true,
+        "followed_utility_advice": true,
+        "interpretation": "Post-episode comparison of public fields; not an inferred agent intention."
+      },
+      "observed_verification": {
+        "status": "area_infeasible",
+        "correctness_verified": true,
+        "device_fits": true,
+        "area_delta_lut4": 70.0,
+        "area_fits": false,
+        "routed_fmax_min_mhz": 61.85439682006836,
+        "timing_fits": true,
+        "verified_feasible": false,
+        "speedup": 1.007443259558375
+      },
+      "measurement_seconds": 39.95467845899111,
+      "provenance": {
+        "action_context_sha256": "e5cedc949017d13ada568dc7b661cb3c153409d447e49534dd5c7205a0321f67",
+        "model_decision_call": 2,
+        "action_context_role": null,
+        "action_context_provider_call": null,
+        "measurement_id": "tool-2",
+        "ledger_observation_sha256": "6b28e445058a66cadc1230f6a75fbf92e2907094e75d833c4c3ea829e166f23a",
+        "training_sha256": "5091a19f9bdd89421652b236e5bd9e9847e4e70a6e9127999f6996a4f90be89e",
+        "grouped_predictions_sha256": "6d061a69e0742803cf5b831c9d3a9cc65f2f5ba2a510acf8fcb59a6c95296ec4"
+      }
+    },
+    {
+      "probe": 2,
+      "tool_sequence": 3,
+      "candidate_id": "c9c796cb59b7fe17b41b5222bf9deca8b051828d87b96b4f0e8f4b34e45243fc",
+      "formula": "sub(addi(0,1),in0)",
+      "logged_reason": {
+        "text": "The first probe is +70 LUT4 and exceeds the +64 cap. Measure the sole remaining candidate, now the utility recommendation, with projected 0.0435% cycle reduction. Its 0.670 feasibility score is advisory; establish a feasible improvement or retain baseline.",
+        "author": "model",
+        "verified": false,
+        "interpretation": "Recorded decision note; not validated reasoning or chain of thought."
+      },
+      "public_advice": {
+        "pairwise_rank": 2,
+        "pairwise_recommendation_id": "c9c796cb59b7fe17b41b5222bf9deca8b051828d87b96b4f0e8f4b34e45243fc",
+        "utility_rank": 1,
+        "utility_recommendation_id": "c9c796cb59b7fe17b41b5222bf9deca8b051828d87b96b4f0e8f4b34e45243fc",
+        "utility_score_ratio": 1.0,
+        "feasibility_score": 0.6704709529876709,
+        "analytic_cycle_reduction": 0.00043490313867811103,
+        "frequency_max_ids": [
+          "c9c796cb59b7fe17b41b5222bf9deca8b051828d87b96b4f0e8f4b34e45243fc"
+        ],
+        "merit_max_ids": [
+          "c9c796cb59b7fe17b41b5222bf9deca8b051828d87b96b4f0e8f4b34e45243fc"
+        ],
+        "analytic_max_ids": [
+          "c9c796cb59b7fe17b41b5222bf9deca8b051828d87b96b4f0e8f4b34e45243fc"
+        ],
+        "uncertainty_calibrated": false
+      },
+      "host_descriptive_comparison": {
+        "followed_pairwise_advice": true,
+        "followed_utility_advice": true,
+        "interpretation": "Post-episode comparison of public fields; not an inferred agent intention."
+      },
+      "observed_verification": {
+        "status": "area_infeasible",
+        "correctness_verified": true,
+        "device_fits": true,
+        "area_delta_lut4": 100.0,
+        "area_fits": false,
+        "routed_fmax_min_mhz": 72.1552734375,
+        "timing_fits": true,
+        "verified_feasible": false,
+        "speedup": 1.0004350923617118
+      },
+      "measurement_seconds": 32.89376258398988,
+      "provenance": {
+        "action_context_sha256": "6cc7ef275c8d3fd757b47de9b5683acf4e3deed0beec3c1a87331c7207e15fd5",
+        "model_decision_call": 3,
+        "action_context_role": null,
+        "action_context_provider_call": null,
+        "measurement_id": "tool-3",
+        "ledger_observation_sha256": "71ae17007b7917bca3ec633a3cc7370057b33160be92ca918f2cb9cbd9f9d5af",
+        "training_sha256": "5091a19f9bdd89421652b236e5bd9e9847e4e70a6e9127999f6996a4f90be89e",
+        "grouped_predictions_sha256": "6d061a69e0742803cf5b831c9d3a9cc65f2f5ba2a510acf8fcb59a6c95296ec4"
+      }
+    }
+  ],
+  "limitations": [
+    "Logged reasons are unverified model/policy notes; no hidden chain of thought is inferred.",
+    "Scores and ensemble spread are uncalibrated advice, not feasibility labels.",
+    "Historical v1 boards did not log utility recommendations; missing advice remains unavailable rather than retroactively inferred.",
+    "Observed outcomes are checked only against this episode\u2019s paid ledger projection; full native replay is separate.",
+    "One episode cannot establish that explanation or reviewer support improves decision quality."
+  ],
+  "provenance": {
+    "result_manifest_sha256": "313fb56d6e5041383a74db529b5093c0172b24f4893155040f451f851403e424",
+    "agent_manifest_sha256": "627a2b46058905ebebe3f2980bbaea23c0228a40f1bdef086d5206013729544c",
+    "ledger_sha256": "90a06fd268397c49219d9d3e2ab6d7d94226ce42f2b5b775cb35e81890b8d61d",
+    "agent_report_sha256": "1964213506a801e494cab4e6b3ca3505df437e527fc7b24211f8190ff83264b8",
+    "script_sha256": "94005b5a2b5821b3a8e88a5bf158e9f5750e92951f7234ad5444b1dcbc828cc5"
+  }
+}

@@ -1,0 +1,813 @@
+{
+  "schema": "isaforge-baseline-only-candidate-size-coverage-v1",
+  "scope": "baseline-only exploratory coverage; not a qualification, label, or selection result",
+  "declared_max_operation_sizes": [
+    4,
+    5,
+    6
+  ],
+  "extractor": "existing src.candidates.extractCandidates, existing operation/block/dataflow logic and existing guards/calibration; scoped in-memory maxSize override only",
+  "studies": {
+    "countnegative-v2": {
+      "study": "countnegative-v2",
+      "evidence": {
+        "qualification_manifest_sha256": "269ba2336a06eb965cd396af92b1bfeef55912d8629da9fb34518d8dbf2231eb",
+        "protocol_sha256": "7f22dc5f8e534abbb20ab86e13be038b71308287d56263b81becb316ef155d18",
+        "qualification_sha256": "d088c5d62904ac728ef68db54062a3597d0be4bb33d61e0cc4acd8462b080cf8",
+        "archive_manifest_sha256": "b05e8e235db8bb8634337e3d7d462d9d0078429d0bd45d0434f242e7521ad76e",
+        "raw_archive_sha256": "d9489590390ddd00e7ea7ecd6b6f93d29fca6770f7f160a815a42f32509f4c11",
+        "plan_sha256": "709151aa5139324be4ee3d294202af30fcfa8b6adc3482a58828048e3fb179b0",
+        "discovery_sha256": "e71838fcd310455a9a206cd0624d1f8db69b9e50441f6b1ac1760f36ee1d75f7",
+        "profile_sha256": "a2958e3e044f8b01770440827c30221576a61e9344d04529ce6f0c8442c84636"
+      },
+      "context_id": "299f36184363e979d30841a77c1471dfd347ed8db47380b0512db0c7bc3e23d8",
+      "source_bindings": {
+        "scripts/qualify_countnegative_v2.py": "ab3a343df6d9404ccbf30dcfc1059e68ed40e848d898aabe0d7dba6b51bdeeeb",
+        "scripts/qualify_nanocobs_v2.py": "17228aeffef6792b39f4808cdf43dd7f83ab03f9fbd2315893f3763b82a7f2c5",
+        "scripts/qualify_opportunity_sources.py": "389e34ba724f2dcc3766752e404e46006b6aa7fced4f2e21508127ac08e8ffe1",
+        "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+        "isaforge/observed_command.py": "f56bf235b31205c842ea04ab5a493ee7f7e6731844e05b6d8991f21d9f3be41e",
+        "isaforge/countnegative_v2_workload.py": "07ab72062c355784e5f82333953479d224878d96cade2d375171035c38764614",
+        "tests/test_countnegative_v2_workload.py": "cbc0943cb8e2ff25487953b71803eae762b3ca6b5ad9d66fb97bcfadb4bf5f26",
+        "docs/countnegative-v2-adapter-contract-2026-10-28.md": "3ffbdbe438a1472df0c0bd68768114b9667d0f3a7563d931bcbdd095e18bdab7",
+        "isaforge/tacle_countnegative_workload.py": "9926341deda881a0ab4c01f2644bd193fcc9a49c498a452fe203b82cc57892bf",
+        "isaforge/nanocobs_v2_workload.py": "b38d575dbf59bfc1cd75052ebff304a14e4ce6e191be077ba3dd2c2edde06329",
+        "results/2026-10-26-lift-selection-corpus/corpus.json": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+        "isaforge/tacle_workload.py": "2c0bd85266b164ff599154911a981566c8cc8353cb0ac7ccbd61c0948250ea4f",
+        "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+        "scripts/blind_campaign.py": "ce8c0d85947ae76dd68aa1a2d9d0c2914018a1377cb60ba9260e33bd830fcf43",
+        "isaforge/semantic_selection.py": "f1779def0ae538ff92f6f148f7a76a8d022082f5db940e5fd67825c40397ffc8",
+        "isaforge/structural_features_v3.py": "b0a4c8233c2a39b675767151f21698d6418c5b3b7bb357741815986033396fb0",
+        "isaforge/area_model_v2.py": "389f6592d6a3fb801638dcc5237cac65f8ab504caac10efef1a43e5d49cf6cf1",
+        "isaforge/area_model.py": "ade5dcc32ef66d0ea03ea9ec4937687564dff36c4483afc76ac59f9dc4a69447",
+        "isaforge/rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+        "isaforge/budgeted_selection.py": "542b7467a830e692a708e23faff87a5c0cead211cdef20ed94753dc5e200cfa3",
+        "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+        "isaforge/ranking.py": "5e332db4dfa03a226792929726184e6ff812065b73d64f9321c138839b833587",
+        "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+        "isaforge/prospective_selection.py": "588d7a4505410587d423b95ad706e829e2e3c2fccdcd0b850fa2f8074f158247",
+        "isaforge/speedup_corpus.py": "d4bbad592260277ef0e66213041dc78dae9c229e35bcf01511496f1decc06e3f",
+        "isaforge/codesign.py": "7dfed20b4914d75e093338710eb0dfd9f83a9ae157f8e768215b854a9c6d75c3",
+        "isaforge/latency_features.py": "c0cd549e0fc7baa8317a552ba4350e86b0342af2e4c7a8737afd02e520161b92",
+        "benchmarks/tacle/countnegative/isaforge_adapter.c": "1112f314eabf9ea6bac53040f3e924c9c24f2a1bdb619582e532e82b4aa5575a",
+        "benchmarks/tacle/COUNTNEGATIVE_SOURCES.json": "5905d06e6b7e5c10d6091551807d7ef5e99e717cf00e0ca95e346368b026eccb",
+        "benchmarks/tacle/countnegative/countnegative.c": "f821c2abb21460f64d601579ee7374d0b09987c32bf9012f857f6af6caba7d93",
+        "benchmarks/tacle/countnegative/ChangeLog.txt": "0d79487b703daee93fab8f911813babc4ecc9d40ff8faa7458d7af3d4bc7f04f",
+        "isaforge/campaign_evidence.py": "96e4a96379dc336e1c04fc8a3bbfb9971cf65281d14cfe140f4eecaec51a748e",
+        "isaforge/prospective_inputs.py": "90abbebb74ad967d498c126134b30401e195da7e12ceef405661e5742ef5f446",
+        "isaforge/guarded_attempts.py": "a382bb5061cfb9e0b0a61591870735195a7f98fb5f10c4f760d8acef398d454d",
+        "isaforge/guarded_evidence.py": "ea5730c8cb72e6e0b079b8f0c10bafb822ffd7f666bfc59651cfbf3b1f72a50e",
+        "hardware/embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+        "hardware/embench_memory.c": "343b26ae849f9bfab8ed197636449c4a91c5d78f26fe7f6ff4f960901520b847",
+        "hardware/checked_sim.cpp": "477635f316551bf85bd7ac1addc11bb9fa2c252969202621e75692ea5cfd9f07"
+      },
+      "caps": {
+        "4": {
+          "max_operation_size": 4,
+          "raw_formula_count": 5,
+          "executable_formula_count": 4,
+          "calibrated_relocation_safe_formula_count": 4,
+          "selected_pool_count": 4,
+          "computational_pool_cap": 30,
+          "formulas": [
+            {
+              "formula": "sub(0,sltu(0,add(in0,in1)))",
+              "candidate_id": "c9fea2df4ac51d27ecd10b98600c886eee7527515aaa22038ad835d6e93d42f3",
+              "operation_count": 3,
+              "total_profile_replacements": 2,
+              "timed_region_replacements": 1,
+              "expected_instruction_savings": 2,
+              "projected_cycle_reduction": 0.000561032299430953
+            },
+            {
+              "formula": "addi(lui(-1540096),1826)",
+              "candidate_id": "44b462b19f848483602ad318ee524905331f212083f3cb66e09e9041584288f2",
+              "operation_count": 2,
+              "total_profile_replacements": 2,
+              "timed_region_replacements": 1,
+              "expected_instruction_savings": 1,
+              "projected_cycle_reduction": 0.00024044241404183698
+            },
+            {
+              "formula": "sltu(0,add(in0,in1))",
+              "candidate_id": "f85497bb06dae4846bde5e9269c03f4faeda446e4e3e7fccc79383646cdfd0aa",
+              "operation_count": 2,
+              "total_profile_replacements": 2,
+              "timed_region_replacements": 1,
+              "expected_instruction_savings": 1,
+              "projected_cycle_reduction": 0.00024044241404183698
+            },
+            {
+              "formula": "sub(0,sltu(0,in0))",
+              "candidate_id": "42e0aad5a2bedc3c6b7d6d909cf97e4999943cbb1f97f1ac99fab88d7a231f07",
+              "operation_count": 2,
+              "total_profile_replacements": 2,
+              "timed_region_replacements": 1,
+              "expected_instruction_savings": 1,
+              "projected_cycle_reduction": 0.00024044241404183698
+            }
+          ],
+          "projected_opportunity": {
+            "maximum_cycle_reduction": 0.000561032299430953,
+            "candidate_count_with_nonzero_projection": 4
+          },
+          "benefit_or_occurrence_filters_applied": false,
+          "matches_authenticated_cap4_discovery": true,
+          "signed_candidate_count": 4
+        },
+        "5": {
+          "max_operation_size": 5,
+          "raw_formula_count": 5,
+          "executable_formula_count": 4,
+          "calibrated_relocation_safe_formula_count": 4,
+          "selected_pool_count": 4,
+          "computational_pool_cap": 30,
+          "formulas": [
+            {
+              "formula": "sub(0,sltu(0,add(in0,in1)))",
+              "candidate_id": "c9fea2df4ac51d27ecd10b98600c886eee7527515aaa22038ad835d6e93d42f3",
+              "operation_count": 3,
+              "total_profile_replacements": 2,
+              "timed_region_replacements": 1,
+              "expected_instruction_savings": 2,
+              "projected_cycle_reduction": 0.000561032299430953
+            },
+            {
+              "formula": "addi(lui(-1540096),1826)",
+              "candidate_id": "44b462b19f848483602ad318ee524905331f212083f3cb66e09e9041584288f2",
+              "operation_count": 2,
+              "total_profile_replacements": 2,
+              "timed_region_replacements": 1,
+              "expected_instruction_savings": 1,
+              "projected_cycle_reduction": 0.00024044241404183698
+            },
+            {
+              "formula": "sltu(0,add(in0,in1))",
+              "candidate_id": "f85497bb06dae4846bde5e9269c03f4faeda446e4e3e7fccc79383646cdfd0aa",
+              "operation_count": 2,
+              "total_profile_replacements": 2,
+              "timed_region_replacements": 1,
+              "expected_instruction_savings": 1,
+              "projected_cycle_reduction": 0.00024044241404183698
+            },
+            {
+              "formula": "sub(0,sltu(0,in0))",
+              "candidate_id": "42e0aad5a2bedc3c6b7d6d909cf97e4999943cbb1f97f1ac99fab88d7a231f07",
+              "operation_count": 2,
+              "total_profile_replacements": 2,
+              "timed_region_replacements": 1,
+              "expected_instruction_savings": 1,
+              "projected_cycle_reduction": 0.00024044241404183698
+            }
+          ],
+          "projected_opportunity": {
+            "maximum_cycle_reduction": 0.000561032299430953,
+            "candidate_count_with_nonzero_projection": 4
+          },
+          "benefit_or_occurrence_filters_applied": false,
+          "matches_authenticated_cap4_discovery": null
+        },
+        "6": {
+          "max_operation_size": 6,
+          "raw_formula_count": 5,
+          "executable_formula_count": 4,
+          "calibrated_relocation_safe_formula_count": 4,
+          "selected_pool_count": 4,
+          "computational_pool_cap": 30,
+          "formulas": [
+            {
+              "formula": "sub(0,sltu(0,add(in0,in1)))",
+              "candidate_id": "c9fea2df4ac51d27ecd10b98600c886eee7527515aaa22038ad835d6e93d42f3",
+              "operation_count": 3,
+              "total_profile_replacements": 2,
+              "timed_region_replacements": 1,
+              "expected_instruction_savings": 2,
+              "projected_cycle_reduction": 0.000561032299430953
+            },
+            {
+              "formula": "addi(lui(-1540096),1826)",
+              "candidate_id": "44b462b19f848483602ad318ee524905331f212083f3cb66e09e9041584288f2",
+              "operation_count": 2,
+              "total_profile_replacements": 2,
+              "timed_region_replacements": 1,
+              "expected_instruction_savings": 1,
+              "projected_cycle_reduction": 0.00024044241404183698
+            },
+            {
+              "formula": "sltu(0,add(in0,in1))",
+              "candidate_id": "f85497bb06dae4846bde5e9269c03f4faeda446e4e3e7fccc79383646cdfd0aa",
+              "operation_count": 2,
+              "total_profile_replacements": 2,
+              "timed_region_replacements": 1,
+              "expected_instruction_savings": 1,
+              "projected_cycle_reduction": 0.00024044241404183698
+            },
+            {
+              "formula": "sub(0,sltu(0,in0))",
+              "candidate_id": "42e0aad5a2bedc3c6b7d6d909cf97e4999943cbb1f97f1ac99fab88d7a231f07",
+              "operation_count": 2,
+              "total_profile_replacements": 2,
+              "timed_region_replacements": 1,
+              "expected_instruction_savings": 1,
+              "projected_cycle_reduction": 0.00024044241404183698
+            }
+          ],
+          "projected_opportunity": {
+            "maximum_cycle_reduction": 0.000561032299430953,
+            "candidate_count_with_nonzero_projection": 4
+          },
+          "benefit_or_occurrence_filters_applied": false,
+          "matches_authenticated_cap4_discovery": null
+        }
+      },
+      "cap4_candidate_roster": [
+        [
+          "sub(0,sltu(0,add(in0,in1)))",
+          "c9fea2df4ac51d27ecd10b98600c886eee7527515aaa22038ad835d6e93d42f3"
+        ],
+        [
+          "addi(lui(-1540096),1826)",
+          "44b462b19f848483602ad318ee524905331f212083f3cb66e09e9041584288f2"
+        ],
+        [
+          "sltu(0,add(in0,in1))",
+          "f85497bb06dae4846bde5e9269c03f4faeda446e4e3e7fccc79383646cdfd0aa"
+        ],
+        [
+          "sub(0,sltu(0,in0))",
+          "42e0aad5a2bedc3c6b7d6d909cf97e4999943cbb1f97f1ac99fab88d7a231f07"
+        ]
+      ],
+      "scope": "Exploratory baseline-only extraction and public projection. No candidate labels, target outcomes, or model inputs used.",
+      "elapsed_host_seconds": 0.32453583399183117
+    },
+    "stringsearch-v2": {
+      "study": "stringsearch-v2",
+      "evidence": {
+        "qualification_manifest_sha256": "6d75d7c2f89928c3f8f3d661d97fa30c635a48aaef32f9fca859842324240d2d",
+        "protocol_sha256": "9ac293aeb0ef28cbfbca49b9f84a6d077b74c295b8553bebcd6216e25328f3b9",
+        "qualification_sha256": "43f9255d7d7d30e1ab3a6a593de637fdd5828b47865787da33c992bfb4cb8718",
+        "archive_manifest_sha256": "96f8c114578cedfd48e5a143cd1ce78af085446e7b0fa2fff2f03442773ad880",
+        "raw_archive_sha256": "32c34f3be88553c7398e14fa91fba05a60e537688d070ce9c95b98a0fa31be0c",
+        "plan_sha256": "11f8d0793db7176da2855f265e82d48be84de499b2f37815978fc63c79b2287d",
+        "discovery_sha256": "6a34207dc83402756a8d6488004b21aedeab270b46ff1243b4b6f582cf2b28a8",
+        "profile_sha256": "67e11797f87e35c1e2440e58b0934a8453106b822d5d54383b164156efb60922"
+      },
+      "context_id": "051e0cd036ca0046cf6766bef88969b5893f747165ca0060cb4d7fbf32b8dd5f",
+      "source_bindings": {
+        "scripts/qualify_mibench_stringsearch_v2.py": "b8fdbbd5a6c11e3fd5be3770224da7147899406f3ff5f5162dbbd637226be43d",
+        "scripts/qualify_nanocobs_v2.py": "17228aeffef6792b39f4808cdf43dd7f83ab03f9fbd2315893f3763b82a7f2c5",
+        "scripts/qualify_opportunity_sources.py": "389e34ba724f2dcc3766752e404e46006b6aa7fced4f2e21508127ac08e8ffe1",
+        "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+        "isaforge/observed_command.py": "f56bf235b31205c842ea04ab5a493ee7f7e6731844e05b6d8991f21d9f3be41e",
+        "isaforge/mibench_stringsearch_v2_workload.py": "08a3cd9796ffd6b2727a0ea15371801308c8af17e54f97378b43b7ba3c8bd1c4",
+        "tests/test_mibench_stringsearch_v2_workload.py": "ab073cef7325b82a8b3b2cf59b7e465fe8fdf77884a51f3e7e59ea6a6503f832",
+        "docs/mibench-stringsearch-v2-adapter-contract-2026-10-28.md": "92df1e257dfa597fdd3dd3c96a5f543aa34fd5d756042fb3c78ac7b5e1acc999",
+        "isaforge/mibench_stringsearch_workload.py": "3cbc274d702e56ae758da5a5eb6d23cd78fa78fc01633f68a969138b111e1b2d",
+        "isaforge/nanocobs_v2_workload.py": "b38d575dbf59bfc1cd75052ebff304a14e4ce6e191be077ba3dd2c2edde06329",
+        "results/2026-10-26-lift-selection-corpus/corpus.json": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+        "scripts/qualify_mibench_stringsearch.py": "2c60cddaac95e3ee56268ddf48286d54aa00a22be8f2f54183e6151292566f04",
+        "tests/test_mibench_stringsearch_workload.py": "a70319e98ff06b6a6db791eabbba68583c95ce82195f8261cb22844d4315ddc5",
+        "docs/mibench-stringsearch-adapter-contract-2026-10-27.md": "a78c9fd55d401a7a2bc242f23e1a8c9d497fbadcdec4030a6eb3a775ce5d0f26",
+        "benchmarks/mibench/stringsearch/MIBENCH_SOURCE_PIN.json": "0be49f305e47fbc0c7e7e84fbe74a3d43372f33afb840031b3ca260a57eb3ff8",
+        "benchmarks/mibench/stringsearch/adapter.c": "a46c8975a98e355153e5f5a20da023c3838103b37a981ee5a9b6da800d7be8fc",
+        "benchmarks/mibench/stringsearch/pbmsrch_small.c": "e2bd846a0ae52e2a340c3885379dd06582dca26daf2b691aae0ab6f0d45fc4bb",
+        "benchmarks/mibench/stringsearch/LICENSE": "b43faa73aa52be87b3121a49495c833d728f10df7652b30d02a9d8578c56f819",
+        "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+        "isaforge/campaign_evidence.py": "96e4a96379dc336e1c04fc8a3bbfb9971cf65281d14cfe140f4eecaec51a748e",
+        "isaforge/prospective_inputs.py": "90abbebb74ad967d498c126134b30401e195da7e12ceef405661e5742ef5f446",
+        "hardware/embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+        "hardware/embench_memory.c": "343b26ae849f9bfab8ed197636449c4a91c5d78f26fe7f6ff4f960901520b847",
+        "hardware/checked_sim.cpp": "477635f316551bf85bd7ac1addc11bb9fa2c252969202621e75692ea5cfd9f07",
+        "isaforge/guarded_attempts.py": "a382bb5061cfb9e0b0a61591870735195a7f98fb5f10c4f760d8acef398d454d",
+        "isaforge/guarded_evidence.py": "ea5730c8cb72e6e0b079b8f0c10bafb822ffd7f666bfc59651cfbf3b1f72a50e"
+      },
+      "caps": {
+        "4": {
+          "max_operation_size": 4,
+          "raw_formula_count": 10,
+          "executable_formula_count": 2,
+          "calibrated_relocation_safe_formula_count": 2,
+          "selected_pool_count": 2,
+          "computational_pool_cap": 30,
+          "formulas": [
+            {
+              "formula": "add(in0,slli(in1,2))",
+              "candidate_id": "ee8ec7bf00baeb6021de6d78c7183215b7e866a92954e0d6ceaec6cf15ac3da5",
+              "operation_count": 2,
+              "total_profile_replacements": 581,
+              "timed_region_replacements": 581,
+              "expected_instruction_savings": 581,
+              "projected_cycle_reduction": 0.007388266771111241
+            },
+            {
+              "formula": "sub(addi(0,1),in0)",
+              "candidate_id": "c9c796cb59b7fe17b41b5222bf9deca8b051828d87b96b4f0e8f4b34e45243fc",
+              "operation_count": 2,
+              "total_profile_replacements": 57,
+              "timed_region_replacements": 57,
+              "expected_instruction_savings": 57,
+              "projected_cycle_reduction": 0.00043490313867814876
+            }
+          ],
+          "projected_opportunity": {
+            "maximum_cycle_reduction": 0.007388266771111241,
+            "candidate_count_with_nonzero_projection": 2
+          },
+          "benefit_or_occurrence_filters_applied": false,
+          "matches_authenticated_cap4_discovery": true,
+          "signed_candidate_count": 2
+        },
+        "5": {
+          "max_operation_size": 5,
+          "raw_formula_count": 10,
+          "executable_formula_count": 2,
+          "calibrated_relocation_safe_formula_count": 2,
+          "selected_pool_count": 2,
+          "computational_pool_cap": 30,
+          "formulas": [
+            {
+              "formula": "add(in0,slli(in1,2))",
+              "candidate_id": "ee8ec7bf00baeb6021de6d78c7183215b7e866a92954e0d6ceaec6cf15ac3da5",
+              "operation_count": 2,
+              "total_profile_replacements": 581,
+              "timed_region_replacements": 581,
+              "expected_instruction_savings": 581,
+              "projected_cycle_reduction": 0.007388266771111241
+            },
+            {
+              "formula": "sub(addi(0,1),in0)",
+              "candidate_id": "c9c796cb59b7fe17b41b5222bf9deca8b051828d87b96b4f0e8f4b34e45243fc",
+              "operation_count": 2,
+              "total_profile_replacements": 57,
+              "timed_region_replacements": 57,
+              "expected_instruction_savings": 57,
+              "projected_cycle_reduction": 0.00043490313867814876
+            }
+          ],
+          "projected_opportunity": {
+            "maximum_cycle_reduction": 0.007388266771111241,
+            "candidate_count_with_nonzero_projection": 2
+          },
+          "benefit_or_occurrence_filters_applied": false,
+          "matches_authenticated_cap4_discovery": null
+        },
+        "6": {
+          "max_operation_size": 6,
+          "raw_formula_count": 10,
+          "executable_formula_count": 2,
+          "calibrated_relocation_safe_formula_count": 2,
+          "selected_pool_count": 2,
+          "computational_pool_cap": 30,
+          "formulas": [
+            {
+              "formula": "add(in0,slli(in1,2))",
+              "candidate_id": "ee8ec7bf00baeb6021de6d78c7183215b7e866a92954e0d6ceaec6cf15ac3da5",
+              "operation_count": 2,
+              "total_profile_replacements": 581,
+              "timed_region_replacements": 581,
+              "expected_instruction_savings": 581,
+              "projected_cycle_reduction": 0.007388266771111241
+            },
+            {
+              "formula": "sub(addi(0,1),in0)",
+              "candidate_id": "c9c796cb59b7fe17b41b5222bf9deca8b051828d87b96b4f0e8f4b34e45243fc",
+              "operation_count": 2,
+              "total_profile_replacements": 57,
+              "timed_region_replacements": 57,
+              "expected_instruction_savings": 57,
+              "projected_cycle_reduction": 0.00043490313867814876
+            }
+          ],
+          "projected_opportunity": {
+            "maximum_cycle_reduction": 0.007388266771111241,
+            "candidate_count_with_nonzero_projection": 2
+          },
+          "benefit_or_occurrence_filters_applied": false,
+          "matches_authenticated_cap4_discovery": null
+        }
+      },
+      "cap4_candidate_roster": [
+        [
+          "add(in0,slli(in1,2))",
+          "ee8ec7bf00baeb6021de6d78c7183215b7e866a92954e0d6ceaec6cf15ac3da5"
+        ],
+        [
+          "sub(addi(0,1),in0)",
+          "c9c796cb59b7fe17b41b5222bf9deca8b051828d87b96b4f0e8f4b34e45243fc"
+        ]
+      ],
+      "scope": "Exploratory baseline-only extraction and public projection. No candidate labels, target outcomes, or model inputs used.",
+      "elapsed_host_seconds": 0.15891658299369738
+    },
+    "nanocobs-v2": {
+      "study": "nanocobs-v2",
+      "evidence": {
+        "qualification_manifest_sha256": "404a4ef043492379cac33b08604440b6b60d354c5fbccf409c5a9f04a107960b",
+        "protocol_sha256": "99b91a03917b453ec916da07ac09dc68cb695a6467cc85d27a14e92b1fbf21ce",
+        "qualification_sha256": "2642cd165aff016397604dc83a13ef77aee1c9fce7ba7e7217116615a2548932",
+        "archive_manifest_sha256": "8a3fbda7a75f5702a8e2a384cf8e1536d8f22d538fcf716cc031bf09ba255988",
+        "raw_archive_sha256": "e97029c521e84caef32c7020f279eb0d2b7cbd01f6fb802df3accd08fcee78ef",
+        "plan_sha256": "2ab679afb3820862e682f2046f2d6a6ea1b7cc610cb607a8270243bdce5bee59",
+        "discovery_sha256": "537bcd1e1101167bcf7c49002955469da527dce28dddbb84fba5657c7b7b400c",
+        "profile_sha256": "6d06eafb42a9c5acadc1afc56321789c81766d1e15b6317d44fbc98bbd6b1a07"
+      },
+      "context_id": "9eb8d5b253b033212eabf55f5d70b556014200eb93895f2f7242a127b5c90185",
+      "source_bindings": {
+        "scripts/qualify_nanocobs_v2.py": "17228aeffef6792b39f4808cdf43dd7f83ab03f9fbd2315893f3763b82a7f2c5",
+        "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+        "scripts/qualify_opportunity_sources.py": "389e34ba724f2dcc3766752e404e46006b6aa7fced4f2e21508127ac08e8ffe1",
+        "isaforge/observed_command.py": "f56bf235b31205c842ea04ab5a493ee7f7e6731844e05b6d8991f21d9f3be41e",
+        "isaforge/nanocobs_v2_workload.py": "b38d575dbf59bfc1cd75052ebff304a14e4ce6e191be077ba3dd2c2edde06329",
+        "tests/test_nanocobs_v2_workload.py": "aa488cda00848e7eb437104e2b0ae12af99d2817f6230876124e8e8726e01cf3",
+        "docs/nanocobs-v2-adapter-contract-2026-10-28.md": "5d943bdc5ddf243ef11d37e86820a69709f7d95ef7499ed1be7d0612fbcf6d93",
+        "benchmarks/nanocobs/SOURCE_PIN.json": "a5ca3bd627f6cf3df01bf53c32487d1ea73448b3b54e87bbacb536781a1ada42",
+        "benchmarks/nanocobs/adapter.c": "288871f8107c222ae5c2746caa0b1c49233cb204ae8f10834d1a4e80e76b819d",
+        "benchmarks/nanocobs/upstream/LICENSE": "be1ed16b605545037e3922495f3387a1630d0dc5e360905cb01fd9be16ff8f34",
+        "benchmarks/nanocobs/upstream/cobs.c": "7cc86cb168a76e153c202b330824787f6daa1cb7734e9030fc10da8ee1d88aa9",
+        "benchmarks/nanocobs/upstream/cobs.h": "9923b13fb8d3f3d7d3000290670fdc099d1cb0af9ff9fe65cac82514842f8745",
+        "benchmarks/nanocobs/upstream/tests/cobs_ref.c": "133e8a6844c1c10e2a0ccbd079970dafc0f8adb413f404e105b058fd530984c9",
+        "benchmarks/nanocobs/upstream/tests/cobs_ref.h": "e3eab4c6bfd8177e428be14f99823b2486f2873d0bb07dc854664cc037aeb7c9",
+        "benchmarks/nanocobs/upstream/tests/qemu/probe.c": "8a85a901a409049ba3b73e0488c5ce32c3aef04d23ee103dfb0fefcad32b93c4",
+        "results/2026-10-26-lift-selection-corpus/corpus.json": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+        "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+        "isaforge/campaign_evidence.py": "96e4a96379dc336e1c04fc8a3bbfb9971cf65281d14cfe140f4eecaec51a748e",
+        "isaforge/prospective_inputs.py": "90abbebb74ad967d498c126134b30401e195da7e12ceef405661e5742ef5f446",
+        "hardware/embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+        "hardware/embench_memory.c": "343b26ae849f9bfab8ed197636449c4a91c5d78f26fe7f6ff4f960901520b847",
+        "hardware/checked_sim.cpp": "477635f316551bf85bd7ac1addc11bb9fa2c252969202621e75692ea5cfd9f07"
+      },
+      "caps": {
+        "4": {
+          "max_operation_size": 4,
+          "raw_formula_count": 12,
+          "executable_formula_count": 10,
+          "calibrated_relocation_safe_formula_count": 10,
+          "selected_pool_count": 10,
+          "computational_pool_cap": 30,
+          "formulas": [
+            {
+              "formula": "addi(lui(16842752),257)",
+              "candidate_id": "c1461416687c586de22e1286e134717d5ec21e83cd7d0e9c261e85a5cd4a4a13",
+              "operation_count": 2,
+              "total_profile_replacements": 80862,
+              "timed_region_replacements": 80862,
+              "expected_instruction_savings": 80862,
+              "projected_cycle_reduction": 0.002517173645634173
+            },
+            {
+              "formula": "or(sltiu(in0,1),in1)",
+              "candidate_id": "5a1ca3063fee7cbf37b43c61613e9a4ccebec787c57df1939a1705b752d04932",
+              "operation_count": 2,
+              "total_profile_replacements": 65576,
+              "timed_region_replacements": 65576,
+              "expected_instruction_savings": 65576,
+              "projected_cycle_reduction": 0.0020413318862519667
+            },
+            {
+              "formula": "add(andi(in0,-4),in1)",
+              "candidate_id": "defe9b0edf3e5be732f13f6de0d64670c95a0706b9ccd649f35b2ec5b5fe57f9",
+              "operation_count": 2,
+              "total_profile_replacements": 47932,
+              "timed_region_replacements": 47932,
+              "expected_instruction_savings": 47932,
+              "projected_cycle_reduction": 0.001492087348600544
+            },
+            {
+              "formula": "sub(addi(in0,-1),in1)",
+              "candidate_id": "ef529c19e59ae58037ef57fb4c51b19644dd7bc77a77411fde6dcc83a271993f",
+              "operation_count": 2,
+              "total_profile_replacements": 47932,
+              "timed_region_replacements": 47932,
+              "expected_instruction_savings": 47932,
+              "projected_cycle_reduction": 0.001492087348600544
+            },
+            {
+              "formula": "addi(lui(-16842752),-257)",
+              "candidate_id": "ba9bc1fccece1078fc96d31f7d61a6f0ed48ed31f0789caf1fd9ffc67a7fcdbf",
+              "operation_count": 2,
+              "total_profile_replacements": 35234,
+              "timed_region_replacements": 35234,
+              "expected_instruction_savings": 35234,
+              "projected_cycle_reduction": 0.0010968080956478253
+            },
+            {
+              "formula": "addi(lui(-2139062272),128)",
+              "candidate_id": "a6aa177895530785747a52c496ecb75ca7a394dbea8901b7cd2f8b79871884e4",
+              "operation_count": 2,
+              "total_profile_replacements": 35234,
+              "timed_region_replacements": 35234,
+              "expected_instruction_savings": 35234,
+              "projected_cycle_reduction": 0.0010968080956478253
+            },
+            {
+              "formula": "or(sltiu(in0,1),sltiu(in1,2))",
+              "candidate_id": "dbc1c8f2c53bbbb7676ea9456e36f184f4ec8aab1553091e65b4c131f6641e49",
+              "operation_count": 3,
+              "total_profile_replacements": 16406,
+              "timed_region_replacements": 16406,
+              "expected_instruction_savings": 32812,
+              "projected_cycle_reduction": 0.0011916485527273615
+            },
+            {
+              "formula": "or(in0,sltiu(in1,2))",
+              "candidate_id": "949e9c37aa925ae02be206bda3bcb70bd3c2113aeb3dc4599c72cb3bac976e8c",
+              "operation_count": 2,
+              "total_profile_replacements": 16406,
+              "timed_region_replacements": 16406,
+              "expected_instruction_savings": 16406,
+              "projected_cycle_reduction": 0.0005107065225974407
+            },
+            {
+              "formula": "or(sltiu(in0,1),sltiu(in1,1))",
+              "candidate_id": "ce5eb1fb238a2a2fc80b39feea9dc6c142194541a9126a3a83e72a947c194577",
+              "operation_count": 3,
+              "total_profile_replacements": 8191,
+              "timed_region_replacements": 8191,
+              "expected_instruction_savings": 16382,
+              "projected_cycle_reduction": 0.0005949526572832999
+            },
+            {
+              "formula": "or(in0,sltiu(in1,1))",
+              "candidate_id": "639cab1caeb7247fdb4996eb0e1f02a4b775002783d8b0e839880732aadcbf43",
+              "operation_count": 2,
+              "total_profile_replacements": 8191,
+              "timed_region_replacements": 8191,
+              "expected_instruction_savings": 8191,
+              "projected_cycle_reduction": 0.0002549797102642714
+            }
+          ],
+          "projected_opportunity": {
+            "maximum_cycle_reduction": 0.002517173645634173,
+            "candidate_count_with_nonzero_projection": 10
+          },
+          "benefit_or_occurrence_filters_applied": false,
+          "matches_authenticated_cap4_discovery": true,
+          "signed_candidate_count": 10
+        },
+        "5": {
+          "max_operation_size": 5,
+          "raw_formula_count": 12,
+          "executable_formula_count": 10,
+          "calibrated_relocation_safe_formula_count": 10,
+          "selected_pool_count": 10,
+          "computational_pool_cap": 30,
+          "formulas": [
+            {
+              "formula": "addi(lui(16842752),257)",
+              "candidate_id": "c1461416687c586de22e1286e134717d5ec21e83cd7d0e9c261e85a5cd4a4a13",
+              "operation_count": 2,
+              "total_profile_replacements": 80862,
+              "timed_region_replacements": 80862,
+              "expected_instruction_savings": 80862,
+              "projected_cycle_reduction": 0.002517173645634173
+            },
+            {
+              "formula": "or(sltiu(in0,1),in1)",
+              "candidate_id": "5a1ca3063fee7cbf37b43c61613e9a4ccebec787c57df1939a1705b752d04932",
+              "operation_count": 2,
+              "total_profile_replacements": 65576,
+              "timed_region_replacements": 65576,
+              "expected_instruction_savings": 65576,
+              "projected_cycle_reduction": 0.0020413318862519667
+            },
+            {
+              "formula": "add(andi(in0,-4),in1)",
+              "candidate_id": "defe9b0edf3e5be732f13f6de0d64670c95a0706b9ccd649f35b2ec5b5fe57f9",
+              "operation_count": 2,
+              "total_profile_replacements": 47932,
+              "timed_region_replacements": 47932,
+              "expected_instruction_savings": 47932,
+              "projected_cycle_reduction": 0.001492087348600544
+            },
+            {
+              "formula": "sub(addi(in0,-1),in1)",
+              "candidate_id": "ef529c19e59ae58037ef57fb4c51b19644dd7bc77a77411fde6dcc83a271993f",
+              "operation_count": 2,
+              "total_profile_replacements": 47932,
+              "timed_region_replacements": 47932,
+              "expected_instruction_savings": 47932,
+              "projected_cycle_reduction": 0.001492087348600544
+            },
+            {
+              "formula": "addi(lui(-16842752),-257)",
+              "candidate_id": "ba9bc1fccece1078fc96d31f7d61a6f0ed48ed31f0789caf1fd9ffc67a7fcdbf",
+              "operation_count": 2,
+              "total_profile_replacements": 35234,
+              "timed_region_replacements": 35234,
+              "expected_instruction_savings": 35234,
+              "projected_cycle_reduction": 0.0010968080956478253
+            },
+            {
+              "formula": "addi(lui(-2139062272),128)",
+              "candidate_id": "a6aa177895530785747a52c496ecb75ca7a394dbea8901b7cd2f8b79871884e4",
+              "operation_count": 2,
+              "total_profile_replacements": 35234,
+              "timed_region_replacements": 35234,
+              "expected_instruction_savings": 35234,
+              "projected_cycle_reduction": 0.0010968080956478253
+            },
+            {
+              "formula": "or(sltiu(in0,1),sltiu(in1,2))",
+              "candidate_id": "dbc1c8f2c53bbbb7676ea9456e36f184f4ec8aab1553091e65b4c131f6641e49",
+              "operation_count": 3,
+              "total_profile_replacements": 16406,
+              "timed_region_replacements": 16406,
+              "expected_instruction_savings": 32812,
+              "projected_cycle_reduction": 0.0011916485527273615
+            },
+            {
+              "formula": "or(in0,sltiu(in1,2))",
+              "candidate_id": "949e9c37aa925ae02be206bda3bcb70bd3c2113aeb3dc4599c72cb3bac976e8c",
+              "operation_count": 2,
+              "total_profile_replacements": 16406,
+              "timed_region_replacements": 16406,
+              "expected_instruction_savings": 16406,
+              "projected_cycle_reduction": 0.0005107065225974407
+            },
+            {
+              "formula": "or(sltiu(in0,1),sltiu(in1,1))",
+              "candidate_id": "ce5eb1fb238a2a2fc80b39feea9dc6c142194541a9126a3a83e72a947c194577",
+              "operation_count": 3,
+              "total_profile_replacements": 8191,
+              "timed_region_replacements": 8191,
+              "expected_instruction_savings": 16382,
+              "projected_cycle_reduction": 0.0005949526572832999
+            },
+            {
+              "formula": "or(in0,sltiu(in1,1))",
+              "candidate_id": "639cab1caeb7247fdb4996eb0e1f02a4b775002783d8b0e839880732aadcbf43",
+              "operation_count": 2,
+              "total_profile_replacements": 8191,
+              "timed_region_replacements": 8191,
+              "expected_instruction_savings": 8191,
+              "projected_cycle_reduction": 0.0002549797102642714
+            }
+          ],
+          "projected_opportunity": {
+            "maximum_cycle_reduction": 0.002517173645634173,
+            "candidate_count_with_nonzero_projection": 10
+          },
+          "benefit_or_occurrence_filters_applied": false,
+          "matches_authenticated_cap4_discovery": null
+        },
+        "6": {
+          "max_operation_size": 6,
+          "raw_formula_count": 12,
+          "executable_formula_count": 10,
+          "calibrated_relocation_safe_formula_count": 10,
+          "selected_pool_count": 10,
+          "computational_pool_cap": 30,
+          "formulas": [
+            {
+              "formula": "addi(lui(16842752),257)",
+              "candidate_id": "c1461416687c586de22e1286e134717d5ec21e83cd7d0e9c261e85a5cd4a4a13",
+              "operation_count": 2,
+              "total_profile_replacements": 80862,
+              "timed_region_replacements": 80862,
+              "expected_instruction_savings": 80862,
+              "projected_cycle_reduction": 0.002517173645634173
+            },
+            {
+              "formula": "or(sltiu(in0,1),in1)",
+              "candidate_id": "5a1ca3063fee7cbf37b43c61613e9a4ccebec787c57df1939a1705b752d04932",
+              "operation_count": 2,
+              "total_profile_replacements": 65576,
+              "timed_region_replacements": 65576,
+              "expected_instruction_savings": 65576,
+              "projected_cycle_reduction": 0.0020413318862519667
+            },
+            {
+              "formula": "add(andi(in0,-4),in1)",
+              "candidate_id": "defe9b0edf3e5be732f13f6de0d64670c95a0706b9ccd649f35b2ec5b5fe57f9",
+              "operation_count": 2,
+              "total_profile_replacements": 47932,
+              "timed_region_replacements": 47932,
+              "expected_instruction_savings": 47932,
+              "projected_cycle_reduction": 0.001492087348600544
+            },
+            {
+              "formula": "sub(addi(in0,-1),in1)",
+              "candidate_id": "ef529c19e59ae58037ef57fb4c51b19644dd7bc77a77411fde6dcc83a271993f",
+              "operation_count": 2,
+              "total_profile_replacements": 47932,
+              "timed_region_replacements": 47932,
+              "expected_instruction_savings": 47932,
+              "projected_cycle_reduction": 0.001492087348600544
+            },
+            {
+              "formula": "addi(lui(-16842752),-257)",
+              "candidate_id": "ba9bc1fccece1078fc96d31f7d61a6f0ed48ed31f0789caf1fd9ffc67a7fcdbf",
+              "operation_count": 2,
+              "total_profile_replacements": 35234,
+              "timed_region_replacements": 35234,
+              "expected_instruction_savings": 35234,
+              "projected_cycle_reduction": 0.0010968080956478253
+            },
+            {
+              "formula": "addi(lui(-2139062272),128)",
+              "candidate_id": "a6aa177895530785747a52c496ecb75ca7a394dbea8901b7cd2f8b79871884e4",
+              "operation_count": 2,
+              "total_profile_replacements": 35234,
+              "timed_region_replacements": 35234,
+              "expected_instruction_savings": 35234,
+              "projected_cycle_reduction": 0.0010968080956478253
+            },
+            {
+              "formula": "or(sltiu(in0,1),sltiu(in1,2))",
+              "candidate_id": "dbc1c8f2c53bbbb7676ea9456e36f184f4ec8aab1553091e65b4c131f6641e49",
+              "operation_count": 3,
+              "total_profile_replacements": 16406,
+              "timed_region_replacements": 16406,
+              "expected_instruction_savings": 32812,
+              "projected_cycle_reduction": 0.0011916485527273615
+            },
+            {
+              "formula": "or(in0,sltiu(in1,2))",
+              "candidate_id": "949e9c37aa925ae02be206bda3bcb70bd3c2113aeb3dc4599c72cb3bac976e8c",
+              "operation_count": 2,
+              "total_profile_replacements": 16406,
+              "timed_region_replacements": 16406,
+              "expected_instruction_savings": 16406,
+              "projected_cycle_reduction": 0.0005107065225974407
+            },
+            {
+              "formula": "or(sltiu(in0,1),sltiu(in1,1))",
+              "candidate_id": "ce5eb1fb238a2a2fc80b39feea9dc6c142194541a9126a3a83e72a947c194577",
+              "operation_count": 3,
+              "total_profile_replacements": 8191,
+              "timed_region_replacements": 8191,
+              "expected_instruction_savings": 16382,
+              "projected_cycle_reduction": 0.0005949526572832999
+            },
+            {
+              "formula": "or(in0,sltiu(in1,1))",
+              "candidate_id": "639cab1caeb7247fdb4996eb0e1f02a4b775002783d8b0e839880732aadcbf43",
+              "operation_count": 2,
+              "total_profile_replacements": 8191,
+              "timed_region_replacements": 8191,
+              "expected_instruction_savings": 8191,
+              "projected_cycle_reduction": 0.0002549797102642714
+            }
+          ],
+          "projected_opportunity": {
+            "maximum_cycle_reduction": 0.002517173645634173,
+            "candidate_count_with_nonzero_projection": 10
+          },
+          "benefit_or_occurrence_filters_applied": false,
+          "matches_authenticated_cap4_discovery": null
+        }
+      },
+      "cap4_candidate_roster": [
+        [
+          "addi(lui(16842752),257)",
+          "c1461416687c586de22e1286e134717d5ec21e83cd7d0e9c261e85a5cd4a4a13"
+        ],
+        [
+          "or(sltiu(in0,1),in1)",
+          "5a1ca3063fee7cbf37b43c61613e9a4ccebec787c57df1939a1705b752d04932"
+        ],
+        [
+          "add(andi(in0,-4),in1)",
+          "defe9b0edf3e5be732f13f6de0d64670c95a0706b9ccd649f35b2ec5b5fe57f9"
+        ],
+        [
+          "sub(addi(in0,-1),in1)",
+          "ef529c19e59ae58037ef57fb4c51b19644dd7bc77a77411fde6dcc83a271993f"
+        ],
+        [
+          "addi(lui(-16842752),-257)",
+          "ba9bc1fccece1078fc96d31f7d61a6f0ed48ed31f0789caf1fd9ffc67a7fcdbf"
+        ],
+        [
+          "addi(lui(-2139062272),128)",
+          "a6aa177895530785747a52c496ecb75ca7a394dbea8901b7cd2f8b79871884e4"
+        ],
+        [
+          "or(sltiu(in0,1),sltiu(in1,2))",
+          "dbc1c8f2c53bbbb7676ea9456e36f184f4ec8aab1553091e65b4c131f6641e49"
+        ],
+        [
+          "or(in0,sltiu(in1,2))",
+          "949e9c37aa925ae02be206bda3bcb70bd3c2113aeb3dc4599c72cb3bac976e8c"
+        ],
+        [
+          "or(sltiu(in0,1),sltiu(in1,1))",
+          "ce5eb1fb238a2a2fc80b39feea9dc6c142194541a9126a3a83e72a947c194577"
+        ],
+        [
+          "or(in0,sltiu(in1,1))",
+          "639cab1caeb7247fdb4996eb0e1f02a4b775002783d8b0e839880732aadcbf43"
+        ]
+      ],
+      "scope": "Exploratory baseline-only extraction and public projection. No candidate labels, target outcomes, or model inputs used.",
+      "elapsed_host_seconds": 0.7069730840012198
+    }
+  },
+  "not_completed": {},
+  "candidate_measurements_or_labels_used": 0,
+  "model_fits": 0,
+  "native_jobs": 0,
+  "no_benefit_or_occurrence_filter": true,
+  "script_sha256": "ccbd4c02deaa1612ea5277d540e3ceae4e5b3392403ae0187dd53e8549fc9fa2"
+}
