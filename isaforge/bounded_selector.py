@@ -18,7 +18,7 @@ from . import codesign as c
 from .model import _number, validate_training_rows
 from .speedup_corpus import family
 
-SCHEMA = 'isaforge-bounded-selector-v1'
+SCHEMA = 'isaforge-bounded-selector-v2'
 PROMPT = (
     'Select one RISC-V custom instruction, or the unchanged baseline. Maximize '
     'VERIFIED FEASIBLE whole-program speedup within the measurement-attempt '
@@ -27,8 +27,12 @@ PROMPT = (
     'cost. Use only list_candidates, predict, measure and finalize. Every '
     'submitted measure request, including an invalid ID or repeat, consumes an '
     'attempt; failed measurements also count. No unqueried outcome is available. '
-    'Only a paid, correct, device-fitting, area/timing-feasible improving '
-    'candidate can be finalized. You may stop early. Provide a short decision '
+    'Only the current incumbent may be finalized: use incumbent.candidate_id '
+    'exactly, or use null only when incumbent.candidate_id is null. The host '
+    'computes the best paid, correct, device-fitting, area/timing-feasible '
+    'improvement; never finalize a stale, unmeasured, infeasible, or lower-speedup '
+    'candidate. You may stop early. The summary you submit is an unverified '
+    'agent note; the host returns the authoritative measured result. Provide a short decision '
     'summary, not private chain of thought. Single instructions only; individual '
     'speedups and area cannot be added. This is consumed-data replay, not fresh '
     'hardware measurement or an unseen-workload experiment.'
@@ -181,6 +185,10 @@ class ReplaySelectionSession:
             attempted_candidate_ids=list(self.attempted_ids),
             incumbent=dict(candidate_id=best['candidate_id'] if best else None,
                            speedup=best['speedup'] if best else 1.0),
+            finalization=dict(
+                required_candidate_id=best['candidate_id'] if best else None,
+                allowed_candidate_ids=[best['candidate_id']] if best else [],
+                rule='Finalize only the current incumbent; null means baseline and is allowed only when there is no measured feasible improvement.'),
             uncertainty_calibrated=False, messages=self.messages))
 
     def _predictions(self, identities):
@@ -308,12 +316,24 @@ class ReplaySelectionSession:
                 (identity is not None and type(identity) is not str)):
                 return error('finalize requires a candidate ID or null and a short summary.')
             chosen = next((r for r in self.observations if r['candidate_id'] == identity), None)
-            if identity is not None and (chosen is None or not b._feasible(chosen, self.area_cap, self.clock_mhz) or chosen['speedup'] <= 1):
-                return error('Choice must be a paid verified feasible improvement, or null baseline.')
+            best = self._best()
+            required = best['candidate_id'] if best else None
+            if identity != required:
+                event.update(finalization_required_candidate_id=required)
+                result = dict(status='error',
+                    error=('Finalize with the current best paid verified feasible improvement; '
+                           'use null only when no such improvement has been measured.'),
+                    required_candidate_id=required,
+                    allowed_candidate_ids=[required] if required else [])
+                return self._result(event, result)
+            speedup = chosen['speedup'] if chosen else 1.0
+            selection = (_observation(chosen) if chosen else
+                         dict(candidate_id=None, status='baseline', speedup=1.0))
             self.ledger.update(status='finalized', selected_id=identity,
-                best_speedup=chosen['speedup'] if chosen else 1.0, decision_summary=summary)
+                best_speedup=speedup, agent_summary=summary,
+                authoritative_selection=copy.deepcopy(selection))
             return self._result(event, dict(status='ok', selected_id=identity,
-                                           speedup=self.ledger['best_speedup']))
+                                           speedup=speedup, selection=selection))
         return error('Unknown tool; only list_candidates, predict, measure and finalize are allowed.')
 
 

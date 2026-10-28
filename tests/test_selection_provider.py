@@ -28,6 +28,7 @@ def test_wire_allowlist_and_stateless_public_input():
                          'parallel_tool_calls', 'max_output_tokens', 'store'}
     assert json.loads(wire['input'][0]['content']) == public
     assert [tool['name'] for tool in wire['tools']] == ['list_candidates', 'predict', 'measure', 'finalize']
+    assert 'current host-computed incumbent.candidate_id' in wire['tools'][-1]['description']
     assert all(tool['type'] == 'function' and tool['strict'] for tool in wire['tools'])
     assert wire['parallel_tool_calls'] is False and wire['tool_choice'] == 'required'
     assert wire['store'] is False and wire['max_output_tokens'] == 127

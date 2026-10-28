@@ -150,6 +150,37 @@ def test_finalize_rejects_unpaid_infeasible_and_slowdown(tmp_path, inputs):
     assert s.ledger['best_speedup'] == 1
 
 
+def test_finalize_requires_current_best_feasible_incumbent(tmp_path, inputs):
+    s = session(tmp_path, inputs)
+    state = s.request()
+    assert state['finalization']['required_candidate_id'] is None
+    assert state['finalization']['allowed_candidate_ids'] == []
+    assert s.call(action('measure', candidate_id='t1'))['status'] == 'ok'
+    best = s._best()
+    assert best is not None
+    alternate = next(row['candidate_id'] for row in s.public
+                     if row['candidate_id'] != best['candidate_id'])
+    state = s.request()
+    assert state['finalization']['required_candidate_id'] == best['candidate_id']
+    assert state['finalization']['allowed_candidate_ids'] == [best['candidate_id']]
+
+    wrong = s.call(action('finalize', candidate_id=alternate, summary='Stale candidate.'))
+    assert wrong == {
+        'status': 'error',
+        'error': 'Finalize with the current best paid verified feasible improvement; use null only when no such improvement has been measured.',
+        'required_candidate_id': best['candidate_id'],
+        'allowed_candidate_ids': [best['candidate_id']]}
+    assert s.call(action('finalize', candidate_id=None, summary='Drop incumbent.'))['status'] == 'error'
+    result = s.call(action('finalize', candidate_id=best['candidate_id'], summary='Keep best.'))
+    assert result['status'] == 'ok'
+    assert result['selection']['candidate_id'] == best['candidate_id']
+    assert result['selection']['correctness_verified'] is True
+    assert result['selection']['speedup'] == best['speedup']
+    assert s.ledger['selected_id'] == best['candidate_id']
+    assert s.ledger['agent_summary'] == 'Keep best.'
+    assert 'decision_summary' not in s.ledger
+
+
 def test_model_limit_falls_back_to_best_paid_feasible(tmp_path, inputs):
     class Policy:
         def choose(self, request): return action('measure', candidate_id='t1')

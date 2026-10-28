@@ -1,5 +1,15 @@
 # Current handoff — model evidence after Lift selection
 
+## October 28: selector v2 incumbent guard and failure audit
+
+The owner resumed a 10-hour improvement block focused on the bounded LLM selector and evidence-backed ML decisions. Selector protocol v2 exposes the host-computed current best feasible incumbent, rejects finalization of any stale/lower candidate or an unnecessary baseline choice, and returns canonical measured fields separately from the LLM's unverified `agent_summary`. The four-tool allowlist and charged-measurement behavior remain unchanged. The earlier pilot's three rejected no-memory finalizations are a concrete motivation; this implementation does **not** establish that a future LLM run will need fewer turns.
+
+Validation: **79 focused tests pass**. `scripts/run_bounded_selector.py --provider controls --target sha256 --seed 0 --cap 64 --budget 3` reproduced **10 policy trajectories / 30 budget endpoints** exactly against archived controls; zero LLM calls and zero native jobs. The sealed run is [`results/2026-10-28-incumbent-v2-control-replay-r2/`](../results/2026-10-28-incumbent-v2-control-replay-r2/). Frequency and latency/cost still find the 1.0213847× measured candidate in one query; merit and XGBoost ranking reach it by query three. Raw regression is worse at 1.0052618× after three. This is consumed SHA-256 replay only; it is not an ML or LLM win.
+
+The [failure audit](../results/2026-10-28-incumbent-v2-control-replay-r2/README.md#historical-failure-audit) clarifies four charged attempts: two candidate correctness/contract rejections (`edn` memory guard and `ud` self-check), one storage-censored attempt (`ud`, under 2 GiB free), and one G.723 routing timeout (route seed 3 at 180 seconds). Preserve all four rows and their budget cost. Only the first two are correctness failures; the latter two provide no target outcome label. Do not retry them as if the old measurements did not happen.
+
+No new model fit is warranted: speedup labels still equal the calibrated latency estimate on the current corpus, and no independent held-out workload has established transfer. The next useful experiment remains a frozen prospective comparison on a newly qualified workload or family, with merit/frequency/latency-cost, XGBoost and an LLM agent sharing the same public state and paid budget. Fresh workload gates remain binding.
+
 ## October 28: live Luna memory and operations evidence
 
 Implemented local TF-IDF/LSA/hybrid historical retrieval over approved training records, memory augmentation, decision-to-tool links, sealed-run SQLite export and file-based public request transport. No general document RAG, pretrained embeddings, production deployment or live model-routing improvement is claimed. [Implementation](agent-memory-operations.md).

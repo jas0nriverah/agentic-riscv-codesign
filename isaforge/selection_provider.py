@@ -16,13 +16,16 @@ import urllib.request
 from typing import Callable
 
 ENDPOINT = 'https://api.openai.com/v1/responses'
-PROTOCOL = 'isaforge-four-tools-v1'
+PROTOCOL = 'isaforge-four-tools-v2'
 INSTRUCTIONS = (
     'Select RISC-V custom instructions using only the supplied public state. '
     'Request one permitted action. Predictions are uncalibrated estimates; only '
     'paid verified measurements establish feasibility. Respect measurement and '
     'action budgets, include failures in costs, and retain baseline when no '
-    'verified feasible improvement is available. Do not invent observations.'
+    'verified feasible improvement is available. Finalize only the current '
+    'host-computed incumbent.candidate_id; use null only when that incumbent is '
+    'null. Your summary is an unverified note; the host return is authoritative. '
+    'Do not invent observations.'
 )
 
 
@@ -41,7 +44,7 @@ def tool_definitions():
                   ['candidate_ids']),
         _function('measure', 'Pay for one candidate measurement, including failures.',
                   {'candidate_id': {'type': 'string'}}, ['candidate_id']),
-        _function('finalize', 'Choose one verified feasible candidate or baseline (null).',
+        _function('finalize', 'Finalize only the current host-computed incumbent.candidate_id; use null only when no measured feasible improvement exists.',
                   {'candidate_id': {'type': ['string', 'null']}, 'summary': {'type': 'string'}},
                   ['candidate_id', 'summary']),
     ]
