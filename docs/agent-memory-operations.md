@@ -24,7 +24,11 @@ The semantic baseline is **latent semantic analysis**, not pretrained neural lan
 
 A fixed query derived from unattempted candidate formulas retrieves up to three records before each model decision. The full approved history remains available in every arm, so retrieval changes ordering/emphasis rather than information access. Retrieved records are labeled evidence, not instructions or target predictions. The agent cannot choose arbitrary queries yet. Both routing roles receive the same augmented request if routing is enabled. LLM-selected search and pretrained embeddings remain potential later experiments.
 
+Two additional opt-in context controls are available for controlled evaluation. `no_history` validates the same target workload/family exclusions, then removes historical examples from the LLM request while keeping the ML training-row count and model predictions visible. `budget_matched_history` chooses up to the same `top_k` approved whole records in ascending candidate-ID order, without a similarity score. It uses the same compact-JSON byte ceiling as retrieval modes, but does not pad or claim identical payload sizes; each exact size is logged. Neither control changes the legacy five `MODES` or default `none` behavior. These controls let a future live study separate historical-example exposure from query-based retrieval. Existing tests and deterministic archived replays are software/accounting checks, not evidence that either context changes LLM decisions.
+
 SQLite is a derived local inspection store. The exporter verifies sealed manifests, protocol and ledger bindings before reading results. It preserves null token counts when unavailable. Interactive elapsed time includes orchestration and waiting; it must not be labeled inference latency. Remote-provider traces retain observed usage. No cloud deployment, production monitor, automatic rollback or external telemetry is claimed. The primary ledger stays authoritative; exports never modify it.
+
+For each decision, the memory trace records context and selection policies, exposed record IDs and hashes, source/exposed row counts, compact payload bytes, serialized request/history/retrieved-object bytes, and the serialization format. These are UTF-8 JSON byte counts, separate from provider token accounting. A fresh SQLite export exposes the same fields in `context_windows`; it verifies trace counts against the bound public request. Use `PRAGMA table_info(context_windows)` to inspect the current schema. Old exports retain their old schema and should not be described as if they contain the new fields.
 
 ## Reproduce the software checks
 
@@ -40,9 +44,19 @@ SQLite is a derived local inspection store. The exporter verifies sealed manifes
 # Requires a fresh output path. Runs deterministic controls, no LLM or hardware calls.
 ../work/audit-venv/bin/python scripts/evaluate_agent_memory.py \
   --output generated/my-agent-memory-check
+
+# New context ablation controls. Consumed-data deterministic replay only.
+../work/audit-venv/bin/python scripts/run_bounded_selector.py \
+  --output generated/my-no-history-control --provider controls \
+  --target sha256 --seed 0 --cap 64 --budget 1 --memory-mode no_history
+../work/audit-venv/bin/python scripts/run_bounded_selector.py \
+  --output generated/my-budget-matched-history-control --provider controls \
+  --target sha256 --seed 0 --cap 64 --budget 1 --memory-mode budget_matched_history
 ```
 
 The completed engineering check is preserved at [`results/2026-10-28-memory-graph-validation-r1`](../results/2026-10-28-memory-graph-validation-r1/README.md). It ran none/lexical/semantic/hybrid/knowledge_graph modes, each with ten matched archived SHA256 controls and 30 endpoints: 50 trajectories, 150 endpoints, 290 decisions and 232 retrieval events. All controls match; there were zero LLM calls and zero new native jobs. These deterministic policies ignore retrieval, so matching proves noninterference only, not retrieval quality or better selection. The new retrieval mode is not a new speedup/hardware model version.
+
+The follow-up [context-control replay](../results/2026-10-28-memory-context-controls-r1/README.md) covers the new `no_history` and `budget_matched_history` modes for one SHA256 seed/cap/budget prefix. Each mode records ten deterministic control trajectories and ten endpoints; every trajectory matches the existing archived path. It adds no target label or live LLM evidence. Use it to validate byte accounting and host/policy noninterference, not as a retrieval-quality comparison.
 
 ### Held-out structural support diagnostic
 

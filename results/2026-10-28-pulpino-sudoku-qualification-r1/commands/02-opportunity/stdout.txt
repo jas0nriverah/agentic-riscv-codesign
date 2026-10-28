@@ -1,0 +1,108 @@
+{
+  "schema": "isaforge-pulpino-sudoku-v1-gate",
+  "protocol": {
+    "schema": "isaforge-pulpino-sudoku-v1",
+    "workload_group": "pulpino-sudoku",
+    "upstream_suite": "PULPino sequential tests Sudoku solver",
+    "upstream_repository": "https://github.com/pulp-platform/pulpino",
+    "upstream_commit": "6631c49ba38a9258da44d6b120d902f7b81f9233",
+    "pool_size": 12,
+    "puzzle_dimensions": "9x9",
+    "fixed_solves": 2,
+    "maximum_solver_recursion_depth": 82,
+    "minimum_calibrated_cycle_reduction": 0.005,
+    "minimum_timed_replacements": 10,
+    "joint_gate": "At least one same candidate satisfies both public opportunity minima.",
+    "unchanged_upstream_solver_and_fixed_puzzle": true,
+    "output_adapter": "Freestanding ISAForge benchmark ABI; source test-suite registration, function-pointer timer harness and formatted output are removed.",
+    "correctness": "Require solver completion and equality of every one of the 81 final grid cells to the pinned SUDOKUSOLVED array.",
+    "correctness_limitation": "One fixed upstream puzzle, run twice as upstream does; no arbitrary puzzle or uniqueness verification.",
+    "library_runtime": "No target libc or formatted output is linked; only original integer solver code and the pinned oracle are used.",
+    "timing_limitation": "Includes fixed puzzle initialization, two resets and two solver calls; excludes generic harness warmup and post-run 81-cell verification.",
+    "compiler_flags": [
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-Os",
+      "-std=gnu17",
+      "-nostdlib",
+      "-nostartfiles",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-msmall-data-limit=0",
+      "-mno-relax",
+      "-DCPU_MHZ=1"
+    ],
+    "isa": "rv32i_zicsr",
+    "abi": "ilp32",
+    "optimization": "-Os",
+    "clock_mhz": 12,
+    "route_seeds": [
+      1,
+      2,
+      3
+    ],
+    "memory_partition": {
+      "ram_bytes": 8192,
+      "program_limit": 2304,
+      "stack_floor": 2432,
+      "stack_bytes": 5760,
+      "minimum_guard_bytes": 128
+    },
+    "candidate_dispatch_enabled": false,
+    "target_candidate_attempts": 0,
+    "family_status": "Recursive backtracking workload; no independent-family claim before source lineage and extracted formula-family review."
+  },
+  "passed": true,
+  "qualifying_candidate_ids": [
+    "f497a981238cd6eb23d7ebeac34ba2f1f530700b8c760903ae2929e7aa17ecc4",
+    "05a60c1d788112c01edc4961ccd183abc6b55e883b3528ef777b0604938647c9",
+    "489e091f01e939bb249a06c15f9b1f0ce608ea2a1e75f5cf9c81a289a9f55fac",
+    "3fad5d8a5d8030d684e74443c6cad5e3c8f558af4a38f78513831592df849c86"
+  ],
+  "source_family_audit": {
+    "schema": "isaforge-pulpino-sudoku-v1-source-family-audit",
+    "historical_corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+    "historical_workload_groups": 14,
+    "historical_verified_labels": 122,
+    "target_candidate_count": 12,
+    "target_operation_family_count": 9,
+    "historical_operation_family_count": 71,
+    "overlapping_operation_families": [
+      "add(input,slli(input,constant))",
+      "slli(add(input,input),constant)",
+      "slli(sub(input,input),constant)"
+    ],
+    "novel_operation_families": [
+      "add(add(input,slli(input,constant)),input)",
+      "slli(add(add(input,slli(input,constant)),input),constant)",
+      "slli(sub(slli(input,constant),input),constant)",
+      "sub(slli(input,constant),input)",
+      "sub(slli(sub(input,input),constant),input)",
+      "sub(slli(sub(slli(input,constant),input),constant),input)"
+    ],
+    "overlap_candidate_ids": [
+      "05a60c1d788112c01edc4961ccd183abc6b55e883b3528ef777b0604938647c9",
+      "489e091f01e939bb249a06c15f9b1f0ce608ea2a1e75f5cf9c81a289a9f55fac",
+      "5ee6cd8f7c5a2ca61d20d4b4c213e8c03e6f830d8c54fe5b4cc08d6e2d859c19",
+      "9667d8419786c4393db7a30f5ae59f2618fb30e191785dd2d7429c8d792d33f8",
+      "f497a981238cd6eb23d7ebeac34ba2f1f530700b8c760903ae2929e7aa17ecc4"
+    ],
+    "novel_candidate_ids": [
+      "39e8cc61c0bd04e4ae243421eaad025c2207f21298a6c99c7af3c64a3668905c",
+      "3a7e628a746099a3d443c4a77f0eba24588a33b87136586f1425b9aef43de2a5",
+      "3fad5d8a5d8030d684e74443c6cad5e3c8f558af4a38f78513831592df849c86",
+      "51a856e6f28bc53ac4ab745709202e3bfef1e037374757724d55fc0e9c02eb0d",
+      "6490cbaaccefa81c6caf0fbd1fffeacc8568e2451f1676069f8cae5dd17fcae6",
+      "83715a2d05acbad030897d73043c4365618e05854c7fd046dbea2a3a5dba238c",
+      "c25c958f1729673ac5a064ac923068aa483e7e9e07d7e33462b5f4378c87a663"
+    ],
+    "interpretation": "Descriptive formula-tree overlap only. A different benchmark name does not establish source-family independence; family-held-out evaluation must exclude every overlapping target operation family."
+  },
+  "public_digest": "bd98fa5091ca83fc7226e08c10215d9f65ef471cd0a68f2c1111f995e42cc209",
+  "maximum_public_cycle_reduction": 0.04543906705994503,
+  "maximum_timed_replacements": 9314,
+  "target_candidate_attempts": 0,
+  "measured_candidate_labels_used": false
+}

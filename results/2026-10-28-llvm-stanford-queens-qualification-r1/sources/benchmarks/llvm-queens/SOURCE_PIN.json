@@ -1,0 +1,32 @@
+{
+  "schema": "isaforge-workload-source-pin-v1",
+  "suite": "LLVM test-suite Stanford Queens",
+  "repository": "https://github.com/llvm/llvm-test-suite",
+  "commit": "9d9184e6ae2d7d4b1fe8dca7a41a90b9d53b6003",
+  "license": {
+    "path": "benchmarks/llvm-queens/LICENSE.TXT",
+    "sha256": "d110d0b221b92267e6d29a9d0a9b4140b59fed0a1fc3184152b0b20cd9f2df0c",
+    "status": "Exact LLVM root license: Apache-2.0 with LLVM exceptions and legacy LLVM notice; no ancestor or source-specific override found at this revision."
+  },
+  "files": {
+    "benchmarks/llvm-queens/upstream/Queens.c": {
+      "bytes": 3946,
+      "sha256": "415ad489300ed93e0c43bcc0e0ccd79a6e1a4f7dafff4a0a631b2b44eba661d3",
+      "git_blob_sha1": "2597275cfc7c16660dd43f156b7deb037b668633"
+    },
+    "benchmarks/llvm-queens/upstream/Queens.reference_output": {
+      "bytes": 299,
+      "sha256": "bedcd4156cb9b5f236ac33acce17b464d3e2ff690abecc0365502ed80b721c7f",
+      "git_blob_sha1": "ce1ab5049480485d2067fc52afd8e650db03bf7b"
+    }
+  },
+  "fixed_workload": {
+    "outer_iterations": 100,
+    "solves_per_iteration": 50,
+    "solves": 5000,
+    "maximum_source_recursion_depth": 8,
+    "stdout_sha256": "93d4e5c77838e0aa5cb6647c385c810a7c2782bf769029e6c420052048ab22bb",
+    "reference_exit_status": 0,
+    "oracle": "Original Error in Queens failure branch plus exact ordered 1..100 progress output; exit 0 is test-runner metadata, not program stdout."
+  }
+}

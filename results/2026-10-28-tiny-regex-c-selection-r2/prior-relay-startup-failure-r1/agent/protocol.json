@@ -1,0 +1,31 @@
+{
+  "schema": "isaforge-tiny-regex-live-agent-observability-v1",
+  "target": "tiny-regex-fixed-suite",
+  "target_context_id": "290157dfd68e0a43dd84124aefa82923c33898addcf36999f03c7cb46265c114",
+  "provider": "codex-chat-bridge",
+  "model_label": "current Codex chat model; exact deployment ID unavailable",
+  "prelabel_commit": "1b8dcb2936a10cef1546525f439d191afda93636",
+  "preregistration_manifest_sha256": "e5d8f49d9ccac25b385b72c2630b06f81955f7f29e640755e148c4ac111968ce",
+  "budget": 3,
+  "area_cap_lut4": 64,
+  "minimum_routed_fmax_mhz": 12.0,
+  "memory": {
+    "mode": "hybrid",
+    "corpus_rows": 106,
+    "target_families_excluded": true,
+    "lexical": "TF-IDF cosine",
+    "semantic": "TF-IDF + truncated-SVD cosine",
+    "fusion": "reciprocal-rank fusion; k=60",
+    "knowledge_graph": "typed graph constructed and source-hashed; separate graph mode is available but not queried in this episode",
+    "max_retrieved_bytes": 40000
+  },
+  "tools": [
+    "list_candidates",
+    "predict",
+    "measure",
+    "finalize"
+  ],
+  "model_routing": "single current Codex chat model; no cross-provider routing or API model selection in this episode",
+  "telemetry": "SQLite is a read-only analysis projection; sealed JSON ledger remains authoritative",
+  "token_usage": "unavailable for current Codex chat bridge"
+}

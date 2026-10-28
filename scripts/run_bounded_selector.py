@@ -22,7 +22,7 @@ from isaforge import codesign as c
 from isaforge.bounded_selector import (PROMPT, MatchedBaselinePolicy,
                                       ReplaySelectionSession, run_selector)
 from isaforge.selection_provider import ResponsesSelectionProvider, tool_definitions
-from isaforge.agent_memory import MemoryAugmentedPolicy, MODES
+from isaforge.agent_memory import MemoryAugmentedPolicy, POLICY_MODES
 from isaforge.routed_selection import RoutedSelectionProvider, summarize_model_events
 
 TARGETS = dict(edn='results/2026-10-20-budget-campaign/selection/embench-edn',
@@ -99,7 +99,7 @@ def run(output, *, provider='controls', model=None, targets=None,
                   'Live run requires explicit --model and OPENAI_API_KEY; no model call was made.')
     c.require(escalation_model is None or provider == 'responses', 'Routing requires responses provider')
     c.require(type(max_model_calls) is int and 0 < max_model_calls <= 100, 'Invalid model limit')
-    c.require(memory_mode in MODES, 'Invalid memory mode')
+    c.require(memory_mode in POLICY_MODES, 'Invalid memory mode')
     output = Path(output).resolve()
     c.require(not output.exists(), 'Use a fresh output directory')
     target_names = list(TARGETS) if targets is None else list(targets)
@@ -231,7 +231,7 @@ def main(argv=None):
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--provider', choices=('controls', 'responses'), default='controls')
     parser.add_argument('--model')
-    parser.add_argument('--memory-mode', choices=MODES, default='none')
+    parser.add_argument('--memory-mode', choices=POLICY_MODES, default='none')
     parser.add_argument('--escalation-model')
     parser.add_argument('--max-model-calls', type=int, default=12)
     parser.add_argument('--target', choices=tuple(TARGETS), action='append')

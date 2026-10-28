@@ -65,6 +65,11 @@ def export(run_dir, output):
         CREATE TABLE context_windows (episode INTEGER, decision INTEGER, context_sha256 TEXT,
           serialized_bytes INTEGER, source_training_rows INTEGER, exposed_training_rows INTEGER,
           retrieved_memory_bytes INTEGER, max_memory_bytes INTEGER,
+          context_policy TEXT, selection_policy TEXT, exposed_records_json TEXT,
+          compact_byte_ceiling INTEGER, compact_payload_bytes INTEGER,
+          compact_serialization_format TEXT, serialized_public_context_bytes INTEGER,
+          serialized_history_bytes INTEGER, serialized_retrieved_object_bytes INTEGER,
+          serialization_format TEXT,
           PRIMARY KEY(episode,decision));
         CREATE TABLE tools (episode INTEGER, sequence INTEGER, tool TEXT, status TEXT,
           charged_attempt INTEGER, evidence_json TEXT);
@@ -116,12 +121,41 @@ def export(run_dir, output):
                 if isinstance(context, dict):
                     serialized_bytes = len(json.dumps(context, sort_keys=True,
                         ensure_ascii=False, allow_nan=False, separators=(',', ':')).encode('utf-8'))
-                    db.execute('INSERT INTO context_windows VALUES (?,?,?,?,?,?,?,?)',
+                    # These are exact JSON byte counts, separate from provider
+                    # tokens. Retain the historical compact count and expose
+                    # explicitly named counts using Responses-style JSON.
+                    json_bytes = lambda value: len(json.dumps(value, sort_keys=True,
+                        allow_nan=False).encode('utf-8'))
+                    public_context_bytes = json_bytes(context)
+                    history_bytes = (json_bytes(context['historical_measurements'])
+                                     if 'historical_measurements' in context else None)
+                    retrieved_bytes = (json_bytes(context['retrieved_memory'])
+                                       if 'retrieved_memory' in context else 0)
+                    compact_payload_bytes = (len(json.dumps(context['retrieved_memory'],
+                        sort_keys=True, allow_nan=False, separators=(',', ':')).encode('utf-8'))
+                        if 'retrieved_memory' in context else 0)
+                    if memory:
+                        for key, expected in (
+                                ('serialized_request_bytes', public_context_bytes),
+                                ('serialized_history_bytes', history_bytes),
+                                ('serialized_retrieved_memory_bytes', retrieved_bytes)):
+                            if key in memory and memory[key] != expected:
+                                raise ValueError('context byte accounting mismatch: '+key)
+                    exposed_records = memory.get('exposed_records') if memory else None
+                    db.execute('INSERT INTO context_windows VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
                         (index, decision, event.get('public_context_sha256'), serialized_bytes,
                          memory.get('source_training_rows') if memory else None,
                          memory.get('exposed_training_rows') if memory else None,
                          memory.get('retrieved_memory_bytes') if memory else None,
-                         memory.get('max_memory_bytes') if memory else None))
+                         memory.get('max_memory_bytes') if memory else None,
+                         memory.get('context_policy') if memory else None,
+                         memory.get('selection_policy') if memory else None,
+                         json.dumps(exposed_records, sort_keys=True) if exposed_records is not None else None,
+                         memory.get('max_memory_bytes') if memory else None,
+                         compact_payload_bytes,
+                         memory.get('memory_budget_format') if memory else None,
+                         public_context_bytes, history_bytes, retrieved_bytes,
+                         'UTF-8 json.dumps(sort_keys=True, allow_nan=False)'))
             for event in ledger['events']:
                 db.execute('INSERT INTO tools VALUES (?,?,?,?,?,?)',
                     (index, event['sequence'], event['tool'], event['status'],

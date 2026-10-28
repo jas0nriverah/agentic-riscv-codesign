@@ -1,0 +1,69 @@
+{
+  "schema": "isaforge-pulpino-sudoku-bounded-agent-prereg-v1",
+  "scope": "one prospective live Codex chat-relay episode with host-measured target observations",
+  "provider": "codex-chat-bridge",
+  "model_label": "current Codex chat model; exact deployment ID unavailable",
+  "model_id_available": false,
+  "api_key_available": false,
+  "tools": [
+    "list_candidates",
+    "predict",
+    "measure",
+    "finalize"
+  ],
+  "structured_action": "one strict JSON object per response through the local bridge; host enforces identities, correctness, area, timing, and budget",
+  "model_bundle": "Seed-zero XGBRanker rank:pairwise trained on historical whole-program measured speedup orderings plus a 20-member XGBoost hardware-feasibility ensemble multiplied by public analytic cycle savings; all target workload labels and target operation families excluded.",
+  "ml_training": {
+    "rows": 106,
+    "workload_groups": 14,
+    "labels": "historical measured whole-program speedup orderings and verified area/timing feasibility",
+    "ranker": {
+      "objective": "rank:pairwise",
+      "n_estimators": 80,
+      "max_depth": 2,
+      "learning_rate": 0.05
+    },
+    "feasibility": {
+      "members": 20,
+      "objective": "binary:logistic",
+      "calibrated": false
+    }
+  },
+  "llm_training": "No LLM fine-tuning. Prompt-based current Codex model receives structured candidate state, frozen ML predictions, public heuristics, hybrid retrieved approved historical examples, and only its own paid measurements.",
+  "memory": {
+    "mode": "hybrid",
+    "top_k": 3,
+    "max_memory_bytes": 40000,
+    "store": "local TF-IDF / truncated-SVD historical memory; one measured record per chunk",
+    "retrieval": "lexical plus latent-semantic cosine fused by reciprocal-rank fusion",
+    "knowledge_graph": "typed graph support is available but is not queried in the frozen hybrid episode",
+    "corpus": "same family-excluded 106-row historical training set",
+    "target_outcomes": "never indexed or retrieved; only the agent own paid observations are returned"
+  },
+  "human_in_loop": "Human relay passes structured request/action between the active chat model and host. The host performs schema/candidate/budget checks and rejects unsafe measurements; no separate approval click is claimed.",
+  "model_routing": "This episode uses the current Codex chat relay. The Responses API provider supports bounded escalation when configured, but no cross-provider routing is used or evaluated here.",
+  "attempts": 3,
+  "area_cap_lut4": 64,
+  "minimum_routed_fmax_mhz": 12.0,
+  "model_calls": 12,
+  "tool_calls": 20,
+  "stop_rule": "Stop within three charged measurements; host finalizes the best paid verified feasible candidate or baseline.",
+  "agent_trials": [
+    0
+  ],
+  "agent_trial_count": 1,
+  "observability": [
+    "provider, decision, tool, and hardware-attempt counts",
+    "hashes of public requests and pre-measure contexts",
+    "retrieved record IDs/source hashes",
+    "host-measured outcomes, attempt charges, final choice, and regret",
+    "verified SQLite projection; sealed JSON remains authoritative"
+  ],
+  "limitations": [
+    "One agent episode is exploratory and has no model-family or agent-superiority power.",
+    "Current Codex model ID, provider tokens, and isolated inference latency are unavailable.",
+    "The current relay is cooperative, not an isolated tool sandbox.",
+    "One fixed Sudoku puzzle; no arbitrary-puzzle generalization.",
+    "Single-instruction pool; no combined instruction labels."
+  ]
+}

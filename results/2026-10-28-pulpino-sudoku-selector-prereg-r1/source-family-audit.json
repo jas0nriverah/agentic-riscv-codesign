@@ -1,0 +1,71 @@
+{
+  "schema": "isaforge-pulpino-sudoku-source-family-audit-v1",
+  "target_families": [
+    "add(add(input,slli(input,constant)),input)",
+    "add(input,slli(input,constant))",
+    "slli(add(add(input,slli(input,constant)),input),constant)",
+    "slli(add(input,input),constant)",
+    "slli(sub(input,input),constant)",
+    "slli(sub(slli(input,constant),input),constant)",
+    "sub(slli(input,constant),input)",
+    "sub(slli(sub(input,input),constant),input)",
+    "sub(slli(sub(slli(input,constant),input),constant),input)"
+  ],
+  "overlapping_families": [
+    "add(input,slli(input,constant))",
+    "slli(add(input,input),constant)",
+    "slli(sub(input,input),constant)"
+  ],
+  "novel_target_families": [
+    "add(add(input,slli(input,constant)),input)",
+    "slli(add(add(input,slli(input,constant)),input),constant)",
+    "slli(sub(slli(input,constant),input),constant)",
+    "sub(slli(input,constant),input)",
+    "sub(slli(sub(input,input),constant),input)",
+    "sub(slli(sub(slli(input,constant),input),constant),input)"
+  ],
+  "target_candidate_count": 12,
+  "overlap_candidate_ids": [
+    "05a60c1d788112c01edc4961ccd183abc6b55e883b3528ef777b0604938647c9",
+    "489e091f01e939bb249a06c15f9b1f0ce608ea2a1e75f5cf9c81a289a9f55fac",
+    "5ee6cd8f7c5a2ca61d20d4b4c213e8c03e6f830d8c54fe5b4cc08d6e2d859c19",
+    "9667d8419786c4393db7a30f5ae59f2618fb30e191785dd2d7429c8d792d33f8",
+    "f497a981238cd6eb23d7ebeac34ba2f1f530700b8c760903ae2929e7aa17ecc4"
+  ],
+  "excluded_historical_success_ids": [
+    "7665f0c5bd95687177d5a576714a918209c40a9aaffbc16436f6b84bb2f78743",
+    "77710d04576085d7031f398c3890958b640ec7efef05e1adbe6c9cf15c9f4cab",
+    "79ad2e04c888da3ddeeff88d8c9fc4bfe48f447b13a469763948dc06a66102c1",
+    "e806ac1ee74f31e9e9519ef2dab4ff49e4242fc4d77224f8a5b4280b873014c0",
+    "04c80235b2ae981a2ef931aef7f8d17f22e038e04d02719edc9159bac919b08b",
+    "6fc88a473c484e02a5a3b8a85d639fbc64d60a05b0558fc796404a6884ff9f5e",
+    "48ce16918e32cf703da747c15b4f568e97dec446afe42ba7f327c781ba8209e6",
+    "3bc442cec098887e93e63da50c3f7046d1233020b689c374e1defb9921eca6c7",
+    "8236aba6452ae8ce11330352ebc46873185218dee871fd97b98e2ccd81e0c7b6",
+    "af63784a01db1c87e6163457a9534616337f8183c786aa7c65b1cb486af23eee",
+    "4fcee35c0642efab5049c2abba5b201916f083e58b396b1e2ff91e08671faade",
+    "ab9e9a8720bce906a1eac38187e46859edaafcf30cf7a0f9ed9a8e0af3e4025c",
+    "91eca3e3dc2c93844566f5cbbc530795cd74b2e6ec517b6c21f8ad98cd04f305",
+    "8df1d27b70b3e78db20e1121f0e7a38978d0c1f38f0b931767dae3f64015db3f",
+    "4d5d3a61f435e56dadabad0538eb201044f562a898efa02e83fbe2738f847d74",
+    "cdd44385c73d3944c7b97d5d3babaca977f4e0a1610cb598fe708c48178e092d"
+  ],
+  "training_rows": 106,
+  "training_workload_groups": [
+    "beebs-aha-compress",
+    "beebs-expint",
+    "beebs-jfdctint",
+    "beebs-ndes",
+    "beebs-nettle-md5",
+    "embench-aha-mont64",
+    "embench-crc32",
+    "embench-edn",
+    "embench-nettle-sha256",
+    "embench-slre",
+    "embench-ud",
+    "tacle-bitcount",
+    "tacle-g723-enc",
+    "tacle-lift"
+  ],
+  "interpretation": "Target source and every exact ordered operator-tree family in the target pool are excluded from training. This is one held-out workload and remains too small for a broad generalization claim."
+}

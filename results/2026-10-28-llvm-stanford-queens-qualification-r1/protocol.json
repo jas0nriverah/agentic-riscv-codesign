@@ -1,0 +1,179 @@
+{
+  "schema": "isaforge-llvm-stanford-queens-v1-qualification",
+  "workload_group": "llvm-stanford-queens",
+  "upstream_suite": "LLVM test-suite Stanford Queens",
+  "upstream_repository": "https://github.com/llvm/llvm-test-suite",
+  "upstream_commit": "9d9184e6ae2d7d4b1fe8dca7a41a90b9d53b6003",
+  "pool_size": 12,
+  "outer_iterations": 100,
+  "solves_per_iteration": 50,
+  "fixed_solves": 5000,
+  "minimum_calibrated_cycle_reduction": 0.005,
+  "minimum_timed_replacements": 10,
+  "joint_gate": "At least one same candidate satisfies both public opportunity minima.",
+  "unchanged_upstream_source_and_iterations": true,
+  "output_adapter": "Call renamed original main; a volatile checked printf sink preserves every failure and validates exactly the original 1..100 output sequence.",
+  "correctness": "Zero original-main return, no upstream failure or unexpected text, and exactly 100 ordered progress lines are required. Upstream reports failure only through Error in Queens.",
+  "correctness_limitation": "Original fixed eight-queens search self-check only; progress output is not a complete board oracle or arbitrary-input verification.",
+  "library_runtime": "No target libc. Freestanding header shims supply no declarations; a bounded variadic output sink replaces printf without changing its call sites.",
+  "timing_limitation": "Complete unchanged 5000 solves including the original loop, adapter reset and checked output sink; no iteration reduction.",
+  "compiler_flags": [
+    "-march=rv32i_zicsr",
+    "-mabi=ilp32",
+    "-Os",
+    "-std=gnu17",
+    "-nostdlib",
+    "-nostartfiles",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-msmall-data-limit=0",
+    "-mno-relax",
+    "-DCPU_MHZ=1"
+  ],
+  "isa": "rv32i_zicsr",
+  "abi": "ilp32",
+  "optimization": "-Os",
+  "clock_mhz": 12,
+  "route_seeds": [
+    1,
+    2,
+    3
+  ],
+  "memory_partition": {
+    "ram_bytes": 8192,
+    "program_limit": 6400,
+    "stack_floor": 6528,
+    "stack_bytes": 1664,
+    "minimum_guard_bytes": 128
+  },
+  "candidate_dispatch_enabled": false,
+  "target_candidate_attempts": 0,
+  "family_status": "Classic Stanford recursive-search benchmark; no independent-family claim before source lineage and extracted formula-family review.",
+  "created_at_utc": "2026-10-28T10:54:03.813562+00:00",
+  "phases": [
+    "prepare",
+    "discover",
+    "opportunity",
+    "baseline",
+    "public",
+    "freeze"
+  ],
+  "reference_root": "generated/codesign-crc32-2026-10-19-r1",
+  "reference_plan_sha256": "796167e07bdc413f348c829ca93e60eda87162ca02143d3f57269ff2059197b9",
+  "historical_corpus_sha256": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+  "upstream": {
+    "schema": "isaforge-workload-source-pin-v1",
+    "suite": "LLVM test-suite Stanford Queens",
+    "repository": "https://github.com/llvm/llvm-test-suite",
+    "commit": "9d9184e6ae2d7d4b1fe8dca7a41a90b9d53b6003",
+    "license": {
+      "path": "benchmarks/llvm-queens/LICENSE.TXT",
+      "sha256": "d110d0b221b92267e6d29a9d0a9b4140b59fed0a1fc3184152b0b20cd9f2df0c",
+      "status": "Exact LLVM root license: Apache-2.0 with LLVM exceptions and legacy LLVM notice; no ancestor or source-specific override found at this revision."
+    },
+    "files": {
+      "benchmarks/llvm-queens/upstream/Queens.c": {
+        "bytes": 3946,
+        "sha256": "415ad489300ed93e0c43bcc0e0ccd79a6e1a4f7dafff4a0a631b2b44eba661d3",
+        "git_blob_sha1": "2597275cfc7c16660dd43f156b7deb037b668633"
+      },
+      "benchmarks/llvm-queens/upstream/Queens.reference_output": {
+        "bytes": 299,
+        "sha256": "bedcd4156cb9b5f236ac33acce17b464d3e2ff690abecc0365502ed80b721c7f",
+        "git_blob_sha1": "ce1ab5049480485d2067fc52afd8e650db03bf7b"
+      }
+    },
+    "fixed_workload": {
+      "outer_iterations": 100,
+      "solves_per_iteration": 50,
+      "solves": 5000,
+      "maximum_source_recursion_depth": 8,
+      "stdout_sha256": "93d4e5c77838e0aa5cb6647c385c810a7c2782bf769029e6c420052048ab22bb",
+      "reference_exit_status": 0,
+      "oracle": "Original Error in Queens failure branch plus exact ordered 1..100 progress output; exit 0 is test-runner metadata, not program stdout."
+    }
+  },
+  "native_root": "generated/llvm-stanford-queens-qualification-2026-10-28-r1",
+  "source_bindings": {
+    "scripts/qualify_llvm_queens.py": "3e75b041766bb5a29a46fee95fe5cf5bbe2faed930040bca34e7ef910e19ab58",
+    "scripts/reproduce_codesign.py": "14731afeeda82a747a9e328ef97be6ef6ccb73b3168d8bf694738b72eed702ee",
+    "scripts/qualify_opportunity_sources.py": "389e34ba724f2dcc3766752e404e46006b6aa7fced4f2e21508127ac08e8ffe1",
+    "isaforge/observed_command.py": "f56bf235b31205c842ea04ab5a493ee7f7e6731844e05b6d8991f21d9f3be41e",
+    "isaforge/llvm_queens_workload.py": "061edd7fcd922e5dc4467221d677adfe39a6cb730e4ecd2dbd594d77c6ca6d53",
+    "tests/test_llvm_queens_workload.py": "42d9a96091d2454d4798f3223eec04cc0736c3ba3eec17898aac1da25b8b29fb",
+    "docs/llvm-queens-adapter-contract-2026-10-28.md": "539111f73ff2f967c81617a7f125ee307be3bf24b4f4dda16482339e95be98cd",
+    "benchmarks/llvm-queens/SOURCE_PIN.json": "9d46483a06dc9f2be69d04dacbb445025f67b2b985c69ea069fbc5b6506a2b50",
+    "benchmarks/llvm-queens/adapter.c": "418f128e5063e17fd1a2f1df14d527a8b457730ae90dc1399692d3b3e75064e3",
+    "benchmarks/llvm-queens/upstream/Queens.c": "415ad489300ed93e0c43bcc0e0ccd79a6e1a4f7dafff4a0a631b2b44eba661d3",
+    "benchmarks/llvm-queens/upstream/Queens.reference_output": "bedcd4156cb9b5f236ac33acce17b464d3e2ff690abecc0365502ed80b721c7f",
+    "benchmarks/llvm-queens/LICENSE.TXT": "d110d0b221b92267e6d29a9d0a9b4140b59fed0a1fc3184152b0b20cd9f2df0c",
+    "benchmarks/llvm-queens/include/stdlib.h": "b772cf3a353aff0b4e78055b577c84e639234124f4b6473a9a00cc79828f73cf",
+    "benchmarks/llvm-queens/include/stdio.h": "c10f5deec20d793db9c029ac63f9dd11795c1ece9ab8ced6d6a379f390115cd3",
+    "results/2026-10-26-lift-selection-corpus/corpus.json": "901413111da94933a1c14f0e758c1cf96f959bde44325e79ded6e47c4b8743ef",
+    "isaforge/guarded_workload.py": "97552baf38eaf3575556d6fa5127f9dd1bec75707daeb3f2ce8396ac28280820",
+    "isaforge/campaign_evidence.py": "96e4a96379dc336e1c04fc8a3bbfb9971cf65281d14cfe140f4eecaec51a748e",
+    "isaforge/prospective_inputs.py": "90abbebb74ad967d498c126134b30401e195da7e12ceef405661e5742ef5f446",
+    "hardware/embench_firmware.c": "687e563a4b6b26ccab64f9c349b01a4e73deb8fcdee55f6553c69a902bf5d7dd",
+    "hardware/embench_memory.c": "343b26ae849f9bfab8ed197636449c4a91c5d78f26fe7f6ff4f960901520b847",
+    "hardware/checked_sim.cpp": "477635f316551bf85bd7ac1addc11bb9fa2c252969202621e75692ea5cfd9f07"
+  },
+  "workers": 1,
+  "build_workers": 2,
+  "phase_timeout_seconds": 3600,
+  "phase_commands": {
+    "prepare": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.llvm_queens_workload",
+      "prepare",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/llvm-stanford-queens-qualification-2026-10-28-r1",
+      "--reference-root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/codesign-crc32-2026-10-19-r1"
+    ],
+    "discover": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.llvm_queens_workload",
+      "discover",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/llvm-stanford-queens-qualification-2026-10-28-r1"
+    ],
+    "opportunity": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.llvm_queens_workload",
+      "opportunity",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/llvm-stanford-queens-qualification-2026-10-28-r1"
+    ],
+    "baseline": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.llvm_queens_workload",
+      "baseline",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/llvm-stanford-queens-qualification-2026-10-28-r1"
+    ],
+    "public": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.llvm_queens_workload",
+      "public",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/llvm-stanford-queens-qualification-2026-10-28-r1"
+    ],
+    "freeze": [
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/../work/audit-venv/bin/python",
+      "-m",
+      "isaforge.llvm_queens_workload",
+      "freeze",
+      "--root",
+      "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/generated/llvm-stanford-queens-qualification-2026-10-28-r1"
+    ]
+  },
+  "rejection_rule": "Preserve the first failed phase and raw archive. A nonzero phase is a workload rejection only when its source-bound gate artifact records an explicit failed gate; otherwise classify it as pipeline failure. Do not alter source, tests, compiler, ISA, partition, pool size, or thresholds.",
+  "pool_freeze_is_candidate_authorization": false
+}

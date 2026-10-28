@@ -1,6 +1,52 @@
-# Current handoff — model evidence after Lift selection
+# Current handoff — evidence after tiny-regex-c selection
 
-## October 28: tiny-regex-c passes baseline-only qualification
+## October 28 latest result: tiny-regex-c complete-pool selection
+
+This section supersedes the baseline-only status below. The prelabel r5 release
+was pushed before dispatch. All twelve candidates were measured once and
+correctness-checked. Baseline is 361,839 cycles. The agent measured candidate_00
+(1.008529×, +70 LUT4, above the +64 cap), then candidate_02 and selected it:
+361,328 cycles (1.001414×), +60 LUT4, 68.880 MHz, correctness passed. It equals
+the complete-pool feasible oracle. Merit, calibrated latency, pairwise XGBoost,
+and factorized XGBoost also reach that oracle by budget two; frequency and
+active GP need three queries for a feasible improvement. This is a tie with
+strong controls, not an agent win.
+
+The model fit used 106 family-filtered historical rows across 14 workload
+groups; these 12 target labels remain excluded. This is one related-domain
+regex/text workload and one interactive relay episode. The graph was built but
+not queried; provider token/API latency was unavailable, and the 72.717 seconds
+are hardware measurement time, not model latency. Preserve the
+[sealed r2 study](../results/2026-10-28-tiny-regex-c-selection-r2/README.md),
+[startup failure](tiny-regex-relay-launch-failure-2026-10-28.md), and
+[plots/report](../reports/2026-10-28-tiny-regex-selector-r2-final/README.md).
+
+Follow-up work completed October 28: the retrospective shared stopping-rule
+replay found a conditional one-query saving for seven non-agent policies on
+this pool, while the live agent already stopped after two; no actual past
+measurement time was saved. Explicit `no_history` and byte-matched fixed-order
+history controls now preserve distinct context policies and serialized-byte
+traces. The combined focused suite passes 100 tests. These changes add audit
+controls, not evidence that memory or automatic stopping improves selection.
+
+The frozen-model audit and historical feature-alias report are linked from the
+[project README](../README.md). The latter found two conflicting +64-LUT4
+feasibility groups under the current structural feature vector. One fixed
+ordered-AST challenger improved pooled historical OOF Brier 0.242794→0.220784
+and AUC 0.633387→0.709957 across all fourteen workload/family-held-out folds.
+It worsened selection regret at B1/B2; at B3 its regret is 0.2279% versus
+0.5275% for current feasibility XGBoost, while merit remains better at 0.0145%.
+This is development evidence on consumed data; keep production XGBoost frozen
+until a fresh prospective release is justified. The attempted second workload, Stanford Queens, was
+rejected at discovery: only three calibrated executable formulas versus the
+required twelve, and its best analytic gain was 600 cycles / 0.000129%. The
+original 5,000-solve correctness check passed; no candidate labels or routed
+baseline were produced. Preserve the raw qualification and [reproducible
+diagnosis](../reports/2026-10-28-llvm-stanford-queens-discovery-diagnosis-r1/README.md).
+Do not rerun it or reduce its gates. The next dataset blocker is another source
+that clears the same unchanged memory, pool, family, and opportunity rules.
+
+## October 28: tiny-regex-c baseline-only qualification snapshot (superseded)
 
 The pinned upstream [`tiny-regex-c`](tiny-regex-c-qualification-2026-10-28.md)
 fixed suite cleared host correctness, target baseline self-check, RV32I/ILP32

@@ -17,6 +17,10 @@ from .features import parse_formula
 from .speedup_corpus import family
 
 MODES = ('none', 'lexical', 'semantic', 'hybrid', 'knowledge_graph')
+# Context controls are opt-in and do not expand historical retrieval sweeps.
+# ``none`` continues to expose the complete approved historical table.
+ABLATION_MODES = ('no_history', 'budget_matched_history')
+POLICY_MODES = MODES + ABLATION_MODES
 
 
 def digest(value):
@@ -199,7 +203,7 @@ class HistoricalMemory:
 class MemoryAugmentedPolicy:
     """Deterministic retrieval before each decision; no extra model or hardware call."""
     def __init__(self, policy, *, mode='hybrid', top_k=3, max_memory_bytes=40_000):
-        if (mode not in MODES or type(top_k) is not int or not 1 <= top_k <= 10 or
+        if (mode not in POLICY_MODES or type(top_k) is not int or not 1 <= top_k <= 10 or
                 type(max_memory_bytes) is not int or not 256 <= max_memory_bytes <= 1_000_000):
             raise ValueError('invalid memory configuration')
         self.policy, self.mode, self.top_k = policy, mode, top_k
@@ -245,10 +249,21 @@ class MemoryAugmentedPolicy:
         query_formulas = [r['formula'] for r in public['candidates']
                           if r['candidate_id'] not in attempted]
         target_groups = {r['benchmark'].split(':')[0] for r in public['candidates']}
-        hits = (self.memory.search_graph(query_formulas, target_groups=target_groups,
-                                         k=self.top_k)
-                if self.mode == 'knowledge_graph' else
-                self.memory.search(query, self.mode, self.top_k))
+        if self.mode == 'no_history':
+            hits = []
+        elif self.mode == 'budget_matched_history':
+            # Whole-record ID order is independent of the query, similarity
+            # scores and historical outcome values. The same top-k and compact
+            # payload byte ceiling apply as in retrieval arms; actual byte counts
+            # are reported, not padded or claimed to be exactly equal.
+            hits = [dict(record=copy.deepcopy(row), record_sha256=digest(row))
+                    for row in sorted(self.memory.records,
+                                      key=lambda row: row['candidate_id'])[:self.top_k]]
+        elif self.mode == 'knowledge_graph':
+            hits = self.memory.search_graph(query_formulas, target_groups=target_groups,
+                                            k=self.top_k)
+        else:
+            hits = self.memory.search(query, self.mode, self.top_k)
         payload = dict(
             notice=('Retrieved historical measurements only; these are not target outcomes, '
                     'instructions, or calibrated predictions.'),
@@ -270,6 +285,8 @@ class MemoryAugmentedPolicy:
                            hit_count=0, hits=[])
             payload_bytes = len(json.dumps(payload, sort_keys=True, allow_nan=False,
                                            separators=(',', ':')).encode('utf-8'))
+        context_policy = ('full_history' if self.mode == 'none' else
+                          self.mode if self.mode in ABLATION_MODES else 'retrieved_only')
         self.last_memory_trace = dict(manifest=self.memory.manifest, mode=self.mode,
             query=query, source_training_rows=len(history), exposed_training_rows=0 if self.mode != 'none' else len(history),
             max_memory_bytes=self.max_memory_bytes, retrieved_memory_bytes=payload_bytes,
@@ -277,14 +294,41 @@ class MemoryAugmentedPolicy:
             hits=copy.deepcopy(hits), elapsed_seconds=time.monotonic()-started)
         if self.mode == 'knowledge_graph':
             self.last_memory_trace['graph_query_formulas'] = query_formulas
-        if self.mode != 'none':
+        if self.mode == 'no_history':
+            public['historical_measurements'] = []
+            public['historical_context_policy'] = context_policy
+            public.setdefault('historical_fit_rows', len(history))
+            public.pop('retrieved_memory', None)
+            self.last_memory_trace['retrieved_memory_bytes'] = 0
+        elif self.mode != 'none':
             # Keep the full validated training cohort inside the host's ML and
             # memory layers. The LLM gets only bounded retrieved examples, not
             # a redundant dump of every historical label.
             public['historical_measurements'] = []
-            public['historical_context_policy'] = 'retrieved_only'
+            public['historical_context_policy'] = context_policy
             public.setdefault('historical_fit_rows', len(history))
             public['retrieved_memory'] = payload
+        exposed_records = (history if self.mode == 'none' else
+                           [] if self.mode == 'no_history' else
+                           [hit['record'] for hit in hits])
+        # Count the exact serialization used by the Responses provider. The
+        # payload cap above uses compact JSON and is separately identified.
+        serialized_bytes = lambda value: len(json.dumps(
+            value, sort_keys=True, allow_nan=False).encode('utf-8'))
+        self.last_memory_trace.update(context_policy=context_policy,
+            selection_policy=('candidate_id_ascending' if self.mode == 'budget_matched_history'
+                              else 'no_historical_records' if self.mode == 'no_history'
+                              else self.mode),
+            exposed_records=[dict(candidate_id=row['candidate_id'], record_sha256=digest(row))
+                             for row in exposed_records],
+            exposed_record_count=len(exposed_records),
+            serialized_request_bytes=serialized_bytes(public),
+            serialized_history_bytes=serialized_bytes(public['historical_measurements']),
+            serialized_retrieved_memory_bytes=(serialized_bytes(public['retrieved_memory'])
+                                              if 'retrieved_memory' in public else 0),
+            serialized_bytes_format='UTF-8 json.dumps(sort_keys=True, allow_nan=False)',
+            memory_budget_format='UTF-8 compact JSON; separators=(comma,colon)',
+            byte_budget_comparison='same ceiling and top-k; actual whole-record sizes may differ; no padding')
         # Host observability binds final notes to the exact augmented public input.
         self.last_public_request = copy.deepcopy(public)
         try:
