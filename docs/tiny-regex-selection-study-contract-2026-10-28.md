@@ -1,5 +1,23 @@
 # tiny-regex-c selector study contract
 
+## Release amendment r5: preserve and recover a pre-agent relay startup failure
+
+The r3 release was opened from its pushed zero-label commit, but the local
+process was started without an interactive input stream. The JSON bridge wrote
+one public request and then received end-of-file before any model response.
+The host recorded `host_fallback`, zero selector tool calls, zero target
+measurements, zero target labels, and zero successful provider calls. Its full
+trace is preserved in `results/2026-10-28-tiny-regex-c-selector-launch-failure-r1/`.
+
+This is a harness startup failure, not an LLM decision or candidate-selection
+trial. No target outcomes were acquired or exposed, and no candidate identity
+was measured. This r5 amendment binds a fresh r2 study path and a corrected
+interactive launch. It keeps the same workload, candidate roster, historical
+training rows, model recipes, exclusions, budgets, tools, policies and metrics.
+The r3 release and failure remain immutable. If the r2 interactive bridge fails
+before a model response, stop and report it; do not retry, change the models,
+or inspect any target outcomes.
+
 ## Question and scope
 
 This study asks whether ISAForge's existing XGBoost ranking and factorized

@@ -30,7 +30,7 @@ SOURCE = "scripts/prepare_tiny_regex_selector.py"
 QUALIFICATION = ROOT / "results/2026-10-28-tiny-regex-c-qualification-r3"
 BASELINE_ROOT = ROOT / "generated/tiny-regex-c-selection-baseline-r1"
 HISTORY = ROOT / "results/2026-10-26-lift-selection-corpus/corpus.json"
-OUTPUT = ROOT / "results/2026-10-28-tiny-regex-c-selector-prereg-r3"
+OUTPUT = ROOT / "results/2026-10-28-tiny-regex-c-selector-prereg-r5"
 SEEDS = (0, 1, 2, 3, 4)
 BUDGETS = (1, 2, 3)
 AREA_CAPS = (32, 64, 128)
@@ -44,6 +44,9 @@ SOURCES = tuple(dict.fromkeys((
     "docs/tiny-regex-c-qualification-2026-10-28.md",
     "docs/tiny-regex-adapter-contract-2026-10-28.md",
     "docs/tiny-regex-selection-study-contract-2026-10-28.md",
+    "docs/tiny-regex-relay-launch-failure-2026-10-28.md",
+    "results/2026-10-28-tiny-regex-c-selector-launch-failure-r1/failure-summary.json",
+    "results/2026-10-28-tiny-regex-c-selector-launch-failure-r1/manifest.json",
     "scripts/qualify_tiny_regex.py", "scripts/reproduce_codesign.py",
     "scripts/execute_tiny_regex_selector.py",
     "scripts/export_agent_observability.py",

@@ -43,10 +43,11 @@ from scripts.export_agent_observability import export as export_agent_observabil
 
 SOURCE = "scripts/execute_tiny_regex_selector.py"
 QUALIFICATION = ROOT / "results/2026-10-28-tiny-regex-c-qualification-r3"
-STUDY = ROOT / "generated/tiny-regex-c-selection-study-r1"
+STUDY = ROOT / "generated/tiny-regex-c-selection-study-r2"
+STARTUP_FAILURE = ROOT / "results/2026-10-28-tiny-regex-c-selector-launch-failure-r1"
 NATIVE = STUDY / "native"
 RELEASE = STUDY / "release.json"
-RESULTS = ROOT / "results/2026-10-28-tiny-regex-c-selection-r1"
+RESULTS = ROOT / "results/2026-10-28-tiny-regex-c-selection-r2"
 BRANCH = "ai-guided-ml"
 AREA_CAP = 64
 CLOCK_MHZ = 12.0
@@ -679,6 +680,15 @@ def _agent_budget_endpoints(agent, budgets, *, oracle, verified_reference):
 
 def evaluate():
     prereg, release_record, _ = _verify_release()
+    require(_inventory(STARTUP_FAILURE) == c.unseal(STARTUP_FAILURE / "manifest.json"),
+            "Preserved pre-agent relay startup failure differs from its manifest")
+    startup_failure = c.unseal(STARTUP_FAILURE / "failure-summary.json")
+    require(startup_failure.get("selector_status") == "host_fallback" and
+            startup_failure.get("selector_charged_attempts") == 0 and
+            startup_failure.get("selector_tool_calls") == 0 and
+            startup_failure.get("selector_successful_provider_calls") == 0 and
+            startup_failure.get("selector_target_labels_revealed") == 0,
+            "Only the verified pre-agent, zero-label relay startup failure may be carried forward")
     budgets = prereg["primary"]["budgets"]
     require(not RESULTS.exists(), "Preserve prior scored study outputs")
     audit = c.unseal(STUDY / "native-audit.json")
@@ -758,6 +768,7 @@ def evaluate():
             scope="full-pool corpus/oracle collection; costs all twelve measured attempts, irrespective of replay budget"),
         policy_costs_note="Each non-agent policy is replayed with one-at-a-time outcome release and counts only its own B1/B2/B3 prefix. Those are offline counterfactual decision costs on already collected target labels; actual corpus construction measured the complete pool.",
         baseline=dict(c.unseal(PREREG / "inputs/cost-provenance.json")["target_baseline"]),
+        prior_relay_startup_failure=startup_failure,
         source_family_audit=c.unseal(PREREG / "source-family-audit.json"),
         inference_training_cost=c.unseal(PREREG / "model-fit-costs.json"),
         hardware_training_cost=prereg["cost_provenance"]["historical"],
@@ -782,7 +793,7 @@ def evaluate():
         "are counterfactual callback releases from the fully collected dataset; the physical dataset build itself cost all candidate evaluations.\n\n"
         "The unit-level metrics are whole-program cycles, speedup, correctness, LUT4 increment, minimum routed Fmax, paid attempts, and actual evaluation time. "
         "See `factorized-policy-report.json`, `outcomes.json`, `native-audit.json`, the verified SQLite agent trace, and archived `native.tar.gz` for full evidence.\n\n"
-        "The Codex relay is cooperative rather than sandboxed; exact model ID, token use and model-only latency are unavailable. One agent episode and one workload "
+        "A prior pre-agent bridge startup failure is preserved separately; it received EOF before a successful provider response and measured no candidates. The r2 episode uses the amended committed protocol. The Codex relay is cooperative rather than sandboxed; exact model ID, token use and model-only latency are unavailable. One agent episode and one workload "
         "are not enough for an agent-quality or generalization claim. Individual-instruction measurements do not demonstrate combined-instruction performance.\n")
     c.seal(RESULTS / "study-report.json", report)
     c.seal(RESULTS / "factorized-policy-report.json", factorized_report)
@@ -802,6 +813,7 @@ def evaluate():
     archive_record = pack_archive(NATIVE, RESULTS / "native.tar.gz")
     c.seal(RESULTS / "archive-manifest.json", archive_record)
     shutil.copytree(STUDY / "agent", RESULTS / "agent")
+    shutil.copytree(STARTUP_FAILURE, RESULTS / "prior-relay-startup-failure-r1")
     c.seal(RESULTS / "manifest.json", _inventory(RESULTS))
     return report
 
@@ -833,6 +845,11 @@ def main(argv=None):
         require(_inventory(RESULTS / "agent") ==
                 c.unseal(RESULTS / "agent/manifest.json"),
                 "Agent evidence package manifest differs")
+        prior_failure = RESULTS / "prior-relay-startup-failure-r1"
+        require(_inventory(prior_failure) == c.unseal(prior_failure / "manifest.json") and
+                result.get("prior_relay_startup_failure") ==
+                    c.unseal(prior_failure / "failure-summary.json"),
+                "Preserved pre-agent relay startup-failure evidence differs")
         observability = c.unseal(RESULTS / "agent/observability-export.json")
         database = RESULTS / "agent/observability.sqlite"
         require(c.sha(database) == observability["database_sha256"],

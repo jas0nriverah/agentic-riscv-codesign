@@ -1,0 +1,77 @@
+{
+  "schema": "isaforge-tiny-regex-source-family-audit-v1",
+  "target_families": [
+    "add(input,slli(input,constant))",
+    "addi(andi(input,constant),constant)",
+    "and(input,sltu(constant,input))",
+    "andi(addi(input,constant),constant)",
+    "or(input,sltiu(input,constant))",
+    "sltiu(addi(andi(input,constant),constant),constant)",
+    "sltiu(sltiu(addi(input,constant),constant),constant)",
+    "sltiu(sltiu(input,constant),constant)",
+    "sltiu(sltu(input,input),constant)",
+    "sltu(constant,sub(input,input))",
+    "sub(constant,xori(input,constant))"
+  ],
+  "overlapping_families": [
+    "add(input,slli(input,constant))",
+    "addi(andi(input,constant),constant)",
+    "or(input,sltiu(input,constant))"
+  ],
+  "novel_target_families": [
+    "and(input,sltu(constant,input))",
+    "andi(addi(input,constant),constant)",
+    "sltiu(addi(andi(input,constant),constant),constant)",
+    "sltiu(sltiu(addi(input,constant),constant),constant)",
+    "sltiu(sltiu(input,constant),constant)",
+    "sltiu(sltu(input,input),constant)",
+    "sltu(constant,sub(input,input))",
+    "sub(constant,xori(input,constant))"
+  ],
+  "target_candidate_count": 12,
+  "overlap_candidate_ids": [
+    "36184aef240a04662516085b7f804f3e0e4c606f170d68bebb6171e8cc0980a4",
+    "695596a316ac87a4d10dd00bf303adc3bf8743860ba81d278dc07fadf4044b6c",
+    "8d10dd62e3fba197d6919a14372835c9fe47071268999a9d91ee98758b49a925",
+    "e654931175c27f85caf0b4a48aa6deb26e79da8925fad18fe008c771af8ed998"
+  ],
+  "excluded_historical_success_ids": [
+    "7665f0c5bd95687177d5a576714a918209c40a9aaffbc16436f6b84bb2f78743",
+    "77710d04576085d7031f398c3890958b640ec7efef05e1adbe6c9cf15c9f4cab",
+    "79ad2e04c888da3ddeeff88d8c9fc4bfe48f447b13a469763948dc06a66102c1",
+    "e806ac1ee74f31e9e9519ef2dab4ff49e4242fc4d77224f8a5b4280b873014c0",
+    "04c80235b2ae981a2ef931aef7f8d17f22e038e04d02719edc9159bac919b08b",
+    "6fc88a473c484e02a5a3b8a85d639fbc64d60a05b0558fc796404a6884ff9f5e",
+    "48ce16918e32cf703da747c15b4f568e97dec446afe42ba7f327c781ba8209e6",
+    "3bc442cec098887e93e63da50c3f7046d1233020b689c374e1defb9921eca6c7",
+    "8236aba6452ae8ce11330352ebc46873185218dee871fd97b98e2ccd81e0c7b6",
+    "4fcee35c0642efab5049c2abba5b201916f083e58b396b1e2ff91e08671faade",
+    "91eca3e3dc2c93844566f5cbbc530795cd74b2e6ec517b6c21f8ad98cd04f305",
+    "8df1d27b70b3e78db20e1121f0e7a38978d0c1f38f0b931767dae3f64015db3f",
+    "4d5d3a61f435e56dadabad0538eb201044f562a898efa02e83fbe2738f847d74",
+    "777e3b4a67c7910fedb2d7632e64dcb120484aa62e145c26899fd3b8420a78af",
+    "cdd44385c73d3944c7b97d5d3babaca977f4e0a1610cb598fe708c48178e092d",
+    "b3a19dca8de404201da970ae904ecf210729e030ade7821d821f2e582660ec14"
+  ],
+  "training_rows": 106,
+  "training_workload_groups": [
+    "beebs-aha-compress",
+    "beebs-expint",
+    "beebs-jfdctint",
+    "beebs-ndes",
+    "beebs-nettle-md5",
+    "embench-aha-mont64",
+    "embench-crc32",
+    "embench-edn",
+    "embench-nettle-sha256",
+    "embench-slre",
+    "embench-ud",
+    "tacle-bitcount",
+    "tacle-g723-enc",
+    "tacle-lift"
+  ],
+  "related_domain_groups_retained": [
+    "embench-slre"
+  ],
+  "interpretation": "Exact operation-tree families are excluded from training. Regex/text workload lineage remains related-domain transfer; this pilot is not independent confirmation."
+}
