@@ -1,0 +1,29 @@
+Traceback (most recent call last):
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/scripts/prepare_countnegative_v2_selector.py", line 426, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/scripts/prepare_countnegative_v2_selector.py", line 416, in main
+    result = freeze(args.output) if args.command == "freeze" else authenticate(args.output)
+             ~~~~~~^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/scripts/prepare_countnegative_v2_selector.py", line 219, in freeze
+    selection_protocol = factorized.freeze(training, public, contexts, selection,
+        target_workload=workload.GROUP, target_labels_observed=0,
+        calibration_cost_seconds=calibration["native_command_seconds"],
+        cost_provenance=cost_provenance, input_bindings=inputs,
+        scope="prospective source holdout")
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/factorized_selection_experiment.py", line 71, in freeze
+    original = controls.freeze(history, public, contexts, output/'controls11',
+        target_workload=target_workload, target_labels_observed=target_labels_observed,
+        calibration_cost_seconds=calibration_cost_seconds, cost_provenance=cost_provenance,
+        input_bindings=input_bindings, scope=scope)
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/feasible_benefit_experiment.py", line 70, in freeze
+    original = b.freeze(history, public, contexts, output/'model', target_workload=target_workload,
+        calibration_cost_seconds=calibration_cost_seconds, cost_provenance=cost_provenance,
+        area_caps=AREA_CAPS,clock_mhz=CLOCK_MHZ,seeds=SEEDS,budgets=BUDGETS,
+        scope='consumed-data development' if scope == 'consumed-data development' else 'prospective')
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/budgeted_selection.py", line 346, in freeze
+    c.require({r['benchmark'] for r in history+public} <= set(contexts), 'Explicit provenance contexts required')
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jasonrivera/Documents/Codex/2026-10-19/clo/agentic-riscv-codesign/isaforge/codesign.py", line 59, in require
+    raise ValueError(message)
+ValueError: Explicit provenance contexts required

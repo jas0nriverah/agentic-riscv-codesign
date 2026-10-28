@@ -1,0 +1,63 @@
+{
+  "schema": "isaforge-mibench-stringsearch-variable-pool-v2-gate",
+  "protocol": {
+    "schema": "isaforge-mibench-stringsearch-variable-pool-v2",
+    "workload_group": "mibench-stringsearch-pbm",
+    "pool_cap": 30,
+    "minimum_legal_candidates": 1,
+    "admission_rule": "Any nonempty calibrated relocation-safe pool under the existing four-operation extractor; no benefit or occurrence admission minima.",
+    "technical_calibration_limit": "Existing public latency feature API requires calibrated source instruction latencies. Unsupported latency formulas remain excluded; this is a runtime coverage limit, not a benefit threshold.",
+    "unchanged_fixed_inputs": true,
+    "unchanged_upstream_source": true,
+    "unchanged_verifier": true,
+    "correctness": "The shim records actual hit/miss and returned pointer offset for all 57 upstream cases; verify_benchmark compares these with independently derived Python str.find offsets after the cycle counter stops.",
+    "correctness_limitation": "Offset checks use a pinned independent oracle over the fixed literal input; this does not establish general-input correctness.",
+    "timing_limitation": "The small output-capture shim runs inside benchmark() and contributes constant bookkeeping overhead to measured cycles.",
+    "library_runtime": "Freestanding bytewise strlen/strncmp implementations are part of the source-bound adapter; no host libc is linked.",
+    "output_adapter": "Renamed upstream main; printf/putchar map to a bounded offset-capture shim; only benchmark ABI functions are added.",
+    "compiler_flags": [
+      "-march=rv32i_zicsr",
+      "-mabi=ilp32",
+      "-Os",
+      "-std=gnu17",
+      "-nostdlib",
+      "-nostartfiles",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-msmall-data-limit=0",
+      "-mno-relax",
+      "-DCPU_MHZ=1"
+    ],
+    "isa": "rv32i_zicsr",
+    "abi": "ilp32",
+    "optimization": "-Os",
+    "memory_partition": {
+      "ram_bytes": 8192,
+      "program_limit": 6400,
+      "stack_floor": 6528,
+      "stack_bytes": 1664,
+      "minimum_guard_bytes": 128
+    },
+    "clock_mhz": 12,
+    "route_seeds": [
+      1,
+      2,
+      3
+    ],
+    "candidate_dispatch_enabled": false,
+    "target_candidate_attempts": 0,
+    "historical_status": "Previously screened under fixed-size v1 gates; this separately authorized variable-pool context is related text-search transfer, not an untouched-source or independent-family claim."
+  },
+  "passed": true,
+  "actual_pool_size": 2,
+  "computational_pool_cap": 30,
+  "public_digest": "e6f9e61c67b1f4162d0ee9a6510a4d5ef80ec2542ae3420cb8a965b780bea0d6",
+  "qualifying_candidate_ids": [
+    "ee8ec7bf00baeb6021de6d78c7183215b7e866a92954e0d6ceaec6cf15ac3da5",
+    "c9c796cb59b7fe17b41b5222bf9deca8b051828d87b96b4f0e8f4b34e45243fc"
+  ],
+  "target_candidate_attempts": 0,
+  "measured_candidate_labels_used": false
+}

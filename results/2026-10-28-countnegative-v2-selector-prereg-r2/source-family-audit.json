@@ -1,0 +1,140 @@
+{
+  "schema": "isaforge-countnegative-v2-source-family-audit-v1",
+  "target_families": [
+    "addi(lui(constant),constant)",
+    "sltu(constant,add(input,input))",
+    "sub(constant,sltu(constant,add(input,input)))",
+    "sub(constant,sltu(constant,input))"
+  ],
+  "overlapping_families": [
+    "addi(lui(constant),constant)",
+    "sltu(constant,add(input,input))"
+  ],
+  "novel_target_families": [
+    "sub(constant,sltu(constant,add(input,input)))",
+    "sub(constant,sltu(constant,input))"
+  ],
+  "target_candidate_count": 4,
+  "overlap_candidate_ids": [
+    "44b462b19f848483602ad318ee524905331f212083f3cb66e09e9041584288f2",
+    "f85497bb06dae4846bde5e9269c03f4faeda446e4e3e7fccc79383646cdfd0aa"
+  ],
+  "excluded_historical_success_ids": [
+    "98cdd67cbcfd7bc4fa446757f0a76f17cece59f56f9941227b0350f4a45f32a1",
+    "cd85282f2bc5eb52fd8e4caeb9689f1a422a30a95d38b2eea42e44bab407e2c0",
+    "cb24749e0960f92e44f6e60d20de20c9a47a680564aa1c5ec45533da2967a105",
+    "685e04e0d5869c39b22f7811e683a0067fd7ac2e364478ca0618db9a909b66b3",
+    "a75cd5d2f2e531c57c4256b93e15287aac6e449f877db5b099455a1a5954a22e",
+    "f3ee2d6ccae47eb9e9b1d8d802b9eb5d9afa09a6fc41bfcd8b0bb6c0aaa988b0",
+    "1697b99419fda6609816799aa19ed144041265c8127e2c8196b5a90e47c62260",
+    "f5c65fdbef148eb623d823a078e0461b9d3197521007d491384b937e4bd5f1a0",
+    "5ad1dddcbb277d6c2778d6d8480fd655ccfe06bcf596da8d10de8cdab285c4f1",
+    "a66889f2445f826d4e7871d66c4063e97c8ff51979516b1d7c4697f0c78b2d3a",
+    "b088b578b417daf31967582b1b777bd360d68a1b4721b909fb94281a1012e910",
+    "0e59451b8b862810d79835cc5d1b3afdeee2ee810c2b1594fdb6478e45e6a82b",
+    "c1461416687c586de22e1286e134717d5ec21e83cd7d0e9c261e85a5cd4a4a13",
+    "ba9bc1fccece1078fc96d31f7d61a6f0ed48ed31f0789caf1fd9ffc67a7fcdbf",
+    "a6aa177895530785747a52c496ecb75ca7a394dbea8901b7cd2f8b79871884e4"
+  ],
+  "training_rows": 141,
+  "training_workload_groups": [
+    "beebs-aha-compress",
+    "beebs-expint",
+    "beebs-jfdctint",
+    "beebs-ndes",
+    "beebs-nettle-md5",
+    "embench-aha-mont64",
+    "embench-crc32",
+    "embench-edn",
+    "embench-nettle-sha256",
+    "embench-slre",
+    "embench-ud",
+    "nanocobs",
+    "pulpino-sudoku",
+    "tacle-bitcount",
+    "tacle-g723-enc",
+    "tacle-lift",
+    "tiny-regex-fixed-suite"
+  ],
+  "interpretation": "Exact operation-tree families are excluded from training. A deterministic integer matrix benchmark and exact-family holdout are descriptive; recent public overlap is recorded below and does not establish domain independence.",
+  "recent_public_rosters_descriptive_only": [
+    {
+      "path": "results/2026-10-28-tiny-regex-c-selector-prereg-r5/inputs/public.json",
+      "sha256": "1e2dca82706454df33b4ac0431608b7b313442d1fbf4076dd22027f222c3283a",
+      "candidate_count": 12,
+      "families": [
+        "add(input,slli(input,constant))",
+        "addi(andi(input,constant),constant)",
+        "and(input,sltu(constant,input))",
+        "andi(addi(input,constant),constant)",
+        "or(input,sltiu(input,constant))",
+        "sltiu(addi(andi(input,constant),constant),constant)",
+        "sltiu(sltiu(addi(input,constant),constant),constant)",
+        "sltiu(sltiu(input,constant),constant)",
+        "sltiu(sltu(input,input),constant)",
+        "sltu(constant,sub(input,input))",
+        "sub(constant,xori(input,constant))"
+      ],
+      "overlapping_families": [],
+      "target_overlap_candidate_ids": []
+    },
+    {
+      "path": "results/2026-10-28-pulpino-sudoku-selector-prereg-r4/inputs/public.json",
+      "sha256": "fcd1ff3bd997612a54d93155deca240932e0be35ac419464f0f26b7c4db76e3a",
+      "candidate_count": 12,
+      "families": [
+        "add(add(input,slli(input,constant)),input)",
+        "add(input,slli(input,constant))",
+        "slli(add(add(input,slli(input,constant)),input),constant)",
+        "slli(add(input,input),constant)",
+        "slli(sub(input,input),constant)",
+        "slli(sub(slli(input,constant),input),constant)",
+        "sub(slli(input,constant),input)",
+        "sub(slli(sub(input,input),constant),input)",
+        "sub(slli(sub(slli(input,constant),input),constant),input)"
+      ],
+      "overlapping_families": [],
+      "target_overlap_candidate_ids": []
+    },
+    {
+      "path": "results/2026-10-27-ascon-selector-prereg-v3/inputs/public.json",
+      "sha256": "f4c0f94c0de9c515405910a9d38d3f6ada3dcc7228ab352030a749fbe3fcd148",
+      "candidate_count": 12,
+      "families": [
+        "add(addi(input,constant),input)",
+        "add(input,slli(input,constant))",
+        "add(input,srli(input,constant))",
+        "add(slli(input,constant),srli(input,constant))",
+        "addi(andi(input,constant),constant)",
+        "addi(lui(constant),constant)",
+        "and(input,xori(input,constant))"
+      ],
+      "overlapping_families": [
+        "addi(lui(constant),constant)"
+      ],
+      "target_overlap_candidate_ids": [
+        "44b462b19f848483602ad318ee524905331f212083f3cb66e09e9041584288f2"
+      ]
+    },
+    {
+      "path": "results/2026-10-28-nanocobs-v2-selector-prereg-r1/inputs/public.json",
+      "sha256": "130f8462061e5a39fbf4a7f44c879e8c692a4867298f7c898083209881eaca52",
+      "candidate_count": 10,
+      "families": [
+        "add(andi(input,constant),input)",
+        "addi(lui(constant),constant)",
+        "or(input,sltiu(input,constant))",
+        "or(sltiu(input,constant),sltiu(input,constant))",
+        "sub(addi(input,constant),input)"
+      ],
+      "overlapping_families": [
+        "addi(lui(constant),constant)"
+      ],
+      "target_overlap_candidate_ids": [
+        "44b462b19f848483602ad318ee524905331f212083f3cb66e09e9041584288f2"
+      ]
+    }
+  ],
+  "descriptive_public_rows_added_to_training": 0,
+  "expanded_corpus_note": "Prior measured target labels may enter training from the authenticated expanded corpus only after current target workload/family exclusion; descriptive roster objects are never fitting inputs."
+}
