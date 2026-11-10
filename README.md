@@ -37,11 +37,11 @@ These are separate experiments, not one learning curve. Targeted coverage helped
 
 ## Latest validated candidate
 
-Adding 64 targeted training circuits and a constrained correction reduced MAE **34.47 →29.44 LUT4 (14.58%)** on 32 new synthetic circuits; MAPE fell **20.64% →18.01%**. Every accept/reject decision at 32/64/128 LUT4 stayed identical to the baseline, and worst underprediction did not increase.
+A targeted signed-arithmetic repair fixes the two previously reported development regressions. On **40 new synthetic circuits**, MAE falls **15.54 →12.99 LUT4 (16.40%)** versus the previous guarded model; MAPE falls **12.71% →11.23%**. Decisions at 32/64/128 LUT4 remain identical to the original baseline, including its existing mistakes.
 
-![Targeted coverage and separate fresh validation of the budget-preserving correction.](docs/figures/research/targeted-coverage.svg)
+![Signed-arithmetic regression repairs and independent fresh synthetic comparison.](docs/figures/research/guarded-revision.svg)
 
-The correction preserves existing budget mistakes rather than fixing them. It remains experimental: one older arithmetic panel and one fresh subgroup regress in accuracy. The candidate is available through an explicit cached-inference command; the original default remains unchanged. [Method, results and inference](results/budget-preserving-coverage/README.md) · [Earlier selection failure](results/selection-validation/README.md).
+The revision adds 32 measured training circuits, uses a narrow structural route and retains the budget-preserving correction. A small research-panel regression versus the incumbent and one fresh subgroup's error versus baseline remain documented. It is available through an explicit cached-inference command; the original default stays unchanged. [Method, results and inference](results/guarded-revision/README.md) · [Previous coverage experiment](results/budget-preserving-coverage/README.md).
 
 ## Run it
 

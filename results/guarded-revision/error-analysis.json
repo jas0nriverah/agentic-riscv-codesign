@@ -1,0 +1,401 @@
+{
+  "created_at_utc": "2026-11-10T04:26:03.850073+00:00",
+  "consumed_development_only": true,
+  "mechanism": "An upward-only guard preserves cap decisions but can increase absolute error when base already overpredicts or a learned lift crosses the target.",
+  "arithmetic_stress32": {
+    "base": {
+      "count": 32,
+      "mae_lut4": 15.521145833333334,
+      "positive_mape_percent": 13.417607960688127,
+      "positive_count": 32,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 2.826666666666654,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 0,
+          "predicted_accept": 0
+        },
+        "64": {
+          "false_accept": 0,
+          "false_reject": 4,
+          "actual_accept": 16,
+          "predicted_accept": 12
+        },
+        "128": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 16,
+          "predicted_accept": 16
+        }
+      }
+    },
+    "incumbent_guard": {
+      "count": 32,
+      "mae_lut4": 15.669843750000002,
+      "positive_mape_percent": 13.782849099954664,
+      "positive_count": 32,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 2.826666666666654,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 0,
+          "predicted_accept": 0
+        },
+        "64": {
+          "false_accept": 0,
+          "false_reject": 4,
+          "actual_accept": 16,
+          "predicted_accept": 12
+        },
+        "128": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 16,
+          "predicted_accept": 16
+        }
+      }
+    },
+    "rows": [
+      {
+        "formula": "mul(xor(in0,in1),addi(0,31))",
+        "actual_lut4": 202,
+        "base": 235.02,
+        "incumbent_guard": 235.02,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "mul(xor(in0,in1),addi(0,47))",
+        "actual_lut4": 260,
+        "base": 272.71666666666664,
+        "incumbent_guard": 272.71666666666664,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "mul(xor(in0,in1),addi(0,79))",
+        "actual_lut4": 255,
+        "base": 264.6,
+        "incumbent_guard": 264.6,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "mul(xor(in0,in1),addi(0,95))",
+        "actual_lut4": 307,
+        "base": 342.0233333333333,
+        "incumbent_guard": 342.0233333333333,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "mul(xor(in0,in1),addi(0,111))",
+        "actual_lut4": 281,
+        "base": 316.85,
+        "incumbent_guard": 316.85,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "mul(xor(in0,in1),addi(0,127))",
+        "actual_lut4": 281,
+        "base": 321.86333333333334,
+        "incumbent_guard": 321.86333333333334,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "mul(xor(in0,in1),addi(0,143))",
+        "actual_lut4": 286,
+        "base": 303.1766666666667,
+        "incumbent_guard": 303.1766666666667,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "mul(xor(in0,in1),addi(0,159))",
+        "actual_lut4": 306,
+        "base": 344.2966666666667,
+        "incumbent_guard": 344.2966666666667,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "xor(mul(in0,addi(0,31)),in1)",
+        "actual_lut4": 173,
+        "base": 199.61,
+        "incumbent_guard": 199.61,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "xor(mul(in0,addi(0,47)),in1)",
+        "actual_lut4": 226,
+        "base": 226.41,
+        "incumbent_guard": 226.41,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "xor(mul(in0,addi(0,79)),in1)",
+        "actual_lut4": 224,
+        "base": 221.17333333333335,
+        "incumbent_guard": 221.17333333333335,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "xor(mul(in0,addi(0,95)),in1)",
+        "actual_lut4": 278,
+        "base": 306.55333333333334,
+        "incumbent_guard": 306.55333333333334,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "xor(mul(in0,addi(0,111)),in1)",
+        "actual_lut4": 252,
+        "base": 288.07666666666665,
+        "incumbent_guard": 288.07666666666665,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "xor(mul(in0,addi(0,127)),in1)",
+        "actual_lut4": 256,
+        "base": 282.4433333333333,
+        "incumbent_guard": 282.4433333333333,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "xor(mul(in0,addi(0,143)),in1)",
+        "actual_lut4": 248,
+        "base": 248.52333333333334,
+        "incumbent_guard": 248.52333333333334,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "xor(mul(in0,addi(0,159)),in1)",
+        "actual_lut4": 271,
+        "base": 296.29333333333335,
+        "incumbent_guard": 296.29333333333335,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "sub(srai(xor(in0,in1),2),srai(in1,31))",
+        "actual_lut4": 62,
+        "base": 66.03666666666666,
+        "incumbent_guard": 66.03666666666666,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "sub(srai(xor(in0,in1),4),srai(in1,31))",
+        "actual_lut4": 58,
+        "base": 64.58666666666667,
+        "incumbent_guard": 64.58666666666667,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "sub(srai(xor(in0,in1),6),srai(in1,31))",
+        "actual_lut4": 54,
+        "base": 61.835,
+        "incumbent_guard": 61.835,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "sub(srai(xor(in0,in1),8),srai(in1,31))",
+        "actual_lut4": 50,
+        "base": 58.858333333333334,
+        "incumbent_guard": 59.18,
+        "absolute_error_delta_lut4": 0.32166666666666544
+      },
+      {
+        "formula": "sub(srai(xor(in0,in1),10),srai(in1,31))",
+        "actual_lut4": 46,
+        "base": 53.39,
+        "incumbent_guard": 54.18333333333333,
+        "absolute_error_delta_lut4": 0.7933333333333294
+      },
+      {
+        "formula": "sub(srai(xor(in0,in1),12),srai(in1,31))",
+        "actual_lut4": 42,
+        "base": 49.85333333333333,
+        "incumbent_guard": 51.696666666666665,
+        "absolute_error_delta_lut4": 1.8433333333333337
+      },
+      {
+        "formula": "sub(srai(xor(in0,in1),14),srai(in1,31))",
+        "actual_lut4": 38,
+        "base": 45.60333333333333,
+        "incumbent_guard": 46.776666666666664,
+        "absolute_error_delta_lut4": 1.173333333333332
+      },
+      {
+        "formula": "sub(srai(xor(in0,in1),16),srai(in1,31))",
+        "actual_lut4": 34,
+        "base": 43.02,
+        "incumbent_guard": 43.64666666666667,
+        "absolute_error_delta_lut4": 0.6266666666666652
+      },
+      {
+        "formula": "sub(srai(and(in0,in1),2),srai(in1,31))",
+        "actual_lut4": 62,
+        "base": 66.06,
+        "incumbent_guard": 66.06,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "sub(srai(and(in0,in1),4),srai(in1,31))",
+        "actual_lut4": 58,
+        "base": 65.04666666666667,
+        "incumbent_guard": 65.04666666666667,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "sub(srai(and(in0,in1),6),srai(in1,31))",
+        "actual_lut4": 54,
+        "base": 61.92166666666667,
+        "incumbent_guard": 61.92166666666667,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "sub(srai(and(in0,in1),8),srai(in1,31))",
+        "actual_lut4": 50,
+        "base": 59.555,
+        "incumbent_guard": 59.555,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "sub(srai(and(in0,in1),10),srai(in1,31))",
+        "actual_lut4": 46,
+        "base": 53.93666666666667,
+        "incumbent_guard": 53.93666666666667,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "sub(srai(and(in0,in1),12),srai(in1,31))",
+        "actual_lut4": 42,
+        "base": 51.593333333333334,
+        "incumbent_guard": 51.593333333333334,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "sub(srai(and(in0,in1),14),srai(in1,31))",
+        "actual_lut4": 38,
+        "base": 48.05,
+        "incumbent_guard": 48.05,
+        "absolute_error_delta_lut4": 0.0
+      },
+      {
+        "formula": "sub(srai(and(in0,in1),16),srai(in1,31))",
+        "actual_lut4": 34,
+        "base": 46.04666666666667,
+        "incumbent_guard": 46.04666666666667,
+        "absolute_error_delta_lut4": 0.0
+      }
+    ]
+  },
+  "signed_dual_arithmetic4": {
+    "base": {
+      "count": 4,
+      "mae_lut4": 18.035833333333336,
+      "positive_mape_percent": 13.14411599867927,
+      "positive_count": 4,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 32.31333333333333,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 0,
+          "predicted_accept": 0
+        },
+        "64": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 0,
+          "predicted_accept": 0
+        },
+        "128": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 2,
+          "predicted_accept": 2
+        }
+      }
+    },
+    "incumbent_guard": {
+      "count": 4,
+      "mae_lut4": 20.63125,
+      "positive_mape_percent": 12.553294789332025,
+      "positive_count": 4,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 28.156666666666666,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 0,
+          "predicted_accept": 0
+        },
+        "64": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 0,
+          "predicted_accept": 0
+        },
+        "128": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 2,
+          "predicted_accept": 2
+        }
+      }
+    },
+    "rows": [
+      {
+        "formula": "xor(sub(in0,sra(in1,andi(in0,1))),add(in0,in1))",
+        "actual_lut4": 95,
+        "base": 81.35,
+        "incumbent_guard": 93.03666666666666,
+        "absolute_error_delta_lut4": -11.686666666666667
+      },
+      {
+        "formula": "xor(sub(in0,sra(in1,andi(in0,5))),add(in0,in1))",
+        "actual_lut4": 126,
+        "base": 93.68666666666667,
+        "incumbent_guard": 97.84333333333333,
+        "absolute_error_delta_lut4": -4.156666666666666
+      },
+      {
+        "formula": "xor(sub(in0,sra(in1,andi(in0,15))),add(in0,in1))",
+        "actual_lut4": 188,
+        "base": 179.43666666666667,
+        "incumbent_guard": 213.585,
+        "absolute_error_delta_lut4": 17.021666666666675
+      },
+      {
+        "formula": "xor(sub(in0,sra(in1,andi(in0,31))),add(in0,in1))",
+        "actual_lut4": 220,
+        "base": 202.38333333333333,
+        "incumbent_guard": 246.82,
+        "absolute_error_delta_lut4": 9.203333333333319
+      }
+    ]
+  },
+  "static_failure": "Five static-srai mixed-xor predictions were raised despite every routed arithmetic-stress target already below base. Returning to base removes this regression; improvement below base is incompatible with the unchanged guard in this class.",
+  "variable_signed_failure": "High-mask signed_dual_arithmetic k15/31 cross the measured target; low-mask k1/5 improvements coexist, motivating signed arithmetic coverage rather than a blanket signed-shift rejection.",
+  "frozen_resolution": {
+    "guard": "p=min(max(base,scoped_augmented217),nextcap(base))",
+    "caps_lut4": [
+      32,
+      64,
+      128
+    ],
+    "primary_route": {
+      "schema": "original-ast-input-only-v1",
+      "variable_shift": "Any sll/srl/sra node whose second operand subtree contains in0 or in1.",
+      "mixed_arithmetic": "At least one add/addi/sub and at least one xor/xori anywhere, with no mul/mulh/mulhu/mulhsu anywhere.",
+      "operator": "variable_shift OR mixed_arithmetic",
+      "otherwise": "base",
+      "normalization": false,
+      "label_or_prediction_inputs": false
+    },
+    "repair_route": "Within original active route, use new1761 forest only if any signed sra/srai AND sub AND xor/xori occur anywhere; otherwise incumbent1729 forest.",
+    "fallback_abstention": "Use base where original mixed_arithmetic route AND any srai node AND no variable_shift node. Otherwise primary route.",
+    "development_selection": "First primary if every development gate passes, else fallback if every development gate passes, else no eligible model and primary evaluated diagnostically.",
+    "prediction_inputs": "Original AST and explicit336 cached features only; no IDs, labels or predicted errors."
+  },
+  "protocol_sha256": "08115c86a136950365262c05dc6f038995231c4d9f3b6db5e373a76d918502de"
+}

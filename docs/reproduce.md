@@ -62,3 +62,7 @@ The runner freezes inputs and folds before fitting, limits native libraries to o
 ## Validated coverage candidate
 
 The [budget-preserving candidate](../results/budget-preserving-coverage/README.md#run-actual-cached-inference) has an explicit cached-feature prediction command. It reuses the base forest and the new 1,729-row forest; no native tools or fitting are needed for cached inference. `make coverage-check` independently verifies both coverage experiments, including saved predictions, raw mapped netlists, oracle vectors, budget decisions and chronology. This audit uses the pinned numerical environment and launches no fits or native jobs.
+
+## Signed-arithmetic revision
+
+The [current experimental revision](../results/guarded-revision/README.md#run-and-replay) provides a separate cached-inference command. Reproduce its new measurement/model audit with `.venv/bin/python scripts/audit_guarded_revision.py`; this compares frozen receipts without modifying them and launches no new fits or native jobs. Regenerate its figure with `.venv/bin/python scripts/render_guarded_revision.py`. Earlier commands and frozen artifacts remain unchanged.
