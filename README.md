@@ -35,13 +35,13 @@ This matched test contains **192 synthetic circuits**, with the same 1,665 fitti
 
 These are separate experiments, not one learning curve. Targeted coverage helped arithmetic cases, but did not improve the primary application-transfer metric. The scoped policy reduced MAE **22.63%** on 32 new related circuits; its worst underprediction increased **2.83 → 32.01 LUT4**, so it remains experimental. [Complete compact results](results/README.md).
 
-## Latest feature experiment
+## Latest validation: keep the current model
 
-On the same five grouped development folds, selecting **128 of 336 available features** reduced primary MAE **5.32%** versus the fixed 217-feature view. Using all 336 reduced it **1.56%**. Selection used training rows only; all three models used identical 300-tree settings.
+Selecting 128 of 336 features improved development MAE across three seeds (**5.53% mean improvement**), but increased budget mistakes. On **40 new synthetic circuits**, its MAE instead worsened **15.46 → 16.94 LUT4**, with additional false accepts at 64 and 128 LUTs. The 217-feature model remains the default.
 
-![Matched feature comparison, including error and hardware-budget tradeoffs.](docs/figures/research/feature-comparison.svg)
+![Selection stability and prospective validation, with hardware-budget tradeoffs.](docs/figures/research/selection-validation.svg)
 
-The selected model increased false-safe decisions at a 128-LUT budget from **10 to 13**, so the default remains unchanged. These are development results on 1,665 previously used circuits, not an independent test. [Protocol, results and next decision](results/feature-comparison/README.md).
+The independent check prevented a development-only gain from becoming a deployed regression. [Stability](results/selection-stability/README.md) · [Fresh validation and evidence](results/selection-validation/README.md) · [Initial feature comparison](results/feature-comparison/README.md).
 
 ## Run it
 

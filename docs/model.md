@@ -40,3 +40,5 @@ The weights and adjacent metadata in [models/](../models/) are byte-identical to
 217 is a fixed representation choice, not a model capacity limit. A [matched development experiment](../results/feature-comparison/README.md) compares that view with all 336 descriptors and with 128 selected inside each training fold. The 336 view contains the same values as the extractor storage, reordered as the 217 inputs followed by 119 semantic descriptors. Feature ordering is frozen because it can affect randomized trees.
 
 The selected view has the lowest development MAE, but its hardware-budget mistakes and worst underprediction prevent promotion. Each fold selects its own 128 columns; this experiment does not produce a single new deployable model.
+
+The [stability follow-up](../results/selection-stability/README.md) repeats the MAE gain across three seeds, but the [fresh 40-circuit test](../results/selection-validation/README.md) worsens both accuracy and budget decisions. The experimental selected forest is retained for reproducibility; it is not exposed as the default prediction model.

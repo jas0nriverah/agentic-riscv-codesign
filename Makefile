@@ -15,6 +15,9 @@ predict:
 figures:
 	$(PYTHON) scripts/render_research_figures.py
 	$(PYTHON) scripts/render_feature_comparison.py
+	$(PYTHON) scripts/render_selection_validation.py
 
 feature-check:
 	$(PYTHON) scripts/replay_feature_comparison.py
+	$(PYTHON) scripts/replay_selection_stability.py
+	$(PYTHON) scripts/replay_selection_validation.py replay

@@ -42,6 +42,10 @@ All 32 targets are positive. All four template MAEs improve; aggregate MAE falls
 
 The [217 vs 336 vs selected-128 comparison](feature-comparison/README.md) uses identical five-fold grouped validation on 1,665 development circuits. Primary group-macro MAE is **10.5678 → 10.4034 → 10.0054 LUT4**. Selected features improve mean error but increase cap128 false-safe decisions **10 → 13**. No model is promoted. This development experiment is separate from the three benchmark datasets above.
 
+## 5. Stability and fresh validation
+
+Selection lowers mean primary development MAE **5.53% across three fixed seeds**, while increasing budget mistakes at64/128LUTs. On40 new synthetic circuits it worsens MAE **15.4586 → 16.9423 LUT4** and adds false accepts. The independent check rejects promotion. [Seed stability](selection-stability/README.md) · [Fresh measured validation](selection-validation/README.md).
+
 ## Evidence and interpretation
 
 The iteration diagram also shows an earlier **25.40% development improvement** on previously examined applications. It uses a different cohort and is not another independent test. Its full measured record is linked from the diagram source to the immutable archive.

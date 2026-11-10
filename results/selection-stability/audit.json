@@ -1,0 +1,118 @@
+{
+  "schema": "isaforge-independent-selection-stability-audit-v1",
+  "status": "pass",
+  "audited_at_utc": "2026-11-10T01:57:37.510795+00:00",
+  "protocol_sha256": "47bbb980e5ef6733966e7b2a172cf7a60be9976163f8d1eaa2b25ca1938fa19e",
+  "manifest_sha256": "1300281e9c09d91d77da219ebf7599a845d80241341590429a0dc709339fb4e1",
+  "summary_sha256": "b91e9d8eed2bdbdc3a7dea9ee2e0d255a1db0ac43b56e72611443a3673137126",
+  "protocol_observed_before_new_scores": true,
+  "prior_feature_comparison_all_files_unchanged": true,
+  "hashes_verified": true,
+  "rows_per_seed": 1665,
+  "descriptive_seed_replicates": 3,
+  "original_seed_reused_exactly": true,
+  "groups": 522,
+  "crossfold_group_count": 0,
+  "selection_training_rows_exclude_validation": true,
+  "all15_training_importance_rankings_replayed": true,
+  "full_data_importance_ranking_replayed": true,
+  "all_saved_metrics_and_jaccard_replayed": true,
+  "metric_numeric_comparisons": 2915,
+  "maximum_numeric_replay_difference": 0,
+  "fits_completed": 33,
+  "cv_fits_completed": 30,
+  "full_data_fits_completed": 3,
+  "wall_seconds": 96.56203187501524,
+  "workers": 1,
+  "new_audit_fits": 0,
+  "new_audit_synthesis": 0,
+  "strictly_eligible": false,
+  "decision": {
+    "mean_error_promising": true,
+    "primary_mae_strictly_lower_each_seed": true,
+    "aggregate_budget_errors_not_worse": {
+      "32": {
+        "false_safe_count": true,
+        "false_rejection_count": true
+      },
+      "64": {
+        "false_safe_count": false,
+        "false_rejection_count": false
+      },
+      "128": {
+        "false_safe_count": false,
+        "false_rejection_count": false
+      }
+    },
+    "maximum_underprediction_not_worse": false,
+    "strictly_eligible": false,
+    "descriptive_aggregates_not_independent_samples": {
+      "mapping217": {
+        "mean_seed_group_macro_mae_lut4": 10.622698388513045,
+        "maximum_underprediction_lut4": 193.59000000000015,
+        "caps": {
+          "32": {
+            "false_safe_count": 65,
+            "false_rejection_count": 289
+          },
+          "64": {
+            "false_safe_count": 45,
+            "false_rejection_count": 115
+          },
+          "128": {
+            "false_safe_count": 31,
+            "false_rejection_count": 19
+          }
+        }
+      },
+      "original336": {
+        "mean_seed_group_macro_mae_lut4": 10.351826303235208,
+        "maximum_underprediction_lut4": 195.62666666666655,
+        "caps": {
+          "32": {
+            "false_safe_count": 64,
+            "false_rejection_count": 284
+          },
+          "64": {
+            "false_safe_count": 48,
+            "false_rejection_count": 106
+          },
+          "128": {
+            "false_safe_count": 33,
+            "false_rejection_count": 21
+          }
+        }
+      },
+      "selected128": {
+        "mean_seed_group_macro_mae_lut4": 10.034856073153003,
+        "maximum_underprediction_lut4": 194.72333333333336,
+        "caps": {
+          "32": {
+            "false_safe_count": 60,
+            "false_rejection_count": 278
+          },
+          "64": {
+            "false_safe_count": 56,
+            "false_rejection_count": 121
+          },
+          "128": {
+            "false_safe_count": 38,
+            "false_rejection_count": 21
+          }
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Same consumed development data and folds across all three seeds: algorithm randomness stability only, no independent sample inference.",
+    "Saved fold forest predictions authenticated and metrics independently replayed; no fold forests retained or refit, so individual OOF estimator inference not independently reproduced.",
+    "Training-only selection verified by recorded row indices and frozen runner source review; saved importances do not independently prove historical training execution.",
+    "Prior semantic/representation grouping reused and prior audit authenticated; finite grouping cannot exclude every semantic equivalence.",
+    "Full-data artifacts are experimental point models; no calibration, hardware guarantee or promotion.",
+    "Recorded fit/time/worker counters and source-reviewed execution; historical OS process peaks cannot be independently proved."
+  ],
+  "full_data_models_loaded_checked": 3,
+  "full_data_model_tree_count": 300,
+  "full_data_model_configuration_matches": true,
+  "full_data_selector_saved_importances_match_loaded_forest": true
+}

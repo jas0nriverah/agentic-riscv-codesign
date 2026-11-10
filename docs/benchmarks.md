@@ -24,6 +24,10 @@ The 192- and 32-case groups are equally sized, so their primary MAE equals circu
 
 Each saved observation includes the original formula, measured target and every retained comparator prediction. All original circuits and zero targets remain. The 32-case input draft had one disclosed pre-freeze template amendment after detecting old formulas; none were replaced after prediction/label release. The application scoped-policy result is retrospective. The arithmetic panel is prospective but related synthetic coverage, not new application-family transfer.
 
+## Selection follow-up
+
+The [selection stability study](../results/selection-stability/README.md) repeats the same grouped development evaluation across three fixed seeds. These are algorithmic repeats on shared data. The subsequent [40-circuit synthetic test](../results/selection-validation/README.md) freezes models and predictions before new synthesis labels across five templates. It rejects the selected-feature candidate: both accuracy and budget mistakes worsen. This prospective synthetic check is separate from application transfer and does not change historical scores.
+
 ## MAPE and other metrics
 
 For positive measured targets y:
