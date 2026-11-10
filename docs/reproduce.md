@@ -70,3 +70,7 @@ The [current experimental revision](../results/guarded-revision/README.md#run-an
 ## Signed-shift refinement
 
 Use [the latest cached inference command](../results/signed-refinement/README.md#run-and-replay) to evaluate the explicit refinement. `python scripts/refine_signed_coverage.py replay` checks all saved points and metrics without writes. `python scripts/audit_signed_refinement.py` independently checks raw evidence and frozen receipts without new fits or native jobs. Regenerate its figure with `python scripts/render_signed_refinement.py` in the pinned environment. Earlier snapshots and commands remain preserved.
+
+## Budget-release diagnostic
+
+The [budget-release report](../results/budget-release/README.md) provides cached inference and replay commands for the new 1,825-row forest and structural policy. It improves fresh area estimates and false acceptances but fails the separate false-rejection gate; it is not promoted. `scripts/release_budget_coverage.py replay` and `scripts/audit_budget_release.py` check frozen evidence without fitting or native measurement. `scripts/render_budget_release.py` regenerates the fresh comparison figure.

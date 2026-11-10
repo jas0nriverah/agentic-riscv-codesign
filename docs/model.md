@@ -54,3 +54,9 @@ The [new experimental revision](../results/guarded-revision/README.md) adds 32 s
 ## Signed-shift refinement
 
 The [current experimental refinement](../results/signed-refinement/README.md) adds 32 measured cases for a 1,793-row forest. It changes only two predeclared signed-shift structural classes; other formulas retain the previous composite predictor. The primary passed development selection before fresh labels and improves a separate 40-case test versus the immediate incumbent. All seven retained panels meet incremental MAE/MAPE and maximum-underprediction criteria. The model remains a four-forest composite with explicit AST routing and the same cap guard; it does not repair existing budget classification errors. Fresh subgroup and older-policy tradeoffs remain documented.
+
+## Budget-release experiment
+
+The [latest experiment](../results/budget-release/README.md) tests whether allowing estimates to cross the old budget limits repairs false acceptances. One new forest uses 1,825 training circuits. The predeclared compound-only policy takes the maximum of the previous composite estimate and the new forest on compound signed shifts, preserving the previous policy elsewhere. This can correct false acceptances but can introduce false rejections; it is not a calibrated safety bound.
+
+Development selection rejected the broader compound/Boolean route. The narrow fallback improved fresh accuracy and reduced false acceptances, but newly rejected one circuit that actually used 125 LUTs at a 128-LUT budget. It therefore fails promotion and remains an explicit diagnostic predictor. The unclipping-only comparator uses the broader route, so its aggregate difference from the selected fallback does not isolate the effect of added training.

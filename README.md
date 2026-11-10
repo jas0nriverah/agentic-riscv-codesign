@@ -35,13 +35,13 @@ This matched test contains **192 synthetic circuits**, with the same 1,665 fitti
 
 These are separate experiments, not one learning curve. Targeted coverage helped arithmetic cases, but did not improve the primary application-transfer metric. The scoped policy reduced MAE **22.63%** on 32 new related circuits; its worst underprediction increased **2.83 → 32.01 LUT4**, so it remains experimental. [Complete compact results](results/README.md).
 
-## Latest validated candidate
+## Latest experiment: budget decisions
 
-A narrow signed-shift refinement fixes the two targeted development tradeoffs. On **40 new synthetic circuits**, MAE falls **33.32 →27.87 LUT4 (16.35%)** versus the previous model; MAPE falls **18.98% →15.69%**. Worst underprediction decreases, while every decision at 32/64/128 LUT4 stays unchanged.
+On **40 fresh synthetic circuits**, a compound-shift correction reduces MAE **20.50 → 11.40 LUT4 (44.38%)** and MAPE **12.76% → 8.12%** versus our previous candidate. At the 128-LUT budget, false acceptances fall **11 → 3**, but false rejections rise **0 → 1**. **The candidate is not promoted:** it fails our predeclared requirement that neither kind of budget mistake worsen.
 
-![Targeted tradeoff repairs and a separate fresh synthetic comparison.](docs/figures/research/signed-refinement.svg)
+![Fresh area error and hardware-budget mistakes, including the failed promotion gate.](docs/figures/research/budget-release.svg)
 
-The refinement adds 32 measured training circuits and preserves the previous predictor outside two declared structural classes. One fresh subgroup regresses slightly, and two unchanged controls still favor an older policy; all are documented. Existing budget mistakes remain. [Method, full results and cached inference](results/signed-refinement/README.md) · [Previous repair](results/guarded-revision/README.md).
+The targeted development subgroup improves, but the fresh boundary error shows why average accuracy alone is insufficient. The experiment preserves the failed broad policy, selected narrow policy, and diagnostic unclipping comparison. [Full evidence, tradeoffs and inference](results/budget-release/README.md) · [Previous validated experimental candidate](results/signed-refinement/README.md). The base model remains the default.
 
 ## Run it
 

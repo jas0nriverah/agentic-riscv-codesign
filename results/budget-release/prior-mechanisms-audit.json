@@ -1,0 +1,881 @@
+{
+  "schema": "independent-budget-release-prior-mechanisms-v1",
+  "created_at_utc": "2026-11-10T21:14:20.741552+00:00",
+  "consumed_development_only": true,
+  "new_training_or_fresh_labels_present": false,
+  "panels": {
+    "research-baselines": {
+      "count": 192,
+      "caps": {
+        "32": {
+          "false_accept": 4,
+          "false_reject": 14,
+          "actual_feasible": 75,
+          "actual_infeasible": 117
+        },
+        "64": {
+          "false_accept": 6,
+          "false_reject": 5,
+          "actual_feasible": 105,
+          "actual_infeasible": 87
+        },
+        "128": {
+          "false_accept": 1,
+          "false_reject": 4,
+          "actual_feasible": 146,
+          "actual_infeasible": 46
+        }
+      }
+    },
+    "application-transfer": {
+      "count": 327,
+      "caps": {
+        "32": {
+          "false_accept": 1,
+          "false_reject": 6,
+          "actual_feasible": 231,
+          "actual_infeasible": 96
+        },
+        "64": {
+          "false_accept": 1,
+          "false_reject": 1,
+          "actual_feasible": 273,
+          "actual_infeasible": 54
+        },
+        "128": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_feasible": 313,
+          "actual_infeasible": 14
+        }
+      }
+    },
+    "arithmetic-stress": {
+      "count": 32,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_feasible": 0,
+          "actual_infeasible": 32
+        },
+        "64": {
+          "false_accept": 0,
+          "false_reject": 4,
+          "actual_feasible": 16,
+          "actual_infeasible": 16
+        },
+        "128": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_feasible": 16,
+          "actual_infeasible": 16
+        }
+      }
+    },
+    "selection-validation": {
+      "count": 40,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 7,
+          "actual_feasible": 8,
+          "actual_infeasible": 32
+        },
+        "64": {
+          "false_accept": 6,
+          "false_reject": 0,
+          "actual_feasible": 15,
+          "actual_infeasible": 25
+        },
+        "128": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_feasible": 29,
+          "actual_infeasible": 11
+        }
+      }
+    },
+    "consumed-first-fresh40": {
+      "count": 40,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 4,
+          "actual_feasible": 12,
+          "actual_infeasible": 28
+        },
+        "64": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_feasible": 12,
+          "actual_infeasible": 28
+        },
+        "128": {
+          "false_accept": 5,
+          "false_reject": 0,
+          "actual_feasible": 23,
+          "actual_infeasible": 17
+        }
+      }
+    },
+    "consumed-second-fresh32": {
+      "count": 32,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 4,
+          "actual_feasible": 4,
+          "actual_infeasible": 28
+        },
+        "64": {
+          "false_accept": 5,
+          "false_reject": 0,
+          "actual_feasible": 4,
+          "actual_infeasible": 28
+        },
+        "128": {
+          "false_accept": 3,
+          "false_reject": 0,
+          "actual_feasible": 14,
+          "actual_infeasible": 18
+        }
+      }
+    },
+    "consumed-third-fresh40": {
+      "count": 40,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_feasible": 6,
+          "actual_infeasible": 34
+        },
+        "64": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_feasible": 10,
+          "actual_infeasible": 30
+        },
+        "128": {
+          "false_accept": 2,
+          "false_reject": 0,
+          "actual_feasible": 25,
+          "actual_infeasible": 15
+        }
+      }
+    },
+    "consumed-fourth-fresh40": {
+      "count": 40,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_feasible": 0,
+          "actual_infeasible": 40
+        },
+        "64": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_feasible": 3,
+          "actual_infeasible": 37
+        },
+        "128": {
+          "false_accept": 9,
+          "false_reject": 0,
+          "actual_feasible": 13,
+          "actual_infeasible": 27
+        }
+      }
+    }
+  },
+  "false_acceptance_events": [
+    {
+      "panel": "research-baselines",
+      "candidate_id": "67cef7bb97b35d137c6457a02f1c554ef30c23f939b080dd351bcb493d2caae2",
+      "cap": 32,
+      "actual_lut4": 37,
+      "incumbent_lut4": 25.71,
+      "formula": "srli(addi(or(srli(srai(in0,1),2),srai(in1,13)),-2047),23)",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "research-baselines",
+      "candidate_id": "22eff2e94c8d3f36675f7ae76c51199c74175fa8ec10feb2828d298ed96b872d",
+      "cap": 32,
+      "actual_lut4": 33,
+      "incumbent_lut4": 30.386666666666667,
+      "formula": "slt(andi(in1,255),xor(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "research-baselines",
+      "candidate_id": "92a640a7aa6d606ba5c7a15397340b1e4a1807bb536d5b8f39466ba782480f4f",
+      "cap": 32,
+      "actual_lut4": 34,
+      "incumbent_lut4": 30.313333333333333,
+      "formula": "xor(slt(add(xori(xori(in0,1),1023),in0),ori(andi(in1,16777215),65535)),sltiu(xori(in0,17),63))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "research-baselines",
+      "candidate_id": "ecb31a4bba58f8029b77f21a4a376c4081782d6f86c8dff71e63cb2e376c9a42",
+      "cap": 32,
+      "actual_lut4": 33,
+      "incumbent_lut4": 27.623333333333335,
+      "formula": "xor(add(sltu(ori(in0,65535),andi(ori(in1,65535),65535)),sltiu(addi(in0,1365),-257)),in1)",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "research-baselines",
+      "candidate_id": "e7998800a58207940e8fbe257c2f890ec15bbfc40d2b9d4cf44b5528d5cccb66",
+      "cap": 64,
+      "actual_lut4": 66,
+      "incumbent_lut4": 52.00333333333333,
+      "formula": "sub(addi(add(andi(srli(slli(in1,31),5),1),ori(addi(ori(ori(in0,1),7),16777215),1431655765)),-1365),in1)",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "research-baselines",
+      "candidate_id": "b2f71df81292c8ea67ec2fb92bd2c3a38a855df53ecdab75003dc2fe8caac99e",
+      "cap": 64,
+      "actual_lut4": 65,
+      "incumbent_lut4": 58.83,
+      "formula": "srai(srai(add(srli(addi(xori(in0,-257),1),11),srai(in1,2)),1),16)",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "research-baselines",
+      "candidate_id": "e4531d61d15b4e2085d3daff56af16948f9edc42f6239902ffca690364a8bfa2",
+      "cap": 64,
+      "actual_lut4": 81,
+      "incumbent_lut4": 62.67333333333333,
+      "formula": "slli(slli(sra(xor(sub(in1,in0),in0),andi(ori(in0,2863311530),31)),19),7)",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "research-baselines",
+      "candidate_id": "174f205f0bf0a06c1bb87085322ff498fa76ab1faa482e8aab6a50bc7729e25f",
+      "cap": 64,
+      "actual_lut4": 81,
+      "incumbent_lut4": 63.04,
+      "formula": "sub(xori(sltu(addi(add(in0,in0),63),slli(add(in1,in0),23)),17),in0)",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "research-baselines",
+      "candidate_id": "4a7e8c3a9030a42f4bde35ed788136dbb348d20d125afeb2e1254dea7d1dd975",
+      "cap": 64,
+      "actual_lut4": 73,
+      "incumbent_lut4": 58.9,
+      "formula": "sub(addi(slt(slli(addi(in0,3),23),xori(slli(in1,3),-1365)),1),in1)",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "research-baselines",
+      "candidate_id": "d878430f23a16ff74a96943df93b1c83f6cc88c4a505fa163f302edf15ac4938",
+      "cap": 64,
+      "actual_lut4": 69,
+      "incumbent_lut4": 39.62,
+      "formula": "sub(addi(slt(slli(addi(in0,-2047),29),xori(slli(in1,16),17)),-33),in1)",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "research-baselines",
+      "candidate_id": "bdcccbb8bdcd95c3b68ca3b264c537496ef228ded021ca191d8fe30a7c205a58",
+      "cap": 128,
+      "actual_lut4": 169,
+      "incumbent_lut4": 117.62,
+      "formula": "addi(add(ori(sub(or(in0,in1),in0),15),sub(sub(or(in0,in1),in0),in0)),-1)",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "application-transfer",
+      "candidate_id": "v11-original:5b0f067fc6a0f85442f4c772a2dc7ecc37771d573048919fa33c3037eb139bf5",
+      "cap": 32,
+      "actual_lut4": 33,
+      "incumbent_lut4": 30.053333333333335,
+      "formula": "sub(0,sltu(0,in0))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "application-transfer",
+      "candidate_id": "v11-original:b83c730318ba686c3e63654131e16972ce0781008d725a5dd0262e045855ae24",
+      "cap": 64,
+      "actual_lut4": 65,
+      "incumbent_lut4": 53.736666666666665,
+      "formula": "add(in0,sltu(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "selection-validation",
+      "candidate_id": "selection-transfer:e3eb0b6a3582319c2c3895920f8a8c341468997dc63e0a5fd3c2819ef5c6258c",
+      "cap": 64,
+      "actual_lut4": 77,
+      "incumbent_lut4": 60.56,
+      "formula": "sub(and(in0,in1),slli(xor(in0,in1),9))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "selection-validation",
+      "candidate_id": "selection-transfer:a22933d9a219f6cfb89d6c9e3a8e247cec57bbd9ec40b0525a97daf0e9710269",
+      "cap": 64,
+      "actual_lut4": 69,
+      "incumbent_lut4": 54.10666666666667,
+      "formula": "sub(and(in0,in1),slli(xor(in0,in1),13))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "selection-validation",
+      "candidate_id": "selection-transfer:fc09aed35ea90654254d1c0ecb5a6a2bf427b6134014d5c2d36cac8063032961",
+      "cap": 64,
+      "actual_lut4": 76,
+      "incumbent_lut4": 61.04333333333334,
+      "formula": "add(slt(in0,in1),srli(xor(in0,in1),10))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "selection-validation",
+      "candidate_id": "selection-transfer:34654d19bcc1ffb3ccca522876e18276c6bc201f02e493151a4d157425150f9b",
+      "cap": 64,
+      "actual_lut4": 68,
+      "incumbent_lut4": 57.343333333333334,
+      "formula": "add(slt(in0,in1),srli(xor(in0,in1),14))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "selection-validation",
+      "candidate_id": "selection-transfer:255f267550a6fc2dc1249e4c731ae768b32ae7835e423fd330d86eb95855428e",
+      "cap": 64,
+      "actual_lut4": 94,
+      "incumbent_lut4": 59.635,
+      "formula": "xor(srl(in0,andi(in1,3)),addi(in1,37))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "selection-validation",
+      "candidate_id": "selection-transfer:e1d8a90df8b031dca7e143008ac8a94c08b91694b2a98be595ef790d6004df06",
+      "cap": 64,
+      "actual_lut4": 95,
+      "incumbent_lut4": 56.58166666666666,
+      "formula": "xor(srl(in0,andi(in1,17)),addi(in1,37))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-first-fresh40",
+      "candidate_id": "targeted-test:3bf86e6886cf055e96fd6e05ecbb61a8b0247de023837d81f2425f2232d9f484",
+      "cap": 128,
+      "actual_lut4": 129,
+      "incumbent_lut4": 119.37333333333333,
+      "formula": "xor(sll(add(in0,in1),andi(in1,7)),in0)",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-first-fresh40",
+      "candidate_id": "targeted-test:fbb56dfbe85608e948bdf463e04cf21e082d5953155e993d9c55b49a730ca2b3",
+      "cap": 128,
+      "actual_lut4": 174,
+      "incumbent_lut4": 120.16666666666667,
+      "formula": "sub(srl(xor(in0,in1),andi(in1,7)),in0)",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-first-fresh40",
+      "candidate_id": "targeted-test:6a1d0a31377ec0833309093cfb5f4183199562ac992c50fa6daf0403dc7e8938",
+      "cap": 128,
+      "actual_lut4": 156,
+      "incumbent_lut4": 104.22,
+      "formula": "add(sra(sub(in0,in1),andi(in1,3)),in1)",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-first-fresh40",
+      "candidate_id": "targeted-test:4ffef926fc686281b92a57d77877ed4fe93bcf01872aa9a6b10dcc6d518e5449",
+      "cap": 128,
+      "actual_lut4": 208,
+      "incumbent_lut4": 125.17,
+      "formula": "add(sra(sub(in0,in1),andi(in1,11)),in1)",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-first-fresh40",
+      "candidate_id": "targeted-test:1c120837ae8b42ea012847450310a04cf7cda0076b6dc8730e1752039543fedc",
+      "cap": 128,
+      "actual_lut4": 158,
+      "incumbent_lut4": 107.53333333333333,
+      "formula": "xor(add(in0,sll(in1,andi(in0,5))),sub(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-second-fresh32",
+      "candidate_id": "budget-preserving-test:a97d322de5f141c3aa6aac323d2f5e55f2c30c6bdbae88e6047433767b896da7",
+      "cap": 64,
+      "actual_lut4": 96,
+      "incumbent_lut4": 64.0,
+      "formula": "add(xor(slli(in1,27),in0),srli(sub(in0,in1),3))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": true
+    },
+    {
+      "panel": "consumed-second-fresh32",
+      "candidate_id": "budget-preserving-test:09102001032f982917fe804d24d812040e406446d2ac2b2c2847759e603d0180",
+      "cap": 64,
+      "actual_lut4": 95,
+      "incumbent_lut4": 61.70333333333333,
+      "formula": "add(sltu(in0,addi(in1,13)),and(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-second-fresh32",
+      "candidate_id": "budget-preserving-test:d3de655971c300077767e84697265b88ff0bd54724e007e3f887a952a6c62505",
+      "cap": 64,
+      "actual_lut4": 95,
+      "incumbent_lut4": 62.4,
+      "formula": "add(sltu(in0,addi(in1,53)),and(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-second-fresh32",
+      "candidate_id": "budget-preserving-test:7e6abcf182b06c3ae8700a3909ef4bdd055351c365a724a92387f0cfb2dcf434",
+      "cap": 64,
+      "actual_lut4": 95,
+      "incumbent_lut4": 62.4,
+      "formula": "add(sltu(in0,addi(in1,211)),and(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-second-fresh32",
+      "candidate_id": "budget-preserving-test:9b4a69f65772218f9a16629c667dabd33548e9809d68b4036361605da01b187a",
+      "cap": 64,
+      "actual_lut4": 95,
+      "incumbent_lut4": 62.123333333333335,
+      "formula": "add(sltu(in0,addi(in1,853)),and(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-second-fresh32",
+      "candidate_id": "budget-preserving-test:64413434d9da4987b5b4cd8cef8d020069116301633971af3c8c68033303adf3",
+      "cap": 128,
+      "actual_lut4": 157,
+      "incumbent_lut4": 110.76666666666667,
+      "formula": "add(srl(sub(in0,in1),andi(in0,1)),xor(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-second-fresh32",
+      "candidate_id": "budget-preserving-test:9a2e06429bc5131a4e5dfa8d720183f779807cd65215777e470528f2e9e71146",
+      "cap": 128,
+      "actual_lut4": 137,
+      "incumbent_lut4": 96.26666666666667,
+      "formula": "sub(sll(xor(in0,in1),andi(in0,3)),srli(in1,5))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-second-fresh32",
+      "candidate_id": "budget-preserving-test:5324e208519e5277443f655e4d6ffc66f05b1a702f2f11350512f0c38001525e",
+      "cap": 128,
+      "actual_lut4": 174,
+      "incumbent_lut4": 120.93,
+      "formula": "sub(sll(xor(in0,in1),andi(in0,7)),srli(in1,5))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-third-fresh40",
+      "candidate_id": "guarded-revision-test:31ef570d1a3019b86ab195a93576e1b4c7a6784bf98eed1a89a491a41e6a8565",
+      "cap": 128,
+      "actual_lut4": 141,
+      "incumbent_lut4": 128.0,
+      "formula": "xor(sub(in0,sra(or(in0,in1),andi(in0,5))),add(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": true
+    },
+    {
+      "panel": "consumed-third-fresh40",
+      "candidate_id": "guarded-revision-test:26c8a1ab72b6fd091dfa183e0cc53de2cb177b47aea5d5fe095e62ac71c3715b",
+      "cap": 128,
+      "actual_lut4": 137,
+      "incumbent_lut4": 100.625,
+      "formula": "or(sll(and(in0,in1),andi(in0,7)),xor(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-fourth-fresh40",
+      "candidate_id": "signed-refinement-test:a72c22cff8baf2ac4d4584ea35014633539556aa7451825974f0419acd6581fc",
+      "cap": 64,
+      "actual_lut4": 79,
+      "incumbent_lut4": 64.0,
+      "formula": "xor(add(in0,sra(xor(in0,in1),andi(in0,1))),or(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": true,
+        "new_coverage": true
+      },
+      "exact_cap_boundary": true
+    },
+    {
+      "panel": "consumed-fourth-fresh40",
+      "candidate_id": "signed-refinement-test:04affd1369754b357a5a7d5b087cac579c7a2a31e7a049ea68b354ef69557fe6",
+      "cap": 128,
+      "actual_lut4": 189,
+      "incumbent_lut4": 128.0,
+      "formula": "xor(add(sra(addi(xori(in1,29),83),andi(sub(in0,in1),7)),in0),in1)",
+      "route": {
+        "compound": true,
+        "add_boolean": false,
+        "new_coverage": true
+      },
+      "exact_cap_boundary": true
+    },
+    {
+      "panel": "consumed-fourth-fresh40",
+      "candidate_id": "signed-refinement-test:8051989bd8b8ca3cd8d52b5ffb5d6bd6eed9bab252d9c7eba031aec600330a60",
+      "cap": 128,
+      "actual_lut4": 190,
+      "incumbent_lut4": 128.0,
+      "formula": "sub(or(sra(xori(addi(in1,29),83),andi(xor(in0,in1),7)),in0),in1)",
+      "route": {
+        "compound": true,
+        "add_boolean": false,
+        "new_coverage": true
+      },
+      "exact_cap_boundary": true
+    },
+    {
+      "panel": "consumed-fourth-fresh40",
+      "candidate_id": "signed-refinement-test:da42a4ad52816cfb29b4495349556f88391b33d5727ba4af98009b1d828e68fe",
+      "cap": 128,
+      "actual_lut4": 156,
+      "incumbent_lut4": 121.63,
+      "formula": "add(sra(addi(xori(or(in0,in1),29),83),andi(in1,1)),xor(in0,in1))",
+      "route": {
+        "compound": true,
+        "add_boolean": true,
+        "new_coverage": true
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-fourth-fresh40",
+      "candidate_id": "signed-refinement-test:afa1246c85a6e736916969689328aa7974b87d39a88b78687693d0a11b97cb2c",
+      "cap": 128,
+      "actual_lut4": 243,
+      "incumbent_lut4": 128.0,
+      "formula": "add(sra(addi(xori(or(in0,in1),29),83),andi(in1,7)),xor(in0,in1))",
+      "route": {
+        "compound": true,
+        "add_boolean": true,
+        "new_coverage": true
+      },
+      "exact_cap_boundary": true
+    },
+    {
+      "panel": "consumed-fourth-fresh40",
+      "candidate_id": "signed-refinement-test:74be30cf20552f3441e0e6e8d37d5c022c241e71bc182e4d243b6a63a5bf5b61",
+      "cap": 128,
+      "actual_lut4": 142,
+      "incumbent_lut4": 128.0,
+      "formula": "xor(add(in0,sra(xor(in0,in1),andi(in0,7))),or(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": true,
+        "new_coverage": true
+      },
+      "exact_cap_boundary": true
+    },
+    {
+      "panel": "consumed-fourth-fresh40",
+      "candidate_id": "signed-refinement-test:bac340fa66dd34dcd4492096c9cc9c149acd71999fe7cc2a3d1d82a4c9b2d128",
+      "cap": 128,
+      "actual_lut4": 155,
+      "incumbent_lut4": 77.63666666666667,
+      "formula": "xor(sub(sra(addi(in0,83),andi(in1,1)),in0),or(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-fourth-fresh40",
+      "candidate_id": "signed-refinement-test:7e4437530c712ea54ba13abe13ae14f6a03026afc846483b3d4f0d899639287f",
+      "cap": 128,
+      "actual_lut4": 242,
+      "incumbent_lut4": 128.0,
+      "formula": "xor(sub(sra(addi(in0,83),andi(in1,7)),in0),or(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": true
+    },
+    {
+      "panel": "consumed-fourth-fresh40",
+      "candidate_id": "signed-refinement-test:9ccb3f85e98f21f0a4f280edff7003ffd2e0f0cfd739041873891606657bbfb9",
+      "cap": 128,
+      "actual_lut4": 187,
+      "incumbent_lut4": 123.12333333333333,
+      "formula": "xor(add(srl(addi(xori(in0,29),83),andi(in1,7)),in1),in0)",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    },
+    {
+      "panel": "consumed-fourth-fresh40",
+      "candidate_id": "signed-refinement-test:a3409950ba1a472c7c4e7f079bf6fc656d702ec21ecd07164bef72ff08fae06d",
+      "cap": 128,
+      "actual_lut4": 141,
+      "incumbent_lut4": 103.65833333333333,
+      "formula": "or(sll(xor(in0,in1),andi(in1,7)),and(in0,in1))",
+      "route": {
+        "compound": false,
+        "add_boolean": false,
+        "new_coverage": false
+      },
+      "exact_cap_boundary": false
+    }
+  ],
+  "count_unit": "Each false_acceptance_events row is one circuit-budget event; one circuit can appear at multiple caps.",
+  "remaining_compound_subgroup": {
+    "incumbent_current": {
+      "count": 4,
+      "mae_lut4": 26.005000000000003,
+      "positive_mape_percent": 15.680258922462142,
+      "positive_count": 4,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 61.0,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 0,
+          "predicted_accept": 0
+        },
+        "64": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 0,
+          "predicted_accept": 0
+        },
+        "128": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_accept": 1,
+          "predicted_accept": 2
+        }
+      }
+    },
+    "signed_refinement": {
+      "count": 4,
+      "mae_lut4": 26.440833333333334,
+      "positive_mape_percent": 15.775661061123838,
+      "positive_count": 4,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 61.0,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 0,
+          "predicted_accept": 0
+        },
+        "64": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 0,
+          "predicted_accept": 0
+        },
+        "128": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_accept": 1,
+          "predicted_accept": 2
+        }
+      }
+    }
+  },
+  "mechanisms": [
+    "Prior guard caps upward changes at first cap >=base, making every32/64/128 budget decision identical to base even when raw forests would reject.",
+    "Consumed fourth-fresh40 has10 FA circuit-budget events;6 on existing compound/add_boolean routes and5 of those exactly clipped to cap. Upward release can correct these events but can add false rejections.",
+    "Prior signed-refinement increased heldout_compound_signed_add_xor4 MAE and positive-target MAPE over previous1761 despite aggregate fresh improvement. Explicit named subgroup gate is needed."
+  ],
+  "recommendations": [
+    "Use per-cap FA and FR separately, every retained complete panel and fresh complete panel; strict prospective FA-event decrease.",
+    "Predeclare upward-only max(incumbent,newforest), exact original-AST scope and finite candidate order before labels.",
+    "Repair consumed compound subgroup against previous1761 and retain any failed or unpromoted candidate without postlabel gate relaxation."
+  ],
+  "audit_fits": 0,
+  "audit_native_jobs": 0
+}
