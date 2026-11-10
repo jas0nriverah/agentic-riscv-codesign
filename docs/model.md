@@ -34,3 +34,9 @@ The scoped policy selects coverage when the original formula contains a low mult
 On the 32-case arithmetic test every case selects coverage, so the scoped policy equals coverage by construction. On the consumed 327-case application panel every case selects base. These checks do not establish routing generalization to a new mixed application distribution.
 
 The weights and adjacent metadata in [models/](../models/) are byte-identical to their archived artifacts. Their original internal module names remain unchanged to preserve serialization and source validation. [Inference and reproduction](reproduce.md).
+
+## Testing the feature budget
+
+217 is a fixed representation choice, not a model capacity limit. A [matched development experiment](../results/feature-comparison/README.md) compares that view with all 336 descriptors and with 128 selected inside each training fold. The 336 view contains the same values as the extractor storage, reordered as the 217 inputs followed by 119 semantic descriptors. Feature ordering is frozen because it can affect randomized trees.
+
+The selected view has the lowest development MAE, but its hardware-budget mistakes and worst underprediction prevent promotion. Each fold selects its own 128 columns; this experiment does not produce a single new deployable model.

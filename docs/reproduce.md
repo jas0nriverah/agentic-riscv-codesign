@@ -39,3 +39,20 @@ Both diagrams have SVG, PDF and PNG exports under `docs/figures/research/`. The 
 ## Historical evidence
 
 This branch is a curated snapshot of commit `b64716a2b94b332fdbced677869620bb949c073d`. [The original research tree](https://github.com/jas0nriverah/agentic-riscv-codesign/tree/b64716a2b94b332fdbced677869620bb949c073d) contains full collection scripts, raw archives, source freezes and negative results. Reproducing those historical native pipelines should use that checkout. The clean branch keeps the inputs needed for model inference and score replay, plus hash-bound provenance to the complete evidence.
+
+## Feature comparison
+
+Replay the retained feature experiment without training:
+
+```sh
+make feature-check
+```
+
+To repeat the bounded 15-fit experiment in a fresh directory (requires the archive commit in Git history):
+
+```sh
+python scripts/compare_features.py prepare --output generated/feature-comparison-repeat
+python scripts/compare_features.py run --output generated/feature-comparison-repeat
+```
+
+The runner freezes inputs and folds before fitting, limits native libraries to one thread, and enforces a 600-second wall limit. Do not overwrite the retained experiment. `make figures` also regenerates its comparison plot. [Protocol and interpretation](../results/feature-comparison/README.md).

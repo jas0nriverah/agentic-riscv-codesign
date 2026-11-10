@@ -1,0 +1,55 @@
+{
+  "schema": "isaforge-independent-feature-comparison-audit-v1",
+  "status": "pass",
+  "audited_at_utc": "2026-11-10T00:53:33.918836+00:00",
+  "protocol_sha256": "f014d62ef883a8ee3dc147bea4ba4f5c3655615a5171402e2b7bbc5fb2c8ab65",
+  "summary_sha256": "a5d60f19562def23a24f65b072988f995bcd9f283e54addd6fb8e537d91b9bca",
+  "runner_sha256": "e0f8daeb74063d5cfb4becea2f1446f95c6244435d88691a6843b036b5ae758c",
+  "input_hashes_verified": true,
+  "result_manifest_hashes_verified": true,
+  "archive_member_hashes_verified": true,
+  "recovered_inputs_exactly_replayed": true,
+  "row_count": 1665,
+  "semantic_groups_before_representation_collision_union": 575,
+  "shared_group_count": 522,
+  "grouping_independently_reconstructed": true,
+  "groupkfold_independently_replayed": true,
+  "crossfold_group_count": 0,
+  "representation_duplicate_audit": {
+    "217": {
+      "unique_vectors": 1278,
+      "crossfold_duplicate_classes": 0
+    },
+    "336": {
+      "unique_vectors": 1551,
+      "crossfold_duplicate_classes": 0
+    }
+  },
+  "original_zero_mask_replayed": true,
+  "all_prediction_identity_and_fold_fields_replayed": true,
+  "all_pooled_group_stratum_fold_positive_zero_cap_metrics_replayed": true,
+  "numeric_values_compared": 2227,
+  "maximum_numeric_replay_difference": 2.842170943040401e-14,
+  "metric_tolerance": {
+    "absolute": 1e-12,
+    "relative": 1e-12
+  },
+  "selected_columns_replayed_all_folds": true,
+  "selection_training_rows_exclude_validation": true,
+  "all_selected_indices_ranked_from_training_only336_importances": true,
+  "selection_source_review": "Frozen runner fits each full336 forest using x[train],y[train], saves its importances, selects128 by importance/index, then fits128 on same train indices. Validation labels enter reported metrics only. Full336 selector is reused as the336 comparator.",
+  "fits_completed": 15,
+  "total_wall_seconds": 43.267943292012205,
+  "maximum_fits": 15,
+  "maximum_wall_seconds": 600,
+  "workers": 1,
+  "new_audit_fits": 0,
+  "new_synthesis": 0,
+  "limitations": [
+    "Consumed development cohort; numerical differences do not establish independent superiority or generalization.",
+    "Independent replay verifies saved predictions and metrics; no extra forests were fit and estimator inference was not independently reproduced.",
+    "Exact vector collision grouping is conservative and does not assert semantic equivalence.",
+    "Selection is fold-specific; these files do not define a single deployable128-column model.",
+    "One predeclared seed; no uncertainty or calibrated safety claim."
+  ]
+}

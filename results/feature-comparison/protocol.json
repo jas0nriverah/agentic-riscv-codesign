@@ -1,0 +1,91 @@
+{
+  "schema": "isaforge-matched-feature-comparison-v1",
+  "created_at_utc": "2026-11-10T00:50:47.932331+00:00",
+  "scope": "Development grouped cross-validation on consumed fitting cohort; not an independent test.",
+  "row_count": 1665,
+  "views": {
+    "mapping217": "14 SOG +180 generic graph descriptors (original60, normalized60, absolute delta60) +23 original mapping descriptors",
+    "original336": "mapping217 +119 original-formula legacy structural/semantic descriptors, in that order",
+    "selected128": "128 columns of original336 selected separately within each training fold"
+  },
+  "storage_warning": "original336 reorders the same numeric features of V6 full336 storage into a nested217 prefix plus119 legacy features; full455 is archival storage only.",
+  "configuration": {
+    "n_estimators": 300,
+    "min_samples_leaf": 1,
+    "max_features": 1.0,
+    "n_jobs": 1,
+    "random_state": 2026101401
+  },
+  "selection_count": 128,
+  "selection_rule": "Descending impurity importance from the same training-fold original336 forest; ties by source feature index; selected indices restored to schema order.",
+  "grouping": "Union prior V5 components with canonical and V5 equivalence_key identities of originals and all three archived proof-mode normalized formulas, then conservatively union exact217-vector collisions across every view. Representation collisions are not claimed semantic identities. GroupKFold(5), no shuffle, no labels.",
+  "zero_override": "Same frozen original generic graph operator-free indicator applied to all predictions; no semantic zero override.",
+  "primary_metric": "Equal-weight mean of per-merged-component OOF MAE; all three views use identical folds.",
+  "secondary_metrics": [
+    "pooled MAE",
+    "positive-target MAPE percent",
+    "zero-target MAE",
+    "maximum underprediction",
+    "false safe and false rejection at caps32/64/128",
+    "nine-stratum macro MAE"
+  ],
+  "caps_definition": "Point predicted<=cap is safe; false safe means actual>cap. No calibrated-bound or coverage claim.",
+  "maximum_fits": 15,
+  "maximum_wall_seconds": 600,
+  "workers": 1,
+  "new_synthesis": 0,
+  "fresh_holdout_rows": 0,
+  "planned_execution": "Five folds, each original336 (reused for selection), mapping217, selected128. No hyperparameter search, additional feature counts, final model fits, or secondary holdout scoring.",
+  "input_sha256": {
+    "columns.json": "87e469d0f6f2d31f87728f86655e4d681b49ed4abf686ae643059e0fa390d163",
+    "folds.json": "3a8835139d4e624192e40b031b3d3e6beb268fe428ac7524b743cef3cd78dc6f",
+    "grouping-audit.json": "41b31d5249198a1f2de698d6f1fc437f1026c04283daf0e3d557b2d68bdda264",
+    "inputs.npz": "4a09210cc3d45a5fe8544d0ea7574e0fad6d899dd00a854c09242989e97619f4",
+    "rows.json": "ad6e25c9e26288c23d7c64409aa5165d10c2cbbc597c7306f48c63e54ade29e2"
+  },
+  "runner_sha256": "e0f8daeb74063d5cfb4becea2f1446f95c6244435d88691a6843b036b5ae758c",
+  "recovery": {
+    "archive_commit": "b64716a2b94b332fdbced677869620bb949c073d",
+    "archive_path": "results/2026-10-14-development-semantics-v7/evidence/evidence.tar.gz",
+    "archive_sha256": "263508c8bb0b9e35b43aca2d8e9b52de4bf1298664ba223c664027509b7317d7",
+    "manifest_sha256": "461737c1fb3f5d422189a363d1eb9a642d87c6175e9dee976a503f05b205253a",
+    "member_sha256": {
+      "prepared/fitting.json": "9008c27d8cdcecfb7ce13f1b6814d7c92ea92fe447816fbb3d47ba1c3fade84a",
+      "prepared/proof-ledger.json": "f2b3e0077a1d28df431e2660e9dbc76a9e3c603a7b1f309bd18482cacc84721d",
+      "prepared/matrices/base.json": "7ac3cdcdbf758a9832b3c6db0b9341ec67735e27093de3a3a7ba1e2177d02835",
+      "prepared/matrices/legacy_original.json": "0f37a7c576d307a95e0837e7649b1a0e1ff53ab81f46464d57a4b9fc6b1386c9",
+      "prepared/input-diagnostics.json": "5a7154284eaa9647a307c4411087e5d15e0b74cc8a242e0a66b28429773a2850"
+    },
+    "training_path": "results/2026-10-15-v8-application-transfer/training/training-data.json",
+    "training_sha256": "0b4c158d2bafcbbab05545624b8d48d7048418d887d77cc8e1ca15720626c5fb",
+    "split_path": "results/2026-10-14-v5/split.json",
+    "split_sha256": "bd1e5023aeb79aaa296ffce16d954dffda7a62a4690fe521d34b1c0659f25780"
+  },
+  "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "numpy": "2.5.4",
+  "sklearn": "1.9.1",
+  "producer_source_sha256": {
+    "area_model_v4.py": "a912198d58203c821da4c3408c48eb2427cd84359071570158e7fd0b73d06357",
+    "structural_features_v4.py": "78b506d9e20ed017f2724352b5c9e6d78eb67b3169fa19eb910b5a95c45905da",
+    "masterrtl_baseline.py": "1473333e7b5d00d1ae91084fa5663697861504c4a411d6242a6160ff5f0a697f",
+    "structural_features_v3.py": "b0a4c8233c2a39b675767151f21698d6418c5b3b7bb357741815986033396fb0",
+    "area_model_v3.py": "0560b5a3a1dff7085a374dd2d5bbc55f487ae1986830bd85899f255fa3299974",
+    "area_model_v2.py": "389f6592d6a3fb801638dcc5237cac65f8ab504caac10efef1a43e5d49cf6cf1",
+    "area_model.py": "ade5dcc32ef66d0ea03ea9ec4937687564dff36c4483afc76ac59f9dc4a69447",
+    "features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+    "synthesis.py": "375e4858f08c2dc2cd793012ceee59d3f4146e2c7c12079d080a0299bfa0223f",
+    "graph_features_v5.py": "c0bb42fa3a4ae86bcaceffd35964fcf07a5dda0f36ab4e21ea8e1cfe6112c8cf",
+    "structural_features_v5.py": "386a324634d26a1a9fde0090a1116dd3ad4ba2303e2d3c7775e3128990ac4bc2",
+    "area_model_v5.py": "6e39f1fae6ac0b7398dbfb80c6096dae0cfafe479ada441a4fa27af7938f990f",
+    "v5_corpus.py": "98a53a2125aef0b4a43546f17473b13d5e42d28925971554c5053887bf75cd75",
+    "v4_corpus.py": "37f30c52e0a330d631f324903c985c69e0cbc1eaa1be7950b1cd6ff3e355bcac",
+    "v4_validation.py": "193dd1b6780b1187e251db2dee08545b0391afead95a8f6d825dd51b58a694ff",
+    "probe_corpus.py": "2435c29388fbf2368aee3e736606dd017d21306e45377021d29650983be775a3",
+    "mapping_features_v6.py": "3b220e3775d536630656681df645b95e0ff3c44b55ec91fd002a6b06d231f5d3",
+    "area_model_v6.py": "b46c90c47461d8888ece12711253c92cc2bac834d621c58e17a82af106db5114",
+    "semantic_features_v7.py": "eddc21bd80fd97dea7e02cbfe14bb5b50649f779ed53ec6068674adc1dc0f9e3",
+    "area_model_v8.py": "e8e442689256155dc8563a0bb2041c5586ec217d36bd59d3cd28c16cb23d975d"
+  },
+  "preparation_seconds": 1.1434200830117334
+}

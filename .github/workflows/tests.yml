@@ -17,6 +17,7 @@ jobs:
         run: python -m pip install -e '.[dev,reports]'
       - run: make test
       - run: make reproduce
+      - run: make feature-check
       - if: matrix.python-version == '3.13'
         run: make predict
   hardware-unit-tests:
