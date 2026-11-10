@@ -42,3 +42,7 @@ The weights and adjacent metadata in [models/](../models/) are byte-identical to
 The selected view has the lowest development MAE, but its hardware-budget mistakes and worst underprediction prevent promotion. Each fold selects its own 128 columns; this experiment does not produce a single new deployable model.
 
 The [stability follow-up](../results/selection-stability/README.md) repeats the MAE gain across three seeds, but the [fresh 40-circuit test](../results/selection-validation/README.md) worsens both accuracy and budget decisions. The experimental selected forest is retained for reproducibility; it is not exposed as the default prediction model.
+
+## Targeted coverage candidate
+
+The latest [experimental predictor](../results/budget-preserving-coverage/README.md) uses the unchanged 217-feature representation and a forest trained on 1,729 circuits (1,665 original plus 64 new variable-shift/mixed-arithmetic cases). A fixed original-AST rule selects it for covered structures. A final constrained upward correction preserves all baseline decisions at 32/64/128 LUT4 and cannot increase underprediction. The correction is not calibrated, does not fix baseline budget errors, and does not guarantee lower average error on every distribution. It passes the separate 32-case fresh synthetic validation, with the documented subgroup regressions retained.

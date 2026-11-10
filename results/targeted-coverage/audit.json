@@ -1,0 +1,472 @@
+{
+  "schema": "independent-targeted-coverage-audit-v1",
+  "status": "pass",
+  "audited_at_utc": "2026-11-10T02:16:07.844253+00:00",
+  "protocol_sha256": "3e7b585293f8fc4b0ea42db7ef157fc15700460545841f6c734d3f724b216ca9",
+  "model_artifact_sha256": "9c3611acf8397ba7c4a17c570f09637d17088c3d9b1b457aace1e37be5f86cff",
+  "auditor_sha256": "0731971f1e7038cb9003b8710feaa71224d02062d0e50dc5470e70a1d7b13aa3",
+  "old_artifacts_preserved": 151,
+  "frozen_cohorts_before_training_labels": true,
+  "frozen_model_and_ordered_points_before_fresh_labels": true,
+  "loaded_weight_predictions_replayed": 1893,
+  "feature_order": "Selected217 mapped independently by column name; generic graph zero override identical.",
+  "fit_count": 1,
+  "fit_stage_seconds": 4.59144995798124,
+  "native_jobs": 210,
+  "maximum_recorded_worker_overlap": 2,
+  "native_total_seconds": 120.9254001659865,
+  "raw_evidence": {
+    "training": {
+      "mapped_netlists_recounted": 64,
+      "RV32_vector_comparisons": 137472,
+      "raw_archive_sha256": "d5c080f749a05b6ac3d604fe6c70de80a94db0ef2fd8592cd202aea03e011abd",
+      "archive_members_hashed": 1744
+    },
+    "fresh": {
+      "mapped_netlists_recounted": 40,
+      "RV32_vector_comparisons": 85920,
+      "raw_archive_sha256": "6e648f405bc331f8cbf1b35cc1f7e0f45f1d685bdef883f9d6fca3fc7e98eb01",
+      "archive_members_hashed": 1144
+    }
+  },
+  "identity_and_feature_collision_audit": {
+    "historical_original_formulas": 8746,
+    "previous40_saved_semantic_aliases_checked": 64,
+    "known_sufficient_identity_keys": 14815,
+    "joint_known_identity_overlaps": 0,
+    "joint_within_or_across_cohort_identity_overlaps": 0,
+    "test_rows_with_exact217_training_collision": 0,
+    "new_train_rows_with_exact217_original1665_collision": 0,
+    "test_rows_with_exact217_original1665_collision": 0,
+    "test_unique217_vectors": 40,
+    "scope": "Known sufficient formula/normalizer identities use frozen library normalizers. Feature vector equality is separately reported and is not a semantic identity."
+  },
+  "independent_metric_replay": {
+    "gates": {
+      "augmented217": {
+        "development_gate_passed": false,
+        "panels": {
+          "research-baselines": {
+            "accuracy_improved": true,
+            "maximum_underprediction_no_worse": false,
+            "all_cap_error_counts_no_worse": false,
+            "pass": false
+          },
+          "application-transfer": {
+            "accuracy_improved": true,
+            "maximum_underprediction_no_worse": true,
+            "all_cap_error_counts_no_worse": true,
+            "pass": true
+          },
+          "arithmetic-stress": {
+            "accuracy_improved": false,
+            "maximum_underprediction_no_worse": false,
+            "all_cap_error_counts_no_worse": true,
+            "pass": false
+          },
+          "selection-validation": {
+            "accuracy_improved": true,
+            "maximum_underprediction_no_worse": true,
+            "all_cap_error_counts_no_worse": false,
+            "pass": false
+          }
+        },
+        "fresh_gate": {
+          "accuracy_improved": true,
+          "maximum_underprediction_no_worse": true,
+          "all_cap_error_counts_no_worse": true,
+          "pass": true
+        },
+        "scoped_experimental_eligibility": false
+      },
+      "scoped_augmented217": {
+        "development_gate_passed": false,
+        "panels": {
+          "research-baselines": {
+            "accuracy_improved": true,
+            "maximum_underprediction_no_worse": true,
+            "all_cap_error_counts_no_worse": false,
+            "pass": false
+          },
+          "application-transfer": {
+            "accuracy_improved": true,
+            "maximum_underprediction_no_worse": true,
+            "all_cap_error_counts_no_worse": true,
+            "pass": true
+          },
+          "arithmetic-stress": {
+            "accuracy_improved": false,
+            "maximum_underprediction_no_worse": true,
+            "all_cap_error_counts_no_worse": true,
+            "pass": true
+          },
+          "selection-validation": {
+            "accuracy_improved": true,
+            "maximum_underprediction_no_worse": true,
+            "all_cap_error_counts_no_worse": false,
+            "pass": false
+          }
+        },
+        "fresh_gate": {
+          "accuracy_improved": true,
+          "maximum_underprediction_no_worse": true,
+          "all_cap_error_counts_no_worse": true,
+          "pass": true
+        },
+        "scoped_experimental_eligibility": false
+      }
+    },
+    "development": {
+      "research-baselines": {
+        "base": {
+          "count": 192,
+          "mae_lut4": 32.160946180555555,
+          "positive_mape_percent": 43.62947391663286,
+          "positive_count": 186,
+          "zero_count": 6,
+          "maximum_underprediction_lut4": 94.82999999999993,
+          "caps": {
+            "32": {
+              "false_accept": 4,
+              "false_reject": 14
+            },
+            "64": {
+              "false_accept": 6,
+              "false_reject": 5
+            },
+            "128": {
+              "false_accept": 1,
+              "false_reject": 4
+            }
+          }
+        },
+        "augmented217": {
+          "count": 192,
+          "mae_lut4": 31.48631076388889,
+          "positive_mape_percent": 43.1817102777418,
+          "positive_count": 186,
+          "zero_count": 6,
+          "maximum_underprediction_lut4": 105.48666666666668,
+          "caps": {
+            "32": {
+              "false_accept": 4,
+              "false_reject": 14
+            },
+            "64": {
+              "false_accept": 6,
+              "false_reject": 6
+            },
+            "128": {
+              "false_accept": 1,
+              "false_reject": 4
+            }
+          }
+        },
+        "scoped_augmented217": {
+          "count": 192,
+          "mae_lut4": 31.661414930555555,
+          "positive_mape_percent": 42.99522412926029,
+          "positive_count": 186,
+          "zero_count": 6,
+          "maximum_underprediction_lut4": 94.82999999999993,
+          "caps": {
+            "32": {
+              "false_accept": 4,
+              "false_reject": 14
+            },
+            "64": {
+              "false_accept": 6,
+              "false_reject": 6
+            },
+            "128": {
+              "false_accept": 1,
+              "false_reject": 4
+            }
+          }
+        }
+      },
+      "application-transfer": {
+        "base": {
+          "count": 327,
+          "mae_lut4": 0.832986748216106,
+          "positive_mape_percent": 29.27004346190423,
+          "positive_count": 228,
+          "zero_count": 99,
+          "maximum_underprediction_lut4": 17.11666666666666,
+          "caps": {
+            "32": {
+              "false_accept": 1,
+              "false_reject": 6
+            },
+            "64": {
+              "false_accept": 1,
+              "false_reject": 1
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          }
+        },
+        "augmented217": {
+          "count": 327,
+          "mae_lut4": 0.8158562691131498,
+          "positive_mape_percent": 27.98551114903145,
+          "positive_count": 228,
+          "zero_count": 99,
+          "maximum_underprediction_lut4": 15.63333333333334,
+          "caps": {
+            "32": {
+              "false_accept": 1,
+              "false_reject": 4
+            },
+            "64": {
+              "false_accept": 1,
+              "false_reject": 1
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          }
+        },
+        "scoped_augmented217": {
+          "count": 327,
+          "mae_lut4": 0.8186544342507645,
+          "positive_mape_percent": 29.225869825474277,
+          "positive_count": 228,
+          "zero_count": 99,
+          "maximum_underprediction_lut4": 17.11666666666666,
+          "caps": {
+            "32": {
+              "false_accept": 1,
+              "false_reject": 6
+            },
+            "64": {
+              "false_accept": 1,
+              "false_reject": 1
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          }
+        }
+      },
+      "arithmetic-stress": {
+        "base": {
+          "count": 32,
+          "mae_lut4": 15.521145833333335,
+          "positive_mape_percent": 13.417607960688125,
+          "positive_count": 32,
+          "zero_count": 0,
+          "maximum_underprediction_lut4": 2.826666666666654,
+          "caps": {
+            "32": {
+              "false_accept": 0,
+              "false_reject": 0
+            },
+            "64": {
+              "false_accept": 0,
+              "false_reject": 4
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          }
+        },
+        "augmented217": {
+          "count": 32,
+          "mae_lut4": 15.294166666666666,
+          "positive_mape_percent": 13.771300199845795,
+          "positive_count": 32,
+          "zero_count": 0,
+          "maximum_underprediction_lut4": 3.4000000000000057,
+          "caps": {
+            "32": {
+              "false_accept": 0,
+              "false_reject": 0
+            },
+            "64": {
+              "false_accept": 0,
+              "false_reject": 2
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          }
+        },
+        "scoped_augmented217": {
+          "count": 32,
+          "mae_lut4": 15.581875000000002,
+          "positive_mape_percent": 13.62902431263954,
+          "positive_count": 32,
+          "zero_count": 0,
+          "maximum_underprediction_lut4": 2.826666666666654,
+          "caps": {
+            "32": {
+              "false_accept": 0,
+              "false_reject": 0
+            },
+            "64": {
+              "false_accept": 0,
+              "false_reject": 3
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          }
+        }
+      },
+      "selection-validation": {
+        "base": {
+          "count": 40,
+          "mae_lut4": 15.458583333333333,
+          "positive_mape_percent": 14.085129074471453,
+          "positive_count": 40,
+          "zero_count": 0,
+          "maximum_underprediction_lut4": 52.150000000000006,
+          "caps": {
+            "32": {
+              "false_accept": 0,
+              "false_reject": 7
+            },
+            "64": {
+              "false_accept": 6,
+              "false_reject": 0
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          }
+        },
+        "augmented217": {
+          "count": 40,
+          "mae_lut4": 14.390291666666664,
+          "positive_mape_percent": 13.460853670795085,
+          "positive_count": 40,
+          "zero_count": 0,
+          "maximum_underprediction_lut4": 45.56166666666667,
+          "caps": {
+            "32": {
+              "false_accept": 0,
+              "false_reject": 8
+            },
+            "64": {
+              "false_accept": 6,
+              "false_reject": 0
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          }
+        },
+        "scoped_augmented217": {
+          "count": 40,
+          "mae_lut4": 14.281041666666667,
+          "positive_mape_percent": 13.395029659894906,
+          "positive_count": 40,
+          "zero_count": 0,
+          "maximum_underprediction_lut4": 45.56166666666667,
+          "caps": {
+            "32": {
+              "false_accept": 0,
+              "false_reject": 8
+            },
+            "64": {
+              "false_accept": 6,
+              "false_reject": 0
+            },
+            "128": {
+              "false_accept": 0,
+              "false_reject": 0
+            }
+          }
+        }
+      }
+    },
+    "fresh": {
+      "base": {
+        "count": 40,
+        "mae_lut4": 20.18541666666667,
+        "positive_mape_percent": 17.228672095077233,
+        "positive_count": 40,
+        "zero_count": 0,
+        "maximum_underprediction_lut4": 83.53333333333333,
+        "caps": {
+          "32": {
+            "false_accept": 0,
+            "false_reject": 4
+          },
+          "64": {
+            "false_accept": 0,
+            "false_reject": 0
+          },
+          "128": {
+            "false_accept": 5,
+            "false_reject": 0
+          }
+        }
+      },
+      "augmented217": {
+        "count": 40,
+        "mae_lut4": 14.321541666666667,
+        "positive_mape_percent": 14.542116274609139,
+        "positive_count": 40,
+        "zero_count": 0,
+        "maximum_underprediction_lut4": 82.83,
+        "caps": {
+          "32": {
+            "false_accept": 0,
+            "false_reject": 4
+          },
+          "64": {
+            "false_accept": 0,
+            "false_reject": 0
+          },
+          "128": {
+            "false_accept": 5,
+            "false_reject": 0
+          }
+        }
+      },
+      "scoped_augmented217": {
+        "count": 40,
+        "mae_lut4": 14.258041666666667,
+        "positive_mape_percent": 14.555675036959062,
+        "positive_count": 40,
+        "zero_count": 0,
+        "maximum_underprediction_lut4": 82.83,
+        "caps": {
+          "32": {
+            "false_accept": 0,
+            "false_reject": 4
+          },
+          "64": {
+            "false_accept": 0,
+            "false_reject": 0
+          },
+          "128": {
+            "false_accept": 5,
+            "false_reject": 0
+          }
+        }
+      }
+    },
+    "numeric_fields_compared": 180
+  },
+  "audit_native_jobs": 0,
+  "audit_fits": 0,
+  "limitations": [
+    "Synthetic isolated combinational circuits and ten declared test templates; no representative workload, full CPU, calibrated safety, timing, routing or power guarantee.",
+    "Historical finite formula and saved-normalizer identity screen authenticated and source-reviewed, not an exhaustive semantic-equivalence proof.",
+    "Saved feature extraction results authenticated and schema aligned; generic features not reextracted by this auditor.",
+    "RV32 vector outputs independently recomputed and measured RTL authenticated to saved successful Verilator execution; no native rerun, universal proof, or mapped-netlist functional proof.",
+    "Recorded process starts/ends and source-reviewed process-group cleanup support budget and worker receipts; historical OS process peaks or absence of unrecorded work cannot be proved from saved evidence."
+  ]
+}

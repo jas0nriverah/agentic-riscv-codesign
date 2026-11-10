@@ -1,0 +1,315 @@
+{
+  "schema": "targeted-training-prospective-validation-v1",
+  "frozen_at_utc": "2026-11-10T02:10:16.168581+00:00",
+  "policy": {
+    "total_native_seconds": 1200,
+    "training_native_seconds": 600,
+    "workers": 2,
+    "fits": 0,
+    "retries": 0,
+    "replacement_candidates": 0,
+    "random_vectors": 2048,
+    "vectors_per_formula": 2148,
+    "caps_lut4": [
+      32,
+      64,
+      128
+    ]
+  },
+  "training_count": 64,
+  "test_count": 40,
+  "training_templates": [
+    [
+      "shift_left_offset",
+      "sll(addi(in0,{k}),andi(in1,31))",
+      [
+        2,
+        6,
+        10,
+        18,
+        34,
+        66,
+        130,
+        258
+      ]
+    ],
+    [
+      "shift_right_xor",
+      "srl(xor(in0,addi(in1,{k})),andi(in1,15))",
+      [
+        3,
+        9,
+        19,
+        35,
+        67,
+        131,
+        259,
+        515
+      ]
+    ],
+    [
+      "shift_signed_sum",
+      "sra(add(in0,in1),andi(xori(in1,{k}),31))",
+      [
+        1,
+        3,
+        7,
+        11,
+        15,
+        19,
+        23,
+        31
+      ]
+    ],
+    [
+      "shift_mask_add",
+      "add(sll(in0,andi(in1,{k})),in1)",
+      [
+        1,
+        3,
+        5,
+        7,
+        11,
+        15,
+        23,
+        31
+      ]
+    ],
+    [
+      "shift_sub_xor",
+      "xor(srl(addi(in0,{k}),in1),sub(in0,in1))",
+      [
+        5,
+        13,
+        29,
+        61,
+        125,
+        253,
+        509,
+        1021
+      ]
+    ],
+    [
+      "mixed_offset_sub",
+      "sub(add(in0,addi(in1,{k})),slli(in1,7))",
+      [
+        7,
+        21,
+        43,
+        85,
+        171,
+        341,
+        683,
+        1365
+      ]
+    ],
+    [
+      "mixed_shift_xor",
+      "add(sub(slli(in0,{k}),in1),xor(in0,in1))",
+      [
+        1,
+        2,
+        4,
+        6,
+        9,
+        14,
+        21,
+        29
+      ]
+    ],
+    [
+      "mixed_dual_arith",
+      "xor(add(in0,srli(in1,{k})),sub(in1,in0))",
+      [
+        1,
+        3,
+        5,
+        8,
+        12,
+        17,
+        24,
+        30
+      ]
+    ]
+  ],
+  "test_templates": [
+    [
+      "heldout_shift_sum_xor",
+      "xor(sll(add(in0,in1),andi(in1,{k})),in0)",
+      [
+        3,
+        7,
+        15,
+        31
+      ]
+    ],
+    [
+      "heldout_shift_xor_sub",
+      "sub(srl(xor(in0,in1),andi(in1,{k})),in0)",
+      [
+        1,
+        7,
+        23,
+        31
+      ]
+    ],
+    [
+      "heldout_signed_sub_add",
+      "add(sra(sub(in0,in1),andi(in1,{k})),in1)",
+      [
+        3,
+        11,
+        15,
+        31
+      ]
+    ],
+    [
+      "heldout_shift_arithmetic",
+      "xor(add(in0,sll(in1,andi(in0,{k}))),sub(in0,in1))",
+      [
+        1,
+        5,
+        15,
+        31
+      ]
+    ],
+    [
+      "heldout_mixed_shift_sub",
+      "sub(add(slli(in0,{k}),in1),srli(in0,7))",
+      [
+        2,
+        5,
+        13,
+        25
+      ]
+    ],
+    [
+      "heldout_mixed_shift_add",
+      "add(xor(srli(in0,{k}),in1),sub(in1,in0))",
+      [
+        2,
+        6,
+        16,
+        27
+      ]
+    ],
+    [
+      "control_boolean",
+      "or(and(in0,srli(in1,{k})),xor(in0,in1))",
+      [
+        3,
+        8,
+        19,
+        26
+      ]
+    ],
+    [
+      "control_compare",
+      "xor(slt(in0,addi(in1,{k})),srli(in1,9))",
+      [
+        11,
+        47,
+        191,
+        767
+      ]
+    ],
+    [
+      "control_product",
+      "xor(mul(in0,addi(0,{k})),and(in0,in1))",
+      [
+        23,
+        47,
+        95,
+        191
+      ]
+    ],
+    [
+      "control_constant_shift",
+      "and(xor(in0,slli(in1,{k})),srli(in0,3))",
+      [
+        2,
+        7,
+        18,
+        28
+      ]
+    ]
+  ],
+  "primary_model": "augmented217",
+  "baseline": "mapping217",
+  "secondary_model": "scoped_augmented217",
+  "secondary_scope_gate": "Original AST has sll/srl/sra with in0/in1 in control subtree OR has add/addi/sub AND xor/xori; excludes any mul/mulh/mulhu/mulhsu. Literal AST, base fallback otherwise.",
+  "success_rule": "Primary test MAE and positive-target MAPE strictly improve versus frozen mapping217; false_accept AND false_reject no worse at EACH cap32/64/128; maximum underprediction no worse. No posthoc criteria.",
+  "fit_contract": "Zero measurement fits. One augmented217 fit originaltraining plus64; fixed scoped route secondary. Prior40 not training.",
+  "chronology": "Joint cohort/protocol freeze and audit; train+test label-free features; train original RTL verification then labels; candidate artifact freeze and ALLordered test predictions freeze and audit; test RTL verification then labels.",
+  "missing_rule": "Retain all rows/failures; no retries or replacements; missing cases make primary unavailable.",
+  "scope": "Fresh synthetic heldout compositions24 plus controls16; no application-transfer, calibration, timing or full-core claim.",
+  "sources": {
+    "scripts/measure_targeted_coverage.py": "18765b45ff1c2c6e7aa85ac3dc85fc1ea6c5cfbb9cb08ab958b71d4e4f0f3f14",
+    "scripts/validate_selected_features.py": "8739cebe56090cbffe6591e1e8e05851430dcbb6fb50945673ef1240cb14188f",
+    "tests/test_measure_targeted_coverage.py": "d18490050ab3c6b64a079f33b15df5f48bdb261260ae5727794c1deae524d5f5",
+    "isaforge/__init__.py": "788b89398980996e41116e972bf0b790b077eda914cd1e630200d1911713109a",
+    "isaforge/area_adaptation_v9.py": "a046dc654190f4edbf6b2cfa4c01382f9218bb1281a44c0dfb1ec7109b4bc56b",
+    "isaforge/area_model.py": "ade5dcc32ef66d0ea03ea9ec4937687564dff36c4483afc76ac59f9dc4a69447",
+    "isaforge/area_model_v2.py": "389f6592d6a3fb801638dcc5237cac65f8ab504caac10efef1a43e5d49cf6cf1",
+    "isaforge/area_model_v3.py": "0560b5a3a1dff7085a374dd2d5bbc55f487ae1986830bd85899f255fa3299974",
+    "isaforge/area_model_v4.py": "a912198d58203c821da4c3408c48eb2427cd84359071570158e7fd0b73d06357",
+    "isaforge/area_model_v5.py": "6e39f1fae6ac0b7398dbfb80c6096dae0cfafe479ada441a4fa27af7938f990f",
+    "isaforge/area_model_v6.py": "b46c90c47461d8888ece12711253c92cc2bac834d621c58e17a82af106db5114",
+    "isaforge/area_model_v8.py": "e8e442689256155dc8563a0bb2041c5586ec217d36bd59d3cd28c16cb23d975d",
+    "isaforge/area_selection.py": "88c14e3029620d61cc7da5fc429904216c69585dca497d5017dcb25d4f05a70e",
+    "isaforge/cached_mapping_inference_v6.py": "d02b0dfdbddd15b52cfd9ba19c7edc590ec850860d2413e8f962bace325fa1c9",
+    "isaforge/challenger_plots.py": "fa7df137b5b783b11e24c92e88474ede869db4472461de82b95fe6b31777bcc4",
+    "isaforge/challenger_report.py": "e984754605417ec2c0c83ad4eda36a56ae989fcee4daa8930311d1eed9e140b1",
+    "isaforge/cli.py": "d467551d205245f4afa1f7695c7a5bc0e7f6c8db95b64f9d19b60f43c79a87ee",
+    "isaforge/conservative_policy.py": "1c318b94c0e2ad6287f2b6d470974c4ec581eb805018f7544bd438e9cd42d823",
+    "isaforge/core_experiment.py": "3e300f3054224050cd600eea0a3a76db496b67951323115cdb5d349bb2f8acc8",
+    "isaforge/core_routing.py": "dfe14bb5e7236630fe376a5131f4d492309933ae98c0a1e3ea9e798b28a36058",
+    "isaforge/dataset.py": "bb568ef7ca5f6ad79fd6a9ffef9ff18c510b29ffb9f4b6a7e3bfd5cb4cae3cbc",
+    "isaforge/demo.py": "f3ba4329895661972e0dfab7da6aa2bf507c577e6c12f2be4172f8fab2ecff14",
+    "isaforge/deployment.py": "8f8bb3d72b6ca3bdc207abfb973cbac899377740a6729ddf38de2be8e4f3c971",
+    "isaforge/evaluation.py": "f23f4d46a1193b0e0780f80c31c13a5662a24aaf6a46a87c46298a9015ecb98e",
+    "isaforge/fast_graph_inference.py": "8c9546f380728abcceefc6156b3e2172e6cc5597c1712390a61fbe719b312b3f",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/fresh_evaluation.py": "3117cb67e16c5a5f2bd429eaacc1927de77665f22e45c4fbfeaec26f513e2074",
+    "isaforge/frozen_inference.py": "33cb0e231dc4a0797e55ce23b145d23a55b812e7ebfc4760507c81319efd47e7",
+    "isaforge/graph_features_v5.py": "c0bb42fa3a4ae86bcaceffd35964fcf07a5dda0f36ab4e21ea8e1cfe6112c8cf",
+    "isaforge/mapping_features_v6.py": "3b220e3775d536630656681df645b95e0ff3c44b55ec91fd002a6b06d231f5d3",
+    "isaforge/masterrtl_baseline.py": "1473333e7b5d00d1ae91084fa5663697861504c4a411d6242a6160ff5f0a697f",
+    "isaforge/midterm_report.py": "2efcbd710e1196126050bd449ade8694fe9685f8ce7c96d4a92263b6ecee3c96",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/probe_audit.py": "b79eb74299ababd1c120f7eacd6fd93fab9355ee407fa94d9be9402c44b90620",
+    "isaforge/probe_corpus.py": "2435c29388fbf2368aee3e736606dd017d21306e45377021d29650983be775a3",
+    "isaforge/probe_evaluation.py": "0d44fbef8484bd610195fbfe393b8ec51285ea04cf5f38ebc846de6825a846d8",
+    "isaforge/real_experiment.py": "5ccd516a9dfae09bb0b3b3ce4480058f79b2cb5a688e9f698e3713124c77e16e",
+    "isaforge/research_report.py": "642c92a6c6dd146abc04d25304319c98316ee7a66cb0b7992176b099ca716b54",
+    "isaforge/rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+    "isaforge/selection.py": "cf76a3f37f86a35b60454beb2be9e69a03944cac287d7485b1a6f20a6fdd5c7e",
+    "isaforge/semantic_features_v7.py": "eddc21bd80fd97dea7e02cbfe14bb5b50649f779ed53ec6068674adc1dc0f9e3",
+    "isaforge/soc_experiment.py": "af8691054b626f687a8962b149bf3431ee7e34951d0aee0fd8692b0e334e3c1a",
+    "isaforge/structural_features_v3.py": "b0a4c8233c2a39b675767151f21698d6418c5b3b7bb357741815986033396fb0",
+    "isaforge/structural_features_v4.py": "78b506d9e20ed017f2724352b5c9e6d78eb67b3169fa19eb910b5a95c45905da",
+    "isaforge/structural_features_v5.py": "386a324634d26a1a9fde0090a1116dd3ad4ba2303e2d3c7775e3128990ac4bc2",
+    "isaforge/synthesis.py": "375e4858f08c2dc2cd793012ceee59d3f4146e2c7c12079d080a0299bfa0223f",
+    "isaforge/v4_corpus.py": "37f30c52e0a330d631f324903c985c69e0cbc1eaa1be7950b1cd6ff3e355bcac",
+    "isaforge/v4_validation.py": "193dd1b6780b1187e251db2dee08545b0391afead95a8f6d825dd51b58a694ff",
+    "isaforge/v5_corpus.py": "98a53a2125aef0b4a43546f17473b13d5e42d28925971554c5053887bf75cd75",
+    "isaforge/v6_corpus.py": "932b2f01dff404a7857c0e3107e8fab006aef3c0665280377d39ca15e7d007ee",
+    "isaforge/v8_application_corpus.py": "191bc3a6c35cdd063bc64839a579952e3bf81166415e38b45764c2fe2e360a2f"
+  },
+  "inputs": {
+    "results/targeted-coverage-data/candidates.json": "89aa9eab6259d99e2453aba4ebfe682b116f7bc07d309caabb5701712e8689be",
+    "results/targeted-coverage-data/historical-formulas.json": "e80950594c3f7684ba66c4424947eff19b6cba510d9caee21b32d1160d0449a4",
+    "results/targeted-coverage-data/novelty.json": "ec881334c774803dab3c95475a5b9150a08a43f50be7c8f0a796f15f126df5b3",
+    "results/targeted-coverage-data/tools.json": "8cdb179640fa4cf11a905ef775a7e28d37b296c309018128c6c8b451d8528fc8",
+    "results/targeted-coverage-validation/candidates.json": "c8609de065f07a706976ab5a503cf60a8f5cf439a68048180074ce1331f93ea7",
+    "results/targeted-coverage-validation/novelty.json": "a0cfc8bcc69eef0fefd920ba104699cc75c0235283a4f42886eebde1231f41ef"
+  },
+  "prior_inventory_sources": {
+    "results/selection-validation/historical-formulas.json": "328462ab31affc360d428384ca93fff29aecb48226839be17571edc920200bbc",
+    "results/selection-validation/historical-input-inventory.json": "87f3f25456da45aae8a4043c9d890fdfd24e64870cd5c4fc44f96f043e1433dd",
+    "results/selection-validation/candidates.json": "7ee14cd29acbf18731ca097716cc4d601f45d3ac93d7f7e70346a51d03a6f4dc"
+  },
+  "fits": 0,
+  "target_label_jobs": 0,
+  "native_feature_jobs": 0
+}

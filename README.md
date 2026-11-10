@@ -35,13 +35,13 @@ This matched test contains **192 synthetic circuits**, with the same 1,665 fitti
 
 These are separate experiments, not one learning curve. Targeted coverage helped arithmetic cases, but did not improve the primary application-transfer metric. The scoped policy reduced MAE **22.63%** on 32 new related circuits; its worst underprediction increased **2.83 → 32.01 LUT4**, so it remains experimental. [Complete compact results](results/README.md).
 
-## Latest validation: keep the current model
+## Latest validated candidate
 
-Selecting 128 of 336 features improved development MAE across three seeds (**5.53% mean improvement**), but increased budget mistakes. On **40 new synthetic circuits**, its MAE instead worsened **15.46 → 16.94 LUT4**, with additional false accepts at 64 and 128 LUTs. The 217-feature model remains the default.
+Adding 64 targeted training circuits and a constrained correction reduced MAE **34.47 →29.44 LUT4 (14.58%)** on 32 new synthetic circuits; MAPE fell **20.64% →18.01%**. Every accept/reject decision at 32/64/128 LUT4 stayed identical to the baseline, and worst underprediction did not increase.
 
-![Selection stability and prospective validation, with hardware-budget tradeoffs.](docs/figures/research/selection-validation.svg)
+![Targeted coverage and separate fresh validation of the budget-preserving correction.](docs/figures/research/targeted-coverage.svg)
 
-The independent check prevented a development-only gain from becoming a deployed regression. [Stability](results/selection-stability/README.md) · [Fresh validation and evidence](results/selection-validation/README.md) · [Initial feature comparison](results/feature-comparison/README.md).
+The correction preserves existing budget mistakes rather than fixing them. It remains experimental: one older arithmetic panel and one fresh subgroup regress in accuracy. The candidate is available through an explicit cached-inference command; the original default remains unchanged. [Method, results and inference](results/budget-preserving-coverage/README.md) · [Earlier selection failure](results/selection-validation/README.md).
 
 ## Run it
 

@@ -20,6 +20,8 @@ jobs:
       - run: make feature-check
       - if: matrix.python-version == '3.13'
         run: make predict
+      - if: matrix.python-version == '3.13'
+        run: make coverage-check
   hardware-unit-tests:
     runs-on: ubuntu-latest
     steps:

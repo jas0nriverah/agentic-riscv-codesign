@@ -58,3 +58,7 @@ python scripts/compare_features.py run --output generated/feature-comparison-rep
 The runner freezes inputs and folds before fitting, limits native libraries to one thread, and enforces a 600-second wall limit. Do not overwrite the retained experiment. `make figures` also regenerates its comparison plot. [Protocol and interpretation](../results/feature-comparison/README.md).
 
 `make feature-check` also replays the selection-stability and fresh-validation follow-ups. The stability replay uses the standard library; fresh-validation replay uses the pinned project environment but launches no fitting or native jobs. Full model weights, ordered feature schemas, prediction freezes and compressed native evidence are retained. See [stability](../results/selection-stability/README.md) and [fresh validation](../results/selection-validation/README.md) for their separate compute budgets and interpretation.
+
+## Validated coverage candidate
+
+The [budget-preserving candidate](../results/budget-preserving-coverage/README.md#run-actual-cached-inference) has an explicit cached-feature prediction command. It reuses the base forest and the new 1,729-row forest; no native tools or fitting are needed for cached inference. `make coverage-check` independently verifies both coverage experiments, including saved predictions, raw mapped netlists, oracle vectors, budget decisions and chronology. This audit uses the pinned numerical environment and launches no fits or native jobs.

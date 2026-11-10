@@ -1,0 +1,56 @@
+{
+  "schema": "independent-budget-preserving-prelabel-v1",
+  "status": "pass",
+  "audited_at_utc": "2026-11-10T02:20:14.383627+00:00",
+  "bindings": {
+    "results/budget-preserving-coverage/protocol.json": "8785faa8adeb8725eb79b057cae73288a39a055e19037bfe8396b4823f658fb5",
+    "results/budget-preserving-coverage/policy-freeze.json": "acf9e5ae2185fb2746059b5e487154a6fcc6767e2d3ccf7870aa8b33ba9336cc",
+    "results/budget-preserving-coverage/fresh-point-freeze.json": "40a9f2888a5ade2d71ba6503eb61198fef3cdf00cb325e99246991d7ec182779",
+    "results/budget-preserving-coverage/fresh-predictions.json": "87f88a1b8b96f6f2dff60f54f21aceef98e48a119cddf9741223fbf6d3a8b9af",
+    "results/budget-preserving-validation/plan.json": "066a8f22bd9302d676bc657b35ac920811b5c1feed1c1c94e3e2635624a6f973",
+    "results/budget-preserving-validation/point-freeze.json": "280aef90f2948792f80bf4fdfff74eeb50f335ae5707963fd20803cf2b0dbf7e",
+    "results/budget-preserving-validation/candidates.json": "2f49749cee5c28c62454fe5b5ca6690150554ff66fd98067c62c28b2818b369c",
+    "results/budget-preserving-validation/features.json": "d3f9a96ce533ae144c54adacd4da9e17f35346c907f4883a933db54d677bec2c"
+  },
+  "new_labels_absent": true,
+  "label_attempt_absent": true,
+  "fresh_points_replayed": 128,
+  "old_and_first_study_artifacts_preserved": 192,
+  "historical_formulas_and_aliases": 8934,
+  "constant_erased_AST_skeleton_overlap": 0,
+  "math_proof": {
+    "formula": "p=min(max(b,s),nextcap(b)); nextcap=min({32,64,128} intersect [b,infinity)), else infinity",
+    "assumptions": "b,s finite nonnegative; fixed caps32/64/128; exact <= decision convention.",
+    "intervals": [
+      "0<=b<=32 => b<=p<=32",
+      "32<b<=64 =>32<b<=p<=64",
+      "64<b<=128 =>64<b<=p<=128",
+      "128<b =>128<b<=p<infinity"
+    ],
+    "deductions": [
+      "For every declared cap, p<=cap iff b<=cap, so every false-accept and false-reject count is identical for arbitrary targets.",
+      "p>=b implies max(actual-p,0)<=max(actual-b,0) for every row; therefore maximum underprediction cannot increase."
+    ],
+    "limitations": "No claim of improved decisions, calibration, representative workload performance, other caps, timing, routing, power or CPU integration."
+  },
+  "development_gate_passed": true,
+  "development_accuracy_regressions": [
+    {
+      "panel": "arithmetic-stress",
+      "metric": "mae_lut4",
+      "base": 15.521145833333335,
+      "policy": 15.669843750000002,
+      "increase": 0.14869791666666643
+    },
+    {
+      "panel": "arithmetic-stress",
+      "metric": "positive_mape_percent",
+      "base": 13.417607960688125,
+      "policy": 13.782849099954664,
+      "increase": 0.3652411392665389
+    }
+  ],
+  "feature_native_seconds": 14.280967790982686,
+  "audit_fits": 0,
+  "audit_native_jobs": 0
+}

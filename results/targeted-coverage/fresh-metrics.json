@@ -1,0 +1,118 @@
+{
+  "schema": "isaforge-targeted-coverage-v1",
+  "models": {
+    "base": {
+      "count": 40,
+      "mae_lut4": 20.18541666666667,
+      "positive_mape_percent": 17.22867209507723,
+      "positive_count": 40,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 83.53333333333333,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 4,
+          "actual_accept": 12,
+          "predicted_accept": 8
+        },
+        "64": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 12,
+          "predicted_accept": 12
+        },
+        "128": {
+          "false_accept": 5,
+          "false_reject": 0,
+          "actual_accept": 23,
+          "predicted_accept": 28
+        }
+      }
+    },
+    "augmented217": {
+      "count": 40,
+      "mae_lut4": 14.321541666666667,
+      "positive_mape_percent": 14.54211627460914,
+      "positive_count": 40,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 82.83,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 4,
+          "actual_accept": 12,
+          "predicted_accept": 8
+        },
+        "64": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 12,
+          "predicted_accept": 12
+        },
+        "128": {
+          "false_accept": 5,
+          "false_reject": 0,
+          "actual_accept": 23,
+          "predicted_accept": 28
+        }
+      }
+    },
+    "scoped_augmented217": {
+      "count": 40,
+      "mae_lut4": 14.258041666666667,
+      "positive_mape_percent": 14.555675036959059,
+      "positive_count": 40,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 82.83,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 4,
+          "actual_accept": 12,
+          "predicted_accept": 8
+        },
+        "64": {
+          "false_accept": 0,
+          "false_reject": 0,
+          "actual_accept": 12,
+          "predicted_accept": 12
+        },
+        "128": {
+          "false_accept": 5,
+          "false_reject": 0,
+          "actual_accept": 23,
+          "predicted_accept": 28
+        }
+      }
+    }
+  },
+  "gates": {
+    "augmented217": {
+      "checks": {
+        "mae_strictly_improved": true,
+        "positive_mape_strictly_improved": true,
+        "maximum_underprediction_no_worse": true,
+        "all_cap_directions_no_worse": true
+      },
+      "fresh_gate_passed": true,
+      "development_gate_passed": false,
+      "scoped_experimental_eligibility": false
+    },
+    "scoped_augmented217": {
+      "checks": {
+        "mae_strictly_improved": true,
+        "positive_mape_strictly_improved": true,
+        "maximum_underprediction_no_worse": true,
+        "all_cap_directions_no_worse": true
+      },
+      "fresh_gate_passed": true,
+      "development_gate_passed": false,
+      "scoped_experimental_eligibility": false
+    }
+  },
+  "fresh_labels_sha256": "beac02a14a37423e8675886c1c09e1aaeb5d9ff15a3982e2a8153c886f35cf30",
+  "fresh_point_freeze_sha256": "827317a5f4e94fc689762bda1bb3612b88f3f472efbae21271f953febaf749f8",
+  "scope": "Experimental isolated iCE40 LUT4 point estimates. No calibrated safety, full CPU, timing, routing, power or energy guarantee.",
+  "fits": 1,
+  "new_native_jobs": 0
+}

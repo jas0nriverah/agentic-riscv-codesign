@@ -1,0 +1,82 @@
+{
+  "schema": "isaforge-budget-preserving-coverage-v1",
+  "models": {
+    "base": {
+      "count": 32,
+      "mae_lut4": 34.46864583333334,
+      "positive_mape_percent": 20.64207145869381,
+      "positive_count": 32,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 86.80000000000001,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 4,
+          "actual_accept": 4,
+          "predicted_accept": 0
+        },
+        "64": {
+          "false_accept": 5,
+          "false_reject": 0,
+          "actual_accept": 4,
+          "predicted_accept": 9
+        },
+        "128": {
+          "false_accept": 3,
+          "false_reject": 0,
+          "actual_accept": 14,
+          "predicted_accept": 17
+        }
+      }
+    },
+    "budget_preserving_coverage": {
+      "count": 32,
+      "mae_lut4": 29.442447916666666,
+      "positive_mape_percent": 18.01398119792642,
+      "positive_count": 32,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 86.80000000000001,
+      "caps": {
+        "32": {
+          "false_accept": 0,
+          "false_reject": 4,
+          "actual_accept": 4,
+          "predicted_accept": 0
+        },
+        "64": {
+          "false_accept": 5,
+          "false_reject": 0,
+          "actual_accept": 4,
+          "predicted_accept": 9
+        },
+        "128": {
+          "false_accept": 3,
+          "false_reject": 0,
+          "actual_accept": 14,
+          "predicted_accept": 17
+        }
+      }
+    }
+  },
+  "checks": {
+    "pointwise_prediction_at_least_base": true,
+    "pointwise_cap_decisions_identical": {
+      "32": true,
+      "64": true,
+      "128": true
+    }
+  },
+  "comparison": {
+    "mae_strictly_improved": true,
+    "positive_mape_strictly_improved": true,
+    "maximum_underprediction_no_worse": true,
+    "all_cap_directions_no_worse": true
+  },
+  "fresh_gate_passed": true,
+  "development_gate_passed": true,
+  "scoped_experimental_eligibility": true,
+  "new_fits": 0,
+  "fresh_labels_sha256": "fec0eed7baa8876273608a3a363ac9d24dc65e309f1aaad26bc5f15ce7271455",
+  "fresh_point_freeze_sha256": "40a9f2888a5ade2d71ba6503eb61198fef3cdf00cb325e99246991d7ec182779",
+  "scope": "Experimental isolated iCE40 LUT4 point policy. No optimality, calibrated safety, application transfer, timing, power or CPU guarantee. Base budget decisions remain unchanged."
+}

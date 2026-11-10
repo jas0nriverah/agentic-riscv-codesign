@@ -1,0 +1,9 @@
+{
+  "schema": "targeted-pre-native-clarification-v1",
+  "created_at_utc": "2026-11-10T02:10:46.990169+00:00",
+  "original_plan_sha256": "f35d4528f14e7b89e164666b626fc3ff0ef3f42868ed8e4a438652fcb4bba24b",
+  "target_label_jobs": 0,
+  "native_feature_jobs": 0,
+  "corrected_sources": {},
+  "clarified_secondary_scope_gate": "variable_shift OR (mixed_arithmetic_xor AND no_multiply). variable_shift = original AST sll/srl/sra control subtree contains in0/in1; mixed_arithmetic_xor = AST has add/addi/sub AND xor/xori; no_multiply = AST lacks mul/mulh/mulhu/mulhsu. Base fallback otherwise. No current declared formula contains both multiplication and variable shift; this clarifies description only."
+}
