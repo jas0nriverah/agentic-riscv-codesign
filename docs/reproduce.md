@@ -66,3 +66,7 @@ The [budget-preserving candidate](../results/budget-preserving-coverage/README.m
 ## Signed-arithmetic revision
 
 The [current experimental revision](../results/guarded-revision/README.md#run-and-replay) provides a separate cached-inference command. Reproduce its new measurement/model audit with `.venv/bin/python scripts/audit_guarded_revision.py`; this compares frozen receipts without modifying them and launches no new fits or native jobs. Regenerate its figure with `.venv/bin/python scripts/render_guarded_revision.py`. Earlier commands and frozen artifacts remain unchanged.
+
+## Signed-shift refinement
+
+Use [the latest cached inference command](../results/signed-refinement/README.md#run-and-replay) to evaluate the explicit refinement. `python scripts/refine_signed_coverage.py replay` checks all saved points and metrics without writes. `python scripts/audit_signed_refinement.py` independently checks raw evidence and frozen receipts without new fits or native jobs. Regenerate its figure with `python scripts/render_signed_refinement.py` in the pinned environment. Earlier snapshots and commands remain preserved.

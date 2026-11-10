@@ -1,0 +1,97 @@
+{
+  "created_at_utc": "2026-11-10T06:43:47.797716+00:00",
+  "consumed_development_only": true,
+  "new_labels_present": false,
+  "research_mechanism": "The1761 broad signed arithmetic route lowers two compound-data variable signed shifts while both measured targets exceed the earlier1729 guarded point, increasing underprediction and absolute error.",
+  "research_rows": [
+    {
+      "formula": "sub(xori(sra(addi(xori(in0,-2047),17),andi(add(xor(xor(in1,in1),in1),in0),31)),7),in0)",
+      "actual_lut4": 258,
+      "earlier_guard": 244.89666666666668,
+      "incumbent_current": 230.96,
+      "absolute_error_delta_lut4": 13.936666666666667,
+      "route": {
+        "compound": true,
+        "add_boolean": false,
+        "new_coverage": true
+      }
+    },
+    {
+      "formula": "sub(xori(sra(addi(xori(in0,-33),1365),andi(add(xor(xor(in1,in1),in1),in0),31)),511),in0)",
+      "actual_lut4": 258,
+      "earlier_guard": 245.39666666666668,
+      "incumbent_current": 231.88333333333333,
+      "absolute_error_delta_lut4": 13.51333333333335,
+      "route": {
+        "compound": true,
+        "add_boolean": false,
+        "new_coverage": true
+      }
+    }
+  ],
+  "signed_add_boolean_mechanism": "Low-mask upward changes help; high-mask changes overshoot actual targets. Restoring every row to base would satisfy MAE but worsen subgroup MAPE versus current, so a blanket abstention cannot meet the preregistered joint gate.",
+  "signed_add_boolean_rows": [
+    {
+      "formula": "xor(add(in0,sra(in1,andi(in0,1))),and(in0,in1))",
+      "actual_lut4": 63,
+      "base": 57.126666666666665,
+      "incumbent_current": 62.196666666666665,
+      "route": {
+        "compound": false,
+        "add_boolean": true,
+        "new_coverage": true
+      }
+    },
+    {
+      "formula": "xor(add(in0,sra(in1,andi(in0,5))),and(in0,in1))",
+      "actual_lut4": 94,
+      "base": 68.11666666666666,
+      "incumbent_current": 73.61666666666666,
+      "route": {
+        "compound": false,
+        "add_boolean": true,
+        "new_coverage": true
+      }
+    },
+    {
+      "formula": "xor(add(in0,sra(in1,andi(in0,15))),and(in0,in1))",
+      "actual_lut4": 156,
+      "base": 163.92,
+      "incumbent_current": 170.89833333333334,
+      "route": {
+        "compound": false,
+        "add_boolean": true,
+        "new_coverage": true
+      }
+    },
+    {
+      "formula": "xor(add(in0,sra(in1,andi(in0,31))),and(in0,in1))",
+      "actual_lut4": 188,
+      "base": 180.98333333333332,
+      "incumbent_current": 202.12333333333333,
+      "route": {
+        "compound": false,
+        "add_boolean": true,
+        "new_coverage": true
+      }
+    }
+  ],
+  "feasibility": "Research can improve bothMAE/MAPE by recovering the earlier compound-data points; signed-add subgroup can jointly improve by keeping lowmask improvements and correcting highmask overshoot. These are diagnostic consumed-label observations, not an inference lookup policy.",
+  "scope": "Original-AST classes cover exactly two research and four third-fresh consumed cases, with all other current predictions preserved; prospective40 evaluates different compositions.",
+  "frozen_policies": {
+    "guard": "p=min(max(base,scoped),nextcap(base)); nextcap is smallest32/64/128 >=base, or infinity",
+    "caps_lut4": [
+      32,
+      64,
+      128
+    ],
+    "compound_route": "Any original sra node with in0/in1 anywhere in its second (shift) operand subtree AND BOTH addi and xori anywhere in its first (data) operand subtree.",
+    "add_boolean_route": "Any original sra node with input-bearing second operand, AND add AND xor AND (and OR or) anywhere in original AST, with NO sub or mul/mulh/mulhu/mulhsu anywhere.",
+    "primary": "New1793 forest only on compound OR add_boolean; current guarded policy elsewhere. Apply unchanged base cap guard.",
+    "fallback": "Earlier1729 guarded point on compound (takes precedence); new1793 forest on add_boolean; current guarded point elsewhere. Apply unchanged base cap guard.",
+    "development_selection": "First primary if every development gate passes; else fallback if every development gate passes; else no eligible model and primary evaluated diagnostically. Freeze selection before fresh labels.",
+    "input_scope": "Original AST and explicit cached336-column features only. No IDs, labels, error lookup, normalization, threshold search or postlabel route changes.",
+    "complexity": "Composite of four fixed300-tree forests (base1665, prior1729, previous1761, new1793) plus structural routing and cap guard; not a pure learned selector."
+  },
+  "protocol_sha256": "cfda1ed58a701fc750ce3791a68c1eac0936f4b392a0191fb4c710d98be2a0ee"
+}

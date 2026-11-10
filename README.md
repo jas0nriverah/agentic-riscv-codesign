@@ -37,11 +37,11 @@ These are separate experiments, not one learning curve. Targeted coverage helped
 
 ## Latest validated candidate
 
-A targeted signed-arithmetic repair fixes the two previously reported development regressions. On **40 new synthetic circuits**, MAE falls **15.54 →12.99 LUT4 (16.40%)** versus the previous guarded model; MAPE falls **12.71% →11.23%**. Decisions at 32/64/128 LUT4 remain identical to the original baseline, including its existing mistakes.
+A narrow signed-shift refinement fixes the two targeted development tradeoffs. On **40 new synthetic circuits**, MAE falls **33.32 →27.87 LUT4 (16.35%)** versus the previous model; MAPE falls **18.98% →15.69%**. Worst underprediction decreases, while every decision at 32/64/128 LUT4 stays unchanged.
 
-![Signed-arithmetic regression repairs and independent fresh synthetic comparison.](docs/figures/research/guarded-revision.svg)
+![Targeted tradeoff repairs and a separate fresh synthetic comparison.](docs/figures/research/signed-refinement.svg)
 
-The revision adds 32 measured training circuits, uses a narrow structural route and retains the budget-preserving correction. A small research-panel regression versus the incumbent and one fresh subgroup's error versus baseline remain documented. It is available through an explicit cached-inference command; the original default stays unchanged. [Method, results and inference](results/guarded-revision/README.md) · [Previous coverage experiment](results/budget-preserving-coverage/README.md).
+The refinement adds 32 measured training circuits and preserves the previous predictor outside two declared structural classes. One fresh subgroup regresses slightly, and two unchanged controls still favor an older policy; all are documented. Existing budget mistakes remain. [Method, full results and cached inference](results/signed-refinement/README.md) · [Previous repair](results/guarded-revision/README.md).
 
 ## Run it
 

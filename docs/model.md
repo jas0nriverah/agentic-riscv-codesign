@@ -50,3 +50,7 @@ The earlier [experimental predictor](../results/budget-preserving-coverage/READM
 ## Signed-arithmetic repair
 
 The [new experimental revision](../results/guarded-revision/README.md) adds 32 signed-arithmetic training cases for a 1,761-row forest, retaining 217 features and 300 trees. Only active formulas containing a signed shift, subtraction and XOR use this repair forest; other cases retain the incumbent. The predeclared static-shift abstention and unchanged budget guard prevent the named development regressions. Selection occurred before the new 40-case test labels. The revision improves aggregate error over the incumbent in that test, with unchanged decisions at 32/64/128 LUT4 and the documented remaining tradeoffs.
+
+## Signed-shift refinement
+
+The [current experimental refinement](../results/signed-refinement/README.md) adds 32 measured cases for a 1,793-row forest. It changes only two predeclared signed-shift structural classes; other formulas retain the previous composite predictor. The primary passed development selection before fresh labels and improves a separate 40-case test versus the immediate incumbent. All seven retained panels meet incremental MAE/MAPE and maximum-underprediction criteria. The model remains a four-forest composite with explicit AST routing and the same cap guard; it does not repair existing budget classification errors. Fresh subgroup and older-policy tradeoffs remain documented.
