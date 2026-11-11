@@ -35,13 +35,13 @@ This matched test contains **192 synthetic circuits**, with the same 1,665 fitti
 
 These are separate experiments, not one learning curve. Targeted coverage helped arithmetic cases, but did not improve the primary application-transfer metric. The scoped policy reduced MAE **22.63%** on 32 new related circuits; its worst underprediction increased **2.83 → 32.01 LUT4**, so it remains experimental. [Complete compact results](results/README.md).
 
-## Latest experiment: boundary repair
+## Latest experiment: boundary challenge
 
-A zero-fit median rule corrects the known false rejection: the 125-LUT circuit's estimate moves **129.32 → 128.00**, preserving all other predictions across 783 prior evaluation circuits. On **40 fresh circuits**, it exactly matches budget release: MAE **12.20 LUT4**, MAPE **14.51%**, and no false rejections. The signed incumbent has MAE 21.20 and MAPE 19.75%; false acceptances at 128 LUTs fall **13 → 5**.
+The median repair fixes the known false rejection, but **does not generalize safely** in the new targeted test. From a fixed 200-input pool, we selected ten prediction disagreements and eight controls before measuring labels. It corrects **eight false rejections**, but introduces **two false acceptances** versus budget release. MAE worsens **11.11 → 11.22 LUT4** and MAPE **12.72% → 13.04%**. The candidate is not promoted.
 
-![Fresh comparison: accuracy and budget gains hold, but the median repair is inactive.](docs/figures/research/boundary-repair.svg)
+![Conditional boundary challenge: corrected false rejections coexist with new false acceptances and slightly worse accuracy.](docs/figures/research/boundary-challenge.svg)
 
-**The repair is not yet validated:** it changes zero fresh predictions, failing our predeclared activity requirement. We retain that result and keep the improvement goal active. [Method, frozen evidence and replay](results/boundary-repair/README.md) · [Previous budget-release tradeoff](results/budget-release/README.md). The base model remains the default.
+This is a prediction-conditioned challenge, not a representative performance estimate. All 200 pool records and all 18 selected measurements are retained. A separate 40-circuit test preserved the earlier accuracy and budget gains but never activated the repair; the two studies are not pooled. [Full challenge and failure analysis](results/boundary-challenge/README.md) · [Separate fresh 40-case study](results/boundary-repair/README.md). The improvement goal remains active and the base model remains the default.
 
 ## Run it
 

@@ -1,0 +1,88 @@
+{
+  "schema": "independent-boundary-challenge-preflight-audit-v1",
+  "status": "pass",
+  "audited_at_utc": "2026-11-11T04:50:00.180589+00:00",
+  "bindings": {
+    "results/boundary-challenge/protocol.json": "bd95cf2a42d9db331722e9e0048dcced059e9a6aff037064fe4db79e70599f2d",
+    "results/boundary-challenge/policy-freeze.json": "c0f291117901c35bd00f838c873fcda0512dc02c6e8263c065906c2fafd47532",
+    "results/boundary-challenge/development-predictions.json": "bfe1916fcea75d2062c6aaff4087e70dd3c9ca283229912bc0e837c081f5affd",
+    "results/boundary-challenge/development-metrics.json": "98908d589c32c18f6db133f2ed8106a46e822be55a93206b046fe5385ce0470b",
+    "results/boundary-challenge/auditor-prior-artifacts.json": "3cb973af8247dc03a8c7d6909534fe2f2484931161e077a13580b317818a697d",
+    "results/boundary-challenge/goal-at-freeze.json": "4c97ca0a6d9aea44063ec591b1c40727d52164b2772411bf579659699537abeb",
+    "results/boundary-challenge-validation/plan.json": "14bfcab55383e69254eea624c27808509a3a363de09b24acee14996ca6a3c33e",
+    "results/boundary-challenge-validation/pool-candidates.json": "2963bc4cda572ec7d69b6ee52effd95e79d507032297626ad939b874ea7ff4ff",
+    "results/boundary-challenge-validation/novelty.json": "047f788a14142347c381636a6536ecb7d3aba378d7ac35ced58ae486628197ce",
+    "results/boundary-challenge-validation/historical-formulas.json": "8d71081e45bfd9bb020335cb74b1a04c9b71c82c4b8cfdc2c3f86f9b33e82859",
+    "results/boundary-challenge-validation/tools.json": "8cdb179640fa4cf11a905ef775a7e28d37b296c309018128c6c8b451d8528fc8"
+  },
+  "scientific_artifacts_preserved": 630,
+  "identity_audit": {
+    "historical_formulas": 9442,
+    "saved_prior_aliases": 760,
+    "known_identity_keys": 16298,
+    "known_or_within_identity_overlaps": 0,
+    "historical_original_AST_skeleton_overlaps": 0,
+    "pool_count": 200,
+    "templates": {
+      "target_addi_xori_xordata__xor_add_reverse": 8,
+      "target_addi_xori_xordata__add_dual_xor": 8,
+      "target_addi_xori_xordata__xor_dual_add": 8,
+      "target_xori_addi_xordata__xor_add_reverse": 8,
+      "target_xori_addi_xordata__add_dual_xor": 8,
+      "target_xori_addi_xordata__xor_dual_add": 8,
+      "target_xor_addi_xori_data__xor_add_reverse": 8,
+      "target_xor_addi_xori_data__add_dual_xor": 8,
+      "target_xor_addi_xori_data__xor_dual_add": 8,
+      "target_xor_xori_addi_reverse__xor_add_reverse": 8,
+      "target_xor_xori_addi_reverse__add_dual_xor": 8,
+      "target_xor_xori_addi_reverse__xor_dual_add": 8,
+      "target_addi_xori_ordata__xor_add_reverse": 8,
+      "target_addi_xori_ordata__add_dual_xor": 8,
+      "target_addi_xori_ordata__xor_dual_add": 8,
+      "target_xori_addi_anddata__xor_add_reverse": 8,
+      "target_xori_addi_anddata__add_dual_xor": 8,
+      "target_xori_addi_anddata__xor_dual_add": 8,
+      "target_addi_xori_low16_xordata__xor_add_reverse": 8,
+      "target_addi_xori_low16_xordata__add_dual_xor": 8,
+      "target_addi_xori_low16_xordata__xor_dual_add": 8,
+      "target_xori_addi_low31_xordata__xor_add_reverse": 8,
+      "target_xori_addi_low31_xordata__add_dual_xor": 8,
+      "target_xori_addi_low31_xordata__xor_dual_add": 8,
+      "control_static_mixed_and": 4,
+      "control_unsigned_add_or": 4
+    }
+  },
+  "reviewed_policy": {
+    "method": "Exactly the previously frozen boundary_median implementation; no new or changed weights, route, cap, median, tolerance, prediction or calibration rule.",
+    "frozen_boundary_protocol_sha256": "a348bbbd238896850d521511f3244453bfb47b80d10b7681c03617f299e1eec0",
+    "evidence_scope": "Complementary conditional activation challenge and separate unchanged broad40 panel. No pooled metric, representative-population claim, or relabeling of the earlier inactive trial as eligible."
+  },
+  "reviewed_selection": {
+    "pool_count": 200,
+    "target_pool_count": 192,
+    "reserved_controls": 8,
+    "maximum_selected_active": 16,
+    "active": "boundary_median point differs exactly from budget_release_compound_only; frozen prediction outputs only, never labels.",
+    "feature_freshness": "Exact217mapping-feature float64 equality against all1825training plus823consumed rows. Historical matches retained but excluded from active eligibility. Round-robin selects at most one active per within-pool217cluster, first occurrence under frozen ordering. All8controls fixed; any control historical match or duplicate among selected217keys blocks eligibility without replacement.",
+    "ordering": "Group active noncontrol pool indices by template; sorted template names. Repeatedly take first remaining pool index from each template in that order until16 or queues exhausted, skipping active rows whose217key was already selected. Within-template order is original frozen pool order. Append all8 reserved controls in pool order.",
+    "coverage": "At least4 selected active cases from at least2 templates; at least1 selected active case whose actual clamp point is128 and whose release point exceeds128.",
+    "missing": "No quota filling, pool extension, replacements, retries, label-based selection or filtering. Retain every pool feature/point and every selected label, including failures; insufficient activity blocks eligibility."
+  },
+  "reviewed_gates": {
+    "retained": "All ten complete consumed panels and prior named subgroups: MAE/MAPE/FA/maxunder no worse than release, FR no worse signed percap32/64/128; bounds signed<=repair<=release. Consumed125 failure remains repaired.",
+    "broad40": "Separately retain the entire unchanged broad40 panel: strict MAE/MAPE and summed circuit-budget FA gains vs signed; FA<=release and FR<=signed separately percap; tail<=release and signed. Original broad40 trial remains ineligible due activity0; do not pool it with conditional selected data.",
+    "conditional": "Selected complete challenge AND active-only subset: MAE/MAPE/FA/maxunder<=release, FR<=signed percap32/64/128, bounds signed<=repair<=release; no strict FA gain vs signed demanded for this prediction-conditioned population. Selection coverage and development gates required.",
+    "tolerance": 1e-10,
+    "postlabel": "No policy, route, weights, selection, threshold, cohort or criterion changes after labels. Failure remains ineligible."
+  },
+  "finite_candidates": [
+    "boundary_median"
+  ],
+  "new_fits": 0,
+  "new_features_labels_selection_and_attempts_absent_at_receipt": true,
+  "unchanged_policy_development_selection_pool_frozen_before_features_or_labels": true,
+  "conditional_population_not_representative": true,
+  "no_pooled_metric": true,
+  "audit_fits": 0,
+  "audit_native_jobs": 0
+}

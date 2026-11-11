@@ -64,3 +64,7 @@ Development selection rejected the broader compound/Boolean route. The narrow fa
 ## Median boundary repair
 
 The [zero-fit boundary experiment](../results/boundary-repair/README.md) reuses the 1,825-row forest. On compound signed shifts, when budget release crosses a fixed cap but the signed incumbent and the forest median remain at or below it, the repair clamps the estimate to that cap. For 300 trees, the median averages the two middle predictions; it is not equivalent to a strict majority vote or a calibrated uncertainty bound. It fixes the known false rejection and leaves the other 782 consumed cases unchanged. A fresh 40-case test preserves the accuracy and false-acceptance gains, but never activates the repair, so it fails the preregistered transfer-activity gate.
+
+## Direct test of the correction
+
+The [conditional boundary challenge](../results/boundary-challenge/README.md) freezes a 200-input pool, extracts all features, then selects novel disagreements using the unchanged policy before any labels. Ten active cases and eight fixed controls meet the predeclared coverage requirements. The repair corrects eight release false rejections but creates two false acceptances, worsening both MAE and MAPE versus release. Median agreement alone is therefore insufficient. No passing subset is substituted for the complete result, and neither this negative result nor the prior inactive trial is promoted.

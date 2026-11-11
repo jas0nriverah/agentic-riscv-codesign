@@ -78,3 +78,7 @@ The [budget-release report](../results/budget-release/README.md) provides cached
 ## Median boundary diagnostic
 
 See the [boundary-repair report](../results/boundary-repair/README.md) for cached inference and read-only replay with `scripts/repair_boundary_coverage.py` and `scripts/audit_boundary_repair.py`. These reuse existing weights without fitting. `scripts/render_boundary_repair.py` renders the matched fresh comparison; its failed activity gate remains explicit.
+
+## Conditional boundary challenge
+
+The [challenge report](../results/boundary-challenge/README.md) documents input-only selection, all-pool provenance, cached inference and read-only replay with `scripts/challenge_boundary_coverage.py` and `scripts/audit_boundary_challenge.py`. `scripts/render_boundary_challenge.py` reproduces the conditional comparison figure. The experiment has zero fits and retains its failed accuracy and false-acceptance gates.
