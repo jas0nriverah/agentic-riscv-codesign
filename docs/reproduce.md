@@ -102,3 +102,20 @@ python scripts/render_boundary_coverage.py
 ```
 
 The saved protocol binds both fitted models, their ordered training data, all pool predictions and the pre-label selection. Raw forest errors and final policy errors are separate. Preserve the existing evidence directories; repeating training or measurement requires a new experiment protocol and output directory.
+
+
+## Fixed-model coverage abstention
+
+The [abstention experiment](../results/boundary-abstention/README.md) reuses the saved forests without fitting. A support table is derived from the original training formulas; each eligible signed-shift chain is evaluated separately. Replay and inference use cached features:
+
+```sh
+python scripts/abstain_boundary_coverage.py replay
+python scripts/audit_boundary_abstention.py
+python scripts/abstain_boundary_coverage.py predict-cached \
+  --candidates results/boundary-abstention-validation/candidates.json \
+  --features results/boundary-abstention-validation/features.json \
+  --prediction-output generated/boundary-abstention-predictions.json
+python scripts/render_boundary_abstention.py
+```
+
+The fixed general panel, eight unsupported-pattern contrasts and selected active cases are reported separately. All pool inputs, predictions, abstentions and selection rules are retained, including failures. These commands do not retrain models or launch native synthesis.

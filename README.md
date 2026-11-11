@@ -35,15 +35,15 @@ This matched test contains **192 synthetic circuits**, with the same 1,665 fitti
 
 These are separate experiments, not one learning curve. Targeted coverage helped arithmetic cases, but did not improve the primary application-transfer metric. The scoped policy reduced MAE **22.63%** on 32 new related circuits; its worst underprediction increased **2.83 → 32.01 LUT4**, so it remains experimental. [Complete compact results](results/README.md).
 
-## Latest experiment: training coverage versus more features
+## Latest experiment: checking unsupported corrections
 
-Two matched forests use the same **1,857 training circuits**, comparing **217 features** with **233 features** that add local sharing and signed-width descriptors. The 217-feature model repairs all four remaining development false rejections and preserves the earlier gains. The 233-feature model leaves two errors, so the frozen development rule selects 217.
+We tested an input-coverage rule using the saved model, with **zero new fits**. It permits a learned budget correction only when every relevant signed-shift chain has a width/sharing pattern represented in training. Unsupported cases retain the earlier structural prediction.
 
-![Matched coverage experiment: general accuracy improves, but a conditional false acceptance prevents promotion.](docs/figures/research/boundary-coverage.svg)
+![Fresh abstention test: six rejection repairs and one blocked unsafe acceptance, with remaining general and unsupported-panel failures.](docs/figures/research/boundary-abstention.svg)
 
-On **32 fresh general circuits**, the selected policy lowers MAE **17.02 → 16.59 LUT4** and MAPE **12.96% → 12.61%** versus the prior structural repair, removes its last false rejection, and preserves its false-acceptance counts. But the separate conditional test falsely accepts a **159-LUT circuit at a 128-LUT budget**. It also supplies only one newly activated case, below the required four across two templates. **The candidate is not promoted; the base model remains the default.**
+On **46 fresh circuits**, the rule preserves six learned corrections of false rejections from the earlier structural predictor and blocks one unsafe acceptance of a **159-LUT circuit at 128 LUTs**. Those targeted checks pass. However, the complete general panel retains **four false rejections at 128** and an inherited false acceptance at 64. General MAE is **17.02 LUT4**, better than the signed incumbent's 20.95 but worse than budget release's 16.91. The separate unsupported panel also fails the release comparison.
 
-The figure compares final budget-decision policies; raw forest errors are reported separately. [Full comparison, failures and reproduction](results/boundary-coverage/README.md) · [Previous structural repair](results/boundary-refinement/README.md). Added coverage helps the known errors, but neither extra features nor agreement between both new forests establishes safe budget decisions.
+**The candidate is not promoted; the goal remains active and the base model remains the default.** The next work must address the inherited median correction and remaining training/representation errors, while preserving the successful repairs. [Full results, failure cases and reproduction](results/boundary-abstention/README.md) · [Prior matched 217-versus-233 experiment](results/boundary-coverage/README.md).
 
 ## Run it
 

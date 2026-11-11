@@ -1,0 +1,63 @@
+{
+  "status": "UNEXECUTED hypothesis; no new model, features, thresholds, training or native jobs implemented in this trial",
+  "evidence": {
+    "guard_success": {
+      "actual_lut4": 159,
+      "learned_prediction": 128,
+      "guarded_prediction": 132.93,
+      "supported_false_rejections_repaired": 6
+    },
+    "legacy_failure": {
+      "actual_lut4": [
+        107,
+        113
+      ],
+      "inherited_prediction": [
+        64,
+        64
+      ],
+      "raw_217_predictions": [
+        84.76333333333334,
+        97.655
+      ],
+      "interpretation": "The inherited median accepts at 64 despite disagreement from the learned mean; guarding only new learned actions leaves these decisions untouched."
+    },
+    "remaining_false_rejections": {
+      "cap": 128,
+      "actual_lut4": [
+        125,
+        119,
+        114,
+        125
+      ],
+      "raw_217_predictions": [
+        129.19666666666666,
+        128.01333333333332,
+        146.505,
+        132.59
+      ],
+      "interpretation": "The last case is outside current learning scope. ADDI after sign placement discards known bits in the current conservative representation."
+    }
+  },
+  "hypothesis": "Treat the whole acceptance-lowering pipeline as a single audited decision policy. Test whether legacy median proposals need independently learned corroboration before lowering release, with release as fallback; combine this with new training coverage and a sound localized width representation for add-immediate after narrow sign placement. No blanket assertion that either frozen fallback is safe.",
+  "representation_proposal": "Before new labels, preregister conservative bit-by-bit known-zero/known-one carry propagation for ADD/ADDI (especially narrow high-position data plus small constants), in a NEW helper under scripts. Current frozen helper and models stay immutable. Soundness tests must compare masks against exact RV32 evaluation; precision recovery is not itself an area guarantee.",
+  "training_proposal": {
+    "maximum_new_rows": 32,
+    "purpose": "Novel Boolean sharing, repeated post-add logic, narrow sign-placement-before/after-add and previously out-of-scope outer-input contrasts, balanced with high-cost cases. Do not fit any consumed evaluation label.",
+    "planned_fits": 1,
+    "maximum_fits": 2,
+    "fit_threads": 1,
+    "base_fitted_rows": 1857,
+    "maximum_total_rows": 1889,
+    "matched_ablation": "If used, freeze coverage-only versus new localized-representation fit order and selection before labels; no margin or seed grid."
+  },
+  "validation": "Freeze a new finite cohort and all proposal/corroboration/fallback rules before features/labels. Measure complete general, supported-action, mandatory unsupported and legacy-disagreement populations separately, with predeclared activation minima and retained controls. Retain all current panels, every named safe correction and all false-acceptance counterexamples. Accuracy/tail must preserve exact frozen comparators; FA<=release and FR<=signed separately32/64/128. No pooled success, postlabel subset, pool extension or numerical cap-margin tweak.",
+  "compute_bounds": {
+    "native_seconds_maximum": 300,
+    "native_workers_maximum": 2,
+    "maximum_fits": 2,
+    "paid_compute": false,
+    "overlapping_native_jobs": false
+  },
+  "limitations": "This is a postlabel mechanistic hypothesis, not a passing policy or a claim that release/learned corroboration already satisfies all gates. Current experiment remains scientifically ineligible and the goal active."
+}
