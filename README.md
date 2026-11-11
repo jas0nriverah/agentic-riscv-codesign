@@ -35,13 +35,15 @@ This matched test contains **192 synthetic circuits**, with the same 1,665 fitti
 
 These are separate experiments, not one learning curve. Targeted coverage helped arithmetic cases, but did not improve the primary application-transfer metric. The scoped policy reduced MAE **22.63%** on 32 new related circuits; its worst underprediction increased **2.83 → 32.01 LUT4**, so it remains experimental. [Complete compact results](results/README.md).
 
-## Latest experiment: structural boundary repair
+## Latest experiment: training coverage versus more features
 
-A structural gate prevents the median repair's two previous false acceptances and preserves all earlier gains. On **16 fresh active cases**, it corrects every false rejection without introducing a false acceptance. However, the separate **32-case general test retains four false rejections at 128 LUTs**, versus zero for the signed incumbent. The candidate is not promoted and the goal remains active.
+Two matched forests use the same **1,857 training circuits**, comparing **217 features** with **233 features** that add local sharing and signed-width descriptors. The 217-feature model repairs all four remaining development false rejections and preserves the earlier gains. The 233-feature model leaves two errors, so the frozen development rule selects 217.
 
-![Separate general and conditional tests: active-case repair succeeds, but four general false rejections remain.](docs/figures/research/boundary-refinement.svg)
+![Matched coverage experiment: general accuracy improves, but a conditional false acceptance prevents promotion.](docs/figures/research/boundary-coverage.svg)
 
-General-test MAE improves **22.48 → 17.59 LUT4** and MAPE **16.19% → 13.79%** versus the signed incumbent, preserving the budget-release gains. False acceptances at 128 LUTs fall **9 → 4**, but the remaining rejections fail our separate acceptance criterion. The two evaluations share eight controls and are not pooled. [Full results and four failure cases](results/boundary-refinement/README.md) · [Earlier negative challenge](results/boundary-challenge/README.md). The base model remains the default.
+On **32 fresh general circuits**, the selected policy lowers MAE **17.02 → 16.59 LUT4** and MAPE **12.96% → 12.61%** versus the prior structural repair, removes its last false rejection, and preserves its false-acceptance counts. But the separate conditional test falsely accepts a **159-LUT circuit at a 128-LUT budget**. It also supplies only one newly activated case, below the required four across two templates. **The candidate is not promoted; the base model remains the default.**
+
+The figure compares final budget-decision policies; raw forest errors are reported separately. [Full comparison, failures and reproduction](results/boundary-coverage/README.md) · [Previous structural repair](results/boundary-refinement/README.md). Added coverage helps the known errors, but neither extra features nor agreement between both new forests establishes safe budget decisions.
 
 ## Run it
 

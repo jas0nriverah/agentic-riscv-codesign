@@ -86,3 +86,19 @@ The [challenge report](../results/boundary-challenge/README.md) documents input-
 ## Structural boundary refinement
 
 The [refinement report](../results/boundary-refinement/README.md) provides cached inference and read-only replay using `scripts/refine_boundary_coverage.py` and `scripts/audit_boundary_refinement.py`. All128 pool features/points and48 unique measured labels are retained. `scripts/render_boundary_refinement.py` reproduces separate general and conditional panels, including the failed general false-rejection gate. No fitting is required.
+
+## Matched coverage and local-feature experiment
+
+The [coverage experiment](../results/boundary-coverage/README.md) compares two saved forests trained on identical 1,857-row data: 217 existing features versus 233 features with 16 local structural descriptors. The development-selected policy uses the 217-feature forest. Replay and cached inference require no retraining or FPGA tools:
+
+```sh
+python scripts/learn_boundary_coverage.py replay
+python scripts/audit_boundary_coverage.py
+python scripts/learn_boundary_coverage.py predict-cached \
+  --candidates results/boundary-coverage-validation/candidates.json \
+  --features results/boundary-coverage-validation/features.json \
+  --prediction-output generated/boundary-coverage-predictions.json
+python scripts/render_boundary_coverage.py
+```
+
+The saved protocol binds both fitted models, their ordered training data, all pool predictions and the pre-label selection. Raw forest errors and final policy errors are separate. Preserve the existing evidence directories; repeating training or measurement requires a new experiment protocol and output directory.

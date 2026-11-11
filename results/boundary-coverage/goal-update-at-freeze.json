@@ -1,0 +1,39 @@
+{
+  "objective": "Improve ISAForge LUT4 prediction accuracy while reducing false hardware-budget acceptances and repairing remaining false rejections, without sacrificing previously validated gains; demonstrate the result on fresh circuits.",
+  "status": "active",
+  "relationship_to_original_goal": "Clarifies current work; does not replace or relax the frozen completion requirements in boundary-repair-goal.json or any experiment protocol.",
+  "current_evidence": {
+    "commit": "375fedd",
+    "remaining_cap128_false_rejections": 4,
+    "interpretation": "Prior structural correction improved selected cases, but the complete fresh general panel failed the false-rejection gate. No successful promotion is claimed."
+  },
+  "next_bounded_experiment": {
+    "training_rows": 1857,
+    "new_training_rows": 32,
+    "matched_feature_counts": [
+      217,
+      233
+    ],
+    "fits": 2,
+    "purpose": "Separate added training coverage from the effect of 16 localized structural features. Select using development evidence only, before fresh labels."
+  },
+  "success_requirements": [
+    "Repair the four remaining cap128 false rejections and preserve all 30 named required rejection corrections; never use labels, candidate IDs, or per-case lookup during inference.",
+    "Preserve prior accuracy, false-acceptance, subgroup and tail-error gains against the exact comparators and tolerances declared in the frozen protocol. Evaluate false acceptances and false rejections separately at caps32/64/128; do not offset one with the other.",
+    "Keep consumed evaluation labels out of training. Freeze cohorts, features, policies, selection rules and gates before new labels, and freeze fitted weights and all fresh predictions before fresh synthesis labels.",
+    "Require better MAE and MAPE than the signed incumbent on the complete fresh general panel, preserve budget-release gains, and meet every predeclared per-cap and subgroup gate. Report MAPE definition, zero-target handling and denominators.",
+    "Evaluate fresh general, conditional and newly changed active cases separately. Require at least four unique newly learned active corrections across at least two templates, including cap128; no post-label selection, replacement or quota refill.",
+    "Audit source provenance, chronology, training membership, saved-model inference, synthesis labels and RTL correctness independently. Retain every negative result and frozen artifact.",
+    "Publish reproducible evidence and concise research figures on latest. Complete the goal or promote a model only when every required gate passes; finite circuit results are not proof of universal hardware safety or CPU speedup."
+  ],
+  "compute_limits": {
+    "model_agents": "GPT-6.1 Sol high",
+    "max_fits_per_experiment": 2,
+    "max_native_seconds_per_experiment": 300,
+    "max_native_workers": 2,
+    "fit_threads": 1,
+    "paid_compute": false,
+    "overlapping_native_jobs": false
+  },
+  "failure_policy": "Record the failure and analyze it. Any revised experiment needs a new preregistered protocol and fresh independent evaluation; never weaken acceptance gates after seeing results."
+}

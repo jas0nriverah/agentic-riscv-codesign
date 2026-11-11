@@ -1,0 +1,184 @@
+{
+  "schema": "independent-boundary-coverage-preflight-audit-v1",
+  "status": "pass",
+  "audited_at_utc": "2026-11-11T06:21:11.332156+00:00",
+  "bindings": {
+    "results/boundary-coverage/protocol.json": "540d0c378edbc86490fc872bb56588cedb341e575fe2a0d9c5ed41c323bc48b7",
+    "results/boundary-coverage/auditor-prior-artifacts.json": "a6c3bcdb174e76524c6a6ad0cfa37a495dad3840a75574e1d6cc4798475c602d",
+    "results/boundary-coverage/goal-at-freeze.json": "fd1aae9c4630eaa01c8b8d603aecef4f56adbaecbabe4119a0930f8f9855f680",
+    "results/boundary-coverage/goal-update-at-freeze.json": "e77035b2ed240e0561dbf211e4e1a9df8056b30ed7247830c200aeffe136b217",
+    "results/boundary-coverage/input-coverage-audit.json": "167847dbe3269fd81f95627152be9598df95cbf27c852ee9f3a9511a01eb05cb",
+    "results/boundary-coverage-data/plan.json": "5f7a9e8fcbc2458f34193d48f4d6cce8c0dced23e0b1caa425111eca3d85e1c9",
+    "results/boundary-coverage-data/novelty.json": "18c9ca8821a834ba6117796a427372b6c1c1e7fa1e3ec5269be3c0e0ef1401c0",
+    "results/boundary-coverage-data/historical-formulas.json": "ed018e44dddbede08b3710e1cda8919f5047d4cc56be41555ca60f355a5786dd",
+    "results/boundary-coverage-data/tools.json": "8cdb179640fa4cf11a905ef775a7e28d37b296c309018128c6c8b451d8528fc8",
+    "results/boundary-coverage-validation/plan.json": "5f7a9e8fcbc2458f34193d48f4d6cce8c0dced23e0b1caa425111eca3d85e1c9",
+    "results/boundary-coverage-validation/novelty.json": "b14e4b9ad411a99aed91a9f64d9c2e17218b3d293f42d2b9ee693509575c3c25",
+    "results/boundary-coverage-validation/historical-formulas.json": "ed018e44dddbede08b3710e1cda8919f5047d4cc56be41555ca60f355a5786dd",
+    "results/boundary-coverage-validation/tools.json": "8cdb179640fa4cf11a905ef775a7e28d37b296c309018128c6c8b451d8528fc8",
+    "results/boundary-coverage-data/candidates.json": "fae995b70a6969da4af71180dd2cafde991f4f9d7c351a0c58aa18758c77e561",
+    "results/boundary-coverage-validation/pool-candidates.json": "6f175699df9cca13df358d351bcaf4d50ad617bea9a687d9fcd65fc95bf456e9"
+  },
+  "scientific_artifacts_preserved": 721,
+  "identity_audit": {
+    "historical_formulas": 10090,
+    "saved_prior_aliases": 1408,
+    "known_identity_keys": 17554,
+    "known_or_joint_identity_overlaps": 0,
+    "historical_or_cross_cohort_original_AST_skeleton_overlaps": 0,
+    "cohorts": {
+      "train": {
+        "count": 32,
+        "templates": {
+          "sharing_anddata_orcontrol": 4,
+          "sharing_ordata_andcontrol": 4,
+          "sharing_xordata_addcontrol": 4,
+          "sharing_plain_input_orroot": 4,
+          "narrow_signed8_orroot": 4,
+          "narrow_signed16_xoradd": 4,
+          "narrow_sign8_before_add": 4,
+          "narrow_sign16_before_xor": 4
+        }
+      },
+      "test": {
+        "count": 128,
+        "templates": {
+          "general_shared_ordata": 4,
+          "general_shared_anddata": 4,
+          "general_existing_scope_xorcontrol": 4,
+          "general_signed8_ordata": 4,
+          "general_signed16_andcontrol": 4,
+          "general_existing_scope_xordata": 4,
+          "control_low16_xor_dualadd": 2,
+          "control_wrappedxor_add_or": 2,
+          "control_unsigned_ordata": 2,
+          "control_static_signed8": 2,
+          "challenge_share_and_or": 8,
+          "challenge_share_or_and": 8,
+          "challenge_share_xor_input": 8,
+          "challenge_share_xor_and": 8,
+          "challenge_share_or_xor": 8,
+          "challenge_share_and_add": 8,
+          "challenge_signed8_oradd": 8,
+          "challenge_signed16_androot": 8,
+          "challenge_signed8_xordata": 8,
+          "challenge_signed8_preadd": 8,
+          "challenge_signed16_prexor": 8,
+          "challenge_low16_sharedxor": 8
+        }
+      }
+    },
+    "all_previous200_and128_pool_rows_included": true
+  },
+  "reviewed_policy": {
+    "learning_scope": "At least one matching chain has outer XOR sibling directly AND/OR/XOR OR its OWN data unknown span<=16. No cap, target, prediction, ID or case lookup in this scope.",
+    "learned_decision": "On learning scope, for each cap32/64/128 require signed<=cap<previous_structural AND newly trained RAW MEAN<=cap. Return smallest qualifying cap; otherwise previous_structural exactly. Outside scope previous_structural exactly. No margin, additional median or threshold tuning.",
+    "fit_order": [
+      "augmented233",
+      "coverage217"
+    ],
+    "configuration": {
+      "n_estimators": 300,
+      "min_samples_leaf": 1,
+      "max_features": 1.0,
+      "n_jobs": 1,
+      "random_state": 2026101401
+    },
+    "selection": "First augmented233 if all development gates pass; else coverage217 if all pass; else no eligible candidate and augmented diagnostic. Both matched forests and raw metrics retained; no postfresh swap.",
+    "training": "Same1825 frozen fitted rows plus32 new training, no consumed evaluation labels. Both300-tree forests fixedseed/parameters, n_jobs1 and threadpool1. Plain sklearn estimator serialization; source helpers under scripts only.",
+    "scope": "Learned budget-decision support, not global point-regressor replacement or calibrated safety. Original formulas/features only; no labels/IDs/errors in prediction or local feature columns."
+  },
+  "reviewed_selection": {
+    "general_count": 32,
+    "shared_controls": 8,
+    "challenge_count": 96,
+    "maximum_active": 16,
+    "minimum_active": 4,
+    "minimum_templates": 2,
+    "requires_cap128": true,
+    "active": "evaluated learned candidate<=cap<previous_structural on a physicalcap, not inherited correction vsrelease",
+    "order": "Fixed general32 first. Exclude challenge historical/training/general217 or233 matches, then sorted-template round-robin originalpoolorder with one per cluster in BOTH representations; append up16active. Generalhistorical/train/within-general matches block eligibility withoutreplacement.",
+    "missing": "No pool extension, quota filling, retry, replacement or label-based selection. Conditional-full uses active+same8fixedgeneralcontrols; active-only separate; no pooled metric."
+  },
+  "reviewed_gates": {
+    "retained": "All13 retained complete panels897 metric rows (889unique circuits;8shared controls) and every named subgroup: MAE/MAPE/tail<=release AND previous_structural; FA<=release and FR<=signed separately32/64/128; signed<=candidate<=previous_structural<=release. Explicitly repair four confident generalFR and preserve all older repairs/rejections.",
+    "general": "Fixed fresh general32: strict MAE/MAPE and summed FA-event gains vs signed; MAE/MAPE/tail<=release AND previous_structural, FA<=release FR<=signed percap. All fixed general feature-novel, no filtering.",
+    "conditional": "NEW learned correction activity candidate<=cap<previous_structural, >=4feature-novel selected cases/>=2templates/>=1cap128. Active-only AND conditional-full(actives+same8generalcontrols) pass no-loss accuracy/tail versus release AND previous_structural, FA<=release FR<=signed. No pooled or independence claim.",
+    "missing": "No failures/retries/replacements/pool extensions/new fits/postlabel changes. All32training+128pool features retained; missing training freshness blocks fitting eligibility. Both fits attempted only in fixed order once; maximum2.",
+    "tolerance": 1e-10
+  },
+  "reviewed_local_features": {
+    "columns": [
+      "local_chain_count",
+      "local_data_control_input_overlap",
+      "local_data_postadd_input_overlap",
+      "local_data_outerxor_input_overlap",
+      "local_control_postadd_input_overlap",
+      "local_control_outerxor_input_overlap",
+      "local_postadd_outerxor_input_overlap",
+      "local_data_postadd_shared_subtrees",
+      "local_data_outerxor_shared_subtrees",
+      "local_postadd_outerxor_shared_subtrees",
+      "local_data_unknown_span_min",
+      "local_data_unknown_lsb_max",
+      "local_control_unknown_bits_max",
+      "local_data_and_input_joins",
+      "local_data_or_input_joins",
+      "local_data_xor_input_joins"
+    ],
+    "count": 16,
+    "chains": "Original root xor; either operand add; either operand of that SAME add DIRECT sra, shift-control contains in0/in1 and OWN data subtree contains both addi and xori. Enumerate root-child then add-child order, all matches.",
+    "aggregation": "Chain count sums matches; data unknown span is minimum over chains; every other column is maximum over chains. All16 zero when no chain.",
+    "input_overlap": "Cardinality of intersection of two operand input sets {in0,in1}, six pairings among data/control/post-add sibling/outer-XOR sibling. Range0..2.",
+    "shared_subtrees": "Cardinality of intersection of unique input-bearing NONLEAF subtree keys. Keys retain original operations and raw literal values; only add/and/or/xor child order is sorted (commutative). Input leaves and constant-only subtrees excluded.",
+    "widths": "Conservative known-zero/known-one32bit masks. Unknown span=highest unknown bit-lowest+1, or0 if fully known; unknown lowbit=lowest unknown index, or32 if fully known. Control unknown count counts only unknown LOW5bits, as required by RV32 shift semantics.",
+    "known_bits": "Inputs unknown; literal bits exact modulo2^32; lui passes its decoded child bits. Fully known operands evaluate exactRV32. and/or/xor and their immediate forms propagate known bits; shifts with known low5control bits shift masks with logicalzero or known arithmetic sign fill. Unknown shifts and other arithmetic conservatively unknown; comparisons have knownzero bits31..1. No algebraic or formula normalization.",
+    "input_joins": "Count AND/OR/XOR nodes in the OWN data subtree whose both operands are input-bearing. Includes original tree occurrences; immediate Boolean ops not counted.",
+    "learning_scope": "At least one matching chain has outer XOR sibling directly AND/OR/XOR OR its OWN data unknown span<=16. No cap, target, prediction, ID or case lookup in this scope.",
+    "inference_inputs": "Original formula only. The literal16 is architectural halfword coverage scope, not a fitted error/cap margin."
+  },
+  "input_coverage_audit": {
+    "artifact_sha256": "167847dbe3269fd81f95627152be9598df95cbf27c852ee9f3a9511a01eb05cb",
+    "training_AST_rows_replayed": 32,
+    "consumed_target_input_profiles": [
+      {
+        "candidate_id": "boundary-refinement-pool:8680afa1960d95cc68584794355327970da980c50b9ff68665823cba7c5e76bf",
+        "prefix_matches": 8,
+        "full16_matches": [
+          13
+        ]
+      },
+      {
+        "candidate_id": "boundary-refinement-pool:92969182dc309f48d332650917160f8efdb016127273208d8b2c65167d3b9851",
+        "prefix_matches": 12,
+        "full16_matches": [
+          0
+        ]
+      },
+      {
+        "candidate_id": "boundary-refinement-pool:a2f55de7658ee842b4b740823f381cbb06052b611f4ef6d2a6a76c2e42a0c515",
+        "prefix_matches": 12,
+        "full16_matches": [
+          4
+        ]
+      },
+      {
+        "candidate_id": "boundary-refinement-pool:773387cdd80a540bbc746dc1474f090ee23d80e3050314a82a5c734385d64189",
+        "prefix_matches": 8,
+        "full16_matches": [
+          19
+        ]
+      }
+    ],
+    "no_new_target_labels_used": true,
+    "scope": "Input representation coverage only; no physical cost transfer claim."
+  },
+  "planned_fits": 2,
+  "no_new_features_labels_fits_or_attempts_at_receipt": true,
+  "general32_fixed_before_predictions": true,
+  "shared_control_count": 8,
+  "shared_controls_not_independent": true,
+  "no_pooled_metric": true,
+  "audit_fits": 0,
+  "audit_native_jobs": 0
+}

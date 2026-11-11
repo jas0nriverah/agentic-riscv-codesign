@@ -1,0 +1,140 @@
+{
+  "schema": "boundary-coverage-consumed-diagnostics-v1",
+  "status": "Descriptive postlabel analysis only; no new fit, gate, policy, selection or eligibility change.",
+  "cases": [
+    {
+      "kind": "safe_general_change",
+      "candidate_id": "boundary-coverage-pool:d0fe0eeca2832f1fc45215676aa85113c8181b93bfbd0b5fc63d15387bb5d143",
+      "formula": "xor(add(sra(slli(andi(xori(addi(or(in0,in1),83),19),255),24),andi(in1,31)),in0),or(in0,in1))",
+      "actual_lut4": 122,
+      "previous_lut4": 141.70333333333335,
+      "candidate_lut4": 128.0,
+      "raw_means": {
+        "boundary_augmented": 126.78666666666666,
+        "boundary_coverage_only": 125.8
+      },
+      "local_features": [
+        1,
+        1,
+        1,
+        2,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        8,
+        24,
+        5,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "kind": "unsafe_active_change",
+      "candidate_id": "boundary-coverage-pool:4e8f4336a4c31700b403bdd33c9335e1b24ab83e3e625e3fa7baa9f769fbbb32",
+      "pool_index": 48,
+      "template": "challenge_share_xor_input",
+      "parameter": [
+        3,
+        17,
+        1
+      ],
+      "formula": "xor(add(sra(addi(xori(xor(in0,in1),3),17),andi(in1,1)),xor(in0,in1)),and(in0,in1))",
+      "actual_lut4": 159,
+      "signed_lut4": 128.0,
+      "release_lut4": 131.94,
+      "previous_lut4": 131.94,
+      "candidate_lut4": 128.0,
+      "raw_means": {
+        "boundary_augmented": 127.29666666666667,
+        "boundary_coverage_only": 126.89333333333333
+      },
+      "new_false_accept_caps": [
+        128
+      ],
+      "local_features": [
+        1,
+        1,
+        2,
+        2,
+        1,
+        1,
+        2,
+        1,
+        0,
+        0,
+        32,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "exact16_training_matches": 0
+    }
+  ],
+  "development_four_raw_margins": [
+    {
+      "candidate_id": "boundary-refinement-pool:8680afa1960d95cc68584794355327970da980c50b9ff68665823cba7c5e76bf",
+      "formula": "xor(add(sra(addi(xori(in1,11),73),andi(in0,3)),in0),or(in0,in1))",
+      "actual_lut4": 128,
+      "raw_means": {
+        "boundary_augmented": 129.67666666666668,
+        "boundary_coverage_only": 127.87666666666667
+      },
+      "coverage_mean_below_cap128": 0.12333333333333485
+    },
+    {
+      "candidate_id": "boundary-refinement-pool:92969182dc309f48d332650917160f8efdb016127273208d8b2c65167d3b9851",
+      "formula": "xor(add(sra(addi(xori(and(in0,in1),11),73),andi(xor(in0,in1),1)),in1),xor(in0,in1))",
+      "actual_lut4": 125,
+      "raw_means": {
+        "boundary_augmented": 128.87333333333333,
+        "boundary_coverage_only": 127.85333333333334
+      },
+      "coverage_mean_below_cap128": 0.14666666666666117
+    },
+    {
+      "candidate_id": "boundary-refinement-pool:a2f55de7658ee842b4b740823f381cbb06052b611f4ef6d2a6a76c2e42a0c515",
+      "formula": "xor(add(sra(xori(addi(or(in0,in1),73),11),andi(add(in0,in1),1)),in0),and(in0,in1))",
+      "actual_lut4": 125,
+      "raw_means": {
+        "boundary_augmented": 127.35333333333334,
+        "boundary_coverage_only": 127.56333333333333
+      },
+      "coverage_mean_below_cap128": 0.4366666666666674
+    },
+    {
+      "candidate_id": "boundary-refinement-pool:773387cdd80a540bbc746dc1474f090ee23d80e3050314a82a5c734385d64189",
+      "formula": "xor(add(sra(slli(andi(xori(addi(in0,73),11),255),24),andi(in1,31)),in1),and(in0,in1))",
+      "actual_lut4": 115,
+      "raw_means": {
+        "boundary_augmented": 124.67666666666666,
+        "boundary_coverage_only": 123.93333333333334
+      },
+      "coverage_mean_below_cap128": 4.066666666666663
+    }
+  ],
+  "training_coverage": {
+    "all_fitted_rows": 1857,
+    "structural_chain_rows": 36,
+    "learning_scope_rows": 32,
+    "outside_learning_scope": 1825,
+    "learning_scope_cells": {
+      "narrow_no_data_postadd_sharing": 8,
+      "narrow_with_data_postadd_sharing": 4,
+      "fullword_no_data_postadd_sharing": 20,
+      "fullword_with_data_postadd_sharing": 0
+    },
+    "additional_structural_only_rows": {
+      "count": 4,
+      "cell": "fullword_no_data_postadd_sharing",
+      "in_learning_scope": false
+    },
+    "definition": "Narrow=conservative unknown span<=16; sharing=local_data_postadd_shared_subtrees>0; cells describe feature coverage, not known cost or calibrated risk."
+  },
+  "interpretation": "Both regressors wrongly accept the159-LUT repeated-XOR/fullword case. It occupies an unrepresented joint coverage cell. Blanket exact16-vector novelty abstention is not enough: the safely repaired122-LUT general case also has no exact16 training match. Joint-cell abstention is a future hypothesis only; current result remains failed."
+}

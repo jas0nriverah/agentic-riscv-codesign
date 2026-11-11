@@ -1,0 +1,31 @@
+{
+  "tests": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 503,
+    "subtests_passed": 40,
+    "seconds": 17.95
+  },
+  "cached_cli": {
+    "command": ".venv/bin/python scripts/learn_boundary_coverage.py predict-cached --candidates results/boundary-coverage-validation/candidates.json --features results/boundary-coverage-validation/features.json --prediction-output generated/boundary-coverage-predictions.json",
+    "rows": 33,
+    "model_columns": 7,
+    "exact_saved_predictions": true,
+    "output_sha256": "a085f334024bd914f9b8f315c984602dcce6c76790d992c86f289ce6c813856d",
+    "frozen_predictions_sha256": "be20d9923d348e57344e315e711aed5bb4b78dbb03896a2bc30809181a495e4e",
+    "new_fits": 0,
+    "native_jobs": 0
+  },
+  "figure_review": {
+    "file": "docs/figures/research/boundary-coverage.png",
+    "visually_reviewed": true,
+    "no_clipping_or_overlap_observed": true,
+    "scope": "Separate general and conditional policy metrics; failed promotion explicit; raw-regressor distinction explicit."
+  },
+  "goal_complete": false,
+  "reason": "Fresh conditional false acceptance, worse conditional accuracy/tail, and insufficient fresh activity.",
+  "diff_check": {
+    "result": "one trailing-space warning",
+    "location": "scripts/learn_boundary_coverage.py:161",
+    "handling": "Retained unchanged because this source is cryptographically frozen before measurements; no functional error or replay mismatch."
+  }
+}
