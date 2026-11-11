@@ -74,3 +74,7 @@ Use [the latest cached inference command](../results/signed-refinement/README.md
 ## Budget-release diagnostic
 
 The [budget-release report](../results/budget-release/README.md) provides cached inference and replay commands for the new 1,825-row forest and structural policy. It improves fresh area estimates and false acceptances but fails the separate false-rejection gate; it is not promoted. `scripts/release_budget_coverage.py replay` and `scripts/audit_budget_release.py` check frozen evidence without fitting or native measurement. `scripts/render_budget_release.py` regenerates the fresh comparison figure.
+
+## Median boundary diagnostic
+
+See the [boundary-repair report](../results/boundary-repair/README.md) for cached inference and read-only replay with `scripts/repair_boundary_coverage.py` and `scripts/audit_boundary_repair.py`. These reuse existing weights without fitting. `scripts/render_boundary_repair.py` renders the matched fresh comparison; its failed activity gate remains explicit.

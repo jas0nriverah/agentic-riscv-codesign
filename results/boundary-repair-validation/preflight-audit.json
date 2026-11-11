@@ -1,0 +1,63 @@
+{
+  "schema": "independent-boundary-repair-preflight-audit-v1",
+  "status": "pass",
+  "audited_at_utc": "2026-11-11T04:35:22.912132+00:00",
+  "bindings": {
+    "results/boundary-repair/protocol.json": "a348bbbd238896850d521511f3244453bfb47b80d10b7681c03617f299e1eec0",
+    "results/boundary-repair/policy-freeze.json": "edc0cda5e6bf683e64ca9aca6c5ff942f07152d8054d8bcbc7ad39b2f146a964",
+    "results/boundary-repair/development-predictions.json": "4e6fa6faf5dd078855667f2c23a13d767d087a47c74600038823f05bdc88fbbf",
+    "results/boundary-repair/development-metrics.json": "2c64e2d919d33f22347882bfc09f77784a2f268918ccea58385c21e6996c23bd",
+    "results/boundary-repair/auditor-prior-artifacts.json": "41aef9bdc8d363cab58fdd778983c0cc4160e40170fab1354410ad806f3be48d",
+    "results/boundary-repair/goal-at-freeze.json": "4c97ca0a6d9aea44063ec591b1c40727d52164b2772411bf579659699537abeb",
+    "results/boundary-repair-validation/plan.json": "b913f4d87e6e711c2c059f42cb1c3e8e988ed49664302c21d18013d9fe12588b",
+    "results/boundary-repair-validation/candidates.json": "847722c446920cc873784fdb18de5555ae5997ec6bf99ca2bb55d22156b19d1b",
+    "results/boundary-repair-validation/novelty.json": "d79931ebed6e7321afb7fa4c369346889e3d3e6c0e277ae1ad794d10e509e232",
+    "results/boundary-repair-validation/historical-formulas.json": "d767c227880eaf75c361b3a8c6444f0590afdafb6f7bae89721fe1181018ca3b",
+    "results/boundary-repair-validation/tools.json": "8cdb179640fa4cf11a905ef775a7e28d37b296c309018128c6c8b451d8528fc8"
+  },
+  "scientific_artifacts_preserved": 592,
+  "identity_audit": {
+    "historical_formulas": 9366,
+    "saved_prior_aliases": 684,
+    "known_identity_keys": 16150,
+    "known_or_within_identity_overlaps": 0,
+    "historical_original_AST_skeleton_overlaps": 0,
+    "fresh_count": 40,
+    "templates": {
+      "boundary_full_compound_addxor_or": 4,
+      "boundary_full_compound_xorand_add": 4,
+      "boundary_full_compound_subxor": 4,
+      "boundary_full_compound_xor_oradd": 4,
+      "boundary_low8_compound_xorand": 4,
+      "boundary_low16_compound_addxor": 4,
+      "boundary_signed8_compound_or": 4,
+      "boundary_signed16_compound_xor": 4,
+      "control_unsigned_offset_xorshift": 4,
+      "control_static_signed_mixed_or": 4
+    }
+  },
+  "reviewed_policy": {
+    "route": "Any original sra node with in0/in1 anywhere in its second (shift) operand subtree AND BOTH addi and xori anywhere in its first (data) operand subtree.",
+    "median": "numpy.median of all300 scalar tree predictions from existing1825forest, on217mappingfeatures; for even300, arithmetic mean of sorted positions149and150 (zero-based). This is not equivalent to strict-majority cap voting.",
+    "formula": "Start with frozen budget_release_compound_only. On compound route, find each cap in[32,64,128] for which incumbent_signed<=cap<release AND forest_median<=cap. If any, return smallest qualifying cap; otherwise return release. Outside compound route return release exactly.",
+    "decisions": "Accept iff point<=cap, inclusive. Exact cap values, no floating tolerance in inference or cap decisions.",
+    "selection": "One fixed candidate; eligible for fresh promotion only if every development gate passes. No alternative selection, extra fits, parameter search or postlabel changes.",
+    "inputs": "Original AST, explicit cached336features, frozen forest outputs and fixed caps only. No labels, IDs, predicted errors, normalized formulas or case lookup in inference.",
+    "interpretation": "Parameter-free but informed by consumed development evidence. Correlated tree predictions and their median do not provide calibrated uncertainty or universal hardware safety."
+  },
+  "reviewed_gates": {
+    "retained": "Each complete nine consumed panels and prior named subgroups: MAE and positive-target MAPE <=budget_release_compound_only; FA<=budget_release_compound_only and FR<=incumbent_signed separately at each32/64/128; maximum underprediction<=both comparators; incumbent_signed<=point<=release and exact release elsewhere.",
+    "named_failure": "Consumed fifth-fresh40 index12 (fixed by frozen candidate manifest for evaluation only) actual125 and release>128; repaired point<=128. No inference lookup.",
+    "fresh": "Complete40: MAE and MAPE strictly<incumbent_signed AND <=budget_release_compound_only; FA<=release and FR<=signed separately percap32/64/128; strictly fewer summed FA circuit-budget events than signed; maximum underprediction<=release and signed. Fresh compound subset MAE/MAPE<=release and all cap/tail gates. At least one fresh point must change versus release, so repair transfer is exercised. Development eligibility required.",
+    "tolerance": 1e-10,
+    "missing": "All preregistered rows retained; missing/failed features or labels blocks eligibility. No retries, replacements, fits, cohort filtering or criterion changes."
+  },
+  "finite_candidates": [
+    "boundary_median"
+  ],
+  "new_fits": 0,
+  "new_features_labels_and_attempts_absent_at_receipt": true,
+  "policy_development_selection_cohort_frozen_before_features_or_labels": true,
+  "audit_fits": 0,
+  "audit_native_jobs": 0
+}

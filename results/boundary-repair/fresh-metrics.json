@@ -1,0 +1,483 @@
+{
+  "schema": "isaforge-boundary-repair-v1",
+  "models": {
+    "base": {
+      "count": 40,
+      "mae_lut4": 35.35333333333333,
+      "positive_mape_percent": 28.422492796633154,
+      "positive_count": 40,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 102.85333333333334,
+      "caps": {
+        "32": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_accept": 2,
+          "predicted_accept": 3
+        },
+        "64": {
+          "false_accept": 2,
+          "false_reject": 0,
+          "actual_accept": 13,
+          "predicted_accept": 15
+        },
+        "128": {
+          "false_accept": 13,
+          "false_reject": 0,
+          "actual_accept": 21,
+          "predicted_accept": 34
+        }
+      }
+    },
+    "incumbent_signed": {
+      "count": 40,
+      "mae_lut4": 21.19658333333333,
+      "positive_mape_percent": 19.753620483526685,
+      "positive_count": 40,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 93.0,
+      "caps": {
+        "32": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_accept": 2,
+          "predicted_accept": 3
+        },
+        "64": {
+          "false_accept": 2,
+          "false_reject": 0,
+          "actual_accept": 13,
+          "predicted_accept": 15
+        },
+        "128": {
+          "false_accept": 13,
+          "false_reject": 0,
+          "actual_accept": 21,
+          "predicted_accept": 34
+        }
+      }
+    },
+    "budget_release_compound_only": {
+      "count": 40,
+      "mae_lut4": 12.201999999999998,
+      "positive_mape_percent": 14.513085439966487,
+      "positive_count": 40,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 41.22,
+      "caps": {
+        "32": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_accept": 2,
+          "predicted_accept": 3
+        },
+        "64": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_accept": 13,
+          "predicted_accept": 14
+        },
+        "128": {
+          "false_accept": 5,
+          "false_reject": 0,
+          "actual_accept": 21,
+          "predicted_accept": 26
+        }
+      }
+    },
+    "boundary_median": {
+      "count": 40,
+      "mae_lut4": 12.201999999999998,
+      "positive_mape_percent": 14.513085439966487,
+      "positive_count": 40,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 41.22,
+      "caps": {
+        "32": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_accept": 2,
+          "predicted_accept": 3
+        },
+        "64": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_accept": 13,
+          "predicted_accept": 14
+        },
+        "128": {
+          "false_accept": 5,
+          "false_reject": 0,
+          "actual_accept": 21,
+          "predicted_accept": 26
+        }
+      }
+    },
+    "checks": {
+      "accuracy_no_worse_release": {
+        "mae_lut4": true,
+        "positive_mape_percent": true
+      },
+      "caps": {
+        "32": {
+          "false_accept_no_worse_release": true,
+          "false_reject_no_worse_signed": true
+        },
+        "64": {
+          "false_accept_no_worse_release": true,
+          "false_reject_no_worse_signed": true
+        },
+        "128": {
+          "false_accept_no_worse_release": true,
+          "false_reject_no_worse_signed": true
+        }
+      },
+      "maximum_underprediction_no_worse_release": true,
+      "maximum_underprediction_no_worse_signed": true,
+      "pointwise_between_signed_and_release": true,
+      "events_vs_signed": {
+        "32": {
+          "actual_accept": 2,
+          "actual_reject": 38,
+          "corrected_false_accept": 0,
+          "new_false_accept": 0,
+          "corrected_false_reject": 0,
+          "new_false_reject": 0
+        },
+        "64": {
+          "actual_accept": 13,
+          "actual_reject": 27,
+          "corrected_false_accept": 1,
+          "new_false_accept": 0,
+          "corrected_false_reject": 0,
+          "new_false_reject": 0
+        },
+        "128": {
+          "actual_accept": 21,
+          "actual_reject": 19,
+          "corrected_false_accept": 8,
+          "new_false_accept": 0,
+          "corrected_false_reject": 0,
+          "new_false_reject": 0
+        }
+      },
+      "events_vs_release": {
+        "32": {
+          "actual_accept": 2,
+          "actual_reject": 38,
+          "corrected_false_accept": 0,
+          "new_false_accept": 0,
+          "corrected_false_reject": 0,
+          "new_false_reject": 0
+        },
+        "64": {
+          "actual_accept": 13,
+          "actual_reject": 27,
+          "corrected_false_accept": 0,
+          "new_false_accept": 0,
+          "corrected_false_reject": 0,
+          "new_false_reject": 0
+        },
+        "128": {
+          "actual_accept": 21,
+          "actual_reject": 19,
+          "corrected_false_accept": 0,
+          "new_false_accept": 0,
+          "corrected_false_reject": 0,
+          "new_false_reject": 0
+        }
+      }
+    }
+  },
+  "fresh_compound_subgroup": {
+    "base": {
+      "count": 32,
+      "mae_lut4": 41.12984375,
+      "positive_mape_percent": 30.995354378917217,
+      "positive_count": 32,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 102.85333333333334,
+      "caps": {
+        "32": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_accept": 2,
+          "predicted_accept": 3
+        },
+        "64": {
+          "false_accept": 2,
+          "false_reject": 0,
+          "actual_accept": 8,
+          "predicted_accept": 10
+        },
+        "128": {
+          "false_accept": 12,
+          "false_reject": 0,
+          "actual_accept": 15,
+          "predicted_accept": 27
+        }
+      }
+    },
+    "incumbent_signed": {
+      "count": 32,
+      "mae_lut4": 23.43390625,
+      "positive_mape_percent": 20.159263987534132,
+      "positive_count": 32,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 93.0,
+      "caps": {
+        "32": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_accept": 2,
+          "predicted_accept": 3
+        },
+        "64": {
+          "false_accept": 2,
+          "false_reject": 0,
+          "actual_accept": 8,
+          "predicted_accept": 10
+        },
+        "128": {
+          "false_accept": 12,
+          "false_reject": 0,
+          "actual_accept": 15,
+          "predicted_accept": 27
+        }
+      }
+    },
+    "budget_release_compound_only": {
+      "count": 32,
+      "mae_lut4": 12.190677083333334,
+      "positive_mape_percent": 13.608595183083882,
+      "positive_count": 32,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 41.22,
+      "caps": {
+        "32": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_accept": 2,
+          "predicted_accept": 3
+        },
+        "64": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_accept": 8,
+          "predicted_accept": 9
+        },
+        "128": {
+          "false_accept": 4,
+          "false_reject": 0,
+          "actual_accept": 15,
+          "predicted_accept": 19
+        }
+      }
+    },
+    "boundary_median": {
+      "count": 32,
+      "mae_lut4": 12.190677083333334,
+      "positive_mape_percent": 13.608595183083882,
+      "positive_count": 32,
+      "zero_count": 0,
+      "maximum_underprediction_lut4": 41.22,
+      "caps": {
+        "32": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_accept": 2,
+          "predicted_accept": 3
+        },
+        "64": {
+          "false_accept": 1,
+          "false_reject": 0,
+          "actual_accept": 8,
+          "predicted_accept": 9
+        },
+        "128": {
+          "false_accept": 4,
+          "false_reject": 0,
+          "actual_accept": 15,
+          "predicted_accept": 19
+        }
+      }
+    },
+    "checks": {
+      "accuracy_no_worse_release": {
+        "mae_lut4": true,
+        "positive_mape_percent": true
+      },
+      "caps": {
+        "32": {
+          "false_accept_no_worse_release": true,
+          "false_reject_no_worse_signed": true
+        },
+        "64": {
+          "false_accept_no_worse_release": true,
+          "false_reject_no_worse_signed": true
+        },
+        "128": {
+          "false_accept_no_worse_release": true,
+          "false_reject_no_worse_signed": true
+        }
+      },
+      "maximum_underprediction_no_worse_release": true,
+      "maximum_underprediction_no_worse_signed": true,
+      "pointwise_between_signed_and_release": true,
+      "events_vs_signed": {
+        "32": {
+          "actual_accept": 2,
+          "actual_reject": 30,
+          "corrected_false_accept": 0,
+          "new_false_accept": 0,
+          "corrected_false_reject": 0,
+          "new_false_reject": 0
+        },
+        "64": {
+          "actual_accept": 8,
+          "actual_reject": 24,
+          "corrected_false_accept": 1,
+          "new_false_accept": 0,
+          "corrected_false_reject": 0,
+          "new_false_reject": 0
+        },
+        "128": {
+          "actual_accept": 15,
+          "actual_reject": 17,
+          "corrected_false_accept": 8,
+          "new_false_accept": 0,
+          "corrected_false_reject": 0,
+          "new_false_reject": 0
+        }
+      },
+      "events_vs_release": {
+        "32": {
+          "actual_accept": 2,
+          "actual_reject": 30,
+          "corrected_false_accept": 0,
+          "new_false_accept": 0,
+          "corrected_false_reject": 0,
+          "new_false_reject": 0
+        },
+        "64": {
+          "actual_accept": 8,
+          "actual_reject": 24,
+          "corrected_false_accept": 0,
+          "new_false_accept": 0,
+          "corrected_false_reject": 0,
+          "new_false_reject": 0
+        },
+        "128": {
+          "actual_accept": 15,
+          "actual_reject": 17,
+          "corrected_false_accept": 0,
+          "new_false_accept": 0,
+          "corrected_false_reject": 0,
+          "new_false_reject": 0
+        }
+      }
+    }
+  },
+  "fresh_compound_count": 32,
+  "gates": {
+    "boundary_median": {
+      "checks": {
+        "fresh_modified_prediction_count": 0,
+        "fresh_repair_exercised": false,
+        "strictly_better_signed": {
+          "mae_lut4": true,
+          "positive_mape_percent": true
+        },
+        "retained_style": {
+          "accuracy_no_worse_release": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "caps": {
+            "32": {
+              "false_accept_no_worse_release": true,
+              "false_reject_no_worse_signed": true
+            },
+            "64": {
+              "false_accept_no_worse_release": true,
+              "false_reject_no_worse_signed": true
+            },
+            "128": {
+              "false_accept_no_worse_release": true,
+              "false_reject_no_worse_signed": true
+            }
+          },
+          "maximum_underprediction_no_worse_release": true,
+          "maximum_underprediction_no_worse_signed": true,
+          "pointwise_between_signed_and_release": true,
+          "events_vs_signed": {
+            "32": {
+              "actual_accept": 2,
+              "actual_reject": 38,
+              "corrected_false_accept": 0,
+              "new_false_accept": 0,
+              "corrected_false_reject": 0,
+              "new_false_reject": 0
+            },
+            "64": {
+              "actual_accept": 13,
+              "actual_reject": 27,
+              "corrected_false_accept": 1,
+              "new_false_accept": 0,
+              "corrected_false_reject": 0,
+              "new_false_reject": 0
+            },
+            "128": {
+              "actual_accept": 21,
+              "actual_reject": 19,
+              "corrected_false_accept": 8,
+              "new_false_accept": 0,
+              "corrected_false_reject": 0,
+              "new_false_reject": 0
+            }
+          },
+          "events_vs_release": {
+            "32": {
+              "actual_accept": 2,
+              "actual_reject": 38,
+              "corrected_false_accept": 0,
+              "new_false_accept": 0,
+              "corrected_false_reject": 0,
+              "new_false_reject": 0
+            },
+            "64": {
+              "actual_accept": 13,
+              "actual_reject": 27,
+              "corrected_false_accept": 0,
+              "new_false_accept": 0,
+              "corrected_false_reject": 0,
+              "new_false_reject": 0
+            },
+            "128": {
+              "actual_accept": 21,
+              "actual_reject": 19,
+              "corrected_false_accept": 0,
+              "new_false_accept": 0,
+              "corrected_false_reject": 0,
+              "new_false_reject": 0
+            }
+          }
+        },
+        "compound_subset_passes": true,
+        "strictly_fewer_false_accept_cap_events_than_signed": true,
+        "outside_compound_exactly_release": true
+      },
+      "fresh_gate_passed": false,
+      "development_gate_passed": true,
+      "eligible": false
+    }
+  },
+  "selected_candidate": "boundary_median",
+  "evaluated_candidate": "boundary_median",
+  "scoped_experimental_eligibility": false,
+  "fresh_labels_sha256": "cf14383cde8e0a8ee7906c56abb360fec4eaa367716a72950e3751953a30e27b",
+  "fresh_point_freeze_sha256": "bf52f78d982982d9526cc791f035a67d497790ec5b6fda24d055fb91d90f05bc",
+  "fits": 0,
+  "native_jobs": 0,
+  "scope": "Targeted synthetic isolated iCE40 LUT4 points. Development-informed uncalibrated decision heuristic; no universal hardware safety, timing, power, full-CPU or application-transfer guarantee."
+}

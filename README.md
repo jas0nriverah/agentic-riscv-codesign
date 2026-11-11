@@ -35,13 +35,13 @@ This matched test contains **192 synthetic circuits**, with the same 1,665 fitti
 
 These are separate experiments, not one learning curve. Targeted coverage helped arithmetic cases, but did not improve the primary application-transfer metric. The scoped policy reduced MAE **22.63%** on 32 new related circuits; its worst underprediction increased **2.83 → 32.01 LUT4**, so it remains experimental. [Complete compact results](results/README.md).
 
-## Latest experiment: budget decisions
+## Latest experiment: boundary repair
 
-On **40 fresh synthetic circuits**, a compound-shift correction reduces MAE **20.50 → 11.40 LUT4 (44.38%)** and MAPE **12.76% → 8.12%** versus our previous candidate. At the 128-LUT budget, false acceptances fall **11 → 3**, but false rejections rise **0 → 1**. **The candidate is not promoted:** it fails our predeclared requirement that neither kind of budget mistake worsen.
+A zero-fit median rule corrects the known false rejection: the 125-LUT circuit's estimate moves **129.32 → 128.00**, preserving all other predictions across 783 prior evaluation circuits. On **40 fresh circuits**, it exactly matches budget release: MAE **12.20 LUT4**, MAPE **14.51%**, and no false rejections. The signed incumbent has MAE 21.20 and MAPE 19.75%; false acceptances at 128 LUTs fall **13 → 5**.
 
-![Fresh area error and hardware-budget mistakes, including the failed promotion gate.](docs/figures/research/budget-release.svg)
+![Fresh comparison: accuracy and budget gains hold, but the median repair is inactive.](docs/figures/research/boundary-repair.svg)
 
-The targeted development subgroup improves, but the fresh boundary error shows why average accuracy alone is insufficient. The experiment preserves the failed broad policy, selected narrow policy, and diagnostic unclipping comparison. [Full evidence, tradeoffs and inference](results/budget-release/README.md) · [Previous validated experimental candidate](results/signed-refinement/README.md). The base model remains the default.
+**The repair is not yet validated:** it changes zero fresh predictions, failing our predeclared activity requirement. We retain that result and keep the improvement goal active. [Method, frozen evidence and replay](results/boundary-repair/README.md) · [Previous budget-release tradeoff](results/budget-release/README.md). The base model remains the default.
 
 ## Run it
 
