@@ -1,0 +1,111 @@
+{
+  "schema": "control-sharing-prior-coverage-diagnosis-v1",
+  "scope": "Descriptive input-derived groups in frozen1889training rows and consumed failures; no future inputs or labels used. Counts do not establish causal mechanism.",
+  "training_manifest_sha256": "fdaa56745d658e34df0a7ec90959105a82c4c51f6f4e09129c26ef9530932dab",
+  "profile_definitions": {
+    "both_input_and_control": "Within same eligible chain, control contains binary AND with input-bearing operands and union dependencies {in0,in1}.",
+    "repeated_and_data_post_outer": "Post operand is binary AND of input-bearing operands, exactly same original canonical outer operand; all its nonleaf subtree keys occur in same-chain data.",
+    "unknown_low_control_bits": "Count unknown bits among low5 from frozen conservative known-bit helper; no independence assumption."
+  },
+  "training_count": 1889,
+  "group_counts": {
+    "both_input_and_control": {
+      "training_rows": 6,
+      "class_counts": {
+        "32": {
+          "feasible": 0,
+          "infeasible": 6
+        },
+        "64": {
+          "feasible": 0,
+          "infeasible": 6
+        },
+        "128": {
+          "feasible": 2,
+          "infeasible": 4
+        }
+      },
+      "control_bit_counts": {
+        "0": 0,
+        "1": 1,
+        "2": 2,
+        "3": 1,
+        "4": 0,
+        "5": 2
+      }
+    },
+    "repeated_and_data_post_outer": {
+      "training_rows": 0,
+      "class_counts": {
+        "32": {
+          "feasible": 0,
+          "infeasible": 0
+        },
+        "64": {
+          "feasible": 0,
+          "infeasible": 0
+        },
+        "128": {
+          "feasible": 0,
+          "infeasible": 0
+        }
+      },
+      "control_bit_counts": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0
+      }
+    }
+  },
+  "consumed_failure_examples": [
+    {
+      "selected_index": 36,
+      "formula": "xor(add(sra(xori(addi(and(in0,in1),47),11),andi(addi(addi(in1,9),2),1)),and(in0,in1)),and(in0,in1))",
+      "input_only_profiles": [
+        {
+          "both_input_and_control": false,
+          "repeated_and_data_post_outer": true,
+          "unknown_low_control_bits": 1
+        }
+      ]
+    },
+    {
+      "selected_index": 51,
+      "formula": "xor(add(sra(addi(xori(in1,23),97),andi(and(xori(in0,15),in1),3)),in0),in1)",
+      "input_only_profiles": [
+        {
+          "both_input_and_control": true,
+          "repeated_and_data_post_outer": false,
+          "unknown_low_control_bits": 2
+        }
+      ]
+    },
+    {
+      "selected_index": 53,
+      "formula": "xor(add(sra(addi(xori(in1,47),157),andi(and(xori(in0,15),in1),3)),in0),in1)",
+      "input_only_profiles": [
+        {
+          "both_input_and_control": true,
+          "repeated_and_data_post_outer": false,
+          "unknown_low_control_bits": 2
+        }
+      ]
+    },
+    {
+      "selected_index": 55,
+      "formula": "xor(add(sra(addi(xori(in1,163),353),andi(and(xori(in0,15),in1),3)),in0),in1)",
+      "input_only_profiles": [
+        {
+          "both_input_and_control": true,
+          "repeated_and_data_post_outer": false,
+          "unknown_low_control_bits": 2
+        }
+      ]
+    }
+  ],
+  "fits": 0,
+  "native_jobs": 0
+}

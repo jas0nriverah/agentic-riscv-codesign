@@ -1,0 +1,52 @@
+{
+  "schema": "isaforge-research-goal-clarification-v2",
+  "status": "active",
+  "updated_date": "2026-11-11",
+  "objective": "Improve ISAForge iCE40 LUT4 area prediction and hardware-budget decisions: reduce false acceptances and repair remaining false rejections while preserving accuracy, subgroup performance, and previously validated corrections; demonstrate all required gains on fresh circuits.",
+  "authority": "Current working clarification requested by the user. Supplements, never replaces or relaxes, boundary-repair-goal.json, boundary-repair-goal-update.json, or frozen experiment requirements.",
+  "latest_evidence": {
+    "experiment": "boundary-corroboration",
+    "selected_candidate": null,
+    "promotion": false,
+    "established_repairs_retained": {
+      "217_features": "31/39",
+      "233_features": "34/39"
+    },
+    "remaining_repairs_fixed": "3/4 for both",
+    "protected_rejections_preserved": "6/6 for both",
+    "fresh_general_false_rejections_cap128": {
+      "signed_reference": 0,
+      "217_features": 2,
+      "233_features": 3
+    },
+    "conclusion": "Neither candidate passes. Integrity and publication audits pass; scientific completion gates fail."
+  },
+  "next_step": {
+    "status": "hypothesis only; not implemented or validated",
+    "proposal": "Compare direct multioutput budget-feasibility classifiers using the same 1889 training rows and matched 217 versus 233 features.",
+    "protocol_source": "boundary-corroboration/next-experiment-hypothesis.json",
+    "prerequisite": "Freeze a complete new protocol and expanded retained-case inventory before fits; freeze models, fresh predictions and selection before fresh synthesis labels."
+  },
+  "completion_requirements": [
+    "Pass every existing frozen completion gate; do not replace full-panel results with a favorable subset.",
+    "Preserve all 43 established required acceptances, all protected rejections, and additional truth-confirmed corrections from the latest experiment; inventory these explicitly before execution.",
+    "Report false acceptances and false rejections separately at 32, 64 and 128 LUT4, with feasible/infeasible denominators. No newly introduced budget mistakes or offsetting one mistake type with another.",
+    "Improve fresh-general MAE and positive-target MAPE against the signed reference while preserving budget-release gains and all required comparator, subgroup and tail-error gates. State zero-target handling.",
+    "Use genuinely fresh circuits and preserve all consumed labelled and unlabelled inputs as excluded novelty evidence. Keep evaluation labels out of training.",
+    "Require the predeclared activity coverage: at least four new acceptance corrections across two templates including cap128, one legacy cap64 veto and one sharing cap128 veto; no post-label refill or threshold adjustment.",
+    "Independently audit training membership, chronological freezes, saved inference, native synthesis and RTL correctness. Preserve failed experiments and publish reproducible results.",
+    "Promote a candidate or complete the goal only after every gate passes. Claims concern isolated iCE40 LUT4 circuits, not demonstrated CPU speedup, power improvement or universal safety."
+  ],
+  "compute_limits": {
+    "max_fits_per_experiment": 2,
+    "fit_threads": 1,
+    "max_native_seconds_per_experiment": 300,
+    "max_native_workers": 2,
+    "new_training_labels_next_experiment": 0,
+    "paid_compute": false,
+    "overlapping_expensive_jobs": false,
+    "delegation": "GPT-6.1 Sol, high reasoning"
+  },
+  "stopping_rule": "At each bounded experiment limit, record the outcome without extending the pool or weakening gates. A failed experiment leaves the goal active and requires a separately preregistered revision.",
+  "app_goal_limitation": "The app goal remains active. Available goal tools permit status changes but not editing an existing objective; this file records the clarified operational objective without falsely completing or replacing it."
+}

@@ -1,0 +1,1172 @@
+{
+  "schema": "control-sharing-coverage-analytical-review-v1",
+  "created_at_utc": "2026-11-11T19:11:03.823515+00:00",
+  "status": "pass",
+  "bindings": {
+    "results/boundary-feasibility/protocol.json": "29f600b8a3a703dee642aeb4d732c9a75d0ed0433fc3900d5b722a8ff6e4dbab",
+    "results/boundary-feasibility/audit.json": "476e153093c2e4e562939ed16daff1eafab196fe5ad8a1b336f5867e2b73d75f",
+    "results/boundary-feasibility/development-predictions.json": "fa78ffe815764e3b58356b4c8cd3963b9e1bc70504c89a59cd649dd3834eb958",
+    "results/boundary-feasibility/fresh-predictions.json": "3e08484df2f574729475ed42a8c310f48b0e6ce8851b159f7262b8851622cd78",
+    "results/boundary-feasibility/training-manifest.json": "fdaa56745d658e34df0a7ec90959105a82c4c51f6f4e09129c26ef9530932dab",
+    "results/boundary-feasibility-validation/labels.json": "e17bf3aab9eca29d97ebc4dda5013e7a72eecfc7719d69597765bedc4d5f0704",
+    "results/control-sharing-coverage/prior-coverage-diagnosis.json": "b325f4b1f174db77662172a3765f2c9b42d5ff72a7ca9411e33205cce8ea57f5",
+    "results/control-sharing-coverage/evaluation-targets.json": "9f02d1281fb7330c62f29e61a68889f45b12ff221cf81b6a162f165d76fc3ab5"
+  },
+  "prior_input_profile_review": {
+    "source_sha256": "b325f4b1f174db77662172a3765f2c9b42d5ff72a7ca9411e33205cce8ea57f5",
+    "training_rows": 1889,
+    "groups": {
+      "both_input_and_control": {
+        "training_rows": 6,
+        "class_counts": {
+          "32": {
+            "feasible": 0,
+            "infeasible": 6
+          },
+          "64": {
+            "feasible": 0,
+            "infeasible": 6
+          },
+          "128": {
+            "feasible": 2,
+            "infeasible": 4
+          }
+        },
+        "control_bit_counts": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 1,
+          "4": 0,
+          "5": 2
+        }
+      },
+      "repeated_and_data_post_outer": {
+        "training_rows": 0,
+        "class_counts": {
+          "32": {
+            "feasible": 0,
+            "infeasible": 0
+          },
+          "64": {
+            "feasible": 0,
+            "infeasible": 0
+          },
+          "128": {
+            "feasible": 0,
+            "infeasible": 0
+          }
+        },
+        "control_bit_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 0
+        }
+      }
+    },
+    "all_four_consumed_failure_profiles_verified": true,
+    "no_future_inputs_or_labels_used": true,
+    "no_causal_mechanism_or_transfer_claim": true
+  },
+  "cap_snap_comparator_feasibility": {
+    "scope": "Consumed-data feasibility analysis ONLY, never inference/training/fresh selection. Known labels select a hypothetical cap-correct oracle solely to test declared gates for contradictions.",
+    "panels": {
+      "research-baselines": {
+        "count": 192,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 31.41296875,
+        "oracle_positive_MAPE_lower_bound": 43.37638526778592,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "application-transfer": {
+        "count": 327,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 0.8165494393476046,
+        "oracle_positive_MAPE_lower_bound": 29.224599749755065,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "arithmetic-stress": {
+        "count": 32,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 15.521145833333335,
+        "oracle_positive_MAPE_lower_bound": 13.417607960688125,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "selection-validation": {
+        "count": 40,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 14.0655,
+        "oracle_positive_MAPE_lower_bound": 13.008067080292673,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-first-fresh40": {
+        "count": 40,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 14.075208333333332,
+        "oracle_positive_MAPE_lower_bound": 14.434834057627402,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-second-fresh32": {
+        "count": 32,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 28.76125,
+        "oracle_positive_MAPE_lower_bound": 17.697725571133105,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-third-fresh40": {
+        "count": 40,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 12.033125,
+        "oracle_positive_MAPE_lower_bound": 10.448903470255072,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-fourth-fresh40": {
+        "count": 40,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 21.59508333333333,
+        "oracle_positive_MAPE_lower_bound": 12.711238687817511,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-fifth-fresh40": {
+        "count": 40,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 11.366666666666667,
+        "oracle_positive_MAPE_lower_bound": 8.090110049925295,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-sixth-broad40": {
+        "count": 40,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 12.202,
+        "oracle_positive_MAPE_lower_bound": 14.513085439966485,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-seventh-conditional18": {
+        "count": 18,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 10.688703703703704,
+        "oracle_positive_MAPE_lower_bound": 12.385098034991334,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-eighth-general32": {
+        "count": 32,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 16.286666666666665,
+        "oracle_positive_MAPE_lower_bound": 12.736149096173085,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-eighth-conditional24": {
+        "count": 24,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 10.042222222222223,
+        "oracle_positive_MAPE_lower_bound": 7.758010637796441,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-ninth-general32": {
+        "count": 32,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 16.590833333333336,
+        "oracle_positive_MAPE_lower_bound": 12.606880482466826,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-ninth-conditional9": {
+        "count": 9,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 23.625555555555557,
+        "oracle_positive_MAPE_lower_bound": 17.543853486091386,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-tenth-general32": {
+        "count": 32,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 15.073333333333329,
+        "oracle_positive_MAPE_lower_bound": 11.754867768417679,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-tenth-unsupported8": {
+        "count": 8,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 26.13541666666667,
+        "oracle_positive_MAPE_lower_bound": 19.618942784968947,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-tenth-conditional14": {
+        "count": 14,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 15.298809523809522,
+        "oracle_positive_MAPE_lower_bound": 11.904180144303032,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-eleventh-general32": {
+        "count": 32,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 11.660208333333335,
+        "oracle_positive_MAPE_lower_bound": 9.829418632670151,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-eleventh-sharing8": {
+        "count": 8,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 30.022916666666667,
+        "oracle_positive_MAPE_lower_bound": 23.15516710587959,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-eleventh-legacy8": {
+        "count": 8,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 25.334583333333335,
+        "oracle_positive_MAPE_lower_bound": 30.180606488584033,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-eleventh-conditional9": {
+        "count": 9,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 19.10518518518519,
+        "oracle_positive_MAPE_lower_bound": 13.65988304714003,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-twelfth-general32": {
+        "count": 32,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 13.441145833333335,
+        "oracle_positive_MAPE_lower_bound": 17.106536410386642,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        },
+        "added_passing_classifier_comparator_feasible": {
+          "mae_lut4": true,
+          "positive_mape_percent": true
+        },
+        "added_passing_classifier_tail_feasible": true,
+        "oracle_exactly_matches_existing_passing_classifier": true
+      },
+      "consumed-twelfth-sharing8": {
+        "count": 8,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 21.982499999999998,
+        "oracle_positive_MAPE_lower_bound": 18.13427213928707,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-twelfth-legacy8": {
+        "count": 8,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 25.155416666666664,
+        "oracle_positive_MAPE_lower_bound": 24.658724850002063,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        },
+        "added_passing_classifier_comparator_feasible": {
+          "mae_lut4": true,
+          "positive_mape_percent": true
+        },
+        "added_passing_classifier_tail_feasible": true,
+        "oracle_exactly_matches_existing_passing_classifier": true
+      },
+      "consumed-twelfth-conditional16": {
+        "count": 16,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 16.157708333333332,
+        "oracle_positive_MAPE_lower_bound": 23.793962814267527,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      }
+    },
+    "unique_feasible_point_for_every_consumed_row": true,
+    "added_classifier_comparator_only_latest_passing_general_and_legacy": true,
+    "deliberately_excluded_impossible_failed_active_comparator": {
+      "population": "latest_failed_active8",
+      "oracle_MAE_lower_bound": 5.905416666666667,
+      "unsafe_classifier_MAE": 2.0,
+      "oracle_positive_MAPE_lower_bound": 4.60777181474856,
+      "unsafe_classifier_positive_MAPE": 1.5861061419200955,
+      "adding_unsafe_classifier_as_area_accuracy_comparator_is_impossible": true,
+      "reason": "Correctly rejecting129/130/129 at128 requires release fallback138.6567/139.7667/144.82. Those larger absolute errors cannot be hidden by changing the other five accepted cap-snap outputs. This is only an evaluation oracle, never inference or a training target."
+    },
+    "future_unknown_cohort_gates_remain_empirical_not_guaranteed": true,
+    "all_original_gates_retained": true
+  },
+  "fits": 0,
+  "native_jobs": 0
+}

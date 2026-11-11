@@ -1,0 +1,52 @@
+{
+  "schema": "control-sharing-coverage-method-rationale-v1",
+  "status": "prospective; no experiment fits or native jobs yet",
+  "question": "Can a fixed targeted coverage intervention repair the three new cap128 false acceptances and shared-AND false rejection while preserving all prior required accuracy and budget gains?",
+  "primary_source": {
+    "url": "https://yosyshq.readthedocs.io/projects/yosys/en/stable/using_yosys/synthesis/opt.html",
+    "accessed": "2026-11-11",
+    "supported_observations": [
+      "opt_merge identifies cells with identical inputs and shares the instance.",
+      "opt_share considers mutually exclusive same-type cells sharing an input and driving the same multiplexer.",
+      "These are motivations for joint dependency/sharing coverage; they do not establish which pass caused the observed four circuit costs."
+    ]
+  },
+  "empirical_motivation": {
+    "diagnosis_path": "results/control-sharing-coverage/prior-coverage-diagnosis.json",
+    "diagnosis_sha256": "b325f4b1f174db77662172a3765f2c9b42d5ff72a7ca9411e33205cce8ea57f5",
+    "both_input_AND_control_training_rows": 6,
+    "repeated_AND_data_post_outer_training_rows": 0,
+    "training_total": 1889,
+    "interpretation": "The observed sparse coverage motivates the intervention. Counts depend on explicitly defined input-only structural profiles and do not prove causation."
+  },
+  "controlled_intervention": {
+    "features": "Frozen233 columns; no new feature engineering.",
+    "learner": "Same native multioutput ExtraTreesClassifier parameters, fixed seed, equal weights,300trees,1thread.",
+    "policy": "Same fixed probability>=0.5 including ties, same scope and signed/release bounds; no confidence-threshold search.",
+    "baseline": "Reuse the frozen1889-row233 classifier without refitting.",
+    "new_fit": "One new fit on exact original1889 rows plus32 genuinely new training circuits.",
+    "interpretation": "This tests the entire fixed coverage intervention, not separate attribution to its two training subgroups. Differences in predictions arise from retraining with the added rows; no claim of a new architecture."
+  },
+  "validation_requirements": [
+    "Freeze original circuits and structural/modular novelty screens before measurements; preserve every historical labelled and unlabelled input.",
+    "Audit input-only coverage profiles against the four consumed failures before labels; matching profiles do not guarantee matching area.",
+    "Keep consumed evaluation labels out of fitting. Freeze weights, every fresh prediction and finite selection before fresh labels.",
+    "Preserve all existing six accuracy/tail comparators and cap gates; preserve the latest classifier gains on its passing general/legacy populations.",
+    "Do not require agreement with unsafe prior classifier decisions or silently introduce mathematically impossible accuracy gates on failed subsets. All added requirements receive a prospective feasibility audit.",
+    "Retain independent full general, sharing, legacy, conditional and active evaluations with separate false-acceptance/rejection counts and denominators."
+  ],
+  "bounds": {
+    "new_training_labels": 32,
+    "maximum_new_fits": 1,
+    "max_summed_worker_process_seconds": 300,
+    "max_native_workers": 2,
+    "fit_threads": 1,
+    "paid_compute": false,
+    "retries": 0
+  },
+  "limitations": [
+    "The new training and test structures must change behavior meaningfully; redundant arithmetic wrappers do not establish structural-family novelty.",
+    "Probabilities are uncalibrated. No arbitrary post-label margin, rule change or subgroup exclusion is allowed.",
+    "The unchanged bounds cannot fix every inherited budget error. Completion still requires every frozen goal gate; no universal safety or CPU-performance claim."
+  ]
+}

@@ -1,0 +1,354 @@
+{
+  "schema": "control-sharing-train32-pool96-v1",
+  "frozen_at_utc": "2026-11-11T19:24:22.033196+00:00",
+  "policy": {
+    "total_native_seconds": 300,
+    "workers": 2,
+    "fits": 0,
+    "retries": 0,
+    "replacement_candidates": 0,
+    "random_vectors": 2048,
+    "vectors_per_formula": 2148,
+    "caps_lut4": [
+      32,
+      64,
+      128
+    ],
+    "budget_accounting": "summed_worker_process_seconds",
+    "stage_wall_safety_reserve_seconds": 1.0
+  },
+  "training_count": 32,
+  "and_control_training_count": 16,
+  "shared_and_training_count": 16,
+  "pool_count": 96,
+  "general_count": 32,
+  "sharing_count": 8,
+  "legacy_count": 8,
+  "challenge_count": 48,
+  "maximum_selected_count": 64,
+  "all_pool_rows_consumed_for_future_novelty": true,
+  "training_templates": [
+    [
+      "and_control_plain_othercomplement",
+      "xor(add(sra(addi(xori(in0,{c}),{d}),andi(and(in0,xori(srli(in1,1),7)),{k})),in1),in0)"
+    ],
+    [
+      "and_control_plain_datacomplement",
+      "xor(add(sra(xori(addi(in1,{d}),{c}),andi(and(xori(in1,7),srai(in0,1)),{k})),in0),in1)"
+    ],
+    [
+      "and_control_signed8",
+      "xor(add(sra(slli(andi(addi(xori(in0,{c}),{d}),255),24),andi(and(xori(in1,7),in0),{k})),in1),in0)"
+    ],
+    [
+      "and_control_signed16_preadd",
+      "xor(add(sra(addi(slli(andi(xori(in1,{c}),65535),16),{d}),andi(and(xori(in0,7),srli(in1,1)),{k})),in0),in1)"
+    ],
+    [
+      "shared_and_full_xori_addi",
+      "xor(add(sra(xori(addi(and(in0,in1),{d}),{c}),andi(xori(srli(in0,1),7),{k})),and(in0,in1)),and(in0,in1))"
+    ],
+    [
+      "shared_and_full_addi_xori",
+      "xor(add(sra(addi(xori(and(in0,in1),{c}),{d}),andi(addi(srai(in1,2),5),{k})),and(in0,in1)),and(in0,in1))"
+    ],
+    [
+      "shared_and_signed8_postadd",
+      "xor(add(sra(slli(andi(xori(addi(and(in0,in1),{d}),{c}),255),24),andi(xori(in0,7),{k})),and(in0,in1)),and(in0,in1))"
+    ],
+    [
+      "shared_and_signed16_preadd",
+      "xor(add(sra(addi(slli(andi(xori(and(in0,in1),{c}),65535),16),{d}),andi(xori(in1,7),{k})),and(in0,in1)),and(in0,in1))"
+    ]
+  ],
+  "training_parameters": [
+    [
+      3,
+      17,
+      1
+    ],
+    [
+      19,
+      67,
+      3
+    ],
+    [
+      59,
+      173,
+      7
+    ],
+    [
+      167,
+      389,
+      31
+    ]
+  ],
+  "general_templates": [
+    [
+      "general_andcontrol_full",
+      "xor(add(sra(xori(addi(in1,97),23),andi(and(xori(srli(in0,1),7),in1),{k})),in0),in1)"
+    ],
+    [
+      "general_andcontrol_signed8",
+      "xor(add(sra(slli(andi(xori(addi(in0,97),23),255),24),andi(and(xori(in1,7),srli(in0,1)),{k})),in1),in0)"
+    ],
+    [
+      "general_andcontrol_ordata",
+      "xor(add(sra(addi(xori(or(in0,in1),23),97),andi(and(xori(in0,7),srli(in1,1)),{k})),in1),in0)"
+    ],
+    [
+      "general_sharedand_xori_addi",
+      "xor(add(sra(xori(addi(and(in0,in1),97),23),andi(xor(srli(in1,1),in1),{k})),and(in0,in1)),and(in0,in1))"
+    ],
+    [
+      "general_sharedand_addi_xori",
+      "xor(add(sra(addi(xori(and(in0,in1),23),97),andi(xor(srai(in0,2),in0),{k})),and(in0,in1)),and(in0,in1))"
+    ],
+    [
+      "general_sharedand_signed16_prexor",
+      "xor(add(sra(xori(slli(andi(addi(and(in0,in1),97),65535),16),23),andi(xori(in1,7),{k})),and(in0,in1)),and(in0,in1))"
+    ]
+  ],
+  "general_parameters": [
+    1,
+    3,
+    7,
+    31
+  ],
+  "control_templates": [
+    [
+      "control_unsigned_andcontrol",
+      "xor(add(srl(xori(addi(in1,97),23),andi(and(xori(in0,7),srli(in1,1)),{k})),in0),in1)"
+    ],
+    [
+      "control_static_andsharing",
+      "xor(add(srai(xori(addi(and(in0,in1),97),23),{k}),and(in0,in1)),and(in0,in1))"
+    ],
+    [
+      "control_rootadd_sharedand",
+      "add(sra(addi(xori(and(in0,in1),23),97),andi(xor(srli(in1,1),in0),{k})),and(in0,in1))"
+    ],
+    [
+      "control_directxor_sra",
+      "xor(sra(xori(addi(and(in0,in1),97),23),andi(and(in0,srli(in1,1)),{k})),and(in0,in1))"
+    ]
+  ],
+  "control_parameters": [
+    1,
+    3
+  ],
+  "sharing_templates": [
+    [
+      "sharing_and_full_signedcontrol",
+      "xor(add(sra(xori(addi(and(in0,in1),{d}),{c}),andi(xor(srai(in1,1),in1),{k})),and(in0,in1)),and(in0,in1))"
+    ],
+    [
+      "sharing_and_signed8",
+      "xor(add(sra(addi(slli(andi(xori(and(in0,in1),{c}),255),24),{d}),andi(xor(srli(in0,1),in0),{k})),and(in0,in1)),and(in0,in1))"
+    ],
+    [
+      "sharing_xor_full",
+      "xor(add(sra(xori(addi(xor(in0,in1),{d}),{c}),andi(and(in0,srli(in1,1)),{k})),xor(in0,in1)),or(in0,in1))"
+    ],
+    [
+      "sharing_xor_low16_preadd",
+      "xor(add(sra(addi(xori(andi(xor(in0,in1),65535),{c}),{d}),andi(xori(srai(in0,1),7),{k})),xor(in0,in1)),or(in0,in1))"
+    ]
+  ],
+  "legacy_templates": [
+    [
+      "legacy_and_signed16_repeat",
+      "xor(add(sra(slli(andi(xori(addi(and(in0,in1),{d}),{c}),65535),16),andi(xor(srli(in0,1),in0),{k})),and(in0,in1)),or(in0,in1))"
+    ],
+    [
+      "legacy_xor_signed8_preadd_repeat",
+      "xor(add(sra(addi(slli(andi(xori(xor(in0,in1),{c}),255),24),{d}),andi(xor(srai(in1,1),in1),{k})),xor(in0,in1)),and(in0,in1))"
+    ],
+    [
+      "legacy_and_low16_preadd",
+      "xor(add(sra(xori(addi(andi(and(in0,in1),65535),{d}),{c}),andi(and(xori(in0,7),srli(in1,1)),{k})),in1),or(in0,in1))"
+    ],
+    [
+      "legacy_signed8_outerinput",
+      "xor(add(sra(slli(andi(addi(xori(in0,{c}),{d}),255),24),andi(xori(srli(in1,1),7),{k})),in1),in0)"
+    ]
+  ],
+  "sharing_legacy_parameters": [
+    [
+      5,
+      29,
+      1
+    ],
+    [
+      41,
+      139,
+      3
+    ]
+  ],
+  "challenge_templates": [
+    [
+      "challenge_andcontrol_full",
+      "xor(add(sra(addi(xori(in1,{c}),{d}),andi(and(xori(in0,7),xor(srli(in1,1),in1)),{k})),in0),in1)"
+    ],
+    [
+      "challenge_andcontrol_signed8",
+      "xor(add(sra(slli(andi(xori(addi(in1,{d}),{c}),255),24),andi(and(xori(in0,7),srai(in1,1)),{k})),in0),in1)"
+    ],
+    [
+      "challenge_andcontrol_signed16",
+      "xor(add(sra(addi(slli(andi(xori(in0,{c}),65535),16),{d}),andi(and(xori(in1,7),or(srli(in0,1),in0)),{k})),in1),in0)"
+    ],
+    [
+      "challenge_sharedand_full",
+      "xor(add(sra(xori(addi(and(in0,in1),{d}),{c}),andi(xor(srli(in0,1),in0),{k})),and(in0,in1)),and(in0,in1))"
+    ],
+    [
+      "challenge_sharedand_alternate",
+      "xor(add(sra(addi(xori(and(in0,in1),{c}),{d}),andi(xor(srai(in1,2),in1),{k})),and(in0,in1)),and(in0,in1))"
+    ],
+    [
+      "challenge_sharedand_signed16",
+      "xor(add(sra(slli(andi(addi(xori(and(in0,in1),{c}),{d}),65535),16),andi(xor(srli(in1,2),in1),{k})),and(in0,in1)),and(in0,in1))"
+    ]
+  ],
+  "challenge_parameters": [
+    [
+      5,
+      29,
+      1
+    ],
+    [
+      17,
+      71,
+      1
+    ],
+    [
+      41,
+      139,
+      1
+    ],
+    [
+      157,
+      347,
+      1
+    ],
+    [
+      5,
+      29,
+      3
+    ],
+    [
+      17,
+      71,
+      3
+    ],
+    [
+      41,
+      139,
+      3
+    ],
+    [
+      157,
+      347,
+      3
+    ]
+  ],
+  "proof_random_seeds": {
+    "train": 2026111109,
+    "test": 2026111110
+  },
+  "design_assumptions": "Fixed32newtraining=16binaryAND-both-inputcontrolcontrasts+16exactsharedANDdata/post/outercontrasts. Eachblock has8fullword+8signed8/16rows; masks1/3/7/31 and low/highimmediates includehighcostcontrasts,withoutcostfiltering. Fresh96=completegeneral32+mandatorysharing8+legacy8+challenge48. Genuinecontrolbit-selection/dependency/data-placement variants,not no-opwrappernovelty. Original/alias/modular/skeletonandlow-bit/input-renamingfamily novelty required jointlybeforelabels. Two rejectedchallengefamilies were prospectivelyrevised to meaningful Gray-XOR/ORdatabit controlfunctions;training32/fixed48/countsunchanged,reviewreceipts retained. No target labels/predictions used forinputchoice;no cost/safetyguarantee.",
+  "selection_rule": "Fixed48(general32/sharing8/legacy8)alwayslabelled firstinpoolorder. Atmost16NEWcapacceptances versusfrozenfeasibility_augmented,deterministicroundrobinchallenge templates/parameterorder,217/233historical+newtrain+fixed48featurefreshness. Require>=4actions/>=2templates/128,legacy64veto oldabstention,sharing128veto oldlearned217 perboundmodelprotocol. No quotas/refills/extensions/replacements.",
+  "success_rule": "ONE fixed233classifierfit on old1889+new32=1921;features/parameters/equalweightnestedoutputs/probability0.5tiepolicy unchanged. Frozen1889classifier reused withoutrefit asbaseline. Allretainedpanels/expandedrepairandrejectiontargets and separatefreshgeneral/sharing/legacy/conditional-full(actions+same8generalcontrols)/active-only hardgates fixedbeforelabels. All96probabilities/selection frozenbeforefreshlabels;no pooledsuccess/sharedcontrolindependenceclaim.",
+  "chronology": "Joint32train+96pool/schema/policy/protocolfreeze+independentpreflight+parentauthorization;all128nativefeatures;featurefreshness/pretrainaudit;32originaltrainingRTLproof+labels;onefixedfit/developmentselection;all96points/selection/fixed48+actions<=16freeze+prelabelaudit/parentauthorization;allselectedoriginalRTLproof+labels.",
+  "native_accounting": "TRUE SUM of worker process launch-through-reap intervals,includingstartup/extraction/proof/synthesis/failures,shared300worker-seconds,max2workers. Eachstage wall deadline=(remaining summed budget minus1s reserve)/2;reportactualsummedprocess andstagewall separately. Anybudgetoverrunfails. Fit/audit/hostbookkeepingexcluded. No overlappingnative stages.",
+  "missing_rule": "Retainall32training+96poolrows/features/probabilitiesandallselectedlabels/failures;noretries,replacements,extensions,orcompletecohortprimarywithmissingcases.",
+  "scope": "Uncalibratedtargetedcontrol/sharingcoverageintervention withinfixed233feasibilityclassifier;notrepresentationablation,nounbiasedapplicationtransfer/hardware-safetycertificate/timing/power/fullcoreorCPUclaim.",
+  "sources": {
+    "scripts/measure_control_sharing_coverage.py": "3d3ec8f904050c8adbe002bf10a7bdc96cd150e0b7b0021f882b9f692db36b58",
+    "scripts/measure_guarded_revision.py": "7d5c9f415b07f4108f16a5adfedc5559fe17355f700fae627593e52728521403",
+    "scripts/boundary_carry_features.py": "17b957178a5e962d8afa9da822fdc85055613849ac2a820d141311d5a5a3480e",
+    "scripts/measure_budget_preserving_coverage.py": "8b2680e5b7a7a716d2fff5e330649bd6753abd091690d471cede73aeb7f72ffd",
+    "scripts/measure_targeted_coverage.py": "18765b45ff1c2c6e7aa85ac3dc85fc1ea6c5cfbb9cb08ab958b71d4e4f0f3f14",
+    "scripts/validate_selected_features.py": "8739cebe56090cbffe6591e1e8e05851430dcbb6fb50945673ef1240cb14188f",
+    "tests/test_measure_control_sharing_coverage.py": "293a0553fe4763b91844cca0f201a57f12ed993a817579ad304f99de96088834",
+    "isaforge/__init__.py": "788b89398980996e41116e972bf0b790b077eda914cd1e630200d1911713109a",
+    "isaforge/area_adaptation_v9.py": "a046dc654190f4edbf6b2cfa4c01382f9218bb1281a44c0dfb1ec7109b4bc56b",
+    "isaforge/area_model.py": "ade5dcc32ef66d0ea03ea9ec4937687564dff36c4483afc76ac59f9dc4a69447",
+    "isaforge/area_model_v2.py": "389f6592d6a3fb801638dcc5237cac65f8ab504caac10efef1a43e5d49cf6cf1",
+    "isaforge/area_model_v3.py": "0560b5a3a1dff7085a374dd2d5bbc55f487ae1986830bd85899f255fa3299974",
+    "isaforge/area_model_v4.py": "a912198d58203c821da4c3408c48eb2427cd84359071570158e7fd0b73d06357",
+    "isaforge/area_model_v5.py": "6e39f1fae6ac0b7398dbfb80c6096dae0cfafe479ada441a4fa27af7938f990f",
+    "isaforge/area_model_v6.py": "b46c90c47461d8888ece12711253c92cc2bac834d621c58e17a82af106db5114",
+    "isaforge/area_model_v8.py": "e8e442689256155dc8563a0bb2041c5586ec217d36bd59d3cd28c16cb23d975d",
+    "isaforge/area_selection.py": "88c14e3029620d61cc7da5fc429904216c69585dca497d5017dcb25d4f05a70e",
+    "isaforge/cached_mapping_inference_v6.py": "d02b0dfdbddd15b52cfd9ba19c7edc590ec850860d2413e8f962bace325fa1c9",
+    "isaforge/challenger_plots.py": "fa7df137b5b783b11e24c92e88474ede869db4472461de82b95fe6b31777bcc4",
+    "isaforge/challenger_report.py": "e984754605417ec2c0c83ad4eda36a56ae989fcee4daa8930311d1eed9e140b1",
+    "isaforge/cli.py": "d467551d205245f4afa1f7695c7a5bc0e7f6c8db95b64f9d19b60f43c79a87ee",
+    "isaforge/conservative_policy.py": "1c318b94c0e2ad6287f2b6d470974c4ec581eb805018f7544bd438e9cd42d823",
+    "isaforge/core_experiment.py": "3e300f3054224050cd600eea0a3a76db496b67951323115cdb5d349bb2f8acc8",
+    "isaforge/core_routing.py": "dfe14bb5e7236630fe376a5131f4d492309933ae98c0a1e3ea9e798b28a36058",
+    "isaforge/dataset.py": "bb568ef7ca5f6ad79fd6a9ffef9ff18c510b29ffb9f4b6a7e3bfd5cb4cae3cbc",
+    "isaforge/demo.py": "f3ba4329895661972e0dfab7da6aa2bf507c577e6c12f2be4172f8fab2ecff14",
+    "isaforge/deployment.py": "8f8bb3d72b6ca3bdc207abfb973cbac899377740a6729ddf38de2be8e4f3c971",
+    "isaforge/evaluation.py": "f23f4d46a1193b0e0780f80c31c13a5662a24aaf6a46a87c46298a9015ecb98e",
+    "isaforge/fast_graph_inference.py": "8c9546f380728abcceefc6156b3e2172e6cc5597c1712390a61fbe719b312b3f",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/fresh_evaluation.py": "3117cb67e16c5a5f2bd429eaacc1927de77665f22e45c4fbfeaec26f513e2074",
+    "isaforge/frozen_inference.py": "33cb0e231dc4a0797e55ce23b145d23a55b812e7ebfc4760507c81319efd47e7",
+    "isaforge/graph_features_v5.py": "c0bb42fa3a4ae86bcaceffd35964fcf07a5dda0f36ab4e21ea8e1cfe6112c8cf",
+    "isaforge/mapping_features_v6.py": "3b220e3775d536630656681df645b95e0ff3c44b55ec91fd002a6b06d231f5d3",
+    "isaforge/masterrtl_baseline.py": "1473333e7b5d00d1ae91084fa5663697861504c4a411d6242a6160ff5f0a697f",
+    "isaforge/midterm_report.py": "2efcbd710e1196126050bd449ade8694fe9685f8ce7c96d4a92263b6ecee3c96",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/probe_audit.py": "b79eb74299ababd1c120f7eacd6fd93fab9355ee407fa94d9be9402c44b90620",
+    "isaforge/probe_corpus.py": "2435c29388fbf2368aee3e736606dd017d21306e45377021d29650983be775a3",
+    "isaforge/probe_evaluation.py": "0d44fbef8484bd610195fbfe393b8ec51285ea04cf5f38ebc846de6825a846d8",
+    "isaforge/real_experiment.py": "5ccd516a9dfae09bb0b3b3ce4480058f79b2cb5a688e9f698e3713124c77e16e",
+    "isaforge/research_report.py": "642c92a6c6dd146abc04d25304319c98316ee7a66cb0b7992176b099ca716b54",
+    "isaforge/rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+    "isaforge/selection.py": "cf76a3f37f86a35b60454beb2be9e69a03944cac287d7485b1a6f20a6fdd5c7e",
+    "isaforge/semantic_features_v7.py": "eddc21bd80fd97dea7e02cbfe14bb5b50649f779ed53ec6068674adc1dc0f9e3",
+    "isaforge/soc_experiment.py": "af8691054b626f687a8962b149bf3431ee7e34951d0aee0fd8692b0e334e3c1a",
+    "isaforge/structural_features_v3.py": "b0a4c8233c2a39b675767151f21698d6418c5b3b7bb357741815986033396fb0",
+    "isaforge/structural_features_v4.py": "78b506d9e20ed017f2724352b5c9e6d78eb67b3169fa19eb910b5a95c45905da",
+    "isaforge/structural_features_v5.py": "386a324634d26a1a9fde0090a1116dd3ad4ba2303e2d3c7775e3128990ac4bc2",
+    "isaforge/synthesis.py": "375e4858f08c2dc2cd793012ceee59d3f4146e2c7c12079d080a0299bfa0223f",
+    "isaforge/v4_corpus.py": "37f30c52e0a330d631f324903c985c69e0cbc1eaa1be7950b1cd6ff3e355bcac",
+    "isaforge/v4_validation.py": "193dd1b6780b1187e251db2dee08545b0391afead95a8f6d825dd51b58a694ff",
+    "isaforge/v5_corpus.py": "98a53a2125aef0b4a43546f17473b13d5e42d28925971554c5053887bf75cd75",
+    "isaforge/v6_corpus.py": "932b2f01dff404a7857c0e3107e8fab006aef3c0665280377d39ca15e7d007ee",
+    "isaforge/v8_application_corpus.py": "191bc3a6c35cdd063bc64839a579952e3bf81166415e38b45764c2fe2e360a2f"
+  },
+  "inputs": {
+    "results/control-sharing-coverage-data/candidates.json": "b7936db85c6069437ef13cacaf3d7071eeaa1476d19cb3a8e772b74d4354c4b1",
+    "results/control-sharing-coverage-data/historical-formulas.json": "975dfd26cff05aecf029c479b24bb4a40a9150cd2f7fa6adb10b7b348424d1e2",
+    "results/control-sharing-coverage-data/novelty.json": "37150e0a97d867398e76077c4fb06437e0da91bd6d1bbe40b80266e0ab4bf34d",
+    "results/control-sharing-coverage-data/tools.json": "8cdb179640fa4cf11a905ef775a7e28d37b296c309018128c6c8b451d8528fc8",
+    "results/control-sharing-coverage-validation/historical-formulas.json": "975dfd26cff05aecf029c479b24bb4a40a9150cd2f7fa6adb10b7b348424d1e2",
+    "results/control-sharing-coverage-validation/novelty.json": "e1f8a411d5123518d9cf107913aa5007a0626033097e9b9c0cc4ff4c4ed8715b",
+    "results/control-sharing-coverage-validation/pool-candidates.json": "eda7ac8ca3237dbfa7f2a024f45044e3ac4db8f2871f3860ba01973ac0147e82",
+    "results/control-sharing-coverage-validation/tools.json": "8cdb179640fa4cf11a905ef775a7e28d37b296c309018128c6c8b451d8528fc8"
+  },
+  "prior_inventory_sources": {
+    "results/boundary-feasibility-validation/historical-formulas.json": "61336342f402e21ddefa86a79ce2b2c3f85d787a797f70c4d7011ba5810e99df",
+    "results/boundary-feasibility-validation/pool-candidates.json": "07f23bc8e5b290b0f344c848438ceb16b8855bf7e23ec34848a07d5809b95786",
+    "results/boundary-feasibility-validation/candidates.json": "ae85429a05ed329579bb7477eadd6eb2824c93698d635a362c290afd5929eb79",
+    "results/boundary-feasibility-validation/novelty.json": "2241b8f2887278201d13b27b1612941a97f9efbcb62d22b96e86e492bd88ae0e",
+    "results/boundary-feasibility-validation/plan.json": "d0bd038d8953b2475ac378e5bf980c8c1f632557dcacdd3d1f1c098256c01563"
+  },
+  "design_audit_inputs": {
+    "results/control-sharing-coverage/measurement-input-profile-audit.json": "7b774789395f54cdd0016cce4a637023b1df079b4704c09d43959c050ae33103"
+  },
+  "family_revision_inputs": {
+    "results/control-sharing-coverage/prefreeze-family-review.json": "fd78163d77eed14a3de4a1b27ca3f28f966f38eb5a75c77ccdbb05e24db79a8b",
+    "results/control-sharing-coverage/rejected-measurement-input-draft-v1.py": "84e542c9ad5e47c301c4529dbb92e8facd109d1256f468b267f5d291040eb6a9",
+    "results/control-sharing-coverage/rejected-joint-inputs-v1.json": "4e71ec2ffa598a3202f377d6aef91f51daeb504679f59aea45017d0ed7867def",
+    "results/control-sharing-coverage/prefreeze-audit-source-v1.py": "ba26e55e7cc6cf5325eaf5ea05f33cd291b3104734a51193b96e785b1f854d8b",
+    "results/control-sharing-coverage/input-family-revision-v1.json": "0a37d5f56b9fc59e7671270eef93817ea9bccd03527df281e2c744d601c9071c"
+  },
+  "fits": 0,
+  "target_label_jobs": 0,
+  "native_feature_jobs": 0
+}

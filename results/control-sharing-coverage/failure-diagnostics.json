@@ -1,0 +1,326 @@
+{
+  "schema": "control-sharing-failure-diagnostics-v1",
+  "status": "postmeasurement_descriptive_only",
+  "policy_or_threshold_changed": false,
+  "extra_fits": 0,
+  "extra_native_jobs": 0,
+  "development": {
+    "acceptances_passed": 62,
+    "required_acceptances": 62,
+    "rejections_passed": 34,
+    "required_rejections": 38,
+    "failed_rejections": [
+      {
+        "candidate_id": "boundary-corroboration-pool:2d05eaceee19a09a5d94c16f2908d2c42ba77522cbe5acc73c4fd62753c33b1c",
+        "formula": "xor(add(sra(xori(addi(and(in0,in1),37),7),andi(addi(in1,9),1)),and(in0,in1)),or(in0,in1))",
+        "actual_lut4": 157,
+        "cap": 128,
+        "expected": "reject",
+        "predictions": {
+          "control_sharing_coverage": 128.0
+        },
+        "panel": "consumed-eleventh-sharing8",
+        "index": 4,
+        "baseline_prediction": 138.37,
+        "candidate_prediction": 128.0,
+        "baseline_probabilities": [
+          0.0,
+          0.0033333333333333335,
+          0.2633333333333333
+        ],
+        "candidate_probabilities": [
+          0.0,
+          0.0033333333333333335,
+          0.5366666666666666
+        ],
+        "cap_order": [
+          32,
+          64,
+          128
+        ]
+      },
+      {
+        "candidate_id": "boundary-feasibility-pool:e64704cde48f6313b584ce5d620de1cc978f040c44f870682aa162ab11a4e499",
+        "formula": "xor(add(sra(addi(xori(in1,23),97),andi(and(xori(in0,15),in1),3)),in0),in1)",
+        "actual_lut4": 129,
+        "cap": 128,
+        "expected": "reject",
+        "predictions": {
+          "control_sharing_coverage": 128.0
+        },
+        "panel": "consumed-twelfth-conditional16",
+        "index": 3,
+        "baseline_prediction": 128.0,
+        "candidate_prediction": 128.0,
+        "baseline_probabilities": [
+          0.0,
+          0.0,
+          0.8733333333333333
+        ],
+        "candidate_probabilities": [
+          0.0,
+          0.0,
+          0.9333333333333333
+        ],
+        "cap_order": [
+          32,
+          64,
+          128
+        ]
+      },
+      {
+        "candidate_id": "boundary-feasibility-pool:6dc5eba26346d6aae9413d014f42f963bc5947bd6c9708b5c3d0f62eb7318021",
+        "formula": "xor(add(sra(addi(xori(in1,47),157),andi(and(xori(in0,15),in1),3)),in0),in1)",
+        "actual_lut4": 130,
+        "cap": 128,
+        "expected": "reject",
+        "predictions": {
+          "control_sharing_coverage": 128.0
+        },
+        "panel": "consumed-twelfth-conditional16",
+        "index": 5,
+        "baseline_prediction": 128.0,
+        "candidate_prediction": 128.0,
+        "baseline_probabilities": [
+          0.0,
+          0.0,
+          0.7133333333333334
+        ],
+        "candidate_probabilities": [
+          0.0,
+          0.0,
+          0.8733333333333333
+        ],
+        "cap_order": [
+          32,
+          64,
+          128
+        ]
+      },
+      {
+        "candidate_id": "boundary-feasibility-pool:3b2b82391c911b81ff3b9db426dbc5ccf3ac347c68e8ba7d672c259aa67276be",
+        "formula": "xor(add(sra(addi(xori(in1,163),353),andi(and(xori(in0,15),in1),3)),in0),in1)",
+        "actual_lut4": 129,
+        "cap": 128,
+        "expected": "reject",
+        "predictions": {
+          "control_sharing_coverage": 128.0
+        },
+        "panel": "consumed-twelfth-conditional16",
+        "index": 7,
+        "baseline_prediction": 128.0,
+        "candidate_prediction": 128.0,
+        "baseline_probabilities": [
+          0.0,
+          0.0033333333333333335,
+          0.6333333333333333
+        ],
+        "candidate_probabilities": [
+          0.0,
+          0.006666666666666667,
+          0.65
+        ],
+        "cap_order": [
+          32,
+          64,
+          128
+        ]
+      }
+    ],
+    "sharing125_repaired": [
+      {
+        "candidate_id": "boundary-feasibility-pool:acea73f5c20b30c9448f9a13071809e242cdfb5d9927c64e7799040aeac225fc",
+        "formula": "xor(add(sra(xori(addi(and(in0,in1),47),11),andi(addi(addi(in1,9),2),1)),and(in0,in1)),and(in0,in1))",
+        "actual_lut4": 125,
+        "cap": 128,
+        "expected": "accept",
+        "predictions": {
+          "control_sharing_coverage": 128.0
+        },
+        "panel": "consumed-twelfth-sharing8",
+        "index": 4,
+        "baseline_prediction": 130.57666666666665,
+        "candidate_prediction": 128.0,
+        "baseline_probabilities": [
+          0.0,
+          0.01,
+          0.36666666666666664
+        ],
+        "candidate_probabilities": [
+          0.0,
+          0.006666666666666667,
+          0.8
+        ],
+        "cap_order": [
+          32,
+          64,
+          128
+        ]
+      }
+    ]
+  },
+  "measured_profile_characterization": [
+    {
+      "consumed_selected_index": 36,
+      "consumed_formula": "xor(add(sra(xori(addi(and(in0,in1),47),11),andi(addi(addi(in1,9),2),1)),and(in0,in1)),and(in0,in1))",
+      "features16": [
+        1,
+        1,
+        2,
+        2,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        32,
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "matching_new_training": [
+        {
+          "training_index": 16,
+          "candidate_id": "control-sharing-train:69d2ed954d781bdede3058b405299c967d1902f41610f3d2d0e34c56fab059c2",
+          "formula": "xor(add(sra(xori(addi(and(in0,in1),17),3),andi(xori(srli(in0,1),7),1)),and(in0,in1)),and(in0,in1))",
+          "actual_lut4": 125,
+          "feasible_at128": true
+        },
+        {
+          "training_index": 20,
+          "candidate_id": "control-sharing-train:737c70f0a5ec6e57aa246f1581fdf9d763d267ed5dc32a6abfbb5c16355b634b",
+          "formula": "xor(add(sra(addi(xori(and(in0,in1),3),17),andi(addi(srai(in1,2),5),1)),and(in0,in1)),and(in0,in1))",
+          "actual_lut4": 127,
+          "feasible_at128": true
+        }
+      ]
+    },
+    {
+      "consumed_selected_index": 51,
+      "consumed_formula": "xor(add(sra(addi(xori(in1,23),97),andi(and(xori(in0,15),in1),3)),in0),in1)",
+      "features16": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        32,
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      "matching_new_training": [
+        {
+          "training_index": 1,
+          "candidate_id": "control-sharing-train:c0a48ba66022c33f6dd4f98f14508fedf8695563222162270fd50fcfaf6c65a5",
+          "formula": "xor(add(sra(addi(xori(in0,19),67),andi(and(in0,xori(srli(in1,1),7)),3)),in1),in0)",
+          "actual_lut4": 128,
+          "feasible_at128": true
+        },
+        {
+          "training_index": 5,
+          "candidate_id": "control-sharing-train:1afceea790bba0de86a1d18b4b2fb5851cb6f921c745fad52377840839952e99",
+          "formula": "xor(add(sra(xori(addi(in1,67),19),andi(and(xori(in1,7),srai(in0,1)),3)),in0),in1)",
+          "actual_lut4": 125,
+          "feasible_at128": true
+        }
+      ]
+    },
+    {
+      "consumed_selected_index": 53,
+      "consumed_formula": "xor(add(sra(addi(xori(in1,47),157),andi(and(xori(in0,15),in1),3)),in0),in1)",
+      "features16": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        32,
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      "matching_new_training": [
+        {
+          "training_index": 1,
+          "candidate_id": "control-sharing-train:c0a48ba66022c33f6dd4f98f14508fedf8695563222162270fd50fcfaf6c65a5",
+          "formula": "xor(add(sra(addi(xori(in0,19),67),andi(and(in0,xori(srli(in1,1),7)),3)),in1),in0)",
+          "actual_lut4": 128,
+          "feasible_at128": true
+        },
+        {
+          "training_index": 5,
+          "candidate_id": "control-sharing-train:1afceea790bba0de86a1d18b4b2fb5851cb6f921c745fad52377840839952e99",
+          "formula": "xor(add(sra(xori(addi(in1,67),19),andi(and(xori(in1,7),srai(in0,1)),3)),in0),in1)",
+          "actual_lut4": 125,
+          "feasible_at128": true
+        }
+      ]
+    },
+    {
+      "consumed_selected_index": 55,
+      "consumed_formula": "xor(add(sra(addi(xori(in1,163),353),andi(and(xori(in0,15),in1),3)),in0),in1)",
+      "features16": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        32,
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      "matching_new_training": [
+        {
+          "training_index": 1,
+          "candidate_id": "control-sharing-train:c0a48ba66022c33f6dd4f98f14508fedf8695563222162270fd50fcfaf6c65a5",
+          "formula": "xor(add(sra(addi(xori(in0,19),67),andi(and(in0,xori(srli(in1,1),7)),3)),in1),in0)",
+          "actual_lut4": 128,
+          "feasible_at128": true
+        },
+        {
+          "training_index": 5,
+          "candidate_id": "control-sharing-train:1afceea790bba0de86a1d18b4b2fb5851cb6f921c745fad52377840839952e99",
+          "formula": "xor(add(sra(xori(addi(in1,67),19),andi(and(xori(in1,7),srai(in0,1)),3)),in0),in1)",
+          "actual_lut4": 125,
+          "feasible_at128": true
+        }
+      ]
+    }
+  ],
+  "profile_vs_class_limitation": "The two exact16-profile new examples for unsafe129/130/129 targets measure128 and125, both feasible. The shared125 target matches125 and127. Local descriptor-profile coverage is not adverse class/cost coverage or guaranteed transfer.",
+  "fresh_status": "All5primarypopulations not_evaluable; no aggregate accuracy/FA/FR metrics or claims from the completed16-label subset.",
+  "future_compute_limitation": "55-label phase exceeded its frozen wall allocation; only16labels complete. A future protocol must reserve realistic worker time and stop pre-fit if required adverse-class support is absent, without refilling after labels.",
+  "bindings": {
+    "results/control-sharing-coverage/incomplete-outcome.json": "e868659970d053456d0bd907910202b2890a32706ee357f545beb415e4515aac",
+    "results/control-sharing-coverage/development-predictions.json": "6973c05fb42e65d5b33e0b72ed7e8aed2147dda1232e20e3ea2418a6d2406516",
+    "results/control-sharing-coverage/development-metrics.json": "3dc761008d2149b6998ae851cd66c223b384ea645b9f732f8751d06960a5d3d5",
+    "results/control-sharing-coverage/measurement-input-profile-audit.json": "7b774789395f54cdd0016cce4a637023b1df079b4704c09d43959c050ae33103",
+    "results/control-sharing-coverage-data/labels.json": "3ac11ad8ac41b24e073e7fd241d59dbbdec3f2c0edba7cb87b199125e505ba89"
+  }
+}

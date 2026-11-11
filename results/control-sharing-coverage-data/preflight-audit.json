@@ -1,0 +1,1289 @@
+{
+  "schema": "independent-control-sharing-coverage-preflight-audit-v1",
+  "status": "pass",
+  "audited_at_utc": "2026-11-11T19:25:46.889676+00:00",
+  "bindings": {
+    "results/control-sharing-coverage/protocol.json": "387f8fbcc8b0538ff9af000232879d0570fb213184dee5c5e37ab9c0bc18828c",
+    "results/control-sharing-coverage/auditor-prior-artifacts.json": "10bcc8744fdbba3b8c004b9893a5387d1588ba93c966f1f1fc2b7c0974da03af",
+    "results/control-sharing-coverage/evaluation-targets.json": "9f02d1281fb7330c62f29e61a68889f45b12ff221cf81b6a162f165d76fc3ab5",
+    "results/control-sharing-coverage/prior-coverage-diagnosis.json": "b325f4b1f174db77662172a3765f2c9b42d5ff72a7ca9411e33205cce8ea57f5",
+    "results/control-sharing-coverage/method-rationale.json": "19fe2252f4c129ccee64807aa5112da2de70e9e70e04853e97a8bc08a31d59eb",
+    "results/control-sharing-coverage/analytical-feasibility-review.json": "83456bbc6e8e31e87ce7c555c54440b39e4089b7d0960e01c95d1add6aaa12d3",
+    "results/control-sharing-coverage/measurement-input-profile-audit.json": "7b774789395f54cdd0016cce4a637023b1df079b4704c09d43959c050ae33103",
+    "results/control-sharing-coverage/support-cells.json": "a20d8fe8f7b14f93bf5c59635eec74897c213e45ad3953709ef16e75a53292dd",
+    "results/control-sharing-coverage/goal-at-freeze.json": "8a39c4ae3edee58848a6e1ab6d9f80237ca44d960954670be2a344f123d5d601",
+    "results/control-sharing-coverage/goal-update-at-freeze.json": "e77035b2ed240e0561dbf211e4e1a9df8056b30ed7247830c200aeffe136b217",
+    "results/control-sharing-coverage/research-goal-current-at-freeze.json": "095cb05936b2a13afda25e7f6a4a9394c5593774f2743b1293adac8f67478a62",
+    "results/control-sharing-coverage-data/plan.json": "944a78157094efc0d64cb3a9fcf01bd689bcab788592d8e00821ce275cde66ae",
+    "results/control-sharing-coverage-data/novelty.json": "37150e0a97d867398e76077c4fb06437e0da91bd6d1bbe40b80266e0ab4bf34d",
+    "results/control-sharing-coverage-data/historical-formulas.json": "975dfd26cff05aecf029c479b24bb4a40a9150cd2f7fa6adb10b7b348424d1e2",
+    "results/control-sharing-coverage-data/tools.json": "8cdb179640fa4cf11a905ef775a7e28d37b296c309018128c6c8b451d8528fc8",
+    "results/control-sharing-coverage-validation/plan.json": "944a78157094efc0d64cb3a9fcf01bd689bcab788592d8e00821ce275cde66ae",
+    "results/control-sharing-coverage-validation/novelty.json": "e1f8a411d5123518d9cf107913aa5007a0626033097e9b9c0cc4ff4c4ed8715b",
+    "results/control-sharing-coverage-validation/historical-formulas.json": "975dfd26cff05aecf029c479b24bb4a40a9150cd2f7fa6adb10b7b348424d1e2",
+    "results/control-sharing-coverage-validation/tools.json": "8cdb179640fa4cf11a905ef775a7e28d37b296c309018128c6c8b451d8528fc8",
+    "results/control-sharing-coverage-data/candidates.json": "b7936db85c6069437ef13cacaf3d7071eeaa1476d19cb3a8e772b74d4354c4b1",
+    "results/control-sharing-coverage-validation/pool-candidates.json": "eda7ac8ca3237dbfa7f2a024f45044e3ac4db8f2871f3860ba01973ac0147e82",
+    "results/control-sharing-coverage/prefreeze-family-review.json": "fd78163d77eed14a3de4a1b27ca3f28f966f38eb5a75c77ccdbb05e24db79a8b",
+    "results/control-sharing-coverage/prefreeze-audit-source-v1.py": "ba26e55e7cc6cf5325eaf5ea05f33cd291b3104734a51193b96e785b1f854d8b",
+    "results/control-sharing-coverage/rejected-measurement-input-draft-v1.py": "84e542c9ad5e47c301c4529dbb92e8facd109d1256f468b267f5d291040eb6a9",
+    "results/control-sharing-coverage/rejected-joint-inputs-v1.json": "4e71ec2ffa598a3202f377d6aef91f51daeb504679f59aea45017d0ed7867def",
+    "results/control-sharing-coverage/input-family-revision-v1.json": "0a37d5f56b9fc59e7671270eef93817ea9bccd03527df281e2c744d601c9071c",
+    "results/control-sharing-coverage/parent-preflight-validation.json": "462b354fb108a71f49e37a0666fe402659d6e1090c5c4df0c8b85339f5df3bd7"
+  },
+  "scientific_artifacts_preserved": 1008,
+  "identity_and_modular_novelty": {
+    "historical_formulas": 11288,
+    "new_training_rows": 32,
+    "fresh_pool_rows": 96,
+    "original_alias_and_modular_identity_or_skeleton_collisions": 0,
+    "masked_shift_input_swap_commutative_family_collisions": 0,
+    "rejected16_prefreeze_family_overlaps_preserved_and_reproduced": true,
+    "only_two_challenge_families_revised_before_freeze": true,
+    "all_latest128_including72_unlabelled_consumed": true,
+    "sound_modular_rules": {
+      "rules": [
+        "ADDI(ADDI(x,a),b)=ADDI(x,(a+b)mod2^32)",
+        "ANDI(ADDI(x,k),2^w-1)=ANDI(x,2^w-1) when k mod2^w=0"
+      ],
+      "decoded_RV32_vector_comparisons": 4144,
+      "plus2_under_mask1_removed": true,
+      "nested9_plus2_collapses11": true,
+      "plus2_under_mask3_preserved": true,
+      "scope": "Sound finite rewrite screen, not exhaustive semantic equivalence."
+    },
+    "finite_screen_not_exhaustive_equivalence": true
+  },
+  "input_profile_review": {
+    "training_profile_counts": {
+      "both_input_and_control": 16,
+      "repeated_and_data_post_outer": 16
+    },
+    "new_training_and_pool_feature_vectors_independently_replayed": 128,
+    "all_four_consumed_failure_profiles_verified": {
+      "source_sha256": "b325f4b1f174db77662172a3765f2c9b42d5ff72a7ca9411e33205cce8ea57f5",
+      "training_rows": 1889,
+      "groups": {
+        "both_input_and_control": {
+          "training_rows": 6,
+          "class_counts": {
+            "32": {
+              "feasible": 0,
+              "infeasible": 6
+            },
+            "64": {
+              "feasible": 0,
+              "infeasible": 6
+            },
+            "128": {
+              "feasible": 2,
+              "infeasible": 4
+            }
+          },
+          "control_bit_counts": {
+            "0": 0,
+            "1": 1,
+            "2": 2,
+            "3": 1,
+            "4": 0,
+            "5": 2
+          }
+        },
+        "repeated_and_data_post_outer": {
+          "training_rows": 0,
+          "class_counts": {
+            "32": {
+              "feasible": 0,
+              "infeasible": 0
+            },
+            "64": {
+              "feasible": 0,
+              "infeasible": 0
+            },
+            "128": {
+              "feasible": 0,
+              "infeasible": 0
+            }
+          },
+          "control_bit_counts": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0
+          }
+        }
+      },
+      "all_four_consumed_failure_profiles_verified": true,
+      "no_future_inputs_or_labels_used": true,
+      "no_causal_mechanism_or_transfer_claim": true
+    },
+    "coordinate_matches_not_cost_or_safety_guarantees": true
+  },
+  "analytical_comparator_feasibility": {
+    "scope": "Consumed-data feasibility analysis ONLY, never inference/training/fresh selection. Known labels select a hypothetical cap-correct oracle solely to test declared gates for contradictions.",
+    "panels": {
+      "research-baselines": {
+        "count": 192,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 31.41296875,
+        "oracle_positive_MAPE_lower_bound": 43.37638526778592,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "application-transfer": {
+        "count": 327,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 0.8165494393476046,
+        "oracle_positive_MAPE_lower_bound": 29.224599749755065,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "arithmetic-stress": {
+        "count": 32,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 15.521145833333335,
+        "oracle_positive_MAPE_lower_bound": 13.417607960688125,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "selection-validation": {
+        "count": 40,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 14.0655,
+        "oracle_positive_MAPE_lower_bound": 13.008067080292673,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-first-fresh40": {
+        "count": 40,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 14.075208333333332,
+        "oracle_positive_MAPE_lower_bound": 14.434834057627402,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-second-fresh32": {
+        "count": 32,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 28.76125,
+        "oracle_positive_MAPE_lower_bound": 17.697725571133105,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-third-fresh40": {
+        "count": 40,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 12.033125,
+        "oracle_positive_MAPE_lower_bound": 10.448903470255072,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-fourth-fresh40": {
+        "count": 40,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 21.59508333333333,
+        "oracle_positive_MAPE_lower_bound": 12.711238687817511,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-fifth-fresh40": {
+        "count": 40,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 11.366666666666667,
+        "oracle_positive_MAPE_lower_bound": 8.090110049925295,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-sixth-broad40": {
+        "count": 40,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 12.202,
+        "oracle_positive_MAPE_lower_bound": 14.513085439966485,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-seventh-conditional18": {
+        "count": 18,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 10.688703703703704,
+        "oracle_positive_MAPE_lower_bound": 12.385098034991334,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-eighth-general32": {
+        "count": 32,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 16.286666666666665,
+        "oracle_positive_MAPE_lower_bound": 12.736149096173085,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-eighth-conditional24": {
+        "count": 24,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 10.042222222222223,
+        "oracle_positive_MAPE_lower_bound": 7.758010637796441,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-ninth-general32": {
+        "count": 32,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 16.590833333333336,
+        "oracle_positive_MAPE_lower_bound": 12.606880482466826,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-ninth-conditional9": {
+        "count": 9,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 23.625555555555557,
+        "oracle_positive_MAPE_lower_bound": 17.543853486091386,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-tenth-general32": {
+        "count": 32,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 15.073333333333329,
+        "oracle_positive_MAPE_lower_bound": 11.754867768417679,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-tenth-unsupported8": {
+        "count": 8,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 26.13541666666667,
+        "oracle_positive_MAPE_lower_bound": 19.618942784968947,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-tenth-conditional14": {
+        "count": 14,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 15.298809523809522,
+        "oracle_positive_MAPE_lower_bound": 11.904180144303032,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-eleventh-general32": {
+        "count": 32,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 11.660208333333335,
+        "oracle_positive_MAPE_lower_bound": 9.829418632670151,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-eleventh-sharing8": {
+        "count": 8,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 30.022916666666667,
+        "oracle_positive_MAPE_lower_bound": 23.15516710587959,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-eleventh-legacy8": {
+        "count": 8,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 25.334583333333335,
+        "oracle_positive_MAPE_lower_bound": 30.180606488584033,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-eleventh-conditional9": {
+        "count": 9,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 19.10518518518519,
+        "oracle_positive_MAPE_lower_bound": 13.65988304714003,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-twelfth-general32": {
+        "count": 32,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 13.441145833333335,
+        "oracle_positive_MAPE_lower_bound": 17.106536410386642,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        },
+        "added_passing_classifier_comparator_feasible": {
+          "mae_lut4": true,
+          "positive_mape_percent": true
+        },
+        "added_passing_classifier_tail_feasible": true,
+        "oracle_exactly_matches_existing_passing_classifier": true
+      },
+      "consumed-twelfth-sharing8": {
+        "count": 8,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 21.982499999999998,
+        "oracle_positive_MAPE_lower_bound": 18.13427213928707,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      },
+      "consumed-twelfth-legacy8": {
+        "count": 8,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 25.155416666666664,
+        "oracle_positive_MAPE_lower_bound": 24.658724850002063,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        },
+        "added_passing_classifier_comparator_feasible": {
+          "mae_lut4": true,
+          "positive_mape_percent": true
+        },
+        "added_passing_classifier_tail_feasible": true,
+        "oracle_exactly_matches_existing_passing_classifier": true
+      },
+      "consumed-twelfth-conditional16": {
+        "count": 16,
+        "all_points_feasible": true,
+        "all_points_unique_under_all_cap_gates": true,
+        "oracle_MAE_lower_bound": 16.157708333333332,
+        "oracle_positive_MAPE_lower_bound": 23.793962814267527,
+        "six_original_accuracy_comparators_feasible": {
+          "budget_release_compound_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_structural": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "boundary_abstention": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_augmented": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          },
+          "corroborated_coverage_only": {
+            "mae_lut4": true,
+            "positive_mape_percent": true
+          }
+        },
+        "six_original_maximum_underprediction_comparators_feasible": {
+          "budget_release_compound_only": true,
+          "boundary_structural": true,
+          "boundary_coverage_only": true,
+          "boundary_abstention": true,
+          "corroborated_augmented": true,
+          "corroborated_coverage_only": true
+        }
+      }
+    },
+    "unique_feasible_point_for_every_consumed_row": true,
+    "added_classifier_comparator_only_latest_passing_general_and_legacy": true,
+    "deliberately_excluded_impossible_failed_active_comparator": {
+      "population": "latest_failed_active8",
+      "oracle_MAE_lower_bound": 5.905416666666667,
+      "unsafe_classifier_MAE": 2.0,
+      "oracle_positive_MAPE_lower_bound": 4.60777181474856,
+      "unsafe_classifier_positive_MAPE": 1.5861061419200955,
+      "adding_unsafe_classifier_as_area_accuracy_comparator_is_impossible": true,
+      "reason": "Correctly rejecting129/130/129 at128 requires release fallback138.6567/139.7667/144.82. Those larger absolute errors cannot be hidden by changing the other five accepted cap-snap outputs. This is only an evaluation oracle, never inference or a training target."
+    },
+    "future_unknown_cohort_gates_remain_empirical_not_guaranteed": true,
+    "all_original_gates_retained": true
+  },
+  "reviewed_policy": {
+    "scope": "ALL original rootxor/add/DIRECTcompoundSRA chains, including outer-input cases; data addi+xori and input control must bind to the SAME shift.",
+    "support": "Same-chain formula-only width/sharing cells from frozen1889+new32 training formulas; every eligible chain must be supported. Allfour cells already represented before intervention.",
+    "decision": "Release-first. For cap32/64/128 require signed<=cap<release, all same-chain cells covered, and P(training_cost<=cap)>=0.5. Exact0.5 tie accepts. Smallest qualifyingcap; release otherwise. No legacy bypass, probability sorting, calibration, margin/threshold search or independent-target wrappers.",
+    "bounds": "signed<=candidate<=release",
+    "baseline_limits": "This bounded experiment repairs excessFR and protects existingFA gains. It cannot fix release falseacceptances or signed falserejections made immutable by these bounds; preserve all six policy-limitations diagnostics without claiming all mistakes solved.",
+    "targets": "Native multioutput ExtraTreesClassifier with shared partitions; nested binary indicators y<=32,y<=64,y<=128 in this order. Explicit sample_weight=None and class_weight=None.",
+    "class_mapping": "Positiveclass1 is found in each classes_ array; singleton0 yields0, singleton1 yields1. Never assume column1 exists. Raw probabilities are retained and independently checked nondecreasing across caps; no clipping/sorting repair.",
+    "configuration": {
+      "n_estimators": 300,
+      "criterion": "gini",
+      "max_depth": null,
+      "min_samples_split": 2,
+      "min_samples_leaf": 1,
+      "min_weight_fraction_leaf": 0.0,
+      "max_features": 1.0,
+      "max_leaf_nodes": null,
+      "min_impurity_decrease": 0.0,
+      "bootstrap": false,
+      "oob_score": false,
+      "n_jobs": 1,
+      "random_state": 2026101401,
+      "verbose": 0,
+      "warm_start": false,
+      "class_weight": null,
+      "ccp_alpha": 0.0,
+      "max_samples": null,
+      "monotonic_cst": null
+    },
+    "planned_fits": 1,
+    "training": "One fixed233 native multioutput classifier on exactly frozen1889+32 genuinely new training rows=1921. No consumed evaluation labels fitted. No feature, threshold, seed, weight or parameter change.",
+    "comparison": "Reuse frozen1889-row feasibility_augmented as zero-fit baseline. No refit of baseline and no217representation ablation. This intervention changes training coverage only, within the fixed algorithm/columns/rule.",
+    "selection": "Select the single new candidate only if all development gates pass; otherwise selectnone and retain it as diagnostic. No postfreshlabel switch.",
+    "validated_baseline_preservation": "Existing six comparators apply everywhere. The latest passing classifier is an additional MAE/MAPE/tail comparator only on retained latestgeneral32/latestlegacy8 and freshgeneral32/freshlegacy8; not on its unsafe active subgroup.",
+    "interpretation": "Synthetic coverage-transfer experiment, uncalibrated probabilities, no cost-mechanism or universal safety/CPU guarantee."
+  },
+  "reviewed_gates": {
+    "retained": "All26panels1113metricrows/1073records(shared40controls), every inheritednamed group, expandedrequiredtargets. Existing six accuracy/tail comparators unchanged, FA<=release FR<=signed separately32/64/128, zero newcase mistakes, signed<=candidate<=release.",
+    "validated_gains": "Preserve frozen feasibility_augmented MAE/MAPE/tail on retained latestgeneral32/latestlegacy8 and prospective freshgeneral32/freshlegacy8. Do not add this failed model as an accuracy comparator on its unsafe active8.",
+    "general": "Completefreshgeneral32 strict MAE/positiveMAPE and totalFA-event gainsvssigned plusallhardgates. PositiveMAPE=100*mean(abs(y-p)/y) over y>0; zero targets retained in MAE/cap/tail.",
+    "other_fresh": "Sharing8,legacy8,conditional-full(active+SAME8generalcontrols),active-only separatelypasshardgates; no pooling/independenceclaim.",
+    "activity": "Atleast4newacceptances versus frozen feasibility_augmented across>=2templatesincluding128, legacy64veto oldabstention>=1, sharing128veto oldlearned217>=1; prediction-defined, truth checkedafterlabels.",
+    "missing": "All32train+96pool inputs/features/points retained. Fixed48alwayslabelled thenup16actions. Onefit only, no retries/replacements/extensions/extra variants or postlabel feature/rule/gatechanges.",
+    "tolerance": 1e-10,
+    "probability_roundoff_tolerance": 1e-12
+  },
+  "reviewed_selection": {
+    "general_count": 32,
+    "sharing_count": 8,
+    "legacy_count": 8,
+    "challenge_count": 48,
+    "shared_controls": 8,
+    "maximum_active": 16,
+    "minimum_active": 4,
+    "minimum_templates": 2,
+    "requires_cap128": true,
+    "active_comparator": "feasibility_augmented",
+    "legacy64_veto_comparator": "boundary_abstention",
+    "sharing128_veto_comparator": "boundary_coverage_only",
+    "order": "Fixed48 then sortedtemplate roundrobin originalindexorder; exclude history/training/fixed/selected collisions in either217/233. No replacement, extension, quotas or label filtering.",
+    "populations": "General/sharing/legacy/conditional-full(active+SAME8generalcontrols)/active-only separatelygated; no pooledmetric or independenceclaim."
+  },
+  "one_fixed233_fit_on1889_plus32_no_consumed_labels": true,
+  "fixed0_5_tie_acceptance_parameters_unchanged": true,
+  "summed_worker_seconds300_peak2_and_parent_stage_authorization_required": true,
+  "no_new_features_training_labels_fit_attempts_at_receipt": true,
+  "postmeasurement_training_label_audit_required_before_fit": true,
+  "audit_fits": 0,
+  "audit_native_jobs": 0
+}

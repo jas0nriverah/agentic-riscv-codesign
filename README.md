@@ -35,7 +35,17 @@ This matched test contains **192 synthetic circuits**, with the same 1,665 fitti
 
 These are separate experiments, not one learning curve. Targeted coverage helped arithmetic cases, but did not improve the primary application-transfer metric. The scoped policy reduced MAE **22.63%** on 32 new related circuits; its worst underprediction increased **2.83 → 32.01 LUT4**, so it remains experimental. [Complete compact results](results/README.md).
 
-## Latest experiment: learning budget feasibility
+## Latest experiment: control and sharing coverage
+
+One fixed **233-feature classifier** adds 32 measured training circuits to the frozen 1,889 rows, holding the 300-tree algorithm and 0.5 rule unchanged. It repairs the consumed shared-AND rejection and accepts all **62 required feasible cases**, but retained panels expose **seven FA128 mistakes versus release: four new versus the frozen classifier and three persistent**. The candidate fails development selection and is not promoted.
+
+**Fresh validation is incomplete:** only **16 of 55 area labels** finish before the frozen wall deadline; two workers time out and 37 cases remain unattempted. All 55 original RTL checks complete, but there are **no fresh population MAE/MAPE or budget-error metrics**. The completed subset is not substituted for the required cohort.
+
+![Execution and label coverage status: development fails and fresh validation is incomplete; no fresh accuracy comparison is available.](docs/figures/research/control-sharing-coverage.svg)
+
+The bounded run uses one fit and **288.69 summed worker-process seconds / 300**, with at most two native workers. The goal remains unmet, the base model stays the default, and all failed evidence is retained. [Full report](results/control-sharing-coverage/README.md) · [Incomplete outcome](results/control-sharing-coverage/incomplete-outcome.json) · [Previous classifier study](results/boundary-feasibility/README.md).
+
+## Previous experiment: learning budget feasibility
 
 Two matched **300-tree classifiers** learn whether a circuit fits **32, 64 or 128 LUT4**, using the same **1,889 training circuits** and either **217 or 233 features**. A fixed probability threshold of 0.5 supports budget decisions; these probabilities are uncalibrated. The 233-feature model passes all retained development checks; the 217-feature model fails a protected rejection.
 

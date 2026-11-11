@@ -153,3 +153,24 @@ python scripts/render_boundary_feasibility.py
 ```
 
 The 56 measured circuits comprise 32 general, eight sharing, eight legacy and eight active cases. The conditional population combines the eight active cases with eight controls already in the general population; do not pool these as independent samples. The run used two fits and 189.39 summed worker-process seconds under a 300-second limit, with at most two native workers. Summed process time and concurrent stage wall time are reported separately. All 120,288 RTL comparisons passed. The negative promotion decision is part of the reproducible result.
+
+
+## Control and sharing coverage: incomplete validation
+
+The [current report](../results/control-sharing-coverage/README.md) preserves one fixed 1,921-row/233-feature fit and an incomplete 55-case diagnostic label phase. Saved inference and audit replay require no new fits or native jobs:
+
+```sh
+python scripts/learn_control_sharing_coverage.py replay
+python scripts/audit_control_sharing_coverage.py final
+python scripts/learn_control_sharing_coverage.py predict-cached \
+  --candidates results/control-sharing-coverage-validation/candidates.json \
+  --features results/control-sharing-coverage-validation/features.json \
+  --prediction-output generated/control-sharing-coverage-predictions.json
+python scripts/render_control_sharing_coverage.py
+```
+
+Model replay verifies all retained and frozen points and reports `fresh_metrics_replayed=false`. This is expected: only 16 of 55 fresh area labels complete, two workers time out and 37 cases are unattempted. `fresh-metrics.json` is intentionally absent; do not run complete-population scoring or treat the 16-case subset as validation. The renderer shows execution and label coverage status, not a fresh accuracy comparison.
+
+The [incomplete outcome](../results/control-sharing-coverage/incomplete-outcome.json) marks all five primary populations not evaluable. All 55 fresh RTL proofs pass (118,140 comparisons); together with 32 measured/proved training circuits the run retains 87 proved formulas and 186,876 comparisons. Native accounting is 288.6874 summed worker-process seconds / 300, 152.0265 stage wall seconds, peak two workers, and 180 launched processes versus 217 scheduled/status records. No retries, residual-margin jobs or extra fits occur.
+
+The candidate passes all 62 required acceptances but fails four protected rejections; the full consumed panels reveal seven unique FA128 mistakes versus release, four new versus the frozen classifier. These development failures and incomplete fresh validation both prevent promotion. Preserve the frozen directories; any further acquisition or training needs a separate preregistered protocol and authorization.

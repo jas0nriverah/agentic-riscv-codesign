@@ -1,0 +1,181 @@
+{
+  "schema": "control-sharing-prefreeze-family-review-v1",
+  "status": "rejected_input_draft",
+  "created_at_utc": "2026-11-11T19:18:30.233578+00:00",
+  "original_measurement_source_sha256": "84e542c9ad5e47c301c4529dbb92e8facd109d1256f468b267f5d291040eb6a9",
+  "audit_normalizer_source_sha256": "ba26e55e7cc6cf5325eaf5ea05f33cd291b3104734a51193b96e785b1f854d8b",
+  "bindings": {
+    "results/control-sharing-coverage/rejected-measurement-input-draft-v1.py": "84e542c9ad5e47c301c4529dbb92e8facd109d1256f468b267f5d291040eb6a9",
+    "results/control-sharing-coverage/rejected-joint-inputs-v1.json": "4e71ec2ffa598a3202f377d6aef91f51daeb504679f59aea45017d0ed7867def"
+  },
+  "finding": "Masked arithmetic/logical right shifts and global input renaming conceal16 training/pool structural-family overlaps. Existing original/modular screen passes but does not include these identities. No historical overlaps under the additional finite screen.",
+  "historical_structural_family_overlaps": [],
+  "training_pool_structural_family_overlaps": [
+    {
+      "pool_index": 48,
+      "template": "challenge_andcontrol_full",
+      "training_indices": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "pool_index": 49,
+      "template": "challenge_andcontrol_full",
+      "training_indices": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "pool_index": 50,
+      "template": "challenge_andcontrol_full",
+      "training_indices": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "pool_index": 51,
+      "template": "challenge_andcontrol_full",
+      "training_indices": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "pool_index": 52,
+      "template": "challenge_andcontrol_full",
+      "training_indices": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "pool_index": 53,
+      "template": "challenge_andcontrol_full",
+      "training_indices": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "pool_index": 54,
+      "template": "challenge_andcontrol_full",
+      "training_indices": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "pool_index": 55,
+      "template": "challenge_andcontrol_full",
+      "training_indices": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "pool_index": 64,
+      "template": "challenge_andcontrol_signed16",
+      "training_indices": [
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "pool_index": 65,
+      "template": "challenge_andcontrol_signed16",
+      "training_indices": [
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "pool_index": 66,
+      "template": "challenge_andcontrol_signed16",
+      "training_indices": [
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "pool_index": 67,
+      "template": "challenge_andcontrol_signed16",
+      "training_indices": [
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "pool_index": 68,
+      "template": "challenge_andcontrol_signed16",
+      "training_indices": [
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "pool_index": 69,
+      "template": "challenge_andcontrol_signed16",
+      "training_indices": [
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "pool_index": 70,
+      "template": "challenge_andcontrol_signed16",
+      "training_indices": [
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "pool_index": 71,
+      "template": "challenge_andcontrol_signed16",
+      "training_indices": [
+        12,
+        13,
+        14,
+        15
+      ]
+    }
+  ],
+  "independent_fullformula_RV32_checks": 12800,
+  "soundness": "Fixed SRAI and SRLI amount k agree on low b output bits if b+k<=32. Low-bit demand propagates through bitwise and modular ADD/SUB/MUL; other operations conservatively demand32bits. Global input swap and commutative operand order preserve hardware family, not literal input/output equality without renaming. Constants are erased only for structural-family screening.",
+  "fits": 0,
+  "native_jobs": 0,
+  "no_features_predictions_or_labels_used": true,
+  "required_resolution": "Substantively revise the two challenge families prospectively before freezing, then rerun the same screen; preserve the rejected evidence."
+}
