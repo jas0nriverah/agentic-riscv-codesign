@@ -68,3 +68,9 @@ The [zero-fit boundary experiment](../results/boundary-repair/README.md) reuses 
 ## Direct test of the correction
 
 The [conditional boundary challenge](../results/boundary-challenge/README.md) freezes a 200-input pool, extracts all features, then selects novel disagreements using the unchanged policy before any labels. Ten active cases and eight fixed controls meet the predeclared coverage requirements. The repair corrects eight release false rejections but creates two false acceptances, worsening both MAE and MAPE versus release. Median agreement alone is therefore insufficient. No passing subset is substituted for the complete result, and neither this negative result nor the prior inactive trial is promoted.
+
+## Structural refinement
+
+The [structural boundary refinement](../results/boundary-refinement/README.md) applies median adjudication only when the original formula has an XOR root, a direct addition operand and a direct compound signed-shift operand of that same addition. Both operand orders are tested; elsewhere the previous budget-release prediction is exact. This development-informed rule uses no labels, IDs or constant-specific lookup at inference.
+
+It preserves the nine known rejection repairs and prevents both earlier new false acceptances. All16 fresh active cases pass, but the fixed general32 panel retains four false rejections introduced by release. Those four cases are inside the structural gate and have forest medians above128, so the correction does not activate. This suggests studying training coverage or representation for Boolean sharing and narrow signed arithmetic; that hypothesis is not yet validated. The candidate remains experimental and unpromoted.

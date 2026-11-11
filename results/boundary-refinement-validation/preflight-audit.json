@@ -1,0 +1,90 @@
+{
+  "schema": "independent-boundary-refinement-preflight-audit-v1",
+  "status": "pass",
+  "audited_at_utc": "2026-11-11T05:38:32.443079+00:00",
+  "bindings": {
+    "results/boundary-refinement/protocol.json": "29dad244ab3389d0e38f7a406251f3dce7e020aefdc4281acf262bae6bf1d912",
+    "results/boundary-refinement/policy-freeze.json": "a3dacf0c1bf3423c8676826e25e184078f361b8c4225194abb34dbbfe8871ace",
+    "results/boundary-refinement/development-predictions.json": "29fa62bd605f6446b2f25570bc1f90dc09c7c2f653f12c6c3a330397c1a1c37d",
+    "results/boundary-refinement/development-metrics.json": "5b32bb9afe78bf5aa2a6c8a899b45d521e16bffb4379322196b765af4d162c72",
+    "results/boundary-refinement/auditor-prior-artifacts.json": "9ffac2bf556e3c104107307c0bd07ed9dfcf98c5342ea3a5404fe44fe11e9e53",
+    "results/boundary-refinement/goal-at-freeze.json": "7c5dcc0a70eed5f5dac9516ca095b0943d801fd21c93f392967c2e356819b776",
+    "results/boundary-refinement-validation/plan.json": "2517d6af584d9ddb137d570472364d6ce3976cb3f7f3565bec768a790ab98e9a",
+    "results/boundary-refinement-validation/pool-candidates.json": "29624c581815f671f5201dd8421332b23692bb4402b797f80ca00b9d8b5f8c2e",
+    "results/boundary-refinement-validation/novelty.json": "6744bcbcbe9a6ee156ea8c77832e0ce47e28676cc28b25d302104807ec1ff139",
+    "results/boundary-refinement-validation/historical-formulas.json": "4f0d73ddc55e51b89a02db19355e3a11ce04cb4a995cf2ca7ac9dba67697eb85",
+    "results/boundary-refinement-validation/tools.json": "8cdb179640fa4cf11a905ef775a7e28d37b296c309018128c6c8b451d8528fc8"
+  },
+  "scientific_artifacts_preserved": 675,
+  "identity_audit": {
+    "historical_formulas": 9834,
+    "saved_prior_aliases": 1152,
+    "known_identity_keys": 17034,
+    "known_or_within_identity_overlaps": 0,
+    "historical_original_AST_skeleton_overlaps": 0,
+    "pool_count": 128,
+    "templates": {
+      "general_signed_offset_orroot": 4,
+      "general_xordata_androot": 4,
+      "general_anddata_xorroot": 4,
+      "general_ordata_addshift": 4,
+      "general_low16_oradd": 4,
+      "general_signed8_androot": 4,
+      "control_low16_xor_dualadd": 2,
+      "control_wrappedxor_add_dualxor": 2,
+      "control_unsigned_addxor": 2,
+      "control_static_signed_addxor": 2,
+      "challenge_addi_xori_xordata_xorshift": 8,
+      "challenge_xori_addi_xordata_andshift": 8,
+      "challenge_addi_xori_xordata_addshift": 8,
+      "challenge_wrappedxor_forward": 8,
+      "challenge_wrappedxor_reverse": 8,
+      "challenge_addi_xori_ordata_xorshift": 8,
+      "challenge_xori_addi_anddata_addshift": 8,
+      "challenge_low16_xordata": 8,
+      "challenge_low31_xordata": 8,
+      "challenge_signed8_xordata": 8,
+      "challenge_addi_xori_anddata_orshift": 8,
+      "challenge_xori_addi_ordata_andshift": 8
+    }
+  },
+  "reviewed_policy": {
+    "method": "Apply the unchanged even300-tree median cap adjudication only on a new original-dataflow structural gate; release elsewhere. No fits or weight changes.",
+    "structural_gate": "Original root is xor; either xor operand is add; either operand of that SAME add is a DIRECT sra with input-bearing shift operand and both addi and xori in its OWN data subtree. No constants, IDs, labels, normalization or case lookup. Test both commutative operand positions.",
+    "median": "Exactly the frozen boundary_median prediction on gated formulas, including numpy even median average at sorted positions149/150 and smallest qualifying cap32/64/128. Else frozen budget_release_compound_only exactly.",
+    "framing": "Development-informed AST/dataflow hypothesis, not an established synthesis mechanism or calibrated uncertainty. Earlier negative receipts remain failed."
+  },
+  "reviewed_selection": {
+    "pool_count": 128,
+    "general_count": 32,
+    "general_controls": 8,
+    "challenge_pool_count": 96,
+    "maximum_selected_active": 16,
+    "active": "Only challenge-cohort rows whose boundary_structural point differs exactly from release; no labels.",
+    "feature_freshness": "Exact217 float64 tuples against2866 historical rows:1825 fitted +841 consumed evaluation +all200 prior challenge pool rows (18 labelled overlaps,182 previously unlabelled). All retained. General32 historical/intra-general duplicates block eligibility. Challenge historical matches and keys shared with general32 excluded; round-robin keeps one active per remaining cluster. No replacements.",
+    "ordering": "All general32 retained in frozen pool order. Eligible active challenge rows grouped by sorted template name; round-robin first remaining original pool index, skipping already selected217 keys; stop immediately at16 or exhaustion. Append actives after general32 for unique labels.",
+    "conditional_full": "Selected actives plus the SAME8 fixed excluded-root general controls; shared controls explicitly disclosed, no pooling or independence claim. Active-only separately gated.",
+    "coverage": "At least4 selected feature-novel actives across at least2 templates; at least1 actual cap128 clamp.",
+    "missing": "All128 features and points retained; general32 and every selected active labelled. No extensions, filling, replacements, retries or postlabel filtering."
+  },
+  "reviewed_gates": {
+    "retained": "All eleven consumed panels841rows and named subgroups: MAE/MAPE/FA/tail<=release, FR<=signed separately percap32/64/128, signed<=point<=release. Preserve original125 repair, all8 latest correctedFR and both latest correct rejections.",
+    "general": "Complete fixed general32: MAE and MAPE strictly<signed AND <=release; FA<=release and FR<=signed separately percap; summed FA circuit-budget events strictly<signed; maxunder<=release and signed. General32 feature-novel/unique; no selection/filtering.",
+    "conditional": "Selected active-only AND conditional-full(active+8shared general controls): MAE/MAPE/FA/tail<=release, FR<=signed percap32/64/128, signed<=point<=release. Prospective coverage>=4active/2templates/cap128. No strict conditional FA gain vs signed demanded.",
+    "tolerance": 1e-10,
+    "postlabel": "No policy, weight, route, cohort, selection, gate or threshold changes after labels; no pooled success metric."
+  },
+  "finite_candidates": [
+    "boundary_structural"
+  ],
+  "new_fits": 0,
+  "new_features_labels_selection_and_attempts_absent_at_receipt": true,
+  "single_structural_policy_development_selection_pool_frozen_before_features_or_labels": true,
+  "general32_fixed_before_predictions": true,
+  "shared_control_count": 8,
+  "shared_controls_not_independent": true,
+  "conditional_population_not_representative": true,
+  "no_pooled_metric": true,
+  "audit_fits": 0,
+  "audit_native_jobs": 0
+}

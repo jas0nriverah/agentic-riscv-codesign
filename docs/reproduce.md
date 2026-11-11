@@ -82,3 +82,7 @@ See the [boundary-repair report](../results/boundary-repair/README.md) for cache
 ## Conditional boundary challenge
 
 The [challenge report](../results/boundary-challenge/README.md) documents input-only selection, all-pool provenance, cached inference and read-only replay with `scripts/challenge_boundary_coverage.py` and `scripts/audit_boundary_challenge.py`. `scripts/render_boundary_challenge.py` reproduces the conditional comparison figure. The experiment has zero fits and retains its failed accuracy and false-acceptance gates.
+
+## Structural boundary refinement
+
+The [refinement report](../results/boundary-refinement/README.md) provides cached inference and read-only replay using `scripts/refine_boundary_coverage.py` and `scripts/audit_boundary_refinement.py`. All128 pool features/points and48 unique measured labels are retained. `scripts/render_boundary_refinement.py` reproduces separate general and conditional panels, including the failed general false-rejection gate. No fitting is required.

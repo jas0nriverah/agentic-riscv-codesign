@@ -1,0 +1,103 @@
+{
+  "schema": "boundary-refinement-consumed-diagnostics-v1",
+  "scope": "Postlabel descriptive general32 diagnostics only; no policy, gate, selection, fit or eligibility change. Conditional passing subset does not establish overall success.",
+  "cases": [
+    {
+      "selected_index": 1,
+      "pool_index": 1,
+      "candidate_id": "boundary-refinement-pool:8680afa1960d95cc68584794355327970da980c50b9ff68665823cba7c5e76bf",
+      "template": "general_signed_offset_orroot",
+      "parameter": 3,
+      "formula": "xor(add(sra(addi(xori(in1,11),73),andi(in0,3)),in0),or(in0,in1))",
+      "actual_lut4": 128,
+      "signed_lut4": 128.0,
+      "release_lut4": 144.45,
+      "broad_median_lut4": 144.45,
+      "refined_lut4": 144.45,
+      "forest_median_lut4": 155.0,
+      "structural_scope": true,
+      "remaining_fr_caps_vs_signed": [
+        128
+      ],
+      "corrected_fr_caps_vs_release": []
+    },
+    {
+      "selected_index": 4,
+      "pool_index": 4,
+      "candidate_id": "boundary-refinement-pool:8d633981a115059722438f321f90ab59fcd8076c4288ac27e26e6c27ddab5b13",
+      "template": "general_xordata_androot",
+      "parameter": 1,
+      "formula": "xor(add(sra(xori(addi(xor(in0,in1),73),11),andi(in1,1)),in1),and(in0,in1))",
+      "actual_lut4": 125,
+      "signed_lut4": 124.51333333333334,
+      "release_lut4": 129.03,
+      "broad_median_lut4": 128.0,
+      "refined_lut4": 128.0,
+      "forest_median_lut4": 128.0,
+      "structural_scope": true,
+      "remaining_fr_caps_vs_signed": [],
+      "corrected_fr_caps_vs_release": [
+        128
+      ]
+    },
+    {
+      "selected_index": 8,
+      "pool_index": 8,
+      "candidate_id": "boundary-refinement-pool:92969182dc309f48d332650917160f8efdb016127273208d8b2c65167d3b9851",
+      "template": "general_anddata_xorroot",
+      "parameter": 1,
+      "formula": "xor(add(sra(addi(xori(and(in0,in1),11),73),andi(xor(in0,in1),1)),in1),xor(in0,in1))",
+      "actual_lut4": 125,
+      "signed_lut4": 128.0,
+      "release_lut4": 136.50666666666666,
+      "broad_median_lut4": 136.50666666666666,
+      "refined_lut4": 136.50666666666666,
+      "forest_median_lut4": 155.0,
+      "structural_scope": true,
+      "remaining_fr_caps_vs_signed": [
+        128
+      ],
+      "corrected_fr_caps_vs_release": []
+    },
+    {
+      "selected_index": 12,
+      "pool_index": 12,
+      "candidate_id": "boundary-refinement-pool:a2f55de7658ee842b4b740823f381cbb06052b611f4ef6d2a6a76c2e42a0c515",
+      "template": "general_ordata_addshift",
+      "parameter": 1,
+      "formula": "xor(add(sra(xori(addi(or(in0,in1),73),11),andi(add(in0,in1),1)),in0),and(in0,in1))",
+      "actual_lut4": 125,
+      "signed_lut4": 128.0,
+      "release_lut4": 135.15,
+      "broad_median_lut4": 135.15,
+      "refined_lut4": 135.15,
+      "forest_median_lut4": 141.0,
+      "structural_scope": true,
+      "remaining_fr_caps_vs_signed": [
+        128
+      ],
+      "corrected_fr_caps_vs_release": []
+    },
+    {
+      "selected_index": 23,
+      "pool_index": 23,
+      "candidate_id": "boundary-refinement-pool:773387cdd80a540bbc746dc1474f090ee23d80e3050314a82a5c734385d64189",
+      "template": "general_signed8_androot",
+      "parameter": 31,
+      "formula": "xor(add(sra(slli(andi(xori(addi(in0,73),11),255),24),andi(in1,31)),in1),and(in0,in1))",
+      "actual_lut4": 115,
+      "signed_lut4": 125.95,
+      "release_lut4": 137.62333333333333,
+      "broad_median_lut4": 137.62333333333333,
+      "refined_lut4": 137.62333333333333,
+      "forest_median_lut4": 145.0,
+      "structural_scope": true,
+      "remaining_fr_caps_vs_signed": [
+        128
+      ],
+      "corrected_fr_caps_vs_release": []
+    }
+  ],
+  "interpretation": "Four budget-release false rejections remain in the broader fixed population, despite preserving release accuracy/FA gains and correcting all16 selected conditional cases. They did not trigger the median-based adjudication; the structural gate alone does not address the broader overprediction failure mode.",
+  "next_step": "Any further method must retain every current panel and separately test genuinely fresh broad and activated cases, preserving release accuracy/FA/tail and signed false-rejection criteria. Do not relabel this trial as success or patch current labels into inference."
+}

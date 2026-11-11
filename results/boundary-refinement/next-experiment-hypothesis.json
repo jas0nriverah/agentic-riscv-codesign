@@ -1,0 +1,29 @@
+{
+  "status": "unexecuted hypothesis; no new fit, cohort freeze, feature extraction or native job",
+  "evidence": "All four remaining general32 false rejections are inside the structural gate, with median141/145/155 above cap128. The failure is confidently biased representation/coverage, not missing gate membership. Further threshold adjustment is not proposed.",
+  "hypothesis": "The fixed forest underrepresents Boolean input sharing and narrow signed compound dataflow. New independent training coverage, together with a small preregistered topology/width representation, could reduce this bias while preserving release accuracy and false-acceptance gains.",
+  "proposed_training": {
+    "new_rows_maximum": 32,
+    "boolean_sharing_compounds": 16,
+    "narrow_signed_compounds": 16,
+    "scope": "Novel compositions varying shared operands across shift data/control, post-shift add and outer Boolean result; 8/16-bit signed narrow data, truncation/sign placement and small/wide input-controlled shifts. Include contrasting high-cost compositions so lower estimates are not learned indiscriminately.",
+    "disjointness": "Freeze every training input before labels; exclude all prior formulas, saved aliases and evaluation217-feature duplicates, including all current128 and previous200 labelled/unlabelled pool cases. Never fit consumed evaluation labels."
+  },
+  "proposed_representation": "Before any new label, freeze a small AST topology/input-sharing/width feature set: direct signed-shift/add/outer-Boolean relationships, intersections of input dependencies across those operands, and signed truncation/extension widths. Audit old-feature collisions and training coverage explicitly. Exact columns and limits must be preregistered; no postlabel feature search.",
+  "proposed_fit": {
+    "planned_fits": 1,
+    "maximum_fits": 2,
+    "fit_threads": 1,
+    "base_training_rows": 1825,
+    "maximum_training_rows": 1857,
+    "configuration": "One fixed-seed forest with the existing300-tree settings; exact feature columns and any source routing chosen before new labels. No extra threshold tuning."
+  },
+  "proposed_validation": "New fixed general panel plus separate prediction-activated challenge, exact217/new-feature freshness, full-pool point retention and deterministic selection before labels. Include outside-family contrasts. Preserve all old11 panels, current general32, current conditional24 and active16, all named9FR repairs and both earlier correct rejections. Preserve release MAE/MAPE/FA/tail and signed FR separately at32/64/128; require fresh general strict signed accuracy/FA gains. Shared controls disclosed, no pooled success or posthoc passing subset.",
+  "compute_bounds": {
+    "native_seconds_maximum": 300,
+    "native_workers_maximum": 2,
+    "overlapping_native_jobs": false,
+    "paid_compute": false
+  },
+  "activation": "Requires a separate prospectively frozen protocol and independent audits before execution; current goal remains incomplete and existing jobs must not be rerun."
+}

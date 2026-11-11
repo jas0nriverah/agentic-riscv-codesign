@@ -35,13 +35,13 @@ This matched test contains **192 synthetic circuits**, with the same 1,665 fitti
 
 These are separate experiments, not one learning curve. Targeted coverage helped arithmetic cases, but did not improve the primary application-transfer metric. The scoped policy reduced MAE **22.63%** on 32 new related circuits; its worst underprediction increased **2.83 → 32.01 LUT4**, so it remains experimental. [Complete compact results](results/README.md).
 
-## Latest experiment: boundary challenge
+## Latest experiment: structural boundary repair
 
-The median repair fixes the known false rejection, but **does not generalize safely** in the new targeted test. From a fixed 200-input pool, we selected ten prediction disagreements and eight controls before measuring labels. It corrects **eight false rejections**, but introduces **two false acceptances** versus budget release. MAE worsens **11.11 → 11.22 LUT4** and MAPE **12.72% → 13.04%**. The candidate is not promoted.
+A structural gate prevents the median repair's two previous false acceptances and preserves all earlier gains. On **16 fresh active cases**, it corrects every false rejection without introducing a false acceptance. However, the separate **32-case general test retains four false rejections at 128 LUTs**, versus zero for the signed incumbent. The candidate is not promoted and the goal remains active.
 
-![Conditional boundary challenge: corrected false rejections coexist with new false acceptances and slightly worse accuracy.](docs/figures/research/boundary-challenge.svg)
+![Separate general and conditional tests: active-case repair succeeds, but four general false rejections remain.](docs/figures/research/boundary-refinement.svg)
 
-This is a prediction-conditioned challenge, not a representative performance estimate. All 200 pool records and all 18 selected measurements are retained. A separate 40-circuit test preserved the earlier accuracy and budget gains but never activated the repair; the two studies are not pooled. [Full challenge and failure analysis](results/boundary-challenge/README.md) · [Separate fresh 40-case study](results/boundary-repair/README.md). The improvement goal remains active and the base model remains the default.
+General-test MAE improves **22.48 → 17.59 LUT4** and MAPE **16.19% → 13.79%** versus the signed incumbent, preserving the budget-release gains. False acceptances at 128 LUTs fall **9 → 4**, but the remaining rejections fail our separate acceptance criterion. The two evaluations share eight controls and are not pooled. [Full results and four failure cases](results/boundary-refinement/README.md) · [Earlier negative challenge](results/boundary-challenge/README.md). The base model remains the default.
 
 ## Run it
 
