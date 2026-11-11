@@ -1,0 +1,20 @@
+{
+  "status": "Method rationale before new experiment labels; no accuracy claim",
+  "primary_sources": [
+    {
+      "title": "LLVM KnownBits reference",
+      "url": "https://llvm.org/doxygen/structllvm_1_1KnownBits.html",
+      "supports": "Known-zero/known-one arithmetic analysis includes addition with carry and addition/subtraction transfer functions."
+    },
+    {
+      "title": "LLVM GlobalISel Known Bits Analysis",
+      "url": "https://llvm.org/docs/GlobalISel/KnownBits.html",
+      "supports": "Known-bits information is used in compiler analysis and optimization."
+    }
+  ],
+  "local_hypothesis": "Retaining sound known-bit information through ADD/ADDI may distinguish narrow shifted data plus constants from unconstrained wide arithmetic, improving localized circuit descriptors. This must be tested using matched fitting and fresh synthesis labels.",
+  "implementation_derivation": "For each bit, enumerate the possible operand bits and incoming carry. Mark an output bit known only if every combination agrees; propagate the set of possible outgoing carries. Start with carry zero and discard carry beyond bit31 for RV32 modular addition. Ignoring correlations overapproximates possibilities rather than inventing known bits.",
+  "validation_required": "Exhaustive small-width abstract/concrete tests plus RV32 boundary, overflow, negative-immediate, shared-input and nested-expression checks; unchanged old feature outputs. Feature precision alone is not evidence of LUT accuracy or safe budget classification.",
+  "novelty_boundary": "Known-bits arithmetic is established compiler analysis, not claimed as a new invention. Our transfer routine is an independently implemented conservative recurrence; no LLVM dependency or copied implementation is introduced.",
+  "comparison_boundary": "Two matched fits can isolate the added descriptors on identical rows; they do not separately identify causal effects of the simultaneous new training coverage and policy change."
+}

@@ -1,0 +1,57 @@
+{
+  "schema": "boundary-corroboration-next-hypothesis-v1",
+  "status": "UNEXECUTED_POSTHOC_HYPOTHESIS",
+  "implemented": false,
+  "new_fits_this_hypothesis": 0,
+  "new_native_jobs_this_hypothesis": 0,
+  "problem": "Whole-pipeline corroboration rejects the protected unsafe cases, but thresholding an area mean loses feasible 128-LUT cases. Averaging tree estimates above and below a cap can place the mean above that cap. Localized features retain more established development repairs than 217 features here, but have more false rejections on the fresh general panel. A direct budget-feasibility learner is a different testable objective, not a cap-margin adjustment.",
+  "evidence": {
+    "augmented_established_repairs_retained": [
+      34,
+      39
+    ],
+    "coverage_established_repairs_retained": [
+      31,
+      39
+    ],
+    "both_remaining_fr_repaired": [
+      3,
+      4
+    ],
+    "both_protected_rejections": [
+      6,
+      6
+    ],
+    "fresh_general_fr128": {
+      "signed": 0,
+      "augmented": 3,
+      "coverage": 2
+    },
+    "fresh_actions": {
+      "count": 1,
+      "templates": 1,
+      "required_count": 4,
+      "required_templates": 2
+    },
+    "fresh_legacy_veto_saved_fa64_actual_lut4": 108,
+    "fresh_sharing128_veto_count": 0
+  },
+  "candidate_recipe": {
+    "training": "Reuse exactly the frozen1889 ordered training rows/targets; fit no consumed evaluation labels and acquire no new training labels.",
+    "fits": "Two preregistered matched multioutput ExtraTreesClassifier fits:217 versus233, fixed300 trees/seed/one thread, no hyperparameter or probability-threshold grid. Augmented-first development hierarchy, coverage fallback, otherwise no selection.",
+    "targets": "For each training target y, jointly learn nested binary outcomes y<=32,y<=64,y<=128. Use shared-tree multioutput partitions and retain all raw probabilities.",
+    "decision": "Release-first, same original-AST scope and signed<=candidate<=release bounds. A physical cap needs signed acceptance and fixed learned feasibility probability>=0.5; choose the smallest supported cap, otherwise release. Exact0.5 tie accepts. Freeze this recipe before any fits or fresh labels.",
+    "monotonicity": "Shared partitions and nested targets should preserve nondecreasing feasibility probabilities with cap; independently verify every output, class mapping and leaf probability. Do not claim calibrated probabilities or a safety guarantee.",
+    "features": "Same frozen217 and pure carry-refined16 columns; no further feature/threshold changes in this comparison. All four input-support cells are already represented and do not themselves protect decisions.",
+    "interpretation": "The matched comparison isolates the added16-column representation within a classifier. A comparison against the current regression policies also changes the learning objective; do not attribute gains to carry analysis alone."
+  },
+  "prospective_validation": {
+    "before_execution": "Freeze exact candidate count, classifier parameters/classes, policy, all-retained named target inventory, cohorts, feature freshness, deterministic selection and gates. Do not execute this JSON as a ready protocol.",
+    "panels": "Complete new general32, mandatory novel sharing8 and legacy8, plus a finite fixed prediction-selected challenge; report general/sharing/legacy/conditional-full/active-only separately and disclose shared controls. Include current false-rejection sign-placement/outer-input structures and high-cost shared-Boolean contrasts.",
+    "activity": "Keep at least4 genuinely new acceptances across2 novel templates including128, plus at least1 legacy64 veto and1 sharing128 veto on mandatory panels. No extension, replacement, label filtering, or postlabel quota/threshold changes.",
+    "gates": "Preserve every consumed full panel and named subgroup, all43 existing acceptance targets plus truth-confirmed fresh corrections, and all protected rejections. Require MAE/MAPE/tail no worse than all frozen required comparators, FA<=release and FR<=signed separately at32/64/128 with no newly introduced cap mistakes. Fresh general requires strict accuracy andFA gains versus signed; all other populations must pass hard no-loss gates. Retain negative evidence if any gate fails.",
+    "freshness": "All historical inputs, including every unlabelled previous pool row, remain consumed for formula/alias/skeleton and217/233 feature novelty. Freeze classifiers and all pool probabilities/selection before fresh labels.",
+    "bounds": "At most2 fixed one-thread fits, zero new training labels, at most300 summed native seconds/2 workers for fresh feature/proof/label jobs; no retries or overlapping expensive stages."
+  },
+  "warning": "This hypothesis is informed by consumed failures and is not a passing subset, validated classifier, or completed goal. Do not rerun this experiment or alter its failed receipts."
+}

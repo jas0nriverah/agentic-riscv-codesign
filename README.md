@@ -35,15 +35,15 @@ This matched test contains **192 synthetic circuits**, with the same 1,665 fitti
 
 These are separate experiments, not one learning curve. Targeted coverage helped arithmetic cases, but did not improve the primary application-transfer metric. The scoped policy reduced MAE **22.63%** on 32 new related circuits; its worst underprediction increased **2.83 → 32.01 LUT4**, so it remains experimental. [Complete compact results](results/README.md).
 
-## Latest experiment: checking unsupported corrections
+## Latest experiment: unified budget decisions
 
-We tested an input-coverage rule using the saved model, with **zero new fits**. It permits a learned budget correction only when every relevant signed-shift chain has a width/sharing pattern represented in training. Unsupported cases retain the earlier structural prediction.
+Two matched forests use the same **1,889 training circuits**, comparing **217 features** with **233 features** that add localized descriptors and carry-aware bit analysis. Every reduction across a hardware-budget cap now requires the new model's support; older median decisions have no bypass.
 
-![Fresh abstention test: six rejection repairs and one blocked unsafe acceptance, with remaining general and unsupported-panel failures.](docs/figures/research/boundary-abstention.svg)
+![Matched unified-policy comparison: improved fresh accuracy and fewer inherited false acceptances, but failed preservation and activity gates.](docs/figures/research/boundary-corroboration.svg)
 
-On **46 fresh circuits**, the rule preserves six learned corrections of false rejections from the earlier structural predictor and blocks one unsafe acceptance of a **159-LUT circuit at 128 LUTs**. Those targeted checks pass. However, the complete general panel retains **four false rejections at 128** and an inherited false acceptance at 64. General MAE is **17.02 LUT4**, better than the signed incumbent's 20.95 but worse than budget release's 16.91. The separate unsupported panel also fails the release comparison.
+On the fresh **32-circuit general test**, policy MAE falls from budget release's **13.47 LUT4** to **12.70 (217 features)** or **13.17 (233)**. Both remove the prior policy's extra 64-LUT false acceptances. But they retain **two or three false rejections at 128**, versus zero for the signed incumbent, and undo earlier valid repairs. The conditional test also misses the declared activity requirements.
 
-**The candidate is not promoted; the goal remains active and the base model remains the default.** The next work must address the inherited median correction and remaining training/representation errors, while preserving the successful repairs. [Full results, failure cases and reproduction](results/boundary-abstention/README.md) · [Prior matched 217-versus-233 experiment](results/boundary-coverage/README.md).
+**Neither candidate passes selection or is promoted; the goal remains active and the base model remains the default.** The next hypothesis is to learn budget feasibility directly, rather than infer it solely from a predicted mean area. [Full comparison, failures and reproduction](results/boundary-corroboration/README.md) · [Previous abstention experiment](results/boundary-abstention/README.md).
 
 ## Run it
 

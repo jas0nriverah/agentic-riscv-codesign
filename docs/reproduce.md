@@ -119,3 +119,20 @@ python scripts/render_boundary_abstention.py
 ```
 
 The fixed general panel, eight unsupported-pattern contrasts and selected active cases are reported separately. All pool inputs, predictions, abstentions and selection rules are retained, including failures. These commands do not retrain models or launch native synthesis.
+
+
+## Unified corroboration and localized features
+
+The [corroboration experiment](../results/boundary-corroboration/README.md) compares matched 217- and 233-feature forests trained on the same 1,889 circuits. Both use the same release-first budget policy; the 16 added descriptors include carry-aware known-bit information. Replaying the saved experiment requires no new fitting or synthesis:
+
+```sh
+python scripts/learn_boundary_corroboration.py replay
+python scripts/audit_boundary_corroboration.py
+python scripts/learn_boundary_corroboration.py predict-cached \
+  --candidates results/boundary-corroboration-validation/candidates.json \
+  --features results/boundary-corroboration-validation/features.json \
+  --prediction-output generated/boundary-corroboration-predictions.json
+python scripts/render_boundary_corroboration.py
+```
+
+The report separates raw forest estimates from final policy predictions, and reports the general, sharing, legacy-disagreement and conditional populations separately. Training rows, feature definitions, policy, model selection and every fresh prediction are frozen before their respective measurement checkpoints. Preserve the retained evidence when planning another experiment.
