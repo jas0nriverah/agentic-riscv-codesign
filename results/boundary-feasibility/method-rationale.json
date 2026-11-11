@@ -1,0 +1,47 @@
+{
+  "schema": "boundary-feasibility-method-rationale-v1",
+  "status": "prospective rationale; no fits or native jobs performed by this analysis",
+  "primary_sources": [
+    {
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html",
+      "accessed": "2026-11-11",
+      "relevance": "Native multioutput classifier, per-output class mapping, and probability interface."
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.multioutput.MultiOutputClassifier.html",
+      "accessed": "2026-11-11",
+      "relevance": "Independent estimators per target differ from the shared-partition model proposed here; this wrapper must not be used."
+    }
+  ],
+  "installed_sklearn": "1.9.1",
+  "motivation": "Prior regression-based cap corroboration loses feasible cases when its scalar mean exceeds the cap. Direct nested feasibility targets test whether a different supervised objective improves decisions. This is a hypothesis, not evidence of improvement.",
+  "matched_comparison": "Hold training membership, random seed, fixed explicit tree parameters, objective and decision policy constant between217and233 columns. This isolates the added16-column representation within this classifier. Comparison to regression also changes the objective, so it cannot isolate feature effects.",
+  "training_npz_sha256": "db417f669add9bb68d71fd713f46d140006cc168c2698e9919b79d763e16f113",
+  "observed_training_class_counts": {
+    "32": {
+      "feasible": 975,
+      "infeasible": 914
+    },
+    "64": {
+      "feasible": 1307,
+      "infeasible": 582
+    },
+    "128": {
+      "feasible": 1603,
+      "infeasible": 286
+    }
+  },
+  "implementation_requirements": [
+    "Use native shared-partition multioutput ExtraTreesClassifier, not three independently trained classifiers.",
+    "Explicitly freeze all model parameters including max_features, class_weight=None and no sample weights; do not silently inherit different classifier defaults.",
+    "Map probability of class1 through each output classes_ array, including singleton output classes.",
+    "Verify nested target probabilities are nondecreasing across32/64/128 from shared leaf membership and equal sample weighting. Do not merely sort or repair invalid outputs.",
+    "Fixed probability>=0.5 including exact ties is a preregistered experimental rule, not a calibrated risk or hardware-safety guarantee.",
+    "Keep area-error, tail-error, per-cap false-acceptance and false-rejection gates separate. A classifier accuracy score is insufficient."
+  ],
+  "interpretation_limits": [
+    "Known class imbalance is disclosed; no class-weight, threshold, seed or hyperparameter search is authorized.",
+    "If no candidate passes retained development gates, record no selection; any frozen fresh diagnostic remains diagnostic and cannot justify promotion.",
+    "No CPU speedup, timing, power, universal safety or superiority over published ASIC PPA research is established by this experiment."
+  ]
+}

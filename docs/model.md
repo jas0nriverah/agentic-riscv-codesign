@@ -98,4 +98,13 @@ The [matched corroboration experiment](../results/boundary-corroboration/README.
 
 Both policies start from budget release. Any lowering across 32, 64 or 128 LUTs requires the signed incumbent and new forest mean to accept that cap. There is no inherited median bypass. The scope includes all original root-XOR/add/direct-compound-signed-shift chains. All four training width/sharing cells are represented, so the cell-support guard is inactive within that scope.
 
-The unified rule rejects all six protected unsafe cases and fixes three remaining rejection cases, but the augmented candidate loses five established repairs and coverage-only loses eight. Neither is selected. Fresh general accuracy improves over release, while two or three excess false rejections remain at 128. The retained direct-feasibility-classifier proposal is an unexecuted next hypothesis, not a deployed model or validated improvement.
+The unified rule rejects all six protected unsafe cases and fixes three remaining rejection cases, but the augmented candidate loses five established repairs and coverage-only loses eight. Neither is selected. Fresh general accuracy improves over release, while two or three excess false rejections remain at 128. The subsequent direct-feasibility experiment is described below; neither regression candidate was promoted.
+
+
+## Direct budget feasibility
+
+The [matched classifier experiment](../results/boundary-feasibility/README.md) reuses the exact 1,889 training circuits and compares the same 217 and 233 input columns. Each native multioutput ExtraTrees classifier shares tree partitions across three nested targets: measured area at most 32, 64 and 128 LUT4. The fixed 0.5 threshold includes ties; output probabilities are uncalibrated. Class mappings and shared-leaf probabilities are independently reconstructed.
+
+The final policy retains the signed-incumbent lower bound and budget-release upper bound. Within the declared signed-shift scope it chooses the smallest crossed cap supported by the classifier, otherwise retaining release. These bounds cannot repair all inherited errors; six consumed examples are explicitly documented in the experiment. The extra 16 descriptors are tested as a block, not as an isolated carry-analysis contribution.
+
+The 233-feature variant passes all 22 retained panels, 25 named groups, 50 required acceptances and 23 protected rejections. Both classifiers improve fresh general accuracy and remove its five excess cap128 rejections. However, both accept three targeted circuits measuring 129, 130 and 129 LUT4 at a 128-LUT budget, and reject one shared-AND circuit measuring 125 LUT4. The highest feasibility probability among those unsafe acceptances is 0.8733, illustrating why it is not a safety certificate. The selected development candidate fails fresh validation and is not promoted; no threshold was changed after labels.

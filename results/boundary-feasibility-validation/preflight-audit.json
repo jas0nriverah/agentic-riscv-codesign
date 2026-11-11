@@ -1,0 +1,167 @@
+{
+  "schema": "independent-boundary-feasibility-preflight-audit-v1",
+  "status": "pass",
+  "audited_at_utc": "2026-11-11T08:44:19.338327+00:00",
+  "bindings": {
+    "results/boundary-feasibility/protocol.json": "29f600b8a3a703dee642aeb4d732c9a75d0ed0433fc3900d5b722a8ff6e4dbab",
+    "results/boundary-feasibility/auditor-prior-artifacts.json": "c12ea13a6e12ece8254a20b12b60108023323d81a3794c621cbfcff03421db08",
+    "results/boundary-feasibility/evaluation-targets.json": "7b6c01263d5b94053b7b2cabeb52a66f134cccf9b716d655d8ad9c52565fe542",
+    "results/boundary-feasibility/method-rationale.json": "4f38fdaf241c483cb61affaa93d8bcb14f05fabd073ac82b0923908b2307d797",
+    "results/boundary-feasibility/policy-limitations.json": "5c9770c9604e4640bbb97cace84af334d817d214e98c640cf067c19e6e6195a1",
+    "results/boundary-feasibility/support-cells.json": "4d89887dd0f4af148ddcfcb3ff785f3b6c9dfceee3359ed6e39263b0c87a8f0a",
+    "results/boundary-feasibility/goal-at-freeze.json": "bfa72a204e2f8ed5d7d7300e3e4e045607046b187ec4b76c81b1f449487f860f",
+    "results/boundary-feasibility/goal-update-at-freeze.json": "e77035b2ed240e0561dbf211e4e1a9df8056b30ed7247830c200aeffe136b217",
+    "results/boundary-feasibility/research-goal-current-at-freeze.json": "095cb05936b2a13afda25e7f6a4a9394c5593774f2743b1293adac8f67478a62",
+    "results/boundary-feasibility/prefreeze-input-review.json": "3b8d840b6b2d9b0067b62b9ba645b396a934671e5e4c423fdbedaa924f45de2d",
+    "results/boundary-feasibility/rejected-input-manifest-v1.json": "f685e9d526fdac5ae9b5cbdb0e77efebf46360baee27890b72c374977d2112bd",
+    "results/boundary-feasibility/rejected-measurement-draft-v1.py": "3f42f67caa1261d1315777449de35796c88652b6d434f8aec6f0d5a008852796",
+    "results/boundary-feasibility/parent-preflight-validation.json": "d28c3f10f33b85e8b17e1c7ae724b6872f3460f0b35a25a554e122654cf5e5ce",
+    "results/boundary-feasibility-validation/plan.json": "d0bd038d8953b2475ac378e5bf980c8c1f632557dcacdd3d1f1c098256c01563",
+    "results/boundary-feasibility-validation/pool-candidates.json": "07f23bc8e5b290b0f344c848438ceb16b8855bf7e23ec34848a07d5809b95786",
+    "results/boundary-feasibility-validation/novelty.json": "2241b8f2887278201d13b27b1612941a97f9efbcb62d22b96e86e492bd88ae0e",
+    "results/boundary-feasibility-validation/historical-formulas.json": "61336342f402e21ddefa86a79ce2b2c3f85d787a797f70c4d7011ba5810e99df",
+    "results/boundary-feasibility-validation/tools.json": "8cdb179640fa4cf11a905ef775a7e28d37b296c309018128c6c8b451d8528fc8"
+  },
+  "scientific_artifacts_preserved": 935,
+  "identity_and_modular_novelty_audit": {
+    "historical_formulas": 10986,
+    "fresh_pool_rows": 128,
+    "original_and_modular_identity_or_structural_family_collisions": 0,
+    "rejected_prefreeze36_rows_preserved": true,
+    "sound_modular_rules": {
+      "rules": [
+        "ADDI(ADDI(x,a),b)=ADDI(x,(a+b)mod2^32)",
+        "ANDI(ADDI(x,k),2^w-1)=ANDI(x,2^w-1) when k mod2^w=0"
+      ],
+      "decoded_RV32_vector_comparisons": 4144,
+      "plus2_under_mask1_removed": true,
+      "nested9_plus2_collapses11": true,
+      "plus2_under_mask3_preserved": true,
+      "scope": "Sound finite rewrite screen, not exhaustive semantic equivalence."
+    },
+    "all_latest32_training_and128_pool_including79_unlabelled_consumed": true
+  },
+  "analytical_and_training_review": {
+    "required_acceptances": 50,
+    "required_rejections": 23,
+    "core_protected_rejections": 10,
+    "all_targets_implied_by_existing_per_case_no_new_error_gates": true,
+    "bound_limited_cases_independently_verified": 6,
+    "no_impossible_inventory_target": true,
+    "training_rows": 1889,
+    "matched_feature_counts": [
+      217,
+      233
+    ],
+    "nested_training_binary_class_counts": {
+      "32": {
+        "feasible": 975,
+        "infeasible": 914
+      },
+      "64": {
+        "feasible": 1307,
+        "infeasible": 582
+      },
+      "128": {
+        "feasible": 1603,
+        "infeasible": 286
+      }
+    },
+    "no_new_training_or_consumed_evaluation_targets": true
+  },
+  "reviewed_policy": {
+    "scope": "ALL original rootxor/add/DIRECTcompoundSRA chains, including outer-input cases; data addi+xori and input control must bind to the SAME shift.",
+    "support": "Per ALLrootchain: own carry-refined unknownspan<=16 narrow elsewide, own data/postadd nonleaf subtree sharing. Every cell must occur in the1889trainingFORMULAS; no labels/IDs/errors used. Freeze and disclose allcounts, including ifallfourcells occur.",
+    "decision": "Release-first. For cap32/64/128 require signed<=cap<release, all same-chain cells covered, and P(training_cost<=cap)>=0.5. Exact0.5 tie accepts. Smallest qualifyingcap; release otherwise. No legacy bypass, probability sorting, calibration, margin/threshold search or independent-target wrappers.",
+    "bounds": "signed<=candidate<=release",
+    "baseline_limits": "This bounded experiment repairs excessFR and protects existingFA gains. It cannot fix release falseacceptances or signed falserejections made immutable by these bounds; preserve all six policy-limitations diagnostics without claiming all mistakes solved.",
+    "targets": "Native multioutput ExtraTreesClassifier with shared partitions; nested binary indicators y<=32,y<=64,y<=128 in this order. Explicit sample_weight=None and class_weight=None.",
+    "class_mapping": "Positiveclass1 is found in each classes_ array; singleton0 yields0, singleton1 yields1. Never assume column1 exists. Raw probabilities are retained and independently checked nondecreasing across caps; no clipping/sorting repair.",
+    "configuration": {
+      "n_estimators": 300,
+      "criterion": "gini",
+      "max_depth": null,
+      "min_samples_split": 2,
+      "min_samples_leaf": 1,
+      "min_weight_fraction_leaf": 0.0,
+      "max_features": 1.0,
+      "max_leaf_nodes": null,
+      "min_impurity_decrease": 0.0,
+      "bootstrap": false,
+      "oob_score": false,
+      "n_jobs": 1,
+      "random_state": 2026101401,
+      "verbose": 0,
+      "warm_start": false,
+      "class_weight": null,
+      "ccp_alpha": 0.0,
+      "max_samples": null,
+      "monotonic_cst": null
+    },
+    "fit_order": [
+      "augmented233",
+      "coverage217"
+    ],
+    "training": "Exactly frozen1889 rows, coverage217/augmented233/y arrays from boundary-corroboration; zero new traininglabels, zero consumed evaluationlabels fitted. Two matched fits maximum, one thread.",
+    "selection": "Augmented-first if all developmentgates pass, elsecoverage ifallpass, else none with augmenteddiagnostic. No fresh-label selection changes.",
+    "interpretation": "Matched217vs233 isolates the entire frozen16localized-column block within classification, not carryalone. Regression comparison changes learningobjective. Probabilities are uncalibrated, not risk guarantees."
+  },
+  "reviewed_selection": {
+    "general_count": 32,
+    "sharing_count": 8,
+    "legacy_count": 8,
+    "challenge_count": 80,
+    "shared_controls": 8,
+    "maximum_active": 16,
+    "minimum_active": 4,
+    "minimum_templates": 2,
+    "requires_cap128": true,
+    "active_comparator": "corroborated_augmented",
+    "legacy64_veto_comparator": "boundary_abstention",
+    "sharing128_veto_comparator": "boundary_coverage_only",
+    "order": "Fixedgeneral32/sharing8/legacy8 first48; challenge historical/fixed217or233matches excluded, sortedtemplate roundrobin originalindex order, one percluster in bothrepresentations, appendup16. Mandatorycollisions block withoutreplacement. No filtering/refill/extensions.",
+    "populations": "General/sharing/legacy/conditional-full(active+SAME8generalcontrols)/active-only separatelygated; no pooling/independenceclaim."
+  },
+  "reviewed_gates": {
+    "retained": "All22panels1049metricrows/1017records(shared32controls), all25namedgroups and expanded50acceptance/23rejection inventory (10coreoverride rejections). MAE/MAPE/tail<=six frozen comparators; FA<=release FR<=signed separately at32/64/128, zero newFA/FRcases and signed<=candidate<=release.",
+    "general": "Completefreshgeneral32 requires strict MAE/positiveMAPE and totalFA-event gains versus signed plus allhardno-lossgates. PositiveMAPE=100*mean(abs(y-p)/y) on y>0; zero targets remain in MAE/cap/tail.",
+    "other_fresh": "Mandatorysharing8,mandatorylegacy8,conditional-full(active+SAME8generalcontrols),active-only eachpasshardgates separately. No pooling/independenceclaim.",
+    "activity": "Atleast4NEWacceptances candidate<=cap<corroborated_augmented across>=2templates including128; fixedlegacy8>=1veto oldabstention<=64<candidate; fixedsharing8>=1veto oldlearned217<=128<candidate. Frozen beforelabels, truth assessed afterward.",
+    "missing": "All128poolinputs/features/probabilities retained, fixed48 alwayslabelled, up16deterministicactions. No newtraininglabels, extra fits/retries/replacements/extensions or postlabel policy/gate/feature/threshold changes.",
+    "tolerance": 1e-10,
+    "probability_roundoff_tolerance": 1e-12
+  },
+  "all_full_classifier_parameters_explicit": {
+    "bootstrap": false,
+    "ccp_alpha": 0.0,
+    "class_weight": null,
+    "criterion": "gini",
+    "max_depth": null,
+    "max_features": 1.0,
+    "max_leaf_nodes": null,
+    "max_samples": null,
+    "min_impurity_decrease": 0.0,
+    "min_samples_leaf": 1,
+    "min_samples_split": 2,
+    "min_weight_fraction_leaf": 0.0,
+    "monotonic_cst": null,
+    "n_estimators": 300,
+    "n_jobs": 1,
+    "oob_score": false,
+    "random_state": 2026101401,
+    "verbose": 0,
+    "warm_start": false
+  },
+  "fixed_probability_threshold": 0.5,
+  "exact_threshold_tie_accepts": true,
+  "no_probability_sorting_clipping_or_calibration": true,
+  "native_budget_unit": "summed_worker_process_seconds",
+  "native_parent_stage_authorization_plan_and_protocol_bound": true,
+  "classifier_parent_authorization_and_exact_preflight_required": true,
+  "fits_and_native_execution_require_parent_receipts_not_granted_by_this_audit": true,
+  "no_new_features_labels_fit_attempts_at_receipt": true,
+  "new_training_labels": 0,
+  "planned_fits": 2,
+  "audit_fits": 0,
+  "audit_native_jobs": 0
+}

@@ -136,3 +136,20 @@ python scripts/render_boundary_corroboration.py
 ```
 
 The report separates raw forest estimates from final policy predictions, and reports the general, sharing, legacy-disagreement and conditional populations separately. Training rows, feature definitions, policy, model selection and every fresh prediction are frozen before their respective measurement checkpoints. Preserve the retained evidence when planning another experiment.
+
+
+## Direct budget feasibility
+
+The [classifier comparison](../results/boundary-feasibility/README.md) fits exactly two matched models, freezes every prediction before fresh labels, and retains the complete 128-input pool. Replay and cached inference require no new fitting or native synthesis:
+
+```sh
+python scripts/learn_boundary_feasibility.py replay
+python scripts/audit_boundary_feasibility.py final
+python scripts/learn_boundary_feasibility.py predict-cached \
+  --candidates results/boundary-feasibility-validation/candidates.json \
+  --features results/boundary-feasibility-validation/features.json \
+  --prediction-output generated/boundary-feasibility-predictions.json
+python scripts/render_boundary_feasibility.py
+```
+
+The 56 measured circuits comprise 32 general, eight sharing, eight legacy and eight active cases. The conditional population combines the eight active cases with eight controls already in the general population; do not pool these as independent samples. The run used two fits and 189.39 summed worker-process seconds under a 300-second limit, with at most two native workers. Summed process time and concurrent stage wall time are reported separately. All 120,288 RTL comparisons passed. The negative promotion decision is part of the reproducible result.

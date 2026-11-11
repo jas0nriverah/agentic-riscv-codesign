@@ -1,0 +1,24 @@
+{
+  "objective": "Repair the false rejection introduced by budget release without losing its accuracy and false-acceptance gains, then validate on genuinely fresh circuits.",
+  "status": "active; unified1889-row217/233 candidates fix inherited64 faults and three remaining128 cases but lose five/eight established repairs; freshgeneral retains three/two excess128 rejections and activity fails; neither selected or promoted; direct feasibility learning remains unexecuted",
+  "baseline_evidence_commit": "4049583",
+  "completion_requirements": [
+    "Repair the consumed 125-LUT circuit falsely rejected at cap128; do not use candidate IDs, labels or per-case lookup in inference.",
+    "Preserve budget-release MAE/MAPE and false-acceptance gains on retained development panels, including prior named subgroup repairs. Compare with both signed incumbent and budget-release candidate.",
+    "Freeze policy, cohort, finite candidate selection and acceptance gates before new labels; freeze selected weights and all test predictions before fresh synthesis labels.",
+    "On complete fresh circuits, require better MAE and MAPE than signed incumbent, no loss of budget-release accuracy gains, and no additional false acceptances or false rejections separately at caps32/64/128 against the appropriate frozen comparators. Report per-cap denominators and changed decisions.",
+    "Independently audit evidence, cached inference, source hashes, chronology and native measurements. Retain failures, negative results and all frozen previous artifacts.",
+    "Publish reproducible scripts, focused tests, exact results and research figures on latest; promote only if all predeclared requirements pass."
+  ],
+  "compute_policy": {
+    "delegation": "GPT-6.1 Sol high",
+    "per_experiment_max_fits": 2,
+    "max_native_seconds": 300,
+    "max_native_workers": 2,
+    "fit_threads": 1,
+    "paid_compute": false,
+    "no_overlapping_native_jobs": true,
+    "repeat_only_with_new_preregistered_protocol": true
+  },
+  "interpretation": "A failed experiment is progress but does not complete this goal. Fresh cohort results do not establish universal hardware safety or CPU performance."
+}

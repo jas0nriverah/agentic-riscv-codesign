@@ -1,0 +1,546 @@
+{
+  "schema": "boundary-feasibility-prefreeze-input-review-v1",
+  "reviewed_at_utc": "2026-11-11T08:36:18.456889+00:00",
+  "status": "requires_input_revision_before_freeze",
+  "original_draft_source_path": "scripts/measure_boundary_feasibility.py",
+  "original_draft_source_sha256": "3f42f67caa1261d1315777449de35796c88652b6d434f8aec6f0d5a008852796",
+  "draft_pool_sha256": "fe7f3a624f96b720351074b83b564ba1b348fe057a15bd1637931da794b82673",
+  "pool_count": 128,
+  "historical_formula_count": 10986,
+  "modular_rule_soundness": {
+    "rules": [
+      "ADDI(ADDI(x,a),b)=ADDI(x,(a+b)mod2^32)",
+      "ANDI(ADDI(x,k),2^w-1)=ANDI(x,2^w-1) when k mod2^w=0"
+    ],
+    "decoded_RV32_vector_comparisons": 4144,
+    "plus2_under_mask1_removed": true,
+    "nested9_plus2_collapses11": true,
+    "plus2_under_mask3_preserved": true,
+    "scope": "Sound finite rewrite screen, not exhaustive semantic equivalence."
+  },
+  "normalized_structural_family_overlap_count": 36,
+  "normalized_exact_formula_overlap_count": 0,
+  "implicated_pool_indices": [
+    16,
+    17,
+    18,
+    19,
+    20,
+    24,
+    26,
+    42,
+    56,
+    57,
+    58,
+    59,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    104,
+    105,
+    106,
+    107,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123
+  ],
+  "matches": [
+    {
+      "pool_index": 16,
+      "template": "general_plain_outerinput",
+      "parameter": 1,
+      "formula": "xor(add(sra(xori(addi(in1,113),29),andi(addi(addi(in0,9),2),1)),in0),in1)",
+      "normalized_formula": "xor(add(sra(xori(addi(in1,113),29),andi(addi(in0,11),1)),in0),in1)",
+      "historical_formula": "xor(add(sra(xori(addi(in1,107),23),andi(addi(in0,9),1)),in0),in1)",
+      "normalized_historical_formula": "xor(add(sra(xori(addi(in1,107),23),andi(addi(in0,9),1)),in0),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('xori', (('addi', ('in1', '#')), '#')), ('andi', (('addi', ('in0', '#')), '#')))), 'in0')), 'in1'))"
+    },
+    {
+      "pool_index": 17,
+      "template": "general_plain_outerinput",
+      "parameter": 3,
+      "formula": "xor(add(sra(xori(addi(in1,113),29),andi(addi(addi(in0,9),2),3)),in0),in1)",
+      "normalized_formula": "xor(add(sra(xori(addi(in1,113),29),andi(addi(in0,11),3)),in0),in1)",
+      "historical_formula": "xor(add(sra(xori(addi(in1,107),23),andi(addi(in0,9),1)),in0),in1)",
+      "normalized_historical_formula": "xor(add(sra(xori(addi(in1,107),23),andi(addi(in0,9),1)),in0),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('xori', (('addi', ('in1', '#')), '#')), ('andi', (('addi', ('in0', '#')), '#')))), 'in0')), 'in1'))"
+    },
+    {
+      "pool_index": 18,
+      "template": "general_plain_outerinput",
+      "parameter": 7,
+      "formula": "xor(add(sra(xori(addi(in1,113),29),andi(addi(addi(in0,9),2),7)),in0),in1)",
+      "normalized_formula": "xor(add(sra(xori(addi(in1,113),29),andi(addi(in0,11),7)),in0),in1)",
+      "historical_formula": "xor(add(sra(xori(addi(in1,107),23),andi(addi(in0,9),1)),in0),in1)",
+      "normalized_historical_formula": "xor(add(sra(xori(addi(in1,107),23),andi(addi(in0,9),1)),in0),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('xori', (('addi', ('in1', '#')), '#')), ('andi', (('addi', ('in0', '#')), '#')))), 'in0')), 'in1'))"
+    },
+    {
+      "pool_index": 19,
+      "template": "general_plain_outerinput",
+      "parameter": 31,
+      "formula": "xor(add(sra(xori(addi(in1,113),29),andi(addi(addi(in0,9),2),31)),in0),in1)",
+      "normalized_formula": "xor(add(sra(xori(addi(in1,113),29),andi(addi(in0,11),31)),in0),in1)",
+      "historical_formula": "xor(add(sra(xori(addi(in1,107),23),andi(addi(in0,9),1)),in0),in1)",
+      "normalized_historical_formula": "xor(add(sra(xori(addi(in1,107),23),andi(addi(in0,9),1)),in0),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('xori', (('addi', ('in1', '#')), '#')), ('andi', (('addi', ('in0', '#')), '#')))), 'in0')), 'in1'))"
+    },
+    {
+      "pool_index": 20,
+      "template": "general_signed16_preadd_outerinput",
+      "parameter": 1,
+      "formula": "xor(add(sra(addi(slli(andi(xori(in1,29),65535),16),113),andi(addi(xori(in0,15),2),1)),in0),in1)",
+      "normalized_formula": "xor(add(sra(addi(slli(andi(xori(in1,29),65535),16),113),andi(xori(in0,15),1)),in0),in1)",
+      "historical_formula": "xor(add(sra(addi(slli(andi(xori(in1,23),65535),16),107),andi(xori(in0,15),1)),in0),in1)",
+      "normalized_historical_formula": "xor(add(sra(addi(slli(andi(xori(in1,23),65535),16),107),andi(xori(in0,15),1)),in0),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('slli', (('andi', (('xori', ('in1', '#')), '#')), '#')), '#')), ('andi', (('xori', ('in0', '#')), '#')))), 'in0')), 'in1'))"
+    },
+    {
+      "pool_index": 24,
+      "template": "control_wrappedxor_rootadd",
+      "parameter": 1,
+      "formula": "add(sra(xor(xori(addi(in1,113),29),in0),andi(addi(xori(in0,15),2),1)),and(in0,in1))",
+      "normalized_formula": "add(sra(xor(xori(addi(in1,113),29),in0),andi(xori(in0,15),1)),and(in0,in1))",
+      "historical_formula": "add(sra(xor(xori(addi(in1,107),23),in0),andi(xori(in0,15),1)),and(in0,in1))",
+      "normalized_historical_formula": "add(sra(xor(xori(addi(in1,107),23),in0),andi(xori(in0,15),1)),and(in0,in1))",
+      "normalized_constant_erased_skeleton": "('add', (('sra', (('xor', (('xori', (('addi', ('in1', '#')), '#')), 'in0')), ('andi', (('xori', ('in0', '#')), '#')))), ('and', ('in0', 'in1'))))"
+    },
+    {
+      "pool_index": 26,
+      "template": "control_low16_dualadd",
+      "parameter": 1,
+      "formula": "xor(sra(xori(addi(andi(xor(in0,in1),65535),113),29),andi(addi(xori(in1,15),2),1)),add(in0,in1))",
+      "normalized_formula": "xor(sra(xori(addi(andi(xor(in0,in1),65535),113),29),andi(xori(in1,15),1)),add(in0,in1))",
+      "historical_formula": "xor(sra(xori(addi(andi(xor(in0,in1),65535),107),23),andi(xori(in1,15),1)),add(in0,in1))",
+      "normalized_historical_formula": "xor(sra(xori(addi(andi(xor(in0,in1),65535),107),23),andi(xori(in1,15),1)),add(in0,in1))",
+      "normalized_constant_erased_skeleton": "('xor', (('sra', (('xori', (('addi', (('andi', (('xor', ('in0', 'in1')), '#')), '#')), '#')), ('andi', (('xori', ('in1', '#')), '#')))), ('add', ('in0', 'in1'))))"
+    },
+    {
+      "pool_index": 42,
+      "template": "legacy_or_complement",
+      "parameter": [
+        11,
+        47,
+        1
+      ],
+      "formula": "xor(add(sra(addi(xori(or(in0,in1),11),47),andi(addi(xori(in1,15),2),1)),in0),xor(in0,in1))",
+      "normalized_formula": "xor(add(sra(addi(xori(or(in0,in1),11),47),andi(xori(in1,15),1)),in0),xor(in0,in1))",
+      "historical_formula": "xor(add(sra(addi(xori(or(in0,in1),11),71),andi(xori(in1,7),1)),in0),xor(in0,in1))",
+      "normalized_historical_formula": "xor(add(sra(addi(xori(or(in0,in1),11),71),andi(xori(in1,7),1)),in0),xor(in0,in1))",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('xori', (('or', ('in0', 'in1')), '#')), '#')), ('andi', (('xori', ('in1', '#')), '#')))), 'in0')), ('xor', ('in0', 'in1'))))"
+    },
+    {
+      "pool_index": 56,
+      "template": "challenge_plain_outerinput",
+      "parameter": [
+        11,
+        47,
+        1
+      ],
+      "formula": "xor(add(sra(addi(xori(in1,11),47),andi(addi(xori(in0,15),2),1)),in0),in1)",
+      "normalized_formula": "xor(add(sra(addi(xori(in1,11),47),andi(xori(in0,15),1)),in0),in1)",
+      "historical_formula": "xor(add(sra(addi(xori(in1,151),337),andi(xori(in0,15),1)),in0),in1)",
+      "normalized_historical_formula": "xor(add(sra(addi(xori(in1,151),337),andi(xori(in0,15),1)),in0),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('xori', ('in1', '#')), '#')), ('andi', (('xori', ('in0', '#')), '#')))), 'in0')), 'in1'))"
+    },
+    {
+      "pool_index": 57,
+      "template": "challenge_plain_outerinput",
+      "parameter": [
+        23,
+        97,
+        1
+      ],
+      "formula": "xor(add(sra(addi(xori(in1,23),97),andi(addi(xori(in0,15),2),1)),in0),in1)",
+      "normalized_formula": "xor(add(sra(addi(xori(in1,23),97),andi(xori(in0,15),1)),in0),in1)",
+      "historical_formula": "xor(add(sra(addi(xori(in1,151),337),andi(xori(in0,15),1)),in0),in1)",
+      "normalized_historical_formula": "xor(add(sra(addi(xori(in1,151),337),andi(xori(in0,15),1)),in0),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('xori', ('in1', '#')), '#')), ('andi', (('xori', ('in0', '#')), '#')))), 'in0')), 'in1'))"
+    },
+    {
+      "pool_index": 58,
+      "template": "challenge_plain_outerinput",
+      "parameter": [
+        47,
+        157,
+        1
+      ],
+      "formula": "xor(add(sra(addi(xori(in1,47),157),andi(addi(xori(in0,15),2),1)),in0),in1)",
+      "normalized_formula": "xor(add(sra(addi(xori(in1,47),157),andi(xori(in0,15),1)),in0),in1)",
+      "historical_formula": "xor(add(sra(addi(xori(in1,151),337),andi(xori(in0,15),1)),in0),in1)",
+      "normalized_historical_formula": "xor(add(sra(addi(xori(in1,151),337),andi(xori(in0,15),1)),in0),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('xori', ('in1', '#')), '#')), ('andi', (('xori', ('in0', '#')), '#')))), 'in0')), 'in1'))"
+    },
+    {
+      "pool_index": 59,
+      "template": "challenge_plain_outerinput",
+      "parameter": [
+        163,
+        353,
+        1
+      ],
+      "formula": "xor(add(sra(addi(xori(in1,163),353),andi(addi(xori(in0,15),2),1)),in0),in1)",
+      "normalized_formula": "xor(add(sra(addi(xori(in1,163),353),andi(xori(in0,15),1)),in0),in1)",
+      "historical_formula": "xor(add(sra(addi(xori(in1,151),337),andi(xori(in0,15),1)),in0),in1)",
+      "normalized_historical_formula": "xor(add(sra(addi(xori(in1,151),337),andi(xori(in0,15),1)),in0),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('xori', ('in1', '#')), '#')), ('andi', (('xori', ('in0', '#')), '#')))), 'in0')), 'in1'))"
+    },
+    {
+      "pool_index": 88,
+      "template": "challenge_signed8_preadd_outerinput",
+      "parameter": [
+        11,
+        47,
+        1
+      ],
+      "formula": "xor(add(sra(addi(slli(andi(xori(in0,11),255),24),47),andi(addi(addi(in1,9),2),1)),in1),in0)",
+      "normalized_formula": "xor(add(sra(addi(slli(andi(xori(in0,11),255),24),47),andi(addi(in1,11),1)),in1),in0)",
+      "historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('slli', (('andi', (('xori', ('in0', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in1', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 89,
+      "template": "challenge_signed8_preadd_outerinput",
+      "parameter": [
+        23,
+        97,
+        1
+      ],
+      "formula": "xor(add(sra(addi(slli(andi(xori(in0,23),255),24),97),andi(addi(addi(in1,9),2),1)),in1),in0)",
+      "normalized_formula": "xor(add(sra(addi(slli(andi(xori(in0,23),255),24),97),andi(addi(in1,11),1)),in1),in0)",
+      "historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('slli', (('andi', (('xori', ('in0', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in1', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 90,
+      "template": "challenge_signed8_preadd_outerinput",
+      "parameter": [
+        47,
+        157,
+        1
+      ],
+      "formula": "xor(add(sra(addi(slli(andi(xori(in0,47),255),24),157),andi(addi(addi(in1,9),2),1)),in1),in0)",
+      "normalized_formula": "xor(add(sra(addi(slli(andi(xori(in0,47),255),24),157),andi(addi(in1,11),1)),in1),in0)",
+      "historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('slli', (('andi', (('xori', ('in0', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in1', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 91,
+      "template": "challenge_signed8_preadd_outerinput",
+      "parameter": [
+        163,
+        353,
+        1
+      ],
+      "formula": "xor(add(sra(addi(slli(andi(xori(in0,163),255),24),353),andi(addi(addi(in1,9),2),1)),in1),in0)",
+      "normalized_formula": "xor(add(sra(addi(slli(andi(xori(in0,163),255),24),353),andi(addi(in1,11),1)),in1),in0)",
+      "historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('slli', (('andi', (('xori', ('in0', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in1', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 92,
+      "template": "challenge_signed8_preadd_outerinput",
+      "parameter": [
+        11,
+        47,
+        3
+      ],
+      "formula": "xor(add(sra(addi(slli(andi(xori(in0,11),255),24),47),andi(addi(addi(in1,9),2),3)),in1),in0)",
+      "normalized_formula": "xor(add(sra(addi(slli(andi(xori(in0,11),255),24),47),andi(addi(in1,11),3)),in1),in0)",
+      "historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('slli', (('andi', (('xori', ('in0', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in1', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 93,
+      "template": "challenge_signed8_preadd_outerinput",
+      "parameter": [
+        23,
+        97,
+        3
+      ],
+      "formula": "xor(add(sra(addi(slli(andi(xori(in0,23),255),24),97),andi(addi(addi(in1,9),2),3)),in1),in0)",
+      "normalized_formula": "xor(add(sra(addi(slli(andi(xori(in0,23),255),24),97),andi(addi(in1,11),3)),in1),in0)",
+      "historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('slli', (('andi', (('xori', ('in0', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in1', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 94,
+      "template": "challenge_signed8_preadd_outerinput",
+      "parameter": [
+        47,
+        157,
+        3
+      ],
+      "formula": "xor(add(sra(addi(slli(andi(xori(in0,47),255),24),157),andi(addi(addi(in1,9),2),3)),in1),in0)",
+      "normalized_formula": "xor(add(sra(addi(slli(andi(xori(in0,47),255),24),157),andi(addi(in1,11),3)),in1),in0)",
+      "historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('slli', (('andi', (('xori', ('in0', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in1', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 95,
+      "template": "challenge_signed8_preadd_outerinput",
+      "parameter": [
+        163,
+        353,
+        3
+      ],
+      "formula": "xor(add(sra(addi(slli(andi(xori(in0,163),255),24),353),andi(addi(addi(in1,9),2),3)),in1),in0)",
+      "normalized_formula": "xor(add(sra(addi(slli(andi(xori(in0,163),255),24),353),andi(addi(in1,11),3)),in1),in0)",
+      "historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(addi(slli(andi(xori(in0,151),255),24),337),andi(addi(in1,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('slli', (('andi', (('xori', ('in0', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in1', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 104,
+      "template": "challenge_signed16_preadd_outerinput",
+      "parameter": [
+        11,
+        47,
+        1
+      ],
+      "formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),11),65535),16),47),andi(addi(xori(in1,15),2),1)),in0),in1)",
+      "normalized_formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),11),65535),16),47),andi(xori(in1,15),1)),in0),in1)",
+      "historical_formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),151),65535),16),337),andi(xori(in1,15),1)),in0),in1)",
+      "normalized_historical_formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),151),65535),16),337),andi(xori(in1,15),1)),in0),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('slli', (('andi', (('xori', (('and', ('in0', 'in1')), '#')), '#')), '#')), '#')), ('andi', (('xori', ('in1', '#')), '#')))), 'in0')), 'in1'))"
+    },
+    {
+      "pool_index": 105,
+      "template": "challenge_signed16_preadd_outerinput",
+      "parameter": [
+        23,
+        97,
+        1
+      ],
+      "formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),23),65535),16),97),andi(addi(xori(in1,15),2),1)),in0),in1)",
+      "normalized_formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),23),65535),16),97),andi(xori(in1,15),1)),in0),in1)",
+      "historical_formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),151),65535),16),337),andi(xori(in1,15),1)),in0),in1)",
+      "normalized_historical_formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),151),65535),16),337),andi(xori(in1,15),1)),in0),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('slli', (('andi', (('xori', (('and', ('in0', 'in1')), '#')), '#')), '#')), '#')), ('andi', (('xori', ('in1', '#')), '#')))), 'in0')), 'in1'))"
+    },
+    {
+      "pool_index": 106,
+      "template": "challenge_signed16_preadd_outerinput",
+      "parameter": [
+        47,
+        157,
+        1
+      ],
+      "formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),47),65535),16),157),andi(addi(xori(in1,15),2),1)),in0),in1)",
+      "normalized_formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),47),65535),16),157),andi(xori(in1,15),1)),in0),in1)",
+      "historical_formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),151),65535),16),337),andi(xori(in1,15),1)),in0),in1)",
+      "normalized_historical_formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),151),65535),16),337),andi(xori(in1,15),1)),in0),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('slli', (('andi', (('xori', (('and', ('in0', 'in1')), '#')), '#')), '#')), '#')), ('andi', (('xori', ('in1', '#')), '#')))), 'in0')), 'in1'))"
+    },
+    {
+      "pool_index": 107,
+      "template": "challenge_signed16_preadd_outerinput",
+      "parameter": [
+        163,
+        353,
+        1
+      ],
+      "formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),163),65535),16),353),andi(addi(xori(in1,15),2),1)),in0),in1)",
+      "normalized_formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),163),65535),16),353),andi(xori(in1,15),1)),in0),in1)",
+      "historical_formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),151),65535),16),337),andi(xori(in1,15),1)),in0),in1)",
+      "normalized_historical_formula": "xor(add(sra(addi(slli(andi(xori(and(in0,in1),151),65535),16),337),andi(xori(in1,15),1)),in0),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('addi', (('slli', (('andi', (('xori', (('and', ('in0', 'in1')), '#')), '#')), '#')), '#')), ('andi', (('xori', ('in1', '#')), '#')))), 'in0')), 'in1'))"
+    },
+    {
+      "pool_index": 112,
+      "template": "challenge_signed16_postadd_outerinput",
+      "parameter": [
+        11,
+        47,
+        1
+      ],
+      "formula": "xor(add(sra(slli(andi(addi(xori(in1,11),47),65535),16),andi(addi(addi(in0,9),2),1)),in1),in0)",
+      "normalized_formula": "xor(add(sra(slli(andi(addi(xori(in1,11),47),65535),16),andi(addi(in0,11),1)),in1),in0)",
+      "historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('slli', (('andi', (('addi', (('xori', ('in1', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in0', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 113,
+      "template": "challenge_signed16_postadd_outerinput",
+      "parameter": [
+        23,
+        97,
+        1
+      ],
+      "formula": "xor(add(sra(slli(andi(addi(xori(in1,23),97),65535),16),andi(addi(addi(in0,9),2),1)),in1),in0)",
+      "normalized_formula": "xor(add(sra(slli(andi(addi(xori(in1,23),97),65535),16),andi(addi(in0,11),1)),in1),in0)",
+      "historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('slli', (('andi', (('addi', (('xori', ('in1', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in0', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 114,
+      "template": "challenge_signed16_postadd_outerinput",
+      "parameter": [
+        47,
+        157,
+        1
+      ],
+      "formula": "xor(add(sra(slli(andi(addi(xori(in1,47),157),65535),16),andi(addi(addi(in0,9),2),1)),in1),in0)",
+      "normalized_formula": "xor(add(sra(slli(andi(addi(xori(in1,47),157),65535),16),andi(addi(in0,11),1)),in1),in0)",
+      "historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('slli', (('andi', (('addi', (('xori', ('in1', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in0', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 115,
+      "template": "challenge_signed16_postadd_outerinput",
+      "parameter": [
+        163,
+        353,
+        1
+      ],
+      "formula": "xor(add(sra(slli(andi(addi(xori(in1,163),353),65535),16),andi(addi(addi(in0,9),2),1)),in1),in0)",
+      "normalized_formula": "xor(add(sra(slli(andi(addi(xori(in1,163),353),65535),16),andi(addi(in0,11),1)),in1),in0)",
+      "historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('slli', (('andi', (('addi', (('xori', ('in1', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in0', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 116,
+      "template": "challenge_signed16_postadd_outerinput",
+      "parameter": [
+        11,
+        47,
+        3
+      ],
+      "formula": "xor(add(sra(slli(andi(addi(xori(in1,11),47),65535),16),andi(addi(addi(in0,9),2),3)),in1),in0)",
+      "normalized_formula": "xor(add(sra(slli(andi(addi(xori(in1,11),47),65535),16),andi(addi(in0,11),3)),in1),in0)",
+      "historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('slli', (('andi', (('addi', (('xori', ('in1', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in0', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 117,
+      "template": "challenge_signed16_postadd_outerinput",
+      "parameter": [
+        23,
+        97,
+        3
+      ],
+      "formula": "xor(add(sra(slli(andi(addi(xori(in1,23),97),65535),16),andi(addi(addi(in0,9),2),3)),in1),in0)",
+      "normalized_formula": "xor(add(sra(slli(andi(addi(xori(in1,23),97),65535),16),andi(addi(in0,11),3)),in1),in0)",
+      "historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('slli', (('andi', (('addi', (('xori', ('in1', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in0', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 118,
+      "template": "challenge_signed16_postadd_outerinput",
+      "parameter": [
+        47,
+        157,
+        3
+      ],
+      "formula": "xor(add(sra(slli(andi(addi(xori(in1,47),157),65535),16),andi(addi(addi(in0,9),2),3)),in1),in0)",
+      "normalized_formula": "xor(add(sra(slli(andi(addi(xori(in1,47),157),65535),16),andi(addi(in0,11),3)),in1),in0)",
+      "historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('slli', (('andi', (('addi', (('xori', ('in1', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in0', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 119,
+      "template": "challenge_signed16_postadd_outerinput",
+      "parameter": [
+        163,
+        353,
+        3
+      ],
+      "formula": "xor(add(sra(slli(andi(addi(xori(in1,163),353),65535),16),andi(addi(addi(in0,9),2),3)),in1),in0)",
+      "normalized_formula": "xor(add(sra(slli(andi(addi(xori(in1,163),353),65535),16),andi(addi(in0,11),3)),in1),in0)",
+      "historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_historical_formula": "xor(add(sra(slli(andi(addi(xori(in1,151),337),65535),16),andi(addi(in0,9),1)),in1),in0)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('slli', (('andi', (('addi', (('xori', ('in1', '#')), '#')), '#')), '#')), ('andi', (('addi', ('in0', '#')), '#')))), 'in1')), 'in0'))"
+    },
+    {
+      "pool_index": 120,
+      "template": "challenge_signed16_xor_repeat",
+      "parameter": [
+        11,
+        47,
+        1
+      ],
+      "formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),47),11),65535),16),andi(addi(xori(in0,15),2),1)),xor(in0,in1)),in1)",
+      "normalized_formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),47),11),65535),16),andi(xori(in0,15),1)),xor(in0,in1)),in1)",
+      "historical_formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),149),43),65535),16),andi(xori(in0,15),1)),xor(in0,in1)),in1)",
+      "normalized_historical_formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),149),43),65535),16),andi(xori(in0,15),1)),xor(in0,in1)),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('slli', (('andi', (('xori', (('addi', (('xor', ('in0', 'in1')), '#')), '#')), '#')), '#')), ('andi', (('xori', ('in0', '#')), '#')))), ('xor', ('in0', 'in1')))), 'in1'))"
+    },
+    {
+      "pool_index": 121,
+      "template": "challenge_signed16_xor_repeat",
+      "parameter": [
+        23,
+        97,
+        1
+      ],
+      "formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),97),23),65535),16),andi(addi(xori(in0,15),2),1)),xor(in0,in1)),in1)",
+      "normalized_formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),97),23),65535),16),andi(xori(in0,15),1)),xor(in0,in1)),in1)",
+      "historical_formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),149),43),65535),16),andi(xori(in0,15),1)),xor(in0,in1)),in1)",
+      "normalized_historical_formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),149),43),65535),16),andi(xori(in0,15),1)),xor(in0,in1)),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('slli', (('andi', (('xori', (('addi', (('xor', ('in0', 'in1')), '#')), '#')), '#')), '#')), ('andi', (('xori', ('in0', '#')), '#')))), ('xor', ('in0', 'in1')))), 'in1'))"
+    },
+    {
+      "pool_index": 122,
+      "template": "challenge_signed16_xor_repeat",
+      "parameter": [
+        47,
+        157,
+        1
+      ],
+      "formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),157),47),65535),16),andi(addi(xori(in0,15),2),1)),xor(in0,in1)),in1)",
+      "normalized_formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),157),47),65535),16),andi(xori(in0,15),1)),xor(in0,in1)),in1)",
+      "historical_formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),149),43),65535),16),andi(xori(in0,15),1)),xor(in0,in1)),in1)",
+      "normalized_historical_formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),149),43),65535),16),andi(xori(in0,15),1)),xor(in0,in1)),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('slli', (('andi', (('xori', (('addi', (('xor', ('in0', 'in1')), '#')), '#')), '#')), '#')), ('andi', (('xori', ('in0', '#')), '#')))), ('xor', ('in0', 'in1')))), 'in1'))"
+    },
+    {
+      "pool_index": 123,
+      "template": "challenge_signed16_xor_repeat",
+      "parameter": [
+        163,
+        353,
+        1
+      ],
+      "formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),353),163),65535),16),andi(addi(xori(in0,15),2),1)),xor(in0,in1)),in1)",
+      "normalized_formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),353),163),65535),16),andi(xori(in0,15),1)),xor(in0,in1)),in1)",
+      "historical_formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),149),43),65535),16),andi(xori(in0,15),1)),xor(in0,in1)),in1)",
+      "normalized_historical_formula": "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),149),43),65535),16),andi(xori(in0,15),1)),xor(in0,in1)),in1)",
+      "normalized_constant_erased_skeleton": "('xor', (('add', (('sra', (('slli', (('andi', (('xori', (('addi', (('xor', ('in0', 'in1')), '#')), '#')), '#')), '#')), ('andi', (('xori', ('in0', '#')), '#')))), ('xor', ('in0', 'in1')))), 'in1'))"
+    }
+  ],
+  "exact_formula_matches": [],
+  "interpretation": "These are historical constant-erased structural-family collisions after sound decoded-RV32 rewrites; different literal data constants mean a skeleton match alone is NOT a proof of identical complete functions. No-op or collapsible wrappers cannot alone establish the predeclared stronger family novelty. A substantive input revision is required before any cohort/protocol freeze.",
+  "protocol_frozen_at_review": false,
+  "classifier_fits": 0,
+  "fresh_native_jobs": 0,
+  "new_predictions_or_labels_used": false,
+  "auditor_source_sha256": "0b8470f92a7936bd37a35494edcbf07eb5fd78a8537756343cdc5fa969d7b1b4"
+}

@@ -35,15 +35,24 @@ This matched test contains **192 synthetic circuits**, with the same 1,665 fitti
 
 These are separate experiments, not one learning curve. Targeted coverage helped arithmetic cases, but did not improve the primary application-transfer metric. The scoped policy reduced MAE **22.63%** on 32 new related circuits; its worst underprediction increased **2.83 → 32.01 LUT4**, so it remains experimental. [Complete compact results](results/README.md).
 
-## Latest experiment: unified budget decisions
+## Latest experiment: learning budget feasibility
 
-Two matched forests use the same **1,889 training circuits**, comparing **217 features** with **233 features** that add localized descriptors and carry-aware bit analysis. Every reduction across a hardware-budget cap now requires the new model's support; older median decisions have no bypass.
+Two matched **300-tree classifiers** learn whether a circuit fits **32, 64 or 128 LUT4**, using the same **1,889 training circuits** and either **217 or 233 features**. A fixed probability threshold of 0.5 supports budget decisions; these probabilities are uncalibrated. The 233-feature model passes all retained development checks; the 217-feature model fails a protected rejection.
 
-![Matched unified-policy comparison: improved fresh accuracy and fewer inherited false acceptances, but failed preservation and activity gates.](docs/figures/research/boundary-corroboration.svg)
+```mermaid
+flowchart LR
+    A[RV32 circuit] --> B[Circuit features: 217 or 233]
+    B --> C[300 shared-partition trees]
+    C --> D[Feasibility at 32 / 64 / 128 LUT4]
+    D --> E[Fixed 0.5 rule + frozen policy bounds]
+    E --> F[Policy LUT estimate and budget decision]
+```
 
-On the fresh **32-circuit general test**, policy MAE falls from budget release's **13.47 LUT4** to **12.70 (217 features)** or **13.17 (233)**. Both remove the prior policy's extra 64-LUT false acceptances. But they retain **two or three false rejections at 128**, versus zero for the signed incumbent, and undo earlier valid repairs. The conditional test also misses the declared activity requirements.
+![Direct feasibility comparison: better fresh general accuracy, but three new false acceptances and one sharing-case false rejection prevent promotion.](docs/figures/research/boundary-feasibility.svg)
 
-**Neither candidate passes selection or is promoted; the goal remains active and the base model remains the default.** The next hypothesis is to learn budget feasibility directly, rather than infer it solely from a predicted mean area. [Full comparison, failures and reproduction](results/boundary-corroboration/README.md) · [Previous abstention experiment](results/boundary-abstention/README.md).
+On **32 fresh general circuits**, both classifiers reduce policy MAE **15.41 → 13.44 LUT4 (12.76%)** and positive-target MAPE **18.67% → 17.11%** versus budget release. False rejections at 128 fall **5 → 0**, with false acceptances unchanged. The complete fresh test measures **56 unique circuits**, with general, sharing, legacy and targeted populations reported separately.
+
+**The model is not promoted.** On the eight targeted active circuits it fixes five false rejections but creates **three false acceptances** at 128; a sharing case also remains falsely rejected. Better average accuracy does not satisfy our requirement to preserve hardware-budget decisions. The goal remains active and the base model remains the default. [Full results and reproducible evidence](results/boundary-feasibility/README.md) · [Previous regression comparison](results/boundary-corroboration/README.md).
 
 ## Run it
 

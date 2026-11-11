@@ -1,0 +1,305 @@
+{
+  "schema": "boundary-feasibility-pool128-v1",
+  "frozen_at_utc": "2026-11-11T08:42:26.703533+00:00",
+  "policy": {
+    "total_native_seconds": 300,
+    "workers": 2,
+    "fits": 0,
+    "retries": 0,
+    "replacement_candidates": 0,
+    "random_vectors": 2048,
+    "vectors_per_formula": 2148,
+    "caps_lut4": [
+      32,
+      64,
+      128
+    ],
+    "budget_accounting": "summed_worker_process_seconds",
+    "stage_wall_safety_reserve_seconds": 1.0
+  },
+  "new_training_label_count": 0,
+  "pool_count": 128,
+  "general_count": 32,
+  "general_target_count": 24,
+  "general_control_count": 8,
+  "sharing_count": 8,
+  "legacy_count": 8,
+  "challenge_count": 80,
+  "maximum_selected_count": 64,
+  "all_pool_rows_consumed_for_future_novelty": true,
+  "general_templates": [
+    [
+      "general_and_complement",
+      "xor(add(sra(addi(xori(and(in0,in1),29),113),andi(addi(xori(in1,15),2),{k})),in1),or(in0,in1))"
+    ],
+    [
+      "general_or_complement",
+      "xor(add(sra(xori(addi(or(in0,in1),113),29),andi(addi(xori(in0,15),2),{k})),in0),xor(in0,in1))"
+    ],
+    [
+      "general_signed8_preadd",
+      "xor(add(sra(addi(slli(andi(xori(and(in0,in1),29),255),24),113),andi(addi(xori(addi(in0,5),15),2),{k})),in1),and(in0,in1))"
+    ],
+    [
+      "general_signed8_postadd",
+      "xor(add(sra(slli(andi(addi(xori(in1,29),113),255),24),andi(addi(addi(in0,9),2),{k})),in1),or(in0,in1))"
+    ],
+    [
+      "general_plain_outerinput",
+      "xor(add(sra(xori(addi(in1,113),29),andi(and(xori(in0,15),in1),{k})),in0),in1)"
+    ],
+    [
+      "general_signed16_preadd_outerinput",
+      "xor(add(sra(addi(slli(andi(xori(in1,29),65535),16),113),andi(xori(srai(in0,1),15),{k})),in0),in1)"
+    ]
+  ],
+  "general_parameters": [
+    1,
+    3,
+    7,
+    31
+  ],
+  "control_templates": [
+    [
+      "control_wrappedxor_rootadd",
+      "add(sra(xor(xori(addi(in1,113),29),in0),andi(xor(in0,srli(in1,1)),{k})),and(in0,in1))"
+    ],
+    [
+      "control_low16_dualadd",
+      "xor(sra(xori(addi(andi(xor(in0,in1),65535),113),29),andi(and(xori(in1,15),srli(in0,1)),{k})),add(in0,in1))"
+    ],
+    [
+      "control_unsigned_ordata",
+      "xor(add(srl(xori(addi(or(in0,in1),113),29),andi(addi(addi(in1,9),2),{k})),in1),xor(in0,in1))"
+    ],
+    [
+      "control_static_signed8",
+      "xor(add(srai(slli(andi(xori(addi(in0,113),29),255),24),{k}),in0),xor(in0,in1))"
+    ]
+  ],
+  "control_parameters": [
+    1,
+    3
+  ],
+  "sharing_templates": [
+    [
+      "sharing_full_xor",
+      "xor(add(sra(addi(xori(xor(in0,in1),{c}),{d}),andi(addi(xori(in1,15),2),{k})),xor(in0,in1)),xor(in0,in1))"
+    ],
+    [
+      "sharing_low16_beforeadd_xor",
+      "xor(add(sra(addi(xori(andi(xor(in0,in1),65535),{c}),{d}),andi(addi(xori(in0,15),2),{k})),xor(in0,in1)),and(in0,in1))"
+    ],
+    [
+      "sharing_full_and",
+      "xor(add(sra(xori(addi(and(in0,in1),{d}),{c}),andi(addi(addi(in1,9),2),{k})),and(in0,in1)),and(in0,in1))"
+    ],
+    [
+      "sharing_signed8_preadd_or",
+      "xor(add(sra(addi(slli(andi(xori(or(in0,in1),{c}),255),24),{d}),andi(addi(xori(in0,15),2),{k})),or(in0,in1)),xor(in0,in1))"
+    ]
+  ],
+  "legacy_templates": [
+    [
+      "legacy_signed16_and_repeat",
+      "xor(add(sra(slli(andi(xori(addi(and(in0,in1),{d}),{c}),65535),16),andi(addi(xori(addi(in0,5),15),2),{k})),and(in0,in1)),or(in0,in1))"
+    ],
+    [
+      "legacy_or_complement",
+      "xor(add(sra(addi(xori(or(in0,in1),{c}),{d}),andi(xori(srai(in1,1),15),{k})),in0),xor(in0,in1))"
+    ],
+    [
+      "legacy_signed8_preadd_xor_repeat",
+      "xor(add(sra(addi(slli(andi(xori(xor(in0,in1),{c}),255),24),{d}),andi(addi(xori(addi(in1,5),15),2),{k})),xor(in0,in1)),and(in0,in1))"
+    ],
+    [
+      "legacy_signed8_postadd",
+      "xor(add(sra(slli(andi(xori(addi(in1,{d}),{c}),255),24),andi(addi(addi(in0,9),2),{k})),in0),or(in0,in1))"
+    ]
+  ],
+  "sharing_legacy_parameters": [
+    [
+      11,
+      47,
+      1
+    ],
+    [
+      47,
+      157,
+      3
+    ]
+  ],
+  "challenge_templates": [
+    [
+      "challenge_plain_boolean",
+      "xor(add(sra(xori(addi(in0,{d}),{c}),andi(addi(addi(in1,9),2),{k})),in1),xor(in0,in1))"
+    ],
+    [
+      "challenge_plain_outerinput",
+      "xor(add(sra(addi(xori(in1,{c}),{d}),andi(and(xori(in0,15),in1),{k})),in0),in1)"
+    ],
+    [
+      "challenge_and_complement",
+      "xor(add(sra(xori(addi(and(in0,in1),{d}),{c}),andi(addi(xori(in1,15),2),{k})),in0),and(in0,in1))"
+    ],
+    [
+      "challenge_or_complement",
+      "xor(add(sra(addi(xori(or(in0,in1),{c}),{d}),andi(addi(xori(in0,15),2),{k})),in1),or(in0,in1))"
+    ],
+    [
+      "challenge_xor_complement",
+      "xor(add(sra(xori(addi(xor(in0,in1),{d}),{c}),andi(addi(addi(in1,9),2),{k})),in0),xor(in0,in1))"
+    ],
+    [
+      "challenge_signed8_preadd_outerinput",
+      "xor(add(sra(addi(slli(andi(xori(in0,{c}),255),24),{d}),andi(xori(srai(in1,1),15),{k})),in1),in0)"
+    ],
+    [
+      "challenge_signed8_postadd_or",
+      "xor(add(sra(slli(andi(xori(addi(or(in0,in1),{d}),{c}),255),24),andi(addi(xori(in0,15),2),{k})),in1),xor(in0,in1))"
+    ],
+    [
+      "challenge_signed16_preadd_outerinput",
+      "xor(add(sra(addi(slli(andi(xori(and(in0,in1),{c}),65535),16),{d}),andi(xor(xori(in1,15),srli(in0,1)),{k})),in0),in1)"
+    ],
+    [
+      "challenge_signed16_postadd_outerinput",
+      "xor(add(sra(slli(andi(addi(xori(in1,{c}),{d}),65535),16),andi(xori(srai(in0,1),15),{k})),in1),in0)"
+    ],
+    [
+      "challenge_signed16_xor_repeat",
+      "xor(add(sra(slli(andi(xori(addi(xor(in0,in1),{d}),{c}),65535),16),andi(or(and(in0,in1),srli(in0,1)),{k})),xor(in0,in1)),in1)"
+    ]
+  ],
+  "challenge_parameters": [
+    [
+      11,
+      47,
+      1
+    ],
+    [
+      23,
+      97,
+      1
+    ],
+    [
+      47,
+      157,
+      1
+    ],
+    [
+      163,
+      353,
+      1
+    ],
+    [
+      11,
+      47,
+      3
+    ],
+    [
+      23,
+      97,
+      3
+    ],
+    [
+      47,
+      157,
+      3
+    ],
+    [
+      163,
+      353,
+      3
+    ]
+  ],
+  "proof_random_seed": 2026111108,
+  "design_assumptions": "Fixed128 freshinputpool:completegeneral32(24rootclass+8outside),mandatorysharing8,mandatorylegacy8,challenge80. NewASTcompositions alter outerBoolean siblings;the10previouslycollidingfamilies nowuse substantive both-inputcomplementedAND,next-bit signedshift,andmixedBooleancontrols. Two soundmodularrewrites screen ALL128againsthistory;ADDI(+2)alone is never novelty evidence; sign-placement andouter-inputstructures retained. Where ADDI(+2) remains,mask3andwider expose carry;mask1 novelty must come from other normalized structure. Mandatorylegacy covers narrow16AND/repeatedpostAND andsign8-beforeADDI-XOR/repeatedpostXOR;sharingincludesfullword/high-costandnarrowcontrasts. Newtuples prospectivelyfixed;no nativecost/predictions used forchoice. No cost,safety,orsemantic-independence guarantee.",
+  "selection_rule": "Alwayslabel general32+sharing8+legacy8 firstinpoolorder. Atmost16NEWcapacceptances classifier<=cap<latestcorroborated_augmented,roundrobinsortedchallenge templatesandfixedparameterorder;reserveall48fixed217/233keys andexcludehistorical/withinpoolduplicates perboundmodelprotocol. Require>=4actions/>=2templates/128,legacy8>=1veto oldabstention<=64<classifier,sharing8>=1veto oldlearned217<=128<classifier. No quotafill,replacement,extensionorlabelselection.",
+  "success_rule": "Zero newtraininglabels;reuseexactfrozen1889orderedtrainingrows/targets fromcorroboration;twofixedmatched217/233multioutputfeasibilityclassifierfits boundseparately. No probability-threshold/grid/featurechanges. Release-first exact0.5tie-accept policyandallretainedhardgates frozenbeforefits/nativejobs. General32/sharing8/legacy8/conditional-full(actions+SAME8generalcontrols)/active-only scoredseparately,full denominators,nopooledsuccess orsharedcontrolindependenceclaim. All128probabilities/selection frozenbeforelabels.",
+  "chronology": "Inputs/protocol/schema/classes/policyfreeze+independentpreflight+explicit parent-authorization.json bound to exact plan/protocol beforeanynativejobs/fits;all128nativefeatures;matchedclassifiersfitonlyold1889training;allpoolprobabilities/monotonicity/classmaps/freshness/selection/exactsubsetfreeze;independentprelabel+authorization;allselectedoriginalRTLproof+labels.",
+  "native_accounting": "SUM of worker process intervals from launch through reap,including startup/extraction/verification/synthesis/failures,all128features+selectedlabels;shared300worker-seconds,max2workers. Stage wall deadline=(remaining summed budget minus1second safety reserve)/2. Track both actual summed worker time and stage wall time;budget overrun isfailure. Audit/fitting/host-bookkeeping timeexcluded.",
+  "missing_rule": "Retainall128poolrows/features/probabilities/pointsandeveryselectedlabel/failure;noretries,replacements,extensions,orcompletecohortprimarywithmissingcases.",
+  "scope": "Uncalibratedbudget-feasibilityclassificationonfixedsyntheticgeneral/sharing/legacypanelsandconditionalchallenge. Objectivechangesfromregression;representationablationisolates16columnswithinclassifieronly. No unbiasedgeneralization,hardware-safetycertificate,timing,power,fullcoreorCPUclaim.",
+  "sources": {
+    "scripts/measure_boundary_feasibility.py": "ac775aaf4d2d052ed78e2671e0a5da35bd3ed372c62cc608f96217dea037f24f",
+    "scripts/measure_guarded_revision.py": "7d5c9f415b07f4108f16a5adfedc5559fe17355f700fae627593e52728521403",
+    "scripts/boundary_carry_features.py": "17b957178a5e962d8afa9da822fdc85055613849ac2a820d141311d5a5a3480e",
+    "scripts/measure_budget_preserving_coverage.py": "8b2680e5b7a7a716d2fff5e330649bd6753abd091690d471cede73aeb7f72ffd",
+    "scripts/measure_targeted_coverage.py": "18765b45ff1c2c6e7aa85ac3dc85fc1ea6c5cfbb9cb08ab958b71d4e4f0f3f14",
+    "scripts/validate_selected_features.py": "8739cebe56090cbffe6591e1e8e05851430dcbb6fb50945673ef1240cb14188f",
+    "tests/test_measure_boundary_feasibility.py": "724f427eff01e88ea857fa741ac9aaee1633e7fc1e20a8b22d81f220332791dc",
+    "isaforge/__init__.py": "788b89398980996e41116e972bf0b790b077eda914cd1e630200d1911713109a",
+    "isaforge/area_adaptation_v9.py": "a046dc654190f4edbf6b2cfa4c01382f9218bb1281a44c0dfb1ec7109b4bc56b",
+    "isaforge/area_model.py": "ade5dcc32ef66d0ea03ea9ec4937687564dff36c4483afc76ac59f9dc4a69447",
+    "isaforge/area_model_v2.py": "389f6592d6a3fb801638dcc5237cac65f8ab504caac10efef1a43e5d49cf6cf1",
+    "isaforge/area_model_v3.py": "0560b5a3a1dff7085a374dd2d5bbc55f487ae1986830bd85899f255fa3299974",
+    "isaforge/area_model_v4.py": "a912198d58203c821da4c3408c48eb2427cd84359071570158e7fd0b73d06357",
+    "isaforge/area_model_v5.py": "6e39f1fae6ac0b7398dbfb80c6096dae0cfafe479ada441a4fa27af7938f990f",
+    "isaforge/area_model_v6.py": "b46c90c47461d8888ece12711253c92cc2bac834d621c58e17a82af106db5114",
+    "isaforge/area_model_v8.py": "e8e442689256155dc8563a0bb2041c5586ec217d36bd59d3cd28c16cb23d975d",
+    "isaforge/area_selection.py": "88c14e3029620d61cc7da5fc429904216c69585dca497d5017dcb25d4f05a70e",
+    "isaforge/cached_mapping_inference_v6.py": "d02b0dfdbddd15b52cfd9ba19c7edc590ec850860d2413e8f962bace325fa1c9",
+    "isaforge/challenger_plots.py": "fa7df137b5b783b11e24c92e88474ede869db4472461de82b95fe6b31777bcc4",
+    "isaforge/challenger_report.py": "e984754605417ec2c0c83ad4eda36a56ae989fcee4daa8930311d1eed9e140b1",
+    "isaforge/cli.py": "d467551d205245f4afa1f7695c7a5bc0e7f6c8db95b64f9d19b60f43c79a87ee",
+    "isaforge/conservative_policy.py": "1c318b94c0e2ad6287f2b6d470974c4ec581eb805018f7544bd438e9cd42d823",
+    "isaforge/core_experiment.py": "3e300f3054224050cd600eea0a3a76db496b67951323115cdb5d349bb2f8acc8",
+    "isaforge/core_routing.py": "dfe14bb5e7236630fe376a5131f4d492309933ae98c0a1e3ea9e798b28a36058",
+    "isaforge/dataset.py": "bb568ef7ca5f6ad79fd6a9ffef9ff18c510b29ffb9f4b6a7e3bfd5cb4cae3cbc",
+    "isaforge/demo.py": "f3ba4329895661972e0dfab7da6aa2bf507c577e6c12f2be4172f8fab2ecff14",
+    "isaforge/deployment.py": "8f8bb3d72b6ca3bdc207abfb973cbac899377740a6729ddf38de2be8e4f3c971",
+    "isaforge/evaluation.py": "f23f4d46a1193b0e0780f80c31c13a5662a24aaf6a46a87c46298a9015ecb98e",
+    "isaforge/fast_graph_inference.py": "8c9546f380728abcceefc6156b3e2172e6cc5597c1712390a61fbe719b312b3f",
+    "isaforge/features.py": "1aa3a05bb40852a5d06bfaedb4f614224c6e09c0d8ed3e9f7eddcb548f4a1c84",
+    "isaforge/fresh_evaluation.py": "3117cb67e16c5a5f2bd429eaacc1927de77665f22e45c4fbfeaec26f513e2074",
+    "isaforge/frozen_inference.py": "33cb0e231dc4a0797e55ce23b145d23a55b812e7ebfc4760507c81319efd47e7",
+    "isaforge/graph_features_v5.py": "c0bb42fa3a4ae86bcaceffd35964fcf07a5dda0f36ab4e21ea8e1cfe6112c8cf",
+    "isaforge/mapping_features_v6.py": "3b220e3775d536630656681df645b95e0ff3c44b55ec91fd002a6b06d231f5d3",
+    "isaforge/masterrtl_baseline.py": "1473333e7b5d00d1ae91084fa5663697861504c4a411d6242a6160ff5f0a697f",
+    "isaforge/midterm_report.py": "2efcbd710e1196126050bd449ade8694fe9685f8ce7c96d4a92263b6ecee3c96",
+    "isaforge/model.py": "fee68c0f6805c5b7743ff23083cad6fe32ad0bd23b5a9dac6b6378f399ddf345",
+    "isaforge/probe_audit.py": "b79eb74299ababd1c120f7eacd6fd93fab9355ee407fa94d9be9402c44b90620",
+    "isaforge/probe_corpus.py": "2435c29388fbf2368aee3e736606dd017d21306e45377021d29650983be775a3",
+    "isaforge/probe_evaluation.py": "0d44fbef8484bd610195fbfe393b8ec51285ea04cf5f38ebc846de6825a846d8",
+    "isaforge/real_experiment.py": "5ccd516a9dfae09bb0b3b3ce4480058f79b2cb5a688e9f698e3713124c77e16e",
+    "isaforge/research_report.py": "642c92a6c6dd146abc04d25304319c98316ee7a66cb0b7992176b099ca716b54",
+    "isaforge/rtl.py": "45cb8bfeb76be65f8debfd4d96bb278f25db776ad54670e26784a4e832f3219e",
+    "isaforge/selection.py": "cf76a3f37f86a35b60454beb2be9e69a03944cac287d7485b1a6f20a6fdd5c7e",
+    "isaforge/semantic_features_v7.py": "eddc21bd80fd97dea7e02cbfe14bb5b50649f779ed53ec6068674adc1dc0f9e3",
+    "isaforge/soc_experiment.py": "af8691054b626f687a8962b149bf3431ee7e34951d0aee0fd8692b0e334e3c1a",
+    "isaforge/structural_features_v3.py": "b0a4c8233c2a39b675767151f21698d6418c5b3b7bb357741815986033396fb0",
+    "isaforge/structural_features_v4.py": "78b506d9e20ed017f2724352b5c9e6d78eb67b3169fa19eb910b5a95c45905da",
+    "isaforge/structural_features_v5.py": "386a324634d26a1a9fde0090a1116dd3ad4ba2303e2d3c7775e3128990ac4bc2",
+    "isaforge/synthesis.py": "375e4858f08c2dc2cd793012ceee59d3f4146e2c7c12079d080a0299bfa0223f",
+    "isaforge/v4_corpus.py": "37f30c52e0a330d631f324903c985c69e0cbc1eaa1be7950b1cd6ff3e355bcac",
+    "isaforge/v4_validation.py": "193dd1b6780b1187e251db2dee08545b0391afead95a8f6d825dd51b58a694ff",
+    "isaforge/v5_corpus.py": "98a53a2125aef0b4a43546f17473b13d5e42d28925971554c5053887bf75cd75",
+    "isaforge/v6_corpus.py": "932b2f01dff404a7857c0e3107e8fab006aef3c0665280377d39ca15e7d007ee",
+    "isaforge/v8_application_corpus.py": "191bc3a6c35cdd063bc64839a579952e3bf81166415e38b45764c2fe2e360a2f"
+  },
+  "inputs": {
+    "results/boundary-feasibility-validation/historical-formulas.json": "61336342f402e21ddefa86a79ce2b2c3f85d787a797f70c4d7011ba5810e99df",
+    "results/boundary-feasibility-validation/novelty.json": "2241b8f2887278201d13b27b1612941a97f9efbcb62d22b96e86e492bd88ae0e",
+    "results/boundary-feasibility-validation/pool-candidates.json": "07f23bc8e5b290b0f344c848438ceb16b8855bf7e23ec34848a07d5809b95786",
+    "results/boundary-feasibility-validation/tools.json": "8cdb179640fa4cf11a905ef775a7e28d37b296c309018128c6c8b451d8528fc8"
+  },
+  "prior_inventory_sources": {
+    "results/boundary-corroboration-data/historical-formulas.json": "f785a3e2879d173a0c15ba13893e6f554c902e432026f6b40d9a0ed1e37898f6",
+    "results/boundary-corroboration-data/candidates.json": "b1124ccaab19ecd2c2d8f4a1c305df4ed36a9f2ad883fe1f5bb34e9d0380c200",
+    "results/boundary-corroboration-data/novelty.json": "941e10858c1f135faaca17166f1f4f6297e68a0914992958484246b77fc103a1",
+    "results/boundary-corroboration-data/plan.json": "d2c5e6462a953306054af4ace15aa792ea29e390fbf594e0fc13cbd1afc6176c",
+    "results/boundary-corroboration-validation/pool-candidates.json": "144d93365118eff61fbe01daa54d59d188bcbda71a94f0385f69f7c727b38b20",
+    "results/boundary-corroboration-validation/candidates.json": "22e436d4f7c86dae28c726ff825cd84615fb363ffc6f21596462977ddd9f1761",
+    "results/boundary-corroboration-validation/novelty.json": "4fd8085b475556c3f4f0bb282f7795eee5d1a879c2f0ff5fae155803303517f0",
+    "results/boundary-corroboration-validation/plan.json": "d2c5e6462a953306054af4ace15aa792ea29e390fbf594e0fc13cbd1afc6176c"
+  },
+  "prefreeze_review_inputs": {
+    "results/boundary-feasibility/prefreeze-input-review.json": "3b8d840b6b2d9b0067b62b9ba645b396a934671e5e4c423fdbedaa924f45de2d",
+    "results/boundary-feasibility/rejected-input-manifest-v1.json": "f685e9d526fdac5ae9b5cbdb0e77efebf46360baee27890b72c374977d2112bd",
+    "results/boundary-feasibility/rejected-measurement-draft-v1.py": "3f42f67caa1261d1315777449de35796c88652b6d434f8aec6f0d5a008852796"
+  },
+  "fits": 0,
+  "target_label_jobs": 0,
+  "native_feature_jobs": 0
+}

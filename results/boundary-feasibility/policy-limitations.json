@@ -1,0 +1,69 @@
+{
+  "schema": "boundary-feasibility-policy-limitations-v1",
+  "source_sha256": "8469c73ef7f8f8e7e23cdfa6b4aec643c0df5d7fe54e0014c27d8a0c576c15f9",
+  "scope": "Prospective analytical limitation of signed<=candidate<=release, using consumed diagnostic evidence; no fits or new native measurements.",
+  "proof": "If actual>cap and release<=cap, then candidate<=release<=cap remains a false acceptance. If actual<=cap and signed>cap, then candidate>=signed>cap remains a false rejection.",
+  "unrepairable_consumed_cases": [
+    {
+      "panel": "general32",
+      "candidate_id": "boundary-corroboration-pool:31e2468959dd528f85bc2ceb1503259d5fd776f69c829d650dd9c74e99d241ce",
+      "actual_lut4": 28,
+      "cap": 32,
+      "signed_lut4": 38.18,
+      "release_lut4": 38.75666666666667,
+      "error": "false_reject",
+      "constraint": "lower bound prevents acceptance"
+    },
+    {
+      "panel": "general32",
+      "candidate_id": "boundary-corroboration-pool:89a0b98b5f3e3ca252fe5bd27d77696f35639a54d57cca82689d6beb4b0bc0d1",
+      "actual_lut4": 155,
+      "cap": 128,
+      "signed_lut4": 109.62,
+      "release_lut4": 109.62,
+      "error": "false_accept",
+      "constraint": "upper bound prevents rejection"
+    },
+    {
+      "panel": "sharing8",
+      "candidate_id": "boundary-corroboration-pool:5d080c5d0bafc8fdf7a13a399c1ad9a703a872b076518caa1720d9a29f99a3b7",
+      "actual_lut4": 145,
+      "cap": 128,
+      "signed_lut4": 102.16,
+      "release_lut4": 102.16,
+      "error": "false_accept",
+      "constraint": "upper bound prevents rejection"
+    },
+    {
+      "panel": "sharing8",
+      "candidate_id": "boundary-corroboration-pool:60b8dd860e0ecd54e29a3f24dcc66d800b0c45ff7363f5d0fc00a687e1b41fcc",
+      "actual_lut4": 100,
+      "cap": 64,
+      "signed_lut4": 51.61666666666667,
+      "release_lut4": 51.61666666666667,
+      "error": "false_accept",
+      "constraint": "upper bound prevents rejection"
+    },
+    {
+      "panel": "legacy8",
+      "candidate_id": "boundary-corroboration-pool:1c3f52fa690cf92161c277fd55e45639e15918bc8d7c8061315a29ae5d8193a7",
+      "actual_lut4": 102,
+      "cap": 64,
+      "signed_lut4": 50.70666666666666,
+      "release_lut4": 51.15,
+      "error": "false_accept",
+      "constraint": "upper bound prevents rejection"
+    },
+    {
+      "panel": "legacy8",
+      "candidate_id": "boundary-corroboration-pool:c570af8b69b5f345122b2a278348eb0b969dc95ac9c14febaaf495ee3de6f5a9",
+      "actual_lut4": 24,
+      "cap": 32,
+      "signed_lut4": 37.903333333333336,
+      "release_lut4": 38.92,
+      "error": "false_reject",
+      "constraint": "lower bound prevents acceptance"
+    }
+  ],
+  "implication": "The next trial can repair excess rejections introduced above the signed predictor and preserve existing false-acceptance gains; these bounds cannot eliminate every existing budget error. Existing completion gates remain unchanged. Any future broader policy requires a separately frozen experiment and fresh evaluation."
+}
