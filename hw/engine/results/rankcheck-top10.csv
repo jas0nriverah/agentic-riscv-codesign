@@ -1,0 +1,8 @@
+program,candidates,rho_saved_vs_cycles,rho_saved_vs_instret,finder_top_is_best,best_by_cycles,best_cycles_saved,finder_top,finder_top_cycles_saved,geomean_speedup,geomean_cycles_only
+aha-mont64,10,0.939,1.0,True,"add(srli(in0,31),slli(in1,1))",3681792,"add(srli(in0,31),slli(in1,1))",3681792,1.0154,1.0564
+crc32,10,0.644,1.0,False,"mul(in0,addi(lui(1103515648),-403))",7137280,"srli(slli(add(in0,in1),1),1)",1392640,1.0723,1.107
+edn,10,0.842,1.0,True,"add(srai(add(slli(in0,1),in0),15),in1)",208800,"add(srai(add(slli(in0,1),in0),15),in1)",208800,0.9877,1.0035
+huffbench,10,0.954,1.0,True,"add(in0,slli(in1,2))",186736,"add(in0,slli(in1,2))",186736,0.975,1.0037
+nettle-aes,10,0.893,0.978,True,"add(in0,slli(in1,2))",2109744,"add(in0,slli(in1,2))",2109744,1.0219,1.0531
+nettle-sha256,10,1.0,1.0,True,"xor(add(srli(in0,2),slli(in0,30)),in1)",1216000,"xor(add(srli(in0,2),slli(in0,30)),in1)",1216000,1.0135,1.0594
+wikisort,10,0.729,1.0,False,"mul(in0,addi(lui(1103515648),-403))",82000,"addi(addi(in0,-16),16)",19793,0.9647,1.0032

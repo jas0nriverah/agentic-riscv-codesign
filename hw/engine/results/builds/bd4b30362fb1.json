@@ -1,0 +1,1480 @@
+{
+ "provisional": true,
+ "id": "bd4b30362fb1",
+ "slots": [
+  {
+   "slot": 0,
+   "funct7": 2,
+   "funct3": 0,
+   "formula": "add(srli(in0,31),slli(in1,1))",
+   "module": "cx_s0",
+   "size": 3,
+   "inputs": [
+    "in0",
+    "in1"
+   ],
+   "has_mul": false,
+   "source": null
+  },
+  {
+   "slot": 1,
+   "funct7": 2,
+   "funct3": 1,
+   "formula": "or(srli(in0,31),slli(in1,1))",
+   "module": "cx_s1",
+   "size": 3,
+   "inputs": [
+    "in0",
+    "in1"
+   ],
+   "has_mul": false,
+   "source": null
+  }
+ ],
+ "priority": [
+  "add(srli(in0,31),slli(in1,1))",
+  "or(srli(in0,31),slli(in1,1))"
+ ],
+ "microtest": {
+  "checks": 2370,
+  "runs": {
+   "micro-check": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-stock-s0": {
+    "expect": "trap",
+    "core": "stock",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "micro-s1-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s1-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-stock-s1": {
+    "expect": "trap",
+    "core": "stock",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "micro-xor-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-xor-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-f3-2": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-4": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-5": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-6": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-7": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-custom1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   }
+  },
+  "cycles_per_insn": {
+   "add(srli(in0,31),slli(in1,1))": 5.0,
+   "or(srli(in0,31),slli(in1,1))": 5.0
+  },
+  "cycles_per_xor": 3.0
+ },
+ "luts": {
+  "baseline": 2439,
+  "engine": 2521,
+  "delta": 82
+ },
+ "fmax_mhz": {
+  "per_seed": {
+   "1": 61.14,
+   "2": 59.98,
+   "3": 62.42,
+   "4": 63.25,
+   "5": 62.96,
+   "6": 64.19,
+   "7": 61.01,
+   "8": 60.31,
+   "9": 64.07,
+   "10": 62.92
+  },
+  "median": 62.67,
+  "min": 59.98,
+  "max": 64.19
+ },
+ "critical_path": {
+  "unit_on_arc_seeds": [],
+  "rows": [
+   {
+    "core": "engine",
+    "seed": "1",
+    "fmax_mhz": "61.14",
+    "path_ns": "16.36",
+    "logic_stages": "39",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "2",
+    "fmax_mhz": "59.98",
+    "path_ns": "16.67",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "3",
+    "fmax_mhz": "62.42",
+    "path_ns": "16.02",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "4",
+    "fmax_mhz": "63.25",
+    "path_ns": "15.81",
+    "logic_stages": "38",
+    "start": "cpu.reg_op2[2]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "5",
+    "fmax_mhz": "62.96",
+    "path_ns": "15.88",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "6",
+    "fmax_mhz": "64.19",
+    "path_ns": "15.58",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "7",
+    "fmax_mhz": "61.01",
+    "path_ns": "16.39",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "8",
+    "fmax_mhz": "60.31",
+    "path_ns": "16.58",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "9",
+    "fmax_mhz": "64.07",
+    "path_ns": "15.61",
+    "logic_stages": "38",
+    "start": "cpu.reg_op2[2]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "10",
+    "fmax_mhz": "62.92",
+    "path_ns": "15.89",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   }
+  ]
+ },
+ "period_rule": {
+  "rule": "T_fused = max(T_base, T_fused_measured)",
+  "candidate_period_ns": 16.2655,
+  "routed_period_ns": 15.9568,
+  "used": "baseline (the routed clock is not slower)"
+ },
+ "programs": {
+  "aha-mont64": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 25631371,
+   "cycles": 19188235,
+   "cycles_saved": 6443136,
+   "baseline_instret": 4475851,
+   "instret": 3717835,
+   "instret_saved": 758016,
+   "instret_saved_predicted": 758016,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 433152,
+     "predicted_saved": 433152,
+     "fused_sites": 10,
+     "fused_sites_executed": 8,
+     "gap": 0,
+     "gap_reasons": {}
+    },
+    "or(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 324864,
+     "predicted_saved": 324864,
+     "fused_sites": 6,
+     "fused_sites_executed": 6,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "mont64_0",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "modul64",
+     "lines": [
+      47,
+      48,
+      49
+     ],
+     "root_line": 49,
+     "original": [
+      "srli\ta7,a0,31",
+      "slli\ta6,a1,1",
+      "add\ta6,a7,a6"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a6, a0, a1",
+     "placed_at": "root",
+     "placed_line": 49,
+     "labels": [
+      "hws_mont64_0_0",
+      "hws_mont64_0_1",
+      "hws_mont64_0_2"
+     ],
+     "pcs": [
+      "0x8000028c",
+      "0x80000290",
+      "0x80000294"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "mont64_1",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "modul64",
+     "lines": [
+      51,
+      54,
+      56
+     ],
+     "root_line": 56,
+     "original": [
+      "slli\ta7,a3,1",
+      "srli\ta3,a2,31",
+      "add\ta7,a3,a7"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a7, a2, a3",
+     "placed_at": "first member",
+     "placed_line": 51,
+     "labels": [
+      "hws_mont64_1_0",
+      "hws_mont64_1_1",
+      "hws_mont64_1_2"
+     ],
+     "pcs": [
+      "0x8000029c",
+      "0x800002a8",
+      "0x800002b0"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "mont64_2",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      260,
+      262,
+      265
+     ],
+     "root_line": 265,
+     "original": [
+      "srli\ta1,a5,31",
+      "slli\ta4,a3,1",
+      "add\ta4,a1,a4"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "not counted by the finder: line 263 overwrites input a5 before the root (fusible at the first member, left alone on purpose)"
+     ],
+     "labels": [
+      "hws_mont64_2_0",
+      "hws_mont64_2_1",
+      "hws_mont64_2_2"
+     ],
+     "pcs": [
+      "0x80000578",
+      "0x80000580",
+      "0x8000058c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_3",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      267,
+      268,
+      269
+     ],
+     "root_line": 269,
+     "original": [
+      "slli\ta1,a6,1",
+      "srli\ta3,a2,31",
+      "add\ta1,a3,a1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a1, a2, a6",
+     "placed_at": "root",
+     "placed_line": 269,
+     "labels": [
+      "hws_mont64_3_0",
+      "hws_mont64_3_1",
+      "hws_mont64_3_2"
+     ],
+     "pcs": [
+      "0x80000594",
+      "0x80000598",
+      "0x8000059c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_4",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      311,
+      313,
+      316
+     ],
+     "root_line": 316,
+     "original": [
+      "srli\ta1,a4,31",
+      "slli\ta3,a2,1",
+      "add\ta3,a1,a3"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "not counted by the finder: line 314 overwrites input a4 before the root (fusible at the first member, left alone on purpose)"
+     ],
+     "labels": [
+      "hws_mont64_4_0",
+      "hws_mont64_4_1",
+      "hws_mont64_4_2"
+     ],
+     "pcs": [
+      "0x80000638",
+      "0x80000640",
+      "0x8000064c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_5",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      318,
+      319,
+      320
+     ],
+     "root_line": 320,
+     "original": [
+      "slli\ta1,a6,1",
+      "srli\ta2,a5,31",
+      "add\ta1,a2,a1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a1, a5, a6",
+     "placed_at": "root",
+     "placed_line": 320,
+     "labels": [
+      "hws_mont64_5_0",
+      "hws_mont64_5_1",
+      "hws_mont64_5_2"
+     ],
+     "pcs": [
+      "0x80000654",
+      "0x80000658",
+      "0x8000065c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_6",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      362,
+      363,
+      364
+     ],
+     "root_line": 364,
+     "original": [
+      "srli\ta3,s1,31",
+      "slli\ta5,s5,1",
+      "add\ta5,a3,a5"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, s1, s5",
+     "placed_at": "root",
+     "placed_line": 364,
+     "labels": [
+      "hws_mont64_6_0",
+      "hws_mont64_6_1",
+      "hws_mont64_6_2"
+     ],
+     "pcs": [
+      "0x800006f8",
+      "0x800006fc",
+      "0x80000700"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_7",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      369,
+      370,
+      371
+     ],
+     "root_line": 371,
+     "original": [
+      "slli\ta3,a1,1",
+      "srli\ta1,a4,31",
+      "add\ta3,a1,a3"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a3, a4, a1",
+     "placed_at": "first member",
+     "placed_line": 369,
+     "labels": [
+      "hws_mont64_7_0",
+      "hws_mont64_7_1",
+      "hws_mont64_7_2"
+     ],
+     "pcs": [
+      "0x80000714",
+      "0x80000718",
+      "0x8000071c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_8",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      448,
+      449,
+      450
+     ],
+     "root_line": 450,
+     "original": [
+      "srli\ta2,a0,31",
+      "slli\ta5,a1,1",
+      "add\ta5,a2,a5"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, a0, a1",
+     "placed_at": "root",
+     "placed_line": 450,
+     "labels": [
+      "hws_mont64_8_0",
+      "hws_mont64_8_1",
+      "hws_mont64_8_2"
+     ],
+     "pcs": [
+      "0x80000838",
+      "0x8000083c",
+      "0x80000840"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_9",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      455,
+      456,
+      457
+     ],
+     "root_line": 457,
+     "original": [
+      "slli\ta2,a4,1",
+      "srli\ta4,a3,31",
+      "add\ta2,a4,a2"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a2, a3, a4",
+     "placed_at": "first member",
+     "placed_line": 455,
+     "labels": [
+      "hws_mont64_9_0",
+      "hws_mont64_9_1",
+      "hws_mont64_9_2"
+     ],
+     "pcs": [
+      "0x80000854",
+      "0x80000858",
+      "0x8000085c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_10",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      485,
+      487,
+      490
+     ],
+     "root_line": 490,
+     "original": [
+      "srli\ta7,a2,31",
+      "slli\ta5,a3,1",
+      "add\ta5,a7,a5"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "not counted by the finder: line 488 overwrites input a2 before the root (fusible at the first member, left alone on purpose)"
+     ],
+     "labels": [
+      "hws_mont64_10_0",
+      "hws_mont64_10_1",
+      "hws_mont64_10_2"
+     ],
+     "pcs": [
+      "0x800008c0",
+      "0x800008c8",
+      "0x800008d4"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_11",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      492,
+      493,
+      494
+     ],
+     "root_line": 494,
+     "original": [
+      "slli\ta7,a4,1",
+      "srli\ta3,a6,31",
+      "add\ta7,a3,a7"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a7, a6, a4",
+     "placed_at": "root",
+     "placed_line": 494,
+     "labels": [
+      "hws_mont64_11_0",
+      "hws_mont64_11_1",
+      "hws_mont64_11_2"
+     ],
+     "pcs": [
+      "0x800008dc",
+      "0x800008e0",
+      "0x800008e4"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_12",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      558,
+      560,
+      563
+     ],
+     "root_line": 563,
+     "original": [
+      "srli\ta1,a3,31",
+      "slli\ta4,a5,1",
+      "add\ta4,a1,a4"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "not counted by the finder: line 561 overwrites input a3 before the root (fusible at the first member, left alone on purpose)"
+     ],
+     "labels": [
+      "hws_mont64_12_0",
+      "hws_mont64_12_1",
+      "hws_mont64_12_2"
+     ],
+     "pcs": [
+      "0x800009d8",
+      "0x800009e0",
+      "0x800009ec"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_13",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      565,
+      566,
+      567
+     ],
+     "root_line": 567,
+     "original": [
+      "slli\ta1,a6,1",
+      "srli\ta5,a2,31",
+      "add\ta1,a5,a1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a1, a2, a6",
+     "placed_at": "root",
+     "placed_line": 567,
+     "labels": [
+      "hws_mont64_13_0",
+      "hws_mont64_13_1",
+      "hws_mont64_13_2"
+     ],
+     "pcs": [
+      "0x800009f4",
+      "0x800009f8",
+      "0x800009fc"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_14",
+     "file": "mont64.s",
+     "slot": 1,
+     "formula": "or(srli(in0,31),slli(in1,1))",
+     "function": "modul64",
+     "lines": [
+      52,
+      53,
+      55
+     ],
+     "root_line": 55,
+     "original": [
+      "srli\ta1,a3,31",
+      "slli\ta0,a0,1",
+      "or\ta0,a1,a0"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "not counted by the finder: line 54 overwrites input a3 before the root (fusible at the first member, left alone on purpose)"
+     ],
+     "labels": [
+      "hws_mont64_14_0",
+      "hws_mont64_14_1",
+      "hws_mont64_14_2"
+     ],
+     "pcs": [
+      "0x800002a0",
+      "0x800002a4",
+      "0x800002ac"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "mont64_15",
+     "file": "mont64.s",
+     "slot": 1,
+     "formula": "or(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      263,
+      264,
+      266
+     ],
+     "root_line": 266,
+     "original": [
+      "slli\ta5,a5,1",
+      "srli\ta3,a6,31",
+      "or\ta5,a3,a5"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 1, 2, a5, a6, a5",
+     "placed_at": "first member",
+     "placed_line": 263,
+     "labels": [
+      "hws_mont64_15_0",
+      "hws_mont64_15_1",
+      "hws_mont64_15_2"
+     ],
+     "pcs": [
+      "0x80000584",
+      "0x80000588",
+      "0x80000590"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_16",
+     "file": "mont64.s",
+     "slot": 1,
+     "formula": "or(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      314,
+      315,
+      317
+     ],
+     "root_line": 317,
+     "original": [
+      "slli\ta4,a4,1",
+      "srli\ta2,a6,31",
+      "or\ta4,a2,a4"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 1, 2, a4, a6, a4",
+     "placed_at": "first member",
+     "placed_line": 314,
+     "labels": [
+      "hws_mont64_16_0",
+      "hws_mont64_16_1",
+      "hws_mont64_16_2"
+     ],
+     "pcs": [
+      "0x80000644",
+      "0x80000648",
+      "0x80000650"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_17",
+     "file": "mont64.s",
+     "slot": 1,
+     "formula": "or(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      365,
+      366,
+      368
+     ],
+     "root_line": 368,
+     "original": [
+      "slli\ts1,s1,1",
+      "srli\ta3,a1,31",
+      "or\ts1,a3,s1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 1, 2, s1, a1, s1",
+     "placed_at": "first member",
+     "placed_line": 365,
+     "labels": [
+      "hws_mont64_17_0",
+      "hws_mont64_17_1",
+      "hws_mont64_17_2"
+     ],
+     "pcs": [
+      "0x80000704",
+      "0x80000708",
+      "0x80000710"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_18",
+     "file": "mont64.s",
+     "slot": 1,
+     "formula": "or(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      451,
+      452,
+      454
+     ],
+     "root_line": 454,
+     "original": [
+      "slli\ta0,a0,1",
+      "srli\ta2,a4,31",
+      "or\ta0,a2,a0"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 1, 2, a0, a4, a0",
+     "placed_at": "first member",
+     "placed_line": 451,
+     "labels": [
+      "hws_mont64_18_0",
+      "hws_mont64_18_1",
+      "hws_mont64_18_2"
+     ],
+     "pcs": [
+      "0x80000844",
+      "0x80000848",
+      "0x80000850"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_19",
+     "file": "mont64.s",
+     "slot": 1,
+     "formula": "or(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      488,
+      489,
+      491
+     ],
+     "root_line": 491,
+     "original": [
+      "slli\ta2,a2,1",
+      "srli\ta3,a4,31",
+      "or\ta2,a3,a2"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 1, 2, a2, a4, a2",
+     "placed_at": "first member",
+     "placed_line": 488,
+     "labels": [
+      "hws_mont64_19_0",
+      "hws_mont64_19_1",
+      "hws_mont64_19_2"
+     ],
+     "pcs": [
+      "0x800008cc",
+      "0x800008d0",
+      "0x800008d8"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_20",
+     "file": "mont64.s",
+     "slot": 1,
+     "formula": "or(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      561,
+      562,
+      564
+     ],
+     "root_line": 564,
+     "original": [
+      "slli\ta3,a3,1",
+      "srli\ta5,a6,31",
+      "or\ta3,a5,a3"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 1, 2, a3, a6, a3",
+     "placed_at": "first member",
+     "placed_line": 561,
+     "labels": [
+      "hws_mont64_20_0",
+      "hws_mont64_20_1",
+      "hws_mont64_20_2"
+     ],
+     "pcs": [
+      "0x800009e4",
+      "0x800009e8",
+      "0x800009f0"
+     ],
+     "runs": 27072
+    }
+   ]
+  },
+  "crc32": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 22461391,
+   "cycles": 22461391,
+   "cycles_saved": 0,
+   "baseline_instret": 3831152,
+   "instret": 3831152,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    },
+    "or(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "edn": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 34849402,
+   "cycles": 34849402,
+   "cycles_saved": 0,
+   "baseline_instret": 3466139,
+   "instret": 3466139,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    },
+    "or(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "huffbench": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 8638203,
+   "cycles": 8638203,
+   "cycles_saved": 0,
+   "baseline_instret": 2131016,
+   "instret": 2131016,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    },
+    "or(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "matmult-int": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 26300272,
+   "cycles": 26300272,
+   "cycles_saved": 0,
+   "baseline_instret": 3179290,
+   "instret": 3179290,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    },
+    "or(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "nettle-aes": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 18773912,
+   "cycles": 18773912,
+   "cycles_saved": 0,
+   "baseline_instret": 4083360,
+   "instret": 4083360,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    },
+    "or(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "nettle-sha256": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 20276586,
+   "cycles": 20276586,
+   "cycles_saved": 0,
+   "baseline_instret": 3854209,
+   "instret": 3854209,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    },
+    "or(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "wikisort": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 6916129,
+   "cycles": 6916129,
+   "cycles_saved": 0,
+   "baseline_instret": 1182160,
+   "instret": 1182160,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 1836,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 1836,
+     "gap_reasons": {
+      "in __ieee754_sqrt, which is library code the rewriter does not see": {
+       "sites": 2,
+       "runs": 918,
+       "saved": 1836
+      }
+     }
+    },
+    "or(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  }
+ },
+ "rows": [
+  {
+   "candidate_id": [
+    "7b9ac55f53f0566985fe7d874ada1119845e37e2b2e91465286b13a57951b0d7",
+    "b4f7f90625af72601c9f98d84a1fe7702bb2ec4db19f177080db102863b41c5b"
+   ],
+   "benchmark": "aha-mont64",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "or(srli(in0,31),slli(in1,1))"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 25631371,
+   "candidate_cycles": 19188235,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2521,
+   "speedup": 1.3358,
+   "speedup_cycles_only": 1.3358
+  },
+  {
+   "candidate_id": [
+    "643c708540b46d65c1e35d49b4d3a702d1cc91fc59339405d245f2134cb1c4ea",
+    "d26b50e9f29ab243cc7929bea95bcf77321ca4653c0002b0340faadfc97ffc74"
+   ],
+   "benchmark": "crc32",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "or(srli(in0,31),slli(in1,1))"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 22461391,
+   "candidate_cycles": 22461391,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2521,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": [
+    "b253dbdc2fcb922f8d0a92e051eb847ecd764443daab680421cabfc5576c3e18",
+    "92359d2f61818af2b9f4da816c707597d3423500808f32542f4ff3041688ed96"
+   ],
+   "benchmark": "edn",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "or(srli(in0,31),slli(in1,1))"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 34849402,
+   "candidate_cycles": 34849402,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2521,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": [
+    "84ca17605417c9e55fa4d16608807571cd1f66e714fb56b20933038b67f66d82",
+    "9f049bc5b9a032eb6dfa808353280ef37dd04464040c5b582164c985ccff0bfd"
+   ],
+   "benchmark": "huffbench",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "or(srli(in0,31),slli(in1,1))"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 8638203,
+   "candidate_cycles": 8638203,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2521,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": [
+    "5fedea595eb337772da4523f51b019d50ff1a1a7e81966feab9245f753f98856",
+    "1b7a956de27b77e65af04fc5ec197f2a69e03a966cf5d1698bf95d7c4f5465a3"
+   ],
+   "benchmark": "matmult-int",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "or(srli(in0,31),slli(in1,1))"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 26300272,
+   "candidate_cycles": 26300272,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2521,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": [
+    "36f5b3afad68bd8b27d4797c03e8140f0fcbf164622a608cba366d69ddcccfdb",
+    "1b4d24a1ce4b456f3c4b8ae33ce1d698227e5da1af26032af449e169e7f48c06"
+   ],
+   "benchmark": "nettle-aes",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "or(srli(in0,31),slli(in1,1))"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 18773912,
+   "candidate_cycles": 18773912,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2521,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": [
+    "a5e75c52aac991c945385738d749edda188d436062a2d913e13ad5268e71d3ad",
+    "2af1c576b9b63790221d2a3bd2d664a6e963c9e1fd54110cc31d821ab5f00527"
+   ],
+   "benchmark": "nettle-sha256",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "or(srli(in0,31),slli(in1,1))"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 20276586,
+   "candidate_cycles": 20276586,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2521,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": [
+    "eee0aa65c42c560a0285568e507fdb51453c16c6b12b332608566ac0542a9be7",
+    "23e834c34bee9191ba5a130e5733da3b4bbbae88a151dc0bef7f27c209509370"
+   ],
+   "benchmark": "wikisort",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "or(srli(in0,31),slli(in1,1))"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 6916129,
+   "candidate_cycles": 6916129,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2521,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  }
+ ],
+ "problems": []
+}

@@ -1,0 +1,73 @@
+{
+ "method": "oracle",
+ "budget": 500,
+ "sweep": "hw/engine/results/sweep-top10-placeable.csv",
+ "sets_considered": 29001,
+ "formulas_measured_alone": 60,
+ "assumption": "cycles and LUTs add; clock = slowest member",
+ "top": [
+  {
+   "formulas": [
+    "add(in0,slli(in1,2))",
+    "add(srli(in0,31),slli(in1,1))",
+    "or(srli(in0,31),slli(in1,1))"
+   ],
+   "est_luts": 175,
+   "est_fmax_min_member": 58.73,
+   "est_geomean_cycles_only": 1.0594721966765677,
+   "est_geomean_max_rule": 1.0120820122123426,
+   "est_cycles_saved": {
+    "aha-mont64": 6443136,
+    "crc32": 696320,
+    "edn": 0,
+    "huffbench": 186736,
+    "matmult-int": 0,
+    "nettle-aes": 2109744,
+    "nettle-sha256": 1900,
+    "wikisort": 0
+   }
+  },
+  {
+   "formulas": [
+    "add(in0,slli(in1,2))",
+    "add(srli(in0,31),slli(in1,1))",
+    "or(srli(in0,31),in1)"
+   ],
+   "est_luts": 164,
+   "est_fmax_min_member": 57.24,
+   "est_geomean_cycles_only": 1.0539963845379934,
+   "est_geomean_max_rule": 0.9813069787077872,
+   "est_cycles_saved": {
+    "aha-mont64": 5630976,
+    "crc32": 696320,
+    "edn": 0,
+    "huffbench": 186736,
+    "matmult-int": 0,
+    "nettle-aes": 2109744,
+    "nettle-sha256": 1900,
+    "wikisort": 0
+   }
+  },
+  {
+   "formulas": [
+    "add(in0,slli(in1,2))",
+    "add(srli(in0,31),in1)",
+    "or(srli(in0,31),slli(in1,1))"
+   ],
+   "est_luts": 208,
+   "est_fmax_min_member": 57.79,
+   "est_geomean_cycles_only": 1.0522265070354462,
+   "est_geomean_max_rule": 0.9890723786854008,
+   "est_cycles_saved": {
+    "aha-mont64": 5360256,
+    "crc32": 696320,
+    "edn": 0,
+    "huffbench": 186736,
+    "matmult-int": 0,
+    "nettle-aes": 2109744,
+    "nettle-sha256": 1900,
+    "wikisort": 0
+   }
+  }
+ ]
+}

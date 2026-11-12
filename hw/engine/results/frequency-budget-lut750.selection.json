@@ -1,0 +1,42 @@
+{
+ "method": "frequency-budget",
+ "budget": 750,
+ "ranked_by": "placeable_saved",
+ "lut_estimate": "single-candidate lut_delta from hw/engine/results/sweep-top10-placeable.csv",
+ "log": [
+  {
+   "rank": 1,
+   "formula": "add(in0,slli(in1,2))",
+   "total_placeable_saved": 748675,
+   "lut_estimate": 76,
+   "outcome": "picked (+76, +76 used)"
+  },
+  {
+   "rank": 2,
+   "formula": "add(in0,slli(andi(in1,255),2))",
+   "total_placeable_saved": 640192,
+   "lut_estimate": 76,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 3,
+   "formula": "add(srli(in0,31),slli(in1,1))",
+   "total_placeable_saved": 433152,
+   "lut_estimate": 49,
+   "outcome": "picked (+49, +125 used)"
+  },
+  {
+   "rank": 4,
+   "formula": "mul(in0,addi(lui(1103515648),-403))",
+   "total_placeable_saved": 352160,
+   "lut_estimate": 624,
+   "outcome": "picked (+624, +749 used)"
+  }
+ ],
+ "picked": [
+  "add(in0,slli(in1,2))",
+  "add(srli(in0,31),slli(in1,1))",
+  "mul(in0,addi(lui(1103515648),-403))"
+ ],
+ "estimated_luts": 749
+}

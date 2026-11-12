@@ -1,0 +1,1522 @@
+{
+ "provisional": true,
+ "id": "ae3791167569",
+ "slots": [
+  {
+   "slot": 0,
+   "funct7": 2,
+   "funct3": 0,
+   "formula": "add(srli(in0,31),slli(in1,1))",
+   "module": "cx_s0",
+   "size": 3,
+   "inputs": [
+    "in0",
+    "in1"
+   ],
+   "has_mul": false,
+   "source": null
+  },
+  {
+   "slot": 1,
+   "funct7": 2,
+   "funct3": 1,
+   "formula": "srli(slli(add(in0,in1),1),1)",
+   "module": "cx_s1",
+   "size": 3,
+   "inputs": [
+    "in0",
+    "in1"
+   ],
+   "has_mul": false,
+   "source": null
+  }
+ ],
+ "priority": [
+  "add(srli(in0,31),slli(in1,1))",
+  "srli(slli(add(in0,in1),1),1)"
+ ],
+ "microtest": {
+  "checks": 2370,
+  "runs": {
+   "micro-check": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-stock-s0": {
+    "expect": "trap",
+    "core": "stock",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "micro-s1-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s1-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-stock-s1": {
+    "expect": "trap",
+    "core": "stock",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "micro-xor-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-xor-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-f3-2": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-4": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-5": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-6": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-7": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-custom1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   }
+  },
+  "cycles_per_insn": {
+   "add(srli(in0,31),slli(in1,1))": 5.0,
+   "srli(slli(add(in0,in1),1),1)": 5.0
+  },
+  "cycles_per_xor": 3.0
+ },
+ "luts": {
+  "baseline": 2439,
+  "engine": 2522,
+  "delta": 83
+ },
+ "fmax_mhz": {
+  "per_seed": {
+   "1": 66.06,
+   "2": 61.3,
+   "3": 64.02,
+   "4": 60.11,
+   "5": 64.19,
+   "6": 59.66,
+   "7": 62.54,
+   "8": 63.48,
+   "9": 63.79,
+   "10": 63.2
+  },
+  "median": 63.34,
+  "min": 59.66,
+  "max": 66.06
+ },
+ "critical_path": {
+  "unit_on_arc_seeds": [],
+  "rows": [
+   {
+    "core": "engine",
+    "seed": "1",
+    "fmax_mhz": "66.06",
+    "path_ns": "15.14",
+    "logic_stages": "39",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "2",
+    "fmax_mhz": "61.3",
+    "path_ns": "16.31",
+    "logic_stages": "39",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "SR",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "3",
+    "fmax_mhz": "64.02",
+    "path_ns": "15.62",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "SR",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "4",
+    "fmax_mhz": "60.11",
+    "path_ns": "16.64",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "2",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "5",
+    "fmax_mhz": "64.19",
+    "path_ns": "15.58",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "2",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "6",
+    "fmax_mhz": "59.66",
+    "path_ns": "16.76",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "7",
+    "fmax_mhz": "62.54",
+    "path_ns": "15.99",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "SR",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "8",
+    "fmax_mhz": "63.48",
+    "path_ns": "15.75",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "SR",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "2",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "9",
+    "fmax_mhz": "63.79",
+    "path_ns": "15.68",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "SR",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "10",
+    "fmax_mhz": "63.2",
+    "path_ns": "15.82",
+    "logic_stages": "39",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   }
+  ]
+ },
+ "period_rule": {
+  "rule": "T_fused = max(T_base, T_fused_measured)",
+  "candidate_period_ns": 16.2655,
+  "routed_period_ns": 15.7884,
+  "used": "baseline (the routed clock is not slower)"
+ },
+ "programs": {
+  "aha-mont64": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 25631371,
+   "cycles": 21949579,
+   "cycles_saved": 3681792,
+   "baseline_instret": 4475851,
+   "instret": 4042699,
+   "instret_saved": 433152,
+   "instret_saved_predicted": 433152,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 433152,
+     "predicted_saved": 433152,
+     "fused_sites": 10,
+     "fused_sites_executed": 8,
+     "gap": 0,
+     "gap_reasons": {}
+    },
+    "srli(slli(add(in0,in1),1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 1,
+     "formula": "srli(slli(add(in0,in1),1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19,
+      20
+     ],
+     "root_line": 20,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1",
+      "srli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 1, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2"
+     ],
+     "pcs": [
+      "0x800000dc",
+      "0x800000e0",
+      "0x800000e4"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "mont64_1",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "modul64",
+     "lines": [
+      47,
+      48,
+      49
+     ],
+     "root_line": 49,
+     "original": [
+      "srli\ta7,a0,31",
+      "slli\ta6,a1,1",
+      "add\ta6,a7,a6"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a6, a0, a1",
+     "placed_at": "root",
+     "placed_line": 49,
+     "labels": [
+      "hws_mont64_1_0",
+      "hws_mont64_1_1",
+      "hws_mont64_1_2"
+     ],
+     "pcs": [
+      "0x8000028c",
+      "0x80000290",
+      "0x80000294"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "mont64_2",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "modul64",
+     "lines": [
+      51,
+      54,
+      56
+     ],
+     "root_line": 56,
+     "original": [
+      "slli\ta7,a3,1",
+      "srli\ta3,a2,31",
+      "add\ta7,a3,a7"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a7, a2, a3",
+     "placed_at": "first member",
+     "placed_line": 51,
+     "labels": [
+      "hws_mont64_2_0",
+      "hws_mont64_2_1",
+      "hws_mont64_2_2"
+     ],
+     "pcs": [
+      "0x8000029c",
+      "0x800002a8",
+      "0x800002b0"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "mont64_3",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      260,
+      262,
+      265
+     ],
+     "root_line": 265,
+     "original": [
+      "srli\ta1,a5,31",
+      "slli\ta4,a3,1",
+      "add\ta4,a1,a4"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "not counted by the finder: line 263 overwrites input a5 before the root (fusible at the first member, left alone on purpose)"
+     ],
+     "labels": [
+      "hws_mont64_3_0",
+      "hws_mont64_3_1",
+      "hws_mont64_3_2"
+     ],
+     "pcs": [
+      "0x80000578",
+      "0x80000580",
+      "0x8000058c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_4",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      267,
+      268,
+      269
+     ],
+     "root_line": 269,
+     "original": [
+      "slli\ta1,a6,1",
+      "srli\ta3,a2,31",
+      "add\ta1,a3,a1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a1, a2, a6",
+     "placed_at": "root",
+     "placed_line": 269,
+     "labels": [
+      "hws_mont64_4_0",
+      "hws_mont64_4_1",
+      "hws_mont64_4_2"
+     ],
+     "pcs": [
+      "0x80000594",
+      "0x80000598",
+      "0x8000059c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_5",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      311,
+      313,
+      316
+     ],
+     "root_line": 316,
+     "original": [
+      "srli\ta1,a4,31",
+      "slli\ta3,a2,1",
+      "add\ta3,a1,a3"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "not counted by the finder: line 314 overwrites input a4 before the root (fusible at the first member, left alone on purpose)"
+     ],
+     "labels": [
+      "hws_mont64_5_0",
+      "hws_mont64_5_1",
+      "hws_mont64_5_2"
+     ],
+     "pcs": [
+      "0x80000638",
+      "0x80000640",
+      "0x8000064c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_6",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      318,
+      319,
+      320
+     ],
+     "root_line": 320,
+     "original": [
+      "slli\ta1,a6,1",
+      "srli\ta2,a5,31",
+      "add\ta1,a2,a1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a1, a5, a6",
+     "placed_at": "root",
+     "placed_line": 320,
+     "labels": [
+      "hws_mont64_6_0",
+      "hws_mont64_6_1",
+      "hws_mont64_6_2"
+     ],
+     "pcs": [
+      "0x80000654",
+      "0x80000658",
+      "0x8000065c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_7",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      362,
+      363,
+      364
+     ],
+     "root_line": 364,
+     "original": [
+      "srli\ta3,s1,31",
+      "slli\ta5,s5,1",
+      "add\ta5,a3,a5"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, s1, s5",
+     "placed_at": "root",
+     "placed_line": 364,
+     "labels": [
+      "hws_mont64_7_0",
+      "hws_mont64_7_1",
+      "hws_mont64_7_2"
+     ],
+     "pcs": [
+      "0x800006f8",
+      "0x800006fc",
+      "0x80000700"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_8",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      369,
+      370,
+      371
+     ],
+     "root_line": 371,
+     "original": [
+      "slli\ta3,a1,1",
+      "srli\ta1,a4,31",
+      "add\ta3,a1,a3"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a3, a4, a1",
+     "placed_at": "first member",
+     "placed_line": 369,
+     "labels": [
+      "hws_mont64_8_0",
+      "hws_mont64_8_1",
+      "hws_mont64_8_2"
+     ],
+     "pcs": [
+      "0x80000714",
+      "0x80000718",
+      "0x8000071c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_9",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      448,
+      449,
+      450
+     ],
+     "root_line": 450,
+     "original": [
+      "srli\ta2,a0,31",
+      "slli\ta5,a1,1",
+      "add\ta5,a2,a5"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, a0, a1",
+     "placed_at": "root",
+     "placed_line": 450,
+     "labels": [
+      "hws_mont64_9_0",
+      "hws_mont64_9_1",
+      "hws_mont64_9_2"
+     ],
+     "pcs": [
+      "0x80000838",
+      "0x8000083c",
+      "0x80000840"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_10",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      455,
+      456,
+      457
+     ],
+     "root_line": 457,
+     "original": [
+      "slli\ta2,a4,1",
+      "srli\ta4,a3,31",
+      "add\ta2,a4,a2"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a2, a3, a4",
+     "placed_at": "first member",
+     "placed_line": 455,
+     "labels": [
+      "hws_mont64_10_0",
+      "hws_mont64_10_1",
+      "hws_mont64_10_2"
+     ],
+     "pcs": [
+      "0x80000854",
+      "0x80000858",
+      "0x8000085c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_11",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      485,
+      487,
+      490
+     ],
+     "root_line": 490,
+     "original": [
+      "srli\ta7,a2,31",
+      "slli\ta5,a3,1",
+      "add\ta5,a7,a5"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "not counted by the finder: line 488 overwrites input a2 before the root (fusible at the first member, left alone on purpose)"
+     ],
+     "labels": [
+      "hws_mont64_11_0",
+      "hws_mont64_11_1",
+      "hws_mont64_11_2"
+     ],
+     "pcs": [
+      "0x800008c0",
+      "0x800008c8",
+      "0x800008d4"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_12",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      492,
+      493,
+      494
+     ],
+     "root_line": 494,
+     "original": [
+      "slli\ta7,a4,1",
+      "srli\ta3,a6,31",
+      "add\ta7,a3,a7"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a7, a6, a4",
+     "placed_at": "root",
+     "placed_line": 494,
+     "labels": [
+      "hws_mont64_12_0",
+      "hws_mont64_12_1",
+      "hws_mont64_12_2"
+     ],
+     "pcs": [
+      "0x800008dc",
+      "0x800008e0",
+      "0x800008e4"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_13",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      558,
+      560,
+      563
+     ],
+     "root_line": 563,
+     "original": [
+      "srli\ta1,a3,31",
+      "slli\ta4,a5,1",
+      "add\ta4,a1,a4"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "not counted by the finder: line 561 overwrites input a3 before the root (fusible at the first member, left alone on purpose)"
+     ],
+     "labels": [
+      "hws_mont64_13_0",
+      "hws_mont64_13_1",
+      "hws_mont64_13_2"
+     ],
+     "pcs": [
+      "0x800009d8",
+      "0x800009e0",
+      "0x800009ec"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_14",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),slli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      565,
+      566,
+      567
+     ],
+     "root_line": 567,
+     "original": [
+      "slli\ta1,a6,1",
+      "srli\ta5,a2,31",
+      "add\ta1,a5,a1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a1, a2, a6",
+     "placed_at": "root",
+     "placed_line": 567,
+     "labels": [
+      "hws_mont64_14_0",
+      "hws_mont64_14_1",
+      "hws_mont64_14_2"
+     ],
+     "pcs": [
+      "0x800009f4",
+      "0x800009f8",
+      "0x800009fc"
+     ],
+     "runs": 27072
+    }
+   ]
+  },
+  "crc32": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 22461391,
+   "cycles": 21068751,
+   "cycles_saved": 1392640,
+   "baseline_instret": 3831152,
+   "instret": 3482992,
+   "instret_saved": 348160,
+   "instret_saved_predicted": 348160,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    },
+    "srli(slli(add(in0,in1),1),1)": {
+     "finder_saved": 348160,
+     "predicted_saved": 348160,
+     "fused_sites": 1,
+     "fused_sites_executed": 1,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 1,
+     "formula": "srli(slli(add(in0,in1),1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19,
+      20
+     ],
+     "root_line": 20,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1",
+      "srli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 1, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2"
+     ],
+     "pcs": [
+      "0x800000e8",
+      "0x800000ec",
+      "0x800000f0"
+     ],
+     "runs": 174080
+    }
+   ]
+  },
+  "edn": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 34849402,
+   "cycles": 34849402,
+   "cycles_saved": 0,
+   "baseline_instret": 3466139,
+   "instret": 3466139,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    },
+    "srli(slli(add(in0,in1),1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 1,
+     "formula": "srli(slli(add(in0,in1),1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19,
+      20
+     ],
+     "root_line": 20,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1",
+      "srli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 1, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2"
+     ],
+     "pcs": [
+      "0x800000e8",
+      "0x800000ec",
+      "0x800000f0"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "huffbench": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 8638203,
+   "cycles": 8638203,
+   "cycles_saved": 0,
+   "baseline_instret": 2131016,
+   "instret": 2131016,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    },
+    "srli(slli(add(in0,in1),1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 1,
+     "formula": "srli(slli(add(in0,in1),1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19,
+      20
+     ],
+     "root_line": 20,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1",
+      "srli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 1, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2"
+     ],
+     "pcs": [
+      "0x800000e8",
+      "0x800000ec",
+      "0x800000f0"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "matmult-int": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 26300272,
+   "cycles": 26300272,
+   "cycles_saved": 0,
+   "baseline_instret": 3179290,
+   "instret": 3179290,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    },
+    "srli(slli(add(in0,in1),1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 1,
+     "formula": "srli(slli(add(in0,in1),1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19,
+      20
+     ],
+     "root_line": 20,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1",
+      "srli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 1, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2"
+     ],
+     "pcs": [
+      "0x800000e8",
+      "0x800000ec",
+      "0x800000f0"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "nettle-aes": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 18773912,
+   "cycles": 18773912,
+   "cycles_saved": 0,
+   "baseline_instret": 4083360,
+   "instret": 4083360,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    },
+    "srli(slli(add(in0,in1),1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 1,
+     "formula": "srli(slli(add(in0,in1),1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19,
+      20
+     ],
+     "root_line": 20,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1",
+      "srli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 1, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2"
+     ],
+     "pcs": [
+      "0x800000dc",
+      "0x800000e0",
+      "0x800000e4"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "nettle-sha256": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 20276586,
+   "cycles": 20276586,
+   "cycles_saved": 0,
+   "baseline_instret": 3854209,
+   "instret": 3854209,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    },
+    "srli(slli(add(in0,in1),1),1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 1,
+     "formula": "srli(slli(add(in0,in1),1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19,
+      20
+     ],
+     "root_line": 20,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1",
+      "srli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 1, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2"
+     ],
+     "pcs": [
+      "0x800000dc",
+      "0x800000e0",
+      "0x800000e4"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "wikisort": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 6916129,
+   "cycles": 6900129,
+   "cycles_saved": 16000,
+   "baseline_instret": 1182160,
+   "instret": 1178160,
+   "instret_saved": 4000,
+   "instret_saved_predicted": 4000,
+   "per_formula": {
+    "add(srli(in0,31),slli(in1,1))": {
+     "finder_saved": 1836,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 1836,
+     "gap_reasons": {
+      "in __ieee754_sqrt, which is library code the rewriter does not see": {
+       "sites": 2,
+       "runs": 918,
+       "saved": 1836
+      }
+     }
+    },
+    "srli(slli(add(in0,in1),1),1)": {
+     "finder_saved": 4000,
+     "predicted_saved": 4000,
+     "fused_sites": 1,
+     "fused_sites_executed": 1,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 1,
+     "formula": "srli(slli(add(in0,in1),1),1)",
+     "function": "rand_beebs",
+     "lines": [
+      18,
+      19,
+      20
+     ],
+     "root_line": 20,
+     "original": [
+      "add\ta0,a0,a5",
+      "slli\ta0,a0,1",
+      "srli\ta0,a0,1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 1, 2, a0, a0, a5",
+     "placed_at": "first member",
+     "placed_line": 18,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1",
+      "hws_beebsc_0_2"
+     ],
+     "pcs": [
+      "0x800000dc",
+      "0x800000e0",
+      "0x800000e4"
+     ],
+     "runs": 2000
+    }
+   ]
+  }
+ },
+ "rows": [
+  {
+   "candidate_id": [
+    "7b9ac55f53f0566985fe7d874ada1119845e37e2b2e91465286b13a57951b0d7",
+    "fe5c687d323317a51d312de565c84285feab335515559811a9abd792adad8240"
+   ],
+   "benchmark": "aha-mont64",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "srli(slli(add(in0,in1),1),1)"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 25631371,
+   "candidate_cycles": 21949579,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2522,
+   "speedup": 1.1677,
+   "speedup_cycles_only": 1.1677
+  },
+  {
+   "candidate_id": [
+    "643c708540b46d65c1e35d49b4d3a702d1cc91fc59339405d245f2134cb1c4ea",
+    "1f985577a27fad6c38561b578767de408cf6014a88e76aeb9a2d93989d575489"
+   ],
+   "benchmark": "crc32",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "srli(slli(add(in0,in1),1),1)"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 22461391,
+   "candidate_cycles": 21068751,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2522,
+   "speedup": 1.0661,
+   "speedup_cycles_only": 1.0661
+  },
+  {
+   "candidate_id": [
+    "b253dbdc2fcb922f8d0a92e051eb847ecd764443daab680421cabfc5576c3e18",
+    "05c310f6d5b3c66c1c98f7329c8f2a1f40588e0bd15448e7b9a246f8eddc238a"
+   ],
+   "benchmark": "edn",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "srli(slli(add(in0,in1),1),1)"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 34849402,
+   "candidate_cycles": 34849402,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2522,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": [
+    "84ca17605417c9e55fa4d16608807571cd1f66e714fb56b20933038b67f66d82",
+    "ade68f7a2e77fae83be67a8e8df9cd2b172548f41a911e7d135670494122c439"
+   ],
+   "benchmark": "huffbench",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "srli(slli(add(in0,in1),1),1)"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 8638203,
+   "candidate_cycles": 8638203,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2522,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": [
+    "5fedea595eb337772da4523f51b019d50ff1a1a7e81966feab9245f753f98856",
+    "a691e578e1ff587c1c52f63a8130b528dbf36557809b0d738e6b34eb2ea36fad"
+   ],
+   "benchmark": "matmult-int",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "srli(slli(add(in0,in1),1),1)"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 26300272,
+   "candidate_cycles": 26300272,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2522,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": [
+    "36f5b3afad68bd8b27d4797c03e8140f0fcbf164622a608cba366d69ddcccfdb",
+    "63f1ad70b258372b07cf0587fe26b41db0bfc21a6ddb939612fc3db37459ab6f"
+   ],
+   "benchmark": "nettle-aes",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "srli(slli(add(in0,in1),1),1)"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 18773912,
+   "candidate_cycles": 18773912,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2522,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": [
+    "a5e75c52aac991c945385738d749edda188d436062a2d913e13ad5268e71d3ad",
+    "b0b210dfbc36eb15e8b79c3bb7773f93e8f943d417b3da86d2312745a39bec39"
+   ],
+   "benchmark": "nettle-sha256",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "srli(slli(add(in0,in1),1),1)"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 20276586,
+   "candidate_cycles": 20276586,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2522,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": [
+    "eee0aa65c42c560a0285568e507fdb51453c16c6b12b332608566ac0542a9be7",
+    "9c72bc327b6ddfd581a7ed23cd1e016c55a069e62f5748ba5374db363a0e9b63"
+   ],
+   "benchmark": "wikisort",
+   "formula": [
+    "add(srli(in0,31),slli(in1,1))",
+    "srli(slli(add(in0,in1),1),1)"
+   ],
+   "measurement_source": "hardware",
+   "baseline_cycles": 6916129,
+   "candidate_cycles": 6900129,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2522,
+   "speedup": 1.0023,
+   "speedup_cycles_only": 1.0023
+  }
+ ],
+ "problems": []
+}

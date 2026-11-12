@@ -1,0 +1,1370 @@
+{
+ "method": "frequency-budget",
+ "budget": 100,
+ "ranked_by": "placeable_saved",
+ "lut_estimate": "single-candidate lut_delta from hw/engine/results/sweep-top10-placeable.csv",
+ "log": [
+  {
+   "rank": 1,
+   "formula": "add(in0,slli(in1,2))",
+   "total_placeable_saved": 748675,
+   "lut_estimate": 76,
+   "outcome": "picked (+76, +76 used)"
+  },
+  {
+   "rank": 2,
+   "formula": "add(in0,slli(andi(in1,255),2))",
+   "total_placeable_saved": 640192,
+   "lut_estimate": 76,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 3,
+   "formula": "add(srli(in0,31),slli(in1,1))",
+   "total_placeable_saved": 433152,
+   "lut_estimate": 49,
+   "outcome": "does not fit: +49 with +76 used of +100"
+  },
+  {
+   "rank": 4,
+   "formula": "mul(in0,addi(lui(1103515648),-403))",
+   "total_placeable_saved": 352160,
+   "lut_estimate": 624,
+   "outcome": "does not fit: +624 with +76 used of +100"
+  },
+  {
+   "rank": 5,
+   "formula": "srli(slli(add(in0,in1),1),1)",
+   "total_placeable_saved": 352160,
+   "lut_estimate": 51,
+   "outcome": "does not fit: +51 with +76 used of +100"
+  },
+  {
+   "rank": 6,
+   "formula": "slli(andi(xor(in0,in1),255),2)",
+   "total_placeable_saved": 348160,
+   "lut_estimate": 40,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 7,
+   "formula": "or(srli(in0,31),slli(in1,1))",
+   "total_placeable_saved": 324864,
+   "lut_estimate": 50,
+   "outcome": "does not fit: +50 with +76 used of +100"
+  },
+  {
+   "rank": 8,
+   "formula": "slli(andi(in0,255),2)",
+   "total_placeable_saved": 320096,
+   "lut_estimate": 44,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 9,
+   "formula": "add(in0,slli(addi(andi(srli(in1,16),255),576),2))",
+   "total_placeable_saved": 259584,
+   "lut_estimate": 75,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 10,
+   "formula": "add(in0,slli(addi(in1,832),2))",
+   "total_placeable_saved": 259584,
+   "lut_estimate": 94,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 11,
+   "formula": "add(in0,slli(addi(andi(in1,255),576),2))",
+   "total_placeable_saved": 243360,
+   "lut_estimate": 75,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 12,
+   "formula": "add(srli(in0,31),in1)",
+   "total_placeable_saved": 216576,
+   "lut_estimate": 82,
+   "outcome": "does not fit: +82 with +76 used of +100"
+  },
+  {
+   "rank": 13,
+   "formula": "add(in0,slli(addi(in1,576),2))",
+   "total_placeable_saved": 194688,
+   "lut_estimate": 94,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 14,
+   "formula": "slli(addi(andi(srli(in0,16),255),576),2)",
+   "total_placeable_saved": 194688,
+   "lut_estimate": 46,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 15,
+   "formula": "xor(add(srli(in0,2),slli(in0,30)),in1)",
+   "total_placeable_saved": 182400,
+   "lut_estimate": 79,
+   "outcome": "does not fit: +79 with +76 used of +100"
+  },
+  {
+   "rank": 16,
+   "formula": "xor(add(srli(in0,6),slli(in0,26)),in1)",
+   "total_placeable_saved": 182400,
+   "lut_estimate": 79,
+   "outcome": "does not fit: +79 with +76 used of +100"
+  },
+  {
+   "rank": 17,
+   "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+   "total_placeable_saved": 182400,
+   "lut_estimate": 79,
+   "outcome": "does not fit: +79 with +76 used of +100"
+  },
+  {
+   "rank": 18,
+   "formula": "xor(in0,add(srli(in1,13),slli(in1,19)))",
+   "total_placeable_saved": 182400,
+   "lut_estimate": 79,
+   "outcome": "does not fit: +79 with +76 used of +100"
+  },
+  {
+   "rank": 19,
+   "formula": "xor(in0,add(srli(in1,25),slli(in1,7)))",
+   "total_placeable_saved": 182400,
+   "lut_estimate": 79,
+   "outcome": "does not fit: +79 with +76 used of +100"
+  },
+  {
+   "rank": 20,
+   "formula": "slli(add(in0,in1),1)",
+   "total_placeable_saved": 176158,
+   "lut_estimate": 41,
+   "outcome": "does not fit: +41 with +76 used of +100"
+  },
+  {
+   "rank": 21,
+   "formula": "addi(lui(1103515648),-403)",
+   "total_placeable_saved": 176080,
+   "lut_estimate": 43,
+   "outcome": "does not fit: +43 with +76 used of +100"
+  },
+  {
+   "rank": 22,
+   "formula": "addi(lui(12288),57)",
+   "total_placeable_saved": 176080,
+   "lut_estimate": 43,
+   "outcome": "does not fit: +43 with +76 used of +100"
+  },
+  {
+   "rank": 23,
+   "formula": "mul(in0,addi(in1,-403))",
+   "total_placeable_saved": 176080,
+   "lut_estimate": 1458,
+   "outcome": "does not fit: +1458 with +76 used of +100"
+  },
+  {
+   "rank": 24,
+   "formula": "srli(slli(in0,1),1)",
+   "total_placeable_saved": 176080,
+   "lut_estimate": 42,
+   "outcome": "does not fit: +42 with +76 used of +100"
+  },
+  {
+   "rank": 25,
+   "formula": "andi(xor(in0,in1),255)",
+   "total_placeable_saved": 174080,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 26,
+   "formula": "xor(in0,srli(in1,8))",
+   "total_placeable_saved": 174080,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 27,
+   "formula": "xor(in0,add(srli(in1,22),slli(in1,10)))",
+   "total_placeable_saved": 173850,
+   "lut_estimate": 79,
+   "outcome": "does not fit: +79 with +76 used of +100"
+  },
+  {
+   "rank": 28,
+   "formula": "add(in0,slli(in1,1))",
+   "total_placeable_saved": 162432,
+   "lut_estimate": 78,
+   "outcome": "does not fit: +78 with +76 used of +100"
+  },
+  {
+   "rank": 29,
+   "formula": "or(srli(in0,31),in1)",
+   "total_placeable_saved": 162432,
+   "lut_estimate": 39,
+   "outcome": "does not fit: +39 with +76 used of +100"
+  },
+  {
+   "rank": 30,
+   "formula": "slli(addi(andi(in0,255),576),2)",
+   "total_placeable_saved": 162240,
+   "lut_estimate": 46,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 31,
+   "formula": "addi(andi(srli(in0,16),255),576)",
+   "total_placeable_saved": 129792,
+   "lut_estimate": 48,
+   "outcome": "does not fit: +48 with +76 used of +100"
+  },
+  {
+   "rank": 32,
+   "formula": "slli(addi(in0,832),2)",
+   "total_placeable_saved": 129792,
+   "lut_estimate": null,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 33,
+   "formula": "add(srli(in0,11),slli(in0,21))",
+   "total_placeable_saved": 121600,
+   "lut_estimate": 49,
+   "outcome": "does not fit: +49 with +76 used of +100"
+  },
+  {
+   "rank": 34,
+   "formula": "add(srli(in0,13),slli(in0,19))",
+   "total_placeable_saved": 121600,
+   "lut_estimate": 49,
+   "outcome": "does not fit: +49 with +76 used of +100"
+  },
+  {
+   "rank": 35,
+   "formula": "add(srli(in0,2),slli(in0,30))",
+   "total_placeable_saved": 121600,
+   "lut_estimate": 49,
+   "outcome": "does not fit: +49 with +76 used of +100"
+  },
+  {
+   "rank": 36,
+   "formula": "add(srli(in0,25),slli(in0,7))",
+   "total_placeable_saved": 121600,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 37,
+   "formula": "add(srli(in0,6),slli(in0,26))",
+   "total_placeable_saved": 121600,
+   "lut_estimate": 49,
+   "outcome": "does not fit: +49 with +76 used of +100"
+  },
+  {
+   "rank": 38,
+   "formula": "add(srli(in0,22),slli(in0,10))",
+   "total_placeable_saved": 115900,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 39,
+   "formula": "xor(add(srli(in0,17),slli(in0,15)),in1)",
+   "total_placeable_saved": 111150,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 40,
+   "formula": "xor(add(srli(in0,7),slli(in0,25)),in1)",
+   "total_placeable_saved": 111150,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 41,
+   "formula": "xor(in0,add(srli(in1,18),slli(in1,14)))",
+   "total_placeable_saved": 111150,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 42,
+   "formula": "xor(in0,add(srli(in1,19),slli(in1,13)))",
+   "total_placeable_saved": 111150,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 43,
+   "formula": "add(slli(in0,31),srli(in1,1))",
+   "total_placeable_saved": 108288,
+   "lut_estimate": 49,
+   "outcome": "does not fit: +49 with +76 used of +100"
+  },
+  {
+   "rank": 44,
+   "formula": "andi(srli(in0,16),255)",
+   "total_placeable_saved": 105612,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 45,
+   "formula": "add(in0,slli(addi(srli(in1,24),832),2))",
+   "total_placeable_saved": 97344,
+   "lut_estimate": null,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 46,
+   "formula": "slli(addi(in0,576),2)",
+   "total_placeable_saved": 97344,
+   "lut_estimate": null,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 47,
+   "formula": "slli(addi(srli(in0,24),832),2)",
+   "total_placeable_saved": 97344,
+   "lut_estimate": null,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 48,
+   "formula": "add(srli(in0,17),slli(in0,15))",
+   "total_placeable_saved": 85500,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 49,
+   "formula": "addi(andi(in0,255),576)",
+   "total_placeable_saved": 81120,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 50,
+   "formula": "addi(srli(in0,24),832)",
+   "total_placeable_saved": 81120,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 51,
+   "formula": "add(srli(in0,18),slli(in0,14))",
+   "total_placeable_saved": 74100,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 52,
+   "formula": "add(srli(in0,19),slli(in0,13))",
+   "total_placeable_saved": 74100,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 53,
+   "formula": "add(srli(in0,7),slli(in0,25))",
+   "total_placeable_saved": 74100,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 54,
+   "formula": "add(in0,slli(in1,10))",
+   "total_placeable_saved": 60800,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 55,
+   "formula": "add(in0,slli(in1,19))",
+   "total_placeable_saved": 60800,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 56,
+   "formula": "add(in0,slli(in1,21))",
+   "total_placeable_saved": 60800,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 57,
+   "formula": "add(in0,slli(in1,26))",
+   "total_placeable_saved": 60800,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 58,
+   "formula": "add(in0,slli(in1,30))",
+   "total_placeable_saved": 60800,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 59,
+   "formula": "add(in0,slli(in1,7))",
+   "total_placeable_saved": 60800,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 60,
+   "formula": "add(srli(in0,11),in1)",
+   "total_placeable_saved": 60800,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 61,
+   "formula": "add(srli(in0,13),in1)",
+   "total_placeable_saved": 60800,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 62,
+   "formula": "add(srli(in0,2),in1)",
+   "total_placeable_saved": 60800,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 63,
+   "formula": "add(srli(in0,25),in1)",
+   "total_placeable_saved": 60800,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 64,
+   "formula": "add(srli(in0,6),in1)",
+   "total_placeable_saved": 60800,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 65,
+   "formula": "add(srli(in0,22),in1)",
+   "total_placeable_saved": 57950,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 66,
+   "formula": "add(in0,srli(in1,1))",
+   "total_placeable_saved": 54144,
+   "lut_estimate": 82,
+   "outcome": "does not fit: +82 with +76 used of +100"
+  },
+  {
+   "rank": 67,
+   "formula": "add(slli(in0,31),in1)",
+   "total_placeable_saved": 54144,
+   "lut_estimate": 43,
+   "outcome": "does not fit: +43 with +76 used of +100"
+  },
+  {
+   "rank": 68,
+   "formula": "add(in0,slli(in1,15))",
+   "total_placeable_saved": 45600,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 69,
+   "formula": "xor(in0,srli(in1,10))",
+   "total_placeable_saved": 45600,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 70,
+   "formula": "xor(in0,srli(in1,3))",
+   "total_placeable_saved": 45600,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 71,
+   "formula": "add(srli(in0,18),in1)",
+   "total_placeable_saved": 42750,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 72,
+   "formula": "add(srli(in0,19),in1)",
+   "total_placeable_saved": 42750,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 73,
+   "formula": "add(in0,slli(in1,13))",
+   "total_placeable_saved": 39900,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 74,
+   "formula": "add(in0,slli(in1,14))",
+   "total_placeable_saved": 39900,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 75,
+   "formula": "add(srli(in0,7),in1)",
+   "total_placeable_saved": 39900,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 76,
+   "formula": "add(srai(add(slli(in0,1),in0),15),in1)",
+   "total_placeable_saved": 39150,
+   "lut_estimate": 93,
+   "outcome": "does not fit: +93 with +76 used of +100"
+  },
+  {
+   "rank": 77,
+   "formula": "add(in0,slli(in1,25))",
+   "total_placeable_saved": 37050,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 78,
+   "formula": "add(srli(in0,17),in1)",
+   "total_placeable_saved": 37050,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 79,
+   "formula": "add(in0,andi(in1,255))",
+   "total_placeable_saved": 33696,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 80,
+   "formula": "addi(andi(srli(in0,8),255),0)",
+   "total_placeable_saved": 32448,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 81,
+   "formula": "andi(srli(in0,8),255)",
+   "total_placeable_saved": 28236,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 82,
+   "formula": "addi(srli(in0,1),0)",
+   "total_placeable_saved": 27072,
+   "lut_estimate": 45,
+   "outcome": "does not fit: +45 with +76 used of +100"
+  },
+  {
+   "rank": 83,
+   "formula": "srli(xor(in0,in1),1)",
+   "total_placeable_saved": 27072,
+   "lut_estimate": 37,
+   "outcome": "does not fit: +37 with +76 used of +100"
+  },
+  {
+   "rank": 84,
+   "formula": "srai(add(slli(in0,1),in0),15)",
+   "total_placeable_saved": 26100,
+   "lut_estimate": 63,
+   "outcome": "does not fit: +63 with +76 used of +100"
+  },
+  {
+   "rank": 85,
+   "formula": "add(in0,andi(srli(in1,8),255))",
+   "total_placeable_saved": 21840,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 86,
+   "formula": "srai(add(in0,in1),15)",
+   "total_placeable_saved": 21750,
+   "lut_estimate": 48,
+   "outcome": "does not fit: +48 with +76 used of +100"
+  },
+  {
+   "rank": 87,
+   "formula": "addi(addi(in0,-16),16)",
+   "total_placeable_saved": 19793,
+   "lut_estimate": 51,
+   "outcome": "does not fit: +51 with +76 used of +100"
+  },
+  {
+   "rank": 88,
+   "formula": "add(srai(in0,15),in1)",
+   "total_placeable_saved": 17400,
+   "lut_estimate": 82,
+   "outcome": "does not fit: +82 with +76 used of +100"
+  },
+  {
+   "rank": 89,
+   "formula": "add(srli(in0,18),slli(in1,14))",
+   "total_placeable_saved": 17100,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 90,
+   "formula": "add(srli(in0,19),slli(in1,13))",
+   "total_placeable_saved": 17100,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 91,
+   "formula": "srai(slli(add(in0,in1),16),16)",
+   "total_placeable_saved": 16704,
+   "lut_estimate": 47,
+   "outcome": "does not fit: +47 with +76 used of +100"
+  },
+  {
+   "rank": 92,
+   "formula": "addi(andi(in0,255),0)",
+   "total_placeable_saved": 16224,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 93,
+   "formula": "or(slli(in0,24),in1)",
+   "total_placeable_saved": 15756,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 94,
+   "formula": "slli(addi(in0,1),1)",
+   "total_placeable_saved": 14674,
+   "lut_estimate": 73,
+   "outcome": "does not fit: +73 with +76 used of +100"
+  },
+  {
+   "rank": 95,
+   "formula": "addi(slli(in0,1),1)",
+   "total_placeable_saved": 14542,
+   "lut_estimate": 42,
+   "outcome": "does not fit: +42 with +76 used of +100"
+  },
+  {
+   "rank": 96,
+   "formula": "add(slli(in0,1),in0)",
+   "total_placeable_saved": 13050,
+   "lut_estimate": 78,
+   "outcome": "does not fit: +78 with +76 used of +100"
+  },
+  {
+   "rank": 97,
+   "formula": "srai(slli(in0,16),16)",
+   "total_placeable_saved": 12528,
+   "lut_estimate": 46,
+   "outcome": "does not fit: +46 with +76 used of +100"
+  },
+  {
+   "rank": 98,
+   "formula": "add(in0,srli(in1,24))",
+   "total_placeable_saved": 12012,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 99,
+   "formula": "add(in0,andi(srli(in1,16),255))",
+   "total_placeable_saved": 11544,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 100,
+   "formula": "sra(srai(slli(in0,16),16),in1)",
+   "total_placeable_saved": 11136,
+   "lut_estimate": 113,
+   "outcome": "does not fit: +113 with +76 used of +100"
+  },
+  {
+   "rank": 101,
+   "formula": "or(slli(in0,8),in1)",
+   "total_placeable_saved": 9984,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 102,
+   "formula": "slli(add(in0,in1),16)",
+   "total_placeable_saved": 9744,
+   "lut_estimate": 46,
+   "outcome": "does not fit: +46 with +76 used of +100"
+  },
+  {
+   "rank": 103,
+   "formula": "add(srai(in0,16),in1)",
+   "total_placeable_saved": 8613,
+   "lut_estimate": 82,
+   "outcome": "does not fit: +82 with +76 used of +100"
+  },
+  {
+   "rank": 104,
+   "formula": "srai(mul(in0,in1),16)",
+   "total_placeable_saved": 8613,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 105,
+   "formula": "or(in0,slli(in1,8))",
+   "total_placeable_saved": 8424,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 106,
+   "formula": "add(in0,andi(in1,1020))",
+   "total_placeable_saved": 8112,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 107,
+   "formula": "add(in0,andi(srli(in1,14),1020))",
+   "total_placeable_saved": 8112,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 108,
+   "formula": "add(in0,slli(srli(in1,24),2))",
+   "total_placeable_saved": 8112,
+   "lut_estimate": null,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 109,
+   "formula": "add(srli(in0,24),slli(in0,8))",
+   "total_placeable_saved": 8112,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 110,
+   "formula": "add(srli(in0,7),slli(in1,25))",
+   "total_placeable_saved": 5700,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 111,
+   "formula": "sra(srai(in0,16),in1)",
+   "total_placeable_saved": 5568,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 112,
+   "formula": "or(slli(in0,16),in1)",
+   "total_placeable_saved": 4992,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 113,
+   "formula": "add(in0,slli(in1,8))",
+   "total_placeable_saved": 4531,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 114,
+   "formula": "andi(srli(in0,14),1020)",
+   "total_placeable_saved": 4056,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 115,
+   "formula": "andi(srli(in0,6),1020)",
+   "total_placeable_saved": 4056,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 116,
+   "formula": "slli(srli(in0,24),2)",
+   "total_placeable_saved": 4056,
+   "lut_estimate": null,
+   "outcome": "conflicts with add(in0,slli(in1,2))"
+  },
+  {
+   "rank": 117,
+   "formula": "or(in0,slli(in1,16))",
+   "total_placeable_saved": 3432,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 118,
+   "formula": "srai(add(srli(in0,31),in0),1)",
+   "total_placeable_saved": 2866,
+   "lut_estimate": 74,
+   "outcome": "does not fit: +74 with +76 used of +100"
+  },
+  {
+   "rank": 119,
+   "formula": "srli(slli(addi(in0,-1),16),16)",
+   "total_placeable_saved": 2784,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 120,
+   "formula": "add(in0,slli(in1,3))",
+   "total_placeable_saved": 2779,
+   "lut_estimate": 73,
+   "outcome": "does not fit: +73 with +76 used of +100"
+  },
+  {
+   "rank": 121,
+   "formula": "and(srai(in0,31),in1)",
+   "total_placeable_saved": 2538,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 122,
+   "formula": "add(slli(in0,24),srli(in0,8))",
+   "total_placeable_saved": 2184,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 123,
+   "formula": "add(srli(in0,31),in0)",
+   "total_placeable_saved": 1433,
+   "lut_estimate": 82,
+   "outcome": "does not fit: +82 with +76 used of +100"
+  },
+  {
+   "rank": 124,
+   "formula": "srai(add(in0,in1),1)",
+   "total_placeable_saved": 1433,
+   "lut_estimate": 45,
+   "outcome": "does not fit: +45 with +76 used of +100"
+  },
+  {
+   "rank": 125,
+   "formula": "add(srli(slli(in0,16),24),slli(in0,8))",
+   "total_placeable_saved": 1425,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 126,
+   "formula": "slli(addi(in0,-1),16)",
+   "total_placeable_saved": 1392,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 127,
+   "formula": "srli(slli(in0,16),16)",
+   "total_placeable_saved": 1392,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 128,
+   "formula": "sltiu(or(in0,in1),1)",
+   "total_placeable_saved": 1269,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 129,
+   "formula": "addi(sub(andi(add(in0,in1),3),in1),1000)",
+   "total_placeable_saved": 1200,
+   "lut_estimate": 77,
+   "outcome": "does not fit: +77 with +76 used of +100"
+  },
+  {
+   "rank": 130,
+   "formula": "add(slli(in0,24),in1)",
+   "total_placeable_saved": 1092,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 131,
+   "formula": "add(srli(in0,23),slli(in1,9))",
+   "total_placeable_saved": 950,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 132,
+   "formula": "add(srli(in0,24),slli(in1,8))",
+   "total_placeable_saved": 950,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 133,
+   "formula": "add(srli(slli(in0,16),24),in1)",
+   "total_placeable_saved": 950,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 134,
+   "formula": "or(slli(in0,9),slli(in1,3))",
+   "total_placeable_saved": 950,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 135,
+   "formula": "addi(sub(andi(in0,3),in1),1000)",
+   "total_placeable_saved": 800,
+   "lut_estimate": 81,
+   "outcome": "does not fit: +81 with +76 used of +100"
+  },
+  {
+   "rank": 136,
+   "formula": "sub(andi(add(in0,in1),3),in1)",
+   "total_placeable_saved": 800,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 137,
+   "formula": "add(in0,slli(in1,9))",
+   "total_placeable_saved": 475,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 138,
+   "formula": "or(in0,slli(in1,3))",
+   "total_placeable_saved": 475,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 139,
+   "formula": "or(slli(in0,9),in1)",
+   "total_placeable_saved": 475,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 140,
+   "formula": "srli(slli(in0,16),24)",
+   "total_placeable_saved": 475,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 141,
+   "formula": "sub(addi(0,64),in0)",
+   "total_placeable_saved": 475,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 142,
+   "formula": "addi(sub(in0,in1),1000)",
+   "total_placeable_saved": 400,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 143,
+   "formula": "andi(add(in0,in1),3)",
+   "total_placeable_saved": 400,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 144,
+   "formula": "srli(srai(in0,31),30)",
+   "total_placeable_saved": 400,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 145,
+   "formula": "sub(andi(in0,3),in1)",
+   "total_placeable_saved": 400,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 146,
+   "formula": "sll(in0,addi(in1,-1))",
+   "total_placeable_saved": 352,
+   "lut_estimate": 209,
+   "outcome": "does not fit: +209 with +76 used of +100"
+  },
+  {
+   "rank": 147,
+   "formula": "addi(slli(add(in0,slli(in1,3)),1),16)",
+   "total_placeable_saved": 234,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 148,
+   "formula": "sltiu(sub(in0,in1),1)",
+   "total_placeable_saved": 200,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 149,
+   "formula": "addi(add(in0,in1),-128)",
+   "total_placeable_saved": 174,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 150,
+   "formula": "addi(slli(add(in0,in1),1),16)",
+   "total_placeable_saved": 156,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 151,
+   "formula": "slli(add(in0,slli(in1,3)),1)",
+   "total_placeable_saved": 156,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 152,
+   "formula": "slli(addi(in0,1),2)",
+   "total_placeable_saved": 156,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 153,
+   "formula": "xori(sltiu(in0,7),1)",
+   "total_placeable_saved": 156,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 154,
+   "formula": "addi(slli(in0,1),16)",
+   "total_placeable_saved": 78,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 155,
+   "formula": "or(or(or(in0,in1),srai(or(in0,in1),2)),srai(or(or(in0,in1),srai(or(in0,in1),2)),4))",
+   "total_placeable_saved": 36,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 156,
+   "formula": "or(or(or(in0,in1),srai(or(in0,in1),4)),srai(or(or(in0,in1),srai(or(in0,in1),4)),8))",
+   "total_placeable_saved": 36,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 157,
+   "formula": "or(or(or(in0,in1),srai(or(in0,in1),8)),srai(or(or(in0,in1),srai(or(in0,in1),8)),16))",
+   "total_placeable_saved": 36,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 158,
+   "formula": "sub(or(or(in0,in1),srai(or(in0,in1),16)),srai(or(or(in0,in1),srai(or(in0,in1),16)),1))",
+   "total_placeable_saved": 36,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 159,
+   "formula": "and(slt(0,in0),in1)",
+   "total_placeable_saved": 31,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 160,
+   "formula": "slli(add(in0,in1),3)",
+   "total_placeable_saved": 30,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 161,
+   "formula": "or(or(in0,srai(in0,2)),srai(or(in0,srai(in0,2)),4))",
+   "total_placeable_saved": 27,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 162,
+   "formula": "or(or(in0,srai(in0,4)),srai(or(in0,srai(in0,4)),8))",
+   "total_placeable_saved": 27,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 163,
+   "formula": "or(or(in0,srai(in0,8)),srai(or(in0,srai(in0,8)),16))",
+   "total_placeable_saved": 27,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 164,
+   "formula": "or(or(srai(in0,1),in1),srai(or(srai(in0,1),in1),2))",
+   "total_placeable_saved": 27,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 165,
+   "formula": "sub(or(in0,srai(in0,16)),srai(or(in0,srai(in0,16)),1))",
+   "total_placeable_saved": 27,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 166,
+   "formula": "addi(lui(4096),1552)",
+   "total_placeable_saved": 22,
+   "lut_estimate": 41,
+   "outcome": "does not fit: +41 with +76 used of +100"
+  },
+  {
+   "rank": 167,
+   "formula": "or(or(in0,in1),srai(or(in0,in1),16))",
+   "total_placeable_saved": 18,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 168,
+   "formula": "or(or(in0,in1),srai(or(in0,in1),2))",
+   "total_placeable_saved": 18,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 169,
+   "formula": "or(or(in0,in1),srai(or(in0,in1),4))",
+   "total_placeable_saved": 18,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 170,
+   "formula": "or(or(in0,in1),srai(or(in0,in1),8))",
+   "total_placeable_saved": 18,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 171,
+   "formula": "sub(or(in0,in1),srai(or(in0,in1),1))",
+   "total_placeable_saved": 18,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 172,
+   "formula": "add(addi(in0,1020),in1)",
+   "total_placeable_saved": 11,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 173,
+   "formula": "addi(add(in0,in1),-2048)",
+   "total_placeable_saved": 11,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 174,
+   "formula": "addi(addi(in0,2047),529)",
+   "total_placeable_saved": 11,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 175,
+   "formula": "addi(lui(-4096),-1632)",
+   "total_placeable_saved": 11,
+   "lut_estimate": 41,
+   "outcome": "does not fit: +41 with +76 used of +100"
+  },
+  {
+   "rank": 176,
+   "formula": "addi(lui(4096),-2048)",
+   "total_placeable_saved": 11,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 177,
+   "formula": "addi(lui(4096),1632)",
+   "total_placeable_saved": 11,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 178,
+   "formula": "sub(addi(0,7),in0)",
+   "total_placeable_saved": 11,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 179,
+   "formula": "addi(addi(in0,-2048),-2048)",
+   "total_placeable_saved": 9,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 180,
+   "formula": "addi(lui(536870912),-1)",
+   "total_placeable_saved": 9,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 181,
+   "formula": "or(in0,srai(in0,16))",
+   "total_placeable_saved": 9,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 182,
+   "formula": "or(in0,srai(in0,2))",
+   "total_placeable_saved": 9,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 183,
+   "formula": "or(in0,srai(in0,4))",
+   "total_placeable_saved": 9,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 184,
+   "formula": "or(in0,srai(in0,8))",
+   "total_placeable_saved": 9,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 185,
+   "formula": "or(srai(in0,1),in1)",
+   "total_placeable_saved": 9,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 186,
+   "formula": "sub(in0,srai(in0,1))",
+   "total_placeable_saved": 9,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 187,
+   "formula": "or(sltu(0,addi(in0,1)),in1)",
+   "total_placeable_saved": 2,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 188,
+   "formula": "sltu(0,addi(and(in0,in1),1))",
+   "total_placeable_saved": 2,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 189,
+   "formula": "addi(and(in0,in1),1)",
+   "total_placeable_saved": 1,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 190,
+   "formula": "addi(lui(45056),-1366)",
+   "total_placeable_saved": 1,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 191,
+   "formula": "or(sltu(0,in0),in1)",
+   "total_placeable_saved": 1,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 192,
+   "formula": "sltu(0,addi(in0,1))",
+   "total_placeable_saved": 1,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 193,
+   "formula": "sltu(0,or(in0,in1))",
+   "total_placeable_saved": 1,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  },
+  {
+   "rank": 194,
+   "formula": "srli(slli(in0,17),17)",
+   "total_placeable_saved": 1,
+   "lut_estimate": null,
+   "outcome": "no LUT estimate (never measured alone)"
+  }
+ ],
+ "picked": [
+  "add(in0,slli(in1,2))"
+ ],
+ "estimated_luts": 76
+}

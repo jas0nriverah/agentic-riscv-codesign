@@ -1,0 +1,773 @@
+{
+ "provisional": true,
+ "id": "23620e9a4e14",
+ "slots": [
+  {
+   "slot": 0,
+   "funct7": 2,
+   "funct3": 0,
+   "formula": "add(in0,srli(in1,1))",
+   "module": "cx_s0",
+   "size": 2,
+   "inputs": [
+    "in0",
+    "in1"
+   ],
+   "has_mul": false,
+   "source": "aha-mont64"
+  }
+ ],
+ "priority": [
+  "add(in0,srli(in1,1))"
+ ],
+ "microtest": {
+  "checks": 1185,
+  "runs": {
+   "micro-check": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-stock-s0": {
+    "expect": "trap",
+    "core": "stock",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "micro-xor-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-xor-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-f3-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-2": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-4": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-5": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-6": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-7": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-custom1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   }
+  },
+  "cycles_per_insn": {
+   "add(in0,srli(in1,1))": 5.0
+  },
+  "cycles_per_xor": 3.0
+ },
+ "luts": {
+  "baseline": 2439,
+  "engine": 2521,
+  "delta": 82
+ },
+ "fmax_mhz": {
+  "per_seed": {
+   "1": 58.15,
+   "2": 56.86,
+   "3": 58.96,
+   "4": 57.82,
+   "5": 59.98,
+   "6": 57.29,
+   "7": 59.09,
+   "8": 60.34,
+   "9": 58.15,
+   "10": 57.9
+  },
+  "median": 58.15,
+  "min": 56.86,
+  "max": 60.34
+ },
+ "critical_path": {
+  "unit_on_arc_seeds": [],
+  "rows": [
+   {
+    "core": "engine",
+    "seed": "1",
+    "fmax_mhz": "58.15",
+    "path_ns": "17.2",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "2",
+    "fmax_mhz": "56.86",
+    "path_ns": "17.59",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "3",
+    "fmax_mhz": "58.96",
+    "path_ns": "16.96",
+    "logic_stages": "13",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "4",
+    "fmax_mhz": "57.82",
+    "path_ns": "17.29",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "5",
+    "fmax_mhz": "59.98",
+    "path_ns": "16.67",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "6",
+    "fmax_mhz": "57.29",
+    "path_ns": "17.45",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "7",
+    "fmax_mhz": "59.09",
+    "path_ns": "16.92",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "8",
+    "fmax_mhz": "60.34",
+    "path_ns": "16.57",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "9",
+    "fmax_mhz": "58.15",
+    "path_ns": "17.2",
+    "logic_stages": "13",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "10",
+    "fmax_mhz": "57.9",
+    "path_ns": "17.27",
+    "logic_stages": "41",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   }
+  ]
+ },
+ "period_rule": {
+  "rule": "T_fused = max(T_base, T_fused_measured)",
+  "candidate_period_ns": 17.197,
+  "routed_period_ns": 17.197,
+  "used": "routed (slower than the baseline)"
+ },
+ "programs": {
+  "aha-mont64": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 25631371,
+   "cycles": 25468939,
+   "cycles_saved": 162432,
+   "baseline_instret": 4475851,
+   "instret": 4421707,
+   "instret_saved": 54144,
+   "instret_saved_predicted": 54144,
+   "per_formula": {
+    "add(in0,srli(in1,1))": {
+     "finder_saved": 54144,
+     "predicted_saved": 54144,
+     "fused_sites": 5,
+     "fused_sites_executed": 2,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "mont64_0",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(in0,srli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      407,
+      409
+     ],
+     "root_line": 409,
+     "original": [
+      "srli\ta1,a1,1",
+      "add\ta1,a7,a1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a1, a7, a1",
+     "placed_at": "first member",
+     "placed_line": 407,
+     "labels": [
+      "hws_mont64_0_0",
+      "hws_mont64_0_1"
+     ],
+     "pcs": [
+      "0x8000079c",
+      "0x800007a4"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_1",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(in0,srli(in1,1))",
+     "function": "benchmark_body",
+     "lines": [
+      410,
+      414
+     ],
+     "root_line": 414,
+     "original": [
+      "srli\tt4,a2,1",
+      "add\ta2,t5,t4"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a2, t5, a2",
+     "placed_at": "root",
+     "placed_line": 414,
+     "labels": [
+      "hws_mont64_1_0",
+      "hws_mont64_1_1"
+     ],
+     "pcs": [
+      "0x800007a8",
+      "0x800007b8"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_2",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(in0,srli(in1,1))",
+     "function": "xbinGCD",
+     "lines": [
+      664,
+      665
+     ],
+     "root_line": 665,
+     "original": [
+      "srli\tt3,t3,1",
+      "add\tt3,a5,t3"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, t3, a5, t3",
+     "placed_at": "first member",
+     "placed_line": 664,
+     "labels": [
+      "hws_mont64_2_0",
+      "hws_mont64_2_1"
+     ],
+     "pcs": [
+      "0x80000b58",
+      "0x80000b5c"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "mont64_3",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(in0,srli(in1,1))",
+     "function": "xbinGCD",
+     "lines": [
+      670,
+      671
+     ],
+     "root_line": 671,
+     "original": [
+      "srli\ta2,t1,1",
+      "add\tt1,a1,a2"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, t1, a1, t1",
+     "placed_at": "root",
+     "placed_line": 671,
+     "labels": [
+      "hws_mont64_3_0",
+      "hws_mont64_3_1"
+     ],
+     "pcs": [
+      "0x80000b70",
+      "0x80000b74"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "mont64_4",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(in0,srli(in1,1))",
+     "function": "xbinGCD",
+     "lines": [
+      668,
+      672
+     ],
+     "root_line": 672,
+     "original": [
+      "srli\tt4,a4,1",
+      "add\tt4,a5,t4"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, t4, a5, a4",
+     "placed_at": "root",
+     "placed_line": 672,
+     "labels": [
+      "hws_mont64_4_0",
+      "hws_mont64_4_1"
+     ],
+     "pcs": [
+      "0x80000b68",
+      "0x80000b78"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "crc32": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 22461391,
+   "cycles": 22461391,
+   "cycles_saved": 0,
+   "baseline_instret": 3831152,
+   "instret": 3831152,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(in0,srli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "edn": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 34849402,
+   "cycles": 34849402,
+   "cycles_saved": 0,
+   "baseline_instret": 3466139,
+   "instret": 3466139,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(in0,srli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "huffbench": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 8638203,
+   "cycles": 8638203,
+   "cycles_saved": 0,
+   "baseline_instret": 2131016,
+   "instret": 2131016,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(in0,srli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "matmult-int": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 26300272,
+   "cycles": 26300272,
+   "cycles_saved": 0,
+   "baseline_instret": 3179290,
+   "instret": 3179290,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(in0,srli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "nettle-aes": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 18773912,
+   "cycles": 18773912,
+   "cycles_saved": 0,
+   "baseline_instret": 4083360,
+   "instret": 4083360,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(in0,srli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "nettle-sha256": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 20276586,
+   "cycles": 20276586,
+   "cycles_saved": 0,
+   "baseline_instret": 3854209,
+   "instret": 3854209,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(in0,srli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "wikisort": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 6916129,
+   "cycles": 6916129,
+   "cycles_saved": 0,
+   "baseline_instret": 1182160,
+   "instret": 1182160,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(in0,srli(in1,1))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  }
+ },
+ "rows": [
+  {
+   "candidate_id": "bddd762e91111eefea754bc64776777d7ed3f11625bc2e8f1b900586af9e2a98",
+   "benchmark": "aha-mont64",
+   "formula": "add(in0,srli(in1,1))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 25631371,
+   "candidate_cycles": 25468939,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.197,
+   "luts": 2521,
+   "speedup": 0.9519,
+   "speedup_cycles_only": 1.0064
+  },
+  {
+   "candidate_id": "ff3cbd1c112613682ef1af55a8591a16fc3bfe8f3a6a457e8212e1c2df95b2bc",
+   "benchmark": "crc32",
+   "formula": "add(in0,srli(in1,1))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 22461391,
+   "candidate_cycles": 22461391,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.197,
+   "luts": 2521,
+   "speedup": 0.9458,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "9000ce6fb56a45a675c412a61ce1f3d1e243b2c260aebe80397d8b2d9f3fda1c",
+   "benchmark": "edn",
+   "formula": "add(in0,srli(in1,1))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 34849402,
+   "candidate_cycles": 34849402,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.197,
+   "luts": 2521,
+   "speedup": 0.9458,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "d6aac10c75dad58862df0d9802663373492143071b78e418c3577325f2891e6a",
+   "benchmark": "huffbench",
+   "formula": "add(in0,srli(in1,1))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 8638203,
+   "candidate_cycles": 8638203,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.197,
+   "luts": 2521,
+   "speedup": 0.9458,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "4b689340ec1922a7bb78aadf5a900df4bf881d53f54fb71aa15b87c0eed3b98d",
+   "benchmark": "matmult-int",
+   "formula": "add(in0,srli(in1,1))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 26300272,
+   "candidate_cycles": 26300272,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.197,
+   "luts": 2521,
+   "speedup": 0.9458,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "492c85097ba3cfcbc994452dffbba2df87a3f8ada3cc11f6913d9a39f6e136db",
+   "benchmark": "nettle-aes",
+   "formula": "add(in0,srli(in1,1))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 18773912,
+   "candidate_cycles": 18773912,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.197,
+   "luts": 2521,
+   "speedup": 0.9458,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "3e04857330f3161605522d7b54cc894a6b1a1a19ba13da267d9e122e2356d190",
+   "benchmark": "nettle-sha256",
+   "formula": "add(in0,srli(in1,1))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 20276586,
+   "candidate_cycles": 20276586,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.197,
+   "luts": 2521,
+   "speedup": 0.9458,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "0dace29df6bc0af51206bb3cd6a5e2db2a8e170f25fe52a32a8eb28c8394f83e",
+   "benchmark": "wikisort",
+   "formula": "add(in0,srli(in1,1))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 6916129,
+   "candidate_cycles": 6916129,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.197,
+   "luts": 2521,
+   "speedup": 0.9458,
+   "speedup_cycles_only": 1.0
+  }
+ ],
+ "problems": []
+}

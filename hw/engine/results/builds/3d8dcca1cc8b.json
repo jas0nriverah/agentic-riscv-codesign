@@ -1,0 +1,1045 @@
+{
+ "provisional": true,
+ "id": "3d8dcca1cc8b",
+ "slots": [
+  {
+   "slot": 0,
+   "funct7": 2,
+   "funct3": 0,
+   "formula": "add(srli(in0,31),in1)",
+   "module": "cx_s0",
+   "size": 2,
+   "inputs": [
+    "in0",
+    "in1"
+   ],
+   "has_mul": false,
+   "source": "aha-mont64"
+  }
+ ],
+ "priority": [
+  "add(srli(in0,31),in1)"
+ ],
+ "microtest": {
+  "checks": 1185,
+  "runs": {
+   "micro-check": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-stock-s0": {
+    "expect": "trap",
+    "core": "stock",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "micro-xor-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-xor-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-f3-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-2": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-4": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-5": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-6": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-7": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-custom1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   }
+  },
+  "cycles_per_insn": {
+   "add(srli(in0,31),in1)": 5.0
+  },
+  "cycles_per_xor": 3.0
+ },
+ "luts": {
+  "baseline": 2439,
+  "engine": 2521,
+  "delta": 82
+ },
+ "fmax_mhz": {
+  "per_seed": {
+   "1": 60.34,
+   "2": 56.79,
+   "3": 56.99,
+   "4": 57.94,
+   "5": 56.61,
+   "6": 60.11,
+   "7": 57.64,
+   "8": 55.9,
+   "9": 58.05,
+   "10": 60.01
+  },
+  "median": 57.79,
+  "min": 55.9,
+  "max": 60.34
+ },
+ "critical_path": {
+  "unit_on_arc_seeds": [],
+  "rows": [
+   {
+    "core": "engine",
+    "seed": "1",
+    "fmax_mhz": "60.34",
+    "path_ns": "16.57",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "2",
+    "fmax_mhz": "56.79",
+    "path_ns": "17.61",
+    "logic_stages": "13",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "3",
+    "fmax_mhz": "56.99",
+    "path_ns": "17.55",
+    "logic_stages": "39",
+    "start": "cpu.reg_op2[2]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "4",
+    "fmax_mhz": "57.94",
+    "path_ns": "17.26",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "5",
+    "fmax_mhz": "56.61",
+    "path_ns": "17.67",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "6",
+    "fmax_mhz": "60.11",
+    "path_ns": "16.64",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "7",
+    "fmax_mhz": "57.64",
+    "path_ns": "17.35",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "8",
+    "fmax_mhz": "55.9",
+    "path_ns": "17.89",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "9",
+    "fmax_mhz": "58.05",
+    "path_ns": "17.23",
+    "logic_stages": "41",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "10",
+    "fmax_mhz": "60.01",
+    "path_ns": "16.66",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   }
+  ]
+ },
+ "period_rule": {
+  "rule": "T_fused = max(T_base, T_fused_measured)",
+  "candidate_period_ns": 17.3049,
+  "routed_period_ns": 17.3049,
+  "used": "routed (slower than the baseline)"
+ },
+ "programs": {
+  "aha-mont64": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 25631371,
+   "cycles": 23032459,
+   "cycles_saved": 2598912,
+   "baseline_instret": 4475851,
+   "instret": 4259275,
+   "instret_saved": 216576,
+   "instret_saved_predicted": 216576,
+   "per_formula": {
+    "add(srli(in0,31),in1)": {
+     "finder_saved": 216576,
+     "predicted_saved": 216576,
+     "fused_sites": 10,
+     "fused_sites_executed": 8,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "mont64_0",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),in1)",
+     "function": "modul64",
+     "lines": [
+      47,
+      49
+     ],
+     "root_line": 49,
+     "original": [
+      "srli\ta7,a0,31",
+      "add\ta6,a7,a6"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a6, a0, a6",
+     "placed_at": "root",
+     "placed_line": 49,
+     "labels": [
+      "hws_mont64_0_0",
+      "hws_mont64_0_1"
+     ],
+     "pcs": [
+      "0x8000028c",
+      "0x80000294"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "mont64_1",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),in1)",
+     "function": "modul64",
+     "lines": [
+      54,
+      56
+     ],
+     "root_line": 56,
+     "original": [
+      "srli\ta3,a2,31",
+      "add\ta7,a3,a7"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a7, a2, a7",
+     "placed_at": "root",
+     "placed_line": 56,
+     "labels": [
+      "hws_mont64_1_0",
+      "hws_mont64_1_1"
+     ],
+     "pcs": [
+      "0x800002a8",
+      "0x800002b0"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "mont64_2",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),in1)",
+     "function": "benchmark_body",
+     "lines": [
+      260,
+      265
+     ],
+     "root_line": 265,
+     "original": [
+      "srli\ta1,a5,31",
+      "add\ta4,a1,a4"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "not counted by the finder: line 263 overwrites input a5 before the root (fusible at the first member, left alone on purpose)"
+     ],
+     "labels": [
+      "hws_mont64_2_0",
+      "hws_mont64_2_1"
+     ],
+     "pcs": [
+      "0x80000578",
+      "0x8000058c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_3",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),in1)",
+     "function": "benchmark_body",
+     "lines": [
+      268,
+      269
+     ],
+     "root_line": 269,
+     "original": [
+      "srli\ta3,a2,31",
+      "add\ta1,a3,a1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a1, a2, a1",
+     "placed_at": "root",
+     "placed_line": 269,
+     "labels": [
+      "hws_mont64_3_0",
+      "hws_mont64_3_1"
+     ],
+     "pcs": [
+      "0x80000598",
+      "0x8000059c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_4",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),in1)",
+     "function": "benchmark_body",
+     "lines": [
+      311,
+      316
+     ],
+     "root_line": 316,
+     "original": [
+      "srli\ta1,a4,31",
+      "add\ta3,a1,a3"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "not counted by the finder: line 314 overwrites input a4 before the root (fusible at the first member, left alone on purpose)"
+     ],
+     "labels": [
+      "hws_mont64_4_0",
+      "hws_mont64_4_1"
+     ],
+     "pcs": [
+      "0x80000638",
+      "0x8000064c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_5",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),in1)",
+     "function": "benchmark_body",
+     "lines": [
+      319,
+      320
+     ],
+     "root_line": 320,
+     "original": [
+      "srli\ta2,a5,31",
+      "add\ta1,a2,a1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a1, a5, a1",
+     "placed_at": "root",
+     "placed_line": 320,
+     "labels": [
+      "hws_mont64_5_0",
+      "hws_mont64_5_1"
+     ],
+     "pcs": [
+      "0x80000658",
+      "0x8000065c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_6",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),in1)",
+     "function": "benchmark_body",
+     "lines": [
+      362,
+      364
+     ],
+     "root_line": 364,
+     "original": [
+      "srli\ta3,s1,31",
+      "add\ta5,a3,a5"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, s1, a5",
+     "placed_at": "root",
+     "placed_line": 364,
+     "labels": [
+      "hws_mont64_6_0",
+      "hws_mont64_6_1"
+     ],
+     "pcs": [
+      "0x800006f8",
+      "0x80000700"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_7",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),in1)",
+     "function": "benchmark_body",
+     "lines": [
+      370,
+      371
+     ],
+     "root_line": 371,
+     "original": [
+      "srli\ta1,a4,31",
+      "add\ta3,a1,a3"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a3, a4, a3",
+     "placed_at": "root",
+     "placed_line": 371,
+     "labels": [
+      "hws_mont64_7_0",
+      "hws_mont64_7_1"
+     ],
+     "pcs": [
+      "0x80000718",
+      "0x8000071c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_8",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),in1)",
+     "function": "benchmark_body",
+     "lines": [
+      448,
+      450
+     ],
+     "root_line": 450,
+     "original": [
+      "srli\ta2,a0,31",
+      "add\ta5,a2,a5"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, a0, a5",
+     "placed_at": "root",
+     "placed_line": 450,
+     "labels": [
+      "hws_mont64_8_0",
+      "hws_mont64_8_1"
+     ],
+     "pcs": [
+      "0x80000838",
+      "0x80000840"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_9",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),in1)",
+     "function": "benchmark_body",
+     "lines": [
+      456,
+      457
+     ],
+     "root_line": 457,
+     "original": [
+      "srli\ta4,a3,31",
+      "add\ta2,a4,a2"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a2, a3, a2",
+     "placed_at": "root",
+     "placed_line": 457,
+     "labels": [
+      "hws_mont64_9_0",
+      "hws_mont64_9_1"
+     ],
+     "pcs": [
+      "0x80000858",
+      "0x8000085c"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_10",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),in1)",
+     "function": "benchmark_body",
+     "lines": [
+      485,
+      490
+     ],
+     "root_line": 490,
+     "original": [
+      "srli\ta7,a2,31",
+      "add\ta5,a7,a5"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "not counted by the finder: line 488 overwrites input a2 before the root (fusible at the first member, left alone on purpose)"
+     ],
+     "labels": [
+      "hws_mont64_10_0",
+      "hws_mont64_10_1"
+     ],
+     "pcs": [
+      "0x800008c0",
+      "0x800008d4"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_11",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),in1)",
+     "function": "benchmark_body",
+     "lines": [
+      493,
+      494
+     ],
+     "root_line": 494,
+     "original": [
+      "srli\ta3,a6,31",
+      "add\ta7,a3,a7"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a7, a6, a7",
+     "placed_at": "root",
+     "placed_line": 494,
+     "labels": [
+      "hws_mont64_11_0",
+      "hws_mont64_11_1"
+     ],
+     "pcs": [
+      "0x800008e0",
+      "0x800008e4"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_12",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),in1)",
+     "function": "benchmark_body",
+     "lines": [
+      558,
+      563
+     ],
+     "root_line": 563,
+     "original": [
+      "srli\ta1,a3,31",
+      "add\ta4,a1,a4"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "not counted by the finder: line 561 overwrites input a3 before the root (fusible at the first member, left alone on purpose)"
+     ],
+     "labels": [
+      "hws_mont64_12_0",
+      "hws_mont64_12_1"
+     ],
+     "pcs": [
+      "0x800009d8",
+      "0x800009ec"
+     ],
+     "runs": 27072
+    },
+    {
+     "id": "mont64_13",
+     "file": "mont64.s",
+     "slot": 0,
+     "formula": "add(srli(in0,31),in1)",
+     "function": "benchmark_body",
+     "lines": [
+      566,
+      567
+     ],
+     "root_line": 567,
+     "original": [
+      "srli\ta5,a2,31",
+      "add\ta1,a5,a1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a1, a2, a1",
+     "placed_at": "root",
+     "placed_line": 567,
+     "labels": [
+      "hws_mont64_13_0",
+      "hws_mont64_13_1"
+     ],
+     "pcs": [
+      "0x800009f8",
+      "0x800009fc"
+     ],
+     "runs": 27072
+    }
+   ]
+  },
+  "crc32": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 22461391,
+   "cycles": 22461391,
+   "cycles_saved": 0,
+   "baseline_instret": 3831152,
+   "instret": 3831152,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),in1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "edn": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 34849402,
+   "cycles": 34849402,
+   "cycles_saved": 0,
+   "baseline_instret": 3466139,
+   "instret": 3466139,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),in1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "huffbench": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 8638203,
+   "cycles": 8638203,
+   "cycles_saved": 0,
+   "baseline_instret": 2131016,
+   "instret": 2131016,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),in1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "matmult-int": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 26300272,
+   "cycles": 26300272,
+   "cycles_saved": 0,
+   "baseline_instret": 3179290,
+   "instret": 3179290,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),in1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "nettle-aes": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 18773912,
+   "cycles": 18773912,
+   "cycles_saved": 0,
+   "baseline_instret": 4083360,
+   "instret": 4083360,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),in1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "nettle-sha256": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 20276586,
+   "cycles": 20276586,
+   "cycles_saved": 0,
+   "baseline_instret": 3854209,
+   "instret": 3854209,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),in1)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "wikisort": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 6916129,
+   "cycles": 6916129,
+   "cycles_saved": 0,
+   "baseline_instret": 1182160,
+   "instret": 1182160,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "add(srli(in0,31),in1)": {
+     "finder_saved": 1188,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 1188,
+     "gap_reasons": {
+      "in __ieee754_sqrt, which is library code the rewriter does not see": {
+       "sites": 3,
+       "runs": 1188,
+       "saved": 1188
+      }
+     }
+    }
+   },
+   "sites": []
+  }
+ },
+ "rows": [
+  {
+   "candidate_id": "e13fad5fe3fe15276593bdc58c801f2ce3ff1f3581652e40edf76ebc366ec736",
+   "benchmark": "aha-mont64",
+   "formula": "add(srli(in0,31),in1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 25631371,
+   "candidate_cycles": 23032459,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.3049,
+   "luts": 2521,
+   "speedup": 1.046,
+   "speedup_cycles_only": 1.1128
+  },
+  {
+   "candidate_id": "e997ccc05297461e8736707b0a55c7e2547e104f87aef3898ce6f85db028ef7d",
+   "benchmark": "crc32",
+   "formula": "add(srli(in0,31),in1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 22461391,
+   "candidate_cycles": 22461391,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.3049,
+   "luts": 2521,
+   "speedup": 0.9399,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "47711e210a466a4cb38e3b59c82127ffd87a5771deaa8f21b87571bffaaa6d76",
+   "benchmark": "edn",
+   "formula": "add(srli(in0,31),in1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 34849402,
+   "candidate_cycles": 34849402,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.3049,
+   "luts": 2521,
+   "speedup": 0.9399,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "787f0c21fd961ebd2f5e539774b5f1f83d8b882886b3d8653dd6b37982c58ca4",
+   "benchmark": "huffbench",
+   "formula": "add(srli(in0,31),in1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 8638203,
+   "candidate_cycles": 8638203,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.3049,
+   "luts": 2521,
+   "speedup": 0.9399,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "770b47ba9be2efa030ef766970332b2b86ed518a4a7a62edbd2a13383efd4c7f",
+   "benchmark": "matmult-int",
+   "formula": "add(srli(in0,31),in1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 26300272,
+   "candidate_cycles": 26300272,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.3049,
+   "luts": 2521,
+   "speedup": 0.9399,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "38e6d134aec30dbb0d0492487a6c6be8143b92417cff2d4c90b0a6a83160c07e",
+   "benchmark": "nettle-aes",
+   "formula": "add(srli(in0,31),in1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 18773912,
+   "candidate_cycles": 18773912,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.3049,
+   "luts": 2521,
+   "speedup": 0.9399,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "7bfbc7b61d11cc8b22d907a142b5f97faaa711b139f0c1170bc3dee16e394763",
+   "benchmark": "nettle-sha256",
+   "formula": "add(srli(in0,31),in1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 20276586,
+   "candidate_cycles": 20276586,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.3049,
+   "luts": 2521,
+   "speedup": 0.9399,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "2179462322b219aea7d3eb28545a416a62b09d84ac418dd9fe77405b48c2e6a9",
+   "benchmark": "wikisort",
+   "formula": "add(srli(in0,31),in1)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 6916129,
+   "candidate_cycles": 6916129,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.3049,
+   "luts": 2521,
+   "speedup": 0.9399,
+   "speedup_cycles_only": 1.0
+  }
+ ],
+ "problems": []
+}

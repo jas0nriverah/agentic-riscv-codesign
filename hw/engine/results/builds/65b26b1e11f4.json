@@ -1,0 +1,1535 @@
+{
+ "provisional": true,
+ "id": "65b26b1e11f4",
+ "slots": [
+  {
+   "slot": 0,
+   "funct7": 2,
+   "funct3": 0,
+   "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+   "module": "cx_s0",
+   "size": 4,
+   "inputs": [
+    "in0",
+    "in1"
+   ],
+   "has_mul": false,
+   "source": "nettle-sha256"
+  }
+ ],
+ "priority": [
+  "xor(in0,add(srli(in1,11),slli(in1,21)))"
+ ],
+ "microtest": {
+  "checks": 1185,
+  "runs": {
+   "micro-check": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-stock-s0": {
+    "expect": "trap",
+    "core": "stock",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "micro-xor-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-xor-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-f3-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-2": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-4": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-5": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-6": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-7": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-custom1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   }
+  },
+  "cycles_per_insn": {
+   "xor(in0,add(srli(in1,11),slli(in1,21)))": 5.0
+  },
+  "cycles_per_xor": 3.0
+ },
+ "luts": {
+  "baseline": 2439,
+  "engine": 2518,
+  "delta": 79
+ },
+ "fmax_mhz": {
+  "per_seed": {
+   "1": 60.75,
+   "2": 62.34,
+   "3": 55.92,
+   "4": 58.7,
+   "5": 57.4,
+   "6": 58.3,
+   "7": 56.92,
+   "8": 56.61,
+   "9": 56.58,
+   "10": 59.13
+  },
+  "median": 57.85,
+  "min": 55.92,
+  "max": 62.34
+ },
+ "critical_path": {
+  "unit_on_arc_seeds": [],
+  "rows": [
+   {
+    "core": "engine",
+    "seed": "1",
+    "fmax_mhz": "60.75",
+    "path_ns": "16.46",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "2",
+    "fmax_mhz": "62.34",
+    "path_ns": "16.04",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "3",
+    "fmax_mhz": "55.92",
+    "path_ns": "17.88",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "4",
+    "fmax_mhz": "58.7",
+    "path_ns": "17.03",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "5",
+    "fmax_mhz": "57.4",
+    "path_ns": "17.42",
+    "logic_stages": "13",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "6",
+    "fmax_mhz": "58.3",
+    "path_ns": "17.15",
+    "logic_stages": "13",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "7",
+    "fmax_mhz": "56.92",
+    "path_ns": "17.57",
+    "logic_stages": "13",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "8",
+    "fmax_mhz": "56.61",
+    "path_ns": "17.67",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "9",
+    "fmax_mhz": "56.58",
+    "path_ns": "17.67",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "10",
+    "fmax_mhz": "59.13",
+    "path_ns": "16.91",
+    "logic_stages": "37",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   }
+  ]
+ },
+ "period_rule": {
+  "rule": "T_fused = max(T_base, T_fused_measured)",
+  "candidate_period_ns": 17.2865,
+  "routed_period_ns": 17.2865,
+  "used": "routed (slower than the baseline)"
+ },
+ "programs": {
+  "aha-mont64": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 25631371,
+   "cycles": 25631371,
+   "cycles_saved": 0,
+   "baseline_instret": 4475851,
+   "instret": 4475851,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "xor(in0,add(srli(in1,11),slli(in1,21)))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "crc32": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 22461391,
+   "cycles": 22461391,
+   "cycles_saved": 0,
+   "baseline_instret": 3831152,
+   "instret": 3831152,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "xor(in0,add(srli(in1,11),slli(in1,21)))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "edn": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 34849402,
+   "cycles": 34849402,
+   "cycles_saved": 0,
+   "baseline_instret": 3466139,
+   "instret": 3466139,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "xor(in0,add(srli(in1,11),slli(in1,21)))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "huffbench": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 8638203,
+   "cycles": 8638203,
+   "cycles_saved": 0,
+   "baseline_instret": 2131016,
+   "instret": 2131016,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "xor(in0,add(srli(in1,11),slli(in1,21)))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "matmult-int": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 26300272,
+   "cycles": 26300272,
+   "cycles_saved": 0,
+   "baseline_instret": 3179290,
+   "instret": 3179290,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "xor(in0,add(srli(in1,11),slli(in1,21)))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "nettle-aes": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 18773912,
+   "cycles": 18773912,
+   "cycles_saved": 0,
+   "baseline_instret": 4083360,
+   "instret": 4083360,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "xor(in0,add(srli(in1,11),slli(in1,21)))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  },
+  "nettle-sha256": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 20276586,
+   "cycles": 19060586,
+   "cycles_saved": 1216000,
+   "baseline_instret": 3854209,
+   "instret": 3671809,
+   "instret_saved": 182400,
+   "instret_saved_predicted": 182400,
+   "per_formula": {
+    "xor(in0,add(srli(in1,11),slli(in1,21)))": {
+     "finder_saved": 182400,
+     "predicted_saved": 182400,
+     "fused_sites": 24,
+     "fused_sites_executed": 24,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "nettle_sha256_0",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      137,
+      139,
+      140,
+      144
+     ],
+     "root_line": 144,
+     "original": [
+      "slli\tt5,s5,21",
+      "srli\tt4,s5,11",
+      "add\tt4,t4,t5",
+      "xor\ta2,a2,t4"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a2, a2, s5",
+     "placed_at": "root",
+     "placed_line": 144,
+     "labels": [
+      "hws_nettle_sha256_0_0",
+      "hws_nettle_sha256_0_1",
+      "hws_nettle_sha256_0_2",
+      "hws_nettle_sha256_0_3"
+     ],
+     "pcs": [
+      "0x800003c8",
+      "0x800003d0",
+      "0x800003d4",
+      "0x800003e4"
+     ],
+     "runs": 1900
+    },
+    {
+     "id": "nettle_sha256_1",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      175,
+      177,
+      178,
+      179
+     ],
+     "root_line": 179,
+     "original": [
+      "slli\tt5,a1,21",
+      "srli\ta2,a1,11",
+      "add\ta2,a2,t5",
+      "xor\tt4,t4,a2"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, t4, t4, a1",
+     "placed_at": "root",
+     "placed_line": 179,
+     "labels": [
+      "hws_nettle_sha256_1_0",
+      "hws_nettle_sha256_1_1",
+      "hws_nettle_sha256_1_2",
+      "hws_nettle_sha256_1_3"
+     ],
+     "pcs": [
+      "0x80000460",
+      "0x80000468",
+      "0x8000046c",
+      "0x80000470"
+     ],
+     "runs": 1900
+    },
+    {
+     "id": "nettle_sha256_2",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      213,
+      215,
+      216,
+      217
+     ],
+     "root_line": 217,
+     "original": [
+      "slli\tt5,a6,21",
+      "srli\ta2,a6,11",
+      "add\ta2,a2,t5",
+      "xor\tt4,t4,a2"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, t4, t4, a6",
+     "placed_at": "root",
+     "placed_line": 217,
+     "labels": [
+      "hws_nettle_sha256_2_0",
+      "hws_nettle_sha256_2_1",
+      "hws_nettle_sha256_2_2",
+      "hws_nettle_sha256_2_3"
+     ],
+     "pcs": [
+      "0x800004f8",
+      "0x80000500",
+      "0x80000504",
+      "0x80000508"
+     ],
+     "runs": 1900
+    },
+    {
+     "id": "nettle_sha256_3",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      251,
+      253,
+      254,
+      255
+     ],
+     "root_line": 255,
+     "original": [
+      "slli\tt6,a7,21",
+      "srli\ta2,a7,11",
+      "add\ta2,a2,t6",
+      "xor\tt5,t5,a2"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, t5, t5, a7",
+     "placed_at": "root",
+     "placed_line": 255,
+     "labels": [
+      "hws_nettle_sha256_3_0",
+      "hws_nettle_sha256_3_1",
+      "hws_nettle_sha256_3_2",
+      "hws_nettle_sha256_3_3"
+     ],
+     "pcs": [
+      "0x80000590",
+      "0x80000598",
+      "0x8000059c",
+      "0x800005a0"
+     ],
+     "runs": 1900
+    },
+    {
+     "id": "nettle_sha256_4",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      294,
+      297,
+      298,
+      300
+     ],
+     "root_line": 300,
+     "original": [
+      "srli\tt0,a0,11",
+      "slli\ta1,a0,21",
+      "add\tt0,t0,a1",
+      "xor\tt4,t4,t0"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, t4, t4, a0",
+     "placed_at": "root",
+     "placed_line": 300,
+     "labels": [
+      "hws_nettle_sha256_4_0",
+      "hws_nettle_sha256_4_1",
+      "hws_nettle_sha256_4_2",
+      "hws_nettle_sha256_4_3"
+     ],
+     "pcs": [
+      "0x8000063c",
+      "0x80000648",
+      "0x8000064c",
+      "0x80000654"
+     ],
+     "runs": 1900
+    },
+    {
+     "id": "nettle_sha256_5",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      333,
+      334,
+      336,
+      338
+     ],
+     "root_line": 338,
+     "original": [
+      "srli\tt0,a5,11",
+      "slli\tt4,a5,21",
+      "add\tt0,t0,t4",
+      "xor\ta6,a6,t0"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a6, a6, a5",
+     "placed_at": "root",
+     "placed_line": 338,
+     "labels": [
+      "hws_nettle_sha256_5_0",
+      "hws_nettle_sha256_5_1",
+      "hws_nettle_sha256_5_2",
+      "hws_nettle_sha256_5_3"
+     ],
+     "pcs": [
+      "0x800006d8",
+      "0x800006dc",
+      "0x800006e4",
+      "0x800006ec"
+     ],
+     "runs": 1900
+    },
+    {
+     "id": "nettle_sha256_6",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      371,
+      372,
+      374,
+      376
+     ],
+     "root_line": 376,
+     "original": [
+      "srli\tt0,a6,11",
+      "slli\tt4,a6,21",
+      "add\tt0,t0,t4",
+      "xor\ta7,a7,t0"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a7, a7, a6",
+     "placed_at": "root",
+     "placed_line": 376,
+     "labels": [
+      "hws_nettle_sha256_6_0",
+      "hws_nettle_sha256_6_1",
+      "hws_nettle_sha256_6_2",
+      "hws_nettle_sha256_6_3"
+     ],
+     "pcs": [
+      "0x80000770",
+      "0x80000774",
+      "0x8000077c",
+      "0x80000784"
+     ],
+     "runs": 1900
+    },
+    {
+     "id": "nettle_sha256_7",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      409,
+      410,
+      412,
+      414
+     ],
+     "root_line": 414,
+     "original": [
+      "srli\tt0,a7,11",
+      "slli\ta0,a7,21",
+      "add\tt0,t0,a0",
+      "xor\tt4,t4,t0"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, t4, t4, a7",
+     "placed_at": "root",
+     "placed_line": 414,
+     "labels": [
+      "hws_nettle_sha256_7_0",
+      "hws_nettle_sha256_7_1",
+      "hws_nettle_sha256_7_2",
+      "hws_nettle_sha256_7_3"
+     ],
+     "pcs": [
+      "0x80000808",
+      "0x8000080c",
+      "0x80000814",
+      "0x8000081c"
+     ],
+     "runs": 1900
+    },
+    {
+     "id": "nettle_sha256_8",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      634,
+      635,
+      636,
+      637
+     ],
+     "root_line": 637,
+     "original": [
+      "srli\ts6,s5,11",
+      "slli\tt2,s5,21",
+      "add\ts6,s6,t2",
+      "xor\ts6,s7,s6"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, s6, s7, s5",
+     "placed_at": "root",
+     "placed_line": 637,
+     "labels": [
+      "hws_nettle_sha256_8_0",
+      "hws_nettle_sha256_8_1",
+      "hws_nettle_sha256_8_2",
+      "hws_nettle_sha256_8_3"
+     ],
+     "pcs": [
+      "0x80000b88",
+      "0x80000b8c",
+      "0x80000b90",
+      "0x80000b94"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_9",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      670,
+      672,
+      673,
+      676
+     ],
+     "root_line": 676,
+     "original": [
+      "slli\ts7,a1,21",
+      "srli\tt2,a1,11",
+      "add\tt2,t2,s7",
+      "xor\ts6,s6,t2"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, s6, s6, a1",
+     "placed_at": "root",
+     "placed_line": 676,
+     "labels": [
+      "hws_nettle_sha256_9_0",
+      "hws_nettle_sha256_9_1",
+      "hws_nettle_sha256_9_2",
+      "hws_nettle_sha256_9_3"
+     ],
+     "pcs": [
+      "0x80000c18",
+      "0x80000c20",
+      "0x80000c24",
+      "0x80000c30"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_10",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      707,
+      709,
+      710,
+      713
+     ],
+     "root_line": 713,
+     "original": [
+      "slli\ts6,a3,21",
+      "srli\ta6,a3,11",
+      "add\ta6,a6,s6",
+      "xor\tt2,t2,a6"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, t2, t2, a3",
+     "placed_at": "root",
+     "placed_line": 713,
+     "labels": [
+      "hws_nettle_sha256_10_0",
+      "hws_nettle_sha256_10_1",
+      "hws_nettle_sha256_10_2",
+      "hws_nettle_sha256_10_3"
+     ],
+     "pcs": [
+      "0x80000cac",
+      "0x80000cb4",
+      "0x80000cb8",
+      "0x80000cc4"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_11",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      744,
+      746,
+      747,
+      750
+     ],
+     "root_line": 750,
+     "original": [
+      "slli\ta7,a4,21",
+      "srli\ta6,a4,11",
+      "add\ta6,a6,a7",
+      "xor\ts10,s10,a6"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, s10, s10, a4",
+     "placed_at": "root",
+     "placed_line": 750,
+     "labels": [
+      "hws_nettle_sha256_11_0",
+      "hws_nettle_sha256_11_1",
+      "hws_nettle_sha256_11_2",
+      "hws_nettle_sha256_11_3"
+     ],
+     "pcs": [
+      "0x80000d40",
+      "0x80000d48",
+      "0x80000d4c",
+      "0x80000d58"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_12",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      784,
+      787,
+      788,
+      792
+     ],
+     "root_line": 792,
+     "original": [
+      "slli\ts5,a0,21",
+      "srli\ta7,a0,11",
+      "add\ta7,a7,s5",
+      "xor\ta6,a6,a7"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a6, a6, a0",
+     "placed_at": "root",
+     "placed_line": 792,
+     "labels": [
+      "hws_nettle_sha256_12_0",
+      "hws_nettle_sha256_12_1",
+      "hws_nettle_sha256_12_2",
+      "hws_nettle_sha256_12_3"
+     ],
+     "pcs": [
+      "0x80000de0",
+      "0x80000dec",
+      "0x80000df0",
+      "0x80000e00"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_13",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      821,
+      824,
+      825,
+      829
+     ],
+     "root_line": 829,
+     "original": [
+      "slli\ts5,a5,21",
+      "srli\ta6,a5,11",
+      "add\ta6,a6,s5",
+      "xor\ta1,a1,a6"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a1, a1, a5",
+     "placed_at": "root",
+     "placed_line": 829,
+     "labels": [
+      "hws_nettle_sha256_13_0",
+      "hws_nettle_sha256_13_1",
+      "hws_nettle_sha256_13_2",
+      "hws_nettle_sha256_13_3"
+     ],
+     "pcs": [
+      "0x80000e74",
+      "0x80000e80",
+      "0x80000e84",
+      "0x80000e94"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_14",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      858,
+      861,
+      862,
+      865
+     ],
+     "root_line": 865,
+     "original": [
+      "slli\ts10,s7,21",
+      "srli\ta1,s7,11",
+      "add\ta1,a1,s10",
+      "xor\ts5,s5,a1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, s5, s5, s7",
+     "placed_at": "root",
+     "placed_line": 865,
+     "labels": [
+      "hws_nettle_sha256_14_0",
+      "hws_nettle_sha256_14_1",
+      "hws_nettle_sha256_14_2",
+      "hws_nettle_sha256_14_3"
+     ],
+     "pcs": [
+      "0x80000f08",
+      "0x80000f14",
+      "0x80000f18",
+      "0x80000f24"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_15",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      926,
+      927,
+      929,
+      930
+     ],
+     "root_line": 930,
+     "original": [
+      "slli\ta0,s5,21",
+      "srli\ta3,s5,11",
+      "add\ta3,a3,a0",
+      "xor\ta4,a4,a3"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a4, a4, s5",
+     "placed_at": "root",
+     "placed_line": 930,
+     "labels": [
+      "hws_nettle_sha256_15_0",
+      "hws_nettle_sha256_15_1",
+      "hws_nettle_sha256_15_2",
+      "hws_nettle_sha256_15_3"
+     ],
+     "pcs": [
+      "0x80001018",
+      "0x8000101c",
+      "0x80001024",
+      "0x80001028"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_16",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      988,
+      989,
+      990,
+      993
+     ],
+     "root_line": 993,
+     "original": [
+      "srli\ta5,t2,11",
+      "slli\ts6,t2,21",
+      "add\ta5,a5,s6",
+      "xor\ta4,a4,a5"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a4, a4, t2",
+     "placed_at": "root",
+     "placed_line": 993,
+     "labels": [
+      "hws_nettle_sha256_16_0",
+      "hws_nettle_sha256_16_1",
+      "hws_nettle_sha256_16_2",
+      "hws_nettle_sha256_16_3"
+     ],
+     "pcs": [
+      "0x80001110",
+      "0x80001114",
+      "0x80001118",
+      "0x80001124"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_17",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      1049,
+      1051,
+      1052,
+      1055
+     ],
+     "root_line": 1055,
+     "original": [
+      "slli\ts7,s6,21",
+      "srli\ta4,s6,11",
+      "add\ta4,a4,s7",
+      "xor\ta0,a0,a4"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a0, a0, s6",
+     "placed_at": "root",
+     "placed_line": 1055,
+     "labels": [
+      "hws_nettle_sha256_17_0",
+      "hws_nettle_sha256_17_1",
+      "hws_nettle_sha256_17_2",
+      "hws_nettle_sha256_17_3"
+     ],
+     "pcs": [
+      "0x80001204",
+      "0x8000120c",
+      "0x80001210",
+      "0x8000121c"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_18",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      1113,
+      1114,
+      1115,
+      1117
+     ],
+     "root_line": 1117,
+     "original": [
+      "slli\ts5,a6,21",
+      "srli\ta0,a6,11",
+      "add\ta0,a0,s5",
+      "xor\ts5,s7,a0"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, s5, s7, a6",
+     "placed_at": "root",
+     "placed_line": 1117,
+     "labels": [
+      "hws_nettle_sha256_18_0",
+      "hws_nettle_sha256_18_1",
+      "hws_nettle_sha256_18_2",
+      "hws_nettle_sha256_18_3"
+     ],
+     "pcs": [
+      "0x80001304",
+      "0x80001308",
+      "0x8000130c",
+      "0x80001314"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_19",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      1170,
+      1171,
+      1172,
+      1175
+     ],
+     "root_line": 1175,
+     "original": [
+      "srli\tt2,a7,11",
+      "slli\ts7,a7,21",
+      "add\tt2,t2,s7",
+      "xor\ta1,a1,t2"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a1, a1, a7",
+     "placed_at": "root",
+     "placed_line": 1175,
+     "labels": [
+      "hws_nettle_sha256_19_0",
+      "hws_nettle_sha256_19_1",
+      "hws_nettle_sha256_19_2",
+      "hws_nettle_sha256_19_3"
+     ],
+     "pcs": [
+      "0x800013e8",
+      "0x800013ec",
+      "0x800013f0",
+      "0x800013fc"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_20",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      1227,
+      1228,
+      1230,
+      1231
+     ],
+     "root_line": 1231,
+     "original": [
+      "slli\ts6,s5,21",
+      "srli\ta1,s5,11",
+      "add\ta1,a1,s6",
+      "xor\ta3,a3,a1"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a3, a3, s5",
+     "placed_at": "root",
+     "placed_line": 1231,
+     "labels": [
+      "hws_nettle_sha256_20_0",
+      "hws_nettle_sha256_20_1",
+      "hws_nettle_sha256_20_2",
+      "hws_nettle_sha256_20_3"
+     ],
+     "pcs": [
+      "0x800014cc",
+      "0x800014d0",
+      "0x800014d8",
+      "0x800014dc"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_21",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      1285,
+      1286,
+      1287,
+      1290
+     ],
+     "root_line": 1290,
+     "original": [
+      "slli\ta6,a5,21",
+      "srli\ta3,a5,11",
+      "add\ta3,a3,a6",
+      "xor\ts6,s6,a3"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, s6, s6, a5",
+     "placed_at": "root",
+     "placed_line": 1290,
+     "labels": [
+      "hws_nettle_sha256_21_0",
+      "hws_nettle_sha256_21_1",
+      "hws_nettle_sha256_21_2",
+      "hws_nettle_sha256_21_3"
+     ],
+     "pcs": [
+      "0x800015b4",
+      "0x800015b8",
+      "0x800015bc",
+      "0x800015c8"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_22",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      1344,
+      1345,
+      1346,
+      1349
+     ],
+     "root_line": 1349,
+     "original": [
+      "slli\ta7,a6,21",
+      "srli\ta4,a6,11",
+      "add\ta4,a4,a7",
+      "xor\ts6,s6,a4"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, s6, s6, a6",
+     "placed_at": "root",
+     "placed_line": 1349,
+     "labels": [
+      "hws_nettle_sha256_22_0",
+      "hws_nettle_sha256_22_1",
+      "hws_nettle_sha256_22_2",
+      "hws_nettle_sha256_22_3"
+     ],
+     "pcs": [
+      "0x800016a0",
+      "0x800016a4",
+      "0x800016a8",
+      "0x800016b4"
+     ],
+     "runs": 2850
+    },
+    {
+     "id": "nettle_sha256_23",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+     "function": "_nettle_sha256_compress",
+     "lines": [
+      1407,
+      1409,
+      1410,
+      1412
+     ],
+     "root_line": 1412,
+     "original": [
+      "srli\ts7,a7,11",
+      "slli\ts5,a7,21",
+      "add\ts5,s7,s5",
+      "xor\ts5,s6,s5"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, s5, s6, a7",
+     "placed_at": "root",
+     "placed_line": 1412,
+     "labels": [
+      "hws_nettle_sha256_23_0",
+      "hws_nettle_sha256_23_1",
+      "hws_nettle_sha256_23_2",
+      "hws_nettle_sha256_23_3"
+     ],
+     "pcs": [
+      "0x8000179c",
+      "0x800017a4",
+      "0x800017a8",
+      "0x800017b0"
+     ],
+     "runs": 2850
+    }
+   ]
+  },
+  "wikisort": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 6916129,
+   "cycles": 6916129,
+   "cycles_saved": 0,
+   "baseline_instret": 1182160,
+   "instret": 1182160,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "xor(in0,add(srli(in1,11),slli(in1,21)))": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 0,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": []
+  }
+ },
+ "rows": [
+  {
+   "candidate_id": "0a9041f0a823a4d2aca2c4a701d351da496bd29e05c82c17a7dd4cb89bcf6733",
+   "benchmark": "aha-mont64",
+   "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 25631371,
+   "candidate_cycles": 25631371,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.2865,
+   "luts": 2518,
+   "speedup": 0.9409,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "b3a6dde9f7a0fd69c4f0de53096662126d32fabc5f0c3f60a79e0b47d686ddaf",
+   "benchmark": "crc32",
+   "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 22461391,
+   "candidate_cycles": 22461391,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.2865,
+   "luts": 2518,
+   "speedup": 0.9409,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "a84a4944408ec8d4a125a59eb1dc7b7f37b4d120a6255707e79fdf36d3ec21b6",
+   "benchmark": "edn",
+   "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 34849402,
+   "candidate_cycles": 34849402,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.2865,
+   "luts": 2518,
+   "speedup": 0.9409,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "f4a6a91788e270ba7006a74ee9ecef8ca9e561c92923f78301a46ebf8398d4bc",
+   "benchmark": "huffbench",
+   "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 8638203,
+   "candidate_cycles": 8638203,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.2865,
+   "luts": 2518,
+   "speedup": 0.9409,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "56e419b65534fd5bc8fc66e09e6c8f78f199f9ff72f1a12bfdfca2afd51fc65f",
+   "benchmark": "matmult-int",
+   "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 26300272,
+   "candidate_cycles": 26300272,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.2865,
+   "luts": 2518,
+   "speedup": 0.9409,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "c85c0dbc2882e07c0cac320e0c5a9036b99615b6a8a391dca7aa6386a6b39d0f",
+   "benchmark": "nettle-aes",
+   "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 18773912,
+   "candidate_cycles": 18773912,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.2865,
+   "luts": 2518,
+   "speedup": 0.9409,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "351d705146c0efc460e3373198896864fc79056dd8db6a3eac1c6dae1a06fa48",
+   "benchmark": "nettle-sha256",
+   "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 20276586,
+   "candidate_cycles": 19060586,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.2865,
+   "luts": 2518,
+   "speedup": 1.001,
+   "speedup_cycles_only": 1.0638
+  },
+  {
+   "candidate_id": "0205e513f29ed937f21db40167bce6cef3db2578a58be54037e15a942289ab16",
+   "benchmark": "wikisort",
+   "formula": "xor(in0,add(srli(in1,11),slli(in1,21)))",
+   "measurement_source": "hardware",
+   "baseline_cycles": 6916129,
+   "candidate_cycles": 6916129,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 17.2865,
+   "luts": 2518,
+   "speedup": 0.9409,
+   "speedup_cycles_only": 1.0
+  }
+ ],
+ "problems": []
+}

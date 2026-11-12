@@ -1,0 +1,2787 @@
+{
+ "provisional": true,
+ "id": "f6555dc9fdce",
+ "slots": [
+  {
+   "slot": 0,
+   "funct7": 2,
+   "funct3": 0,
+   "formula": "addi(lui(1103515648),-403)",
+   "module": "cx_s0",
+   "size": 2,
+   "inputs": [],
+   "has_mul": false,
+   "source": "crc32"
+  }
+ ],
+ "priority": [
+  "addi(lui(1103515648),-403)"
+ ],
+ "microtest": {
+  "checks": 1185,
+  "runs": {
+   "micro-check": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-s0-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-stock-s0": {
+    "expect": "trap",
+    "core": "stock",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "micro-xor-1x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "micro-xor-2x": {
+    "expect": "pass",
+    "core": "engine",
+    "ok": true,
+    "error": null,
+    "exit_word": 1
+   },
+   "trap-f3-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-2": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-4": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-5": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-6": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f3-7": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-f7-3": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   },
+   "trap-custom1": {
+    "expect": "trap",
+    "core": "engine",
+    "ok": true,
+    "error": "processor trap",
+    "exit_word": 0
+   }
+  },
+  "cycles_per_insn": {
+   "addi(lui(1103515648),-403)": 5.0
+  },
+  "cycles_per_xor": 3.0
+ },
+ "luts": {
+  "baseline": 2439,
+  "engine": 2482,
+  "delta": 43
+ },
+ "fmax_mhz": {
+  "per_seed": {
+   "1": 60.57,
+   "2": 63.45,
+   "3": 61.46,
+   "4": 65.58,
+   "5": 62.29,
+   "6": 60.57,
+   "7": 61.91,
+   "8": 59.9,
+   "9": 63.67,
+   "10": 62.54
+  },
+  "median": 62.1,
+  "min": 59.9,
+  "max": 65.58
+ },
+ "critical_path": {
+  "unit_on_arc_seeds": [],
+  "rows": [
+   {
+    "core": "engine",
+    "seed": "1",
+    "fmax_mhz": "60.57",
+    "path_ns": "16.51",
+    "logic_stages": "39",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "2",
+    "fmax_mhz": "63.45",
+    "path_ns": "15.76",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "3",
+    "fmax_mhz": "61.46",
+    "path_ns": "16.27",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "SR",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "4",
+    "fmax_mhz": "65.58",
+    "path_ns": "15.25",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "SR",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "5",
+    "fmax_mhz": "62.29",
+    "path_ns": "16.05",
+    "logic_stages": "39",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "SR",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "6",
+    "fmax_mhz": "60.57",
+    "path_ns": "16.51",
+    "logic_stages": "39",
+    "start": "cpu.reg_op2[1]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "0"
+   },
+   {
+    "core": "engine",
+    "seed": "7",
+    "fmax_mhz": "61.91",
+    "path_ns": "16.15",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "8",
+    "fmax_mhz": "59.9",
+    "path_ns": "16.69",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "9",
+    "fmax_mhz": "63.67",
+    "path_ns": "15.71",
+    "logic_stages": "40",
+    "start": "cpu.reg_op2[0]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "CEN",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   },
+   {
+    "core": "engine",
+    "seed": "10",
+    "fmax_mhz": "62.54",
+    "path_ns": "15.99",
+    "logic_stages": "36",
+    "start": "cpu.reg_op2[4]",
+    "end": "cpu.mem_do_rinst",
+    "end_pin": "SR",
+    "unit_on_arc": "False",
+    "unit_on_arc_reason": "unit logic not on the arc",
+    "shared_with_unit": "0",
+    "shared_with_pcpi_handshake": "0",
+    "shared_with_mul": "0",
+    "shared_with_div": "1"
+   }
+  ]
+ },
+ "period_rule": {
+  "rule": "T_fused = max(T_base, T_fused_measured)",
+  "candidate_period_ns": 16.2655,
+  "routed_period_ns": 16.1033,
+  "used": "baseline (the routed clock is not slower)"
+ },
+ "programs": {
+  "aha-mont64": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 25631371,
+   "cycles": 25631371,
+   "cycles_saved": 0,
+   "baseline_instret": 4475851,
+   "instret": 4475851,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "addi(lui(1103515648),-403)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14
+     ],
+     "root_line": 14,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, zero, zero",
+     "placed_at": "root",
+     "placed_line": 14,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000c8",
+      "0x800000cc"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "crc32": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 22461391,
+   "cycles": 22287311,
+   "cycles_saved": 174080,
+   "baseline_instret": 3831152,
+   "instret": 3657072,
+   "instret_saved": 174080,
+   "instret_saved_predicted": 174080,
+   "per_formula": {
+    "addi(lui(1103515648),-403)": {
+     "finder_saved": 174080,
+     "predicted_saved": 174080,
+     "fused_sites": 1,
+     "fused_sites_executed": 1,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14
+     ],
+     "root_line": 14,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, zero, zero",
+     "placed_at": "root",
+     "placed_line": 14,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000d4",
+      "0x800000d8"
+     ],
+     "runs": 174080
+    },
+    {
+     "id": "crc_32_1",
+     "file": "crc_32.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body",
+     "lines": [
+      15,
+      20
+     ],
+     "root_line": 20,
+     "original": [
+      "lui\ts2,%hi(.LANCHOR0)",
+      "addi\ts2,s2,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 15: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 20: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_crc_32_1_0",
+      "hws_crc_32_1_1"
+     ],
+     "pcs": [
+      "0x80000248",
+      "0x8000025c"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "crc_32_2",
+     "file": "crc_32.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "crc32pseudo",
+     "lines": [
+      59,
+      63
+     ],
+     "root_line": 63,
+     "original": [
+      "lui\ts2,%hi(.LANCHOR0)",
+      "addi\ts2,s2,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 59: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 63: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_crc_32_2_0",
+      "hws_crc_32_2_1"
+     ],
+     "pcs": [
+      "0x800002d8",
+      "0x800002e8"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "edn": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 34849402,
+   "cycles": 34849402,
+   "cycles_saved": 0,
+   "baseline_instret": 3466139,
+   "instret": 3466139,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "addi(lui(1103515648),-403)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14
+     ],
+     "root_line": 14,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, zero, zero",
+     "placed_at": "root",
+     "placed_line": 14,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000d4",
+      "0x800000d8"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "libedn_1",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      404,
+      422
+     ],
+     "root_line": 422,
+     "original": [
+      "lui\ts3,%hi(.LANCHOR0)",
+      "addi\ts3,s3,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 404: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 422: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libedn_1_0",
+      "hws_libedn_1_1"
+     ],
+     "pcs": [
+      "0x80000788",
+      "0x800007b8"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "libedn_2",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      405,
+      423
+     ],
+     "root_line": 423,
+     "original": [
+      "lui\ta1,%hi(.LANCHOR1)",
+      "addi\ts8,a1,%lo(.LANCHOR1)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 405: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 423: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libedn_2_0",
+      "hws_libedn_2_1"
+     ],
+     "pcs": [
+      "0x8000078c",
+      "0x800007bc"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "libedn_3",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      406,
+      424
+     ],
+     "root_line": 424,
+     "original": [
+      "lui\ts2,%hi(.LANCHOR0+400)",
+      "addi\ts2,s2,%lo(.LANCHOR0+400)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 406: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 424: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libedn_3_0",
+      "hws_libedn_3_1"
+     ],
+     "pcs": [
+      "0x8000078c",
+      "0x800007c0"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "libedn_4",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      407,
+      425
+     ],
+     "root_line": 425,
+     "original": [
+      "lui\ta0,%hi(.LANCHOR1+400)",
+      "addi\ts7,a0,%lo(.LANCHOR1+400)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 407: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 425: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libedn_4_0",
+      "hws_libedn_4_1"
+     ],
+     "pcs": [
+      "0x80000790",
+      "0x800007c4"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "libedn_5",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      408,
+      426
+     ],
+     "root_line": 426,
+     "original": [
+      "lui\ta7,%hi(.LANCHOR1+700)",
+      "addi\ts6,a7,%lo(.LANCHOR1+700)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 408: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 426: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libedn_5_0",
+      "hws_libedn_5_1"
+     ],
+     "pcs": [
+      "0x80000790",
+      "0x800007c8"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "libedn_6",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      409,
+      427
+     ],
+     "root_line": 427,
+     "original": [
+      "lui\ta6,%hi(.LANCHOR1+300)",
+      "addi\ts4,a6,%lo(.LANCHOR1+300)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 409: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 427: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libedn_6_0",
+      "hws_libedn_6_1"
+     ],
+     "pcs": [
+      "0x80000790",
+      "0x800007cc"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "libedn_7",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      410,
+      428
+     ],
+     "root_line": 428,
+     "original": [
+      "lui\ts0,%hi(.LANCHOR1+800)",
+      "addi\ts0,s0,%lo(.LANCHOR1+800)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 410: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 428: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libedn_7_0",
+      "hws_libedn_7_1"
+     ],
+     "pcs": [
+      "0x80000790",
+      "0x800007d0"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "libedn_8",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      411,
+      429
+     ],
+     "root_line": 429,
+     "original": [
+      "lui\tt1,%hi(.LANCHOR1+398)",
+      "addi\ts11,t1,%lo(.LANCHOR1+398)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 411: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 429: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libedn_8_0",
+      "hws_libedn_8_1"
+     ],
+     "pcs": [
+      "0x80000790",
+      "0x800007d4"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "libedn_9",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      458,
+      460
+     ],
+     "root_line": 460,
+     "original": [
+      "lui\ta3,%hi(.LANCHOR0+800)",
+      "addi\ta3,a3,%lo(.LANCHOR0+800)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 458: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 460: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libedn_9_0",
+      "hws_libedn_9_1"
+     ],
+     "pcs": [
+      "0x80000838",
+      "0x80000840"
+     ],
+     "runs": 2175
+    },
+    {
+     "id": "libedn_10",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      516,
+      519
+     ],
+     "root_line": 519,
+     "original": [
+      "lui\ta4,%hi(.LANCHOR1+596)",
+      "addi\ta4,a4,%lo(.LANCHOR1+596)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 516: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 519: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libedn_10_0",
+      "hws_libedn_10_1"
+     ],
+     "pcs": [
+      "0x80000914",
+      "0x80000918"
+     ],
+     "runs": 87
+    },
+    {
+     "id": "libedn_11",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      517,
+      520
+     ],
+     "root_line": 520,
+     "original": [
+      "lui\ta3,%hi(.LANCHOR1+196)",
+      "addi\ta3,a3,%lo(.LANCHOR1+196)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 517: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 520: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libedn_11_0",
+      "hws_libedn_11_1"
+     ],
+     "pcs": [
+      "0x80000914",
+      "0x8000091c"
+     ],
+     "runs": 87
+    },
+    {
+     "id": "libedn_12",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      535,
+      536
+     ],
+     "root_line": 536,
+     "original": [
+      "lui\ta5,%hi(.LANCHOR1+1200)",
+      "addi\ta2,a5,%lo(.LANCHOR1+1200)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 535: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 536: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libedn_12_0",
+      "hws_libedn_12_1"
+     ],
+     "pcs": [
+      "0x80000954",
+      "0x80000954"
+     ],
+     "runs": 87
+    },
+    {
+     "id": "libedn_13",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "verify_benchmark",
+     "lines": [
+      599,
+      600
+     ],
+     "root_line": 600,
+     "original": [
+      "lui\ta4,%hi(.LANCHOR0)",
+      "addi\ta4,a4,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 599: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 600: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libedn_13_0",
+      "hws_libedn_13_1"
+     ],
+     "pcs": [
+      "0x800009f4",
+      "0x800009f8"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "libedn_14",
+     "file": "libedn.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "verify_benchmark",
+     "lines": [
+      618,
+      620
+     ],
+     "root_line": 620,
+     "original": [
+      "lui\ta0,%hi(.LANCHOR1+800)",
+      "addi\ta0,a0,%lo(.LANCHOR1+800)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 618: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 620: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libedn_14_0",
+      "hws_libedn_14_1"
+     ],
+     "pcs": [
+      "0x80000a3c",
+      "0x80000a40"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "huffbench": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 8638203,
+   "cycles": 8638203,
+   "cycles_saved": 0,
+   "baseline_instret": 2131016,
+   "instret": 2131016,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "addi(lui(1103515648),-403)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14
+     ],
+     "root_line": 14,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, zero, zero",
+     "placed_at": "root",
+     "placed_line": 14,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000d4",
+      "0x800000d8"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "libhuffbench_1",
+     "file": "libhuffbench.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      528,
+      535
+     ],
+     "root_line": 535,
+     "original": [
+      "lui\ts2,%hi(heap)",
+      "addi\ts2,s2,%lo(heap)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 528: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 535: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libhuffbench_1_0",
+      "hws_libhuffbench_1_1"
+     ],
+     "pcs": [
+      "0x80000930",
+      "0x8000094c"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "libhuffbench_2",
+     "file": "libhuffbench.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      527,
+      536
+     ],
+     "root_line": 536,
+     "original": [
+      "lui\ts0,%hi(.LANCHOR0)",
+      "addi\ts0,s0,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 527: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 536: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libhuffbench_2_0",
+      "hws_libhuffbench_2_1"
+     ],
+     "pcs": [
+      "0x80000930",
+      "0x80000950"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "libhuffbench_3",
+     "file": "libhuffbench.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      529,
+      537
+     ],
+     "root_line": 537,
+     "original": [
+      "lui\ts1,%hi(.LC0+500)",
+      "addi\ts1,s1,%lo(.LC0+500)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 529: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 537: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libhuffbench_3_0",
+      "hws_libhuffbench_3_1"
+     ],
+     "pcs": [
+      "0x80000934",
+      "0x80000954"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "libhuffbench_4",
+     "file": "libhuffbench.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "verify_benchmark",
+     "lines": [
+      581,
+      584
+     ],
+     "root_line": 584,
+     "original": [
+      "lui\ta1,%hi(.LANCHOR1)",
+      "addi\ta1,a1,%lo(.LANCHOR1)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 581: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 584: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libhuffbench_4_0",
+      "hws_libhuffbench_4_1"
+     ],
+     "pcs": [
+      "0x800009e4",
+      "0x800009ec"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "libhuffbench_5",
+     "file": "libhuffbench.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "verify_benchmark",
+     "lines": [
+      582,
+      585
+     ],
+     "root_line": 585,
+     "original": [
+      "lui\ta0,%hi(.LANCHOR0)",
+      "addi\ta0,a0,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 582: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 585: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libhuffbench_5_0",
+      "hws_libhuffbench_5_1"
+     ],
+     "pcs": [
+      "0x800009e8",
+      "0x800009f0"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "matmult-int": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 26300272,
+   "cycles": 26300272,
+   "cycles_saved": 0,
+   "baseline_instret": 3179290,
+   "instret": 3179290,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "addi(lui(1103515648),-403)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14
+     ],
+     "root_line": 14,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, zero, zero",
+     "placed_at": "root",
+     "placed_line": 14,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000d4",
+      "0x800000d8"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "matmult_int_1",
+     "file": "matmult-int.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      92,
+      94
+     ],
+     "root_line": 94,
+     "original": [
+      "lui\ts0,%hi(.LANCHOR0+1600)",
+      "addi\ts0,s0,%lo(.LANCHOR0+1600)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 92: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 94: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_matmult_int_1_0",
+      "hws_matmult_int_1_1"
+     ],
+     "pcs": [
+      "0x8000030c",
+      "0x80000310"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "matmult_int_2",
+     "file": "matmult-int.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      93,
+      95
+     ],
+     "root_line": 95,
+     "original": [
+      "lui\ts3,%hi(.LANCHOR1+704)",
+      "addi\ts3,s3,%lo(.LANCHOR1+704)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 93: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 95: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_matmult_int_2_0",
+      "hws_matmult_int_2_1"
+     ],
+     "pcs": [
+      "0x8000030c",
+      "0x80000314"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "matmult_int_3",
+     "file": "matmult-int.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      96,
+      108
+     ],
+     "root_line": 108,
+     "original": [
+      "lui\ta5,%hi(.LANCHOR0)",
+      "addi\ta0,a5,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 96: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 108: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_matmult_int_3_0",
+      "hws_matmult_int_3_1"
+     ],
+     "pcs": [
+      "0x80000318",
+      "0x80000340"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "matmult_int_4",
+     "file": "matmult-int.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      97,
+      109
+     ],
+     "root_line": 109,
+     "original": [
+      "lui\ta1,%hi(.LANCHOR1-896)",
+      "addi\ta1,a1,%lo(.LANCHOR1-896)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 97: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 109: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_matmult_int_4_0",
+      "hws_matmult_int_4_1"
+     ],
+     "pcs": [
+      "0x80000318",
+      "0x80000344"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "matmult_int_5",
+     "file": "matmult-int.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      98,
+      110
+     ],
+     "root_line": 110,
+     "original": [
+      "lui\ta4,%hi(.LANCHOR2-1792)",
+      "addi\ts6,a4,%lo(.LANCHOR2-1792)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 98: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 110: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_matmult_int_5_0",
+      "hws_matmult_int_5_1"
+     ],
+     "pcs": [
+      "0x80000318",
+      "0x80000348"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "matmult_int_6",
+     "file": "matmult-int.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      143,
+      144
+     ],
+     "root_line": 144,
+     "original": [
+      "lui\ta5,%hi(.LANCHOR0)",
+      "addi\ta0,a5,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 143: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 144: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_matmult_int_6_0",
+      "hws_matmult_int_6_1"
+     ],
+     "pcs": [
+      "0x800003c0",
+      "0x800003c0"
+     ],
+     "runs": 46
+    },
+    {
+     "id": "matmult_int_7",
+     "file": "matmult-int.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      146,
+      147
+     ],
+     "root_line": 147,
+     "original": [
+      "lui\ta5,%hi(.LANCHOR1-896)",
+      "addi\ta1,a5,%lo(.LANCHOR1-896)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 146: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 147: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_matmult_int_7_0",
+      "hws_matmult_int_7_1"
+     ],
+     "pcs": [
+      "0x800003c8",
+      "0x800003c8"
+     ],
+     "runs": 46
+    },
+    {
+     "id": "matmult_int_8",
+     "file": "matmult-int.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "initialise_benchmark",
+     "lines": [
+      185,
+      186
+     ],
+     "root_line": 186,
+     "original": [
+      "lui\ta1,%hi(.LANCHOR0)",
+      "addi\ta1,a1,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 185: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 186: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_matmult_int_8_0",
+      "hws_matmult_int_8_1"
+     ],
+     "pcs": [
+      "0x80000420",
+      "0x80000420"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "matmult_int_9",
+     "file": "matmult-int.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "initialise_benchmark",
+     "lines": [
+      214,
+      215
+     ],
+     "root_line": 215,
+     "original": [
+      "lui\ta1,%hi(.LANCHOR1)",
+      "addi\ta1,a1,%lo(.LANCHOR1)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 214: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 215: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_matmult_int_9_0",
+      "hws_matmult_int_9_1"
+     ],
+     "pcs": [
+      "0x80000488",
+      "0x8000048c"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "matmult_int_10",
+     "file": "matmult-int.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "verify_benchmark",
+     "lines": [
+      250,
+      252
+     ],
+     "root_line": 252,
+     "original": [
+      "lui\ta5,%hi(.LANCHOR3)",
+      "addi\ta5,a5,%lo(.LANCHOR3)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 250: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 252: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_matmult_int_10_0",
+      "hws_matmult_int_10_1"
+     ],
+     "pcs": [
+      "0x800004fc",
+      "0x80000504"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "matmult_int_11",
+     "file": "matmult-int.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "verify_benchmark",
+     "lines": [
+      268,
+      270
+     ],
+     "root_line": 270,
+     "original": [
+      "lui\ta0,%hi(.LANCHOR2-1792)",
+      "addi\ta0,a0,%lo(.LANCHOR2-1792)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 268: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 270: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_matmult_int_11_0",
+      "hws_matmult_int_11_1"
+     ],
+     "pcs": [
+      "0x80000540",
+      "0x80000548"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "nettle-aes": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 18773912,
+   "cycles": 18773912,
+   "cycles_saved": 0,
+   "baseline_instret": 4083360,
+   "instret": 4083360,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "addi(lui(1103515648),-403)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14
+     ],
+     "root_line": 14,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, zero, zero",
+     "placed_at": "root",
+     "placed_line": 14,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000c8",
+      "0x800000cc"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "nettle_aes_1",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "_aes_set_key",
+     "lines": [
+      698,
+      702
+     ],
+     "root_line": 702,
+     "original": [
+      "lui\tt3,%hi(.LANCHOR0)",
+      "addi\tt3,t3,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 698: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 702: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_1_0",
+      "hws_nettle_aes_1_1"
+     ],
+     "pcs": [
+      "0x80000c84",
+      "0x80000c94"
+     ],
+     "runs": 156
+    },
+    {
+     "id": "nettle_aes_2",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "_aes_set_key",
+     "lines": [
+      699,
+      703
+     ],
+     "root_line": 703,
+     "original": [
+      "lui\tt1,%hi(_aes_encrypt_table)",
+      "addi\tt1,t1,%lo(_aes_encrypt_table)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 699: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 703: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_2_0",
+      "hws_nettle_aes_2_1"
+     ],
+     "pcs": [
+      "0x80000c88",
+      "0x80000c98"
+     ],
+     "runs": 156
+    },
+    {
+     "id": "nettle_aes_3",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "_aes_set_key",
+     "lines": [
+      747,
+      748
+     ],
+     "root_line": 748,
+     "original": [
+      "lui\ta4,%hi(_aes_encrypt_table)",
+      "addi\ta4,a4,%lo(_aes_encrypt_table)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 747: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 748: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_3_0",
+      "hws_nettle_aes_3_1"
+     ],
+     "pcs": [
+      "0x80000d3c",
+      "0x80000d40"
+     ],
+     "runs": 936
+    },
+    {
+     "id": "nettle_aes_4",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "_nettle_aes_invert",
+     "lines": [
+      852,
+      854
+     ],
+     "root_line": 854,
+     "original": [
+      "lui\ta0,%hi(.LANCHOR0)",
+      "addi\ta0,a0,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 852: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 854: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_4_0",
+      "hws_nettle_aes_4_1"
+     ],
+     "pcs": [
+      "0x80000e98",
+      "0x80000ea0"
+     ],
+     "runs": 78
+    },
+    {
+     "id": "nettle_aes_5",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      926,
+      934
+     ],
+     "root_line": 934,
+     "original": [
+      "lui\ts1,%hi(.LANCHOR1)",
+      "addi\ts1,s1,%lo(.LANCHOR1)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 926: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 934: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_5_0",
+      "hws_nettle_aes_5_1"
+     ],
+     "pcs": [
+      "0x80000f98",
+      "0x80000fb4"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "nettle_aes_6",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      935,
+      949
+     ],
+     "root_line": 949,
+     "original": [
+      "lui\ts6,%hi(.LANCHOR2)",
+      "addi\ts6,s6,%lo(.LANCHOR2)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 935: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 949: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_6_0",
+      "hws_nettle_aes_6_1"
+     ],
+     "pcs": [
+      "0x80000fb8",
+      "0x80000fe4"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "nettle_aes_7",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      936,
+      950
+     ],
+     "root_line": 950,
+     "original": [
+      "lui\ts5,%hi(.LANCHOR1+4)",
+      "addi\ts5,s5,%lo(.LANCHOR1+4)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 936: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 950: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_7_0",
+      "hws_nettle_aes_7_1"
+     ],
+     "pcs": [
+      "0x80000fbc",
+      "0x80000fe8"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "nettle_aes_8",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      937,
+      951
+     ],
+     "root_line": 951,
+     "original": [
+      "lui\ts11,%hi(.LANCHOR2+32)",
+      "addi\ts11,s11,%lo(.LANCHOR2+32)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 937: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 951: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_8_0",
+      "hws_nettle_aes_8_1"
+     ],
+     "pcs": [
+      "0x80000fbc",
+      "0x80000fec"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "nettle_aes_9",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      938,
+      952
+     ],
+     "root_line": 952,
+     "original": [
+      "lui\ts4,%hi(.LANCHOR1+244)",
+      "addi\ts4,s4,%lo(.LANCHOR1+244)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 938: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 952: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_9_0",
+      "hws_nettle_aes_9_1"
+     ],
+     "pcs": [
+      "0x80000fc0",
+      "0x80000ff0"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "nettle_aes_10",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      939,
+      953
+     ],
+     "root_line": 953,
+     "original": [
+      "lui\ts10,%hi(_aes_encrypt_table)",
+      "addi\ts10,s10,%lo(_aes_encrypt_table)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 939: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 953: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_10_0",
+      "hws_nettle_aes_10_1"
+     ],
+     "pcs": [
+      "0x80000fc0",
+      "0x80000ff4"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "nettle_aes_11",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      940,
+      954
+     ],
+     "root_line": 954,
+     "original": [
+      "lui\ts9,%hi(.LANCHOR1+744)",
+      "addi\ts9,s9,%lo(.LANCHOR1+744)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 940: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 954: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_11_0",
+      "hws_nettle_aes_11_1"
+     ],
+     "pcs": [
+      "0x80000fc4",
+      "0x80000ff8"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "nettle_aes_12",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      941,
+      955
+     ],
+     "root_line": 955,
+     "original": [
+      "lui\ts8,%hi(_aes_decrypt_table)",
+      "addi\ts8,s8,%lo(_aes_decrypt_table)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 941: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 955: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_12_0",
+      "hws_nettle_aes_12_1"
+     ],
+     "pcs": [
+      "0x80000fc4",
+      "0x80000ffc"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "nettle_aes_13",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "aes_encrypt",
+     "lines": [
+      1113,
+      1115
+     ],
+     "root_line": 1115,
+     "original": [
+      "lui\ta2,%hi(_aes_encrypt_table)",
+      "addi\ta2,a2,%lo(_aes_encrypt_table)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 1113: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 1115: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_13_0",
+      "hws_nettle_aes_13_1"
+     ],
+     "pcs": [
+      "0x800011f0",
+      "0x800011f8"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "nettle_aes_14",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "aes_decrypt",
+     "lines": [
+      1134,
+      1136
+     ],
+     "root_line": 1136,
+     "original": [
+      "lui\ta2,%hi(_aes_decrypt_table)",
+      "addi\ta2,a2,%lo(_aes_decrypt_table)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 1134: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 1136: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_14_0",
+      "hws_nettle_aes_14_1"
+     ],
+     "pcs": [
+      "0x8000122c",
+      "0x80001234"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "nettle_aes_15",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "verify_benchmark",
+     "lines": [
+      1150,
+      1152
+     ],
+     "root_line": 1152,
+     "original": [
+      "lui\tt3,%hi(.LANCHOR1)",
+      "addi\tt3,t3,%lo(.LANCHOR1)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 1150: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 1152: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_15_0",
+      "hws_nettle_aes_15_1"
+     ],
+     "pcs": [
+      "0x80001254",
+      "0x80001258"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "nettle_aes_16",
+     "file": "nettle-aes.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "verify_benchmark",
+     "lines": [
+      1151,
+      1153
+     ],
+     "root_line": 1153,
+     "original": [
+      "lui\ta2,%hi(.LANCHOR2)",
+      "addi\ta2,a2,%lo(.LANCHOR2)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 1151: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 1153: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_aes_16_0",
+      "hws_nettle_aes_16_1"
+     ],
+     "pcs": [
+      "0x80001254",
+      "0x8000125c"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "nettle-sha256": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 20276586,
+   "cycles": 20276586,
+   "cycles_saved": 0,
+   "baseline_instret": 3854209,
+   "instret": 3854209,
+   "instret_saved": 0,
+   "instret_saved_predicted": 0,
+   "per_formula": {
+    "addi(lui(1103515648),-403)": {
+     "finder_saved": 0,
+     "predicted_saved": 0,
+     "fused_sites": 1,
+     "fused_sites_executed": 0,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14
+     ],
+     "root_line": 14,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, zero, zero",
+     "placed_at": "root",
+     "placed_line": 14,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000c8",
+      "0x800000cc"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "nettle_sha256_1",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "sha256_init",
+     "lines": [
+      11,
+      13
+     ],
+     "root_line": 13,
+     "original": [
+      "lui\ta1,%hi(.LANCHOR0)",
+      "addi\ta1,a1,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 11: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 13: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_sha256_1_0",
+      "hws_nettle_sha256_1_1"
+     ],
+     "pcs": [
+      "0x80000214",
+      "0x8000021c"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "nettle_sha256_2",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "sha256_update",
+     "lines": [
+      1505,
+      1508
+     ],
+     "root_line": 1508,
+     "original": [
+      "lui\ta2,%hi(.LANCHOR0+32)",
+      "addi\ta2,a2,%lo(.LANCHOR0+32)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 1505: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 1508: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_sha256_2_0",
+      "hws_nettle_sha256_2_1"
+     ],
+     "pcs": [
+      "0x80001910",
+      "0x8000191c"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "nettle_sha256_3",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "sha256_update",
+     "lines": [
+      1525,
+      1530
+     ],
+     "root_line": 1530,
+     "original": [
+      "lui\ts4,%hi(.LANCHOR0+32)",
+      "addi\ts4,s4,%lo(.LANCHOR0+32)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 1525: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 1530: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_sha256_3_0",
+      "hws_nettle_sha256_3_1"
+     ],
+     "pcs": [
+      "0x8000195c",
+      "0x80001970"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "nettle_sha256_4",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "sha256_write_digest",
+     "lines": [
+      1602,
+      1604
+     ],
+     "root_line": 1604,
+     "original": [
+      "lui\ta5,%hi(.LANCHOR0+32)",
+      "addi\ts3,a5,%lo(.LANCHOR0+32)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 1602: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 1604: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_sha256_4_0",
+      "hws_nettle_sha256_4_1"
+     ],
+     "pcs": [
+      "0x80001a70",
+      "0x80001a78"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "nettle_sha256_5",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "sha256_write_digest",
+     "lines": [
+      1662,
+      1663
+     ],
+     "root_line": 1663,
+     "original": [
+      "lui\ta5,%hi(.LANCHOR0+32)",
+      "addi\ts3,a5,%lo(.LANCHOR0+32)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 1662: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 1663: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_sha256_5_0",
+      "hws_nettle_sha256_5_1"
+     ],
+     "pcs": [
+      "0x80001b50",
+      "0x80001b54"
+     ],
+     "runs": 475
+    },
+    {
+     "id": "nettle_sha256_6",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "sha256_digest",
+     "lines": [
+      1704,
+      1706
+     ],
+     "root_line": 1706,
+     "original": [
+      "lui\ta1,%hi(.LANCHOR0)",
+      "addi\ta1,a1,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 1704: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 1706: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_sha256_6_0",
+      "hws_nettle_sha256_6_1"
+     ],
+     "pcs": [
+      "0x80001bd4",
+      "0x80001bdc"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "nettle_sha256_7",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      1723,
+      1725
+     ],
+     "root_line": 1725,
+     "original": [
+      "lui\ta5,%hi(.LANCHOR0)",
+      "addi\ta5,a5,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 1723: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 1725: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_sha256_7_0",
+      "hws_nettle_sha256_7_1"
+     ],
+     "pcs": [
+      "0x80001c10",
+      "0x80001c18"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "nettle_sha256_8",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      1744,
+      1750
+     ],
+     "root_line": 1750,
+     "original": [
+      "lui\ts0,%hi(.LANCHOR1)",
+      "addi\ts0,s0,%lo(.LANCHOR1)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 1744: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 1750: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_sha256_8_0",
+      "hws_nettle_sha256_8_1"
+     ],
+     "pcs": [
+      "0x80001c64",
+      "0x80001c78"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "nettle_sha256_9",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      1745,
+      1751
+     ],
+     "root_line": 1751,
+     "original": [
+      "lui\ts11,%hi(.LANCHOR2)",
+      "addi\ts11,s11,%lo(.LANCHOR2)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 1745: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 1751: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_sha256_9_0",
+      "hws_nettle_sha256_9_1"
+     ],
+     "pcs": [
+      "0x80001c64",
+      "0x80001c7c"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "nettle_sha256_10",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "verify_benchmark",
+     "lines": [
+      1807,
+      1808
+     ],
+     "root_line": 1808,
+     "original": [
+      "lui\ta1,%hi(.LANCHOR2)",
+      "addi\ta1,a1,%lo(.LANCHOR2)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 1807: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 1808: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_sha256_10_0",
+      "hws_nettle_sha256_10_1"
+     ],
+     "pcs": [
+      "0x80001d40",
+      "0x80001d44"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "nettle_sha256_11",
+     "file": "nettle-sha256.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "verify_benchmark",
+     "lines": [
+      1809,
+      1811
+     ],
+     "root_line": 1811,
+     "original": [
+      "lui\ta3,%hi(.LANCHOR1)",
+      "addi\ta3,a3,%lo(.LANCHOR1)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 1809: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 1811: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_nettle_sha256_11_0",
+      "hws_nettle_sha256_11_1"
+     ],
+     "pcs": [
+      "0x80001d48",
+      "0x80001d4c"
+     ],
+     "runs": 0
+    }
+   ]
+  },
+  "wikisort": {
+   "verified": true,
+   "stock_unchanged": true,
+   "baseline_cycles": 6916129,
+   "cycles": 6914129,
+   "cycles_saved": 2000,
+   "baseline_instret": 1182160,
+   "instret": 1180160,
+   "instret_saved": 2000,
+   "instret_saved_predicted": 2000,
+   "per_formula": {
+    "addi(lui(1103515648),-403)": {
+     "finder_saved": 2000,
+     "predicted_saved": 2000,
+     "fused_sites": 1,
+     "fused_sites_executed": 1,
+     "gap": 0,
+     "gap_reasons": {}
+    }
+   },
+   "sites": [
+    {
+     "id": "beebsc_0",
+     "file": "beebsc.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "rand_beebs",
+     "lines": [
+      13,
+      14
+     ],
+     "root_line": 14,
+     "original": [
+      "li\ta5,1103515648",
+      "addi\ta5,a5,-403"
+     ],
+     "status": "fused",
+     "reasons": [],
+     "fused": ".insn r 0x0b, 0, 2, a5, zero, zero",
+     "placed_at": "root",
+     "placed_line": 14,
+     "labels": [
+      "hws_beebsc_0_0",
+      "hws_beebsc_0_1"
+     ],
+     "pcs": [
+      "0x800000c8",
+      "0x800000cc"
+     ],
+     "runs": 2000
+    },
+    {
+     "id": "libwikisort_1",
+     "file": "libwikisort.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      2062,
+      2063
+     ],
+     "root_line": 2063,
+     "original": [
+      "lui\ta5,%hi(.LANCHOR0)",
+      "addi\ta5,a5,%lo(.LANCHOR0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 2062: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 2063: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libwikisort_1_0",
+      "hws_libwikisort_1_1"
+     ],
+     "pcs": [
+      "0x80001de8",
+      "0x80001dec"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "libwikisort_2",
+     "file": "libwikisort.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      2088,
+      2097
+     ],
+     "root_line": 2097,
+     "original": [
+      "lui\ts6,%hi(TestCompare)",
+      "addi\ts6,s6,%lo(TestCompare)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 2088: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 2097: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libwikisort_2_0",
+      "hws_libwikisort_2_1"
+     ],
+     "pcs": [
+      "0x80001e50",
+      "0x80001e74"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "libwikisort_3",
+     "file": "libwikisort.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "benchmark_body.isra.0",
+     "lines": [
+      2087,
+      2098
+     ],
+     "root_line": 2098,
+     "original": [
+      "lui\ts5,%hi(array1)",
+      "addi\ts5,s5,%lo(array1)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 2087: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 2098: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libwikisort_3_0",
+      "hws_libwikisort_3_1"
+     ],
+     "pcs": [
+      "0x80001e4c",
+      "0x80001e78"
+     ],
+     "runs": 1
+    },
+    {
+     "id": "libwikisort_4",
+     "file": "libwikisort.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "verify_benchmark",
+     "lines": [
+      2145,
+      2147
+     ],
+     "root_line": 2147,
+     "original": [
+      "lui\ta5,%hi(.LC0)",
+      "addi\ta5,a5,%lo(.LC0)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 2145: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 2147: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libwikisort_4_0",
+      "hws_libwikisort_4_1"
+     ],
+     "pcs": [
+      "0x80001f10",
+      "0x80001f18"
+     ],
+     "runs": 0
+    },
+    {
+     "id": "libwikisort_5",
+     "file": "libwikisort.s",
+     "slot": 0,
+     "formula": "addi(lui(1103515648),-403)",
+     "function": "verify_benchmark",
+     "lines": [
+      2165,
+      2169
+     ],
+     "root_line": 2169,
+     "original": [
+      "lui\ta0,%hi(array1)",
+      "addi\ta0,a0,%lo(array1)"
+     ],
+     "status": "skipped",
+     "reasons": [
+      "line 2165: immediate is filled in by the linker (address constant; it changes when fused code moves)",
+      "line 2169: immediate is filled in by the linker (address constant; it changes when fused code moves)"
+     ],
+     "labels": [
+      "hws_libwikisort_5_0",
+      "hws_libwikisort_5_1"
+     ],
+     "pcs": [
+      "0x80001f5c",
+      "0x80001f6c"
+     ],
+     "runs": 0
+    }
+   ]
+  }
+ },
+ "rows": [
+  {
+   "candidate_id": "4c2e115757f6478d9ab0e3555dcf4be6e3a23e98d3058c0a108208c9f3e6a336",
+   "benchmark": "aha-mont64",
+   "formula": "addi(lui(1103515648),-403)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 25631371,
+   "candidate_cycles": 25631371,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2482,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "4028babb15b5463316507ac510af23f9e59e3bd98999ef83afe9a8bb7fb30f4d",
+   "benchmark": "crc32",
+   "formula": "addi(lui(1103515648),-403)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 22461391,
+   "candidate_cycles": 22287311,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2482,
+   "speedup": 1.0078,
+   "speedup_cycles_only": 1.0078
+  },
+  {
+   "candidate_id": "bbd93b9cdeb805dbca73752b8f88b457eee0c09a68edbd896076046ffad70d19",
+   "benchmark": "edn",
+   "formula": "addi(lui(1103515648),-403)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 34849402,
+   "candidate_cycles": 34849402,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2482,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "1a4807abe097fb477f4e9c9ca5e5d944484fe71231875821b9583d2d8742a720",
+   "benchmark": "huffbench",
+   "formula": "addi(lui(1103515648),-403)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 8638203,
+   "candidate_cycles": 8638203,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2482,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "11ced861e8adbcbf6ff0832357b04ce261fd345b15e7993d08a755a1a3029f21",
+   "benchmark": "matmult-int",
+   "formula": "addi(lui(1103515648),-403)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 26300272,
+   "candidate_cycles": 26300272,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2482,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "587b86f4e8988c99b1322a44b66750a65fe38c36f3ec1b90d37fdb5c6c8f308b",
+   "benchmark": "nettle-aes",
+   "formula": "addi(lui(1103515648),-403)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 18773912,
+   "candidate_cycles": 18773912,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2482,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "d4e7257c31f9d8b2fd04b99c3852cf3c4eea8946e76f668f02c1c1dc09d759d2",
+   "benchmark": "nettle-sha256",
+   "formula": "addi(lui(1103515648),-403)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 20276586,
+   "candidate_cycles": 20276586,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2482,
+   "speedup": 1.0,
+   "speedup_cycles_only": 1.0
+  },
+  {
+   "candidate_id": "04c40a401a815ab069e9e182b3e3a8c2d994364bb74a174494d1f2ee141fe74d",
+   "benchmark": "wikisort",
+   "formula": "addi(lui(1103515648),-403)",
+   "measurement_source": "hardware",
+   "baseline_cycles": 6916129,
+   "candidate_cycles": 6914129,
+   "baseline_period_ns": 16.2655,
+   "candidate_period_ns": 16.2655,
+   "luts": 2482,
+   "speedup": 1.0003,
+   "speedup_cycles_only": 1.0003
+  }
+ ],
+ "problems": []
+}
