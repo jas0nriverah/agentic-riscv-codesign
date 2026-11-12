@@ -2,16 +2,7 @@
 
 Predict FPGA area for RISC-V custom instructions, then check the hardware tradeoff before adding them to a CPU.
 
-```mermaid
-flowchart LR
-    A[RV32 computation] --> B[Circuit graph features]
-    B --> C[300-tree ML model]
-    C --> D[Predicted LUT4 area]
-    A --> E[Verified RTL + Yosys]
-    E --> F[Measured area]
-    D --> G[Error + budget comparison]
-    F --> G
-```
+![ISAForge pipeline: predict LUT4 area from circuit features, measure original RTL with Yosys, and compare error and hardware-budget fit.](docs/assets/area-pipeline.svg)
 
 | Model | Validation | Hardware |
 | --- | --- | --- |

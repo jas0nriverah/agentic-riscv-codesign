@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="420" viewBox="0 0 1040 420" role="img" aria-labelledby="title desc">
+  <title id="title">ISAForge area prediction and measurement</title>
+  <desc id="desc">An RV32 computation follows two paths. Circuit features feed a 300-tree ExtraTrees model to predict LUT4 area. RTL checks and Yosys synthesis produce measured LUT4 area. Comparing the two gives prediction error and hardware-budget mistakes.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M1 1 L7 4 L1 7" fill="none" stroke="#52657d" stroke-width="1.5"/>
+    </marker>
+  </defs>
+  <rect width="1040" height="420" rx="8" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="32" y="40" font-size="22" fill="#172b4d" font-weight="600">Predict area. Check the hardware budget.</text>
+    <text x="232" y="78" font-size="14" fill="#52657d">MODEL INFERENCE</text>
+    <text x="232" y="246" font-size="14" fill="#52657d">HARDWARE MEASUREMENT</text>
+    <g fill="none" stroke="#52657d" stroke-width="1.5" marker-end="url(#arrow)">
+      <path d="M208 216 H220 V132 H228"/>
+      <path d="M208 216 H220 V300 H228"/>
+      <path d="M408 132 H428"/>
+      <path d="M608 132 H628"/>
+      <path d="M408 300 H428"/>
+      <path d="M608 300 H628"/>
+      <path d="M808 132 H820 V202 H828"/>
+      <path d="M808 300 H820 V230 H828"/>
+    </g>
+    <g fill="#f7f9fc" stroke="#c7d0db">
+      <rect x="32" y="174" width="176" height="84" rx="6"/>
+      <rect x="232" y="90" width="176" height="84" rx="6"/>
+      <rect x="432" y="90" width="176" height="84" rx="6"/>
+      <rect x="632" y="90" width="176" height="84" rx="6"/>
+      <rect x="232" y="258" width="176" height="84" rx="6"/>
+      <rect x="432" y="258" width="176" height="84" rx="6"/>
+      <rect x="632" y="258" width="176" height="84" rx="6"/>
+    </g>
+    <rect x="832" y="174" width="176" height="84" rx="6" fill="#edf3fa" stroke="#a8bfd9"/>
+    <g font-size="17" fill="#172b4d" font-weight="600">
+      <text x="48" y="203">RV32 computation</text>
+      <text x="248" y="119">Circuit features</text>
+      <text x="448" y="119">ExtraTrees</text>
+      <text x="648" y="119">Predicted area</text>
+      <text x="248" y="287">RTL checks</text>
+      <text x="448" y="287">Yosys synthesis</text>
+      <text x="648" y="287">Measured area</text>
+      <text x="848" y="203">Compare</text>
+    </g>
+    <g font-size="14" fill="#52657d">
+      <text x="48" y="229">Instruction candidate</text>
+      <text x="248" y="145">217 model inputs</text>
+      <text x="448" y="145">300-tree regressor</text>
+      <text x="648" y="145">Estimated LUT4</text>
+      <text x="248" y="313">Integer semantics</text>
+      <text x="448" y="313">iCE40 mapping</text>
+      <text x="648" y="313">Counted LUT4</text>
+      <text x="848" y="229">Error · budget fit</text>
+    </g>
+    <text x="32" y="388" font-size="15" fill="#52657d">Isolated circuit area. Budget decisions are checked against measured hardware, not model confidence.</text>
+  </g>
+</svg>
