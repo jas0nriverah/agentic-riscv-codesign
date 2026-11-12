@@ -8,6 +8,9 @@ help:
 	@echo 'make feature-check  Replay the matched feature comparison without training'
 	@echo 'make coverage-check  Audit targeted coverage and fresh policy validation'
 	@echo 'make test       Run current implementation and replay tests'
+	@echo 'make hw-baseline  Build and measure the stock PicoRV32 (optional tools)'
+	@echo 'make candidates   Extract Embench instruction candidates (optional tools)'
+	@echo './start.sh        Set up and run the verified local demo'
 test:
 	$(PYTHON) -m pytest -q
 reproduce:

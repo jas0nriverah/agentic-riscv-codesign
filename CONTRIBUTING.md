@@ -1,9 +1,23 @@
-# Contributing
+# Development
 
-The `latest` branch is the focused research snapshot: model code, two pretrained forests, three benchmark panels and concise documentation. Start with [the model](docs/model.md), [evaluation definitions](docs/benchmarks.md) and [reproduction](docs/reproduce.md).
+```sh
+./start.sh --test
+```
 
-Keep benchmark observations and pretrained weights immutable. Add a separately declared evaluation when changing a model; do not silently tune on reported tests and relabel them as fresh. Report zero targets, large underpredictions, hardware-budget mistakes and negative results alongside average improvements.
+| Change | Required checks |
+| --- | --- |
+| Runtime, startup or inference | Full tests, saved-score replay and actual cached inference |
+| Model or training data | Declared comparison, frozen predictions, independent validation |
+| Documentation or figures | Local links, accurate numbers and visual inspection |
+| Hardware | Relevant simulation, synthesis and toolchain checks in `hw/README.md` |
 
-Saved models bind their runtime source files. Preserve the existing package files when using those weights, or explicitly produce and validate a new compatible artifact. Model versions inside the serialized runtime are implementation identities, not a changelog for the README.
+| Preserve | Why |
+| --- | --- |
+| Frozen weights, runtime source, observations and receipts | Hash-checked reproducibility |
+| Failed cases, zero-area circuits and incomplete cohorts | Honest evaluation |
+| Separate MAE, tail errors and budget mistakes | Better averages do not imply safe hardware decisions |
+| A new output path for each run | Avoid silently replacing evidence |
 
-Run `make test`, `make reproduce` and a cached prediction smoke check for functional changes. Inspect regenerated figures visually. Keep builds, traces, caches and disposable outputs in `generated/`. Historical experiment-specific protocols, scripts and tests remain available in the [immutable research archive](https://github.com/jas0nriverah/agentic-riscv-codesign/tree/b64716a2b94b332fdbced677869620bb949c073d).
+Keep transient outputs in `generated/`. Add new research implementations outside the frozen `isaforge/` runtime unless you also produce and validate compatible model artifacts. Historical implementation names are evidence identities, not front-page content.
+
+`main` is the entry point for users. Research records remain under `results/`; the hardware track remains under `hw/`. Merge changes only after their relevant checks pass.

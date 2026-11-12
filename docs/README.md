@@ -1,9 +1,11 @@
 # Documentation
 
-- [Model architecture and artifacts](model.md)
-- [Benchmarks, ground truth and MAPE](benchmarks.md)
-- [Measured results](../results/README.md)
-- [Reproduction and inference](reproduce.md)
-- [Reuse and attribution](reuse.md)
-
-[Model diagram](figures/research/model.svg) · [Improvement diagram](figures/research/improvement.svg) · [Complete historical research archive](https://github.com/jas0nriverah/agentic-riscv-codesign/tree/b64716a2b94b332fdbced677869620bb949c073d)
+| Task | Guide |
+| --- | --- |
+| Understand inputs, features and model selection | [Model](model.md) |
+| Start, predict, troubleshoot | [Operations](reproduce.md) |
+| Understand ground truth, MAPE and budget errors | [Benchmarks](benchmarks.md) |
+| Compare outcomes and replay experiments | [Results](../results/README.md) |
+| Integrate instructions and measure a CPU | [Hardware](../hw/README.md) |
+| Develop changes | [Contributing](../CONTRIBUTING.md) |
+| Reuse and cite | [Attribution](reuse.md) |

@@ -1,55 +1,63 @@
 # Results
 
-Three curated datasets retain every original circuit, measured LUT count and comparator prediction. Run `make reproduce` to verify their hashes and regenerate [summary.json](summary.json). No training or synthesis is needed.
+**Default model: base.** Newer experimental models have not passed all accuracy and hardware-budget gates.
 
-## 1. Research-baseline comparison
+## Matched benchmark outcomes
 
-192 synthetic circuits, eight equally sized structural strata. All models below use the same 1,665 fitting circuits and original-RTL targets. MAE includes all 192 circuits; MAPE uses 186 positive targets, with six zeros retained separately.
+| Study | Comparison | Primary result | Decision |
+| --- | --- | --- | --- |
+| 192 synthetic circuits | Dual-graph → base | MAE 34.33 → 32.16 LUT4 (6.32% lower) | Base representation retained |
+| 327 application circuits | Base → coverage | Family-macro MAE 0.506605 → 0.525239 (3.68% worse) | No transfer improvement |
+| 32 arithmetic circuits | Base → coverage | MAE 15.5211 → 12.0093 (22.63% lower) | Experimental: worst underestimate rises 2.83 → 32.01 |
 
-| Model | MAE, LUT4 ↓ | MAPE ↓ |
+These are separate distributions and endpoints. The 327-case scoped policy is retrospective and selects base everywhere. [Metric definitions and denominators](../docs/benchmarks.md).
+
+| 192-circuit predictor | MAE, LUT4 ↓ | Positive-target MAPE ↓ |
 | --- | ---: | ---: |
-| **ISAForge base** | **32.1609** | **43.63%** |
-| Dual-graph control | 34.3322 | 49.37% |
-| Tuned simple operator graph | 46.3390 | 75.63% |
-| MasterRTL recipe adaptation | 61.4686 | 85.67% |
+| Base | 32.1609 | 43.63% |
+| Dual-graph | 34.3322 | 49.37% |
+| Tuned operator graph | 46.3390 | 75.63% |
+| MasterRTL FPGA recipe adaptation | 61.4686 | 85.67% |
 
-Adding mapping descriptors lowers primary MAE by **6.32%** against the dual-graph control. These are our FPGA recipe comparisons, not the published MasterRTL ASIC results. All eight historical comparator predictions, including additional ablations, remain in [observations](research-baselines/observations.json).
+These are our measured implementations, not published MasterRTL ASIC scores.
 
-## 2. Application transfer
+## Latest budget-safety work
 
-327 unique original circuits across five nonempty application families. All base/coverage predictions were frozen before new labels. The original input pool has recorded overlap with earlier data. The scoped policy was designed afterward and selects base on every case.
+| Experiment | Accuracy / coverage | Budget outcome | Status |
+| --- | --- | --- | --- |
+| Direct feasibility | Fresh general32 MAE 15.41 → 13.44 | Three targeted false accepts; one sharing false reject | Not promoted |
+| Control/sharing coverage | 32 training additions; 62/62 required acceptances | Seven consumed false accepts, four newly introduced | Not promoted |
+| Latest fresh validation | 16/55 area labels complete | Complete-population metrics unavailable | Incomplete; no accuracy claim |
 
-| Model | Primary family-macro MAE, LUT4 ↓ | Unique positive-circuit MAPE ↓ |
-| --- | ---: | ---: |
-| **Base** | **0.506605** | 29.27% |
-| Coverage | 0.525239 | **28.28%** |
-| Scoped, retrospective | 0.506605 | 29.27% |
+[Latest report](control-sharing-coverage/README.md) · [Status figure](../docs/figures/research/control-sharing-coverage.svg). Negative results and missing outcomes remain part of the record.
 
-Coverage **worsens the primary endpoint by 3.68%**, despite slightly lower MAPE. MAPE uses 228 positive physical circuits; all 99 zero targets remain in MAE. Family-macro MAE weights families equally through 521 program/formula memberships. Circuit-pooled MAE is 0.832987 for base and 0.831651 for coverage; changing that weighting changes the conclusion, so the original primary remains explicit. Threshold mistakes are unchanged. [Observations](application-transfer/observations.json) · [Audit](application-transfer/audit.json).
+## Reproduce
 
-## 3. Prospective arithmetic stress
+```sh
+./start.sh
+# Or, in the prepared environment:
+.venv/bin/python scripts/reproduce.py --check
+```
 
-32 new related synthetic circuits, four templates with eight parameters each. All 32 route to coverage, so scoped and coverage predictions are identical. This tests arithmetic coverage, not transfer to new application families.
+This checks hashes and recomputes the three curated benchmark summaries, with no training or synthesis. [Machine-readable summary](summary.json) · [Provenance](provenance.json).
 
-| Model | MAE, LUT4 ↓ | MAPE ↓ | Cap64 false rejections ↓ | Worst underprediction, LUT4 ↓ |
-| --- | ---: | ---: | ---: | ---: |
-| Base | 15.5211 | 13.42% | 4 | **2.83** |
-| Coverage / scoped | **12.0093** | **11.57%** | **2** | 32.01 |
+| Benchmark evidence | Files |
+| --- | --- |
+| Research baselines | [Observations](research-baselines/observations.json) |
+| Application transfer | [Observations](application-transfer/observations.json) · [Audit](application-transfer/audit.json) |
+| Arithmetic stress | [Observations](arithmetic-stress/observations.json) · [Audit](arithmetic-stress/audit.json) |
 
-All 32 targets are positive. All four template MAEs improve; aggregate MAE falls **22.63%**. The larger underprediction tail keeps the scoped policy experimental. All 68,736 sampled RTL checks and 32 measurements passed. [Observations](arithmetic-stress/observations.json) · [Audit](arithmetic-stress/audit.json).
+## Experiment records
 
-## 4. Matched feature selection
+Individual records retain protocols, complete predictions, failures, replay commands and raw-evidence references. They are archival research detail, not alternative production defaults.
 
-The [217 vs 336 vs selected-128 comparison](feature-comparison/README.md) uses identical five-fold grouped validation on 1,665 development circuits. Primary group-macro MAE is **10.5678 → 10.4034 → 10.0054 LUT4**. Selected features improve mean error but increase cap128 false-safe decisions **10 → 13**. No model is promoted. This development experiment is separate from the three benchmark datasets above.
+| Question | Records |
+| --- | --- |
+| Do more or selected features help? | [Feature comparison](feature-comparison/README.md) · [Stability](selection-stability/README.md) · [Fresh validation](selection-validation/README.md) |
+| Does training coverage transfer? | [Targeted coverage](targeted-coverage/README.md) · [Budget-preserving coverage](budget-preserving-coverage/README.md) · [Guarded revision](guarded-revision/README.md) |
+| Can signed arithmetic be improved? | [Signed refinement](signed-refinement/README.md) · [Budget release](budget-release/README.md) |
+| Can boundary decisions be repaired? | [Repair](boundary-repair/README.md) · [Challenge](boundary-challenge/README.md) · [Refinement](boundary-refinement/README.md) |
+| Do coverage and abstention help? | [Coverage](boundary-coverage/README.md) · [Abstention](boundary-abstention/README.md) · [Corroboration](boundary-corroboration/README.md) |
+| Can feasibility be learned directly? | [Feasibility](boundary-feasibility/README.md) · [Control/sharing coverage](control-sharing-coverage/README.md) |
 
-## 5. Stability and fresh validation
-
-Selection lowers mean primary development MAE **5.53% across three fixed seeds**, while increasing budget mistakes at64/128LUTs. On40 new synthetic circuits it worsens MAE **15.4586 → 16.9423 LUT4** and adds false accepts. The independent check rejects promotion. [Seed stability](selection-stability/README.md) · [Fresh measured validation](selection-validation/README.md).
-
-## Evidence and interpretation
-
-The iteration diagram also shows an earlier **25.40% development improvement** on previously examined applications. It uses a different cohort and is not another independent test. Its full measured record is linked from the diagram source to the immutable archive.
-
-Each dataset has `candidates.json`, cached `features.json`, `observations.json` and an original audit receipt. [Provenance](provenance.json) records the source commit and SHA256 of every source/export. Audits retain their original historical paths; resolve those paths in the [preserved archive](https://github.com/jas0nriverah/agentic-riscv-codesign/tree/b64716a2b94b332fdbced677869620bb949c073d), where raw netlists, verification logs, protocols, input amendments and failed experiments remain available. No failed case was removed to produce this presentation.
-
-These are three different benchmark distributions. Their raw error values do not form a learning curve. The estimates concern isolated FPGA area; no learned instruction-selection or CPU-performance advantage follows from these scores alone. [Definitions and MAPE calculation](../docs/benchmarks.md).
+[Earlier research archive](https://github.com/jas0nriverah/agentic-riscv-codesign/tree/b64716a2b94b332fdbced677869620bb949c073d) · [Pre-cleanup documentation snapshot](https://github.com/jas0nriverah/agentic-riscv-codesign/tree/f8fa7b02ba56507f64893debece8d38db8aff642). Historical audit paths and document hashes resolve at their recorded commits.
