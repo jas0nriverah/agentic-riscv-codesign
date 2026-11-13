@@ -4,11 +4,6 @@ Predict FPGA area for RISC-V custom instructions, then check the hardware tradeo
 
 ![ISAForge pipeline: predict LUT4 area from circuit features, measure original RTL with Yosys, and compare error and hardware-budget fit.](docs/assets/area-pipeline.svg)
 
-| Model | Validation | Hardware |
-| --- | --- | --- |
-| 217 features · 1,665 training circuits | Matched benchmarks and saved inference | PicoRV32 integration and instruction fusion |
-| Pretrained ExtraTrees regressor | RTL checks and synthesis labels | Cycles, LUTs and routed frequency |
-
 ## Quick start
 
 ```sh
@@ -17,7 +12,7 @@ cd agentic-riscv-codesign
 ./start.sh
 ```
 
-Creates a local Python environment → installs pinned dependencies → verifies model and benchmark hashes → runs 32 real predictions. Requires Python 3.11+ and network access for the first install; subsequent runs work offline. No FPGA tools or retraining needed for this demo.
+Sets up Python → verifies artifacts → runs 32 real predictions. Requires Python 3.11+ and network for the first install; later runs work offline without FPGA tools.
 
 | Command | Action |
 | --- | --- |
@@ -36,6 +31,16 @@ mul(xor(in0,in1),addi(0,31))                  235.02             202
 
 The prediction comes from the saved model; the measured value is a retained Yosys result. Predictions are estimates, not guarantees that a circuit fits a hardware budget.
 
+## ML model
+
+![217 circuit features feed a 300-tree ExtraTrees ensemble; averaged outputs estimate LUT4 area.](docs/assets/ml-model.svg)
+
+## Improvements
+
+![Separate studies show representation gains, an application-transfer regression, and arithmetic gains with worse underprediction.](docs/assets/model-improvement.svg)
+
+Representation compares dual-graph with base; coverage studies compare base with added training data. These are separate benchmarks, not one learning curve.
+
 ## Results
 
 Same **192 synthetic test circuits**, same **1,665 training circuits**, same measured FPGA target:
@@ -49,7 +54,7 @@ Same **192 synthetic test circuits**, same **1,665 training circuits**, same mea
 
 MAPE compares each prediction with **measured LUT4 count**; it excludes six zero-area circuits, which remain in MAE. The MasterRTL row is our FPGA adaptation, not the paper's ASIC result. [Benchmark definitions](docs/benchmarks.md).
 
-**Status:** runnable research software. The base model remains the default; newer budget classifiers failed safety checks and are not promoted. CPU-performance measurements are a separate, provisional hardware track. [Results and limitations](results/README.md).
+**Research status:** base remains the default; newer budget classifiers are not promoted. CPU measurements are a separate, provisional hardware track. [Results and limitations](results/README.md).
 
 ## Documentation
 
