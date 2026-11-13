@@ -4,13 +4,9 @@
 
 ## Matched benchmark outcomes
 
-| Study | Comparison | Primary result | Decision |
-| --- | --- | --- | --- |
-| 192 synthetic circuits | Dual-graph → base | MAE 34.33 → 32.16 LUT4 (6.32% lower) | Base representation retained |
-| 327 application circuits | Base → coverage | Family-macro MAE 0.506605 → 0.525239 (3.68% worse) | No transfer improvement |
-| 32 arithmetic circuits | Base → coverage | MAE 15.5211 → 12.0093 (22.63% lower) | Experimental: worst underestimate rises 2.83 → 32.01 |
+![Three separate studies: representation improves mean error, application transfer regresses, and arithmetic coverage improves mean error but worsens the underprediction tail.](../docs/assets/model-improvement.svg)
 
-These are separate distributions and endpoints. The 327-case scoped policy is retrospective and selects base everywhere. [Metric definitions and denominators](../docs/benchmarks.md).
+Representation compares dual-graph with base; the coverage studies compare base with coverage. These are separate distributions and endpoints. The 327-case scoped policy is retrospective and selects base everywhere. [Metric definitions and denominators](../docs/benchmarks.md).
 
 | 192-circuit predictor | MAE, LUT4 ↓ | Positive-target MAPE ↓ |
 | --- | ---: | ---: |
@@ -29,7 +25,7 @@ These are our measured implementations, not published MasterRTL ASIC scores.
 | Control/sharing coverage | 32 training additions; 62/62 required acceptances | Seven consumed false accepts, four newly introduced | Not promoted |
 | Latest fresh validation | 16/55 area labels complete | Complete-population metrics unavailable | Incomplete; no accuracy claim |
 
-[Latest report](control-sharing-coverage/README.md) · [Status figure](../docs/figures/research/control-sharing-coverage.svg). Negative results and missing outcomes remain part of the record.
+[Latest report](control-sharing-coverage/README.md) · [Status figure](../docs/assets/research-status.svg). Negative results and missing outcomes remain part of the record.
 
 ## Reproduce
 

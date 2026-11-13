@@ -18,6 +18,7 @@ reproduce:
 predict:
 	$(PYTHON) scripts/predict.py --model base --candidates results/arithmetic-stress/candidates.json --features results/arithmetic-stress/features.json --output generated/predictions.json
 figures:
+	$(PYTHON) scripts/render_project_diagrams.py
 	$(PYTHON) scripts/render_research_figures.py
 	$(PYTHON) scripts/render_feature_comparison.py
 	$(PYTHON) scripts/render_selection_validation.py

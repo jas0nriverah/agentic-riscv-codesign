@@ -1,6 +1,6 @@
 # Model pipeline
 
-![Model architecture](figures/research/model.svg)
+![217 circuit features feed a 300-tree ExtraTrees ensemble; averaged outputs estimate LUT4 area.](assets/ml-model.svg)
 
 | Stage | Input → output | Implementation |
 | --- | --- | --- |
@@ -37,16 +37,7 @@ Weights and metadata live in `models/`. Loading checks artifact hashes, numerica
 
 ## Improvement and selection
 
-```mermaid
-flowchart LR
-    A[Declare hypothesis + limits] --> B[Change features or training coverage]
-    B --> C[Compare on fixed development panels]
-    C --> D[Freeze candidate + fresh inputs]
-    D --> E[Measure fresh circuits]
-    E --> F{Accuracy and budget gates pass?}
-    F -->|Yes| G[Eligible for promotion]
-    F -->|No or incomplete| H[Retain evidence; keep default]
-```
+![Model promotion: declare, develop, freeze, measure, then evaluate accuracy and budget mistakes.](assets/model-validation.svg)
 
 | Finding | Decision |
 | --- | --- |
