@@ -59,6 +59,7 @@ Omitting `--features` invokes label-free native feature extraction and requires 
 
 | Task | Entry point |
 | --- | --- |
+| Replay frozen coverage audits | `make coverage-check` uses an isolated copy with the hash-verified historical results index; scientific files remain current |
 | Reproduce an individual model experiment | [Experiment records](../results/README.md#experiment-records) |
 | Extract candidates from Embench | `make candidates` · [Source pipeline](../src/README.md) |
 | Build the stock PicoRV32 baseline | `make hw-baseline` · [Hardware guide](../hw/README.md) |

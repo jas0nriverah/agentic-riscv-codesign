@@ -30,7 +30,7 @@ feature-check:
 	$(PYTHON) scripts/replay_selection_validation.py replay
 
 coverage-check:
-	$(PYTHON) scripts/replay_coverage_audits.py
+	$(PYTHON) scripts/check_coverage.py
 
 # Workload extraction and hardware integration from main.
 # uses riscv64-unknown-elf- when it is installed and xPack's riscv-none-elf- otherwise
