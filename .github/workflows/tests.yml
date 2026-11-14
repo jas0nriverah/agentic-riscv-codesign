@@ -34,15 +34,21 @@ jobs:
       - run: python -m pytest -q tests/test_rtl.py tests/test_synthesis.py tests/test_masterrtl_baseline.py
 
   startup:
-    runs-on: ubuntu-latest
+    name: Fresh-clone startup (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - name: Bootstrap and run real inference
-        run: ./start.sh
-      - name: Check and repeat without network
+      - name: Bootstrap from outside the checkout and run tests plus inference
+        working-directory: ${{ runner.temp }}
+        run: '"$GITHUB_WORKSPACE/start.sh" --test'
+      - name: Check and repeat with package downloads disabled
         run: |
           ./start.sh --check
           PIP_NO_INDEX=1 ./start.sh
