@@ -18,7 +18,7 @@ Sets up Python → verifies artifacts → runs 32 real predictions. Requires Pyt
 | --- | --- |
 | `./start.sh` | Verify and run the inference demo; save outputs under `generated/start/` |
 | `./start.sh --check` | Check the environment and saved evidence without installing or writing |
-| `./start.sh --test` | Run the full test suite, then the demo |
+| `./start.sh --test` | Run the full test suite, then the demo; on macOS, uses Homebrew to install `libomp` if XGBoost needs it |
 
 ## Example
 

@@ -31,5 +31,17 @@ if ! "$PY" -B scripts/startup.py --dependencies; then
 fi
 "$PY" -B scripts/startup.py --check
 if [[ "$MODE" == --check ]]; then exit 0; fi
-if [[ "$MODE" == --test ]]; then "$PY" -m pytest -q; fi
+if [[ "$MODE" == --test ]]; then
+  # The cached demo uses ExtraTrees; the full suite also loads XGBoost.
+  if [[ "$(uname -s)" == Darwin ]] && ! "$PY" -c 'import xgboost' >/dev/null 2>&1; then
+    if ! command -v brew >/dev/null 2>&1; then
+      printf 'XGBoost tests require OpenMP on macOS. Install Homebrew, then run brew install libomp and retry.\n' >&2
+      exit 1
+    fi
+    printf 'Installing the macOS OpenMP runtime required by XGBoost tests.\n'
+    brew install libomp
+    "$PY" -c 'import xgboost'
+  fi
+  "$PY" -m pytest -q
+fi
 exec "$PY" -B scripts/startup.py --demo
